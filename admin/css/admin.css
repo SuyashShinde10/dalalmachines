@@ -241,18 +241,46 @@ a:hover {
   font-weight: 700;
 }
 .btn-logout-sidebar {
-  background: none;
-  border: none;
-  color: var(--text-dim);
-  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  color: #fca5a5;
+  font-size: 12px;
+  font-weight: 600;
   cursor: pointer;
-  padding: 6px;
+  padding: 6px 10px;
   border-radius: 4px;
   transition: all 0.2s;
+  white-space: nowrap;
 }
 .btn-logout-sidebar:hover {
-  color: var(--color-danger);
-  background: var(--color-danger-bg);
+  color: #fff;
+  background: var(--color-danger);
+  border-color: var(--color-danger);
+}
+
+.btn-logout-topbar {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #fca5a5;
+  padding: 7px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-logout-topbar:hover {
+  background: var(--color-danger);
+  border-color: var(--color-danger);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
 }
 
 /* Main Content Area */
@@ -365,8 +393,11 @@ a:hover {
   gap: 8px;
   background: var(--brand-gold);
   color: #090d15;
+  font-family: 'Barlow', sans-serif;
   font-weight: 700;
   font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
   padding: 10px 18px;
   border-radius: var(--radius-sm);
   border: none;
@@ -386,8 +417,11 @@ a:hover {
   gap: 8px;
   background: rgba(255, 255, 255, 0.08);
   color: #fff;
-  font-weight: 600;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 700;
   font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
   padding: 10px 18px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border-color);
