@@ -1677,21 +1677,300 @@ body.sidebar-collapsed .admin-main {
   padding: 24px;
 }
 
-/* Responsive */
+/* ==========================================================================
+   MOBILE & TABLET RESPONSIVE SYSTEM (Production Grade)
+   ========================================================================== */
+
+/* Tablet & Mobile Drawer (< 992px) */
 @media (max-width: 992px) {
+  /* Mobile Sidebar Drawer */
   .admin-sidebar {
     transform: translateX(-100%);
+    width: 280px;
+    max-width: 85vw;
+    z-index: 2200;
+    box-shadow: 4px 0 24px rgba(15, 23, 42, 0.15);
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
   }
+
   .admin-sidebar.open {
     transform: translateX(0);
   }
+
+  /* Main Viewport Takes Full Width */
   .admin-main {
-    margin-left: 0;
+    margin-left: 0 !important;
+    width: 100% !important;
+    min-width: 0;
+    padding-bottom: 110px;
   }
+
+  /* Toggle Button */
   .btn-sidebar-toggle {
-    display: block;
+    display: inline-flex !important;
+    padding: 0 10px;
+    height: 36px;
+    font-size: 12px;
   }
+  .btn-sidebar-toggle span {
+    display: none;
+  }
+
+  /* Topbar Adjustments */
+  .admin-topbar {
+    padding: 0 16px;
+    height: 60px;
+  }
+  .topbar-left {
+    gap: 10px;
+    min-width: 0;
+  }
+  .topbar-breadcrumb {
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 160px;
+  }
+  .topbar-right {
+    gap: 8px;
+  }
+  .btn-public-site span,
+  .btn-logout-topbar span {
+    display: none;
+  }
+  .btn-public-site,
+  .btn-logout-topbar {
+    padding: 0 10px;
+    height: 36px;
+    min-width: 36px;
+    justify-content: center;
+  }
+
+  /* Content Padding */
+  .admin-content {
+    padding: 20px 16px;
+  }
+
+  /* Hero Section */
+  .hero-greeting-box {
+    padding: 20px 16px;
+  }
+  .hero-greeting-title {
+    font-size: 22px;
+  }
+  .hero-greeting-subtitle {
+    font-size: 13px;
+  }
+
+  /* Dashboard Widgets */
   .widgets-grid-top {
     grid-template-columns: 1fr;
+    gap: 14px;
   }
+
+  /* Stats Grid */
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px;
+  }
+
+  /* Form Grids Collapse to Single Column */
+  .form-grid-2,
+  .form-grid-3,
+  .form-grid-4 {
+    grid-template-columns: 1fr !important;
+    gap: 14px;
+  }
+
+  /* Omnibar on Mobile */
+  .omnibar-wrapper,
+  .admin-omnibar,
+  .form-actions-floating {
+    left: 12px !important;
+    right: 12px !important;
+    transform: none !important;
+    width: auto !important;
+    bottom: 12px !important;
+    padding: 10px 14px !important;
+    border-radius: var(--radius-md) !important;
+  }
+}
+
+/* Smartphone & Compact Screen (< 640px) */
+@media (max-width: 640px) {
+  body {
+    font-size: 13.5px;
+  }
+
+  .admin-topbar {
+    padding: 0 12px;
+    height: 56px;
+  }
+
+  .topbar-breadcrumb {
+    max-width: 120px;
+    font-size: 11px;
+  }
+
+  .admin-content {
+    padding: 14px 10px;
+  }
+
+  /* Hero Greeting */
+  .hero-greeting-box {
+    padding: 16px 14px;
+    border-radius: var(--radius-md);
+  }
+  .hero-greeting-pill {
+    font-size: 11px;
+    padding: 3px 10px;
+  }
+  .hero-greeting-title {
+    font-size: 19px;
+    line-height: 1.3;
+  }
+
+  /* Stats Grid on Small Phones */
+  .stats-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px;
+  }
+  .stat-card {
+    padding: 14px 12px;
+  }
+  .stat-value {
+    font-size: 24px;
+  }
+
+  /* Filter Bars on Product & Inquiries Pages */
+  .table-toolbar,
+  .products-filter-bar,
+  .inquiry-filter-bar,
+  .filter-bar-wrap,
+  .inquiry-tabs-header {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+  }
+
+  .search-input-box,
+  .filter-select,
+  .filter-input {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .toolbar-actions,
+  .filter-actions,
+  .header-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .toolbar-actions .btn,
+  .filter-actions .btn,
+  .btn-add-product,
+  .btn-export-csv {
+    flex: 1;
+    min-width: 130px;
+    justify-content: center;
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+
+  /* Horizontal Scrolling for All Tables */
+  .table-card,
+  .table-responsive,
+  .data-table-container,
+  .inquiries-table-wrap,
+  .products-table-wrap {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    border-radius: var(--radius-sm);
+    width: 100%;
+    margin-bottom: 16px;
+    border: 1px solid var(--border-color);
+  }
+
+  .data-table,
+  .admin-table {
+    min-width: 600px;
+    font-size: 12.5px;
+  }
+
+  .data-table th,
+  .data-table td,
+  .admin-table th,
+  .admin-table td {
+    padding: 8px 10px;
+  }
+
+  /* Form Elements */
+  .form-section-card {
+    padding: 16px 12px !important;
+    border-radius: var(--radius-md) !important;
+  }
+  .form-section-title {
+    font-size: 15px;
+  }
+  .form-label {
+    font-size: 12px;
+  }
+  .form-control,
+  .form-select,
+  .form-textarea {
+    font-size: 13px !important;
+    padding: 8px 10px !important;
+  }
+
+  /* Technical Specs Rows */
+  .spec-row {
+    flex-direction: column;
+    gap: 6px;
+    background: #f8fafc;
+    padding: 10px;
+    border-radius: var(--radius-sm);
+  }
+
+  /* Modals on Phones */
+  .admin-modal-dialog {
+    width: 95vw !important;
+    max-width: 95vw !important;
+    margin: 10px auto !important;
+    border-radius: var(--radius-md) !important;
+  }
+  .admin-modal-header {
+    padding: 14px 16px;
+  }
+  .admin-modal-body {
+    padding: 16px 14px;
+  }
+  .admin-modal-footer {
+    padding: 12px 14px;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .admin-modal-footer .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Mobile Drawer Overlay Backdrop */
+.admin-mobile-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(3px);
+  z-index: 2150;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.admin-mobile-backdrop.active {
+  display: block;
+  opacity: 1;
 }

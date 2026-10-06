@@ -74,10 +74,24 @@ const AdminCore = {
     const collapseIcon = document.querySelector('.sidebar-collapse-icon');
     const sidebar = document.querySelector('.admin-sidebar');
 
+    let backdrop = document.querySelector('.admin-mobile-backdrop');
+    if (!backdrop) {
+      backdrop = document.createElement('div');
+      backdrop.className = 'admin-mobile-backdrop';
+      document.body.appendChild(backdrop);
+    }
+
     function toggleMenu(e) {
       if (e) e.stopPropagation();
       if (window.innerWidth <= 992) {
-        if (sidebar) sidebar.classList.toggle('open');
+        if (sidebar) {
+          sidebar.classList.toggle('open');
+          if (sidebar.classList.contains('open')) {
+            backdrop.classList.add('active');
+          } else {
+            backdrop.classList.remove('active');
+          }
+        }
       } else {
         document.body.classList.toggle('sidebar-collapsed');
         const isCollapsed = document.body.classList.contains('sidebar-collapsed');
@@ -87,15 +101,32 @@ const AdminCore = {
 
     if (toggleBtn) toggleBtn.addEventListener('click', toggleMenu);
     if (collapseIcon) collapseIcon.addEventListener('click', toggleMenu);
+    backdrop.addEventListener('click', () => {
+      if (sidebar) sidebar.classList.remove('open');
+      backdrop.classList.remove('active');
+    });
 
-    // Close on mobile backdrop tap
+    // Close on tap outside
     document.addEventListener('click', (e) => {
       if (window.innerWidth <= 992 && sidebar && sidebar.classList.contains('open')) {
         if (!sidebar.contains(e.target) && toggleBtn && !toggleBtn.contains(e.target)) {
           sidebar.classList.remove('open');
+          backdrop.classList.remove('active');
         }
       }
     });
+
+    // Close drawer when a navigation link is clicked
+    if (sidebar) {
+      sidebar.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          if (window.innerWidth <= 992) {
+            sidebar.classList.remove('open');
+            backdrop.classList.remove('active');
+          }
+        });
+      });
+    }
 
     // Restore desktop collapsed preference
     if (window.innerWidth > 992 && localStorage.getItem('dalal_sidebar_collapsed') === '1') {

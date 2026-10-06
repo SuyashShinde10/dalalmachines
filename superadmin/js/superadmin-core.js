@@ -59,10 +59,24 @@ const SuperAdminCore = {
     const toggleBtn = document.getElementById('sa-btn-toggle');
     const sidebar = document.querySelector('.sa-sidebar');
 
+    let backdrop = document.querySelector('.sa-mobile-backdrop');
+    if (!backdrop) {
+      backdrop = document.createElement('div');
+      backdrop.className = 'sa-mobile-backdrop';
+      document.body.appendChild(backdrop);
+    }
+
     function toggleSaMenu(e) {
       if (e) e.stopPropagation();
       if (window.innerWidth <= 992) {
-        if (sidebar) sidebar.classList.toggle('open');
+        if (sidebar) {
+          sidebar.classList.toggle('open');
+          if (sidebar.classList.contains('open')) {
+            backdrop.classList.add('active');
+          } else {
+            backdrop.classList.remove('active');
+          }
+        }
       } else {
         document.body.classList.toggle('sa-sidebar-collapsed');
         const isCollapsed = document.body.classList.contains('sa-sidebar-collapsed');
@@ -71,15 +85,32 @@ const SuperAdminCore = {
     }
 
     if (toggleBtn) toggleBtn.addEventListener('click', toggleSaMenu);
+    backdrop.addEventListener('click', () => {
+      if (sidebar) sidebar.classList.remove('open');
+      backdrop.classList.remove('active');
+    });
 
     // Close on backdrop tap for mobile
     document.addEventListener('click', (e) => {
       if (window.innerWidth <= 992 && sidebar && sidebar.classList.contains('open')) {
         if (!sidebar.contains(e.target) && toggleBtn && !toggleBtn.contains(e.target)) {
           sidebar.classList.remove('open');
+          backdrop.classList.remove('active');
         }
       }
     });
+
+    // Auto-close drawer on navigation link tap
+    if (sidebar) {
+      sidebar.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          if (window.innerWidth <= 992) {
+            sidebar.classList.remove('open');
+            backdrop.classList.remove('active');
+          }
+        });
+      });
+    }
 
     // Restore desktop preference
     if (window.innerWidth > 992 && localStorage.getItem('dalal_sa_sidebar_collapsed') === '1') {
