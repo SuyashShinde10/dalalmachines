@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Machinery Catalog | Dalal Admin Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700;800&family=Inter:wght@400;500;600;700&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/new/Machinery/css/font-awesome.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+  <div class="admin-wrapper">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-header">
+        <a href="dashboard.html" class="brand-badge">
+          <div class="brand-title-wrap">
+            <div class="brand-title-text">DALAL <span>TOOLS</span></div>
+            <div class="brand-subtext">ADMINISTRATION</div>
+          </div>
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Core Operations</div>
+        <a href="dashboard.html" class="nav-link">
+          <i class="fa fa-th-large"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="products.html" class="nav-link active">
+          <i class="fa fa-cubes"></i>
+          <span>Machinery Catalog</span>
+          <span class="nav-badge" id="badge-total-machines">...</span>
+        </a>
+        <a href="product-form.html" class="nav-link">
+          <i class="fa fa-plus-circle"></i>
+          <span>Add New Machine</span>
+        </a>
+        <a href="product-form.html?custom=1" class="nav-link">
+          <i class="fa fa-magic" style="color: var(--brand-gold);"></i>
+          <span>Add Custom Machine</span>
+        </a>
+        <a href="inquiries.html" class="nav-link">
+          <i class="fa fa-envelope-open"></i>
+          <span>Customer RFQs</span>
+        </a>
+
+        <!-- Super Admin Only Section -->
+        <div class="nav-section-title superadmin-only-item">Developer & Super Admin</div>
+        <a href="users.html" class="nav-link superadmin-only-item">
+          <i class="fa fa-users"></i>
+          <span>Admin Users</span>
+        </a>
+        <a href="logs.html" class="nav-link superadmin-only-item">
+          <i class="fa fa-history"></i>
+          <span>Activity & Audit Logs</span>
+        </a>
+        <a href="settings.html" class="nav-link superadmin-only-item">
+          <i class="fa fa-sliders"></i>
+          <span>System & Backups</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-info-pill">
+          <div class="user-avatar" id="sidebar-user-avatar">D</div>
+          <div class="user-details">
+            <span class="user-name" id="sidebar-user-name">Loading...</span>
+            <span class="user-role-badge" id="sidebar-user-role">ADMIN</span>
+          </div>
+        </div>
+        <button class="btn-logout-sidebar btn-logout" title="Sign Out">
+          <i class="fa fa-sign-out"></i>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      <header class="admin-topbar">
+        <div class="topbar-left">
+          <button id="btn-sidebar-toggle" class="btn-sidebar-toggle">
+            <i class="fa fa-bars"></i>
+          </button>
+          <div class="topbar-breadcrumb">
+            Control Portal &bull; <span>Machinery Inventory Catalog</span>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <a href="/new/Machinery/category.html" target="_blank" class="btn-view-site">
+            <i class="fa fa-external-link"></i>
+            <span>View Public Catalog</span>
+          </a>
+        </div>
+      </header>
+
+      <div class="page-container">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Machinery Inventory Management</h1>
+            <p class="page-subtitle">Search, filter, update statuses, or publish new standard and custom bespoke machinery.</p>
+          </div>
+          <div class="page-actions">
+            <a href="product-form.html" class="btn-primary">
+              <i class="fa fa-plus"></i>
+              <span>Add Standard Machine</span>
+            </a>
+            <a href="product-form.html?custom=1" class="btn-secondary" style="border-color: var(--brand-gold);">
+              <i class="fa fa-magic" style="color: var(--brand-gold);"></i>
+              <span>Add Custom Machine</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Filter Toolbar -->
+        <div class="admin-card">
+          <div class="filter-toolbar">
+            <div class="search-input-wrap">
+              <i class="fa fa-search"></i>
+              <input type="text" id="filter-search" class="form-control" placeholder="Search by name, make, model, ID...">
+            </div>
+
+            <div style="min-width: 150px;">
+              <select id="filter-section" class="form-select">
+                <option value="">All Sections</option>
+                <option value="forming">Metal Forming</option>
+                <option value="cutting">Metal Cutting</option>
+              </select>
+            </div>
+
+            <div style="min-width: 170px;">
+              <select id="filter-location" class="form-select">
+                <option value="">All Locations</option>
+                <option value="Pune">In Stock Pune</option>
+                <option value="Europe">Ready in Europe</option>
+                <option value="Thailand">Thailand</option>
+                <option value="Vietnam">Vietnam</option>
+              </select>
+            </div>
+
+            <div style="min-width: 140px;">
+              <select id="filter-status" class="form-select">
+                <option value="">All Statuses</option>
+                <option value="active">Live / Active</option>
+                <option value="draft">Drafts</option>
+                <option value="sold">Marked Sold</option>
+              </select>
+            </div>
+
+            <div style="min-width: 140px;">
+              <select id="filter-type" class="form-select">
+                <option value="">All Types</option>
+                <option value="standard">Standard Only</option>
+                <option value="custom">Custom Machines</option>
+              </select>
+            </div>
+
+            <button id="btn-reset-filters" class="btn-secondary btn-sm" title="Reset Filters">
+              <i class="fa fa-undo"></i> Reset
+            </button>
+          </div>
+
+          <div style="padding: 10px 20px; font-size: 13px; color: var(--text-muted); display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.1);">
+            <div>Showing <strong id="filter-result-count" style="color:#fff;">0</strong> machines</div>
+            <div id="filter-active-tags"></div>
+          </div>
+
+          <!-- Inventory Table -->
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th style="width: 70px;">Photo</th>
+                  <th>ID & Machine Name</th>
+                  <th>Make & Model</th>
+                  <th>Section / Category</th>
+                  <th>Location</th>
+                  <th>Year / Tonnage</th>
+                  <th>Status</th>
+                  <th style="width: 140px; text-align: right;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="products-tbody">
+                <tr><td colspan="8" style="text-align:center; padding: 30px;">Loading machines...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="js/admin-core.js"></script>
+  <script>
+    let allMachines = [];
+
+    (async () => {
+      const user = await AdminCore.requireAuth();
+      if (!user) return;
+
+      loadProducts();
+      setupFilters();
+    })();
+
+    async function loadProducts() {
+      const res = await AdminCore.api('/api/products?all=true');
+      if (res.success) {
+        allMachines = res.products;
+        document.getElementById('badge-total-machines').textContent = allMachines.length;
+        renderFilteredTable();
+      } else {
+        AdminCore.toast(res.message || 'Failed to load products', 'error');
+      }
+    }
+
+    function setupFilters() {
+      ['filter-search', 'filter-section', 'filter-location', 'filter-status', 'filter-type'].forEach(id => {
+        document.getElementById(id).addEventListener('input', renderFilteredTable);
+        document.getElementById(id).addEventListener('change', renderFilteredTable);
+      });
+
+      document.getElementById('btn-reset-filters').addEventListener('click', () => {
+        document.getElementById('filter-search').value = '';
+        document.getElementById('filter-section').value = '';
+        document.getElementById('filter-location').value = '';
+        document.getElementById('filter-status').value = '';
+        document.getElementById('filter-type').value = '';
+        renderFilteredTable();
+      });
+    }
+
+    function renderFilteredTable() {
+      const searchVal = document.getElementById('filter-search').value.toLowerCase().trim();
+      const sectionVal = document.getElementById('filter-section').value;
+      const locationVal = document.getElementById('filter-location').value.toLowerCase();
+      const statusVal = document.getElementById('filter-status').value;
+      const typeVal = document.getElementById('filter-type').value;
+
+      const filtered = allMachines.filter(m => {
+        if (sectionVal && m.section !== sectionVal) return false;
+        if (statusVal && (m.status || 'active') !== statusVal) return false;
+        if (locationVal && !(m.location || '').toLowerCase().includes(locationVal)) return false;
+        if (typeVal === 'custom' && !m.isCustom) return false;
+        if (typeVal === 'standard' && m.isCustom) return false;
+        if (searchVal) {
+          const match = (m.name || '').toLowerCase().includes(searchVal) ||
+                        (m.id || '').toLowerCase().includes(searchVal) ||
+                        (m.make || '').toLowerCase().includes(searchVal) ||
+                        (m.model || '').toLowerCase().includes(searchVal) ||
+                        (m.categoryName || '').toLowerCase().includes(searchVal);
+          if (!match) return false;
+        }
+        return true;
+      });
+
+      document.getElementById('filter-result-count').textContent = filtered.length;
+
+      const tbody = document.getElementById('products-tbody');
+      if (filtered.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding: 40px; color: var(--text-dim);">No machinery matching current filters.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(m => `
+        <tr>
+          <td>
+            <img src="/${m.image || 'new/Machinery/images/dalal/cframe_press_pune.jpg'}" class="machine-thumb" alt="${m.name}" onerror="this.src='/new/Machinery/images/dalal/cframe_press_pune.jpg'">
+          </td>
+          <td>
+            <div class="machine-name-cell">
+              <span style="font-size: 14px; font-weight: 600;">${m.name}</span>
+              <div style="display: flex; gap: 6px; align-items: center; margin-top: 3px;">
+                <span class="machine-id-tag">${m.id}</span>
+                ${m.isCustom ? '<span class="badge badge-custom"><i class="fa fa-magic"></i> Custom</span>' : ''}
+              </div>
+            </div>
+          </td>
+          <td>
+            <div style="font-size: 13px;">${m.make || '-'}</div>
+            <small style="color: var(--text-muted);">${m.model || '-'}</small>
+          </td>
+          <td>
+            <div style="font-size: 13px; font-weight: 500; text-transform: capitalize;">${m.categoryName || m.category}</div>
+            <span class="badge" style="background: rgba(255,255,255,0.06); color: var(--text-muted); text-transform: uppercase;">
+              ${m.section}
+            </span>
+          </td>
+          <td><small style="color: var(--text-main); font-weight: 500;">${m.location || '-'}</small></td>
+          <td>
+            <div style="font-size: 13px;">${m.year || '-'}</div>
+            <small style="color: var(--brand-gold);">${m.tonnage > 0 ? m.tonnage + ' Tons' : '-'}</small>
+          </td>
+          <td>
+            <select class="form-select btn-sm" style="width: auto; padding: 4px 8px; font-size: 11px; font-weight: 700;" onchange="updateStatus('${m.id}', this.value)">
+              <option value="active" ${(m.status || 'active') === 'active' ? 'selected' : ''}>LIVE / ACTIVE</option>
+              <option value="draft" ${m.status === 'draft' ? 'selected' : ''}>DRAFT</option>
+              <option value="sold" ${m.status === 'sold' ? 'selected' : ''}>SOLD</option>
+            </select>
+          </td>
+          <td style="text-align: right;">
+            <div style="display: inline-flex; gap: 6px;">
+              <a href="/new/Machinery/product.html?id=${m.id}" target="_blank" class="btn-secondary btn-sm" title="Preview on Website">
+                <i class="fa fa-external-link"></i>
+              </a>
+              <a href="product-form.html?id=${m.id}" class="btn-primary btn-sm" title="Edit Machine">
+                <i class="fa fa-pencil"></i>
+              </a>
+              <button onclick="deleteProduct('${m.id}', '${m.name.replace(/'/g, "\\'")}')" class="btn-danger btn-sm" title="Delete Machine">
+                <i class="fa fa-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    async function updateStatus(id, newStatus) {
+      const res = await AdminCore.api(`/api/products/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify({ status: newStatus })
+      });
+      if (res.success) {
+        AdminCore.toast(`Status for machine ${id} changed to ${newStatus.toUpperCase()}`);
+        const found = allMachines.find(m => m.id === id);
+        if (found) found.status = newStatus;
+      } else {
+        AdminCore.toast(res.message || 'Status update failed', 'error');
+      }
+    }
+
+    async function deleteProduct(id, name) {
+      if (!confirm(`Are you sure you want to permanently delete this machine?\n\n"${name}" (${id})`)) {
+        return;
+      }
+      const res = await AdminCore.api(`/api/products/${id}`, { method: 'DELETE' });
+      if (res.success) {
+        AdminCore.toast(`Machine ${id} deleted successfully`);
+        allMachines = allMachines.filter(m => m.id !== id);
+        renderFilteredTable();
+      } else {
+        AdminCore.toast(res.message || 'Failed to delete machine', 'error');
+      }
+    }
+  </script>
+</body>
+</html>

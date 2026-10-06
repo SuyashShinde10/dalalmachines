@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System Settings & Diagnostics | Super Admin Developer Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700;800&family=Inter:wght@400;500;600;700&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/new/Machinery/css/font-awesome.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+  <div class="admin-wrapper">
+    <aside class="admin-sidebar">
+      <div class="sidebar-header">
+        <a href="dashboard.html" class="brand-badge">
+          <div class="brand-title-wrap">
+            <div class="brand-title-text">DALAL <span>TOOLS</span></div>
+            <div class="brand-subtext">ADMINISTRATION</div>
+          </div>
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Core Operations</div>
+        <a href="dashboard.html" class="nav-link">
+          <i class="fa fa-th-large"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="products.html" class="nav-link">
+          <i class="fa fa-cubes"></i>
+          <span>Machinery Catalog</span>
+        </a>
+        <a href="product-form.html" class="nav-link">
+          <i class="fa fa-plus-circle"></i>
+          <span>Add New Machine</span>
+        </a>
+        <a href="product-form.html?custom=1" class="nav-link">
+          <i class="fa fa-magic" style="color: var(--brand-gold);"></i>
+          <span>Add Custom Machine</span>
+        </a>
+        <a href="inquiries.html" class="nav-link">
+          <i class="fa fa-envelope-open"></i>
+          <span>Customer RFQs</span>
+        </a>
+
+        <!-- Super Admin Only Section -->
+        <div class="nav-section-title superadmin-only-item">Developer & Super Admin</div>
+        <a href="users.html" class="nav-link superadmin-only-item">
+          <i class="fa fa-users"></i>
+          <span>Admin Users</span>
+        </a>
+        <a href="logs.html" class="nav-link superadmin-only-item">
+          <i class="fa fa-history"></i>
+          <span>Activity & Audit Logs</span>
+        </a>
+        <a href="settings.html" class="nav-link active superadmin-only-item">
+          <i class="fa fa-sliders"></i>
+          <span>System & Backups</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-info-pill">
+          <div class="user-avatar" id="sidebar-user-avatar">D</div>
+          <div class="user-details">
+            <span class="user-name" id="sidebar-user-name">Loading...</span>
+            <span class="user-role-badge" id="sidebar-user-role">SUPERADMIN</span>
+          </div>
+        </div>
+        <button class="btn-logout-sidebar btn-logout" title="Sign Out">
+          <i class="fa fa-sign-out"></i>
+        </button>
+      </div>
+    </aside>
+
+    <main class="admin-main">
+      <header class="admin-topbar">
+        <div class="topbar-left">
+          <button id="btn-sidebar-toggle" class="btn-sidebar-toggle">
+            <i class="fa fa-bars"></i>
+          </button>
+          <div class="topbar-breadcrumb">
+            Developer Console &bull; <span>System Settings, Diagnostics & Backups</span>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <span class="badge badge-superadmin"><i class="fa fa-wrench"></i> Developer Mode</span>
+        </div>
+      </header>
+
+      <div class="page-container" style="max-width: 1080px;">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Developer & System Administration</h1>
+            <p class="page-subtitle">Configure contact routing, trigger static catalog synchronization, and export automated database backups.</p>
+          </div>
+        </div>
+
+        <!-- Diagnostics KPI Grid -->
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-card-header">
+              <span class="kpi-label">Server Uptime</span>
+              <div class="kpi-icon gold"><i class="fa fa-clock-o"></i></div>
+            </div>
+            <div class="kpi-value" id="stat-uptime">-</div>
+            <div class="kpi-sub">Continuous process runtime</div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-card-header">
+              <span class="kpi-label">Node Environment</span>
+              <div class="kpi-icon green"><i class="fa fa-server"></i></div>
+            </div>
+            <div class="kpi-value" id="stat-node">-</div>
+            <div class="kpi-sub">RAM: <span id="stat-mem">-</span></div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-card-header">
+              <span class="kpi-label">Database Machines</span>
+              <div class="kpi-icon purple"><i class="fa fa-database"></i></div>
+            </div>
+            <div class="kpi-value" id="stat-machines">-</div>
+            <div class="kpi-sub">Total records stored</div>
+          </div>
+        </div>
+
+        <!-- Developer Database Backup & Static Sync Card -->
+        <div class="admin-card">
+          <div class="card-header-bar">
+            <div class="card-title">
+              <i class="fa fa-database" style="color: var(--brand-gold);"></i> Database Tools & Static Sync
+            </div>
+          </div>
+          <div class="card-body">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+              
+              <!-- Sync to Static -->
+              <div style="background: rgba(0,0,0,0.2); border: 1px solid var(--border-color); border-radius: 8px; padding: 18px;">
+                <h4 style="color: #fff; font-size: 15px; margin-bottom: 6px;">
+                  <i class="fa fa-refresh" style="color: var(--color-success);"></i> Export to <code>catalog-data.js</code>
+                </h4>
+                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">
+                  Writes all active machines into <code>new/Machinery/js/catalog-data.js</code>. Ensures client-side static pages or GitHub Pages deployment stay synchronized.
+                </p>
+                <button type="button" id="btn-sync-static" class="btn-primary btn-sm">
+                  <i class="fa fa-bolt"></i> Run Static Sync
+                </button>
+              </div>
+
+              <!-- Download Backup -->
+              <div style="background: rgba(0,0,0,0.2); border: 1px solid var(--border-color); border-radius: 8px; padding: 18px;">
+                <h4 style="color: #fff; font-size: 15px; margin-bottom: 6px;">
+                  <i class="fa fa-download" style="color: var(--brand-gold);"></i> JSON Database Backup
+                </h4>
+                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">
+                  Export complete snapshot of all products, specifications, admin accounts, and customer quotation leads.
+                </p>
+                <a href="/api/system/backup" class="btn-secondary btn-sm" download>
+                  <i class="fa fa-download"></i> Download Full Backup
+                </a>
+              </div>
+
+              <!-- Restore Backup -->
+              <div style="background: rgba(0,0,0,0.2); border: 1px solid var(--border-color); border-radius: 8px; padding: 18px;">
+                <h4 style="color: #fff; font-size: 15px; margin-bottom: 6px;">
+                  <i class="fa fa-upload" style="color: var(--color-info);"></i> Restore Database
+                </h4>
+                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">
+                  Upload a previously exported JSON backup file to restore all machinery and accounts.
+                </p>
+                <input type="file" id="restore-file-input" accept=".json" style="display: none;">
+                <button type="button" id="btn-trigger-restore" class="btn-secondary btn-sm">
+                  <i class="fa fa-upload"></i> Upload & Restore JSON
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Global Settings Form -->
+        <div class="admin-card">
+          <div class="card-header-bar">
+            <div class="card-title">Global Configuration & Routing</div>
+          </div>
+          <div class="card-body">
+            <form id="settings-form">
+              <div class="form-row">
+                <div>
+                  <label class="form-label" for="setting-sitename">Official Company Name</label>
+                  <input type="text" id="setting-sitename" class="form-control" value="Dalal Machine Tools Agency Pvt. Ltd.">
+                </div>
+
+                <div>
+                  <label class="form-label" for="setting-whatsapp">WhatsApp RFQ Phone (International Format)</label>
+                  <input type="text" id="setting-whatsapp" class="form-control" placeholder="+919820088888">
+                  <div class="form-text">Used for all 1-click Quick RFQ buttons across the website.</div>
+                </div>
+
+                <div>
+                  <label class="form-label" for="setting-email">Sales & Inquiry Email</label>
+                  <input type="email" id="setting-email" class="form-control" placeholder="info@dalalmachines.com">
+                </div>
+              </div>
+
+              <div class="form-row" style="margin-top: 14px;">
+                <div>
+                  <label class="form-label">OMPI India LLP Co-Branding Visibility</label>
+                  <select id="setting-ompi" class="form-select">
+                    <option value="true">Enabled (Technical Partner badge & co-branding active)</option>
+                    <option value="false">Disabled</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="form-label">Auto-Sync Database to <code>catalog-data.js</code> on every change</label>
+                  <select id="setting-autosync" class="form-select">
+                    <option value="true">Enabled (Recommended: Keep static files updated)</option>
+                    <option value="false">Disabled (Manual sync only)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div style="text-align: right; margin-top: 20px;">
+                <button type="submit" class="btn-primary">
+                  <i class="fa fa-check"></i> Save System Settings
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="js/admin-core.js"></script>
+  <script>
+    (async () => {
+      const user = await AdminCore.requireAuth('superadmin');
+      if (!user) return;
+
+      loadStats();
+      loadSettings();
+      setupHandlers();
+    })();
+
+    async function loadStats() {
+      const res = await AdminCore.api('/api/system/stats');
+      if (res.success) {
+        const s = res.stats;
+        const uptimeMins = Math.floor(s.uptimeSeconds / 60);
+        document.getElementById('stat-uptime').textContent = uptimeMins + ' min';
+        document.getElementById('stat-node').textContent = s.nodeVersion;
+        document.getElementById('stat-mem').textContent = s.memoryUsageMB + ' MB';
+        document.getElementById('stat-machines').textContent = s.totalMachines;
+      }
+    }
+
+    async function loadSettings() {
+      const res = await AdminCore.api('/api/system/settings');
+      if (res.success && res.settings) {
+        const s = res.settings;
+        document.getElementById('setting-sitename').value = s.siteName || '';
+        document.getElementById('setting-whatsapp').value = s.whatsappNumber || '';
+        document.getElementById('setting-email').value = s.contactEmail || '';
+        document.getElementById('setting-ompi').value = s.ompiEnabled ? 'true' : 'false';
+        document.getElementById('setting-autosync').value = s.autoSyncCatalogJs !== false ? 'true' : 'false';
+      }
+    }
+
+    function setupHandlers() {
+      // Sync static button
+      document.getElementById('btn-sync-static').addEventListener('click', async () => {
+        const btn = document.getElementById('btn-sync-static');
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Exporting...';
+        const res = await AdminCore.api('/api/system/sync-static', { method: 'POST' });
+        if (res.success) {
+          AdminCore.toast('Catalog exported successfully to new/Machinery/js/catalog-data.js!');
+        } else {
+          AdminCore.toast(res.message || 'Export failed', 'error');
+        }
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa fa-bolt"></i> Run Static Sync';
+      });
+
+      // Restore JSON backup
+      const fileInput = document.getElementById('restore-file-input');
+      document.getElementById('btn-trigger-restore').addEventListener('click', () => fileInput.click());
+
+      fileInput.addEventListener('change', (e) => {
+        if (!e.target.files.length) return;
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onload = async (evt) => {
+          try {
+            const parsed = JSON.parse(evt.target.result);
+            if (!confirm(`Are you sure you want to restore database from backup (${parsed.products ? parsed.products.length : 0} machines)? Current data will be replaced.`)) {
+              return;
+            }
+            const res = await AdminCore.api('/api/system/restore', {
+              method: 'POST',
+              body: JSON.stringify(parsed)
+            });
+            if (res.success) {
+              AdminCore.toast('Database restored successfully!');
+              loadStats();
+            } else {
+              AdminCore.toast(res.message || 'Restore failed', 'error');
+            }
+          } catch (err) {
+            AdminCore.toast('Invalid JSON backup file: ' + err.message, 'error');
+          }
+        };
+        reader.readAsText(file);
+      });
+
+      // Save settings form
+      document.getElementById('settings-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const payload = {
+          siteName: document.getElementById('setting-sitename').value.trim(),
+          whatsappNumber: document.getElementById('setting-whatsapp').value.trim(),
+          contactEmail: document.getElementById('setting-email').value.trim(),
+          ompiEnabled: document.getElementById('setting-ompi').value === 'true',
+          autoSyncCatalogJs: document.getElementById('setting-autosync').value === 'true'
+        };
+
+        const res = await AdminCore.api('/api/system/settings', {
+          method: 'PUT',
+          body: JSON.stringify(payload)
+        });
+
+        if (res.success) {
+          AdminCore.toast('System settings saved successfully!');
+        } else {
+          AdminCore.toast(res.message || 'Failed to save settings', 'error');
+        }
+      });
+    }
+  </script>
+</body>
+</html>

@@ -395,89 +395,106 @@ function switchMainImage(thumb) {
     thumb.classList.add('active');
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+    function populatePDP(item) {
+        if (!item) return;
+        // Page title and headers
+        document.title = `${item.name} | Dalal Machine Tools Agency Pvt. Ltd.`;
+        document.getElementById('pdp-title').textContent = item.name;
+        document.getElementById('pdp-crumb-name').textContent = `${item.name} (${item.id})`;
+        document.getElementById('pdp-crumb-cat').textContent = item.categoryName;
+        document.getElementById('pdp-cat-header').textContent = `${item.section === 'forming' ? 'Metal Forming' : 'Metal Cutting'} • ${item.categoryName}`;
+        
+        // Dynamic Accurate Description
+        const descEl = document.getElementById('pdp-desc');
+        if (descEl) {
+            descEl.textContent = `${item.name} engineered by ${item.make} (Model: ${item.model}, Mfg Year: ${item.year || 'Standard'}). High-capacity industrial machinery in ${item.condition}. Available for live power demonstration and physical inspection at our ${item.location} facility. Full foundation blueprints, electrical schematics, and previous production history supplied. Turnkey CIF shipping and High Seas Sales delivery in INR arranged with direct Bill of Entry in buyer's name.`;
+        }
+
+        // Balanced 2-Column Metadata Card
+        document.getElementById('pdp-make').textContent = item.make;
+        document.getElementById('pdp-model').textContent = item.model;
+        document.getElementById('pdp-year').textContent = item.year || 'Standard / Operational';
+        document.getElementById('pdp-tonnage').textContent = item.tonnage > 0 ? `${item.tonnage.toLocaleString()} Metric Tons` : 'Precision CNC Machining';
+        document.getElementById('pdp-loc').textContent = item.location;
+        const condEl = document.getElementById('pdp-condition');
+        if (condEl) condEl.textContent = item.condition || 'Verified Operational';
+
+        // Badges & Images
+        document.getElementById('pdp-id-tag').textContent = `Machine No: ${item.id}`;
+        document.getElementById('pdp-location-tag').innerHTML = `<i class="fa fa-map-marker"></i> ${item.location}`;
+        document.getElementById('pdp-main-img').src = item.image;
+        document.getElementById('pdp-wa-btn').href = `https://wa.me/919821232131?text=Hello%20Mr.%20Vinit%20Dalal,%20I%20am%20interested%20in%20${encodeURIComponent(item.name)}%20(Machine%20ID:%20${item.id})`;
+
+        // Update Thumbnails Switcher
+        const thumbWrap = document.getElementById('pdp-thumbnails-wrap');
+        if (thumbWrap) {
+            thumbWrap.innerHTML = `
+                <img src="${item.image}" class="pdp-thumb-item active" onclick="switchMainImage(this)" alt="View 1">
+                <img src="images/dalal/logistics_heavy_transport.jpg" class="pdp-thumb-item" onclick="switchMainImage(this)" alt="Rigging View">
+                <img src="images/dalal/pune_warehouse_yard.jpg" class="pdp-thumb-item" onclick="switchMainImage(this)" alt="Yard Staging">
+            `;
+        }
+
+        // Populate Full Technical Specifications Table
+        if (item.specs && Object.keys(item.specs).length > 0) {
+            const specLabels = {
+                capacity: "Nominal Capacity / Tonnage",
+                cushionCapacity: "Die Cushion Capacity",
+                stroke: "Slide Stroke Length",
+                daylight: "Daylight Opening (Shut Height)",
+                bedDimensions: "Bolster Bed Dimensions",
+                slideDimensions: "Slide Area Dimensions",
+                operatingPressure: "Hydraulic Operating Pressure",
+                control: "CNC / PLC Control System",
+                strokesPerMinute: "Operating Speed",
+                continuousStrokes: "Continuous Stroke Rate",
+                shutHeight: "Die Shut Height",
+                bedArea: "Bolster Bed Area",
+                ramArea: "Slide / Ram Area",
+                mainMotor: "Main Drive Motor Power",
+                motor: "Drive Motor Power",
+                totalWeight: "Approximate Machine Weight",
+                speed: "Operating Strokes / Min",
+                dieHeight: "Die Height (Shut Height)",
+                bolsterDimensions: "Bolster Bed Dimensions",
+                cushion: "Pneumatic Die Cushion",
+                maxGearDiameter: "Max. Workpiece Diameter",
+                maxModule: "Max. Pitch / Module",
+                maxFaceWidth: "Max. Face Width",
+                tableDiameter: "Work Table Diameter",
+                spindlePower: "Main Spindle Drive Power",
+                cncSystem: "CNC Controller Package"
+            };
+
+            const tbody = document.getElementById('pdp-specs-tbody');
+            if (tbody) {
+                tbody.innerHTML = Object.entries(item.specs).map(([key, val]) => {
+                    const label = specLabels[key] || key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+                    return `<tr><th style="width:38%; font-weight:700; color:#1e293b; background:#f8fafc;">${label}</th><td style="color:#334155; font-weight:600;">${val}</td></tr>`;
+                }).join('');
+            }
+        }
+    }
+
     const urlParams = new URLSearchParams(window.location.search);
     const mId = urlParams.get('id');
-    if (mId && typeof DALAL_MACHINES !== 'undefined') {
-        const item = DALAL_MACHINES.find(m => m.id.toLowerCase() === mId.toLowerCase());
-        if (item) {
-            // Page title and headers
-            document.title = `${item.name} | Dalal Machine Tools Agency Pvt. Ltd.`;
-            document.getElementById('pdp-title').textContent = item.name;
-            document.getElementById('pdp-crumb-name').textContent = `${item.name} (${item.id})`;
-            document.getElementById('pdp-crumb-cat').textContent = item.categoryName;
-            document.getElementById('pdp-cat-header').textContent = `${item.section === 'forming' ? 'Metal Forming' : 'Metal Cutting'} • ${item.categoryName}`;
-            
-            // Dynamic Accurate Description
-            const descEl = document.getElementById('pdp-desc');
-            if (descEl) {
-                descEl.textContent = `${item.name} engineered by ${item.make} (Model: ${item.model}, Mfg Year: ${item.year || 'Standard'}). High-capacity industrial machinery in ${item.condition}. Available for live power demonstration and physical inspection at our ${item.location} facility. Full foundation blueprints, electrical schematics, and previous production history supplied. Turnkey CIF shipping and High Seas Sales delivery in INR arranged with direct Bill of Entry in buyer's name.`;
-            }
-
-            // Balanced 2-Column Metadata Card
-            document.getElementById('pdp-make').textContent = item.make;
-            document.getElementById('pdp-model').textContent = item.model;
-            document.getElementById('pdp-year').textContent = item.year || 'Standard / Operational';
-            document.getElementById('pdp-tonnage').textContent = item.tonnage > 0 ? `${item.tonnage.toLocaleString()} Metric Tons` : 'Precision CNC Machining';
-            document.getElementById('pdp-loc').textContent = item.location;
-            const condEl = document.getElementById('pdp-condition');
-            if (condEl) condEl.textContent = item.condition || 'Verified Operational';
-
-            // Badges & Images
-            document.getElementById('pdp-id-tag').textContent = `Machine No: ${item.id}`;
-            document.getElementById('pdp-location-tag').innerHTML = `<i class="fa fa-map-marker"></i> ${item.location}`;
-            document.getElementById('pdp-main-img').src = item.image;
-            document.getElementById('pdp-wa-btn').href = `https://wa.me/919821232131?text=Hello%20Mr.%20Vinit%20Dalal,%20I%20am%20interested%20in%20${encodeURIComponent(item.name)}%20(Machine%20ID:%20${item.id})`;
-
-            // Update Thumbnails Switcher
-            const thumbWrap = document.getElementById('pdp-thumbnails-wrap');
-            if (thumbWrap) {
-                thumbWrap.innerHTML = `
-                    <img src="${item.image}" class="pdp-thumb-item active" onclick="switchMainImage(this)" alt="View 1">
-                    <img src="images/dalal/logistics_heavy_transport.jpg" class="pdp-thumb-item" onclick="switchMainImage(this)" alt="Rigging View">
-                    <img src="images/dalal/pune_warehouse_yard.jpg" class="pdp-thumb-item" onclick="switchMainImage(this)" alt="Yard Staging">
-                `;
-            }
-
-            // Populate Full Technical Specifications Table
-            if (item.specs && Object.keys(item.specs).length > 0) {
-                const specLabels = {
-                    capacity: "Nominal Capacity / Tonnage",
-                    cushionCapacity: "Die Cushion Capacity",
-                    stroke: "Slide Stroke Length",
-                    daylight: "Daylight Opening (Shut Height)",
-                    bedDimensions: "Bolster Bed Dimensions",
-                    slideDimensions: "Slide Area Dimensions",
-                    operatingPressure: "Hydraulic Operating Pressure",
-                    control: "CNC / PLC Control System",
-                    strokesPerMinute: "Operating Speed",
-                    continuousStrokes: "Continuous Stroke Rate",
-                    shutHeight: "Die Shut Height",
-                    bedArea: "Bolster Bed Area",
-                    ramArea: "Slide / Ram Area",
-                    mainMotor: "Main Drive Motor Power",
-                    motor: "Drive Motor Power",
-                    totalWeight: "Approximate Machine Weight",
-                    speed: "Operating Strokes / Min",
-                    dieHeight: "Die Height (Shut Height)",
-                    bolsterDimensions: "Bolster Bed Dimensions",
-                    cushion: "Pneumatic Die Cushion",
-                    maxGearDiameter: "Max. Workpiece Diameter",
-                    maxModule: "Max. Pitch / Module",
-                    maxFaceWidth: "Max. Face Width",
-                    tableDiameter: "Work Table Diameter",
-                    spindlePower: "Main Spindle Drive Power",
-                    cncSystem: "CNC Controller Package"
-                };
-
-                const tbody = document.getElementById('pdp-specs-tbody');
-                if (tbody) {
-                    tbody.innerHTML = Object.entries(item.specs).map(([key, val]) => {
-                        const label = specLabels[key] || key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
-                        return `<tr><th style="width:38%; font-weight:700; color:#1e293b; background:#f8fafc;">${label}</th><td style="color:#334155; font-weight:600;">${val}</td></tr>`;
-                    }).join('');
-                }
-            }
+    if (mId) {
+        let foundItem = null;
+        if (typeof DALAL_MACHINES !== 'undefined') {
+            foundItem = DALAL_MACHINES.find(m => m.id.toLowerCase() === mId.toLowerCase());
+        }
+        if (foundItem) {
+            populatePDP(foundItem);
+        } else if (typeof fetch !== 'undefined') {
+            // Live API fetch for newly added custom machines
+            fetch(`/api/products/${mId}`)
+                .then(r => r.json())
+                .then(data => {
+                    if (data.success && data.product) {
+                        populatePDP(data.product);
+                    }
+                })
+                .catch(() => {});
         }
     }
 });

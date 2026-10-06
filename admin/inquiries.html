@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer RFQs & Inquiries | Dalal Admin Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700;800&family=Inter:wght@400;500;600;700&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/new/Machinery/css/font-awesome.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+  <div class="admin-wrapper">
+    <aside class="admin-sidebar">
+      <div class="sidebar-header">
+        <a href="dashboard.html" class="brand-badge">
+          <div class="brand-title-wrap">
+            <div class="brand-title-text">DALAL <span>TOOLS</span></div>
+            <div class="brand-subtext">ADMINISTRATION</div>
+          </div>
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Core Operations</div>
+        <a href="dashboard.html" class="nav-link">
+          <i class="fa fa-th-large"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="products.html" class="nav-link">
+          <i class="fa fa-cubes"></i>
+          <span>Machinery Catalog</span>
+        </a>
+        <a href="product-form.html" class="nav-link">
+          <i class="fa fa-plus-circle"></i>
+          <span>Add New Machine</span>
+        </a>
+        <a href="product-form.html?custom=1" class="nav-link">
+          <i class="fa fa-magic" style="color: var(--brand-gold);"></i>
+          <span>Add Custom Machine</span>
+        </a>
+        <a href="inquiries.html" class="nav-link active">
+          <i class="fa fa-envelope-open"></i>
+          <span>Customer RFQs</span>
+          <span class="nav-badge" id="badge-inquiries" style="background: rgba(16, 185, 129, 0.2); color: #34d399;">...</span>
+        </a>
+
+        <!-- Super Admin Only Section -->
+        <div class="nav-section-title superadmin-only-item">Developer & Super Admin</div>
+        <a href="users.html" class="nav-link superadmin-only-item">
+          <i class="fa fa-users"></i>
+          <span>Admin Users</span>
+        </a>
+        <a href="logs.html" class="nav-link superadmin-only-item">
+          <i class="fa fa-history"></i>
+          <span>Activity & Audit Logs</span>
+        </a>
+        <a href="settings.html" class="nav-link superadmin-only-item">
+          <i class="fa fa-sliders"></i>
+          <span>System & Backups</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-info-pill">
+          <div class="user-avatar" id="sidebar-user-avatar">D</div>
+          <div class="user-details">
+            <span class="user-name" id="sidebar-user-name">Loading...</span>
+            <span class="user-role-badge" id="sidebar-user-role">ADMIN</span>
+          </div>
+        </div>
+        <button class="btn-logout-sidebar btn-logout" title="Sign Out">
+          <i class="fa fa-sign-out"></i>
+        </button>
+      </div>
+    </aside>
+
+    <main class="admin-main">
+      <header class="admin-topbar">
+        <div class="topbar-left">
+          <button id="btn-sidebar-toggle" class="btn-sidebar-toggle">
+            <i class="fa fa-bars"></i>
+          </button>
+          <div class="topbar-breadcrumb">
+            Control Portal &bull; <span>Customer Quotation Requests</span>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <a href="/new/Machinery/contact.html" target="_blank" class="btn-view-site">
+            <i class="fa fa-external-link"></i>
+            <span>View Public Contact Page</span>
+          </a>
+        </div>
+      </header>
+
+      <div class="page-container">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Customer RFQ & Quotation Inbox</h1>
+            <p class="page-subtitle">Direct inquiries submitted from machinery PDP pages and the contact form.</p>
+          </div>
+        </div>
+
+        <div class="admin-card">
+          <div class="filter-toolbar">
+            <div class="search-input-wrap">
+              <i class="fa fa-search"></i>
+              <input type="text" id="filter-inq-search" class="form-control" placeholder="Search customer, phone, company, or machine...">
+            </div>
+
+            <div style="min-width: 160px;">
+              <select id="filter-inq-status" class="form-select">
+                <option value="">All Statuses</option>
+                <option value="new">New Inquiries</option>
+                <option value="contacted">Contacted</option>
+                <option value="quoted">Quotation Sent</option>
+                <option value="closed">Closed / Won</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Date & Time</th>
+                  <th>Customer & Company</th>
+                  <th>Contact Info</th>
+                  <th>Machine Inquired</th>
+                  <th>Message / Notes</th>
+                  <th style="width: 140px;">Status</th>
+                </tr>
+              </thead>
+              <tbody id="inquiries-tbody">
+                <tr><td colspan="6" style="text-align:center; padding: 30px;">Loading customer inquiries...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="js/admin-core.js"></script>
+  <script>
+    let allInquiries = [];
+
+    (async () => {
+      const user = await AdminCore.requireAuth();
+      if (!user) return;
+
+      loadInquiries();
+      document.getElementById('filter-inq-search').addEventListener('input', renderInquiries);
+      document.getElementById('filter-inq-status').addEventListener('change', renderInquiries);
+    })();
+
+    async function loadInquiries() {
+      const res = await AdminCore.api('/api/inquiries');
+      if (res.success) {
+        allInquiries = res.inquiries;
+        document.getElementById('badge-inquiries').textContent = allInquiries.length;
+        renderInquiries();
+      } else {
+        AdminCore.toast(res.message || 'Failed to load inquiries', 'error');
+      }
+    }
+
+    function renderInquiries() {
+      const q = document.getElementById('filter-inq-search').value.toLowerCase().trim();
+      const statusFilter = document.getElementById('filter-inq-status').value;
+
+      const filtered = allInquiries.filter(i => {
+        if (statusFilter && i.status !== statusFilter) return false;
+        if (q) {
+          const match = (i.name || '').toLowerCase().includes(q) ||
+                        (i.company || '').toLowerCase().includes(q) ||
+                        (i.phone || '').toLowerCase().includes(q) ||
+                        (i.email || '').toLowerCase().includes(q) ||
+                        (i.machineName || '').toLowerCase().includes(q);
+          if (!match) return false;
+        }
+        return true;
+      });
+
+      const tbody = document.getElementById('inquiries-tbody');
+      if (filtered.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding: 40px; color: var(--text-dim);">No customer inquiries found.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(i => {
+        const cleanPhone = (i.phone || '').replace(/[^0-9]/g, '');
+        const dateStr = new Date(i.createdAt).toLocaleDateString() + ' ' + new Date(i.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+        return `
+          <tr>
+            <td>
+              <small style="color: var(--text-dim); font-size: 11px;">${dateStr}</small>
+            </td>
+            <td>
+              <strong style="color: #fff; font-size: 13px;">${i.name}</strong><br>
+              <small style="color: var(--text-muted);">${i.company || 'Individual Buyer'}</small>
+            </td>
+            <td>
+              <div style="display: flex; flex-direction: column; gap: 3px;">
+                ${i.phone ? `
+                  <a href="tel:${i.phone}" style="font-size: 12px; color: var(--text-main);">
+                    <i class="fa fa-phone" style="color: var(--brand-gold);"></i> ${i.phone}
+                  </a>
+                  <a href="https://wa.me/${cleanPhone}" target="_blank" style="font-size: 11px; color: #25d366; font-weight: 600;">
+                    <i class="fa fa-whatsapp"></i> Chat on WhatsApp
+                  </a>
+                ` : ''}
+                ${i.email ? `
+                  <a href="mailto:${i.email}" style="font-size: 12px; color: var(--text-muted);">
+                    <i class="fa fa-envelope"></i> ${i.email}
+                  </a>
+                ` : ''}
+              </div>
+            </td>
+            <td>
+              ${i.machineName ? `
+                <strong style="color: #fff; font-size: 12px;">${i.machineName}</strong>
+                ${i.machineId ? `<br><small style="color: var(--brand-gold);">${i.machineId}</small>` : ''}
+              ` : '<span style="color: var(--text-dim);">General Inquiry</span>'}
+            </td>
+            <td>
+              <p style="font-size: 12px; color: var(--text-muted); max-width: 280px; line-height: 1.4; margin: 0;">
+                ${i.message || 'No additional message.'}
+              </p>
+            </td>
+            <td>
+              <select class="form-select btn-sm" style="padding: 4px 8px; font-size: 11px; font-weight: 700;" onchange="updateInquiryStatus('${i.id}', this.value)">
+                <option value="new" ${i.status === 'new' ? 'selected' : ''}>NEW</option>
+                <option value="contacted" ${i.status === 'contacted' ? 'selected' : ''}>CONTACTED</option>
+                <option value="quoted" ${i.status === 'quoted' ? 'selected' : ''}>QUOTATION SENT</option>
+                <option value="closed" ${i.status === 'closed' ? 'selected' : ''}>CLOSED / WON</option>
+              </select>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    async function updateInquiryStatus(id, newStatus) {
+      const res = await AdminCore.api(`/api/inquiries/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify({ status: newStatus })
+      });
+      if (res.success) {
+        AdminCore.toast(`Inquiry status updated to ${newStatus.toUpperCase()}`);
+        const found = allInquiries.find(i => i.id === id);
+        if (found) found.status = newStatus;
+      } else {
+        AdminCore.toast(res.message || 'Status update failed', 'error');
+      }
+    }
+  </script>
+</body>
+</html>

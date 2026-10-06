@@ -45,8 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Synchronize sidebar count badges with actual DALAL_MACHINES inventory
-  if (typeof DALAL_MACHINES !== 'undefined' && categoryFilters.length > 0) {
+  function syncSidebarCounts() {
+    if (typeof DALAL_MACHINES === 'undefined' || categoryFilters.length === 0) return;
     const catCounts = {};
     let formingCount = 0;
     let cuttingCount = 0;
@@ -71,6 +71,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  syncSidebarCounts();
 
   function buildCardHTML(m) {
     return `
@@ -281,6 +283,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initial render
   renderGrid();
+
+  // Dynamic Live API Synchronization (falls back smoothly to static catalog-data.js)
+  if (typeof fetch !== 'undefined') {
+    fetch('/api/products')
+      .then(r => r.json())
+      .then(data => {
+        if (data && data.success && Array.isArray(data.products) && data.products.length > 0) {
+          window.DALAL_MACHINES = data.products;
+          syncSidebarCounts();
+          renderGrid();
+        }
+      })
+      .catch(() => {
+        // Silent fallback for static/offline operation
+      });
+  }
 
   // High Seas Calculator Setup
   const calcBtn = document.getElementById('calc-calculate-btn');

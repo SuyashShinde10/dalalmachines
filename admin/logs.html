@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audit Logs | Super Admin Developer Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700;800&family=Inter:wght@400;500;600;700&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/new/Machinery/css/font-awesome.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+  <div class="admin-wrapper">
+    <aside class="admin-sidebar">
+      <div class="sidebar-header">
+        <a href="dashboard.html" class="brand-badge">
+          <div class="brand-title-wrap">
+            <div class="brand-title-text">DALAL <span>TOOLS</span></div>
+            <div class="brand-subtext">ADMINISTRATION</div>
+          </div>
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Core Operations</div>
+        <a href="dashboard.html" class="nav-link">
+          <i class="fa fa-th-large"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="products.html" class="nav-link">
+          <i class="fa fa-cubes"></i>
+          <span>Machinery Catalog</span>
+        </a>
+        <a href="product-form.html" class="nav-link">
+          <i class="fa fa-plus-circle"></i>
+          <span>Add New Machine</span>
+        </a>
+        <a href="product-form.html?custom=1" class="nav-link">
+          <i class="fa fa-magic" style="color: var(--brand-gold);"></i>
+          <span>Add Custom Machine</span>
+        </a>
+        <a href="inquiries.html" class="nav-link">
+          <i class="fa fa-envelope-open"></i>
+          <span>Customer RFQs</span>
+        </a>
+
+        <!-- Super Admin Only Section -->
+        <div class="nav-section-title superadmin-only-item">Developer & Super Admin</div>
+        <a href="users.html" class="nav-link superadmin-only-item">
+          <i class="fa fa-users"></i>
+          <span>Admin Users</span>
+        </a>
+        <a href="logs.html" class="nav-link active superadmin-only-item">
+          <i class="fa fa-history"></i>
+          <span>Activity & Audit Logs</span>
+        </a>
+        <a href="settings.html" class="nav-link superadmin-only-item">
+          <i class="fa fa-sliders"></i>
+          <span>System & Backups</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-info-pill">
+          <div class="user-avatar" id="sidebar-user-avatar">D</div>
+          <div class="user-details">
+            <span class="user-name" id="sidebar-user-name">Loading...</span>
+            <span class="user-role-badge" id="sidebar-user-role">SUPERADMIN</span>
+          </div>
+        </div>
+        <button class="btn-logout-sidebar btn-logout" title="Sign Out">
+          <i class="fa fa-sign-out"></i>
+        </button>
+      </div>
+    </aside>
+
+    <main class="admin-main">
+      <header class="admin-topbar">
+        <div class="topbar-left">
+          <button id="btn-sidebar-toggle" class="btn-sidebar-toggle">
+            <i class="fa fa-bars"></i>
+          </button>
+          <div class="topbar-breadcrumb">
+            Developer Console &bull; <span>System Activity & Audit Logs</span>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <span class="badge badge-superadmin"><i class="fa fa-lock"></i> Super Admin Audit Trail</span>
+        </div>
+      </header>
+
+      <div class="page-container">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">System Activity & Audit Ledger</h1>
+            <p class="page-subtitle">Historical records of all administrative actions, machine publications, updates, deletions, and logins.</p>
+          </div>
+          <div class="page-actions">
+            <button id="btn-refresh-logs" class="btn-secondary btn-sm">
+              <i class="fa fa-refresh"></i> Refresh
+            </button>
+          </div>
+        </div>
+
+        <div class="admin-card">
+          <div class="filter-toolbar">
+            <div class="search-input-wrap">
+              <i class="fa fa-search"></i>
+              <input type="text" id="log-search-input" class="form-control" placeholder="Search by user, action, target machine...">
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th style="width: 170px;">Timestamp</th>
+                  <th>Actor / User</th>
+                  <th>Action</th>
+                  <th>Target</th>
+                  <th>Details</th>
+                </tr>
+              </thead>
+              <tbody id="logs-tbody">
+                <tr><td colspan="5" style="text-align:center; padding: 30px;">Loading audit logs...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="js/admin-core.js"></script>
+  <script>
+    let allLogs = [];
+
+    (async () => {
+      const user = await AdminCore.requireAuth('superadmin');
+      if (!user) return;
+
+      loadLogs();
+      document.getElementById('log-search-input').addEventListener('input', renderLogs);
+      document.getElementById('btn-refresh-logs').addEventListener('click', loadLogs);
+    })();
+
+    async function loadLogs() {
+      const res = await AdminCore.api('/api/logs?limit=300');
+      if (res.success) {
+        allLogs = res.logs;
+        renderLogs();
+      } else {
+        AdminCore.toast(res.message || 'Failed to load logs', 'error');
+      }
+    }
+
+    function renderLogs() {
+      const q = document.getElementById('log-search-input').value.toLowerCase().trim();
+      const filtered = allLogs.filter(l => {
+        if (!q) return true;
+        return (l.username || '').toLowerCase().includes(q) ||
+               (l.action || '').toLowerCase().includes(q) ||
+               (l.target || '').toLowerCase().includes(q) ||
+               (l.details || '').toLowerCase().includes(q);
+      });
+
+      const tbody = document.getElementById('logs-tbody');
+      if (filtered.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding: 40px; color: var(--text-dim);">No activity logs match query.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(l => {
+        const timeStr = new Date(l.timestamp).toLocaleString();
+        let actionBadgeClass = 'badge-active';
+        if (l.action.includes('DELETE')) actionBadgeClass = 'badge-sold';
+        if (l.action.includes('UPDATE')) actionBadgeClass = 'badge-draft';
+        if (l.action.includes('USER')) actionBadgeClass = 'badge-custom';
+
+        return `
+          <tr>
+            <td><small style="color: var(--text-dim); font-size: 11px;">${timeStr}</small></td>
+            <td>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <strong style="color: #fff; font-size: 12px;">${l.username}</strong>
+                <span class="badge" style="font-size: 9px; padding: 2px 6px; background: rgba(255,255,255,0.06);">${(l.role || '').toUpperCase()}</span>
+              </div>
+            </td>
+            <td>
+              <span class="badge ${actionBadgeClass}" style="font-size: 10px;">
+                ${l.action}
+              </span>
+            </td>
+            <td><code style="color: var(--brand-gold); font-size: 11px;">${l.target}</code></td>
+            <td><span style="font-size: 12px; color: var(--text-muted);">${l.details}</span></td>
+          </tr>
+        `;
+      }).join('');
+    }
+  </script>
+</body>
+</html>

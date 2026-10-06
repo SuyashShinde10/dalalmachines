@@ -12,6 +12,11 @@ $RECYCLE.BIN/
 /nav_crop*.png
 /nav_debug.html
 
+# Node dependencies
+node_modules/
+server/node_modules/
+package-lock.json
+
 # IDE and Editor settings
 .vscode/
 .idea/

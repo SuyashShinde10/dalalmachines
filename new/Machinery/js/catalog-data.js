@@ -1,5 +1,42 @@
 // Dalal Machine Tools Agency Pvt. Ltd. - Audited Inventory Database
+// Auto-synced from Dalal Admin Portal
 var DALAL_MACHINES = [
+  {
+    "id": "P00099-CUST",
+    "name": "Custom 4000T Hydraulic Closed Die Forging Press with OMPI Clutch",
+    "section": "forming",
+    "category": "hot-forging-press",
+    "categoryName": "Hot Forging Press",
+    "make": "Schuler / Dalal Custom Rebuild",
+    "model": "HD-4000-SPECIAL",
+    "year": 2024,
+    "tonnage": 4000,
+    "location": "In Stock PUNE",
+    "condition": "Factory Refurbished - Live Trial Ready",
+    "image": "images/dalal/hero_forging_press.jpg",
+    "galleryImages": [
+      "images/dalal/hero_forging_press.jpg"
+    ],
+    "specs": {
+      "Capacity": "4,000 Metric Tons",
+      "Slide Stroke": "650 mm",
+      "Shut Height Daylight": "1,400 mm",
+      "Bed Area": "2,400 x 2,000 mm",
+      "OMPI Clutch & Brake Unit": "Series 2800 Dual Safety",
+      "Siemens PLC Package": "S7-1500 with 15 inch Touch HMI"
+    },
+    "isCustom": true,
+    "customBadges": [
+      "EXCLUSIVE BESPOKE BUILD",
+      "HIGH SEAS READY"
+    ],
+    "priceText": "High Seas CIF Nhava Sheva USD 350,000",
+    "brochurePdf": null,
+    "status": "active",
+    "createdAt": "2026-10-06T10:09:42.259Z",
+    "updatedAt": "2026-10-06T10:09:42.259Z",
+    "createdBy": "admin"
+  },
   {
     "id": "P00007",
     "name": "2500T RUSSIAN TMP-VORONEZH Hot Forging Press",
@@ -22,7 +59,15 @@ var DALAL_MACHINES = [
       "ramArea": "1,400 x 1,400 mm",
       "mainMotor": "160 kW",
       "totalWeight": "Approx. 185 Tons"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/hero_forging_press.jpg"
+    ],
+    "createdAt": "2026-10-04T09:58:03.487Z",
+    "updatedAt": "2026-10-06T09:58:03.487Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P00031",
@@ -46,7 +91,15 @@ var DALAL_MACHINES = [
       "bolsterDimensions": "2000 x 600 mm",
       "motor": "20 HP x 4P",
       "cushion": "14 Tons (640 x 440 mm)"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/cframe_press_pune.jpg"
+    ],
+    "createdAt": "2026-10-04T10:58:03.487Z",
+    "updatedAt": "2026-10-06T09:58:03.487Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P00019C",
@@ -70,7 +123,15 @@ var DALAL_MACHINES = [
       "tableSize": "1000 x 1120 mm",
       "rotaryTable": "360 Degrees Powered",
       "dro": "3-Axis Digital Readout System"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/cnc_boring_machine.jpg"
+    ],
+    "createdAt": "2026-10-04T11:58:03.487Z",
+    "updatedAt": "2026-10-06T09:58:03.487Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P000015",
@@ -93,7 +154,15 @@ var DALAL_MACHINES = [
       "bedDimensions": "1000 x 1000 mm",
       "slideDimensions": "850 x 850 mm",
       "mainMotor": "90 kW"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/knuckle_coining_press.jpg"
+    ],
+    "createdAt": "2026-10-04T12:58:03.487Z",
+    "updatedAt": "2026-10-06T09:58:03.487Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P00018H",
@@ -116,7 +185,15 @@ var DALAL_MACHINES = [
       "bedDimensions": "2500 x 1800 mm",
       "operatingPressure": "280 Bar",
       "control": "Siemens S7 PLC with Safety Light Curtains"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/hydraulic_deep_draw.jpg"
+    ],
+    "createdAt": "2026-10-04T13:58:03.487Z",
+    "updatedAt": "2026-10-06T09:58:03.487Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P00026G",
@@ -138,7 +215,15 @@ var DALAL_MACHINES = [
       "tableDiameter": "1600 mm",
       "spindlePower": "45 kW",
       "cncSystem": "Siemens Sinumerik 840D"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/gear_hobbing_machine.jpg"
+    ],
+    "createdAt": "2026-10-04T14:58:03.487Z",
+    "updatedAt": "2026-10-06T09:58:03.487Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P00027L",
@@ -160,7 +245,15 @@ var DALAL_MACHINES = [
       "spindleBore": "260 mm",
       "motorPower": "75 kW Heavy Duty Spindle",
       "cncSystem": "Fanuc 18i-TB with Heavy Roll Steadies"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/heavy_cnc_lathe.jpg"
+    ],
+    "createdAt": "2026-10-04T15:58:03.487Z",
+    "updatedAt": "2026-10-06T09:58:03.487Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P00032O",
@@ -181,7 +274,15 @@ var DALAL_MACHINES = [
       "reactionTime": "Ultra-Fast Dynamic Engagement (< 0.08s)",
       "application": "Forging Presses, Mechanical Stamping, Shears",
       "warranty": "12 Months Official OMPI Warranty"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/ompi_clutch_brake_unit.jpg"
+    ],
+    "createdAt": "2026-10-04T16:58:03.487Z",
+    "updatedAt": "2026-10-06T09:58:03.487Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P00030",
@@ -205,7 +306,15 @@ var DALAL_MACHINES = [
       "bolsterDimensions": "1400 x 840 mm",
       "motor": "25 HP",
       "cushion": "Pneumatic Cushion"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/cframe_press_pune.jpg"
+    ],
+    "createdAt": "2026-10-04T17:58:03.487Z",
+    "updatedAt": "2026-10-06T09:58:03.487Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P0091",
@@ -227,7 +336,15 @@ var DALAL_MACHINES = [
       "shutHeight": "1,150 mm",
       "bedArea": "1,720 x 1,600 mm",
       "mainMotor": "200 kW"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/hero_forging_press.jpg"
+    ],
+    "createdAt": "2026-10-04T18:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P0097",
@@ -249,7 +366,15 @@ var DALAL_MACHINES = [
       "shutHeight": "1,350 mm",
       "bedArea": "2,100 x 2,000 mm",
       "totalWeight": "Approx. 490 Tons"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/hero_forging_press.jpg"
+    ],
+    "createdAt": "2026-10-04T19:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P00029",
@@ -271,7 +396,15 @@ var DALAL_MACHINES = [
       "dieHeight": "310 mm",
       "slideDimensions": "560 x 450 mm",
       "bolsterDimensions": "1000 x 600 mm"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/cframe_press_pune.jpg"
+    ],
+    "createdAt": "2026-10-04T20:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P017",
@@ -295,7 +428,15 @@ var DALAL_MACHINES = [
       "spindlePower": "90 / 50 kW",
       "atc": "60 Tools",
       "spindleHours": "Approx. 1,650 hours"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/cnc_boring_machine.jpg"
+    ],
+    "createdAt": "2026-10-04T21:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P018",
@@ -318,7 +459,15 @@ var DALAL_MACHINES = [
       "spindleSpeed": "12,000 RPM",
       "spindleTaper": "Big Plus BBT40",
       "atc": "30 Tools"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/cnc_boring_machine.jpg"
+    ],
+    "createdAt": "2026-10-04T22:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P00024",
@@ -338,7 +487,15 @@ var DALAL_MACHINES = [
       "stroke": "180 mm",
       "dieHeight": "480 mm",
       "bolsterDimensions": "1350 x 800 mm"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/hero_forging_press.jpg"
+    ],
+    "createdAt": "2026-10-04T23:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P00022",
@@ -358,7 +515,15 @@ var DALAL_MACHINES = [
       "stroke": "250 mm",
       "speed": "25-45 SPM",
       "bolsterDimensions": "2100 x 850 mm"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/cframe_press_pune.jpg"
+    ],
+    "createdAt": "2026-10-05T00:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P0050",
@@ -378,7 +543,15 @@ var DALAL_MACHINES = [
       "stroke": "110 mm",
       "speed": "50 SPM",
       "bedDimensions": "630 x 630 mm"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/knuckle_coining_press.jpg"
+    ],
+    "createdAt": "2026-10-05T01:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P00028",
@@ -398,7 +571,15 @@ var DALAL_MACHINES = [
       "stroke": "200 mm",
       "dieHeight": "450 mm",
       "bolsterDimensions": "1400 x 840 mm"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/cframe_press_pune.jpg"
+    ],
+    "createdAt": "2026-10-05T02:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P00025",
@@ -419,7 +600,15 @@ var DALAL_MACHINES = [
       "speed": "50-90 SPM",
       "dieHeight": "330 mm",
       "bolsterDimensions": "1000 x 550 mm"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/cframe_press_pune.jpg"
+    ],
+    "createdAt": "2026-10-05T03:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P0001",
@@ -439,7 +628,15 @@ var DALAL_MACHINES = [
       "stroke": "250 mm",
       "speed": "80 SPM",
       "bedArea": "950 x 800 mm"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/hero_forging_press.jpg"
+    ],
+    "createdAt": "2026-10-05T04:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P00021",
@@ -460,7 +657,15 @@ var DALAL_MACHINES = [
       "speed": "35-65 SPM",
       "dieHeight": "400 mm",
       "bolsterDimensions": "1250 x 750 mm"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/cframe_press_pune.jpg"
+    ],
+    "createdAt": "2026-10-05T05:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P00019D",
@@ -485,7 +690,15 @@ var DALAL_MACHINES = [
       "spindleSpeed": "1120 RPM",
       "facingHead": "Included",
       "droSystem": "Heidenhain 3-Axis DRO"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/cnc_boring_machine.jpg"
+    ],
+    "createdAt": "2026-10-05T06:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P00019E",
@@ -510,7 +723,15 @@ var DALAL_MACHINES = [
       "spindleSpeed": "800 RPM Variable",
       "millingHeads": "Universal Right Angle Head Included",
       "control": "Siemens 840D / Heidenhain DRO"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/cnc_boring_machine.jpg"
+    ],
+    "createdAt": "2026-10-05T07:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P018B",
@@ -534,7 +755,15 @@ var DALAL_MACHINES = [
       "spindleSpeed": "18,000 RPM",
       "toolChanger": "48 Tools ATC",
       "control": "Mazatrol Matrix 2"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/cnc_boring_machine.jpg"
+    ],
+    "createdAt": "2026-10-05T08:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P018C",
@@ -557,7 +786,15 @@ var DALAL_MACHINES = [
       "spindleSpeed": "12,000 RPM Direct Drive",
       "toolChanger": "30 Tools ATC",
       "control": "CELOS with MAPPS V"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/cnc_boring_machine.jpg"
+    ],
+    "createdAt": "2026-10-05T09:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P017B",
@@ -580,7 +817,15 @@ var DALAL_MACHINES = [
       "spindleSpeed": "10,000 RPM (CAT 50)",
       "toolChanger": "60 Tools ATC",
       "control": "Makino Professional 3 (Fanuc)"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/cnc_boring_machine.jpg"
+    ],
+    "createdAt": "2026-10-05T10:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P021M",
@@ -602,7 +847,15 @@ var DALAL_MACHINES = [
       "yTravel": "3500 mm",
       "zTravel": "1500 mm",
       "control": "Siemens Sinumerik 840D"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/cnc_boring_machine.jpg"
+    ],
+    "createdAt": "2026-10-05T11:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P022M",
@@ -623,7 +876,15 @@ var DALAL_MACHINES = [
       "yTravel": "2800 mm",
       "zTravel": "1200 mm",
       "spindleMotor": "60 kW Heavy Duty Geared Head"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/cnc_boring_machine.jpg"
+    ],
+    "createdAt": "2026-10-05T12:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P023V",
@@ -645,7 +906,15 @@ var DALAL_MACHINES = [
       "maxWorkpieceWeight": "8,000 kg",
       "tableSpeeds": "4 - 200 RPM",
       "mainMotor": "45 kW"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/heavy_cnc_lathe.jpg"
+    ],
+    "createdAt": "2026-10-05T13:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P024V",
@@ -666,7 +935,15 @@ var DALAL_MACHINES = [
       "maxHeight": "2000 mm",
       "maxWorkpieceWeight": "20,000 kg",
       "control": "Siemens 840D CNC"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/heavy_cnc_lathe.jpg"
+    ],
+    "createdAt": "2026-10-05T14:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P025VB",
@@ -687,7 +964,15 @@ var DALAL_MACHINES = [
       "maxHeight": "1600 mm",
       "maxWorkpieceWeight": "16,000 kg",
       "mainMotor": "55 kW"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/heavy_cnc_lathe.jpg"
+    ],
+    "createdAt": "2026-10-05T15:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P028L",
@@ -708,7 +993,15 @@ var DALAL_MACHINES = [
       "distanceBetweenCentres": "2000 mm",
       "spindleBore": "165 mm (Hollow Spindle)",
       "control": "Mazatrol Fusion 640T"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/heavy_cnc_lathe.jpg"
+    ],
+    "createdAt": "2026-10-05T16:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P029GS",
@@ -729,7 +1022,15 @@ var DALAL_MACHINES = [
       "maxFaceWidth": "152 mm",
       "maxPitch": "3 Module / 8 DP",
       "strokesPerMinute": "18 - 300 SPM"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/gear_hobbing_machine.jpg"
+    ],
+    "createdAt": "2026-10-05T17:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P030S",
@@ -750,7 +1051,15 @@ var DALAL_MACHINES = [
       "distanceRamToColumn": "630 mm",
       "ramSpeeds": "30 - 75 strokes/min",
       "mainMotor": "7.5 kW"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/gear_hobbing_machine.jpg"
+    ],
+    "createdAt": "2026-10-05T18:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P031SM",
@@ -772,7 +1081,15 @@ var DALAL_MACHINES = [
       "bedArea": "3150 x 1800 mm",
       "strokesPerMinute": "14 SPM",
       "hydraulicCushion": "160 Tons"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/cframe_press_pune.jpg"
+    ],
+    "createdAt": "2026-10-05T19:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P032SM",
@@ -793,7 +1110,15 @@ var DALAL_MACHINES = [
       "bedArea": "2500 x 1400 mm",
       "speed": "20 - 40 SPM",
       "shutHeight": "750 mm"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/cframe_press_pune.jpg"
+    ],
+    "createdAt": "2026-10-05T20:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P033HY",
@@ -814,7 +1139,15 @@ var DALAL_MACHINES = [
       "stroke": "1000 mm",
       "daylight": "1600 mm",
       "dieCushion": "600 Tons"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/hydraulic_deep_draw.jpg"
+    ],
+    "createdAt": "2026-10-05T21:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P034TP",
@@ -835,7 +1168,15 @@ var DALAL_MACHINES = [
       "bedArea": "1400 x 1000 mm",
       "speed": "32 SPM",
       "shutHeight": "600 mm"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/knuckle_coining_press.jpg"
+    ],
+    "createdAt": "2026-10-05T22:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P035PH",
@@ -855,7 +1196,15 @@ var DALAL_MACHINES = [
       "blowEnergy": "63 kJ",
       "blowsPerMinute": "95 BPM",
       "totalWeight": "Approx. 65 Tons"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/hero_forging_press.jpg"
+    ],
+    "createdAt": "2026-10-05T23:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P036FS",
@@ -876,7 +1225,15 @@ var DALAL_MACHINES = [
       "stroke": "450 mm",
       "daylight": "750 mm",
       "bedArea": "800 x 800 mm"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/hero_forging_press.jpg"
+    ],
+    "createdAt": "2026-10-06T00:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P037CF",
@@ -897,7 +1254,15 @@ var DALAL_MACHINES = [
       "shutHeight": "550 mm",
       "bedArea": "900 x 900 mm",
       "speed": "35 SPM"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/cframe_press_pune.jpg"
+    ],
+    "createdAt": "2026-10-06T01:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P038FR",
@@ -917,7 +1282,15 @@ var DALAL_MACHINES = [
       "maxBilletDiameter": "75 mm round / 65 mm sq",
       "maxRollingLength": "450 mm",
       "mainMotor": "30 kW"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/hero_forging_press.jpg"
+    ],
+    "createdAt": "2026-10-06T02:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P039UP",
@@ -938,7 +1311,15 @@ var DALAL_MACHINES = [
       "gatheringStroke": "250 mm",
       "dieOpening": "140 mm",
       "speed": "35 SPM"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/hero_forging_press.jpg"
+    ],
+    "createdAt": "2026-10-06T03:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P040DS",
@@ -958,7 +1339,15 @@ var DALAL_MACHINES = [
       "clampingArea": "1600 x 1200 mm",
       "daylight": "1400 mm",
       "stroke": "1000 mm"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/cframe_press_pune.jpg"
+    ],
+    "createdAt": "2026-10-06T04:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P041HS",
@@ -978,7 +1367,15 @@ var DALAL_MACHINES = [
       "speedRange": "100 - 1050 SPM",
       "stroke": "16 - 51 mm adjustable",
       "bedArea": "760 x 650 mm"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/cframe_press_pune.jpg"
+    ],
+    "createdAt": "2026-10-06T05:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P042FB",
@@ -998,7 +1395,15 @@ var DALAL_MACHINES = [
       "v-ringForce": "160 Tons",
       "counterForce": "80 Tons",
       "bedArea": "760 x 760 mm"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/hydraulic_deep_draw.jpg"
+    ],
+    "createdAt": "2026-10-06T06:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P043OD",
@@ -1018,7 +1423,15 @@ var DALAL_MACHINES = [
       "stroke": "1200 mm",
       "daylight": "2400 mm",
       "columnClearance": "2000 mm"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/hero_forging_press.jpg"
+    ],
+    "createdAt": "2026-10-06T07:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   },
   {
     "id": "P044FM",
@@ -1038,14 +1451,21 @@ var DALAL_MACHINES = [
       "loadMoment": "125 kNm",
       "rotation": "360 deg Continuous",
       "travelSpeed": "30 m/min"
-    }
+    },
+    "isCustom": false,
+    "status": "active",
+    "galleryImages": [
+      "images/dalal/logistics_heavy_transport.jpg"
+    ],
+    "createdAt": "2026-10-06T08:58:03.488Z",
+    "updatedAt": "2026-10-06T09:58:03.488Z",
+    "createdBy": "system_import"
   }
 ];
 
 // Helper: Filter machines
 function getMachines(filterOptions = {}) {
   return DALAL_MACHINES.filter(m => {
-    // If a specific category is selected, category takes priority over section
     if (filterOptions.category) {
       if (m.category !== filterOptions.category) return false;
     } else if (filterOptions.section) {

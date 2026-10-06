@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Machine Editor | Dalal Admin Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700;800&family=Inter:wght@400;500;600;700&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/new/Machinery/css/font-awesome.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <style>
+    .type-switcher {
+      display: flex;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 6px;
+      margin-bottom: 24px;
+      gap: 8px;
+    }
+    .type-tab-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 18px;
+      border-radius: var(--radius-sm);
+      border: 1px solid transparent;
+      background: none;
+      color: var(--text-muted);
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .type-tab-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .type-tab-btn.active {
+      background: var(--brand-gold);
+      color: #0b0f19;
+      box-shadow: 0 4px 15px var(--brand-gold-glow);
+    }
+    .preview-box {
+      width: 100%;
+      height: 220px;
+      border-radius: var(--radius-sm);
+      background: #000;
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin-bottom: 12px;
+      position: relative;
+    }
+    .preview-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .custom-features-card {
+      border: 1px solid rgba(139, 92, 246, 0.4);
+      background: rgba(139, 92, 246, 0.03);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="admin-wrapper">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-header">
+        <a href="dashboard.html" class="brand-badge">
+          <div class="brand-title-wrap">
+            <div class="brand-title-text">DALAL <span>TOOLS</span></div>
+            <div class="brand-subtext">ADMINISTRATION</div>
+          </div>
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Core Operations</div>
+        <a href="dashboard.html" class="nav-link">
+          <i class="fa fa-th-large"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="products.html" class="nav-link">
+          <i class="fa fa-cubes"></i>
+          <span>Machinery Catalog</span>
+        </a>
+        <a href="product-form.html" class="nav-link active" id="sidebar-add-link">
+          <i class="fa fa-plus-circle"></i>
+          <span id="sidebar-form-title">Add New Machine</span>
+        </a>
+        <a href="product-form.html?custom=1" class="nav-link">
+          <i class="fa fa-magic" style="color: var(--brand-gold);"></i>
+          <span>Add Custom Machine</span>
+        </a>
+        <a href="inquiries.html" class="nav-link">
+          <i class="fa fa-envelope-open"></i>
+          <span>Customer RFQs</span>
+        </a>
+
+        <!-- Super Admin Only Section -->
+        <div class="nav-section-title superadmin-only-item">Developer & Super Admin</div>
+        <a href="users.html" class="nav-link superadmin-only-item">
+          <i class="fa fa-users"></i>
+          <span>Admin Users</span>
+        </a>
+        <a href="logs.html" class="nav-link superadmin-only-item">
+          <i class="fa fa-history"></i>
+          <span>Activity & Audit Logs</span>
+        </a>
+        <a href="settings.html" class="nav-link superadmin-only-item">
+          <i class="fa fa-sliders"></i>
+          <span>System & Backups</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-info-pill">
+          <div class="user-avatar" id="sidebar-user-avatar">D</div>
+          <div class="user-details">
+            <span class="user-name" id="sidebar-user-name">Loading...</span>
+            <span class="user-role-badge" id="sidebar-user-role">ADMIN</span>
+          </div>
+        </div>
+        <button class="btn-logout-sidebar btn-logout" title="Sign Out">
+          <i class="fa fa-sign-out"></i>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      <header class="admin-topbar">
+        <div class="topbar-left">
+          <button id="btn-sidebar-toggle" class="btn-sidebar-toggle">
+            <i class="fa fa-bars"></i>
+          </button>
+          <div class="topbar-breadcrumb">
+            Control Portal &bull; <span id="topbar-mode-title">Create Machine</span>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <a href="products.html" class="btn-secondary btn-sm">
+            <i class="fa fa-arrow-left"></i> Back to Catalog
+          </a>
+        </div>
+      </header>
+
+      <div class="page-container" style="max-width: 1080px;">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title" id="page-heading">Add New Machinery</h1>
+            <p class="page-subtitle">Publish a standard inventory asset or build a custom bespoke machine with dynamic technical specifications.</p>
+          </div>
+          <div class="page-actions" id="preview-action-wrap" style="display: none;">
+            <a href="#" id="btn-live-preview" target="_blank" class="btn-secondary">
+              <i class="fa fa-external-link"></i> Preview on Website
+            </a>
+          </div>
+        </div>
+
+        <!-- Mode Switcher: Standard vs Custom Product -->
+        <div class="type-switcher">
+          <button type="button" class="type-tab-btn active" id="tab-standard">
+            <i class="fa fa-cube"></i> Standard Industrial Machine
+          </button>
+          <button type="button" class="type-tab-btn" id="tab-custom">
+            <i class="fa fa-magic"></i> Custom / Bespoke Machine (Dynamic Specs & Badges)
+          </button>
+        </div>
+
+        <form id="machine-form">
+          <input type="hidden" id="input-is-custom" value="false">
+
+          <!-- 1. Core Identification -->
+          <div class="admin-card">
+            <div class="card-header-bar">
+              <div class="card-title">1. Machine Identification & Classification</div>
+              <div id="custom-indicator-badge" style="display: none;">
+                <span class="badge badge-custom"><i class="fa fa-magic"></i> Custom Product Mode</span>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="form-row">
+                <div style="flex: 2;">
+                  <label class="form-label" for="input-name">Full Machine Name *</label>
+                  <input type="text" id="input-name" class="form-control" placeholder="e.g. 2500T RUSSIAN TMP-VORONEZH Hot Forging Press" required>
+                  <div class="form-text">Descriptive title shown in the catalog, search bar, and PDP header.</div>
+                </div>
+                <div style="flex: 1;">
+                  <label class="form-label" for="input-id">Machine ID (Optional)</label>
+                  <input type="text" id="input-id" class="form-control" placeholder="e.g. P00035 (Leave empty to auto-generate)">
+                  <div class="form-text">Unique catalog inventory code.</div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div>
+                  <label class="form-label" for="input-section">Machinery Section *</label>
+                  <select id="input-section" class="form-select" required>
+                    <option value="forming">Metal Forming</option>
+                    <option value="cutting">Metal Cutting</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="form-label" for="input-category">Category *</label>
+                  <select id="input-category" class="form-select" required>
+                    <!-- Populated dynamically -->
+                  </select>
+                </div>
+
+                <div>
+                  <label class="form-label" for="input-location">Location *</label>
+                  <select id="input-location" class="form-select" required>
+                    <option value="In Stock PUNE">In Stock PUNE (Warehouse Yard)</option>
+                    <option value="Ready in Europe">Ready in Europe</option>
+                    <option value="Thailand">Thailand Yard</option>
+                    <option value="Vietnam">Vietnam Yard</option>
+                    <option value="Nhava Sheva Port">Nhava Sheva Port (In Transit)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div>
+                  <label class="form-label" for="input-make">Make / Manufacturer & Country</label>
+                  <input type="text" id="input-make" class="form-control" placeholder="e.g. TMP Voronezh (Russia) or Li Chin (Taiwan)">
+                </div>
+
+                <div>
+                  <label class="form-label" for="input-model">Model Number / Series</label>
+                  <input type="text" id="input-model" class="form-control" placeholder="e.g. K8544 / KB8544">
+                </div>
+
+                <div>
+                  <label class="form-label" for="input-year">Year of Manufacture</label>
+                  <input type="number" id="input-year" class="form-control" placeholder="e.g. 1995" min="1950" max="2027">
+                </div>
+
+                <div>
+                  <label class="form-label" for="input-tonnage">Capacity / Tonnage (Tons)</label>
+                  <input type="number" id="input-tonnage" class="form-control" placeholder="e.g. 2500 (0 for lathes/boring)">
+                </div>
+              </div>
+
+              <div style="margin-top: 10px;">
+                <label class="form-label" for="input-condition">Inspection & Operational Condition</label>
+                <input type="text" id="input-condition" class="form-control" placeholder="e.g. Excellent - Inspected Under Live Power Abroad & Live Video Available">
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Media & Visuals -->
+          <div class="admin-card">
+            <div class="card-header-bar">
+              <div class="card-title">2. Machine Photography & Media</div>
+            </div>
+            <div class="card-body">
+              <div class="form-row">
+                <div style="flex: 1.2;">
+                  <div class="preview-box">
+                    <img id="img-preview" src="/new/Machinery/images/dalal/cframe_press_pune.jpg" alt="Preview">
+                  </div>
+                </div>
+
+                <div style="flex: 2;">
+                  <label class="form-label">Upload Machine Photo</label>
+                  <div class="dropzone-box" id="dropzone">
+                    <div class="dropzone-icon"><i class="fa fa-cloud-upload"></i></div>
+                    <div style="font-weight: 600; font-size: 14px; margin-bottom: 4px;">Click or Drag & Drop image here</div>
+                    <div style="font-size: 12px; color: var(--text-dim);">JPG, PNG, WebP up to 15MB</div>
+                    <input type="file" id="file-uploader" accept="image/*,.pdf" style="display: none;">
+                  </div>
+
+                  <div style="margin-top: 14px;">
+                    <label class="form-label" for="input-image">Image URL / Path</label>
+                    <input type="text" id="input-image" class="form-control" placeholder="images/dalal/cframe_press_pune.jpg or /uploads/...">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Specifications: Standard vs Dynamic Custom Specs -->
+          <div class="admin-card" id="specs-card">
+            <div class="card-header-bar">
+              <div class="card-title" id="specs-card-title">3. Technical Specifications</div>
+              <button type="button" class="btn-secondary btn-sm" id="btn-add-spec-row">
+                <i class="fa fa-plus"></i> Add Custom Specification Row
+              </button>
+            </div>
+            <div class="card-body">
+              <p class="form-text" style="margin-bottom: 16px;">
+                Add standard or bespoke machine parameters (e.g. Bed Area, Stroke, Spindle Speed, Motor Power).
+              </p>
+
+              <div id="dynamic-specs-container">
+                <!-- Dynamically populated spec rows -->
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Custom Machine Commercial Terms & Badges (Visible for Custom products) -->
+          <div class="admin-card custom-features-card" id="custom-details-card" style="display: none;">
+            <div class="card-header-bar">
+              <div class="card-title" style="color: #c084fc;">
+                <i class="fa fa-magic"></i> 4. Custom Commercial Terms & Badges
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="form-row">
+                <div>
+                  <label class="form-label" for="input-price-text">Commercial Terms / Pricing Display</label>
+                  <input type="text" id="input-price-text" class="form-control" placeholder="Price On Request or High Seas CIF Nhava Sheva">
+                </div>
+
+                <div>
+                  <label class="form-label" for="input-custom-badge">Marketing Callout Badge</label>
+                  <input type="text" id="input-custom-badge" class="form-control" placeholder="e.g. HIGH SEAS READY or LIVE VIDEO INSPECTION">
+                </div>
+              </div>
+
+              <div>
+                <label class="form-label" for="input-brochure">Technical Brochure PDF (Optional URL)</label>
+                <input type="text" id="input-brochure" class="form-control" placeholder="/uploads/brochure.pdf or external link">
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. Publishing Status & Submit Actions -->
+          <div class="admin-card">
+            <div class="card-body" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;">
+              <div style="display: flex; align-items: center; gap: 14px;">
+                <label class="form-label" style="margin: 0;" for="input-status">Publish Status:</label>
+                <select id="input-status" class="form-select" style="width: 170px;">
+                  <option value="active">Live / Active</option>
+                  <option value="draft">Save as Draft</option>
+                  <option value="sold">Mark as Sold</option>
+                </select>
+              </div>
+
+              <div style="display: flex; gap: 12px;">
+                <a href="products.html" class="btn-secondary">Cancel</a>
+                <button type="submit" id="btn-save-machine" class="btn-primary">
+                  <i class="fa fa-check"></i>
+                  <span id="btn-save-text">Save & Publish Machine</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </form>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="js/admin-core.js"></script>
+  <script>
+    let isEditMode = false;
+    let editMachineId = null;
+
+    const DEFAULT_SPECS = [
+      { key: "capacity", label: "Capacity / Tonnage", val: "" },
+      { key: "stroke", label: "Stroke Length", val: "" },
+      { key: "speed", label: "Speed / Strokes Per Minute", val: "" },
+      { key: "shutHeight", label: "Shut Height", val: "" },
+      { key: "bedArea", label: "Bed / Bolster Dimensions", val: "" },
+      { key: "ramArea", label: "Slide / Ram Area", val: "" },
+      { key: "mainMotor", label: "Main Motor Power", val: "" },
+      { key: "totalWeight", label: "Approx. Total Weight", val: "" }
+    ];
+
+    const CATEGORIES = [
+      { slug: "hot-forging-press", name: "Hot Forging Press", section: "forming" },
+      { slug: "c-frame-press", name: "C-Frame Press", section: "forming" },
+      { slug: "knuckle-joint-press", name: "Knuckle Joint Coining Press", section: "forming" },
+      { slug: "hydraulic-deep-draw", name: "Hydraulic Deep Draw Press", section: "forming" },
+      { slug: "horizontal-boring-machine", name: "Horizontal Boring Machine", section: "cutting" },
+      { slug: "heavy-duty-lathe", name: "Heavy Duty CNC Lathe", section: "cutting" },
+      { slug: "gear-hobbing-machine", name: "Gear Hobbing Machine", section: "cutting" },
+      { slug: "other-machinery", name: "Specialized / Other Machinery", section: "forming" }
+    ];
+
+    (async () => {
+      const user = await AdminCore.requireAuth();
+      if (!user) return;
+
+      setupCategoryDropdown();
+      setupTabs();
+      setupUploader();
+      setupSpecRowAddButton();
+
+      // Check URL parameters
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.has('id')) {
+        isEditMode = true;
+        editMachineId = urlParams.get('id');
+        document.getElementById('page-heading').textContent = 'Edit Machinery Details';
+        document.getElementById('topbar-mode-title').textContent = `Edit Machine (${editMachineId})`;
+        document.getElementById('sidebar-form-title').textContent = 'Edit Machine';
+        document.getElementById('btn-save-text').textContent = 'Update Machine';
+        
+        // Show live preview link
+        const previewWrap = document.getElementById('preview-action-wrap');
+        const previewLink = document.getElementById('btn-live-preview');
+        previewWrap.style.display = 'block';
+        previewLink.href = `/new/Machinery/product.html?id=${editMachineId}`;
+
+        await loadMachineForEdit(editMachineId);
+      } else {
+        // New machine mode
+        if (urlParams.get('custom') === '1') {
+          setCustomMode(true);
+        } else {
+          populateDefaultSpecs();
+        }
+      }
+
+      // Handle form submit
+      document.getElementById('machine-form').addEventListener('submit', handleFormSubmit);
+    })();
+
+    function setupCategoryDropdown() {
+      const select = document.getElementById('input-category');
+      select.innerHTML = CATEGORIES.map(c => `
+        <option value="${c.slug}" data-section="${c.section}" data-name="${c.name}">${c.name} (${c.section.toUpperCase()})</option>
+      `).join('');
+
+      document.getElementById('input-section').addEventListener('change', (e) => {
+        const sec = e.target.value;
+        const firstMatch = CATEGORIES.find(c => c.section === sec);
+        if (firstMatch) select.value = firstMatch.slug;
+      });
+    }
+
+    function setupTabs() {
+      const stdTab = document.getElementById('tab-standard');
+      const custTab = document.getElementById('tab-custom');
+
+      stdTab.addEventListener('click', () => setCustomMode(false));
+      custTab.addEventListener('click', () => setCustomMode(true));
+    }
+
+    function setCustomMode(isCustom) {
+      document.getElementById('input-is-custom').value = isCustom ? 'true' : 'false';
+      const stdTab = document.getElementById('tab-standard');
+      const custTab = document.getElementById('tab-custom');
+      const customCard = document.getElementById('custom-details-card');
+      const customBadge = document.getElementById('custom-indicator-badge');
+
+      if (isCustom) {
+        custTab.classList.add('active');
+        stdTab.classList.remove('active');
+        customCard.style.display = 'block';
+        customBadge.style.display = 'block';
+      } else {
+        stdTab.classList.add('active');
+        custTab.classList.remove('active');
+        customCard.style.display = 'none';
+        customBadge.style.display = 'none';
+      }
+    }
+
+    function populateDefaultSpecs(specsObj = null) {
+      const container = document.getElementById('dynamic-specs-container');
+      container.innerHTML = '';
+
+      if (specsObj && Object.keys(specsObj).length > 0) {
+        Object.entries(specsObj).forEach(([k, v]) => {
+          addSpecRow(k, v);
+        });
+      } else {
+        DEFAULT_SPECS.forEach(s => {
+          addSpecRow(s.label, s.val);
+        });
+      }
+    }
+
+    function addSpecRow(keyName = '', keyValue = '') {
+      const container = document.getElementById('dynamic-specs-container');
+      const row = document.createElement('div');
+      row.className = 'spec-row';
+      row.innerHTML = `
+        <input type="text" class="form-control spec-key" placeholder="Parameter (e.g. Stroke, Bed Dimensions)" value="${keyName}">
+        <input type="text" class="form-control spec-val" placeholder="Value (e.g. 250 mm, 2000 x 600 mm)" value="${keyValue}">
+        <button type="button" class="btn-remove-spec" title="Remove row">
+          <i class="fa fa-trash"></i>
+        </button>
+      `;
+      row.querySelector('.btn-remove-spec').addEventListener('click', () => row.remove());
+      container.appendChild(row);
+    }
+
+    function setupSpecRowAddButton() {
+      document.getElementById('btn-add-spec-row').addEventListener('click', () => {
+        addSpecRow('', '');
+      });
+    }
+
+    function setupUploader() {
+      const dropzone = document.getElementById('dropzone');
+      const fileInput = document.getElementById('file-uploader');
+      const imgInput = document.getElementById('input-image');
+      const imgPreview = document.getElementById('img-preview');
+
+      dropzone.addEventListener('click', () => fileInput.click());
+      imgInput.addEventListener('input', (e) => {
+        imgPreview.src = '/' + e.target.value.replace(/^\//, '');
+      });
+
+      fileInput.addEventListener('change', async (e) => {
+        if (!e.target.files.length) return;
+        const file = e.target.files[0];
+        const formData = new FormData();
+        formData.append('file', file);
+
+        dropzone.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Uploading asset...';
+
+        const res = await AdminCore.api('/api/products/upload', {
+          method: 'POST',
+          body: formData
+        });
+
+        if (res.success) {
+          AdminCore.toast('Image uploaded successfully!');
+          imgInput.value = res.url.replace(/^\//, '');
+          imgPreview.src = res.url;
+        } else {
+          AdminCore.toast(res.message || 'Upload failed', 'error');
+        }
+
+        dropzone.innerHTML = `
+          <div class="dropzone-icon"><i class="fa fa-cloud-upload"></i></div>
+          <div style="font-weight: 600; font-size: 14px; margin-bottom: 4px;">File uploaded: ${file.name}</div>
+          <div style="font-size: 12px; color: var(--color-success);">&#10003; Click to replace</div>
+        `;
+      });
+    }
+
+    async function loadMachineForEdit(id) {
+      const res = await AdminCore.api(`/api/products/${id}`);
+      if (!res.success) {
+        AdminCore.toast('Machine not found', 'error');
+        return;
+      }
+      const m = res.product;
+      document.getElementById('input-name').value = m.name || '';
+      document.getElementById('input-id').value = m.id || '';
+      document.getElementById('input-id').disabled = true; // Protect ID on edit
+      document.getElementById('input-section').value = m.section || 'forming';
+      document.getElementById('input-category').value = m.category || 'c-frame-press';
+      document.getElementById('input-location').value = m.location || 'In Stock PUNE';
+      document.getElementById('input-make').value = m.make || '';
+      document.getElementById('input-model').value = m.model || '';
+      document.getElementById('input-year').value = m.year || '';
+      document.getElementById('input-tonnage').value = m.tonnage || '';
+      document.getElementById('input-condition').value = m.condition || '';
+      document.getElementById('input-status').value = m.status || 'active';
+      document.getElementById('input-image').value = m.image || '';
+      document.getElementById('img-preview').src = '/' + (m.image || '').replace(/^\//, '');
+
+      setCustomMode(Boolean(m.isCustom));
+      if (m.priceText) document.getElementById('input-price-text').value = m.priceText;
+      if (m.customBadges && m.customBadges.length > 0) document.getElementById('input-custom-badge').value = m.customBadges.join(', ');
+      if (m.brochurePdf) document.getElementById('input-brochure').value = m.brochurePdf;
+
+      populateDefaultSpecs(m.specs || {});
+    }
+
+    async function handleFormSubmit(e) {
+      e.preventDefault();
+      const saveBtn = document.getElementById('btn-save-machine');
+      saveBtn.disabled = true;
+      saveBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Saving Machine...';
+
+      // Gather specs key-value map
+      const specs = {};
+      document.querySelectorAll('#dynamic-specs-container .spec-row').forEach(row => {
+        const k = row.querySelector('.spec-key').value.trim();
+        const v = row.querySelector('.spec-val').value.trim();
+        if (k && v) {
+          specs[k] = v;
+        }
+      });
+
+      const catSelect = document.getElementById('input-category');
+      const selectedOption = catSelect.options[catSelect.selectedIndex];
+
+      const isCustom = document.getElementById('input-is-custom').value === 'true';
+      const customBadgeVal = document.getElementById('input-custom-badge').value.trim();
+      const customBadges = customBadgeVal ? customBadgeVal.split(',').map(b => b.trim()) : [];
+
+      const payload = {
+        name: document.getElementById('input-name').value.trim(),
+        id: document.getElementById('input-id').value.trim() || undefined,
+        section: document.getElementById('input-section').value,
+        category: catSelect.value,
+        categoryName: selectedOption ? selectedOption.getAttribute('data-name') : catSelect.value,
+        location: document.getElementById('input-location').value,
+        make: document.getElementById('input-make').value.trim(),
+        model: document.getElementById('input-model').value.trim(),
+        year: parseInt(document.getElementById('input-year').value) || new Date().getFullYear(),
+        tonnage: parseInt(document.getElementById('input-tonnage').value) || 0,
+        condition: document.getElementById('input-condition').value.trim(),
+        image: document.getElementById('input-image').value.trim() || 'new/Machinery/images/dalal/cframe_press_pune.jpg',
+        specs: specs,
+        isCustom: isCustom,
+        status: document.getElementById('input-status').value,
+        priceText: document.getElementById('input-price-text').value.trim() || 'Price On Request',
+        customBadges: customBadges,
+        brochurePdf: document.getElementById('input-brochure').value.trim() || null
+      };
+
+      let url = '/api/products';
+      let method = 'POST';
+      if (isEditMode) {
+        url = `/api/products/${editMachineId}`;
+        method = 'PUT';
+      }
+
+      const res = await AdminCore.api(url, {
+        method: method,
+        body: JSON.stringify(payload)
+      });
+
+      if (res.success) {
+        AdminCore.toast(res.message || 'Machine saved successfully!');
+        setTimeout(() => {
+          window.location.href = 'products.html';
+        }, 800);
+      } else {
+        AdminCore.toast(res.message || 'Failed to save machine', 'error');
+        saveBtn.disabled = false;
+        saveBtn.innerHTML = '<i class="fa fa-check"></i> ' + (isEditMode ? 'Update Machine' : 'Save & Publish Machine');
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dalal Machine Tools | Admin & Developer Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700;800&family=Inter:wght@400;500;600;700&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/new/Machinery/css/font-awesome.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: radial-gradient(circle at 50% 20%, rgba(248, 157, 19, 0.08) 0%, transparent 60%),
+                  linear-gradient(180deg, #07090f 0%, #0d121c 100%);
+    }
+    .login-container {
+      width: 100%;
+      max-width: 440px;
+    }
+    .login-card {
+      background: rgba(18, 25, 38, 0.95);
+      border: 1px solid var(--border-color);
+      border-top: 4px solid var(--brand-gold);
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    }
+    .login-brand-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .login-brand-title {
+      font-family: 'Barlow', sans-serif;
+      font-weight: 800;
+      font-size: 24px;
+      color: #fff;
+      letter-spacing: -0.5px;
+    }
+    .login-brand-title span { color: var(--brand-gold); }
+    .login-badge {
+      display: inline-block;
+      font-family: 'Rajdhani', sans-serif;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      font-weight: 700;
+      color: var(--brand-gold);
+      background: rgba(248, 157, 19, 0.12);
+      border: 1px solid rgba(248, 157, 19, 0.3);
+      padding: 4px 12px;
+      border-radius: 9999px;
+      margin-top: 6px;
+    }
+    .quick-creds-box {
+      margin-top: 24px;
+      padding: 14px;
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px dashed var(--border-light);
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+    }
+    .quick-creds-title {
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .quick-btn-group {
+      display: flex;
+      gap: 8px;
+    }
+    .btn-quick-fill {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 6px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .btn-quick-fill:hover {
+      background: rgba(248, 157, 19, 0.15);
+      border-color: var(--brand-gold);
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <div class="login-card">
+      <div class="login-brand-header">
+        <div class="login-brand-title">
+          DALAL MACHINE <span>TOOLS</span>
+        </div>
+        <div class="login-badge">Admin & Developer Control Portal</div>
+      </div>
+
+      <div id="login-alert" style="display: none; padding: 12px 14px; border-radius: 6px; margin-bottom: 18px; font-size: 13px;"></div>
+
+      <form id="login-form">
+        <div style="margin-bottom: 18px;">
+          <label class="form-label" for="input-identifier">Username or Email</label>
+          <div style="position: relative;">
+            <input type="text" id="input-identifier" class="form-control" placeholder="developer or admin" required autofocus autocomplete="username">
+          </div>
+        </div>
+
+        <div style="margin-bottom: 24px;">
+          <label class="form-label" for="input-password">Password</label>
+          <div style="position: relative;">
+            <input type="password" id="input-password" class="form-control" placeholder="••••••••••••" required autocomplete="current-password">
+            <button type="button" id="btn-toggle-pw" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-muted); cursor: pointer;">
+              <i class="fa fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" id="btn-submit" class="btn-primary" style="width: 100%; justify-content: center; padding: 12px;">
+          <span>Secure Sign In</span>
+          <i class="fa fa-arrow-right"></i>
+        </button>
+      </form>
+
+      <!-- Quick Credentials Helper -->
+      <div class="quick-creds-box">
+        <div class="quick-creds-title">
+          <i class="fa fa-key" style="color: var(--brand-gold);"></i>
+          <span>One-Click Role Selection for Testing:</span>
+        </div>
+        <div class="quick-btn-group">
+          <button type="button" class="btn-quick-fill" id="fill-superadmin">
+            👑 Super Admin (Developer)
+          </button>
+          <button type="button" class="btn-quick-fill" id="fill-admin">
+            🛠️ Admin (Staff)
+          </button>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 24px; font-size: 12px; color: var(--text-dim);">
+        &larr; <a href="/" target="_blank" style="color: var(--text-muted);">Return to Public Website</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/admin-core.js"></script>
+  <script>
+    // Redirect if already authenticated
+    if (AdminCore.getToken() && AdminCore.getUser()) {
+      window.location.href = '/admin/dashboard.html';
+    }
+
+    const form = document.getElementById('login-form');
+    const idInput = document.getElementById('input-identifier');
+    const pwInput = document.getElementById('input-password');
+    const alertBox = document.getElementById('login-alert');
+    const submitBtn = document.getElementById('btn-submit');
+    const togglePw = document.getElementById('btn-toggle-pw');
+
+    togglePw.addEventListener('click', () => {
+      const isPw = pwInput.type === 'password';
+      pwInput.type = isPw ? 'text' : 'password';
+      togglePw.querySelector('i').className = isPw ? 'fa fa-eye-slash' : 'fa fa-eye';
+    });
+
+    document.getElementById('fill-superadmin').addEventListener('click', () => {
+      idInput.value = 'developer';
+      pwInput.value = 'Developer@2026';
+      alertBox.style.display = 'none';
+    });
+
+    document.getElementById('fill-admin').addEventListener('click', () => {
+      idInput.value = 'admin';
+      pwInput.value = 'Dalal@Admin2026';
+      alertBox.style.display = 'none';
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      alertBox.style.display = 'none';
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Authenticating...';
+
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            identifier: idInput.value,
+            password: pwInput.value
+          })
+        });
+
+        const data = await res.json();
+        if (data.success) {
+          AdminCore.setSession(data.token, data.user);
+          alertBox.style.display = 'block';
+          alertBox.style.background = 'rgba(16, 185, 129, 0.2)';
+          alertBox.style.border = '1px solid #10b981';
+          alertBox.style.color = '#34d399';
+          alertBox.textContent = `Welcome back, ${data.user.name}! Redirecting to Dashboard...`;
+          setTimeout(() => {
+            window.location.href = '/admin/dashboard.html';
+          }, 600);
+        } else {
+          alertBox.style.display = 'block';
+          alertBox.style.background = 'rgba(239, 68, 68, 0.2)';
+          alertBox.style.border = '1px solid #ef4444';
+          alertBox.style.color = '#f87171';
+          alertBox.textContent = data.message || 'Login failed. Please verify credentials.';
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '<span>Secure Sign In</span> <i class="fa fa-arrow-right"></i>';
+        }
+      } catch (err) {
+        alertBox.style.display = 'block';
+        alertBox.style.background = 'rgba(239, 68, 68, 0.2)';
+        alertBox.style.border = '1px solid #ef4444';
+        alertBox.style.color = '#f87171';
+        alertBox.textContent = 'Server connection error. Please ensure backend server is active.';
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<span>Secure Sign In</span> <i class="fa fa-arrow-right"></i>';
+      }
+    });
+  </script>
+</body>
+</html>

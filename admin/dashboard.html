@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | Dalal Machine Tools Admin Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700;800&family=Inter:wght@400;500;600;700&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/new/Machinery/css/font-awesome.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+  <div class="admin-wrapper">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-header">
+        <a href="dashboard.html" class="brand-badge">
+          <div class="brand-title-wrap">
+            <div class="brand-title-text">DALAL <span>TOOLS</span></div>
+            <div class="brand-subtext">ADMINISTRATION</div>
+          </div>
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Core Operations</div>
+        <a href="dashboard.html" class="nav-link active">
+          <i class="fa fa-th-large"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="products.html" class="nav-link">
+          <i class="fa fa-cubes"></i>
+          <span>Machinery Catalog</span>
+          <span class="nav-badge" id="badge-total-machines">...</span>
+        </a>
+        <a href="product-form.html" class="nav-link">
+          <i class="fa fa-plus-circle"></i>
+          <span>Add New Machine</span>
+        </a>
+        <a href="product-form.html?custom=1" class="nav-link">
+          <i class="fa fa-magic" style="color: var(--brand-gold);"></i>
+          <span>Add Custom Machine</span>
+        </a>
+        <a href="inquiries.html" class="nav-link">
+          <i class="fa fa-envelope-open"></i>
+          <span>Customer RFQs</span>
+          <span class="nav-badge" id="badge-inquiries-count" style="background: rgba(16, 185, 129, 0.2); color: #34d399;">...</span>
+        </a>
+
+        <!-- Super Admin Only Section -->
+        <div class="nav-section-title superadmin-only-item">Developer & Super Admin</div>
+        <a href="users.html" class="nav-link superadmin-only-item">
+          <i class="fa fa-users"></i>
+          <span>Admin Users</span>
+        </a>
+        <a href="logs.html" class="nav-link superadmin-only-item">
+          <i class="fa fa-history"></i>
+          <span>Activity & Audit Logs</span>
+        </a>
+        <a href="settings.html" class="nav-link superadmin-only-item">
+          <i class="fa fa-sliders"></i>
+          <span>System & Backups</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-info-pill">
+          <div class="user-avatar" id="sidebar-user-avatar">D</div>
+          <div class="user-details">
+            <span class="user-name" id="sidebar-user-name">Loading...</span>
+            <span class="user-role-badge" id="sidebar-user-role">ADMIN</span>
+          </div>
+        </div>
+        <button class="btn-logout-sidebar btn-logout" title="Sign Out">
+          <i class="fa fa-sign-out"></i>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      <!-- Topbar -->
+      <header class="admin-topbar">
+        <div class="topbar-left">
+          <button id="btn-sidebar-toggle" class="btn-sidebar-toggle">
+            <i class="fa fa-bars"></i>
+          </button>
+          <div class="topbar-breadcrumb">
+            Control Portal &bull; <span>Dashboard Overview</span>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <a href="/new/Machinery/index.html" target="_blank" class="btn-view-site">
+            <i class="fa fa-external-link"></i>
+            <span>View Public Site</span>
+          </a>
+        </div>
+      </header>
+
+      <!-- Page Body -->
+      <div class="page-container">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Executive Machinery Dashboard</h1>
+            <p class="page-subtitle">Real-time inventory statistics, recent customer quotation requests, and quick machine authoring.</p>
+          </div>
+          <div class="page-actions">
+            <a href="product-form.html" class="btn-primary">
+              <i class="fa fa-plus"></i>
+              <span>Add Machine</span>
+            </a>
+            <a href="product-form.html?custom=1" class="btn-secondary">
+              <i class="fa fa-magic"></i>
+              <span>Custom Machine</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- KPI Cards Grid -->
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-card-header">
+              <span class="kpi-label">Total Active Machinery</span>
+              <div class="kpi-icon gold"><i class="fa fa-cogs"></i></div>
+            </div>
+            <div class="kpi-value" id="kpi-total-machines">-</div>
+            <div class="kpi-sub">Audited in catalog database</div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-card-header">
+              <span class="kpi-label">Forming Presses</span>
+              <div class="kpi-icon blue"><i class="fa fa-wrench"></i></div>
+            </div>
+            <div class="kpi-value" id="kpi-forming">-</div>
+            <div class="kpi-sub">Forging, C-Frame, Knuckle</div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-card-header">
+              <span class="kpi-label">Metal Cutting</span>
+              <div class="kpi-icon purple"><i class="fa fa-scissors"></i></div>
+            </div>
+            <div class="kpi-value" id="kpi-cutting">-</div>
+            <div class="kpi-sub">Boring, Lathes, Hobbing</div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-card-header">
+              <span class="kpi-label">Pune Stock Ready</span>
+              <div class="kpi-icon green"><i class="fa fa-map-marker"></i></div>
+            </div>
+            <div class="kpi-value" id="kpi-pune">-</div>
+            <div class="kpi-sub">Ready for live trial in yard</div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-card-header">
+              <span class="kpi-label">Customer RFQ Leads</span>
+              <div class="kpi-icon gold"><i class="fa fa-envelope"></i></div>
+            </div>
+            <div class="kpi-value" id="kpi-inquiries">-</div>
+            <div class="kpi-sub">Quotation inquiries received</div>
+          </div>
+        </div>
+
+        <!-- Dashboard Action Banner (Super Admin Only: Sync to Static) -->
+        <div class="superadmin-only-item" style="margin-bottom: 24px;">
+          <div style="background: rgba(248, 157, 19, 0.08); border: 1px solid rgba(248, 157, 19, 0.3); border-radius: 10px; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: gap: 16px; width: 100%;">
+            <div>
+              <div style="font-weight: 700; color: #fff; font-size: 15px;">
+                <i class="fa fa-refresh" style="color: var(--brand-gold); margin-right: 8px;"></i>
+                Developer Sync: Database &rarr; Static <code>catalog-data.js</code>
+              </div>
+              <div style="color: var(--text-muted); font-size: 13px;">
+                All modifications auto-sync automatically. Click here to force re-export database inventory to the static catalog script.
+              </div>
+            </div>
+            <button id="btn-sync-catalog" class="btn-primary btn-sm" style="white-space: nowrap;">
+              <i class="fa fa-bolt"></i> Force Sync Now
+            </button>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 2fr 1.2fr; gap: 24px;">
+          <!-- Left Column: Recent Machinery -->
+          <div class="admin-card">
+            <div class="card-header-bar">
+              <div class="card-title">Recent Inventory Additions</div>
+              <a href="products.html" class="btn-secondary btn-sm">View All Machinery &rarr;</a>
+            </div>
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Photo</th>
+                    <th>ID & Machine Name</th>
+                    <th>Section</th>
+                    <th>Location</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="recent-machines-tbody">
+                  <tr><td colspan="6" style="text-align:center; padding: 20px;">Loading machines...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Right Column: Recent Inquiries -->
+          <div class="admin-card">
+            <div class="card-header-bar">
+              <div class="card-title">Recent Customer RFQs</div>
+              <a href="inquiries.html" class="btn-secondary btn-sm">All Leads &rarr;</a>
+            </div>
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Customer</th>
+                    <th>Inquiry / Machine</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="recent-inquiries-tbody">
+                  <tr><td colspan="3" style="text-align:center; padding: 20px;">Loading inquiries...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="js/admin-core.js"></script>
+  <script>
+    (async () => {
+      const user = await AdminCore.requireAuth();
+      if (!user) return;
+
+      loadDashboardData();
+
+      // Force Sync Button
+      const syncBtn = document.getElementById('btn-sync-catalog');
+      if (syncBtn) {
+        syncBtn.addEventListener('click', async () => {
+          syncBtn.disabled = true;
+          syncBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Syncing...';
+          const res = await AdminCore.api('/api/system/sync-static', { method: 'POST' });
+          if (res.success) {
+            AdminCore.toast('Catalog exported successfully to new/Machinery/js/catalog-data.js!');
+          } else {
+            AdminCore.toast(res.message || 'Sync failed', 'error');
+          }
+          syncBtn.disabled = false;
+          syncBtn.innerHTML = '<i class="fa fa-bolt"></i> Force Sync Now';
+        });
+      }
+    })();
+
+    async function loadDashboardData() {
+      // 1. Fetch products
+      const pRes = await AdminCore.api('/api/products?all=true');
+      if (pRes.success) {
+        const machines = pRes.products;
+        document.getElementById('badge-total-machines').textContent = machines.length;
+        document.getElementById('kpi-total-machines').textContent = machines.length;
+
+        const forming = machines.filter(m => m.section === 'forming').length;
+        const cutting = machines.filter(m => m.section === 'cutting').length;
+        const pune = machines.filter(m => (m.location || '').toLowerCase().includes('pune')).length;
+
+        document.getElementById('kpi-forming').textContent = forming;
+        document.getElementById('kpi-cutting').textContent = cutting;
+        document.getElementById('kpi-pune').textContent = pune;
+
+        // Render Recent 5 Machines
+        const recent = machines.slice(0, 5);
+        const tbody = document.getElementById('recent-machines-tbody');
+        tbody.innerHTML = recent.map(m => `
+          <tr>
+            <td>
+              <img src="/${m.image || 'new/Machinery/images/dalal/cframe_press_pune.jpg'}" class="machine-thumb" alt="${m.name}" onerror="this.src='/new/Machinery/images/dalal/cframe_press_pune.jpg'">
+            </td>
+            <td>
+              <div class="machine-name-cell">
+                <span style="font-size: 13px;">${m.name}</span>
+                <span class="machine-id-tag">${m.id} ${m.isCustom ? '&bull; <span class="badge badge-custom">Custom</span>' : ''}</span>
+              </div>
+            </td>
+            <td>
+              <span class="badge" style="background: rgba(255,255,255,0.06); color: var(--text-muted); text-transform: capitalize;">
+                ${m.section}
+              </span>
+            </td>
+            <td><small style="color: var(--text-muted);">${m.location || '-'}</small></td>
+            <td>
+              <span class="badge badge-${m.status === 'active' ? 'active' : m.status === 'draft' ? 'draft' : 'sold'}">
+                ${m.status || 'active'}
+              </span>
+            </td>
+            <td>
+              <a href="product-form.html?id=${m.id}" class="btn-secondary btn-sm" style="padding: 4px 8px;">
+                <i class="fa fa-pencil"></i>
+              </a>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      // 2. Fetch Inquiries
+      const inqRes = await AdminCore.api('/api/inquiries');
+      if (inqRes.success) {
+        const inqs = inqRes.inquiries;
+        document.getElementById('badge-inquiries-count').textContent = inqs.length;
+        document.getElementById('kpi-inquiries').textContent = inqs.length;
+
+        const recentInqs = inqs.slice(0, 5);
+        const inqTbody = document.getElementById('recent-inquiries-tbody');
+        if (recentInqs.length === 0) {
+          inqTbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color: var(--text-dim); padding: 16px;">No customer RFQs yet.</td></tr>';
+        } else {
+          inqTbody.innerHTML = recentInqs.map(i => `
+            <tr>
+              <td>
+                <strong style="color: #fff; font-size: 13px;">${i.name}</strong><br>
+                <small style="color: var(--text-muted);">${i.company || i.phone || i.email}</small>
+              </td>
+              <td>
+                <span style="font-size: 12px; color: var(--text-main); font-weight: 500;">
+                  ${i.machineName ? i.machineName : 'General Inquiry'}
+                </span>
+              </td>
+              <td>
+                <span class="badge badge-${i.status === 'new' ? 'active' : 'draft'}">
+                  ${i.status.toUpperCase()}
+                </span>
+              </td>
+            </tr>
+          `).join('');
+        }
+      }
+    }
+  </script>
+</body>
+</html>
