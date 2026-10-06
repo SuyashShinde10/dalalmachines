@@ -1,4 +1,8 @@
 {
+  "cleanUrls": true,
+  "redirects": [
+    { "source": "/", "destination": "/new/dalalmachine/", "permanent": false }
+  ],
   "rewrites": [
     { "source": "/api/(.*)", "destination": "https://dalalmachines.onrender.com/api/$1" },
     { "source": "/new/Machinery/(.*)", "destination": "/new/dalalmachine/$1" },
