@@ -138,6 +138,22 @@ const server = app.listen(PORT, () => {
   console.log(` API Endpoint:  http://localhost:${PORT}/api/health`);
   console.log(` Security:      Helmet ON, RateLimiter ON, /hub REMOVED `);
   console.log(`=======================================================`);
+
+  // Automated Keep-Alive Heartbeat (Prevents Render Free Tier 15-min Sleep)
+  const keepAliveUrl = process.env.RENDER_EXTERNAL_URL || process.env.KEEP_ALIVE_URL;
+  if (keepAliveUrl) {
+    console.log(`[KeepAlive] Render 24/7 Anti-Sleep engine activated for: ${keepAliveUrl}`);
+    setInterval(() => {
+      fetch(`${keepAliveUrl}/api/health`)
+        .then(res => res.json())
+        .then(data => {
+          console.log(`[KeepAlive] Heartbeat ping sent at ${new Date().toLocaleTimeString()} - Health: ${data.status}`);
+        })
+        .catch(err => {
+          console.warn(`[KeepAlive] Ping warning: ${err.message}`);
+        });
+    }, 10 * 60 * 1000); // Pings every 10 minutes (Render sleep timeout is 15 mins)
+  }
 });
 
 module.exports = { app, server };
