@@ -75,8 +75,10 @@ document.addEventListener('DOMContentLoaded', () => {
   syncSidebarCounts();
 
   function buildCardHTML(m) {
+    const isHomePage = window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname.endsWith('/Machinery/');
+    const colClass = isHomePage ? 'col-lg-4 col-md-6 col-sm-12' : 'col-xl-4 col-lg-6 col-md-6 col-sm-12';
     return `
-      <div class="col-lg-4 col-md-6 col-sm-12" style="margin-bottom: 30px;">
+      <div class="${colClass}" style="margin-bottom: 30px;">
         <div class="machine-item-card">
           <div class="machine-thumb-box">
             <img src="${m.image}" alt="${m.name}" loading="lazy">
@@ -85,23 +87,23 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
           <div class="machine-info-content">
             <div class="machine-cat-label">${m.categoryName} &bull; ${m.make}</div>
-            <h4 class="machine-title">${m.name}</h4>
+            <h4 class="machine-title" title="${m.name}">${m.name}</h4>
             <div class="machine-specs-grid">
-              <div class="spec-item">
+              <div class="spec-item" title="${m.tonnage > 0 ? m.tonnage + ' Tons' : 'Precision CNC'}">
                 <span class="label">Capacity / Tonnage</span>
                 <span class="val">${m.tonnage > 0 ? m.tonnage + ' Tons' : 'Precision CNC'}</span>
               </div>
-              <div class="spec-item">
+              <div class="spec-item" title="${m.year || 'Standard'}">
                 <span class="label">Mfg. Year</span>
                 <span class="val">${m.year || 'Standard'}</span>
               </div>
-              <div class="spec-item">
+              <div class="spec-item" title="${m.model || '-'}">
                 <span class="label">Model Code</span>
-                <span class="val">${m.model}</span>
+                <span class="val">${m.model || '-'}</span>
               </div>
-              <div class="spec-item">
+              <div class="spec-item" title="Inspected & Ready for Live Trial">
                 <span class="label">Ready Status</span>
-                <span class="val" style="color: #16a34a;">Inspected / Verified</span>
+                <span class="val" style="color: #16a34a;"><i class="fa fa-check-circle" style="font-size:11px; margin-right:2px;"></i> Inspected</span>
               </div>
             </div>
             <div class="machine-card-footer">

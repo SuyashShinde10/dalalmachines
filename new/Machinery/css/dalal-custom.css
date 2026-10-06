@@ -929,9 +929,9 @@ h1, h2, h3, h4, h5, h6, .sec-title h2, .main-header .navigation > li > a {
 }
 .machine-thumb-box {
   position: relative;
-  height: 220px !important;
-  min-height: 220px !important;
-  max-height: 220px !important;
+  height: 200px !important;
+  min-height: 200px !important;
+  max-height: 200px !important;
   width: 100% !important;
   overflow: hidden;
   background: #f1f5f9;
@@ -977,13 +977,13 @@ h1, h2, h3, h4, h5, h6, .sec-title h2, .main-header .navigation > li > a {
   z-index: 2;
 }
 .machine-info-content {
-  padding: 20px;
+  padding: 18px;
   display: flex !important;
   flex-direction: column !important;
   flex-grow: 1 !important;
 }
 .machine-cat-label {
-  font-size: 11.5px;
+  font-size: 11px;
   text-transform: uppercase;
   color: #64748b;
   font-weight: 700;
@@ -996,14 +996,14 @@ h1, h2, h3, h4, h5, h6, .sec-title h2, .main-header .navigation > li > a {
   text-overflow: ellipsis;
 }
 .machine-title {
-  font-size: 17px !important;
+  font-size: 16px !important;
   font-weight: 700 !important;
   color: var(--dalal-dark) !important;
   margin-bottom: 12px !important;
   line-height: 1.35 !important;
-  height: 46px !important;
-  min-height: 46px !important;
-  max-height: 46px !important;
+  height: 44px !important;
+  min-height: 44px !important;
+  max-height: 44px !important;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -1011,30 +1011,38 @@ h1, h2, h3, h4, h5, h6, .sec-title h2, .main-header .navigation > li > a {
 }
 .machine-specs-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 8px 12px;
   background: #f8fafc;
+  border: 1px solid #edf2f7;
   padding: 10px 12px;
   border-radius: 6px;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   font-size: 12px;
-  height: 125px !important;
-  min-height: 125px !important;
-  max-height: 125px !important;
-  overflow: hidden;
+  height: auto !important;
+  min-height: 98px !important;
+  max-height: none !important;
+  overflow: visible !important;
   flex-shrink: 0;
+}
+.spec-item {
+  min-width: 0 !important;
+  overflow: hidden !important;
 }
 .spec-item span.label {
   color: #64748b;
   font-size: 10.5px;
+  font-weight: 500;
   display: block;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin-bottom: 2px;
 }
 .spec-item span.val {
   color: #1e293b;
   font-weight: 600;
+  font-size: 12px;
   display: block;
   white-space: nowrap;
   overflow: hidden;
