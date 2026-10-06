@@ -22,7 +22,22 @@ app.use(cookieParser());
 // Static File Directories
 app.use('/uploads', express.static(config.UPLOADS_DIR));
 app.use('/admin', express.static(config.ADMIN_DIR));
+app.use('/new/Machinery', express.static(config.PUBLIC_DIR));
+app.use('/hub', express.static(path.join(__dirname, '..')));
 app.use('/', express.static(config.PUBLIC_DIR));
+
+// Redirects & Route Fallbacks
+app.get(['/new', '/new/'], (req, res) => {
+  res.redirect('/new/Machinery/');
+});
+
+app.get('/new/Machinery', (req, res) => {
+  res.sendFile(path.join(config.PUBLIC_DIR, 'index.html'));
+});
+
+app.get('/admin', (req, res) => {
+  res.sendFile(path.join(config.ADMIN_DIR, 'index.html'));
+});
 
 // API Routes
 app.use('/api/auth', authRoutes);
@@ -39,11 +54,6 @@ app.get('/api/health', (req, res) => {
     timestamp: new Date().toISOString(),
     uptime: process.uptime()
   });
-});
-
-// Default admin route fallback
-app.get('/admin', (req, res) => {
-  res.sendFile(path.join(config.ADMIN_DIR, 'index.html'));
 });
 
 // Global Error Handler

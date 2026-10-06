@@ -9,7 +9,7 @@
       "name": "System Developer",
       "active": true,
       "createdAt": "2026-10-06T09:58:03.305Z",
-      "lastLogin": "2026-10-06T10:11:35.406Z"
+      "lastLogin": "2026-10-06T10:26:17.443Z"
     },
     {
       "id": "usr_admin",
@@ -20,7 +20,7 @@
       "name": "Dalal Inventory Admin",
       "active": true,
       "createdAt": "2026-10-06T09:58:03.484Z",
-      "lastLogin": "2026-10-06T10:09:42.227Z"
+      "lastLogin": "2026-10-06T10:30:31.579Z"
     }
   ],
   "products": [
@@ -1676,6 +1676,39 @@
     }
   ],
   "logs": [
+    {
+      "id": "log_88afa113",
+      "timestamp": "2026-10-06T10:30:31.595Z",
+      "userId": "usr_admin",
+      "username": "admin",
+      "role": "admin",
+      "action": "USER_LOGIN",
+      "target": "AUTH",
+      "details": "User logged in successfully from ::1",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_a70761a2",
+      "timestamp": "2026-10-06T10:26:17.447Z",
+      "userId": "usr_superadmin",
+      "username": "developer",
+      "role": "superadmin",
+      "action": "USER_LOGIN",
+      "target": "AUTH",
+      "details": "User logged in successfully from ::1",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_f19cace0",
+      "timestamp": "2026-10-06T10:26:10.132Z",
+      "userId": "usr_superadmin",
+      "username": "developer",
+      "role": "superadmin",
+      "action": "USER_LOGIN",
+      "target": "AUTH",
+      "details": "User logged in successfully from ::1",
+      "ip": "127.0.0.1"
+    },
     {
       "id": "log_0f925d60",
       "timestamp": "2026-10-06T10:11:35.431Z",
