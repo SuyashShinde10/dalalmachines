@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
+const compression = require('compression');
 const { rateLimit } = require('express-rate-limit');
 const cookieParser = require('cookie-parser');
 const path = require('path');
@@ -15,7 +16,8 @@ const systemRoutes = require('./routes/system');
 
 const app = express();
 
-// 1. Disable information disclosure
+// 1. Gzip/Brotli Compression & Disable information disclosure
+app.use(compression());
 app.disable('x-powered-by');
 
 // 2. HTTP Security Headers via Helmet
@@ -71,13 +73,26 @@ const inquiryLimiter = rateLimit({
   }
 });
 
-// 6. Static File Directories (SECURE: /hub directory exposure removed)
-app.use('/uploads', express.static(config.UPLOADS_DIR));
-app.use('/admin', express.static(config.ADMIN_DIR));
-app.use('/superadmin', express.static(config.SUPERADMIN_DIR));
-app.use('/new/dalalmachine', express.static(config.PUBLIC_DIR));
-app.use('/new/Machinery', express.static(config.PUBLIC_DIR)); // backward compatibility alias
-app.use('/', express.static(config.PUBLIC_DIR));
+// 6. High-Performance Static File Serving with Aggressive Caching
+const staticOptions = {
+  maxAge: '7d',
+  etag: true,
+  lastModified: true,
+  setHeaders: (res, filePath) => {
+    if (/\.(jpg|jpeg|png|gif|webp|svg|ico|woff|woff2|ttf|eot)$/i.test(filePath)) {
+      res.setHeader('Cache-Control', 'public, max-age=2592000, immutable'); // 30 days cache for images & fonts
+    } else if (/\.(css|js)$/i.test(filePath)) {
+      res.setHeader('Cache-Control', 'public, max-age=604800'); // 7 days cache for CSS & JS
+    }
+  }
+};
+
+app.use('/uploads', express.static(config.UPLOADS_DIR, staticOptions));
+app.use('/admin', express.static(config.ADMIN_DIR, staticOptions));
+app.use('/superadmin', express.static(config.SUPERADMIN_DIR, staticOptions));
+app.use('/new/dalalmachine', express.static(config.PUBLIC_DIR, staticOptions));
+app.use('/new/Machinery', express.static(config.PUBLIC_DIR, staticOptions)); // backward compatibility alias
+app.use('/', express.static(config.PUBLIC_DIR, staticOptions));
 
 // 7. Redirects & Route Fallbacks
 app.get(['/new', '/new/'], (req, res) => {

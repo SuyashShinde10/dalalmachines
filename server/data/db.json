@@ -9,7 +9,7 @@
       "name": "System Developer",
       "active": true,
       "createdAt": "2026-10-06T09:58:03.305Z",
-      "lastLogin": "2026-10-06T15:46:01.796Z"
+      "lastLogin": "2026-10-06T16:08:01.139Z"
     },
     {
       "id": "usr_admin",
@@ -20,7 +20,7 @@
       "name": "Dalal Inventory Admin",
       "active": true,
       "createdAt": "2026-10-06T09:58:03.484Z",
-      "lastLogin": "2026-10-06T15:46:01.544Z"
+      "lastLogin": "2026-10-06T16:08:00.901Z"
     }
   ],
   "products": [
@@ -1651,6 +1651,18 @@
   ],
   "inquiries": [
     {
+      "id": "inq_04667f95",
+      "name": "Automated Test Client",
+      "email": "qa-tester@dalaltest.com",
+      "phone": "+91 98000 11122",
+      "company": "Test Precision Engg",
+      "machineId": null,
+      "machineName": "DMTA High-Precision Press",
+      "message": "Automated E2E test inquiry verifying pipeline responsiveness.",
+      "status": "contacted",
+      "createdAt": "2026-10-06T16:08:01.212Z"
+    },
+    {
       "id": "inq_bea74947",
       "name": "Automated Test Client",
       "email": "qa-tester@dalaltest.com",
@@ -1892,6 +1904,72 @@
     }
   ],
   "logs": [
+    {
+      "id": "log_537d1087",
+      "timestamp": "2026-10-06T16:08:01.509Z",
+      "userId": "usr_admin",
+      "username": "admin",
+      "role": "admin",
+      "action": "PRODUCT_DELETED",
+      "target": "P000550",
+      "details": "Deleted machine QA Test Auto-Lathe 400",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_b11675b1",
+      "timestamp": "2026-10-06T16:08:01.433Z",
+      "userId": "usr_admin",
+      "username": "admin",
+      "role": "admin",
+      "action": "PRODUCT_UPDATED",
+      "target": "P000550",
+      "details": "Updated details for machine QA Test Auto-Lathe 400",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_7458078d",
+      "timestamp": "2026-10-06T16:08:01.275Z",
+      "userId": "usr_admin",
+      "username": "admin",
+      "role": "admin",
+      "action": "PRODUCT_CREATED",
+      "target": "P000550",
+      "details": "Created machine QA Test Auto-Lathe 400 (Standard Machine)",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_6889b9e5",
+      "timestamp": "2026-10-06T16:08:01.249Z",
+      "userId": "usr_admin",
+      "username": "admin",
+      "role": "admin",
+      "action": "INQUIRY_STATUS_CHANGED",
+      "target": "inq_04667f95",
+      "details": "Changed inquiry status to contacted",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_722d514a",
+      "timestamp": "2026-10-06T16:08:01.159Z",
+      "userId": "usr_superadmin",
+      "username": "developer",
+      "role": "superadmin",
+      "action": "USER_LOGIN",
+      "target": "AUTH",
+      "details": "User logged in successfully from ::1",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_8f2c5444",
+      "timestamp": "2026-10-06T16:08:00.934Z",
+      "userId": "usr_admin",
+      "username": "admin",
+      "role": "admin",
+      "action": "USER_LOGIN",
+      "target": "AUTH",
+      "details": "User logged in successfully from ::1",
+      "ip": "127.0.0.1"
+    },
     {
       "id": "log_e184dbab",
       "timestamp": "2026-10-06T15:46:02.268Z",
