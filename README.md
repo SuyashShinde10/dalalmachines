@@ -3,13 +3,13 @@
 Official website redesign for **Dalal Machine Tools Agency Pvt. Ltd.** and technical partner co-branding with **OMPI India LLP**.
 
 ## 📌 Project Overview
-- **Production Suite**: Redesigned 9-page responsive website located in [`/new/Machinery/`](./new/Machinery/).
+- **Production Suite**: Redesigned 9-page responsive website located in [`/new/dalalmachine/`](./new/dalalmachine/).
 - **Technical Partner**: OMPI India LLP (Clutch & Brake Units) co-branding integrated across header, footer, and partner sections.
 - **Mobile Responsive Engine**: Fully optimized across desktop, tablet, and mobile viewports (360px – 1920px).
 - **Core Technology**: Semantic HTML5, CSS3, Vanilla JS, Bootstrap, FontAwesome & inline SVG icons.
 
 ## 📁 Directory Structure
-- `/new/Machinery/`: Production website files
+- `/new/dalalmachine/`: Production website files
   - `index.html`: Homepage with hero slider, 4 pillars, machine showcase, and partner co-branding
   - `about.html`: 20+ years company profile, leadership, and global sourcing network
   - `services.html`: 6 Pillars of machinery import and High Seas Sales savings calculator
@@ -32,4 +32,4 @@ python -m http.server 8080
 # Node.js
 npx serve .
 ```
-Or open [`index.html`](./index.html) or [`new/Machinery/index.html`](./new/Machinery/index.html) directly in any modern web browser.
+Or open [`index.html`](./index.html) or [`new/dalalmachine/index.html`](./new/dalalmachine/index.html) directly in any modern web browser.

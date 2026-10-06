@@ -123,9 +123,22 @@
         });
     }
 
+    // Universal Floating WhatsApp Widget
+    function initFloatingWhatsApp() {
+        if ($('#dalal-wa-float-btn').length) return;
+        var defaultText = encodeURIComponent("Hello Mr. Vinit Dalal, I have an inquiry regarding Dalal Machine Tools machinery.");
+        var html = '<a href="https://wa.me/919821232131?text=' + defaultText + '" target="_blank" id="dalal-wa-float-btn" class="dalal-wa-float" title="Chat with Mr. Vinit Dalal on WhatsApp" rel="noopener noreferrer">' +
+                   '  <div class="dalal-wa-pulse"></div>' +
+                   '  <i class="fa fa-whatsapp"></i>' +
+                   '  <span class="dalal-wa-label">WhatsApp RFQ</span>' +
+                   '</a>';
+        $('body').append(html);
+    }
+
     $(document).ready(function() {
         handlePreloader();
         initPageTransitions();
+        initFloatingWhatsApp();
     });
     setTimeout(handlePreloader, 400);
 

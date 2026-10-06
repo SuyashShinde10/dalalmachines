@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Security & Activity Audit Ledger | Super Admin Master Console</title>
-  <link rel="shortcut icon" href="/new/Machinery/images/favicon.png" type="image/x-icon">
-  <link rel="stylesheet" href="/new/Machinery/css/font-awesome.css">
+  <link rel="shortcut icon" href="/new/dalalmachine/images/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="/new/dalalmachine/css/font-awesome.css">
   <link rel="stylesheet" href="css/superadmin.css">
 </head>
 <body>
@@ -14,7 +14,7 @@
     <aside class="sa-sidebar">
       <div class="sa-sidebar-header">
         <a href="dashboard.html" class="sa-brand-badge">
-          <img src="/new/Machinery/images/logo-dalal-light.png" alt="Dalal Machine Tools">
+          <img src="/new/dalalmachine/images/logo-dalal.png" alt="Dalal Machine Tools" style="max-height: 38px; width: auto; object-fit: contain;">
           <span class="sa-brand-badge-tag">MASTER</span>
         </a>
       </div>
@@ -66,8 +66,9 @@
     <main class="sa-main">
       <header class="sa-topbar">
         <div class="sa-topbar-left">
-          <button id="sa-btn-toggle" class="sa-btn-toggle">
+          <button id="sa-btn-toggle" class="sa-btn-toggle" title="Toggle Side Menu">
             <i class="fa fa-bars"></i>
+            <span>Menu</span>
           </button>
           <div class="sa-breadcrumb">
             Master Console &bull; <span>System Security & Audit Trail</span>
@@ -117,6 +118,23 @@
               </tbody>
             </table>
           </div>
+          <div class="sa-pagination-bar">
+            <div class="sa-pagination-info">
+              <span id="sa-pagination-range">Showing 0 - 0 of 0 logs</span>
+              <div class="sa-pagination-size-wrap">
+                <label for="sa-page-size-select" style="font-size: 12px; color: var(--sa-text-muted);">Rows per page:</label>
+                <select id="sa-page-size-select" class="sa-pagination-size-select">
+                  <option value="15" selected>15</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                  <option value="all">All</option>
+                </select>
+              </div>
+            </div>
+            <div class="sa-pagination-controls" id="sa-pagination-controls">
+              <!-- Rendered dynamically: Prev, 1, 2, 3, Next -->
+            </div>
+          </div>
         </div>
 
       </div>
@@ -125,35 +143,132 @@
 
   <script src="js/superadmin-core.js"></script>
   <script>
+    let allLogs = [];
+    let currentLogPage = 1;
+    let logPageSize = 15;
+
     (async () => {
       const user = await SuperAdminCore.requireSuperAdmin();
       if (!user) return;
 
       loadLogs();
       document.getElementById('btn-refresh-logs').addEventListener('click', loadLogs);
+      document.getElementById('sa-page-size-select').addEventListener('change', (e) => {
+        logPageSize = e.target.value === 'all' ? 'all' : parseInt(e.target.value, 10);
+        currentLogPage = 1;
+        renderLogTable();
+      });
     })();
 
     async function loadLogs() {
       const res = await SuperAdminCore.api('/api/logs');
       if (res.success) {
-        document.getElementById('log-count-tag').textContent = `${res.logs.length} Total Events Logged`;
-        const tbody = document.getElementById('sa-logs-tbody');
-        tbody.innerHTML = res.logs.map(l => {
+        allLogs = res.logs || [];
+        document.getElementById('log-count-tag').textContent = `${allLogs.length} Total Events Logged`;
+        currentLogPage = 1;
+        renderLogTable();
+      } else {
+        SuperAdminCore.toast(res.message || 'Failed to load activity logs', 'error');
+      }
+    }
+
+    function renderLogTable() {
+      const totalItems = allLogs.length;
+      const actualSize = logPageSize === 'all' ? (totalItems || 1) : parseInt(logPageSize, 10);
+      const totalPages = Math.max(1, Math.ceil(totalItems / actualSize));
+
+      if (currentLogPage > totalPages) currentLogPage = totalPages;
+      if (currentLogPage < 1) currentLogPage = 1;
+
+      let pageItems = [];
+      let startIdx = 0;
+      let endIdx = 0;
+
+      if (totalItems > 0) {
+        if (logPageSize === 'all') {
+          pageItems = allLogs;
+          startIdx = 1;
+          endIdx = totalItems;
+        } else {
+          const start = (currentLogPage - 1) * actualSize;
+          pageItems = allLogs.slice(start, start + actualSize);
+          startIdx = start + 1;
+          endIdx = Math.min(start + actualSize, totalItems);
+        }
+      }
+
+      const rangeEl = document.getElementById('sa-pagination-range');
+      if (rangeEl) {
+        rangeEl.textContent = totalItems === 0
+          ? 'No logs recorded'
+          : `Showing ${startIdx} - ${endIdx} of ${totalItems} logs`;
+      }
+
+      const tbody = document.getElementById('sa-logs-tbody');
+      if (totalItems === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 32px; color: var(--sa-text-dim);">No security activity logs recorded yet.</td></tr>';
+      } else {
+        tbody.innerHTML = pageItems.map(l => {
+          const esc = SuperAdminCore.escapeHTML;
           const dt = new Date(l.timestamp);
           const time = dt.toLocaleTimeString() + ' &bull; ' + dt.toLocaleDateString();
           return `
             <tr>
               <td><small style="font-family: 'JetBrains Mono'; color: var(--sa-text-dim);">${time}</small></td>
-              <td><small style="font-family: 'JetBrains Mono'; color: var(--sa-text-dim);">${l.ip || '127.0.0.1'}</small></td>
-              <td><strong style="color: #fff;">${l.username}</strong></td>
-              <td><span class="sa-badge ${l.role === 'superadmin' ? 'sa-badge-gold' : 'sa-badge-active'}">${l.role}</span></td>
-              <td><span class="sa-badge sa-badge-gold" style="font-size: 10px;">${l.action}</span></td>
-              <td><code>${l.target || '-'}</code></td>
-              <td><small style="color: var(--sa-text-muted);">${l.details || '-'}</small></td>
+              <td><small style="font-family: 'JetBrains Mono'; color: var(--sa-text-dim);">${esc(l.ip || '127.0.0.1')}</small></td>
+              <td><strong style="color: #1e293b;">${esc(l.username)}</strong></td>
+              <td><span class="sa-badge ${l.role === 'superadmin' ? 'sa-badge-gold' : 'sa-badge-active'}">${esc(l.role)}</span></td>
+              <td><span class="sa-badge sa-badge-gold" style="font-size: 10px;">${esc(l.action)}</span></td>
+              <td><code>${esc(l.target || '-')}</code></td>
+              <td><small style="color: var(--sa-text-muted);">${esc(l.details || '-')}</small></td>
             </tr>
           `;
         }).join('');
       }
+
+      renderLogPaginationControls(totalPages);
+    }
+
+    function renderLogPaginationControls(totalPages) {
+      const container = document.getElementById('sa-pagination-controls');
+      if (!container) return;
+
+      if (logPageSize === 'all' || totalPages <= 1) {
+        container.innerHTML = '';
+        return;
+      }
+
+      let html = '';
+      const prevDisabled = currentLogPage === 1 ? 'disabled' : '';
+      html += `<button class="sa-page-btn" ${prevDisabled} onclick="changeLogPage(${currentLogPage - 1})"><i class="fa fa-angle-left"></i> Prev</button>`;
+
+      let startP = Math.max(1, currentLogPage - 2);
+      let endP = Math.min(totalPages, currentLogPage + 2);
+
+      if (startP > 1) {
+        html += `<button class="sa-page-btn ${currentLogPage === 1 ? 'active' : ''}" onclick="changeLogPage(1)">1</button>`;
+        if (startP > 2) html += `<span style="padding: 0 4px; color: var(--sa-text-muted);">...</span>`;
+      }
+
+      for (let i = startP; i <= endP; i++) {
+        const active = i === currentLogPage ? 'active' : '';
+        html += `<button class="sa-page-btn ${active}" onclick="changeLogPage(${i})">${i}</button>`;
+      }
+
+      if (endP < totalPages) {
+        if (endP < totalPages - 1) html += `<span style="padding: 0 4px; color: var(--sa-text-muted);">...</span>`;
+        html += `<button class="sa-page-btn ${currentLogPage === totalPages ? 'active' : ''}" onclick="changeLogPage(${totalPages})">${totalPages}</button>`;
+      }
+
+      const nextDisabled = currentLogPage === totalPages ? 'disabled' : '';
+      html += `<button class="sa-page-btn ${nextDisabled} onclick="changeLogPage(${currentLogPage + 1})">Next <i class="fa fa-angle-right"></i></button>`;
+
+      container.innerHTML = html;
+    }
+
+    function changeLogPage(p) {
+      currentLogPage = p;
+      renderLogTable();
     }
   </script>
 </body>

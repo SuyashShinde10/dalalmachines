@@ -89,6 +89,9 @@ router.put('/profile', authenticateToken, (req, res) => {
   const user = db.getUserById(req.user.id);
 
   if (newPassword) {
+    if (newPassword.length < 8) {
+      return res.status(400).json({ success: false, message: 'New password must be at least 8 characters long.' });
+    }
     if (!currentPassword) {
       return res.status(400).json({ success: false, message: 'Current password required to set a new password.' });
     }

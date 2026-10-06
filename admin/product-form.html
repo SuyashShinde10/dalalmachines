@@ -7,67 +7,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700;800&family=Inter:wght@400;500;600;700&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="shortcut icon" href="/new/Machinery/images/favicon.png" type="image/x-icon">
-  <link rel="stylesheet" href="/new/Machinery/css/font-awesome.css">
+  <link rel="shortcut icon" href="/new/dalalmachine/images/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="/new/dalalmachine/css/font-awesome.css">
   <link rel="stylesheet" href="css/admin.css">
-  <style>
-    .type-switcher {
-      display: flex;
-      background: rgba(0, 0, 0, 0.4);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      padding: 6px;
-      margin-bottom: 24px;
-      gap: 8px;
-    }
-    .type-tab-btn {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 12px 18px;
-      border-radius: var(--radius-sm);
-      border: 1px solid transparent;
-      background: none;
-      color: var(--text-muted);
-      font-weight: 700;
-      font-size: 14px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .type-tab-btn:hover {
-      color: #fff;
-      background: rgba(255, 255, 255, 0.05);
-    }
-    .type-tab-btn.active {
-      background: var(--brand-gold);
-      color: #0b0f19;
-      box-shadow: 0 4px 15px var(--brand-gold-glow);
-    }
-    .preview-box {
-      width: 100%;
-      height: 220px;
-      border-radius: var(--radius-sm);
-      background: #000;
-      border: 1px solid var(--border-color);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      margin-bottom: 12px;
-      position: relative;
-    }
-    .preview-box img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .custom-features-card {
-      border: 1px solid rgba(139, 92, 246, 0.4);
-      background: rgba(139, 92, 246, 0.03);
-    }
-  </style>
 </head>
 <body>
 
@@ -76,7 +18,7 @@
     <aside class="admin-sidebar">
       <div class="sidebar-header">
         <a href="dashboard.html" class="brand-badge" title="Dalal Machine Tools">
-          <img src="/new/Machinery/images/logo-dalal-light.png" alt="Dalal Machine Tools" style="max-height: 28px; width: auto; object-fit: contain;">
+          <img src="/new/dalalmachine/images/logo-dalal.png" alt="Dalal Machine Tools" style="max-height: 42px; width: auto; object-fit: contain;">
         </a>
       </div>
 
@@ -88,7 +30,7 @@
         </a>
         <a href="products.html" class="nav-link">
           <i class="fa fa-cubes"></i>
-          <span>Machinery Catalog</span>
+          <span>Dalal Machine Catalog</span>
         </a>
         <a href="product-form.html" class="nav-link active" id="sidebar-add-link">
           <i class="fa fa-plus-circle"></i>
@@ -103,19 +45,21 @@
           <span>Customer RFQs</span>
         </a>
 
-        <div class="nav-section-title">Portals & Navigation</div>
-        <a href="/superadmin/dashboard.html" class="nav-link">
-          <i class="fa fa-shield" style="color: var(--brand-gold);"></i>
-          <span>Super Admin Console &rarr;</span>
+        <div class="nav-section-title">User Account</div>
+        <a href="settings.html" class="nav-link">
+          <i class="fa fa-user-circle"></i>
+          <span>My Profile & Password</span>
         </a>
-        <a href="/new/Machinery/index.html" target="_blank" class="nav-link">
+
+        <div class="nav-section-title">Quick Links</div>
+        <a href="/new/dalalmachine/index.html" target="_blank" class="nav-link">
           <i class="fa fa-external-link"></i>
-          <span>Customer Website &rarr;</span>
+          <span>View Public Website &rarr;</span>
         </a>
       </nav>
 
       <div class="sidebar-footer">
-        <div class="user-info-pill">
+        <div class="user-info-pill" onclick="window.location.href='settings.html'" style="cursor: pointer;" title="My Account & Password Settings">
           <div class="user-avatar" id="sidebar-user-avatar">D</div>
           <div class="user-details">
             <span class="user-name" id="sidebar-user-name">Loading...</span>
@@ -133,8 +77,9 @@
     <main class="admin-main">
       <header class="admin-topbar">
         <div class="topbar-left">
-          <button id="btn-sidebar-toggle" class="btn-sidebar-toggle">
+          <button id="btn-sidebar-toggle" class="btn-sidebar-toggle" title="Toggle Side Menu">
             <i class="fa fa-bars"></i>
+            <span>Menu</span>
           </button>
           <div class="topbar-breadcrumb">
             Control Portal &bull; <span id="topbar-mode-title">Create Machine</span>
@@ -155,7 +100,7 @@
         <div class="page-header">
           <div>
             <h1 class="page-title" id="page-heading">Add New Machinery</h1>
-            <p class="page-subtitle">Publish a standard inventory asset or build a custom bespoke machine with dynamic technical specifications.</p>
+            <p class="page-subtitle">Publish a standard inventory asset or build a bespoke machine with dynamic technical specifications.</p>
           </div>
           <div class="page-actions" id="preview-action-wrap" style="display: none;">
             <a href="#" id="btn-live-preview" target="_blank" class="btn-secondary">
@@ -180,28 +125,30 @@
           <!-- 1. Core Identification -->
           <div class="admin-card">
             <div class="card-header-bar">
-              <div class="card-title">1. Machine Identification & Classification</div>
+              <div class="card-title">
+                <span class="step-num">1</span> Machine Identification & Classification
+              </div>
               <div id="custom-indicator-badge" style="display: none;">
-                <span class="badge badge-custom"><i class="fa fa-magic"></i> Custom Product Mode</span>
+                <span class="badge badge-custom"><i class="fa fa-magic"></i> Custom Product Mode Active</span>
               </div>
             </div>
             <div class="card-body">
-              <div class="form-row">
-                <div style="flex: 2;">
-                  <label class="form-label" for="input-name">Full Machine Name *</label>
+              <div class="form-grid-name-id">
+                <div>
+                  <label class="form-label" for="input-name">Full Machine Name <span class="required-star">*</span></label>
                   <input type="text" id="input-name" class="form-control" placeholder="e.g. 2500T RUSSIAN TMP-VORONEZH Hot Forging Press" required>
-                  <div class="form-text">Descriptive title shown in the catalog, search bar, and PDP header.</div>
+                  <div class="form-text"><i class="fa fa-info-circle"></i> Descriptive title shown in catalog, search bar, and machinery page.</div>
                 </div>
-                <div style="flex: 1;">
-                  <label class="form-label" for="input-id">Machine ID (Optional)</label>
+                <div>
+                  <label class="form-label" for="input-id">Machine ID <span style="font-size: 11px; font-weight: normal; color: var(--text-muted);">(Optional)</span></label>
                   <input type="text" id="input-id" class="form-control" placeholder="e.g. P00035 (Leave empty to auto-generate)">
-                  <div class="form-text">Unique catalog inventory code.</div>
+                  <div class="form-text"><i class="fa fa-barcode"></i> Unique inventory catalog identifier.</div>
                 </div>
               </div>
 
-              <div class="form-row">
+              <div class="form-grid-3">
                 <div>
-                  <label class="form-label" for="input-section">Machinery Section *</label>
+                  <label class="form-label" for="input-section">Machinery Section <span class="required-star">*</span></label>
                   <select id="input-section" class="form-select" required>
                     <option value="forming">Metal Forming</option>
                     <option value="cutting">Metal Cutting</option>
@@ -209,14 +156,14 @@
                 </div>
 
                 <div>
-                  <label class="form-label" for="input-category">Category *</label>
+                  <label class="form-label" for="input-category">Category <span class="required-star">*</span></label>
                   <select id="input-category" class="form-select" required>
-                    <!-- Populated dynamically -->
+                    <!-- Populated dynamically based on section -->
                   </select>
                 </div>
 
                 <div>
-                  <label class="form-label" for="input-location">Location *</label>
+                  <label class="form-label" for="input-location">Location / Yard <span class="required-star">*</span></label>
                   <select id="input-location" class="form-select" required>
                     <option value="In Stock PUNE">In Stock PUNE (Warehouse Yard)</option>
                     <option value="Ready in Europe">Ready in Europe</option>
@@ -227,31 +174,32 @@
                 </div>
               </div>
 
-              <div class="form-row">
+              <div class="form-grid-4">
                 <div>
-                  <label class="form-label" for="input-make">Make / Manufacturer & Country</label>
-                  <input type="text" id="input-make" class="form-control" placeholder="e.g. TMP Voronezh (Russia) or Li Chin (Taiwan)">
+                  <label class="form-label" for="input-make">Make / Manufacturer</label>
+                  <input type="text" id="input-make" class="form-control" placeholder="e.g. TMP Voronezh (Russia)">
                 </div>
 
                 <div>
-                  <label class="form-label" for="input-model">Model Number / Series</label>
+                  <label class="form-label" for="input-model">Model / Series</label>
                   <input type="text" id="input-model" class="form-control" placeholder="e.g. K8544 / KB8544">
                 </div>
 
                 <div>
-                  <label class="form-label" for="input-year">Year of Manufacture</label>
+                  <label class="form-label" for="input-year">Year of Mfg</label>
                   <input type="number" id="input-year" class="form-control" placeholder="e.g. 1995" min="1950" max="2027">
                 </div>
 
                 <div>
-                  <label class="form-label" for="input-tonnage">Capacity / Tonnage (Tons)</label>
-                  <input type="number" id="input-tonnage" class="form-control" placeholder="e.g. 2500 (0 for lathes/boring)">
+                  <label class="form-label" for="input-tonnage">Capacity (Tons)</label>
+                  <input type="number" id="input-tonnage" class="form-control" placeholder="e.g. 2500 (0 for lathes)">
                 </div>
               </div>
 
-              <div style="margin-top: 10px;">
+              <div style="margin-top: 18px;">
                 <label class="form-label" for="input-condition">Inspection & Operational Condition</label>
                 <input type="text" id="input-condition" class="form-control" placeholder="e.g. Excellent - Inspected Under Live Power Abroad & Live Video Available">
+                <div class="form-text"><i class="fa fa-shield"></i> Highlight running condition, trial runs, or technical refurbishment.</div>
               </div>
             </div>
           </div>
@@ -259,49 +207,88 @@
           <!-- 2. Media & Visuals -->
           <div class="admin-card">
             <div class="card-header-bar">
-              <div class="card-title">2. Machine Photography & Media</div>
+              <div class="card-title">
+                <span class="step-num">2</span> Machine Photography & Media
+              </div>
             </div>
             <div class="card-body">
-              <div class="form-row">
-                <div style="flex: 1.2;">
+              <div class="media-card-grid">
+                <!-- Left: Live Preview Container -->
+                <div class="preview-card">
+                  <div class="preview-card-header">
+                    <span><i class="fa fa-image"></i> Asset Preview</span>
+                    <span id="preview-dimensions" style="font-weight: 500; font-size: 11px;">Aspect 16:9</span>
+                  </div>
                   <div class="preview-box">
-                    <img id="img-preview" src="/new/Machinery/images/dalal/cframe_press_pune.jpg" alt="Preview">
+                    <img id="img-preview" src="/new/dalalmachine/images/dalal/cframe_press_pune.jpg" alt="Machine Photo Preview">
+                    <div class="preview-badge-live">
+                      <i class="fa fa-eye"></i> Live Preview
+                    </div>
+                  </div>
+                  <div style="font-size: 11.5px; color: var(--text-dim); text-align: center;">
+                    Displays on catalog listing cards and PDP showcase.
                   </div>
                 </div>
 
-                <div style="flex: 2;">
-                  <label class="form-label">Upload Machine Photo</label>
-                  <div class="dropzone-box" id="dropzone">
-                    <div class="dropzone-icon"><i class="fa fa-cloud-upload"></i></div>
-                    <div style="font-weight: 600; font-size: 14px; margin-bottom: 4px;">Click or Drag & Drop image here</div>
-                    <div style="font-size: 12px; color: var(--text-dim);">JPG, PNG, WebP up to 15MB</div>
-                    <input type="file" id="file-uploader" accept="image/*,.pdf" style="display: none;">
+                <!-- Right: Upload Dropzone & Direct URL -->
+                <div style="display: flex; flex-direction: column; justify-content: space-between; gap: 16px;">
+                  <div>
+                    <label class="form-label">Upload Machine Photo</label>
+                    <div class="dropzone-box" id="dropzone">
+                      <div class="dropzone-icon"><i class="fa fa-cloud-upload"></i></div>
+                      <div style="font-weight: 700; font-size: 14px; color: var(--text-main); margin-bottom: 4px;">
+                        Click to Browse or Drag & Drop Photo
+                      </div>
+                      <div style="font-size: 12px; color: var(--text-dim);">
+                        Supports JPG, PNG, WebP (Max 15MB)
+                      </div>
+                      <input type="file" id="file-uploader" accept="image/*,.pdf" style="display: none;">
+                    </div>
                   </div>
 
-                  <div style="margin-top: 14px;">
-                    <label class="form-label" for="input-image">Image URL / Path</label>
-                    <input type="text" id="input-image" class="form-control" placeholder="images/dalal/cframe_press_pune.jpg or /uploads/...">
+                  <div>
+                    <label class="form-label" for="input-image">Image URL / Local Asset Path</label>
+                    <input type="text" id="input-image" class="form-control" placeholder="new/dalalmachine/images/dalal/cframe_press_pune.jpg">
+                    <div class="form-text">
+                      <i class="fa fa-link"></i> Relative path or server URL. Updates preview thumbnail in real time.
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- 3. Specifications: Standard vs Dynamic Custom Specs -->
+          <!-- 3. Specifications Builder -->
           <div class="admin-card" id="specs-card">
             <div class="card-header-bar">
-              <div class="card-title" id="specs-card-title">3. Technical Specifications</div>
-              <button type="button" class="btn-secondary btn-sm" id="btn-add-spec-row">
-                <i class="fa fa-plus"></i> Add Custom Specification Row
+              <div class="card-title" id="specs-card-title">
+                <span class="step-num">3</span> Technical Specifications
+              </div>
+              <button type="button" class="btn-primary btn-sm" id="btn-add-spec-row">
+                <i class="fa fa-plus"></i> Add Specification Row
               </button>
             </div>
             <div class="card-body">
-              <p class="form-text" style="margin-bottom: 16px;">
-                Add standard or bespoke machine parameters (e.g. Bed Area, Stroke, Spindle Speed, Motor Power).
+              <p class="form-text" style="margin-bottom: 16px; font-size: 13px;">
+                Define key machine parameters displayed on the technical specification table (e.g. Bed Area, Stroke, Spindle Speed, Motor Power).
               </p>
 
-              <div id="dynamic-specs-container">
+              <div class="specs-header-row">
+                <div>Parameter / Specification Name</div>
+                <div>Measurement / Value</div>
+                <div style="text-align: center;">Action</div>
+              </div>
+
+              <div id="dynamic-specs-container" class="specs-list">
                 <!-- Dynamically populated spec rows -->
+              </div>
+
+              <!-- Quick Presets Toolbar -->
+              <div class="specs-presets-toolbar">
+                <span class="specs-preset-label"><i class="fa fa-bolt"></i> Quick Templates:</span>
+                <button type="button" class="btn-preset-chip" id="preset-forming">Press / Forming Specs</button>
+                <button type="button" class="btn-preset-chip" id="preset-cutting">Boring / Lathe Specs</button>
+                <button type="button" class="btn-preset-chip" id="preset-clear" style="color: #ef4444;">Clear All Rows</button>
               </div>
             </div>
           </div>
@@ -309,49 +296,52 @@
           <!-- 4. Custom Machine Commercial Terms & Badges (Visible for Custom products) -->
           <div class="admin-card custom-features-card" id="custom-details-card" style="display: none;">
             <div class="card-header-bar">
-              <div class="card-title" style="color: #c084fc;">
-                <i class="fa fa-magic"></i> 4. Custom Commercial Terms & Badges
+              <div class="card-title" style="color: #7e22ce;">
+                <span class="step-num" style="background: #f3e8ff; color: #7e22ce; border-color: #d8b4fe;">4</span>
+                <i class="fa fa-magic"></i> Bespoke / Custom Machinery Commercial Terms
               </div>
+              <span class="badge badge-custom"><i class="fa fa-check-circle"></i> Custom Mode Active</span>
             </div>
             <div class="card-body">
-              <div class="form-row">
+              <div class="form-grid-2">
                 <div>
                   <label class="form-label" for="input-price-text">Commercial Terms / Pricing Display</label>
-                  <input type="text" id="input-price-text" class="form-control" placeholder="Price On Request or High Seas CIF Nhava Sheva">
+                  <input type="text" id="input-price-text" class="form-control" placeholder="e.g. Price On Request or High Seas CIF Nhava Sheva">
+                  <div class="form-text">Shown in the catalog card in place of standard pricing badge.</div>
                 </div>
 
                 <div>
-                  <label class="form-label" for="input-custom-badge">Marketing Callout Badge</label>
-                  <input type="text" id="input-custom-badge" class="form-control" placeholder="e.g. HIGH SEAS READY or LIVE VIDEO INSPECTION">
+                  <label class="form-label" for="input-custom-badge">Marketing Callout Badges</label>
+                  <input type="text" id="input-custom-badge" class="form-control" placeholder="e.g. HIGH SEAS READY, LIVE POWER VIDEO">
+                  <div class="form-text">Comma-separated tags shown as promotional badges on product card.</div>
                 </div>
               </div>
 
-              <div>
-                <label class="form-label" for="input-brochure">Technical Brochure PDF (Optional URL)</label>
-                <input type="text" id="input-brochure" class="form-control" placeholder="/uploads/brochure.pdf or external link">
+              <div style="margin-top: 18px;">
+                <label class="form-label" for="input-brochure">Technical Brochure PDF (Optional URL / Download Link)</label>
+                <input type="text" id="input-brochure" class="form-control" placeholder="/uploads/brochures/brochure.pdf or external PDF link">
+                <div class="form-text">Direct PDF download link presented to customers on the machine PDP.</div>
               </div>
             </div>
           </div>
 
-          <!-- 5. Publishing Status & Submit Actions -->
-          <div class="admin-card">
-            <div class="card-body" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;">
-              <div style="display: flex; align-items: center; gap: 14px;">
-                <label class="form-label" style="margin: 0;" for="input-status">Publish Status:</label>
-                <select id="input-status" class="form-select" style="width: 170px;">
-                  <option value="active">Live / Active</option>
-                  <option value="draft">Save as Draft</option>
-                  <option value="sold">Mark as Sold</option>
-                </select>
-              </div>
+          <!-- 5. Publishing Status & Sticky Action Bar -->
+          <div class="form-footer-card">
+            <div class="status-pill-group">
+              <label class="form-label" style="margin: 0; font-weight: 700;" for="input-status">Publish Status:</label>
+              <select id="input-status" class="form-select" style="width: 175px;">
+                <option value="active">&#9679; Live / Active</option>
+                <option value="draft">&#9679; Save as Draft</option>
+                <option value="sold">&#9679; Mark as Sold</option>
+              </select>
+            </div>
 
-              <div style="display: flex; gap: 12px;">
-                <a href="products.html" class="btn-secondary">Cancel</a>
-                <button type="submit" id="btn-save-machine" class="btn-primary">
-                  <i class="fa fa-check"></i>
-                  <span id="btn-save-text">Save & Publish Machine</span>
-                </button>
-              </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <a href="products.html" class="btn-secondary">Cancel</a>
+              <button type="submit" id="btn-save-machine" class="btn-primary" style="padding: 10px 24px; font-size: 14px;">
+                <i class="fa fa-check"></i>
+                <span id="btn-save-text">Save & Publish Machine</span>
+              </button>
             </div>
           </div>
 
@@ -366,15 +356,26 @@
     let isEditMode = false;
     let editMachineId = null;
 
-    const DEFAULT_SPECS = [
-      { key: "capacity", label: "Capacity / Tonnage", val: "" },
-      { key: "stroke", label: "Stroke Length", val: "" },
-      { key: "speed", label: "Speed / Strokes Per Minute", val: "" },
-      { key: "shutHeight", label: "Shut Height", val: "" },
-      { key: "bedArea", label: "Bed / Bolster Dimensions", val: "" },
-      { key: "ramArea", label: "Slide / Ram Area", val: "" },
-      { key: "mainMotor", label: "Main Motor Power", val: "" },
-      { key: "totalWeight", label: "Approx. Total Weight", val: "" }
+    const FORMING_SPECS = [
+      { label: "Capacity / Tonnage", val: "2500 Tons" },
+      { label: "Stroke Length", val: "350 mm" },
+      { label: "Speed / Strokes Per Min", val: "20 SPM" },
+      { label: "Shut Height", val: "950 mm" },
+      { label: "Bed / Bolster Dimensions", val: "2500 x 1400 mm" },
+      { label: "Slide / Ram Area", val: "2200 x 1200 mm" },
+      { label: "Main Motor Power", val: "135 kW" },
+      { label: "Approx. Total Weight", val: "185 Tons" }
+    ];
+
+    const CUTTING_SPECS = [
+      { label: "Spindle Diameter", val: "130 mm" },
+      { label: "X-Axis Travel (Cross)", val: "2500 mm" },
+      { label: "Y-Axis Travel (Vertical)", val: "1800 mm" },
+      { label: "Z-Axis Travel (Longitudinal)", val: "1500 mm" },
+      { label: "Rotary Table Size", val: "1600 x 1400 mm" },
+      { label: "Spindle Speed Range", val: "5 - 1200 RPM" },
+      { label: "Main Drive Motor Power", val: "37 kW" },
+      { label: "CNC Controller System", val: "Siemens 840D / Manual" }
     ];
 
     const CATEGORIES = [
@@ -396,6 +397,7 @@
       setupTabs();
       setupUploader();
       setupSpecRowAddButton();
+      setupPresetButtons();
 
       // Check URL parameters
       const urlParams = new URLSearchParams(window.location.search);
@@ -411,16 +413,15 @@
         const previewWrap = document.getElementById('preview-action-wrap');
         const previewLink = document.getElementById('btn-live-preview');
         previewWrap.style.display = 'block';
-        previewLink.href = `/new/Machinery/product.html?id=${editMachineId}`;
+        previewLink.href = `/new/dalalmachine/product.html?id=${editMachineId}`;
 
         await loadMachineForEdit(editMachineId);
       } else {
         // New machine mode
         if (urlParams.get('custom') === '1') {
           setCustomMode(true);
-        } else {
-          populateDefaultSpecs();
         }
+        populateDefaultSpecs();
       }
 
       // Handle form submit
@@ -429,14 +430,25 @@
 
     function setupCategoryDropdown() {
       const select = document.getElementById('input-category');
-      select.innerHTML = CATEGORIES.map(c => `
-        <option value="${c.slug}" data-section="${c.section}" data-name="${c.name}">${c.name} (${c.section.toUpperCase()})</option>
-      `).join('');
+      const sectionSelect = document.getElementById('input-section');
 
-      document.getElementById('input-section').addEventListener('change', (e) => {
+      function renderCategories(filterSection) {
+        const filtered = CATEGORIES.filter(c => !filterSection || c.section === filterSection);
+        select.innerHTML = filtered.map(c => `
+          <option value="${c.slug}" data-section="${c.section}" data-name="${c.name}">${c.name} (${c.section.toUpperCase()})</option>
+        `).join('');
+      }
+
+      renderCategories(sectionSelect.value);
+
+      sectionSelect.addEventListener('change', (e) => {
         const sec = e.target.value;
-        const firstMatch = CATEGORIES.find(c => c.section === sec);
-        if (firstMatch) select.value = firstMatch.slug;
+        renderCategories(sec);
+        // Also auto-switch spec preset if default specs are empty or user hasn't customized
+        const rows = document.querySelectorAll('#dynamic-specs-container .spec-row');
+        if (rows.length === 0) {
+          populateDefaultSpecs(null, sec === 'cutting' ? CUTTING_SPECS : FORMING_SPECS);
+        }
       });
     }
 
@@ -466,9 +478,15 @@
         customCard.style.display = 'none';
         customBadge.style.display = 'none';
       }
+
+      // Ensure specs are not left empty
+      const currentRows = document.querySelectorAll('#dynamic-specs-container .spec-row');
+      if (currentRows.length === 0) {
+        populateDefaultSpecs();
+      }
     }
 
-    function populateDefaultSpecs(specsObj = null) {
+    function populateDefaultSpecs(specsObj = null, presetList = null) {
       const container = document.getElementById('dynamic-specs-container');
       container.innerHTML = '';
 
@@ -477,7 +495,8 @@
           addSpecRow(k, v);
         });
       } else {
-        DEFAULT_SPECS.forEach(s => {
+        const source = presetList || FORMING_SPECS;
+        source.forEach(s => {
           addSpecRow(s.label, s.val);
         });
       }
@@ -488,20 +507,64 @@
       const row = document.createElement('div');
       row.className = 'spec-row';
       row.innerHTML = `
-        <input type="text" class="form-control spec-key" placeholder="Parameter (e.g. Stroke, Bed Dimensions)" value="${keyName}">
-        <input type="text" class="form-control spec-val" placeholder="Value (e.g. 250 mm, 2000 x 600 mm)" value="${keyValue}">
-        <button type="button" class="btn-remove-spec" title="Remove row">
+        <input type="text" class="form-control spec-key" placeholder="Parameter (e.g. Bed Dimensions, Stroke)" value="${escapeHtml(keyName)}">
+        <input type="text" class="form-control spec-val" placeholder="Value (e.g. 2500 x 1400 mm, 350 mm)" value="${escapeHtml(keyValue)}">
+        <button type="button" class="btn-remove-spec" title="Delete Parameter">
           <i class="fa fa-trash"></i>
         </button>
       `;
-      row.querySelector('.btn-remove-spec').addEventListener('click', () => row.remove());
+      row.querySelector('.btn-remove-spec').addEventListener('click', () => {
+        row.style.opacity = '0';
+        row.style.transform = 'translateX(10px)';
+        setTimeout(() => row.remove(), 150);
+      });
       container.appendChild(row);
+      return row;
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
     }
 
     function setupSpecRowAddButton() {
       document.getElementById('btn-add-spec-row').addEventListener('click', () => {
-        addSpecRow('', '');
+        const row = addSpecRow('', '');
+        const keyInput = row.querySelector('.spec-key');
+        if (keyInput) keyInput.focus();
       });
+    }
+
+    function setupPresetButtons() {
+      const formingBtn = document.getElementById('preset-forming');
+      const cuttingBtn = document.getElementById('preset-cutting');
+      const clearBtn = document.getElementById('preset-clear');
+
+      if (formingBtn) {
+        formingBtn.addEventListener('click', () => {
+          populateDefaultSpecs(null, FORMING_SPECS);
+          AdminCore.toast('Loaded Press & Metal Forming specifications template');
+        });
+      }
+
+      if (cuttingBtn) {
+        cuttingBtn.addEventListener('click', () => {
+          populateDefaultSpecs(null, CUTTING_SPECS);
+          AdminCore.toast('Loaded Boring Machine & Lathe specifications template');
+        });
+      }
+
+      if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+          document.getElementById('dynamic-specs-container').innerHTML = '';
+          AdminCore.toast('Cleared all specification rows');
+        });
+      }
     }
 
     function setupUploader() {
@@ -511,8 +574,22 @@
       const imgPreview = document.getElementById('img-preview');
 
       dropzone.addEventListener('click', () => fileInput.click());
+
+      function updatePreview(url) {
+        if (!url) {
+          imgPreview.src = '/new/dalalmachine/images/dalal/cframe_press_pune.jpg';
+          return;
+        }
+        const cleaned = url.startsWith('http') || url.startsWith('/') ? url : '/' + url;
+        imgPreview.src = cleaned;
+      }
+
+      imgPreview.onerror = () => {
+        imgPreview.src = '/new/dalalmachine/images/dalal/cframe_press_pune.jpg';
+      };
+
       imgInput.addEventListener('input', (e) => {
-        imgPreview.src = '/' + e.target.value.replace(/^\//, '');
+        updatePreview(e.target.value.trim());
       });
 
       fileInput.addEventListener('change', async (e) => {
@@ -521,7 +598,7 @@
         const formData = new FormData();
         formData.append('file', file);
 
-        dropzone.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Uploading asset...';
+        dropzone.innerHTML = '<i class="fa fa-spinner fa-spin" style="font-size: 24px; color: var(--brand-gold-dark);"></i><div style="margin-top: 8px; font-weight: 600;">Uploading asset...</div>';
 
         const res = await AdminCore.api('/api/products/upload', {
           method: 'POST',
@@ -531,16 +608,20 @@
         if (res.success) {
           AdminCore.toast('Image uploaded successfully!');
           imgInput.value = res.url.replace(/^\//, '');
-          imgPreview.src = res.url;
+          updatePreview(res.url);
+          dropzone.innerHTML = `
+            <div class="dropzone-icon" style="background: #ecfdf5; color: #047857;"><i class="fa fa-check"></i></div>
+            <div style="font-weight: 700; font-size: 14px; margin-bottom: 4px; color: #047857;">Uploaded: ${escapeHtml(file.name)}</div>
+            <div style="font-size: 12px; color: var(--text-dim);">&#10003; Click to replace with another photo</div>
+          `;
         } else {
           AdminCore.toast(res.message || 'Upload failed', 'error');
+          dropzone.innerHTML = `
+            <div class="dropzone-icon"><i class="fa fa-cloud-upload"></i></div>
+            <div style="font-weight: 700; font-size: 14px; margin-bottom: 4px;">Click to Browse or Drag & Drop Photo</div>
+            <div style="font-size: 12px; color: var(--text-dim);">Supports JPG, PNG, WebP (Max 15MB)</div>
+          `;
         }
-
-        dropzone.innerHTML = `
-          <div class="dropzone-icon"><i class="fa fa-cloud-upload"></i></div>
-          <div style="font-weight: 600; font-size: 14px; margin-bottom: 4px;">File uploaded: ${file.name}</div>
-          <div style="font-size: 12px; color: var(--color-success);">&#10003; Click to replace</div>
-        `;
       });
     }
 
@@ -554,8 +635,14 @@
       document.getElementById('input-name').value = m.name || '';
       document.getElementById('input-id').value = m.id || '';
       document.getElementById('input-id').disabled = true; // Protect ID on edit
-      document.getElementById('input-section').value = m.section || 'forming';
-      document.getElementById('input-category').value = m.category || 'c-frame-press';
+      
+      const secSelect = document.getElementById('input-section');
+      secSelect.value = m.section || 'forming';
+      secSelect.dispatchEvent(new Event('change'));
+
+      const catSelect = document.getElementById('input-category');
+      catSelect.value = m.category || 'c-frame-press';
+      
       document.getElementById('input-location').value = m.location || 'In Stock PUNE';
       document.getElementById('input-make').value = m.make || '';
       document.getElementById('input-model').value = m.model || '';
@@ -564,7 +651,10 @@
       document.getElementById('input-condition').value = m.condition || '';
       document.getElementById('input-status').value = m.status || 'active';
       document.getElementById('input-image').value = m.image || '';
-      document.getElementById('img-preview').src = '/' + (m.image || '').replace(/^\//, '');
+      
+      const imgPath = m.image || '';
+      const imgPreview = document.getElementById('img-preview');
+      imgPreview.src = imgPath ? (imgPath.startsWith('http') || imgPath.startsWith('/') ? imgPath : '/' + imgPath) : '/new/dalalmachine/images/dalal/cframe_press_pune.jpg';
 
       setCustomMode(Boolean(m.isCustom));
       if (m.priceText) document.getElementById('input-price-text').value = m.priceText;
@@ -609,7 +699,7 @@
         year: parseInt(document.getElementById('input-year').value) || new Date().getFullYear(),
         tonnage: parseInt(document.getElementById('input-tonnage').value) || 0,
         condition: document.getElementById('input-condition').value.trim(),
-        image: document.getElementById('input-image').value.trim() || 'new/Machinery/images/dalal/cframe_press_pune.jpg',
+        image: document.getElementById('input-image').value.trim() || 'new/dalalmachine/images/dalal/cframe_press_pune.jpg',
         specs: specs,
         isCustom: isCustom,
         status: document.getElementById('input-status').value,

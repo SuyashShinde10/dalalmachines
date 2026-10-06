@@ -21,6 +21,16 @@ const SuperAdminCore = {
     localStorage.removeItem('superadmin_user');
   },
 
+  escapeHTML: (str) => {
+    if (str === null || str === undefined) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  },
+
   requireSuperAdmin: async () => {
     const token = SuperAdminCore.getToken();
     const user = SuperAdminCore.getUser();
@@ -45,15 +55,35 @@ const SuperAdminCore = {
     if (avatarEl) avatarEl.textContent = (user.name || user.username).charAt(0).toUpperCase();
 
     // Toggle button
+    // Universal Side Menu Toggle (Desktop Collapse + Mobile Drawer)
     const toggleBtn = document.getElementById('sa-btn-toggle');
     const sidebar = document.querySelector('.sa-sidebar');
-    if (toggleBtn && sidebar) {
-      toggleBtn.addEventListener('click', () => sidebar.classList.toggle('open'));
-      document.addEventListener('click', (e) => {
-        if (!sidebar.contains(e.target) && !toggleBtn.contains(e.target) && sidebar.classList.contains('open')) {
+
+    function toggleSaMenu(e) {
+      if (e) e.stopPropagation();
+      if (window.innerWidth <= 992) {
+        if (sidebar) sidebar.classList.toggle('open');
+      } else {
+        document.body.classList.toggle('sa-sidebar-collapsed');
+        const isCollapsed = document.body.classList.contains('sa-sidebar-collapsed');
+        try { localStorage.setItem('dalal_sa_sidebar_collapsed', isCollapsed ? '1' : '0'); } catch (err) {}
+      }
+    }
+
+    if (toggleBtn) toggleBtn.addEventListener('click', toggleSaMenu);
+
+    // Close on backdrop tap for mobile
+    document.addEventListener('click', (e) => {
+      if (window.innerWidth <= 992 && sidebar && sidebar.classList.contains('open')) {
+        if (!sidebar.contains(e.target) && toggleBtn && !toggleBtn.contains(e.target)) {
           sidebar.classList.remove('open');
         }
-      });
+      }
+    });
+
+    // Restore desktop preference
+    if (window.innerWidth > 992 && localStorage.getItem('dalal_sa_sidebar_collapsed') === '1') {
+      document.body.classList.add('sa-sidebar-collapsed');
     }
 
     // Logout buttons

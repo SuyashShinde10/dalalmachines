@@ -24,6 +24,16 @@ const AdminCore = {
     localStorage.removeItem('admin_user');
   },
 
+  escapeHTML: (str) => {
+    if (str === null || str === undefined) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  },
+
   // Auth Guard: Call at top of protected admin pages
   requireAuth: async (requiredRole = null) => {
     const token = AdminCore.getToken();
@@ -59,25 +69,37 @@ const AdminCore = {
     if (roleEl) roleEl.textContent = user.role.toUpperCase();
     if (avatarEl) avatarEl.textContent = (user.name || user.username).charAt(0).toUpperCase();
 
-    // Show superadmin links if user is superadmin
-    if (user.role === 'superadmin') {
-      document.querySelectorAll('.superadmin-only-item').forEach(el => {
-        el.style.display = 'flex';
-      });
+    // Universal Side Menu Toggle (Desktop Collapse + Mobile Drawer)
+    const toggleBtn = document.getElementById('btn-sidebar-toggle');
+    const collapseIcon = document.querySelector('.sidebar-collapse-icon');
+    const sidebar = document.querySelector('.admin-sidebar');
+
+    function toggleMenu(e) {
+      if (e) e.stopPropagation();
+      if (window.innerWidth <= 992) {
+        if (sidebar) sidebar.classList.toggle('open');
+      } else {
+        document.body.classList.toggle('sidebar-collapsed');
+        const isCollapsed = document.body.classList.contains('sidebar-collapsed');
+        try { localStorage.setItem('dalal_sidebar_collapsed', isCollapsed ? '1' : '0'); } catch (err) {}
+      }
     }
 
-    // Mobile drawer toggle
-    const toggleBtn = document.getElementById('btn-sidebar-toggle');
-    const sidebar = document.querySelector('.admin-sidebar');
-    if (toggleBtn && sidebar) {
-      toggleBtn.addEventListener('click', () => {
-        sidebar.classList.toggle('open');
-      });
-      document.addEventListener('click', (e) => {
-        if (!sidebar.contains(e.target) && !toggleBtn.contains(e.target) && sidebar.classList.contains('open')) {
+    if (toggleBtn) toggleBtn.addEventListener('click', toggleMenu);
+    if (collapseIcon) collapseIcon.addEventListener('click', toggleMenu);
+
+    // Close on mobile backdrop tap
+    document.addEventListener('click', (e) => {
+      if (window.innerWidth <= 992 && sidebar && sidebar.classList.contains('open')) {
+        if (!sidebar.contains(e.target) && toggleBtn && !toggleBtn.contains(e.target)) {
           sidebar.classList.remove('open');
         }
-      });
+      }
+    });
+
+    // Restore desktop collapsed preference
+    if (window.innerWidth > 992 && localStorage.getItem('dalal_sidebar_collapsed') === '1') {
+      document.body.classList.add('sidebar-collapsed');
     }
 
     // Logout buttons

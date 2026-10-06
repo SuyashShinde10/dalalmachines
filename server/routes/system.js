@@ -70,7 +70,7 @@ router.post('/sync-static', (req, res) => {
     db.syncToCatalogJs();
     res.json({ 
       success: true, 
-      message: 'Successfully exported active database inventory to new/Machinery/js/catalog-data.js!' 
+      message: 'Successfully exported active database inventory to new/dalalmachine/js/catalog-data.js!' 
     });
   } catch (err) {
     res.status(500).json({ success: false, message: 'Sync failed: ' + err.message });

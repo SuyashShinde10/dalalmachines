@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Commercial Invoice (Premium Enterprise Edition) - Dalal Machine Tools</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #0f172a;
+      --accent-color: #b45309;
+      --border-color: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --text-dark: #1e293b;
+      --text-muted: #64748b;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      color: var(--text-dark);
+      background-color: #f1f5f9;
+      padding: 40px 20px;
+      line-height: 1.5;
+    }
+    .invoice-container {
+      max-width: 880px;
+      margin: 0 auto;
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 48px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+    }
+    @media print {
+      body { background: #ffffff; padding: 0; }
+      .invoice-container { border: none; box-shadow: none; padding: 24px; max-width: 100%; }
+      .no-print { display: none !important; }
+    }
+    .top-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+    }
+    .btn-print { background: var(--primary-color); color: #ffffff; }
+    .btn-print:hover { background: #1e293b; }
+    .invoice-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 26px;
+      margin-bottom: 28px;
+    }
+    .brand-title { font-size: 24px; font-weight: 800; color: var(--primary-color); letter-spacing: -0.5px; }
+    .brand-subtitle { font-size: 13px; color: var(--text-muted); margin-top: 4px; font-weight: 500; }
+    .invoice-badge-wrap { text-align: right; }
+    .invoice-title { font-size: 26px; font-weight: 800; color: var(--primary-color); text-transform: uppercase; }
+    .invoice-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #92400e;
+      background: #fef3c7;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      margin-top: 6px;
+      border: 1px solid #fde68a;
+    }
+    .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-bottom: 28px; }
+    .meta-card { background: var(--bg-subtle); border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; }
+    .meta-card-title { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; color: var(--accent-color); margin-bottom: 10px; }
+    .meta-card p { font-size: 13px; color: var(--text-dark); margin-bottom: 3px; }
+    .meta-card p strong { font-weight: 600; }
+    .invoice-details-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 28px;
+    }
+    .details-item span { display: block; font-size: 11px; text-transform: uppercase; font-weight: 600; color: var(--text-muted); margin-bottom: 3px; }
+    .details-item strong { font-size: 13.5px; font-weight: 700; color: var(--primary-color); font-family: 'JetBrains Mono', monospace; }
+    .invoice-table { width: 100%; border-collapse: collapse; margin-bottom: 28px; }
+    .invoice-table th {
+      background: var(--primary-color);
+      color: #ffffff;
+      font-size: 11.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 10px 14px;
+      text-align: left;
+    }
+    .invoice-table th:last-child { text-align: right; }
+    .invoice-table td { padding: 13px 14px; border-bottom: 1px solid var(--border-color); font-size: 13px; vertical-align: top; }
+    .invoice-table td:last-child { text-align: right; font-weight: 700; font-family: 'JetBrains Mono', monospace; font-size: 13.5px; }
+    .item-name { font-weight: 700; color: var(--primary-color); margin-bottom: 3px; }
+    .item-desc { font-size: 11.5px; color: var(--text-muted); line-height: 1.45; }
+    .item-desc ul { margin-left: 16px; margin-top: 3px; }
+    .sac-badge { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: #64748b; background: #e2e8f0; padding: 2px 6px; border-radius: 4px; margin-top: 4px; }
+    .calc-section { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 28px; gap: 24px; }
+    .payment-instructions { flex: 1; background: var(--bg-subtle); border: 1px solid var(--border-color); border-radius: 8px; padding: 18px; }
+    .payment-instructions h4 { font-size: 12px; font-weight: 700; color: var(--primary-color); margin-bottom: 10px; text-transform: uppercase; }
+    .payment-instructions p { font-size: 12px; color: var(--text-dark); margin-bottom: 4px; }
+    .totals-box { width: 330px; background: #f8fafc; border: 1px solid var(--border-color); border-radius: 8px; padding: 18px; }
+    .totals-row { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px; color: var(--text-muted); }
+    .totals-row strong { color: var(--text-dark); font-family: 'JetBrains Mono', monospace; }
+    .totals-row.grand-total { border-top: 2px solid var(--border-color); padding-top: 10px; margin-top: 10px; font-size: 15px; font-weight: 800; color: var(--primary-color); }
+    .totals-row.grand-total strong { color: var(--accent-color); font-size: 17px; }
+    .amount-words { font-size: 11.5px; font-style: italic; color: var(--text-muted); margin-top: 6px; text-align: right; }
+    .milestone-box { border: 1px solid var(--border-color); border-radius: 8px; padding: 18px; margin-bottom: 28px; }
+    .milestone-title { font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--primary-color); margin-bottom: 10px; }
+    .milestone-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .ms-item { background: var(--bg-subtle); padding: 12px 14px; border-radius: 6px; border-left: 3px solid var(--accent-color); }
+    .ms-item-tag { font-size: 10.5px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
+    .ms-item-amt { font-size: 14px; font-weight: 800; color: var(--primary-color); font-family: 'JetBrains Mono', monospace; margin: 2px 0; }
+    .ms-item-status { font-size: 11px; font-weight: 600; color: #b45309; }
+    .terms-box { font-size: 11px; color: var(--text-muted); border-top: 1px solid var(--border-color); padding-top: 16px; margin-bottom: 28px; line-height: 1.5; }
+    .terms-box ol { margin-left: 16px; margin-top: 6px; }
+    .sign-section { display: flex; justify-content: space-between; margin-top: 36px; padding-top: 20px; }
+    .sign-box { width: 220px; text-align: center; }
+    .sign-line { border-bottom: 1px dashed #94a3b8; height: 40px; margin-bottom: 6px; }
+    .sign-label { font-size: 11.5px; font-weight: 700; color: var(--primary-color); text-transform: uppercase; }
+    .sign-sub { font-size: 10.5px; color: var(--text-muted); }
+  </style>
+</head>
+<body>
+
+  <div class="top-actions no-print">
+    <button onclick="window.print()" class="btn btn-print">
+      <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/><path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zm1 2h4v2H6V3zm6 8v2H4v-2h8z"/></svg>
+      Print / Save as PDF
+    </button>
+  </div>
+
+  <div class="invoice-container">
+    <header class="invoice-header">
+      <div>
+        <div class="brand-title">DIGITAL ENGINEERING & ENTERPRISE ARCHITECTURE</div>
+        <div class="brand-subtitle">Commercial Software Proposal & Tax Invoice (Premium Enterprise Turnkey Edition)</div>
+      </div>
+      <div class="invoice-badge-wrap">
+        <div class="invoice-title">TAX INVOICE</div>
+        <span class="invoice-tag">Premium Enterprise Package</span>
+      </div>
+    </header>
+
+    <div class="invoice-details-bar">
+      <div class="details-item"><span>Invoice Number</span><strong>INV-2026-DMT-MAX</strong></div>
+      <div class="details-item"><span>Invoice Date</span><strong>06 OCT 2026</strong></div>
+      <div class="details-item"><span>Payment Due</span><strong>MILESTONE ESCROW</strong></div>
+      <div class="details-item"><span>Place of Supply</span><strong>MAHARASHTRA (27)</strong></div>
+    </div>
+
+    <div class="meta-grid">
+      <div class="meta-card">
+        <div class="meta-card-title">SERVICE PROVIDER (ISSUER)</div>
+        <p><strong>Principal Solutions Architect & Engineering Consultancy</strong></p>
+        <p>Enterprise Web & B2B Cloud Solutions</p>
+        <p>Pune / Mumbai, Maharashtra, India</p>
+        <p><strong>PAN:</strong> [YOUR PAN NUMBER HERE]</p>
+        <p><strong>GST Status:</strong> Unregistered / Threshold Exemption (Sec 22(1) CGST Act)</p>
+      </div>
+
+      <div class="meta-card">
+        <div class="meta-card-title">BILLED TO (CLIENT)</div>
+        <p><strong>Dalal Machine Tools Agency Pvt. Ltd.</strong></p>
+        <p>12/B, Everest Building, Tardeo Road, Mumbai - 400034</p>
+        <p><strong>Yard:</strong> Chakan Industrial Area, Pune, MH</p>
+        <p><strong>Contact:</strong> Mr. Vinit Dalal (Managing Director)</p>
+      </div>
+    </div>
+
+    <table class="invoice-table">
+      <thead>
+        <tr>
+          <th style="width: 40px;">#</th>
+          <th>Description of Premium Services, Enterprise Systems & AMC</th>
+          <th style="width: 80px;">SAC</th>
+          <th style="width: 60px; text-align: center;">Qty</th>
+          <th style="width: 130px;">Amount (INR)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>01</strong></td>
+          <td>
+            <div class="item-name">Fullstack B2B Machinery Customer Portal & Interactive Engine</div>
+            <div class="item-desc">
+              Comprehensive client-facing experience:
+              <ul>
+                <li>24 responsive pages, 0 JS errors, 360px-1920px mobile optimization</li>
+                <li>26-category machinery catalog with real-time instant search & location filters</li>
+                <li>Interactive High Seas Sales calculator (INR savings + GST input credit analysis)</li>
+                <li>Machine PDP with WhatsApp RFQ generator and 10-row specifications table</li>
+                <li>Shipment archive photo ledger and OMPI India LLP co-branding</li>
+              </ul>
+            </div>
+            <span class="sac-badge">SAC 998314 - Web Engineering</span>
+          </td>
+          <td>998314</td>
+          <td style="text-align: center;">1 Unit</td>
+          <td>₹85,000.00</td>
+        </tr>
+
+        <tr>
+          <td><strong>02</strong></td>
+          <td>
+            <div class="item-name">Dual Operations Hub: Staff Admin CMS + Super Admin Master Console</div>
+            <div class="item-desc">
+              Executive-grade enterprise management suites:
+              <ul>
+                <li><strong>Staff Operations:</strong> Machinery CRUD, photo dropzone uploader, live/draft/sold states, RFQ lead inbox with status pipeline, Excel/CSV stock export, multi-tier pagination</li>
+                <li><strong>Super Admin Console:</strong> Master system telemetry, staff account provisioning & RBAC governance, immutable audit logs ledger, 1-click JSON database snapshot backup & instant restore engine</li>
+              </ul>
+            </div>
+            <span class="sac-badge">SAC 998314 - Custom Software</span>
+          </td>
+          <td>998314</td>
+          <td style="text-align: center;">1 Unit</td>
+          <td>₹65,000.00</td>
+        </tr>
+
+        <tr>
+          <td><strong>03</strong></td>
+          <td>
+            <div class="item-name">Advanced Technical SEO & Generative AEO (AI Engine Optimization)</div>
+            <div class="item-desc">
+              Next-generation discoverability engineering:
+              <ul>
+                <li>On-Page SEO: Unique metadata, OpenGraph cards, canonical URLs on all 24 pages</li>
+                <li>Dynamic sitemap.xml & robots.txt with search crawler indexing directives</li>
+                <li>Rich Schema Markup (JSON-LD): Organization, LocalBusiness (Pune & Mumbai), Product/ItemList schema</li>
+                <li>AEO Structured Entity Tagging for AI citations (ChatGPT, Perplexity, Gemini, Google AI Overviews)</li>
+              </ul>
+            </div>
+            <span class="sac-badge">SAC 998314 - Search & AI Optimization</span>
+          </td>
+          <td>998314</td>
+          <td style="text-align: center;">1 Unit</td>
+          <td>₹40,000.00</td>
+        </tr>
+
+        <tr>
+          <td><strong>04</strong></td>
+          <td>
+            <div class="item-name">Google Webmaster Ecosystem, GA4 & Local Business Integration</div>
+            <div class="item-desc">
+              Full analytics & search infrastructure:
+              <ul>
+                <li>Google Search Console DNS domain verification & instant indexing submission</li>
+                <li>Google Analytics 4 (GA4) property setup with custom lead conversion events</li>
+                <li>Google Business Profile (Google Maps) integration</li>
+              </ul>
+            </div>
+            <span class="sac-badge">SAC 998314 - Webmaster & Analytics</span>
+          </td>
+          <td>998314</td>
+          <td style="text-align: center;">1 Unit</td>
+          <td>₹15,000.00</td>
+        </tr>
+
+        <tr>
+          <td><strong>05</strong></td>
+          <td>
+            <div class="item-name">Production Server Setup, Domain Mapping & Hardened Security Suite</div>
+            <div class="item-desc">
+              Enterprise deployment & security audit remediation:
+              <ul>
+                <li>Node.js production daemon with PM2 Process Manager & Nginx reverse proxy</li>
+                <li>Production domain DNS mapping (A-records, CNAME, www redirects) & SSL (HTTPS)</li>
+                <li>Full security audit: Helmet headers, rate limiting (25 auth / 30 RFQs), stored XSS escaping, CORS hardening, directory traversal elimination, 24/24 regression test suite execution</li>
+              </ul>
+            </div>
+            <span class="sac-badge">SAC 998315 - Cloud & Security</span>
+          </td>
+          <td>998315</td>
+          <td style="text-align: center;">1 Unit</td>
+          <td>₹20,000.00</td>
+        </tr>
+
+        <tr>
+          <td><strong>06</strong></td>
+          <td>
+            <div class="item-name">1-Year Comprehensive Annual Technical Maintenance & Data AMC</div>
+            <div class="item-desc">
+              Peace-of-mind ongoing operations package (12 Months):
+              <ul>
+                <li>Quarterly security updates, package dependency patching & vulnerability audits</li>
+                <li>Automated weekly database backup verification and offsite archive integrity checks</li>
+                <li>Priority technical support for bug resolution and server uptime assurance</li>
+              </ul>
+            </div>
+            <span class="sac-badge">SAC 998316 - Technical Support AMC</span>
+          </td>
+          <td>998316</td>
+          <td style="text-align: center;">1 Year</td>
+          <td>₹20,000.00</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="calc-section">
+      <div class="payment-instructions">
+        <h4>Bank Transfer / Payment Details</h4>
+        <p><strong>Account Name:</strong> [YOUR NAME / AGENCY NAME]</p>
+        <p><strong>Bank:</strong> [BANK NAME, e.g. HDFC Bank / ICICI Bank]</p>
+        <p><strong>Account Number:</strong> [YOUR ACCOUNT NUMBER]</p>
+        <p><strong>IFSC Code:</strong> [YOUR IFSC CODE]</p>
+        <p><strong>UPI ID:</strong> [YOUR UPI ID, e.g. yourname@okhdfcbank]</p>
+      </div>
+
+      <div class="totals-box">
+        <div class="totals-row"><span>Gross Subtotal:</span><strong>₹2,45,000.00</strong></div>
+        <div class="totals-row"><span>GST (CGST + SGST):</span><strong>₹0.00*</strong></div>
+        <div class="totals-row grand-total"><span>Net Payable:</span><strong>₹2,45,000.00</strong></div>
+        <div class="amount-words">(Two Lakh Forty-Five Thousand Indian Rupees Only)</div>
+        <p style="font-size: 10px; color: #64748b; margin-top: 8px;">*Exempted from GST under Section 22(1) CGST Act (Turnover &lt; ₹20L).</p>
+      </div>
+    </div>
+
+    <div class="milestone-box">
+      <div class="milestone-title">Agreed Milestone Payment Schedule</div>
+      <div class="milestone-grid">
+        <div class="ms-item">
+          <div class="ms-item-tag">Milestone 1 (40%)</div>
+          <div class="ms-item-amt">₹98,000.00</div>
+          <div class="ms-item-status">✓ Project Initiation & Architecture Handover</div>
+        </div>
+        <div class="ms-item">
+          <div class="ms-item-tag">Milestone 2 (40%)</div>
+          <div class="ms-item-amt">₹98,000.00</div>
+          <div class="ms-item-status">✓ Portals, Security & SEO Audit Complete</div>
+        </div>
+        <div class="ms-item">
+          <div class="ms-item-tag">Milestone 3 (20%)</div>
+          <div class="ms-item-amt">₹49,000.00</div>
+          <div class="ms-item-status">Domain Live & 1-Year AMC Commencement</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="terms-box">
+      <strong>Terms & Conditions:</strong>
+      <ol>
+        <li>Upon receipt of final payment, 100% intellectual property rights and full source code transfer permanently to Dalal Machine Tools Agency Pvt. Ltd.</li>
+        <li>Cloud hosting infrastructure subscriptions are direct client liabilities billed by the service provider.</li>
+        <li>Complimentary 60-day post-launch warranty plus 12-month AMC coverage as enumerated in Item 06.</li>
+        <li>Jurisdiction: Courts of Pune / Mumbai, Maharashtra.</li>
+      </ol>
+    </div>
+
+    <div class="sign-section">
+      <div class="sign-box"><div class="sign-line"></div><div class="sign-label">Authorized Signatory</div><div class="sign-sub">Digital Engineering</div></div>
+      <div class="sign-box"><div class="sign-line"></div><div class="sign-label">Client Acceptance</div><div class="sign-sub">For Dalal Machine Tools Agency Pvt. Ltd.</div></div>
+    </div>
+  </div>
+
+</body>
+</html>

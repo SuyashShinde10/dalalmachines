@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard | Dalal Machine Tools Admin Portal</title>
+  <title>Operations Dashboard | Dalal Machine Tools Admin Portal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700;800&family=Inter:wght@400;500;600;700&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="shortcut icon" href="/new/Machinery/images/favicon.png" type="image/x-icon">
-  <link rel="stylesheet" href="/new/Machinery/css/font-awesome.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="/new/dalalmachine/images/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="/new/dalalmachine/css/font-awesome.css">
   <link rel="stylesheet" href="css/admin.css">
 </head>
 <body>
@@ -18,19 +18,31 @@
     <aside class="admin-sidebar">
       <div class="sidebar-header">
         <a href="dashboard.html" class="brand-badge" title="Dalal Machine Tools">
-          <img src="/new/Machinery/images/logo-dalal-light.png" alt="Dalal Machine Tools" style="max-height: 28px; width: auto; object-fit: contain;">
+          <img src="/new/dalalmachine/images/logo-dalal.png" alt="Dalal Machine Tools" style="max-height: 42px; width: auto; object-fit: contain;">
         </a>
       </div>
 
+      <!-- Top User Profile Pill (Stratify Inspired) -->
+      <div class="sidebar-user-top" onclick="window.location.href='settings.html'" style="cursor: pointer;" title="My Account & Password Settings">
+        <div class="sidebar-user-info">
+          <div class="sidebar-user-avatar" id="sidebar-top-avatar">D</div>
+          <div class="sidebar-user-meta">
+            <span class="sidebar-user-name" id="sidebar-top-name">Dalal Admin</span>
+            <span class="sidebar-user-badge">Operations</span>
+          </div>
+        </div>
+        <i class="fa fa-angle-double-left sidebar-collapse-icon"></i>
+      </div>
+
       <nav class="sidebar-nav">
-        <div class="nav-section-title">Core Operations</div>
+        <div class="nav-section-title">Navigation</div>
         <a href="dashboard.html" class="nav-link active">
           <i class="fa fa-th-large"></i>
           <span>Dashboard</span>
         </a>
         <a href="products.html" class="nav-link">
           <i class="fa fa-cubes"></i>
-          <span>Machinery Catalog</span>
+          <span>Dalal Machine Catalog</span>
           <span class="nav-badge" id="badge-total-machines">...</span>
         </a>
         <a href="product-form.html" class="nav-link">
@@ -38,37 +50,46 @@
           <span>Add New Machine</span>
         </a>
         <a href="product-form.html?custom=1" class="nav-link">
-          <i class="fa fa-magic" style="color: var(--brand-gold);"></i>
+          <i class="fa fa-magic"></i>
           <span>Add Custom Machine</span>
         </a>
         <a href="inquiries.html" class="nav-link">
           <i class="fa fa-envelope-open"></i>
           <span>Customer RFQs</span>
-          <span class="nav-badge" id="badge-inquiries-count" style="background: rgba(16, 185, 129, 0.2); color: #34d399;">...</span>
+          <span class="nav-badge" id="badge-inquiries-count">...</span>
         </a>
 
-        <div class="nav-section-title">Portals & Navigation</div>
-        <a href="/superadmin/dashboard.html" class="nav-link">
-          <i class="fa fa-shield" style="color: var(--brand-gold);"></i>
-          <span>Super Admin Console &rarr;</span>
+        <div class="nav-section-title">User Account</div>
+        <a href="settings.html" class="nav-link">
+          <i class="fa fa-user-circle"></i>
+          <span>My Profile & Password</span>
         </a>
-        <a href="/new/Machinery/index.html" target="_blank" class="nav-link">
+
+        <div class="nav-section-title">Quick Links</div>
+        <a href="/new/dalalmachine/index.html" target="_blank" class="nav-link">
           <i class="fa fa-external-link"></i>
-          <span>Customer Website &rarr;</span>
+          <span>View Public Site &rarr;</span>
         </a>
       </nav>
 
-      <div class="sidebar-footer">
-        <div class="user-info-pill">
-          <div class="user-avatar" id="sidebar-user-avatar">D</div>
-          <div class="user-details">
-            <span class="user-name" id="sidebar-user-name">Loading...</span>
-            <span class="user-role-badge" id="sidebar-user-role">ADMIN</span>
-          </div>
+      <!-- Sidebar Status Widget (Stratify Inspired) -->
+      <div class="sidebar-status-card">
+        <div class="sidebar-status-title">
+          <i class="fa fa-check-circle" style="color: #10b981;"></i>
+          <span>Catalog Synced</span>
         </div>
+        <div class="sidebar-status-desc">50 machines active & publicly searchable.</div>
+        <a href="/new/Machinery/category.html" target="_blank" class="sidebar-status-btn">
+          <span>Live Catalog</span>
+          <i class="fa fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <!-- Footer User Actions -->
+      <div class="sidebar-footer">
         <button class="btn-logout-sidebar btn-logout" title="Sign Out from Admin">
           <i class="fa fa-sign-out"></i>
-          <span>Log Out</span>
+          <span>Sign Out</span>
         </button>
       </div>
     </aside>
@@ -78,15 +99,16 @@
       <!-- Topbar -->
       <header class="admin-topbar">
         <div class="topbar-left">
-          <button id="btn-sidebar-toggle" class="btn-sidebar-toggle">
+          <button id="btn-sidebar-toggle" class="btn-sidebar-toggle" title="Toggle Side Menu">
             <i class="fa fa-bars"></i>
+            <span>Menu</span>
           </button>
           <div class="topbar-breadcrumb">
-            Control Portal &bull; <span>Dashboard Overview</span>
+            Control Portal &bull; <span>Operations Overview</span>
           </div>
         </div>
         <div class="topbar-right">
-          <a href="/new/Machinery/index.html" target="_blank" class="btn-view-site">
+          <a href="/new/Machinery/index.html" target="_blank" class="btn-public-site">
             <i class="fa fa-external-link"></i>
             <span>View Public Site</span>
           </a>
@@ -98,78 +120,121 @@
       </header>
 
       <!-- Page Body -->
-      <div class="page-container">
-        <div class="page-header">
-          <div>
-            <h1 class="page-title">Executive Machinery Dashboard</h1>
-            <p class="page-subtitle">Real-time inventory statistics, recent customer quotation requests, and quick machine authoring.</p>
+      <div class="admin-content">
+        <!-- Hero Greeting Section (Stratify Inspired) -->
+        <div class="hero-greeting-box">
+          <div class="hero-greeting-pill">
+            <span>Welcome, <span id="hero-user-name">Operations Team</span>! 👋</span>
           </div>
-          <div class="page-actions">
-            <a href="product-form.html" class="btn-primary">
-              <i class="fa fa-plus"></i>
-              <span>Add Machine</span>
-            </a>
-            <a href="product-form.html?custom=1" class="btn-secondary">
-              <i class="fa fa-magic"></i>
-              <span>Custom Machine</span>
-            </a>
+          <h1 class="hero-greeting-title">How can we accelerate machinery operations today?</h1>
+          <p class="hero-greeting-subtitle">Dalal Machine Tools Agency Pvt. Ltd. &bull; Live inventory audit & buyer quotation pipeline.</p>
+        </div>
+
+        <!-- Highlight & Suggested Task Row (Stratify Inspired) -->
+        <div class="widgets-grid-top">
+          <!-- Tilted Pastel Yellow Card -->
+          <div class="card-sticky-highlight">
+            <div class="sticky-header">
+              <span class="sticky-title">
+                <i class="fa fa-thumb-tack"></i>
+                <span>Priority Inventory Focus</span>
+              </span>
+              <span style="font-size: 11px; font-weight: 700; color: #b45309; text-transform: uppercase;">In Stock Pune</span>
+            </div>
+            <div class="sticky-items-list">
+              <a href="products.html?q=5000T" class="sticky-item">
+                <i class="fa fa-file-text-o"></i>
+                <span>5000T Heavy Hydraulic Closed Die Forging Press</span>
+              </a>
+              <a href="products.html?q=Custom" class="sticky-item">
+                <i class="fa fa-file-text-o"></i>
+                <span>Custom 4000T Hydraulic Closed Die with OMPI Clutch</span>
+              </a>
+              <a href="products.html?q=Boring" class="sticky-item">
+                <i class="fa fa-file-text-o"></i>
+                <span>TOS Varnsdorf W9A Horizontal Boring Machine</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Suggested Action Card -->
+          <div class="card-suggestion">
+            <div class="suggestion-header">
+              <i class="fa fa-bolt" style="color: #f59e0b;"></i>
+              <span>Suggested Next Action</span>
+            </div>
+            <div class="suggestion-body">
+              <div class="suggestion-avatar">
+                <i class="fa fa-envelope-open"></i>
+              </div>
+              <div class="suggestion-content">
+                <span class="suggestion-title">Review 3 Active Customer RFQ Leads</span>
+                <span class="suggestion-meta">Inquiries from Kalyani Technoforge & Gujarat Heavy Forgings need quotes.</span>
+              </div>
+            </div>
+            <div style="display: flex; gap: 10px; margin-top: 4px;">
+              <a href="inquiries.html" class="btn-primary" style="font-size: 12.5px; padding: 8px 16px;">
+                <span>Open RFQ Inbox &rarr;</span>
+              </a>
+              <a href="product-form.html" class="btn-secondary" style="font-size: 12.5px; padding: 8px 14px;">
+                <i class="fa fa-plus"></i>
+                <span>Add Machine</span>
+              </a>
+            </div>
           </div>
         </div>
 
-        <!-- KPI Cards Grid -->
-        <div class="kpi-grid">
-          <div class="kpi-card">
-            <div class="kpi-card-header">
-              <span class="kpi-label">Total Active Machinery</span>
-              <div class="kpi-icon gold"><i class="fa fa-cogs"></i></div>
+        <!-- Metric KPI Cards -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-top">
+              <span class="stat-label">Total Machinery</span>
+              <div class="stat-icon gold"><i class="fa fa-cubes"></i></div>
             </div>
-            <div class="kpi-value" id="kpi-total-machines">-</div>
-            <div class="kpi-sub">Audited in catalog database</div>
+            <div class="stat-value" id="kpi-total-machines">-</div>
+            <div class="stat-desc">Audited in catalog database</div>
           </div>
 
-          <div class="kpi-card">
-            <div class="kpi-card-header">
-              <span class="kpi-label">Forming Presses</span>
-              <div class="kpi-icon blue"><i class="fa fa-wrench"></i></div>
+          <div class="stat-card">
+            <div class="stat-top">
+              <span class="stat-label">Forming Presses</span>
+              <div class="stat-icon blue"><i class="fa fa-wrench"></i></div>
             </div>
-            <div class="kpi-value" id="kpi-forming">-</div>
-            <div class="kpi-sub">Forging, C-Frame, Knuckle</div>
+            <div class="stat-value" id="kpi-forming">-</div>
+            <div class="stat-desc">Forging, C-Frame, Knuckle</div>
           </div>
 
-          <div class="kpi-card">
-            <div class="kpi-card-header">
-              <span class="kpi-label">Metal Cutting</span>
-              <div class="kpi-icon purple"><i class="fa fa-scissors"></i></div>
+          <div class="stat-card">
+            <div class="stat-top">
+              <span class="stat-label">Metal Cutting</span>
+              <div class="stat-icon purple"><i class="fa fa-scissors"></i></div>
             </div>
-            <div class="kpi-value" id="kpi-cutting">-</div>
-            <div class="kpi-sub">Boring, Lathes, Hobbing</div>
+            <div class="stat-value" id="kpi-cutting">-</div>
+            <div class="stat-desc">Boring, Lathes, Hobbing</div>
           </div>
 
-          <div class="kpi-card">
-            <div class="kpi-card-header">
-              <span class="kpi-label">Pune Stock Ready</span>
-              <div class="kpi-icon green"><i class="fa fa-map-marker"></i></div>
+          <div class="stat-card">
+            <div class="stat-top">
+              <span class="stat-label">Pune Stock Ready</span>
+              <div class="stat-icon green"><i class="fa fa-map-marker"></i></div>
             </div>
-            <div class="kpi-value" id="kpi-pune">-</div>
-            <div class="kpi-sub">Ready for live trial in yard</div>
-          </div>
-
-          <div class="kpi-card">
-            <div class="kpi-card-header">
-              <span class="kpi-label">Customer RFQ Leads</span>
-              <div class="kpi-icon gold"><i class="fa fa-envelope"></i></div>
-            </div>
-            <div class="kpi-value" id="kpi-inquiries">-</div>
-            <div class="kpi-sub">Quotation inquiries received</div>
+            <div class="stat-value" id="kpi-pune">-</div>
+            <div class="stat-desc">Ready for live trial in yard</div>
           </div>
         </div>
 
-        <div style="display: grid; grid-template-columns: 2fr 1.2fr; gap: 24px;">
-          <!-- Left Column: Recent Machinery -->
+        <!-- Inventory & RFQ Tables Split -->
+        <div style="display: grid; grid-template-columns: 1.8fr 1.2fr; gap: 24px;">
+          <!-- Recent Inventory Table -->
           <div class="admin-card">
-            <div class="card-header-bar">
-              <div class="card-title">Recent Inventory Additions</div>
-              <a href="products.html" class="btn-secondary btn-sm">View All Machinery &rarr;</a>
+            <div class="card-header">
+              <div class="card-title">
+                <i class="fa fa-list-ul" style="color: var(--brand-gold-dark);"></i>
+                <span>Recent Inventory Additions</span>
+              </div>
+              <a href="products.html" class="btn-secondary" style="font-size: 12px; padding: 6px 14px;">
+                <span>View All 50 Machines &rarr;</span>
+              </a>
             </div>
             <div class="table-responsive">
               <table class="admin-table">
@@ -184,35 +249,39 @@
                   </tr>
                 </thead>
                 <tbody id="recent-machines-tbody">
-                  <tr><td colspan="6" style="text-align:center; padding: 20px;">Loading machines...</td></tr>
+                  <tr><td colspan="6" style="text-align:center; padding: 24px; color: var(--text-dim);">Loading machinery...</td></tr>
                 </tbody>
               </table>
             </div>
           </div>
 
-          <!-- Right Column: Recent Inquiries -->
+          <!-- Recent Customer RFQs -->
           <div class="admin-card">
-            <div class="card-header-bar">
-              <div class="card-title">Recent Customer RFQs</div>
-              <a href="inquiries.html" class="btn-secondary btn-sm">All Leads &rarr;</a>
+            <div class="card-header">
+              <div class="card-title">
+                <i class="fa fa-inbox" style="color: #3b82f6;"></i>
+                <span>Recent Quotation Requests</span>
+              </div>
+              <a href="inquiries.html" class="btn-secondary" style="font-size: 12px; padding: 6px 14px;">
+                <span>All Leads &rarr;</span>
+              </a>
             </div>
             <div class="table-responsive">
               <table class="admin-table">
                 <thead>
                   <tr>
                     <th>Customer</th>
-                    <th>Inquiry / Machine</th>
+                    <th>Machine Inquired</th>
                     <th>Status</th>
                   </tr>
                 </thead>
                 <tbody id="recent-inquiries-tbody">
-                  <tr><td colspan="3" style="text-align:center; padding: 20px;">Loading inquiries...</td></tr>
+                  <tr><td colspan="3" style="text-align:center; padding: 24px; color: var(--text-dim);">Loading inquiries...</td></tr>
                 </tbody>
               </table>
             </div>
           </div>
         </div>
-
       </div>
     </main>
   </div>
@@ -223,24 +292,15 @@
       const user = await AdminCore.requireAuth();
       if (!user) return;
 
-      loadDashboardData();
+      // Update hero greeting with user's name
+      const heroName = document.getElementById('hero-user-name');
+      const topName = document.getElementById('sidebar-top-name');
+      const topAvatar = document.getElementById('sidebar-top-avatar');
+      if (heroName) heroName.textContent = user.name || user.username;
+      if (topName) topName.textContent = user.name || user.username;
+      if (topAvatar) topAvatar.textContent = (user.name || user.username).charAt(0).toUpperCase();
 
-      // Force Sync Button
-      const syncBtn = document.getElementById('btn-sync-catalog');
-      if (syncBtn) {
-        syncBtn.addEventListener('click', async () => {
-          syncBtn.disabled = true;
-          syncBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Syncing...';
-          const res = await AdminCore.api('/api/system/sync-static', { method: 'POST' });
-          if (res.success) {
-            AdminCore.toast('Catalog exported successfully to new/Machinery/js/catalog-data.js!');
-          } else {
-            AdminCore.toast(res.message || 'Sync failed', 'error');
-          }
-          syncBtn.disabled = false;
-          syncBtn.innerHTML = '<i class="fa fa-bolt"></i> Force Sync Now';
-        });
-      }
+      loadDashboardData();
     })();
 
     async function loadDashboardData() {
@@ -265,27 +325,28 @@
         tbody.innerHTML = recent.map(m => `
           <tr>
             <td>
-              <img src="/${m.image || 'new/Machinery/images/dalal/cframe_press_pune.jpg'}" class="machine-thumb" alt="${m.name}" onerror="this.src='/new/Machinery/images/dalal/cframe_press_pune.jpg'">
+              <img src="/${m.image || 'new/Machinery/images/dalal/cframe_press_pune.jpg'}" class="machine-photo-thumb" alt="${m.name}" onerror="this.src='/new/Machinery/images/dalal/cframe_press_pune.jpg'">
             </td>
             <td>
               <div class="machine-name-cell">
-                <span style="font-size: 13px;">${m.name}</span>
-                <span class="machine-id-tag">${m.id} ${m.isCustom ? '&bull; <span class="badge badge-custom">Custom</span>' : ''}</span>
+                <span style="font-size: 13.5px; font-weight: 700;">${m.name}</span>
+                <span class="machine-id-sub">${m.id} ${m.isCustom ? '&bull; <span class="status-pill new" style="padding: 1px 6px; font-size: 10px;">Custom</span>' : ''}</span>
               </div>
             </td>
             <td>
-              <span class="badge" style="background: rgba(255,255,255,0.06); color: var(--text-muted); text-transform: capitalize;">
+              <span style="text-transform: capitalize; font-weight: 600; font-size: 12.5px; color: var(--text-secondary);">
                 ${m.section}
               </span>
             </td>
-            <td><small style="color: var(--text-muted);">${m.location || '-'}</small></td>
+            <td><span style="color: var(--text-muted); font-size: 12.5px;">${m.location || '-'}</span></td>
             <td>
-              <span class="badge badge-${m.status === 'active' ? 'active' : m.status === 'draft' ? 'draft' : 'sold'}">
-                ${m.status || 'active'}
+              <span class="status-pill active">
+                <span class="status-dot green"></span>
+                <span>${(m.status || 'active').toUpperCase()}</span>
               </span>
             </td>
             <td>
-              <a href="product-form.html?id=${m.id}" class="btn-secondary btn-sm" style="padding: 4px 8px;">
+              <a href="product-form.html?id=${m.id}" class="btn-secondary" style="padding: 5px 10px; font-size: 12px;" title="Edit Machine">
                 <i class="fa fa-pencil"></i>
               </a>
             </td>
@@ -298,31 +359,36 @@
       if (inqRes.success) {
         const inqs = inqRes.inquiries;
         document.getElementById('badge-inquiries-count').textContent = inqs.length;
-        document.getElementById('kpi-inquiries').textContent = inqs.length;
 
         const recentInqs = inqs.slice(0, 5);
         const inqTbody = document.getElementById('recent-inquiries-tbody');
         if (recentInqs.length === 0) {
-          inqTbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color: var(--text-dim); padding: 16px;">No customer RFQs yet.</td></tr>';
+          inqTbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color: var(--text-dim); padding: 20px;">No customer RFQs yet.</td></tr>';
         } else {
-          inqTbody.innerHTML = recentInqs.map(i => `
-            <tr>
-              <td>
-                <strong style="color: #fff; font-size: 13px;">${i.name}</strong><br>
-                <small style="color: var(--text-muted);">${i.company || i.phone || i.email}</small>
-              </td>
-              <td>
-                <span style="font-size: 12px; color: var(--text-main); font-weight: 500;">
-                  ${i.machineName ? i.machineName : 'General Inquiry'}
-                </span>
-              </td>
-              <td>
-                <span class="badge badge-${i.status === 'new' ? 'active' : 'draft'}">
-                  ${i.status.toUpperCase()}
-                </span>
-              </td>
-            </tr>
-          `).join('');
+          inqTbody.innerHTML = recentInqs.map(i => {
+            const isNew = i.status === 'new';
+            const statusClass = isNew ? 'new' : 'contacted';
+            const dotClass = isNew ? 'blue' : 'yellow';
+            return `
+              <tr>
+                <td>
+                  <strong style="color: var(--text-main); font-size: 13px;">${i.name}</strong><br>
+                  <small style="color: var(--text-muted);">${i.company || i.phone}</small>
+                </td>
+                <td>
+                  <span style="font-size: 12.5px; color: var(--text-secondary); font-weight: 600;">
+                    ${i.machineName ? i.machineName : 'General Inquiry'}
+                  </span>
+                </td>
+                <td>
+                  <span class="status-pill ${statusClass}">
+                    <span class="status-dot ${dotClass}"></span>
+                    <span>${i.status.toUpperCase()}</span>
+                  </span>
+                </td>
+              </tr>
+            `;
+          }).join('');
         }
       }
     }

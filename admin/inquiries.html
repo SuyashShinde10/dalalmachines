@@ -7,8 +7,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700;800&family=Inter:wght@400;500;600;700&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="shortcut icon" href="/new/Machinery/images/favicon.png" type="image/x-icon">
-  <link rel="stylesheet" href="/new/Machinery/css/font-awesome.css">
+  <link rel="shortcut icon" href="/new/dalalmachine/images/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="/new/dalalmachine/css/font-awesome.css">
   <link rel="stylesheet" href="css/admin.css">
 </head>
 <body>
@@ -17,7 +17,7 @@
     <aside class="admin-sidebar">
       <div class="sidebar-header">
         <a href="dashboard.html" class="brand-badge" title="Dalal Machine Tools">
-          <img src="/new/Machinery/images/logo-dalal-light.png" alt="Dalal Machine Tools" style="max-height: 28px; width: auto; object-fit: contain;">
+          <img src="/new/dalalmachine/images/logo-dalal.png" alt="Dalal Machine Tools" style="max-height: 42px; width: auto; object-fit: contain;">
         </a>
       </div>
 
@@ -29,7 +29,7 @@
         </a>
         <a href="products.html" class="nav-link">
           <i class="fa fa-cubes"></i>
-          <span>Machinery Catalog</span>
+          <span>Dalal Machine Catalog</span>
         </a>
         <a href="product-form.html" class="nav-link">
           <i class="fa fa-plus-circle"></i>
@@ -45,19 +45,21 @@
           <span class="nav-badge" id="badge-inquiries" style="background: rgba(16, 185, 129, 0.2); color: #34d399;">...</span>
         </a>
 
-        <div class="nav-section-title">Portals & Navigation</div>
-        <a href="/superadmin/dashboard.html" class="nav-link">
-          <i class="fa fa-shield" style="color: var(--brand-gold);"></i>
-          <span>Super Admin Console &rarr;</span>
+        <div class="nav-section-title">User Account</div>
+        <a href="settings.html" class="nav-link">
+          <i class="fa fa-user-circle"></i>
+          <span>My Profile & Password</span>
         </a>
-        <a href="/new/Machinery/index.html" target="_blank" class="nav-link">
+
+        <div class="nav-section-title">Quick Links</div>
+        <a href="/new/dalalmachine/index.html" target="_blank" class="nav-link">
           <i class="fa fa-external-link"></i>
-          <span>Customer Website &rarr;</span>
+          <span>View Public Website &rarr;</span>
         </a>
       </nav>
 
       <div class="sidebar-footer">
-        <div class="user-info-pill">
+        <div class="user-info-pill" onclick="window.location.href='settings.html'" style="cursor: pointer;" title="My Account & Password Settings">
           <div class="user-avatar" id="sidebar-user-avatar">D</div>
           <div class="user-details">
             <span class="user-name" id="sidebar-user-name">Loading...</span>
@@ -74,15 +76,16 @@
     <main class="admin-main">
       <header class="admin-topbar">
         <div class="topbar-left">
-          <button id="btn-sidebar-toggle" class="btn-sidebar-toggle">
+          <button id="btn-sidebar-toggle" class="btn-sidebar-toggle" title="Toggle Side Menu">
             <i class="fa fa-bars"></i>
+            <span>Menu</span>
           </button>
           <div class="topbar-breadcrumb">
             Control Portal &bull; <span>Customer Quotation Requests</span>
           </div>
         </div>
         <div class="topbar-right">
-          <a href="/new/Machinery/contact.html" target="_blank" class="btn-view-site">
+          <a href="/new/dalalmachine/contact.html" target="_blank" class="btn-view-site">
             <i class="fa fa-external-link"></i>
             <span>View Public Contact Page</span>
           </a>
@@ -119,6 +122,14 @@
             </div>
           </div>
 
+          <div style="padding: 12px 24px; font-size: 13.5px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; background: #f8fafc; border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light);">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span>Showing</span>
+              <span id="filter-inq-count" style="font-weight: 800; color: #0f172a; background: #e2e8f0; padding: 2px 10px; border-radius: 9999px; font-size: 13px;">0</span>
+              <span>customer quotation leads</span>
+            </div>
+          </div>
+
           <div class="table-responsive">
             <table class="admin-table">
               <thead>
@@ -136,6 +147,27 @@
               </tbody>
             </table>
           </div>
+
+          <!-- Table Pagination Footer: 1, 2, 3, 4, 5, Next -->
+          <div class="table-pagination-footer" id="table-pagination-footer">
+            <div class="pagination-left">
+              <div class="pagination-info" id="pagination-info-text">
+                Showing <strong>0</strong> inquiries
+              </div>
+              <div class="pagination-page-size">
+                <label for="pagination-size-select">Per page:</label>
+                <select id="pagination-size-select">
+                  <option value="10" selected>10</option>
+                  <option value="20">20</option>
+                  <option value="50">50</option>
+                  <option value="all">All</option>
+                </select>
+              </div>
+            </div>
+            <div class="pagination-controls" id="pagination-controls">
+              <!-- Rendered dynamically: Prev, 1, 2, 3, Next -->
+            </div>
+          </div>
         </div>
 
       </div>
@@ -145,14 +177,16 @@
   <script src="js/admin-core.js"></script>
   <script>
     let allInquiries = [];
+    let currentPage = 1;
+    let pageSize = 10;
 
     (async () => {
       const user = await AdminCore.requireAuth();
       if (!user) return;
 
       loadInquiries();
-      document.getElementById('filter-inq-search').addEventListener('input', renderInquiries);
-      document.getElementById('filter-inq-status').addEventListener('change', renderInquiries);
+      setupFilters();
+      setupPaginationEvents();
     })();
 
     async function loadInquiries() {
@@ -163,6 +197,28 @@
         renderInquiries();
       } else {
         AdminCore.toast(res.message || 'Failed to load inquiries', 'error');
+      }
+    }
+
+    function setupFilters() {
+      document.getElementById('filter-inq-search').addEventListener('input', () => {
+        currentPage = 1;
+        renderInquiries();
+      });
+      document.getElementById('filter-inq-status').addEventListener('change', () => {
+        currentPage = 1;
+        renderInquiries();
+      });
+    }
+
+    function setupPaginationEvents() {
+      const sizeSelect = document.getElementById('pagination-size-select');
+      if (sizeSelect) {
+        sizeSelect.addEventListener('change', (e) => {
+          pageSize = e.target.value === 'all' ? 'all' : parseInt(e.target.value, 10);
+          currentPage = 1;
+          renderInquiries();
+        });
       }
     }
 
@@ -177,70 +233,171 @@
                         (i.company || '').toLowerCase().includes(q) ||
                         (i.phone || '').toLowerCase().includes(q) ||
                         (i.email || '').toLowerCase().includes(q) ||
-                        (i.machineName || '').toLowerCase().includes(q);
+                        (i.machineName || '').toLowerCase().includes(q) ||
+                        (i.machineId || '').toLowerCase().includes(q);
           if (!match) return false;
         }
         return true;
       });
 
+      const countEl = document.getElementById('filter-inq-count');
+      if (countEl) countEl.textContent = filtered.length;
+
+      const totalItems = filtered.length;
+      const actualSize = pageSize === 'all' ? (totalItems || 1) : parseInt(pageSize, 10);
+      const totalPages = Math.max(1, Math.ceil(totalItems / actualSize));
+
+      if (currentPage > totalPages) currentPage = totalPages;
+      if (currentPage < 1) currentPage = 1;
+
+      let pageItems = [];
+      let startIdx = 0;
+      let endIdx = 0;
+
+      if (totalItems > 0) {
+        if (pageSize === 'all') {
+          pageItems = filtered;
+          startIdx = 1;
+          endIdx = totalItems;
+        } else {
+          const start = (currentPage - 1) * actualSize;
+          pageItems = filtered.slice(start, start + actualSize);
+          startIdx = start + 1;
+          endIdx = Math.min(start + actualSize, totalItems);
+        }
+      }
+
       const tbody = document.getElementById('inquiries-tbody');
-      if (filtered.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding: 40px; color: var(--text-dim);">No customer inquiries found.</td></tr>';
+      if (totalItems === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding: 40px; color: var(--text-dim);"><i class="fa fa-inbox" style="font-size: 26px; display: block; margin-bottom: 8px; opacity: 0.5;"></i>No customer inquiries found matching filters.</td></tr>';
+      } else {
+        tbody.innerHTML = pageItems.map(i => {
+          const esc = AdminCore.escapeHTML;
+          const cleanPhone = (i.phone || '').replace(/[^0-9]/g, '');
+          const dateStr = new Date(i.createdAt).toLocaleDateString() + ' ' + new Date(i.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+          return `
+            <tr>
+              <td>
+                <small style="color: var(--text-dim); font-size: 11px;">${dateStr}</small>
+              </td>
+              <td>
+                <strong style="color: var(--text-main); font-size: 13.5px; font-weight: 700;">${esc(i.name)}</strong><br>
+                <small style="color: var(--text-muted); font-size: 12px;">${esc(i.company) || 'Individual Buyer'}</small>
+              </td>
+              <td>
+                <div style="display: flex; flex-direction: column; gap: 4px;">
+                  ${i.phone ? `
+                    <a href="tel:${encodeURIComponent(i.phone)}" style="font-size: 12px; color: var(--text-main); font-weight: 600;">
+                      <i class="fa fa-phone" style="color: var(--brand-gold-dark);"></i> ${esc(i.phone)}
+                    </a>
+                    <a href="https://wa.me/${cleanPhone}" target="_blank" style="font-size: 11px; color: #16a34a; font-weight: 600;">
+                      <i class="fa fa-whatsapp"></i> Chat on WhatsApp
+                    </a>
+                  ` : ''}
+                  ${i.email ? `
+                    <a href="mailto:${encodeURIComponent(i.email)}" style="font-size: 12px; color: var(--text-muted);">
+                      <i class="fa fa-envelope" style="color: var(--text-dim);"></i> ${esc(i.email)}
+                    </a>
+                  ` : ''}
+                </div>
+              </td>
+              <td>
+                ${i.machineName ? `
+                  <strong style="color: var(--text-main); font-size: 12.5px; font-weight: 600;">${esc(i.machineName)}</strong>
+                  ${i.machineId ? `<br><small style="color: var(--brand-gold-dark); font-weight: 700; font-family: 'JetBrains Mono', monospace;">${esc(i.machineId)}</small>` : ''}
+                ` : '<span class="badge" style="background: #f1f5f9; color: var(--text-muted); font-size: 11px;">General Inquiry</span>'}
+              </td>
+              <td>
+                <p style="font-size: 12.5px; color: var(--text-secondary); max-width: 280px; line-height: 1.4; margin: 0;">
+                  ${esc(i.message) || 'No additional message.'}
+                </p>
+              </td>
+              <td>
+                <select class="form-select btn-sm" style="padding: 4px 8px; font-size: 11px; font-weight: 700;" onchange="updateInquiryStatus('${esc(i.id)}', this.value)">
+                  <option value="new" ${i.status === 'new' ? 'selected' : ''}>NEW</option>
+                  <option value="contacted" ${i.status === 'contacted' ? 'selected' : ''}>CONTACTED</option>
+                  <option value="quoted" ${i.status === 'quoted' ? 'selected' : ''}>QUOTATION SENT</option>
+                  <option value="closed" ${i.status === 'closed' ? 'selected' : ''}>CLOSED / WON</option>
+                </select>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      renderPaginationControls(totalItems, actualSize, totalPages, startIdx, endIdx);
+    }
+
+    function renderPaginationControls(totalItems, actualSize, totalPages, startIdx, endIdx) {
+      const infoText = document.getElementById('pagination-info-text');
+      const controls = document.getElementById('pagination-controls');
+
+      if (!infoText || !controls) return;
+
+      if (totalItems === 0) {
+        infoText.innerHTML = 'Showing <strong>0</strong> inquiries';
+        controls.innerHTML = '';
         return;
       }
 
-      tbody.innerHTML = filtered.map(i => {
-        const cleanPhone = (i.phone || '').replace(/[^0-9]/g, '');
-        const dateStr = new Date(i.createdAt).toLocaleDateString() + ' ' + new Date(i.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      infoText.innerHTML = `Showing <strong>${startIdx}</strong>-<strong>${endIdx}</strong> of <strong>${totalItems}</strong> inquiries`;
 
-        return `
-          <tr>
-            <td>
-              <small style="color: var(--text-dim); font-size: 11px;">${dateStr}</small>
-            </td>
-            <td>
-              <strong style="color: #fff; font-size: 13px;">${i.name}</strong><br>
-              <small style="color: var(--text-muted);">${i.company || 'Individual Buyer'}</small>
-            </td>
-            <td>
-              <div style="display: flex; flex-direction: column; gap: 3px;">
-                ${i.phone ? `
-                  <a href="tel:${i.phone}" style="font-size: 12px; color: var(--text-main);">
-                    <i class="fa fa-phone" style="color: var(--brand-gold);"></i> ${i.phone}
-                  </a>
-                  <a href="https://wa.me/${cleanPhone}" target="_blank" style="font-size: 11px; color: #25d366; font-weight: 600;">
-                    <i class="fa fa-whatsapp"></i> Chat on WhatsApp
-                  </a>
-                ` : ''}
-                ${i.email ? `
-                  <a href="mailto:${i.email}" style="font-size: 12px; color: var(--text-muted);">
-                    <i class="fa fa-envelope"></i> ${i.email}
-                  </a>
-                ` : ''}
-              </div>
-            </td>
-            <td>
-              ${i.machineName ? `
-                <strong style="color: #fff; font-size: 12px;">${i.machineName}</strong>
-                ${i.machineId ? `<br><small style="color: var(--brand-gold);">${i.machineId}</small>` : ''}
-              ` : '<span style="color: var(--text-dim);">General Inquiry</span>'}
-            </td>
-            <td>
-              <p style="font-size: 12px; color: var(--text-muted); max-width: 280px; line-height: 1.4; margin: 0;">
-                ${i.message || 'No additional message.'}
-              </p>
-            </td>
-            <td>
-              <select class="form-select btn-sm" style="padding: 4px 8px; font-size: 11px; font-weight: 700;" onchange="updateInquiryStatus('${i.id}', this.value)">
-                <option value="new" ${i.status === 'new' ? 'selected' : ''}>NEW</option>
-                <option value="contacted" ${i.status === 'contacted' ? 'selected' : ''}>CONTACTED</option>
-                <option value="quoted" ${i.status === 'quoted' ? 'selected' : ''}>QUOTATION SENT</option>
-                <option value="closed" ${i.status === 'closed' ? 'selected' : ''}>CLOSED / WON</option>
-              </select>
-            </td>
-          </tr>
+      if (pageSize === 'all' || totalPages <= 1) {
+        controls.innerHTML = `
+          <button class="pagination-btn active" disabled>1</button>
         `;
-      }).join('');
+        return;
+      }
+
+      let html = '';
+
+      // Prev Button
+      const isFirst = currentPage <= 1;
+      html += `<button class="pagination-btn" ${isFirst ? 'disabled' : ''} onclick="goToPage(${currentPage - 1})" title="Previous Page">
+        <i class="fa fa-chevron-left" style="font-size: 11px;"></i> Prev
+      </button>`;
+
+      // Page numbers: 1, 2, 3, 4, 5...
+      const pages = generatePageNumbers(currentPage, totalPages);
+      pages.forEach(p => {
+        if (p === '...') {
+          html += `<span class="pagination-ellipsis">&hellip;</span>`;
+        } else {
+          const isActive = p === currentPage;
+          html += `<button class="pagination-btn ${isActive ? 'active' : ''}" onclick="goToPage(${p})" ${isActive ? 'disabled' : ''}>${p}</button>`;
+        }
+      });
+
+      // Next Button
+      const isLast = currentPage >= totalPages;
+      html += `<button class="pagination-btn" ${isLast ? 'disabled' : ''} onclick="goToPage(${currentPage + 1})" title="Next Page">
+        Next <i class="fa fa-chevron-right" style="font-size: 11px;"></i>
+      </button>`;
+
+      controls.innerHTML = html;
+    }
+
+    function generatePageNumbers(current, total) {
+      if (total <= 7) {
+        return Array.from({ length: total }, (_, i) => i + 1);
+      }
+      if (current <= 4) {
+        return [1, 2, 3, 4, 5, '...', total];
+      }
+      if (current >= total - 3) {
+        return [1, '...', total - 4, total - 3, total - 2, total - 1, total];
+      }
+      return [1, '...', current - 1, current, current + 1, '...', total];
+    }
+
+    function goToPage(page) {
+      currentPage = page;
+      renderInquiries();
+      const targetCard = document.querySelector('.table-responsive');
+      if (targetCard) {
+        targetCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
 
     async function updateInquiryStatus(id, newStatus) {

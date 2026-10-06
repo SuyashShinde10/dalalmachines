@@ -19,6 +19,10 @@ router.post('/', (req, res) => {
     return res.status(400).json({ success: false, message: 'Username, email, and password are required.' });
   }
 
+  if (password.length < 8) {
+    return res.status(400).json({ success: false, message: 'Password must be at least 8 characters long.' });
+  }
+
   // Check if username or email already exists
   const existing = db.getUserByUsernameOrEmail(username) || db.getUserByUsernameOrEmail(email);
   if (existing) {
@@ -38,6 +42,9 @@ router.put('/:id', (req, res) => {
   const user = db.getUserById(req.params.id);
   if (!user) {
     return res.status(404).json({ success: false, message: 'User not found.' });
+  }
+  if (req.body.password && req.body.password.length < 8) {
+    return res.status(400).json({ success: false, message: 'Password must be at least 8 characters long.' });
   }
 
   // Check if changing role from superadmin and it's the last superadmin

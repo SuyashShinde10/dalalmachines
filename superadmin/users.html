@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Team Accounts | Super Admin Master Console</title>
-  <link rel="shortcut icon" href="/new/Machinery/images/favicon.png" type="image/x-icon">
-  <link rel="stylesheet" href="/new/Machinery/css/font-awesome.css">
+  <link rel="shortcut icon" href="/new/dalalmachine/images/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="/new/dalalmachine/css/font-awesome.css">
   <link rel="stylesheet" href="css/superadmin.css">
 </head>
 <body>
@@ -14,7 +14,7 @@
     <aside class="sa-sidebar">
       <div class="sa-sidebar-header">
         <a href="dashboard.html" class="sa-brand-badge">
-          <img src="/new/Machinery/images/logo-dalal-light.png" alt="Dalal Machine Tools">
+          <img src="/new/dalalmachine/images/logo-dalal.png" alt="Dalal Machine Tools" style="max-height: 38px; width: auto; object-fit: contain;">
           <span class="sa-brand-badge-tag">MASTER</span>
         </a>
       </div>
@@ -67,8 +67,9 @@
     <main class="sa-main">
       <header class="sa-topbar">
         <div class="sa-topbar-left">
-          <button id="sa-btn-toggle" class="sa-btn-toggle">
+          <button id="sa-btn-toggle" class="sa-btn-toggle" title="Toggle Side Menu">
             <i class="fa fa-bars"></i>
+            <span>Menu</span>
           </button>
           <div class="sa-breadcrumb">
             Master Console &bull; <span>Admin Team Accounts & Roles</span>
@@ -239,17 +240,18 @@
         allUsers = res.users;
         document.getElementById('sa-badge-users').textContent = allUsers.length;
         const tbody = document.getElementById('sa-users-tbody');
+        const esc = SuperAdminCore.escapeHTML;
         tbody.innerHTML = allUsers.map(u => `
           <tr>
             <td>
-              <strong style="color: #fff; font-size: 14px;">${u.name || u.username}</strong>
-              <div style="font-size: 11px; color: var(--sa-text-dim);">ID: ${u.id}</div>
+              <strong style="color: #fff; font-size: 14px;">${esc(u.name || u.username)}</strong>
+              <div style="font-size: 11px; color: var(--sa-text-dim);">ID: ${esc(u.id)}</div>
             </td>
-            <td><code style="color: var(--sa-gold); font-family: 'JetBrains Mono';">${u.username}</code></td>
-            <td>${u.email}</td>
+            <td><code style="color: var(--sa-gold); font-family: 'JetBrains Mono';">${esc(u.username)}</code></td>
+            <td>${esc(u.email)}</td>
             <td>
               <span class="sa-badge ${u.role === 'superadmin' ? 'sa-badge-gold' : 'sa-badge-active'}">
-                ${u.role.toUpperCase()}
+                ${esc(u.role ? u.role.toUpperCase() : '')}
               </span>
             </td>
             <td>
@@ -258,13 +260,13 @@
               </span>
             </td>
             <td style="text-align: right;">
-              <button onclick="editUser('${u.id}')" class="sa-btn sa-btn-secondary sa-btn-sm" title="Edit User">
+              <button onclick="editUser('${esc(u.id)}')" class="sa-btn sa-btn-secondary sa-btn-sm" title="Edit User">
                 <i class="fa fa-pencil"></i>
               </button>
-              <button onclick="toggleUserStatus('${u.id}', ${!u.active})" class="sa-btn sa-btn-secondary sa-btn-sm" title="${u.active ? 'Suspend' : 'Activate'}">
+              <button onclick="toggleUserStatus('${esc(u.id)}', ${!u.active})" class="sa-btn sa-btn-secondary sa-btn-sm" title="${u.active ? 'Suspend' : 'Activate'}">
                 <i class="fa fa-${u.active ? 'ban' : 'check'}"></i>
               </button>
-              <button onclick="deleteUser('${u.id}', '${u.username}')" class="sa-btn sa-btn-secondary sa-btn-sm" style="color: #f87171;" title="Delete User">
+              <button onclick="deleteUser('${esc(u.id)}', '${esc(u.username)}')" class="sa-btn sa-btn-secondary sa-btn-sm" style="color: #f87171;" title="Delete User">
                 <i class="fa fa-trash"></i>
               </button>
             </td>

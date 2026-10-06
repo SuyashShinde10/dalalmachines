@@ -4,8 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Staff Operations Portal | Dalal Machine Tools Agency Pvt. Ltd.</title>
-  <link rel="shortcut icon" href="/new/Machinery/images/favicon.png" type="image/x-icon">
-  <link rel="stylesheet" href="/new/Machinery/css/font-awesome.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="/new/dalalmachine/images/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="/new/dalalmachine/css/font-awesome.css">
   <link rel="stylesheet" href="css/admin.css">
   <style>
     body {
@@ -14,61 +17,46 @@
       justify-content: center;
       min-height: 100vh;
       padding: 24px;
-      background: radial-gradient(circle at 50% 15%, rgba(248, 157, 19, 0.06) 0%, transparent 60%),
-                  #0c1017;
+      background: radial-gradient(at 15% 15%, rgba(245, 158, 11, 0.06) 0px, transparent 50%),
+                  radial-gradient(at 85% 85%, rgba(59, 130, 246, 0.06) 0px, transparent 50%),
+                  #f6f8fc;
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
     }
     .staff-login-box {
       width: 100%;
-      max-width: 420px;
-      background: #131924;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-top: 3px solid var(--brand-gold);
-      border-radius: var(--radius-md);
-      padding: 38px 32px;
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
+      max-width: 440px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 24px;
+      padding: 40px 36px;
+      box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.08), 0 4px 12px rgba(15, 23, 42, 0.03);
     }
     .staff-login-header {
       text-align: center;
-      margin-bottom: 26px;
+      margin-bottom: 28px;
     }
     .staff-logo-img {
-      max-height: 38px;
+      max-height: 36px;
       width: auto;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       object-fit: contain;
     }
     .staff-brand-title {
-      font-family: 'Barlow', sans-serif;
       font-weight: 800;
-      font-size: 20px;
-      color: #fff;
-      letter-spacing: -0.3px;
+      font-size: 22px;
+      color: #0f172a;
+      letter-spacing: -0.4px;
     }
     .staff-brand-badge {
       display: inline-block;
-      font-family: 'Rajdhani', sans-serif;
-      text-transform: uppercase;
       font-size: 11px;
-      letter-spacing: 1.2px;
+      letter-spacing: 0.6px;
       font-weight: 700;
-      color: var(--brand-gold);
-      background: rgba(248, 157, 19, 0.1);
-      border: 1px solid rgba(248, 157, 19, 0.25);
-      padding: 3px 10px;
+      color: #b45309;
+      background: #fef3c7;
+      padding: 4px 12px;
       border-radius: 9999px;
-      margin-top: 6px;
-    }
-    .staff-helper-note {
-      font-size: 12px;
-      color: var(--text-dim);
-      background: rgba(0, 0, 0, 0.2);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-sm);
-      padding: 10px 12px;
-      margin-top: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      margin-top: 8px;
     }
   </style>
 </head>
@@ -76,42 +64,40 @@
 
   <div class="staff-login-box">
     <div class="staff-login-header">
-      <img src="/new/Machinery/images/logo-dalal-light.png" alt="Dalal Machine Tools" class="staff-logo-img">
-      <div class="staff-brand-title">STAFF OPERATIONS PORTAL</div>
+      <img src="/new/dalalmachine/images/logo-dalal.png" alt="Dalal Machine Tools" class="staff-logo-img">
+      <div class="staff-brand-title">Operations Portal</div>
       <div class="staff-brand-badge">Inventory & Customer Leads Management</div>
     </div>
 
-    <div id="login-alert" style="display: none; padding: 12px 14px; border-radius: 6px; margin-bottom: 20px; font-size: 13px;"></div>
+    <div id="login-alert" style="display: none; padding: 12px 14px; border-radius: 12px; margin-bottom: 20px; font-size: 13px; font-weight: 600;"></div>
 
     <form id="login-form">
-      <div style="margin-bottom: 18px;">
-        <label class="form-label" for="input-identifier">Staff Username / Email</label>
-        <input type="text" id="input-identifier" class="form-control" placeholder="admin@dalalmachines.com" required autofocus autocomplete="username" value="admin">
+      <div class="form-group" style="margin-bottom: 18px;">
+        <label class="form-label" for="input-identifier">Staff Username or Email</label>
+        <input type="text" id="input-identifier" class="form-control" placeholder="admin" required autofocus autocomplete="username" value="admin">
       </div>
 
-      <div style="margin-bottom: 24px;">
+      <div class="form-group" style="margin-bottom: 24px;">
         <label class="form-label" for="input-password">Password</label>
         <div style="position: relative;">
           <input type="password" id="input-password" class="form-control" placeholder="••••••••••••" required autocomplete="current-password" value="Dalal@Admin2026">
-          <button type="button" id="btn-toggle-pw" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-dim); cursor: pointer;">
+          <button type="button" id="btn-toggle-pw" style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-dim); cursor: pointer;">
             <i class="fa fa-eye"></i>
           </button>
         </div>
       </div>
 
-      <button type="submit" id="btn-submit" class="btn-primary" style="width: 100%; justify-content: center; padding: 12px;">
+      <button type="submit" id="btn-submit" class="btn-primary" style="width: 100%; justify-content: center; padding: 13px; font-size: 14px;">
         <i class="fa fa-sign-in"></i>
         <span>Sign In to Operations</span>
       </button>
     </form>
 
-    <div class="staff-helper-note">
-      <span>Master Executive Access?</span>
-      <a href="/superadmin/index.html" style="color: var(--brand-gold); font-weight: 600; text-decoration: none;">Super Admin Portal &rarr;</a>
-    </div>
-
-    <div style="text-align: center; margin-top: 20px; font-size: 12px;">
-      <a href="/new/Machinery/index.html" target="_blank" style="color: var(--text-muted); text-decoration: none;">&larr; View Customer Website</a>
+    <div style="text-align: center; margin-top: 24px; font-size: 13px;">
+      <a href="/new/dalalmachine/index.html" target="_blank" style="color: var(--text-muted); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 600;">
+        <i class="fa fa-arrow-left"></i>
+        <span>Back to Customer Website</span>
+      </a>
     </div>
   </div>
 
@@ -124,62 +110,59 @@
     const form = document.getElementById('login-form');
     const idInput = document.getElementById('input-identifier');
     const pwInput = document.getElementById('input-password');
-    const alertBox = document.getElementById('login-alert');
     const submitBtn = document.getElementById('btn-submit');
-    const togglePw = document.getElementById('btn-toggle-pw');
+    const alertBox = document.getElementById('login-alert');
+    const togglePwBtn = document.getElementById('btn-toggle-pw');
 
-    togglePw.addEventListener('click', () => {
-      const isPw = pwInput.type === 'password';
-      pwInput.type = isPw ? 'text' : 'password';
-      togglePw.querySelector('i').className = isPw ? 'fa fa-eye-slash' : 'fa fa-eye';
+    togglePwBtn.addEventListener('click', () => {
+      const type = pwInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      pwInput.setAttribute('type', type);
+      togglePwBtn.innerHTML = type === 'password' ? '<i class="fa fa-eye"></i>' : '<i class="fa fa-eye-slash"></i>';
     });
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       alertBox.style.display = 'none';
       submitBtn.disabled = true;
-      submitBtn.innerHTML = '<i class="fa fa-circle-o-notch fa-spin"></i> Authenticating...';
+      submitBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Authenticating...';
 
       try {
-        const res = await fetch('/api/auth/login', {
+        const res = await AdminCore.api('/api/auth/login', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             identifier: idInput.value.trim(),
             password: pwInput.value
           })
         });
 
-        const data = await res.json();
-        if (data.success) {
-          AdminCore.setSession(data.token, data.user);
+        if (res.success && res.token && res.user) {
+          AdminCore.setSession(res.token, res.user);
           alertBox.style.display = 'block';
-          alertBox.style.background = 'rgba(16, 185, 129, 0.15)';
-          alertBox.style.border = '1px solid #10b981';
-          alertBox.style.color = '#34d399';
-          alertBox.textContent = `Welcome, ${data.user.name}. Entering Operations Portal...`;
+          alertBox.style.background = '#ecfdf5';
+          alertBox.style.color = '#047857';
+          alertBox.style.border = '1px solid #d1fae5';
+          alertBox.textContent = 'Welcome back! Opening operations portal...';
           setTimeout(() => {
             window.location.href = '/admin/dashboard.html';
-          }, 500);
+          }, 400);
         } else {
-          alertBox.style.display = 'block';
-          alertBox.style.background = 'rgba(239, 68, 68, 0.15)';
-          alertBox.style.border = '1px solid #ef4444';
-          alertBox.style.color = '#f87171';
-          alertBox.textContent = data.message || 'Login failed. Please verify credentials.';
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = '<i class="fa fa-sign-in"></i> <span>Sign In to Operations</span>';
+          showError(res.message || 'Invalid username or password.');
         }
       } catch (err) {
-        alertBox.style.display = 'block';
-        alertBox.style.background = 'rgba(239, 68, 68, 0.15)';
-        alertBox.style.border = '1px solid #ef4444';
-        alertBox.style.color = '#f87171';
-        alertBox.textContent = 'Server connection error. Ensure backend server is active.';
+        showError('Network error. Ensure local server is running on port 5000.');
+      } finally {
         submitBtn.disabled = false;
-        submitBtn.innerHTML = '<i class="fa fa-sign-in"></i> <span>Sign In to Operations</span>';
+        submitBtn.innerHTML = '<i class="fa fa-sign-in"></i> Sign In to Operations';
       }
     });
+
+    function showError(msg) {
+      alertBox.style.display = 'block';
+      alertBox.style.background = '#fef2f2';
+      alertBox.style.color = '#b91c1c';
+      alertBox.style.border = '1px solid #fee2e2';
+      alertBox.textContent = msg;
+    }
   </script>
 </body>
 </html>

@@ -22,3 +22,20 @@ package-lock.json
 .idea/
 *.swp
 *.swo
+
+# Environment & Secrets
+.env
+.env.*
+*.env
+!.env.example
+
+# Database temporary files & uploads
+server/data/db.json.tmp
+server/data/uploads/*
+!server/data/uploads/.gitkeep
+
+# Application logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Commercial Invoice - Suyash Shinde to Dalal Machine Tools</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0f172a;
+      --accent: #f59e0b;
+      --accent-dark: #b45309;
+      --border: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --text: #1e293b;
+      --text-muted: #64748b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      background-color: #f1f5f9;
+      padding: 40px 20px;
+      line-height: 1.5;
+    }
+
+    .invoice-card {
+      max-width: 860px;
+      margin: 0 auto;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 48px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+        padding: 0;
+      }
+      .invoice-card {
+        border: none;
+        box-shadow: none;
+        padding: 24px;
+        max-width: 100%;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+
+    .action-bar {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .btn-print {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #0f172a;
+      color: #ffffff;
+      padding: 10px 22px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      border: none;
+      transition: background 0.2s;
+    }
+
+    .btn-print:hover {
+      background: #1e293b;
+    }
+
+    .invoice-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 24px;
+      margin-bottom: 28px;
+    }
+
+    .engineer-brand h1 {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: -0.5px;
+    }
+
+    .engineer-brand p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 3px;
+      font-weight: 500;
+    }
+
+    .badge-wrap {
+      text-align: right;
+    }
+
+    .invoice-tag-title {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: 0.5px;
+    }
+
+    .status-pill {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      color: #92400e;
+      background: #fef3c7;
+      border: 1px solid #fde68a;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      margin-top: 4px;
+      text-transform: uppercase;
+    }
+
+    .meta-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 28px;
+    }
+
+    .meta-item span {
+      display: block;
+      font-size: 11px;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 3px;
+    }
+
+    .meta-item strong {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--primary);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .parties-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .party-card {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px;
+    }
+
+    .party-title {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--accent-dark);
+      margin-bottom: 8px;
+    }
+
+    .party-card p {
+      font-size: 13px;
+      margin-bottom: 3px;
+      color: var(--text);
+    }
+
+    .party-card p strong {
+      font-weight: 600;
+    }
+
+    .items-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 28px;
+    }
+
+    .items-table th {
+      background: var(--primary);
+      color: #ffffff;
+      font-size: 11.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 10px 14px;
+      text-align: left;
+    }
+
+    .items-table th:last-child {
+      text-align: right;
+    }
+
+    .items-table td {
+      padding: 14px;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+      vertical-align: top;
+    }
+
+    .items-table td:last-child {
+      text-align: right;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+    }
+
+    .item-title {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 3px;
+    }
+
+    .item-desc {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    .item-desc ul {
+      margin-left: 16px;
+      margin-top: 3px;
+    }
+
+    .sac-pill {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      color: #64748b;
+      background: #e2e8f0;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-top: 4px;
+    }
+
+    .calc-grid {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .bank-box {
+      flex: 1;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px;
+    }
+
+    .bank-box h4 {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .bank-box p {
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+
+    .total-box {
+      width: 320px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px;
+    }
+
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      margin-bottom: 8px;
+      color: var(--text-muted);
+    }
+
+    .total-row strong {
+      color: var(--text);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .total-row.grand {
+      border-top: 2px solid var(--border);
+      padding-top: 10px;
+      margin-top: 10px;
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .total-row.grand strong {
+      color: var(--accent-dark);
+      font-size: 18px;
+    }
+
+    .words {
+      font-size: 11.5px;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-top: 6px;
+      text-align: right;
+    }
+
+    .milestone-box {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px;
+      margin-bottom: 28px;
+    }
+
+    .milestone-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .milestone-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .m-item {
+      background: var(--bg-subtle);
+      padding: 12px 14px;
+      border-radius: 6px;
+      border-left: 3px solid var(--accent);
+    }
+
+    .m-item-tag {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .m-item-amt {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--primary);
+      font-family: 'JetBrains Mono', monospace;
+      margin: 2px 0;
+    }
+
+    .m-item-status {
+      font-size: 11px;
+      font-weight: 600;
+      color: #047857;
+    }
+
+    .terms {
+      font-size: 11px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+
+    .terms ol {
+      margin-left: 16px;
+      margin-top: 6px;
+    }
+
+    .signs {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 36px;
+      padding-top: 20px;
+    }
+
+    .sign-col {
+      width: 220px;
+      text-align: center;
+    }
+
+    .sign-dash {
+      border-bottom: 1px dashed #94a3b8;
+      height: 40px;
+      margin-bottom: 6px;
+    }
+
+    .sign-name {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+    }
+
+    .sign-role {
+      font-size: 10.5px;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="action-bar no-print">
+    <button onclick="window.print()" class="btn-print">
+      <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/><path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zm1 2h4v2H6V3zm6 8v2H4v-2h8z"/></svg>
+      Print / Save as PDF
+    </button>
+  </div>
+
+  <div class="invoice-card">
+    <header class="invoice-header">
+      <div class="engineer-brand">
+        <h1>SUYASH SHINDE</h1>
+        <p>Fullstack Software Engineer & Digital Solutions Architect</p>
+      </div>
+      <div class="badge-wrap">
+        <div class="invoice-tag-title">COMMERCIAL INVOICE</div>
+        <span class="status-pill">Agreed Project Scope</span>
+      </div>
+    </header>
+
+    <div class="meta-bar">
+      <div class="meta-item"><span>Invoice Number</span><strong>INV-SS-2026-001</strong></div>
+      <div class="meta-item"><span>Invoice Date</span><strong>06 OCT 2026</strong></div>
+      <div class="meta-item"><span>Payment Terms</span><strong>50% ADV / 50% LIVE</strong></div>
+      <div class="meta-item"><span>Place of Supply</span><strong>MAHARASHTRA (27)</strong></div>
+    </div>
+
+    <div class="parties-grid">
+      <div class="party-card">
+        <div class="party-title">ISSUED BY (SERVICE PROVIDER)</div>
+        <p><strong>Suyash Shinde</strong></p>
+        <p>Software Engineer & Web Consultant</p>
+        <p><strong>Email:</strong> suyashshinde360@gmail.com</p>
+        <p>Maharashtra, India</p>
+        <p><strong>GST Status:</strong> Unregistered / Threshold Exemption (&lt; ₹20L under Sec 22(1) CGST Act)</p>
+      </div>
+
+      <div class="party-card">
+        <div class="party-title">BILLED TO (CLIENT)</div>
+        <p><strong>Dalal Machine Tools Agency Pvt. Ltd.</strong></p>
+        <p>12/B, Everest Building, Tardeo Road, Mumbai - 400034</p>
+        <p><strong>Yard:</strong> Chakan Industrial Area, Pune, MH</p>
+        <p><strong>Attention:</strong> Mr. Vinit Dalal (Managing Director)</p>
+      </div>
+    </div>
+
+    <table class="items-table">
+      <thead>
+        <tr>
+          <th style="width: 40px;">#</th>
+          <th>Description of Technical Deliverables</th>
+          <th style="width: 80px;">SAC</th>
+          <th style="width: 60px; text-align: center;">Qty</th>
+          <th style="width: 130px;">Amount (INR)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>01</strong></td>
+          <td>
+            <div class="item-title">Fullstack B2B Customer Portal & Machinery Catalog Engine</div>
+            <div class="item-desc">
+              Complete engineering of modern machinery showcase:
+              <ul>
+                <li>24-page responsive website with 0 JavaScript errors across mobile & desktop</li>
+                <li>26-category machinery catalog with instant reactive search and location filters</li>
+                <li>WhatsApp direct RFQ quotation generator and interactive PDP specifications table</li>
+                <li>High Seas Sales calculator, shipment photo ledger & OMPI partner representation</li>
+              </ul>
+            </div>
+            <span class="sac-pill">SAC 998314 - Web Engineering</span>
+          </td>
+          <td>998314</td>
+          <td style="text-align: center;">1 Unit</td>
+          <td>₹32,000.00</td>
+        </tr>
+
+        <tr>
+          <td><strong>02</strong></td>
+          <td>
+            <div class="item-title">Staff Admin Operations Portal (Inventory & Quotations)</div>
+            <div class="item-desc">
+              In-house daily operations management system:
+              <ul>
+                <li>Machinery inventory CRUD with photo dropzone uploader & live/draft/sold states</li>
+                <li>Customer RFQ inquiry inbox with contact workflow management</li>
+                <li>Excel / CSV stock catalog export button and multi-tier pagination (1, 2, 3... Next)</li>
+              </ul>
+            </div>
+            <span class="sac-pill">SAC 998314 - Custom Software</span>
+          </td>
+          <td>998314</td>
+          <td style="text-align: center;">1 Unit</td>
+          <td>₹20,000.00</td>
+        </tr>
+
+        <tr>
+          <td><strong>03</strong></td>
+          <td>
+            <div class="item-title">Core Technical SEO & Google Search Console Verification</div>
+            <div class="item-desc">
+              Search discovery setup:
+              <ul>
+                <li>On-Page SEO: Unique Meta Titles, Descriptions, Canonical Tags across all pages</li>
+                <li>Dynamic XML Sitemap & robots.txt generation</li>
+                <li>Google Search Console domain DNS verification and Google indexing submission</li>
+              </ul>
+            </div>
+            <span class="sac-pill">SAC 998314 - Search Optimization</span>
+          </td>
+          <td>998314</td>
+          <td style="text-align: center;">1 Unit</td>
+          <td>₹7,000.00</td>
+        </tr>
+
+        <tr>
+          <td><strong>04</strong></td>
+          <td>
+            <div class="item-title">Production Server Setup, Domain Pointing & SSL Security</div>
+            <div class="item-desc">
+              Live deployment & hardening:
+              <ul>
+                <li>Node.js production server daemon setup with automatic recovery</li>
+                <li>Production domain DNS mapping (A-records, CNAME, www redirect)</li>
+                <li>SSL Certificate (HTTPS) encryption and security header protections</li>
+              </ul>
+            </div>
+            <span class="sac-pill">SAC 998315 - Deployment & Cloud</span>
+          </td>
+          <td>998315</td>
+          <td style="text-align: center;">1 Unit</td>
+          <td>₹6,000.00</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="calc-grid">
+      <div class="bank-box">
+        <h4>Bank Account / UPI Payment Details</h4>
+        <p><strong>Account Holder:</strong> Suyash Shinde</p>
+        <p><strong>Email / Contact:</strong> suyashshinde360@gmail.com</p>
+        <p><strong>Bank Name:</strong> [YOUR BANK NAME, e.g. State Bank of India / HDFC Bank]</p>
+        <p><strong>Account Number:</strong> [YOUR ACCOUNT NUMBER]</p>
+        <p><strong>IFSC Code:</strong> [YOUR IFSC CODE]</p>
+        <p><strong>UPI ID:</strong> [YOUR UPI ID, e.g. 91940xxxx@upi / suyash@okhdfcbank]</p>
+      </div>
+
+      <div class="total-box">
+        <div class="total-row"><span>Gross Subtotal:</span><strong>₹65,000.00</strong></div>
+        <div class="total-row"><span>GST (CGST + SGST):</span><strong>₹0.00*</strong></div>
+        <div class="total-row grand"><span>Net Payable Amount:</span><strong>₹65,000.00</strong></div>
+        <div class="words">(Sixty-Five Thousand Indian Rupees Only)</div>
+        <p style="font-size: 10px; color: #64748b; margin-top: 8px;">*Exempted from GST under Section 22(1) CGST Act (Aggregate annual turnover below statutory limit of ₹20,00,000).</p>
+      </div>
+    </div>
+
+    <div class="milestone-box">
+      <div class="milestone-title">Agreed Milestone Payment Terms</div>
+      <div class="milestone-grid">
+        <div class="m-item">
+          <div class="m-item-tag">Milestone 1 (50% Advance)</div>
+          <div class="m-item-amt">₹32,500.00</div>
+          <div class="m-item-status">✓ Complete Website & Admin Engine Handover</div>
+        </div>
+        <div class="m-item">
+          <div class="m-item-tag">Milestone 2 (50% Final)</div>
+          <div class="m-item-amt">₹32,500.00</div>
+          <div class="m-item-status">Live Domain Pointing & Google Indexing Handover</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="terms">
+      <strong>Terms & Conditions of Service:</strong>
+      <ol>
+        <li>Upon receipt of final payment, 100% intellectual property rights, database architecture, and complete source code transfer irrevocably to Dalal Machine Tools Agency Pvt. Ltd.</li>
+        <li>Third-party recurring infrastructure costs (domain renewal, cloud VPS server hosting subscription) are direct client liabilities and billed directly by the hosting service provider.</li>
+        <li>Includes a complimentary 30-day technical bug-fix warranty commencing from the official domain live launch.</li>
+        <li>Legal Jurisdiction: Courts of Pune / Mumbai, Maharashtra.</li>
+      </ol>
+    </div>
+
+    <div class="signs">
+      <div class="sign-col">
+        <div class="sign-dash"></div>
+        <div class="sign-name">Suyash Shinde</div>
+        <div class="sign-role">Lead Software Engineer</div>
+      </div>
+      <div class="sign-col">
+        <div class="sign-dash"></div>
+        <div class="sign-name">Client Acceptance</div>
+        <div class="sign-role">For Dalal Machine Tools Agency Pvt. Ltd.</div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
