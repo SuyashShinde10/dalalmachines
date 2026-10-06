@@ -1,0 +1,10 @@
+{
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "https://dalalmachines.onrender.com/api/$1" },
+    { "source": "/new/Machinery/(.*)", "destination": "/new/dalalmachine/$1" },
+    { "source": "/new", "destination": "/new/dalalmachine/index.html" },
+    { "source": "/new/", "destination": "/new/dalalmachine/index.html" },
+    { "source": "/admin", "destination": "/admin/index.html" },
+    { "source": "/superadmin", "destination": "/superadmin/index.html" }
+  ]
+}
