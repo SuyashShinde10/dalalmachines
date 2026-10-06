@@ -1,0 +1,19 @@
+# Operating System Files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+
+# Scratch screenshots and debug files at root
+/mobile*.png
+/mobile2*.png
+/mobile3*.png
+/nav_crop*.png
+/nav_debug.html
+
+# IDE and Editor settings
+.vscode/
+.idea/
+*.swp
+*.swo
