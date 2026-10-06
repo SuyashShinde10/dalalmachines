@@ -153,7 +153,7 @@
         </div>
 
         <!-- Two Columns: Audit Trail & Admin Accounts -->
-        <div style="display: grid; grid-template-columns: 1.6fr 1.2fr; gap: 24px;">
+        <div class="sa-dashboard-split">
           <!-- Recent Audit Logs -->
           <div class="sa-card">
             <div class="sa-card-header">
@@ -164,19 +164,21 @@
               <a href="logs.html" class="sa-btn sa-btn-secondary" style="font-size: 12px; padding: 6px 14px;">Full Ledger &rarr;</a>
             </div>
             <div class="sa-card-body" style="padding: 0;">
-              <table class="sa-table">
-                <thead>
-                  <tr>
-                    <th>Timestamp</th>
-                    <th>Actor</th>
-                    <th>Action</th>
-                    <th>Details</th>
-                  </tr>
-                </thead>
-                <tbody id="sa-tbody-logs">
-                  <tr><td colspan="4" style="text-align: center; color: var(--sa-text-dim); padding: 24px;">Loading ledger...</td></tr>
-                </tbody>
-              </table>
+              <div class="sa-table-wrap">
+                <table class="sa-table">
+                  <thead>
+                    <tr>
+                      <th>Timestamp</th>
+                      <th>Actor</th>
+                      <th>Action</th>
+                      <th>Details</th>
+                    </tr>
+                  </thead>
+                  <tbody id="sa-tbody-logs">
+                    <tr><td colspan="4" style="text-align: center; color: var(--sa-text-dim); padding: 24px;">Loading ledger...</td></tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
 
@@ -190,18 +192,20 @@
               <a href="users.html" class="sa-btn sa-btn-secondary" style="font-size: 12px; padding: 6px 14px;">Manage Users &rarr;</a>
             </div>
             <div class="sa-card-body" style="padding: 0;">
-              <table class="sa-table">
-                <thead>
-                  <tr>
-                    <th>User</th>
-                    <th>Role</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody id="sa-tbody-users">
-                  <tr><td colspan="3" style="text-align: center; color: var(--sa-text-dim); padding: 24px;">Loading accounts...</td></tr>
-                </tbody>
-              </table>
+              <div class="sa-table-wrap">
+                <table class="sa-table">
+                  <thead>
+                    <tr>
+                      <th>User</th>
+                      <th>Role</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="sa-tbody-users">
+                    <tr><td colspan="3" style="text-align: center; color: var(--sa-text-dim); padding: 24px;">Loading accounts...</td></tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>

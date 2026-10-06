@@ -69,6 +69,7 @@
   padding: 0;
 }
 
+html,
 body {
   font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   background-color: var(--sa-bg-body);
@@ -79,6 +80,9 @@ body {
   min-height: 100vh;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  max-width: 100%;
+  width: 100%;
 }
 
 a {
@@ -94,6 +98,9 @@ a:hover {
 .sa-wrapper {
   display: flex;
   min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 /* Sidebar */
@@ -295,6 +302,9 @@ a:hover {
   display: flex;
   flex-direction: column;
   min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
   padding-bottom: 90px;
 }
 
@@ -674,6 +684,13 @@ body.sa-sidebar-collapsed .sa-main {
    SUPER ADMIN MOBILE & TABLET RESPONSIVE SYSTEM (Production Grade)
    ========================================================================== */
 
+/* Dashboard Tables Split Grid */
+.sa-dashboard-split {
+  display: grid;
+  grid-template-columns: 1.6fr 1.2fr;
+  gap: 24px;
+}
+
 @media (max-width: 992px) {
   /* Sidebar Drawer */
   .sa-sidebar {
@@ -691,7 +708,9 @@ body.sa-sidebar-collapsed .sa-main {
   .sa-main {
     margin-left: 0 !important;
     width: 100% !important;
-    min-width: 0;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow-x: hidden !important;
     padding-bottom: 90px;
   }
 
@@ -714,6 +733,7 @@ body.sa-sidebar-collapsed .sa-main {
   .sa-topbar-left {
     gap: 10px;
     min-width: 0;
+    flex: 1;
   }
   .sa-breadcrumb {
     font-size: 12px;
@@ -723,18 +743,29 @@ body.sa-sidebar-collapsed .sa-main {
     text-overflow: ellipsis;
   }
   .sa-topbar-right {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
     gap: 8px;
   }
   .sa-btn-link span,
-  .sa-btn-logout span {
-    display: none;
+  .sa-btn-logout span,
+  .sa-topbar-right a span,
+  .sa-topbar-right button span {
+    display: none !important;
   }
   .sa-btn-link,
-  .sa-btn-logout {
-    padding: 0 10px;
-    height: 36px;
-    min-width: 36px;
-    justify-content: center;
+  .sa-btn-logout,
+  .sa-topbar-right a,
+  .sa-topbar-right button {
+    padding: 0 !important;
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: var(--sa-radius-full) !important;
   }
 
   /* Content */
@@ -748,27 +779,23 @@ body.sa-sidebar-collapsed .sa-main {
     gap: 12px;
   }
 
-  /* Telemetry Grid */
+  /* Telemetry Grid & Dashboard Split */
   .sa-telemetry-grid,
   .sa-dashboard-split {
     grid-template-columns: 1fr !important;
-    gap: 16px;
+    gap: 20px !important;
   }
 }
 
-@media (max-width: 640px) {
-  body {
-    font-size: 13.5px;
+@media (max-width: 768px) {
+  /* Complete Topbar Collision Fix */
+  .sa-breadcrumb {
+    display: none !important;
   }
 
   .sa-topbar {
     padding: 0 12px;
     height: 56px;
-  }
-
-  .sa-breadcrumb {
-    max-width: 110px;
-    font-size: 11px;
   }
 
   .sa-content {
