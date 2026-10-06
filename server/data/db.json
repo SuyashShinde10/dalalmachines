@@ -9,7 +9,7 @@
       "name": "System Developer",
       "active": true,
       "createdAt": "2026-10-06T09:58:03.305Z",
-      "lastLogin": "2026-10-06T10:26:17.443Z"
+      "lastLogin": "2026-10-06T10:51:46.545Z"
     },
     {
       "id": "usr_admin",
@@ -20,10 +20,36 @@
       "name": "Dalal Inventory Admin",
       "active": true,
       "createdAt": "2026-10-06T09:58:03.484Z",
-      "lastLogin": "2026-10-06T10:30:31.579Z"
+      "lastLogin": "2026-10-06T10:56:35.146Z"
     }
   ],
   "products": [
+    {
+      "id": "P00099-TEST",
+      "name": "5000T Heavy Hydraulic Forging Press - DEMO",
+      "section": "forming",
+      "category": "hot-forging-press",
+      "categoryName": "Hot Forging Press",
+      "make": "India",
+      "model": "Dalal Heavy Forging / D-5000",
+      "year": 2025,
+      "tonnage": 5000,
+      "location": "In Stock PUNE",
+      "condition": "Execellet",
+      "image": "uploads/dalalmachines_visitor_flow_diagram-1791284372802-707307.png",
+      "galleryImages": [
+        "uploads/dalalmachines_visitor_flow_diagram-1791284372802-707307.png"
+      ],
+      "specs": {},
+      "isCustom": false,
+      "customBadges": [],
+      "priceText": "Price On Request",
+      "brochurePdf": null,
+      "status": "sold",
+      "createdAt": "2026-10-06T10:59:36.025Z",
+      "updatedAt": "2026-10-06T11:01:06.923Z",
+      "createdBy": "admin"
+    },
     {
       "id": "P00099-CUST",
       "name": "Custom 4000T Hydraulic Closed Die Forging Press with OMPI Clutch",
@@ -1676,6 +1702,50 @@
     }
   ],
   "logs": [
+    {
+      "id": "log_55ec8846",
+      "timestamp": "2026-10-06T11:01:06.933Z",
+      "userId": "usr_admin",
+      "username": "admin",
+      "role": "admin",
+      "action": "PRODUCT_UPDATED",
+      "target": "P00099-TEST",
+      "details": "Updated details for machine 5000T Heavy Hydraulic Forging Press - DEMO",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_1889c094",
+      "timestamp": "2026-10-06T10:59:36.045Z",
+      "userId": "usr_admin",
+      "username": "admin",
+      "role": "admin",
+      "action": "PRODUCT_CREATED",
+      "target": "P00099-TEST",
+      "details": "Created machine 5000T Heavy Hydraulic Forging Press - DEMO (Standard Machine)",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_a92aeda1",
+      "timestamp": "2026-10-06T10:56:35.160Z",
+      "userId": "usr_admin",
+      "username": "admin",
+      "role": "admin",
+      "action": "USER_LOGIN",
+      "target": "AUTH",
+      "details": "User logged in successfully from ::1",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_91e26574",
+      "timestamp": "2026-10-06T10:51:46.576Z",
+      "userId": "usr_superadmin",
+      "username": "developer",
+      "role": "superadmin",
+      "action": "USER_LOGIN",
+      "target": "AUTH",
+      "details": "User logged in successfully from ::1",
+      "ip": "127.0.0.1"
+    },
     {
       "id": "log_88afa113",
       "timestamp": "2026-10-06T10:30:31.595Z",

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Team Accounts | Super Admin Master Console</title>
+  <link rel="shortcut icon" href="/new/Machinery/images/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="/new/Machinery/css/font-awesome.css">
+  <link rel="stylesheet" href="css/superadmin.css">
+</head>
+<body>
+
+  <div class="sa-wrapper">
+    <aside class="sa-sidebar">
+      <div class="sa-sidebar-header">
+        <a href="dashboard.html" class="sa-brand-badge">
+          <img src="/new/Machinery/images/logo-dalal-light.png" alt="Dalal Machine Tools">
+          <span class="sa-brand-badge-tag">MASTER</span>
+        </a>
+      </div>
+
+      <nav class="sa-nav">
+        <div class="sa-nav-section-title">Master Telemetry</div>
+        <a href="dashboard.html" class="sa-nav-link">
+          <i class="fa fa-dashboard"></i>
+          <span>Executive Overview</span>
+        </a>
+
+        <div class="sa-nav-section-title">Security & Governance</div>
+        <a href="users.html" class="sa-nav-link active">
+          <i class="fa fa-users"></i>
+          <span>Admin Team Accounts</span>
+          <span class="sa-nav-badge" id="sa-badge-users">...</span>
+        </a>
+        <a href="logs.html" class="sa-nav-link">
+          <i class="fa fa-shield"></i>
+          <span>Security Audit Trail</span>
+        </a>
+
+        <div class="sa-nav-section-title">Database & Engine</div>
+        <a href="settings.html" class="sa-nav-link">
+          <i class="fa fa-database"></i>
+          <span>Database Backups & Sync</span>
+        </a>
+
+        <div class="sa-nav-section-title">Operations Portal</div>
+        <a href="/admin/dashboard.html" target="_blank" class="sa-nav-link">
+          <i class="fa fa-external-link"></i>
+          <span>Open Staff Admin &rarr;</span>
+        </a>
+      </nav>
+
+      <div class="sa-sidebar-footer">
+        <div class="sa-user-pill">
+          <div class="sa-user-avatar" id="sa-user-avatar">D</div>
+          <div class="sa-user-meta">
+            <span class="sa-user-name" id="sa-user-name">Developer</span>
+            <span class="sa-user-role">SUPER ADMIN</span>
+          </div>
+        </div>
+        <button class="sa-btn-logout" title="Sign Out">
+          <i class="fa fa-power-off"></i>
+        </button>
+      </div>
+    </aside>
+
+    <main class="sa-main">
+      <header class="sa-topbar">
+        <div class="sa-topbar-left">
+          <button id="sa-btn-toggle" class="sa-btn-toggle">
+            <i class="fa fa-bars"></i>
+          </button>
+          <div class="sa-breadcrumb">
+            Master Console &bull; <span>Admin Team Accounts & Roles</span>
+          </div>
+        </div>
+        <div class="sa-topbar-right">
+          <button class="sa-btn-logout" title="Sign Out">
+            <i class="fa fa-sign-out"></i>
+            <span>Exit Console</span>
+          </button>
+        </div>
+      </header>
+
+      <div class="sa-content">
+        <div class="sa-page-header">
+          <div>
+            <h1 class="sa-page-title">Team Access & Permission Governance</h1>
+            <p class="sa-page-sub">Provision new staff credentials, assign administrative clearance, reset passwords, or suspend access.</p>
+          </div>
+          <div>
+            <button id="btn-open-create" class="sa-btn sa-btn-primary">
+              <i class="fa fa-user-plus"></i> Provision New Admin
+            </button>
+          </div>
+        </div>
+
+        <!-- Create User Card (Collapsible) -->
+        <div class="sa-card" id="card-create-user" style="display: none; border-color: var(--sa-gold);">
+          <div class="sa-card-header">
+            <div class="sa-card-title">
+              <i class="fa fa-user-plus" style="color: var(--sa-gold);"></i>
+              <span id="form-user-title">Provision New Administrative User</span>
+            </div>
+            <button type="button" id="btn-close-form" class="sa-btn sa-btn-secondary sa-btn-sm">&times; Cancel</button>
+          </div>
+          <div class="sa-card-body">
+            <form id="sa-user-form">
+              <input type="hidden" id="input-edit-id" value="">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 16px;">
+                <div class="sa-form-group">
+                  <label class="sa-label">Full Name</label>
+                  <input type="text" id="input-name" class="sa-input" placeholder="e.g. Vinit Dalal" required>
+                </div>
+                <div class="sa-form-group">
+                  <label class="sa-label">Username (Login ID)</label>
+                  <input type="text" id="input-username" class="sa-input" placeholder="e.g. vinit_dalal" required>
+                </div>
+                <div class="sa-form-group">
+                  <label class="sa-label">Email Address</label>
+                  <input type="email" id="input-email" class="sa-input" placeholder="e.g. vinit@dalalmachines.com" required>
+                </div>
+                <div class="sa-form-group">
+                  <label class="sa-label">Access Role</label>
+                  <select id="input-role" class="sa-select">
+                    <option value="admin">Staff Admin (Inventory & Leads Only)</option>
+                    <option value="superadmin">Super Admin (Full Master Console)</option>
+                  </select>
+                </div>
+                <div class="sa-form-group" id="group-password">
+                  <label class="sa-label">Password</label>
+                  <input type="password" id="input-password" class="sa-input" placeholder="Minimum 6 characters" required>
+                </div>
+              </div>
+              <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                <button type="button" id="btn-cancel-create" class="sa-btn sa-btn-secondary">Cancel</button>
+                <button type="submit" id="btn-save-user" class="sa-btn sa-btn-primary">Save User Credentials</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Users Table -->
+        <div class="sa-card">
+          <div class="sa-card-header">
+            <div class="sa-card-title">Authorized Accounts Ledger</div>
+          </div>
+          <div class="sa-card-body" style="padding: 0;">
+            <table class="sa-table">
+              <thead>
+                <tr>
+                  <th>User / Name</th>
+                  <th>Username</th>
+                  <th>Email</th>
+                  <th>Role Clearance</th>
+                  <th>Account Status</th>
+                  <th style="text-align: right;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="sa-users-tbody">
+                <tr><td colspan="6" style="text-align: center; padding: 24px;">Loading accounts...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="js/superadmin-core.js"></script>
+  <script>
+    let allUsers = [];
+
+    (async () => {
+      const me = await SuperAdminCore.requireSuperAdmin();
+      if (!me) return;
+
+      loadUsers();
+
+      const cardForm = document.getElementById('card-create-user');
+      const openBtn = document.getElementById('btn-open-create');
+      const closeBtn = document.getElementById('btn-close-form');
+      const cancelBtn = document.getElementById('btn-cancel-create');
+
+      openBtn.addEventListener('click', () => {
+        document.getElementById('sa-user-form').reset();
+        document.getElementById('input-edit-id').value = '';
+        document.getElementById('input-username').disabled = false;
+        document.getElementById('input-password').required = true;
+        document.getElementById('group-password').style.display = 'block';
+        document.getElementById('form-user-title').textContent = 'Provision New Administrative User';
+        cardForm.style.display = 'block';
+        cardForm.scrollIntoView({ behavior: 'smooth' });
+      });
+
+      const hideForm = () => { cardForm.style.display = 'none'; };
+      closeBtn.addEventListener('click', hideForm);
+      cancelBtn.addEventListener('click', hideForm);
+
+      document.getElementById('sa-user-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const editId = document.getElementById('input-edit-id').value;
+        const payload = {
+          name: document.getElementById('input-name').value.trim(),
+          email: document.getElementById('input-email').value.trim(),
+          role: document.getElementById('input-role').value
+        };
+
+        if (!editId) {
+          payload.username = document.getElementById('input-username').value.trim();
+          payload.password = document.getElementById('input-password').value;
+          const res = await SuperAdminCore.api('/api/users', { method: 'POST', body: JSON.stringify(payload) });
+          if (res.success) {
+            SuperAdminCore.toast('User created successfully');
+            hideForm();
+            loadUsers();
+          } else {
+            SuperAdminCore.toast(res.message || 'Failed to create user', 'error');
+          }
+        } else {
+          const pw = document.getElementById('input-password').value;
+          if (pw) payload.password = pw;
+          const res = await SuperAdminCore.api(`/api/users/${editId}`, { method: 'PUT', body: JSON.stringify(payload) });
+          if (res.success) {
+            SuperAdminCore.toast('User updated successfully');
+            hideForm();
+            loadUsers();
+          } else {
+            SuperAdminCore.toast(res.message || 'Failed to update user', 'error');
+          }
+        }
+      });
+    })();
+
+    async function loadUsers() {
+      const res = await SuperAdminCore.api('/api/users');
+      if (res.success) {
+        allUsers = res.users;
+        document.getElementById('sa-badge-users').textContent = allUsers.length;
+        const tbody = document.getElementById('sa-users-tbody');
+        tbody.innerHTML = allUsers.map(u => `
+          <tr>
+            <td>
+              <strong style="color: #fff; font-size: 14px;">${u.name || u.username}</strong>
+              <div style="font-size: 11px; color: var(--sa-text-dim);">ID: ${u.id}</div>
+            </td>
+            <td><code style="color: var(--sa-gold); font-family: 'JetBrains Mono';">${u.username}</code></td>
+            <td>${u.email}</td>
+            <td>
+              <span class="sa-badge ${u.role === 'superadmin' ? 'sa-badge-gold' : 'sa-badge-active'}">
+                ${u.role.toUpperCase()}
+              </span>
+            </td>
+            <td>
+              <span class="sa-badge ${u.active ? 'sa-badge-active' : 'sa-badge-danger'}">
+                ${u.active ? 'ACTIVE' : 'SUSPENDED'}
+              </span>
+            </td>
+            <td style="text-align: right;">
+              <button onclick="editUser('${u.id}')" class="sa-btn sa-btn-secondary sa-btn-sm" title="Edit User">
+                <i class="fa fa-pencil"></i>
+              </button>
+              <button onclick="toggleUserStatus('${u.id}', ${!u.active})" class="sa-btn sa-btn-secondary sa-btn-sm" title="${u.active ? 'Suspend' : 'Activate'}">
+                <i class="fa fa-${u.active ? 'ban' : 'check'}"></i>
+              </button>
+              <button onclick="deleteUser('${u.id}', '${u.username}')" class="sa-btn sa-btn-secondary sa-btn-sm" style="color: #f87171;" title="Delete User">
+                <i class="fa fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        `).join('');
+      }
+    }
+
+    function editUser(id) {
+      const u = allUsers.find(x => x.id === id);
+      if (!u) return;
+      document.getElementById('input-edit-id').value = u.id;
+      document.getElementById('input-name').value = u.name || '';
+      document.getElementById('input-username').value = u.username;
+      document.getElementById('input-username').disabled = true;
+      document.getElementById('input-email').value = u.email || '';
+      document.getElementById('input-role').value = u.role;
+      document.getElementById('input-password').value = '';
+      document.getElementById('input-password').required = false;
+      document.getElementById('input-password').placeholder = 'Leave blank to keep current password';
+      document.getElementById('form-user-title').textContent = `Edit Account: ${u.username}`;
+      const card = document.getElementById('card-create-user');
+      card.style.display = 'block';
+      card.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    async function toggleUserStatus(id, newActive) {
+      const res = await SuperAdminCore.api(`/api/users/${id}`, { method: 'PUT', body: JSON.stringify({ active: newActive }) });
+      if (res.success) {
+        SuperAdminCore.toast(`Account ${newActive ? 'activated' : 'suspended'}`);
+        loadUsers();
+      } else {
+        SuperAdminCore.toast(res.message || 'Status change failed', 'error');
+      }
+    }
+
+    async function deleteUser(id, username) {
+      if (!confirm(`Permanently delete account "${username}"?`)) return;
+      const res = await SuperAdminCore.api(`/api/users/${id}`, { method: 'DELETE' });
+      if (res.success) {
+        SuperAdminCore.toast('Account removed');
+        loadUsers();
+      } else {
+        SuperAdminCore.toast(res.message || 'Delete failed', 'error');
+      }
+    }
+  </script>
+</body>
+</html>

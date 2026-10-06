@@ -22,6 +22,7 @@ app.use(cookieParser());
 // Static File Directories
 app.use('/uploads', express.static(config.UPLOADS_DIR));
 app.use('/admin', express.static(config.ADMIN_DIR));
+app.use('/superadmin', express.static(config.SUPERADMIN_DIR));
 app.use('/new/Machinery', express.static(config.PUBLIC_DIR));
 app.use('/hub', express.static(path.join(__dirname, '..')));
 app.use('/', express.static(config.PUBLIC_DIR));
@@ -37,6 +38,10 @@ app.get('/new/Machinery', (req, res) => {
 
 app.get('/admin', (req, res) => {
   res.sendFile(path.join(config.ADMIN_DIR, 'index.html'));
+});
+
+app.get('/superadmin', (req, res) => {
+  res.sendFile(path.join(config.SUPERADMIN_DIR, 'index.html'));
 });
 
 // API Routes

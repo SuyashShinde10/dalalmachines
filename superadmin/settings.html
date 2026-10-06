@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Database & Engine Governance | Super Admin Master Console</title>
+  <link rel="shortcut icon" href="/new/Machinery/images/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="/new/Machinery/css/font-awesome.css">
+  <link rel="stylesheet" href="css/superadmin.css">
+</head>
+<body>
+
+  <div class="sa-wrapper">
+    <aside class="sa-sidebar">
+      <div class="sa-sidebar-header">
+        <a href="dashboard.html" class="sa-brand-badge">
+          <img src="/new/Machinery/images/logo-dalal-light.png" alt="Dalal Machine Tools">
+          <span class="sa-brand-badge-tag">MASTER</span>
+        </a>
+      </div>
+
+      <nav class="sa-nav">
+        <div class="sa-nav-section-title">Master Telemetry</div>
+        <a href="dashboard.html" class="sa-nav-link">
+          <i class="fa fa-dashboard"></i>
+          <span>Executive Overview</span>
+        </a>
+
+        <div class="sa-nav-section-title">Security & Governance</div>
+        <a href="users.html" class="sa-nav-link">
+          <i class="fa fa-users"></i>
+          <span>Admin Team Accounts</span>
+        </a>
+        <a href="logs.html" class="sa-nav-link">
+          <i class="fa fa-shield"></i>
+          <span>Security Audit Trail</span>
+        </a>
+
+        <div class="sa-nav-section-title">Database & Engine</div>
+        <a href="settings.html" class="sa-nav-link active">
+          <i class="fa fa-database"></i>
+          <span>Database Backups & Sync</span>
+        </a>
+
+        <div class="sa-nav-section-title">Operations Portal</div>
+        <a href="/admin/dashboard.html" target="_blank" class="sa-nav-link">
+          <i class="fa fa-external-link"></i>
+          <span>Open Staff Admin &rarr;</span>
+        </a>
+      </nav>
+
+      <div class="sa-sidebar-footer">
+        <div class="sa-user-pill">
+          <div class="sa-user-avatar" id="sa-user-avatar">D</div>
+          <div class="sa-user-meta">
+            <span class="sa-user-name" id="sa-user-name">Developer</span>
+            <span class="sa-user-role">SUPER ADMIN</span>
+          </div>
+        </div>
+        <button class="sa-btn-logout" title="Sign Out">
+          <i class="fa fa-power-off"></i>
+        </button>
+      </div>
+    </aside>
+
+    <main class="sa-main">
+      <header class="sa-topbar">
+        <div class="sa-topbar-left">
+          <button id="sa-btn-toggle" class="sa-btn-toggle">
+            <i class="fa fa-bars"></i>
+          </button>
+          <div class="sa-breadcrumb">
+            Master Console &bull; <span>Database & Sync Engine Governance</span>
+          </div>
+        </div>
+        <div class="sa-topbar-right">
+          <button class="sa-btn-logout" title="Sign Out">
+            <i class="fa fa-sign-out"></i>
+            <span>Exit Console</span>
+          </button>
+        </div>
+      </header>
+
+      <div class="sa-content">
+        <div class="sa-page-header">
+          <div>
+            <h1 class="sa-page-title">Database Backups & Engine Synchronization</h1>
+            <p class="sa-page-sub">Export full offline database snapshots, trigger static catalog recompilation, and update routing configuration.</p>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+          <!-- 1. Database Backup & Restore -->
+          <div class="sa-card">
+            <div class="sa-card-header">
+              <div class="sa-card-title">
+                <i class="fa fa-database" style="color: var(--sa-gold);"></i>
+                <span>Database Snapshots & Disaster Recovery</span>
+              </div>
+            </div>
+            <div class="sa-card-body">
+              <p style="font-size: 13.5px; color: var(--sa-text-muted); margin-bottom: 20px;">
+                Download an immutable JSON snapshot of all machinery products, specs, customer leads, activity logs, and system settings to your local computer.
+              </p>
+
+              <div style="margin-bottom: 24px;">
+                <button id="btn-download-backup" class="sa-btn sa-btn-primary" style="width: 100%; justify-content: center;">
+                  <i class="fa fa-download"></i> Download Full Database JSON Snapshot
+                </button>
+              </div>
+
+              <div style="border-top: 1px solid var(--sa-border); padding-top: 20px;">
+                <label class="sa-label">Restore Database from JSON Snapshot</label>
+                <div style="display: flex; gap: 10px;">
+                  <input type="file" id="file-restore" accept=".json" class="sa-input" style="padding: 7px 10px;">
+                  <button type="button" id="btn-restore" class="sa-btn sa-btn-secondary" style="white-space: nowrap;">
+                    <i class="fa fa-upload"></i> Restore
+                  </button>
+                </div>
+                <small style="color: var(--sa-text-dim); display: block; margin-top: 6px;">
+                  Caution: Restoring replaces active database with the uploaded file contents.
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Two-Way Sync Engine -->
+          <div class="sa-card">
+            <div class="sa-card-header">
+              <div class="sa-card-title">
+                <i class="fa fa-bolt" style="color: var(--sa-gold);"></i>
+                <span>Catalog Re-Export & Static Two-Way Sync</span>
+              </div>
+            </div>
+            <div class="sa-card-body">
+              <p style="font-size: 13.5px; color: var(--sa-text-muted); margin-bottom: 20px;">
+                The backend automatically updates <code>catalog-data.js</code> on every machine change. You can also trigger an immediate manual re-export to verify static files.
+              </p>
+
+              <div style="background: rgba(248, 157, 19, 0.06); border: 1px solid rgba(248, 157, 19, 0.2); border-radius: var(--sa-radius-sm); padding: 14px 16px; margin-bottom: 24px;">
+                <div style="font-size: 13px; font-weight: 600; color: #fff;">Status: Auto-Sync Engine Active</div>
+                <div style="font-size: 12px; color: var(--sa-text-muted); margin-top: 4px;">Destination: <code>/new/Machinery/js/catalog-data.js</code></div>
+              </div>
+
+              <button id="btn-force-sync-2" class="sa-btn sa-btn-primary" style="width: 100%; justify-content: center;">
+                <i class="fa fa-refresh"></i> Force Catalog Static Re-Export
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Enterprise Contact Routing Settings -->
+        <div class="sa-card" style="margin-top: 24px;">
+          <div class="sa-card-header">
+            <div class="sa-card-title">
+              <i class="fa fa-sliders" style="color: var(--sa-gold);"></i>
+              <span>Global Contact Routing & WhatsApp Number</span>
+            </div>
+          </div>
+          <div class="sa-card-body">
+            <form id="sa-settings-form">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+                <div class="sa-form-group">
+                  <label class="sa-label">Company Official Trading Name</label>
+                  <input type="text" id="set-sitename" class="sa-input" required>
+                </div>
+                <div class="sa-form-group">
+                  <label class="sa-label">Instant RFQ WhatsApp Number (with Country Code)</label>
+                  <input type="text" id="set-whatsapp" class="sa-input" placeholder="+919821232131" required>
+                </div>
+                <div class="sa-form-group">
+                  <label class="sa-label">Official RFQ Routing Email</label>
+                  <input type="email" id="set-email" class="sa-input" placeholder="dalalmachine@gmail.com" required>
+                </div>
+              </div>
+
+              <div style="display: flex; justify-content: flex-end; margin-top: 10px;">
+                <button type="submit" class="sa-btn sa-btn-primary">
+                  <i class="fa fa-check"></i> Save Global Settings
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="js/superadmin-core.js"></script>
+  <script>
+    (async () => {
+      const user = await SuperAdminCore.requireSuperAdmin();
+      if (!user) return;
+
+      loadSettings();
+
+      // Download Backup
+      document.getElementById('btn-download-backup').addEventListener('click', async () => {
+        const token = SuperAdminCore.getToken();
+        const res = await fetch('/api/system/backup', { headers: { 'Authorization': `Bearer ${token}` } });
+        const data = await res.json();
+        if (data.success && data.backup) {
+          const blob = new Blob([JSON.stringify(data.backup, null, 2)], { type: 'application/json' });
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(blob);
+          a.download = `dalal_db_snapshot_${new Date().toISOString().slice(0, 10)}.json`;
+          a.click();
+          SuperAdminCore.toast('Snapshot exported and downloaded');
+        } else {
+          SuperAdminCore.toast('Backup failed', 'error');
+        }
+      });
+
+      // Force Sync
+      document.getElementById('btn-force-sync-2').addEventListener('click', async () => {
+        const res = await SuperAdminCore.api('/api/system/sync-static', { method: 'POST' });
+        if (res.success) {
+          SuperAdminCore.toast('Static catalog synchronized successfully');
+        } else {
+          SuperAdminCore.toast(res.message || 'Sync failed', 'error');
+        }
+      });
+
+      // Restore
+      document.getElementById('btn-restore').addEventListener('click', async () => {
+        const fileInput = document.getElementById('file-restore');
+        if (!fileInput.files.length) {
+          alert('Please select a JSON snapshot file first.');
+          return;
+        }
+        if (!confirm('Warning: Restoring will overwrite the current database. Continue?')) return;
+
+        const reader = new FileReader();
+        reader.onload = async (e) => {
+          try {
+            const parsed = JSON.parse(e.target.result);
+            const res = await SuperAdminCore.api('/api/system/restore', {
+              method: 'POST',
+              body: JSON.stringify({ backup: parsed })
+            });
+            if (res.success) {
+              SuperAdminCore.toast('Database restored successfully');
+              setTimeout(() => location.reload(), 1000);
+            } else {
+              SuperAdminCore.toast(res.message || 'Restore failed', 'error');
+            }
+          } catch (err) {
+            alert('Invalid JSON file format.');
+          }
+        };
+        reader.readAsText(fileInput.files[0]);
+      });
+
+      // Save Settings Form
+      document.getElementById('sa-settings-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const payload = {
+          siteName: document.getElementById('set-sitename').value.trim(),
+          whatsappNumber: document.getElementById('set-whatsapp').value.trim(),
+          contactEmail: document.getElementById('set-email').value.trim()
+        };
+        const res = await SuperAdminCore.api('/api/system/settings', {
+          method: 'PUT',
+          body: JSON.stringify(payload)
+        });
+        if (res.success) {
+          SuperAdminCore.toast('Global settings updated successfully');
+        } else {
+          SuperAdminCore.toast(res.message || 'Failed to update settings', 'error');
+        }
+      });
+    })();
+
+    async function loadSettings() {
+      const res = await SuperAdminCore.api('/api/system/settings');
+      if (res.success && res.settings) {
+        document.getElementById('set-sitename').value = res.settings.siteName || '';
+        document.getElementById('set-whatsapp').value = res.settings.whatsappNumber || '';
+        document.getElementById('set-email').value = res.settings.contactEmail || '';
+      }
+    }
+  </script>
+</body>
+</html>

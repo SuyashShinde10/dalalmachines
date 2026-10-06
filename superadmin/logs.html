@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Security & Activity Audit Ledger | Super Admin Master Console</title>
+  <link rel="shortcut icon" href="/new/Machinery/images/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="/new/Machinery/css/font-awesome.css">
+  <link rel="stylesheet" href="css/superadmin.css">
+</head>
+<body>
+
+  <div class="sa-wrapper">
+    <aside class="sa-sidebar">
+      <div class="sa-sidebar-header">
+        <a href="dashboard.html" class="sa-brand-badge">
+          <img src="/new/Machinery/images/logo-dalal-light.png" alt="Dalal Machine Tools">
+          <span class="sa-brand-badge-tag">MASTER</span>
+        </a>
+      </div>
+
+      <nav class="sa-nav">
+        <div class="sa-nav-section-title">Master Telemetry</div>
+        <a href="dashboard.html" class="sa-nav-link">
+          <i class="fa fa-dashboard"></i>
+          <span>Executive Overview</span>
+        </a>
+
+        <div class="sa-nav-section-title">Security & Governance</div>
+        <a href="users.html" class="sa-nav-link">
+          <i class="fa fa-users"></i>
+          <span>Admin Team Accounts</span>
+        </a>
+        <a href="logs.html" class="sa-nav-link active">
+          <i class="fa fa-shield"></i>
+          <span>Security Audit Trail</span>
+        </a>
+
+        <div class="sa-nav-section-title">Database & Engine</div>
+        <a href="settings.html" class="sa-nav-link">
+          <i class="fa fa-database"></i>
+          <span>Database Backups & Sync</span>
+        </a>
+
+        <div class="sa-nav-section-title">Operations Portal</div>
+        <a href="/admin/dashboard.html" target="_blank" class="sa-nav-link">
+          <i class="fa fa-external-link"></i>
+          <span>Open Staff Admin &rarr;</span>
+        </a>
+      </nav>
+
+      <div class="sa-sidebar-footer">
+        <div class="sa-user-pill">
+          <div class="sa-user-avatar" id="sa-user-avatar">D</div>
+          <div class="sa-user-meta">
+            <span class="sa-user-name" id="sa-user-name">Developer</span>
+            <span class="sa-user-role">SUPER ADMIN</span>
+          </div>
+        </div>
+        <button class="sa-btn-logout" title="Sign Out">
+          <i class="fa fa-power-off"></i>
+        </button>
+      </div>
+    </aside>
+
+    <main class="sa-main">
+      <header class="sa-topbar">
+        <div class="sa-topbar-left">
+          <button id="sa-btn-toggle" class="sa-btn-toggle">
+            <i class="fa fa-bars"></i>
+          </button>
+          <div class="sa-breadcrumb">
+            Master Console &bull; <span>System Security & Audit Trail</span>
+          </div>
+        </div>
+        <div class="sa-topbar-right">
+          <button class="sa-btn-logout" title="Sign Out">
+            <i class="fa fa-sign-out"></i>
+            <span>Exit Console</span>
+          </button>
+        </div>
+      </header>
+
+      <div class="sa-content">
+        <div class="sa-page-header">
+          <div>
+            <h1 class="sa-page-title">Immutable Security & Activity Ledger</h1>
+            <p class="sa-page-sub">Historical forensic log of all administrative actions, machine edits, deletions, user logins, and database syncs.</p>
+          </div>
+          <div>
+            <button id="btn-refresh-logs" class="sa-btn sa-btn-secondary">
+              <i class="fa fa-refresh"></i> Refresh Ledger
+            </button>
+          </div>
+        </div>
+
+        <div class="sa-card">
+          <div class="sa-card-header">
+            <div class="sa-card-title">Activity Trail Records</div>
+            <div id="log-count-tag" style="font-family: 'JetBrains Mono'; font-size: 12px; color: var(--sa-gold);">Loading...</div>
+          </div>
+          <div class="sa-card-body" style="padding: 0;">
+            <table class="sa-table">
+              <thead>
+                <tr>
+                  <th>Timestamp</th>
+                  <th>IP Address</th>
+                  <th>Actor / Username</th>
+                  <th>Role</th>
+                  <th>Action Trigger</th>
+                  <th>Target Object</th>
+                  <th>Operation Details</th>
+                </tr>
+              </thead>
+              <tbody id="sa-logs-tbody">
+                <tr><td colspan="7" style="text-align: center; padding: 24px;">Loading logs...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="js/superadmin-core.js"></script>
+  <script>
+    (async () => {
+      const user = await SuperAdminCore.requireSuperAdmin();
+      if (!user) return;
+
+      loadLogs();
+      document.getElementById('btn-refresh-logs').addEventListener('click', loadLogs);
+    })();
+
+    async function loadLogs() {
+      const res = await SuperAdminCore.api('/api/logs');
+      if (res.success) {
+        document.getElementById('log-count-tag').textContent = `${res.logs.length} Total Events Logged`;
+        const tbody = document.getElementById('sa-logs-tbody');
+        tbody.innerHTML = res.logs.map(l => {
+          const dt = new Date(l.timestamp);
+          const time = dt.toLocaleTimeString() + ' &bull; ' + dt.toLocaleDateString();
+          return `
+            <tr>
+              <td><small style="font-family: 'JetBrains Mono'; color: var(--sa-text-dim);">${time}</small></td>
+              <td><small style="font-family: 'JetBrains Mono'; color: var(--sa-text-dim);">${l.ip || '127.0.0.1'}</small></td>
+              <td><strong style="color: #fff;">${l.username}</strong></td>
+              <td><span class="sa-badge ${l.role === 'superadmin' ? 'sa-badge-gold' : 'sa-badge-active'}">${l.role}</span></td>
+              <td><span class="sa-badge sa-badge-gold" style="font-size: 10px;">${l.action}</span></td>
+              <td><code>${l.target || '-'}</code></td>
+              <td><small style="color: var(--sa-text-muted);">${l.details || '-'}</small></td>
+            </tr>
+          `;
+        }).join('');
+      }
+    }
+  </script>
+</body>
+</html>

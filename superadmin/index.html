@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Master Executive Console | Dalal Machine Tools Agency Pvt. Ltd.</title>
+  <link rel="shortcut icon" href="/new/Machinery/images/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="/new/Machinery/css/font-awesome.css">
+  <link rel="stylesheet" href="css/superadmin.css">
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 24px;
+      background: radial-gradient(circle at 50% 15%, rgba(248, 157, 19, 0.08) 0%, transparent 55%),
+                  #070a0f;
+    }
+    .sa-login-card {
+      width: 100%;
+      max-width: 440px;
+      background: #111622;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-top: 3px solid var(--sa-gold);
+      border-radius: var(--sa-radius-md);
+      padding: 38px 34px;
+      box-shadow: 0 24px 50px rgba(0, 0, 0, 0.7);
+    }
+    .sa-login-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .sa-login-logo {
+      height: 36px;
+      margin-bottom: 14px;
+      object-fit: contain;
+    }
+    .sa-login-title {
+      font-family: 'Barlow', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      color: #fff;
+    }
+    .sa-login-sub {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--sa-gold);
+      margin-top: 4px;
+    }
+    .sa-security-notice {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(248, 157, 19, 0.06);
+      border: 1px solid rgba(248, 157, 19, 0.2);
+      border-radius: var(--sa-radius-sm);
+      padding: 10px 14px;
+      font-size: 12px;
+      color: var(--sa-text-muted);
+      margin-bottom: 22px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sa-login-card">
+    <div class="sa-login-header">
+      <img src="/new/Machinery/images/logo-dalal-light.png" alt="Dalal Machine Tools" class="sa-login-logo">
+      <div class="sa-login-title">SUPER ADMIN MASTER CONSOLE</div>
+      <div class="sa-login-sub">Executive Level Access &bull; Dalal Group</div>
+    </div>
+
+    <div class="sa-security-notice">
+      <i class="fa fa-shield" style="color: var(--sa-gold); font-size: 16px;"></i>
+      <span>Restricted Area. Authorized administrative personnel only. All access is cryptographically audited.</span>
+    </div>
+
+    <div id="sa-alert" style="display: none; padding: 12px 14px; border-radius: 6px; margin-bottom: 20px; font-size: 13px;"></div>
+
+    <form id="sa-login-form">
+      <div class="sa-form-group">
+        <label class="sa-label" for="sa-input-id">Super Admin Identifier</label>
+        <input type="text" id="sa-input-id" class="sa-input" placeholder="developer@dalalmachines.com" required autofocus autocomplete="username" value="developer">
+      </div>
+
+      <div class="sa-form-group">
+        <label class="sa-label" for="sa-input-pw">Master Key / Password</label>
+        <div style="position: relative;">
+          <input type="password" id="sa-input-pw" class="sa-input" placeholder="••••••••••••" required autocomplete="current-password" value="Developer@2026">
+          <button type="button" id="sa-toggle-pw" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--sa-text-dim); cursor: pointer;">
+            <i class="fa fa-eye"></i>
+          </button>
+        </div>
+      </div>
+
+      <button type="submit" id="sa-btn-submit" class="sa-btn sa-btn-primary" style="width: 100%; justify-content: center; padding: 12px;">
+        <i class="fa fa-lock"></i>
+        <span>Authenticate & Enter Console</span>
+      </button>
+    </form>
+
+    <div style="margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--sa-border); display: flex; justify-content: space-between; font-size: 12px;">
+      <a href="/admin/index.html" style="color: var(--sa-text-muted); text-decoration: none;">&larr; Switch to Staff Admin Portal</a>
+      <a href="/new/Machinery/index.html" target="_blank" style="color: var(--sa-gold); text-decoration: none;">Public Website &rarr;</a>
+    </div>
+  </div>
+
+  <script src="js/superadmin-core.js"></script>
+  <script>
+    // If already authenticated as superadmin, redirect to dashboard
+    const existing = SuperAdminCore.getUser();
+    if (SuperAdminCore.getToken() && existing && existing.role === 'superadmin') {
+      window.location.href = '/superadmin/dashboard.html';
+    }
+
+    const form = document.getElementById('sa-login-form');
+    const idInput = document.getElementById('sa-input-id');
+    const pwInput = document.getElementById('sa-input-pw');
+    const alertBox = document.getElementById('sa-alert');
+    const submitBtn = document.getElementById('sa-btn-submit');
+    const togglePw = document.getElementById('sa-toggle-pw');
+
+    togglePw.addEventListener('click', () => {
+      const isPw = pwInput.type === 'password';
+      pwInput.type = isPw ? 'text' : 'password';
+      togglePw.querySelector('i').className = isPw ? 'fa fa-eye-slash' : 'fa fa-eye';
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      alertBox.style.display = 'none';
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fa fa-circle-o-notch fa-spin"></i> Authenticating Master Credentials...';
+
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            identifier: idInput.value.trim(),
+            password: pwInput.value
+          })
+        });
+
+        const data = await res.json();
+        if (data.success) {
+          if (data.user.role !== 'superadmin') {
+            alertBox.style.display = 'block';
+            alertBox.style.background = 'rgba(239, 68, 68, 0.15)';
+            alertBox.style.border = '1px solid #ef4444';
+            alertBox.style.color = '#f87171';
+            alertBox.textContent = 'Access Denied: Your account role does not have Super Admin privileges. Please use the Staff Admin Portal.';
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fa fa-lock"></i> <span>Authenticate & Enter Console</span>';
+            return;
+          }
+
+          SuperAdminCore.setSession(data.token, data.user);
+          alertBox.style.display = 'block';
+          alertBox.style.background = 'rgba(16, 185, 129, 0.15)';
+          alertBox.style.border = '1px solid #10b981';
+          alertBox.style.color = '#34d399';
+          alertBox.textContent = `Executive Clearance Granted. Welcome, ${data.user.name}. Entering Console...`;
+          setTimeout(() => {
+            window.location.href = '/superadmin/dashboard.html';
+          }, 500);
+        } else {
+          alertBox.style.display = 'block';
+          alertBox.style.background = 'rgba(239, 68, 68, 0.15)';
+          alertBox.style.border = '1px solid #ef4444';
+          alertBox.style.color = '#f87171';
+          alertBox.textContent = data.message || 'Authentication failed. Please verify credentials.';
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '<i class="fa fa-lock"></i> <span>Authenticate & Enter Console</span>';
+        }
+      } catch (err) {
+        alertBox.style.display = 'block';
+        alertBox.style.background = 'rgba(239, 68, 68, 0.15)';
+        alertBox.style.border = '1px solid #ef4444';
+        alertBox.style.color = '#f87171';
+        alertBox.textContent = 'Server connection error. Ensure backend server is running.';
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fa fa-lock"></i> <span>Authenticate & Enter Console</span>';
+      }
+    });
+  </script>
+</body>
+</html>

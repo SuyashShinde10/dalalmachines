@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Master Control Console | Dalal Machine Tools Agency Pvt. Ltd.</title>
+  <link rel="shortcut icon" href="/new/Machinery/images/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="/new/Machinery/css/font-awesome.css">
+  <link rel="stylesheet" href="css/superadmin.css">
+</head>
+<body>
+
+  <div class="sa-wrapper">
+    <!-- Sidebar -->
+    <aside class="sa-sidebar">
+      <div class="sa-sidebar-header">
+        <a href="dashboard.html" class="sa-brand-badge">
+          <img src="/new/Machinery/images/logo-dalal-light.png" alt="Dalal Machine Tools">
+          <span class="sa-brand-badge-tag">MASTER</span>
+        </a>
+      </div>
+
+      <nav class="sa-nav">
+        <div class="sa-nav-section-title">Master Telemetry</div>
+        <a href="dashboard.html" class="sa-nav-link active">
+          <i class="fa fa-dashboard"></i>
+          <span>Executive Overview</span>
+        </a>
+
+        <div class="sa-nav-section-title">Security & Governance</div>
+        <a href="users.html" class="sa-nav-link">
+          <i class="fa fa-users"></i>
+          <span>Admin Team Accounts</span>
+          <span class="sa-nav-badge" id="sa-badge-users">...</span>
+        </a>
+        <a href="logs.html" class="sa-nav-link">
+          <i class="fa fa-shield"></i>
+          <span>Security Audit Trail</span>
+        </a>
+
+        <div class="sa-nav-section-title">Database & Engine</div>
+        <a href="settings.html" class="sa-nav-link">
+          <i class="fa fa-database"></i>
+          <span>Database Backups & Sync</span>
+        </a>
+
+        <div class="sa-nav-section-title">Operations Portal</div>
+        <a href="/admin/dashboard.html" target="_blank" class="sa-nav-link">
+          <i class="fa fa-external-link"></i>
+          <span>Open Staff Admin &rarr;</span>
+        </a>
+        <a href="/new/Machinery/index.html" target="_blank" class="sa-nav-link">
+          <i class="fa fa-globe"></i>
+          <span>Open Public Website &rarr;</span>
+        </a>
+      </nav>
+
+      <div class="sa-sidebar-footer">
+        <div class="sa-user-pill">
+          <div class="sa-user-avatar" id="sa-user-avatar">D</div>
+          <div class="sa-user-meta">
+            <span class="sa-user-name" id="sa-user-name">Developer</span>
+            <span class="sa-user-role">SUPER ADMIN</span>
+          </div>
+        </div>
+        <button class="sa-btn-logout" title="Sign Out from Console">
+          <i class="fa fa-power-off"></i>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="sa-main">
+      <header class="sa-topbar">
+        <div class="sa-topbar-left">
+          <button id="sa-btn-toggle" class="sa-btn-toggle">
+            <i class="fa fa-bars"></i>
+          </button>
+          <div class="sa-breadcrumb">
+            Master Console &bull; <span>Executive Control & Telemetry</span>
+          </div>
+        </div>
+        <div class="sa-topbar-right">
+          <a href="/admin/dashboard.html" class="sa-btn-link">
+            <i class="fa fa-cubes"></i>
+            <span>Staff Inventory Portal</span>
+          </a>
+          <button class="sa-btn-logout" title="Sign Out">
+            <i class="fa fa-sign-out"></i>
+            <span>Exit Console</span>
+          </button>
+        </div>
+      </header>
+
+      <div class="sa-content">
+        <div class="sa-page-header">
+          <div>
+            <h1 class="sa-page-title">Executive Control Center</h1>
+            <p class="sa-page-sub">Comprehensive governance, live inventory sync telemetry, security audit ledger, and database recovery.</p>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <button id="btn-force-sync" class="sa-btn sa-btn-primary">
+              <i class="fa fa-refresh"></i> Force Catalog Sync
+            </button>
+            <a href="settings.html" class="sa-btn sa-btn-secondary">
+              <i class="fa fa-download"></i> System Backups
+            </a>
+          </div>
+        </div>
+
+        <!-- KPI Telemetry Grid -->
+        <div class="sa-kpi-grid">
+          <div class="sa-kpi-card">
+            <div class="sa-kpi-header">
+              <span class="sa-kpi-label">Audited Machinery</span>
+              <div class="sa-kpi-icon"><i class="fa fa-cubes"></i></div>
+            </div>
+            <div class="sa-kpi-val" id="val-machines">-</div>
+            <div class="sa-kpi-sub">Total heavy machines in catalog</div>
+          </div>
+
+          <div class="sa-kpi-card">
+            <div class="sa-kpi-header">
+              <span class="sa-kpi-label">Customer Quotation RFQs</span>
+              <div class="sa-kpi-icon"><i class="fa fa-envelope-open"></i></div>
+            </div>
+            <div class="sa-kpi-val" id="val-inquiries">-</div>
+            <div class="sa-kpi-sub">Active leads received</div>
+          </div>
+
+          <div class="sa-kpi-card">
+            <div class="sa-kpi-header">
+              <span class="sa-kpi-label">Staff & Admin Users</span>
+              <div class="sa-kpi-icon"><i class="fa fa-users"></i></div>
+            </div>
+            <div class="sa-kpi-val" id="val-users">-</div>
+            <div class="sa-kpi-sub">Authorized team accounts</div>
+          </div>
+
+          <div class="sa-kpi-card">
+            <div class="sa-kpi-header">
+              <span class="sa-kpi-label">Server Telemetry</span>
+              <div class="sa-kpi-icon"><i class="fa fa-heartbeat"></i></div>
+            </div>
+            <div class="sa-kpi-val" id="val-uptime" style="font-size: 24px; color: #34d399;">OPERATIONAL</div>
+            <div class="sa-kpi-sub">Node.js Express &bull; Port 5000</div>
+          </div>
+        </div>
+
+        <!-- Two Columns: Audit Trail & Admin Accounts -->
+        <div style="display: grid; grid-template-columns: 1.6fr 1.2fr; gap: 24px;">
+          <!-- Recent Audit Logs -->
+          <div class="sa-card">
+            <div class="sa-card-header">
+              <div class="sa-card-title">
+                <i class="fa fa-shield" style="color: var(--sa-gold);"></i>
+                <span>Live Security & Operational Audit Trail</span>
+              </div>
+              <a href="logs.html" class="sa-btn sa-btn-secondary sa-btn-sm">View Full Ledger &rarr;</a>
+            </div>
+            <div class="sa-card-body" style="padding: 0;">
+              <table class="sa-table">
+                <thead>
+                  <tr>
+                    <th>Timestamp</th>
+                    <th>Actor</th>
+                    <th>Action</th>
+                    <th>Details</th>
+                  </tr>
+                </thead>
+                <tbody id="sa-recent-logs-tbody">
+                  <tr><td colspan="4" style="text-align: center; padding: 24px; color: var(--sa-text-dim);">Loading audit trail...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Team Accounts Overview -->
+          <div class="sa-card">
+            <div class="sa-card-header">
+              <div class="sa-card-title">
+                <i class="fa fa-users" style="color: var(--sa-gold);"></i>
+                <span>Provisioned Team Accounts</span>
+              </div>
+              <a href="users.html" class="sa-btn sa-btn-secondary sa-btn-sm">Manage Users &rarr;</a>
+            </div>
+            <div class="sa-card-body" style="padding: 0;">
+              <table class="sa-table">
+                <thead>
+                  <tr>
+                    <th>Username</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="sa-recent-users-tbody">
+                  <tr><td colspan="3" style="text-align: center; padding: 24px; color: var(--sa-text-dim);">Loading users...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="js/superadmin-core.js"></script>
+  <script>
+    (async () => {
+      const user = await SuperAdminCore.requireSuperAdmin();
+      if (!user) return;
+
+      loadTelemetry();
+
+      // Force Sync Button
+      const syncBtn = document.getElementById('btn-force-sync');
+      if (syncBtn) {
+        syncBtn.addEventListener('click', async () => {
+          syncBtn.disabled = true;
+          syncBtn.innerHTML = '<i class="fa fa-circle-o-notch fa-spin"></i> Syncing Engine...';
+          const res = await SuperAdminCore.api('/api/system/sync-static', { method: 'POST' });
+          if (res.success) {
+            SuperAdminCore.toast('Catalog exported successfully to new/Machinery/js/catalog-data.js!');
+          } else {
+            SuperAdminCore.toast(res.message || 'Sync failed', 'error');
+          }
+          syncBtn.disabled = false;
+          syncBtn.innerHTML = '<i class="fa fa-refresh"></i> Force Catalog Sync';
+        });
+      }
+    })();
+
+    async function loadTelemetry() {
+      // 1. Machines count
+      const pRes = await SuperAdminCore.api('/api/products?all=true');
+      if (pRes.success) {
+        document.getElementById('val-machines').textContent = pRes.products.length;
+      }
+
+      // 2. Inquiries count
+      const iRes = await SuperAdminCore.api('/api/inquiries');
+      if (iRes.success) {
+        document.getElementById('val-inquiries').textContent = iRes.inquiries.length;
+      }
+
+      // 3. Users
+      const uRes = await SuperAdminCore.api('/api/users');
+      if (uRes.success) {
+        document.getElementById('val-users').textContent = uRes.users.length;
+        document.getElementById('sa-badge-users').textContent = uRes.users.length;
+
+        const tbody = document.getElementById('sa-recent-users-tbody');
+        tbody.innerHTML = uRes.users.map(u => `
+          <tr>
+            <td>
+              <strong style="color: #fff;">${u.username}</strong><br>
+              <small style="color: var(--sa-text-dim);">${u.email || '-'}</small>
+            </td>
+            <td>
+              <span class="sa-badge ${u.role === 'superadmin' ? 'sa-badge-gold' : 'sa-badge-active'}">
+                ${u.role.toUpperCase()}
+              </span>
+            </td>
+            <td>
+              <span class="sa-badge ${u.active ? 'sa-badge-active' : 'sa-badge-danger'}">
+                ${u.active ? 'ACTIVE' : 'DISABLED'}
+              </span>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      // 4. Recent logs
+      const lRes = await SuperAdminCore.api('/api/logs');
+      if (lRes.success) {
+        const tbody = document.getElementById('sa-recent-logs-tbody');
+        const recent = lRes.logs.slice(0, 6);
+        tbody.innerHTML = recent.map(l => {
+          const dt = new Date(l.timestamp);
+          const timeStr = dt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + ' ' + dt.toLocaleDateString([], { month: 'short', day: 'numeric' });
+          return `
+            <tr>
+              <td><small style="font-family: 'JetBrains Mono', monospace; color: var(--sa-text-dim); font-size: 11px;">${timeStr}</small></td>
+              <td><span style="font-weight: 600; color: #fff;">${l.username || 'SYSTEM'}</span></td>
+              <td><span class="sa-badge sa-badge-gold" style="font-size: 10px;">${l.action}</span></td>
+              <td><small style="color: var(--sa-text-muted);">${l.details || '-'}</small></td>
+            </tr>
+          `;
+        }).join('');
+      }
+    }
+  </script>
+</body>
+</html>
