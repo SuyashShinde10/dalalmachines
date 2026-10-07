@@ -74,16 +74,18 @@ const inquiryLimiter = rateLimit({
   }
 });
 
-// 6. High-Performance Static File Serving with Aggressive Caching
+// 6. High-Performance Static File Serving with Precision Cache Strategy
 const staticOptions = {
-  maxAge: '7d',
   etag: true,
   lastModified: true,
   setHeaders: (res, filePath) => {
-    if (/\.(jpg|jpeg|png|gif|webp|svg|ico|woff|woff2|ttf|eot)$/i.test(filePath)) {
-      res.setHeader('Cache-Control', 'public, max-age=2592000, immutable'); // 30 days cache for images & fonts
+    if (/\.html$/i.test(filePath)) {
+      // HTML documents must always revalidate so layout & script updates take effect immediately
+      res.setHeader('Cache-Control', 'no-cache, must-revalidate');
+    } else if (/\.(jpg|jpeg|png|gif|webp|svg|ico|woff|woff2|ttf|eot)$/i.test(filePath)) {
+      res.setHeader('Cache-Control', 'public, max-age=2592000, immutable'); // 30 days cache for immutable assets
     } else if (/\.(css|js)$/i.test(filePath)) {
-      res.setHeader('Cache-Control', 'public, max-age=604800'); // 7 days cache for CSS & JS
+      res.setHeader('Cache-Control', 'public, max-age=86400, must-revalidate'); // 1 day cache for CSS & JS with revalidation
     }
   }
 };
