@@ -1934,11 +1934,17 @@ body.sidebar-collapsed .admin-main {
   }
   .page-actions {
     width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
   }
   .page-actions .btn-primary,
-  .page-actions .btn-secondary {
+  .page-actions .btn-secondary,
+  .page-actions button,
+  .page-actions a {
     width: 100% !important;
     justify-content: center !important;
+    min-height: 42px !important;
   }
 
   /* Horizontal Scrolling for All Tables - Constrained strictly to Card Width */
@@ -1988,13 +1994,79 @@ body.sidebar-collapsed .admin-main {
     justify-content: center !important;
   }
 
-  /* Technical Specs Rows */
+  /* Technical Specs Rows & Headers */
+  .specs-header-row {
+    display: none !important;
+  }
   .spec-row {
-    flex-direction: column;
-    gap: 6px;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 8px !important;
     background: #f8fafc;
-    padding: 10px;
-    border-radius: var(--radius-sm);
+    padding: 12px 10px;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+  }
+  .btn-remove-spec {
+    width: 100% !important;
+    height: 38px !important;
+    justify-content: center !important;
+  }
+
+  /* Form Action Footer Bar */
+  .form-footer-card {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 14px !important;
+    padding: 16px 14px !important;
+    margin-top: 18px !important;
+    margin-bottom: 24px !important;
+  }
+  .status-pill-group {
+    width: 100% !important;
+    justify-content: space-between !important;
+  }
+  .status-pill-group .form-select {
+    flex: 1 !important;
+    max-width: 200px !important;
+  }
+  .form-footer-card > div:last-child {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+  .form-footer-card .btn-primary,
+  .form-footer-card .btn-secondary {
+    width: 100% !important;
+    justify-content: center !important;
+    height: 44px !important;
+  }
+
+  /* Table Pagination Bar */
+  .table-pagination-footer {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 14px 10px !important;
+    text-align: center !important;
+  }
+  .pagination-range-text {
+    width: 100% !important;
+    justify-content: center !important;
+    font-size: 12px !important;
+  }
+  .pagination-controls-group {
+    width: 100% !important;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+  }
+
+  /* Compact Forms Input UX (Prevent iOS Safari auto-zoom) */
+  .form-control,
+  .form-select {
+    font-size: 16px !important;
   }
 
   /* Modals on Phones */
@@ -2009,6 +2081,7 @@ body.sidebar-collapsed .admin-main {
   }
   .admin-modal-body {
     padding: 16px 14px;
+    -webkit-overflow-scrolling: touch;
   }
   .admin-modal-footer {
     padding: 12px 14px;
@@ -2018,6 +2091,21 @@ body.sidebar-collapsed .admin-main {
   .admin-modal-footer .btn {
     width: 100%;
     justify-content: center;
+    height: 42px;
+  }
+
+  /* Form Actions Bar on Mobile */
+  .form-actions-bar {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+  .form-actions-bar .btn-primary,
+  .form-actions-bar .btn-secondary {
+    width: 100% !important;
+    justify-content: center !important;
+    height: 44px !important;
   }
 }
 

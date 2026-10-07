@@ -815,6 +815,21 @@ body.sa-sidebar-collapsed .sa-main {
     font-size: 12.5px;
   }
 
+  /* Page Header & Action Buttons */
+  .sa-page-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+  .sa-page-header > div:last-child {
+    width: 100% !important;
+  }
+  .sa-page-header .sa-btn {
+    width: 100% !important;
+    justify-content: center !important;
+    min-height: 42px !important;
+  }
+
   /* Single Column KPI Grid */
   .sa-kpi-grid {
     grid-template-columns: 1fr !important;
@@ -879,11 +894,51 @@ body.sa-sidebar-collapsed .sa-main {
   .sa-pagination-bar {
     flex-direction: column !important;
     align-items: center !important;
-    gap: 10px !important;
+    gap: 12px !important;
+    padding: 14px 10px !important;
+  }
+  .sa-pagination-info {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 8px !important;
+    width: 100% !important;
+    text-align: center !important;
+    font-size: 12px !important;
   }
   .sa-pagination-controls {
-    justify-content: center;
-    width: 100%;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+    width: 100% !important;
+  }
+
+  /* Compact Forms Input UX (Prevent iOS Safari auto-zoom) */
+  .sa-input,
+  .sa-select {
+    font-size: 16px !important;
+  }
+
+  /* Form Action Buttons on Mobile */
+  .sa-form-actions {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+  .sa-form-actions .sa-btn {
+    width: 100% !important;
+    justify-content: center !important;
+    height: 44px !important;
+  }
+
+  /* Restore Database Group */
+  .sa-restore-group {
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+  .sa-restore-group .sa-btn {
+    width: 100% !important;
+    justify-content: center !important;
+    height: 42px !important;
   }
 
   /* Modals */
@@ -895,6 +950,7 @@ body.sa-sidebar-collapsed .sa-main {
   }
   .sa-modal-body {
     padding: 16px 14px;
+    -webkit-overflow-scrolling: touch;
   }
 }
 

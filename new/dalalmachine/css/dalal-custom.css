@@ -2734,10 +2734,20 @@ img {
     right: 10px !important;
   }
 
+  #pdp-thumbnails-wrap {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding-bottom: 6px !important;
+    width: 100% !important;
+    display: flex !important;
+    gap: 8px !important;
+  }
+
   .pdp-thumb-item {
     width: 60px !important;
     height: 45px !important;
     object-fit: cover !important;
+    flex-shrink: 0 !important;
   }
 
   .pdp-metadata-card {
