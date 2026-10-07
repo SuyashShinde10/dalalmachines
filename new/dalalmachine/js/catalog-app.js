@@ -76,6 +76,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function buildCardHTML(m) {
     const isHomePage = window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname.endsWith('/Machinery/');
+    const colClass = isHomePage
+      ? 'col-lg-4 col-md-6 col-sm-12 col-xs-12'
+      : 'col-lg-4 col-md-6 col-sm-12 col-xs-12';
     const rawImg = m.image || 'images/dalal/cframe_press_pune.jpg';
     const thumbWebp = rawImg.replace(/\.(jpe?g|png)$/i, '_thumb.webp');
     const thumbJpg = rawImg.replace(/\.(jpe?g|png)$/i, '_thumb.jpg');
