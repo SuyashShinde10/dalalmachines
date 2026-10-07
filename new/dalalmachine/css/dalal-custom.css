@@ -3120,4 +3120,175 @@ img {
 
 
 
+/* ====================================================================
+   MOBILE UI FIXES v3.2 — Screenshot-based corrections
+   1. OMPI Technical Partner info-box overlap in header-upper
+   2. About section "20+" badge overlapping on mobile
+   3. "Welcome to Dalal" span text crashing into image
+   4. Filter pill buttons clean 2x2 grid (index + category)
+   5. High Seas comparison table horizontal scroll on mobile
+==================================================================== */
+
+/* --- Fix 1: OMPI header box — hide on mobile to prevent overlap --- */
+@media only screen and (max-width: 767px) {
+  .main-header .info-box.ompi-upper-box {
+    display: none !important; /* Too crowded in header on small screens */
+  }
+}
+
+/* --- Fix 2 & 3: About Section on mobile --- */
+@media only screen and (max-width: 767px) {
+  /* The "20+" overlay badge — move below image so it doesn't overlap text */
+  .about-section [style*="position:absolute"][style*="bottom:-25px"],
+  .about-section div[style*="bottom:-25px"] {
+    position: relative !important;
+    bottom: auto !important;
+    right: auto !important;
+    margin-top: 16px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    border-radius: 8px !important;
+    padding: 14px 20px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Add bottom padding to about image col to prevent badge clipping */
+  .about-section .col-lg-6:first-child {
+    margin-bottom: 24px !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* "Welcome to Dalal..." subtitle — ensure it wraps cleanly */
+  .about-section .sec-title .title {
+    display: block !important;
+    font-size: 13px !important;
+    line-height: 1.4 !important;
+    word-wrap: break-word !important;
+    white-space: normal !important;
+    margin-bottom: 6px !important;
+  }
+
+  /* Right col padding fix on mobile */
+  .about-section .col-lg-6[style*="padding-left:40px"] {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    margin-top: 16px !important;
+  }
+
+  /* About stats row (Up to 6300T / 100% Transparency) */
+  .about-section div[style*="display:flex"][style*="gap:20px"] {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+}
+
+/* --- Fix 4: Filter Pill Buttons — proper 2x2 grid on homepage & category --- */
+.loc-filter-nav-wrap {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.loc-filter-pill-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.loc-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 20px;
+  border-radius: 50px;
+  border: 1.5px solid #e2e8f0;
+  background: #ffffff;
+  color: #475569;
+  font-family: 'Inter', sans-serif;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  white-space: nowrap;
+}
+
+.loc-filter-btn:hover {
+  border-color: var(--dalal-yellow);
+  color: var(--dalal-yellow-dark);
+  background: #fff8ee;
+}
+
+.loc-filter-btn.active {
+  background: var(--dalal-yellow) !important;
+  border-color: var(--dalal-yellow) !important;
+  color: #111 !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 14px rgba(248, 157, 19, 0.35);
+}
+
+@media only screen and (max-width: 767px) {
+  .loc-filter-nav-wrap {
+    margin-bottom: 20px;
+  }
+
+  .loc-filter-pill-bar {
+    gap: 8px;
+    justify-content: flex-start;
+  }
+
+  .loc-filter-btn {
+    flex: 1 1 calc(50% - 8px); /* Exactly 2 per row */
+    max-width: calc(50% - 8px);
+    justify-content: center;
+    padding: 9px 8px;
+    font-size: 12.5px;
+    white-space: normal;
+    text-align: center;
+  }
+}
+
+/* --- Fix 5: High Seas Comparison Table — horizontal scroll on mobile --- */
+@media only screen and (max-width: 767px) {
+  .high-seas-table-wrapper {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    margin-top: 20px !important;
+    border-radius: 8px !important;
+  }
+
+  .high-seas-table {
+    min-width: 480px !important; /* Forces scroll before crushing columns */
+    font-size: 12.5px !important;
+  }
+
+  .high-seas-table thead th {
+    padding: 12px 14px !important;
+    font-size: 13px !important;
+  }
+
+  .high-seas-table tbody td {
+    padding: 12px 14px !important;
+    font-size: 12.5px !important;
+  }
+
+  .badge-advantage,
+  .badge-risk {
+    font-size: 11px !important;
+    padding: 3px 7px !important;
+    white-space: nowrap !important;
+  }
+
+  /* High Seas section layout: stack text above table on mobile */
+  section .col-lg-5.col-md-12,
+  section .col-lg-7.col-md-12 {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+}
+
 
