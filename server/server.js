@@ -4,6 +4,7 @@ const helmet = require('helmet');
 const compression = require('compression');
 const { rateLimit } = require('express-rate-limit');
 const cookieParser = require('cookie-parser');
+const fs = require('fs');
 const path = require('path');
 const config = require('./config');
 
@@ -86,6 +87,31 @@ const staticOptions = {
     }
   }
 };
+
+// 6. Transparent High-Speed WebP Content Negotiation
+app.use((req, res, next) => {
+  if (req.method !== 'GET' && req.method !== 'HEAD') return next();
+  const accept = req.headers['accept'] || '';
+  if (!accept.includes('image/webp')) return next();
+  
+  if (/\.(jpe?g|png)$/i.test(req.path)) {
+    let relPath = req.path;
+    if (relPath.startsWith('/new/dalalmachine/')) relPath = relPath.replace('/new/dalalmachine/', '');
+    else if (relPath.startsWith('/new/Machinery/')) relPath = relPath.replace('/new/Machinery/', '');
+    else if (relPath.startsWith('/')) relPath = relPath.substring(1);
+
+    const webpRel = relPath.replace(/\.(jpe?g|png)$/i, '.webp');
+    const candidatePath = path.join(config.PUBLIC_DIR, webpRel);
+
+    if (fs.existsSync(candidatePath)) {
+      res.setHeader('Content-Type', 'image/webp');
+      res.setHeader('Vary', 'Accept');
+      res.setHeader('Cache-Control', 'public, max-age=2592000, immutable');
+      return res.sendFile(candidatePath);
+    }
+  }
+  next();
+});
 
 app.use('/uploads', express.static(config.UPLOADS_DIR, staticOptions));
 app.use('/admin', express.static(config.ADMIN_DIR, staticOptions));

@@ -885,6 +885,7 @@ body.sidebar-collapsed .admin-main {
   border-radius: var(--radius-sm);
   border: 1px solid var(--border-color);
   background: #f1f5f9;
+  content-visibility: auto;
 }
 .machine-name-cell {
   font-weight: 700;
@@ -1497,6 +1498,7 @@ body.sidebar-collapsed .admin-main {
   border-radius: var(--radius-xs);
   border: 1px solid var(--border-color);
   background: #f8fafc;
+  content-visibility: auto;
 }
 .machine-id-tag {
   font-family: 'JetBrains Mono', monospace;

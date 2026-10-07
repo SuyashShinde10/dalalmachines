@@ -128,11 +128,25 @@ function renderGallery(page = 1) {
   const startIdx = (currentGalleryPage - 1) * ITEMS_PER_PAGE;
   const pageItems = DALAL_SHIPMENTS.slice(startIdx, startIdx + ITEMS_PER_PAGE);
 
-  container.innerHTML = pageItems.map(item => `
+  container.innerHTML = pageItems.map(item => {
+    const rawImg = item.image || 'images/dalal/hero_forging_press.jpg';
+    const thumbWebp = rawImg.replace(/\.(jpe?g|png)$/i, '_thumb.webp');
+    const thumbJpg = rawImg.replace(/\.(jpe?g|png)$/i, '_thumb.jpg');
+    return `
     <div class="col-lg-4 col-md-6 col-sm-12">
       <div class="gallery-item-card">
         <div class="gallery-thumb-box">
-          <img src="${item.image}" alt="${item.title}" loading="lazy">
+          <picture>
+            <source srcset="${thumbWebp}" type="image/webp">
+            <img src="${thumbJpg}" 
+                 onerror="this.onerror=null; this.src='${rawImg}';" 
+                 alt="${item.title}" 
+                 loading="lazy" 
+                 decoding="async" 
+                 width="370" 
+                 height="240"
+                 style="width:100%; height:100%; object-fit:cover; display:block;">
+          </picture>
         </div>
         <div class="gallery-content">
           <span class="gallery-date-pill">${item.date}</span>
@@ -141,7 +155,8 @@ function renderGallery(page = 1) {
         </div>
       </div>
     </div>
-  `).join('');
+  `;
+  }).join('');
 
   renderPagination(totalPages);
 }

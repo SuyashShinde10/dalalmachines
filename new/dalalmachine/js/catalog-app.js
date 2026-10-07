@@ -76,12 +76,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function buildCardHTML(m) {
     const isHomePage = window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname.endsWith('/Machinery/');
-    const colClass = isHomePage ? 'col-lg-4 col-md-6 col-sm-12' : 'col-xl-4 col-lg-6 col-md-6 col-sm-12';
+    const rawImg = m.image || 'images/dalal/cframe_press_pune.jpg';
+    const thumbWebp = rawImg.replace(/\.(jpe?g|png)$/i, '_thumb.webp');
+    const thumbJpg = rawImg.replace(/\.(jpe?g|png)$/i, '_thumb.jpg');
     return `
       <div class="${colClass}" style="margin-bottom: 30px;">
         <div class="machine-item-card">
           <div class="machine-thumb-box">
-            <img src="${m.image}" alt="${m.name}" loading="lazy">
+            <picture>
+              <source srcset="${thumbWebp}" type="image/webp">
+              <img src="${thumbJpg}" 
+                   onerror="this.onerror=null; this.src='${rawImg}';" 
+                   alt="${m.name}" 
+                   loading="lazy" 
+                   decoding="async" 
+                   width="370" 
+                   height="240"
+                   style="width:100%; height:100%; object-fit:cover; display:block;">
+            </picture>
             <span class="machine-location-pill"><i class="fa fa-map-marker"></i> ${m.location}</span>
             <span class="machine-stock-badge">ID: ${m.id}</span>
           </div>

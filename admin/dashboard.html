@@ -325,7 +325,14 @@
         tbody.innerHTML = recent.map(m => `
           <tr>
             <td>
-              <img src="/${m.image || 'new/Machinery/images/dalal/cframe_press_pune.jpg'}" class="machine-photo-thumb" alt="${m.name}" onerror="this.src='/new/Machinery/images/dalal/cframe_press_pune.jpg'">
+              <img src="/${m.image ? m.image.replace(/\.(jpe?g|png)$/i, '_mini.webp') : 'images/dalal/cframe_press_pune_mini.webp'}" 
+                   class="machine-photo-thumb" 
+                   alt="${m.name}" 
+                   loading="lazy" 
+                   decoding="async" 
+                   width="50" 
+                   height="38" 
+                   onerror="this.onerror=null; this.src='/${m.image || 'images/dalal/cframe_press_pune.jpg'}';">
             </td>
             <td>
               <div class="machine-name-cell">

@@ -18,9 +18,9 @@
   <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
   <link rel="icon" href="images/favicon.png" type="image/x-icon">
   
-  <!-- Preload Critical Above-The-Fold Hero Image -->
-  <link rel="preload" as="image" href="images/dalal/hero_forging_press.jpg">
-  <link rel="preload" as="image" href="images/logo-dalal.png">
+  <!-- Preload Critical Above-The-Fold Hero & Logo Assets (High Priority) -->
+  <link rel="preload" as="image" href="images/dalal/hero_forging_press.webp" type="image/webp" fetchpriority="high">
+  <link rel="preload" as="image" href="images/logo-dalal.webp" type="image/webp">
 
   <!-- Responsive -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -207,7 +207,7 @@
     <section class="main-slider" style="background:#0a0d14;">
         <div class="main-slider-carousel owl-carousel owl-theme">
             
-            <div class="slide slide-item" style="background-image:linear-gradient(rgba(10,13,20,0.65), rgba(10,13,20,0.75)), url('images/dalal/hero_forging_press.jpg'); background-size:cover; background-position:center; min-height:640px; display:flex; align-items:center;">
+            <div class="slide slide-item" style="background-image:linear-gradient(rgba(10,13,20,0.65), rgba(10,13,20,0.75)), url('images/dalal/hero_forging_press.webp'); background-size:cover; background-position:center; min-height:640px; display:flex; align-items:center;">
                 <div class="auto-container">
                     <div class="content">
                         <div style="font-family:'Rajdhani'; font-size:18px; font-weight:700; color:#f89d13; letter-spacing:2px; text-transform:uppercase; margin-bottom:10px;">
@@ -227,7 +227,7 @@
                 </div>
             </div>
 
-            <div class="slide slide-item" style="background-image:linear-gradient(rgba(10,13,20,0.65), rgba(10,13,20,0.75)), url('images/dalal/cnc_boring_machine.jpg'); background-size:cover; background-position:center; min-height:640px; display:flex; align-items:center;">
+            <div class="slide slide-item" style="background-image:linear-gradient(rgba(10,13,20,0.65), rgba(10,13,20,0.75)), url('images/dalal/cnc_boring_machine.webp'); background-size:cover; background-position:center; min-height:640px; display:flex; align-items:center;">
                 <div class="auto-container">
                     <div class="content">
                         <div style="font-family:'Rajdhani'; font-size:18px; font-weight:700; color:#f89d13; letter-spacing:2px; text-transform:uppercase; margin-bottom:10px;">
@@ -247,7 +247,7 @@
                 </div>
             </div>
 
-            <div class="slide slide-item" style="background-image:linear-gradient(rgba(10,13,20,0.65), rgba(10,13,20,0.75)), url('images/dalal/logistics_heavy_transport.jpg'); background-size:cover; background-position:center; min-height:640px; display:flex; align-items:center;">
+            <div class="slide slide-item" style="background-image:linear-gradient(rgba(10,13,20,0.65), rgba(10,13,20,0.75)), url('images/dalal/logistics_heavy_transport.webp'); background-size:cover; background-position:center; min-height:640px; display:flex; align-items:center;">
                 <div class="auto-container">
                     <div class="content">
                         <div style="font-family:'Rajdhani'; font-size:18px; font-weight:700; color:#f89d13; letter-spacing:2px; text-transform:uppercase; margin-bottom:10px;">
@@ -317,7 +317,10 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-12">
                     <div style="position:relative;">
-                        <img src="images/dalal/cframe_press_pune.jpg" alt="Pune Warehouse Stockyard" loading="lazy" decoding="async" style="border-radius:8px; box-shadow:0 15px 35px rgba(0,0,0,0.12); width:100%;">
+                        <picture>
+                            <source srcset="images/dalal/cframe_press_pune.webp" type="image/webp">
+                            <img src="images/dalal/cframe_press_pune.jpg" alt="Pune Warehouse Stockyard" loading="lazy" decoding="async" width="570" height="380" style="border-radius:8px; box-shadow:0 15px 35px rgba(0,0,0,0.12); width:100%; display:block;">
+                        </picture>
                         <div style="position:absolute; bottom:-25px; right:20px; background:#1b212f; color:#fff; padding:20px 30px; border-radius:8px; border-left:5px solid #f89d13; box-shadow:0 10px 25px rgba(0,0,0,0.2);">
                             <div style="font-family:'Barlow'; font-size:36px; font-weight:800; color:#f89d13;">20+</div>
                             <div style="font-size:13px; font-weight:600; text-transform:uppercase; letter-spacing:1px; color:#cbd5e1;">Years of Industrial Excellence</div>
@@ -464,7 +467,10 @@
         <div class="auto-container">
             <div class="row align-items-center">
                 <div class="col-lg-4 col-md-12 text-center" style="margin-bottom:20px;">
-                    <img src="images/dalal/ompi_clutch_brake_unit.jpg" alt="OMPI Clutch and Brake Unit" loading="lazy" decoding="async" style="border-radius:8px; border:2px solid rgba(248,157,19,0.4); max-height:260px; object-fit:cover; width:100%;">
+                    <picture>
+                        <source srcset="images/dalal/ompi_clutch_brake_unit.webp" type="image/webp">
+                        <img src="images/dalal/ompi_clutch_brake_unit.jpg" alt="OMPI Clutch and Brake Unit" loading="lazy" decoding="async" width="370" height="260" style="border-radius:8px; border:2px solid rgba(248,157,19,0.4); max-height:260px; object-fit:cover; width:100%; display:block;">
+                    </picture>
                 </div>
                 <div class="col-lg-8 col-md-12">
                     <div style="font-family:'Rajdhani'; font-size:15px; font-weight:700; color:#f89d13; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:8px;">
@@ -505,7 +511,10 @@
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="gallery-item-card">
                         <div class="gallery-thumb-box">
-                            <img src="images/dalal/logistics_heavy_transport.jpg" alt="National 1000T Thailand" loading="lazy" decoding="async">
+                            <picture>
+                                <source srcset="images/dalal/logistics_heavy_transport_thumb.webp" type="image/webp">
+                                <img src="images/dalal/logistics_heavy_transport_thumb.jpg" onerror="this.onerror=null; this.src='images/dalal/logistics_heavy_transport.jpg';" alt="National 1000T Thailand" loading="lazy" decoding="async" width="370" height="240" style="width:100%; height:100%; object-fit:cover; display:block;">
+                            </picture>
                         </div>
                         <div class="gallery-content">
                             <span class="gallery-date-pill">July 2026 &bull; Thailand to Rajkot</span>
@@ -519,7 +528,10 @@
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="gallery-item-card">
                         <div class="gallery-thumb-box">
-                            <img src="images/dalal/knuckle_coining_press.jpg" alt="Russian Knuckle Joint Jamshedpur" loading="lazy" decoding="async">
+                            <picture>
+                                <source srcset="images/dalal/knuckle_coining_press_thumb.webp" type="image/webp">
+                                <img src="images/dalal/knuckle_coining_press_thumb.jpg" onerror="this.onerror=null; this.src='images/dalal/knuckle_coining_press.jpg';" alt="Russian Knuckle Joint Jamshedpur" loading="lazy" decoding="async" width="370" height="240" style="width:100%; height:100%; object-fit:cover; display:block;">
+                            </picture>
                         </div>
                         <div class="gallery-content">
                             <span class="gallery-date-pill">June 2026 &bull; Russia to Jamshedpur</span>
@@ -533,7 +545,10 @@
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="gallery-item-card">
                         <div class="gallery-thumb-box">
-                            <img src="images/dalal/port_crane_logistics.jpg" alt="Nhava Sheva Port Delivery" loading="lazy" decoding="async">
+                            <picture>
+                                <source srcset="images/dalal/port_crane_logistics_thumb.webp" type="image/webp">
+                                <img src="images/dalal/port_crane_logistics_thumb.jpg" onerror="this.onerror=null; this.src='images/dalal/port_crane_logistics.jpg';" alt="Nhava Sheva Port Delivery" loading="lazy" decoding="async" width="370" height="240" style="width:100%; height:100%; object-fit:cover; display:block;">
+                            </picture>
                         </div>
                         <div class="gallery-content">
                             <span class="gallery-date-pill">May 2026 &bull; Nhava Sheva Port</span>

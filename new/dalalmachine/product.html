@@ -212,7 +212,7 @@
                 <!-- Gallery Column -->
                 <div class="col-lg-6 col-md-12" style="margin-bottom:30px;">
                     <div style="position:relative; border-radius:8px; overflow:hidden; border:1px solid #e2e8f0; background:#f1f5f9; height:420px; margin-bottom:15px;">
-                        <img id="pdp-main-img" src="images/dalal/cframe_press_pune.jpg" alt="Machine Photo" style="width:100%; height:100%; object-fit:cover;">
+                        <img id="pdp-main-img" src="images/dalal/cframe_press_pune.webp" onerror="this.onerror=null; this.src='images/dalal/cframe_press_pune.jpg';" alt="Machine Photo" loading="eager" fetchpriority="high" decoding="async" width="570" height="420" style="width:100%; height:100%; object-fit:cover;">
                         <span id="pdp-location-tag" style="position:absolute; top:15px; left:15px; background:rgba(19,23,34,0.9); color:#fff; padding:6px 14px; border-radius:4px; font-weight:700; font-size:13px; border-left:3px solid #f89d13;">
                             <i class="fa fa-map-marker"></i> In Stock PUNE
                         </span>
@@ -223,9 +223,9 @@
 
                     <!-- Thumbnails Switcher -->
                     <div id="pdp-thumbnails-wrap" style="display:flex; gap:10px;">
-                        <img src="images/dalal/cframe_press_pune.jpg" class="pdp-thumb-item active" onclick="switchMainImage(this)" alt="View 1">
-                        <img src="images/dalal/hero_forging_press.jpg" class="pdp-thumb-item" onclick="switchMainImage(this)" alt="View 2">
-                        <img src="images/dalal/pune_warehouse_yard.jpg" class="pdp-thumb-item" onclick="switchMainImage(this)" alt="View 3">
+                        <img src="images/dalal/cframe_press_pune_thumb.webp" onerror="this.onerror=null; this.src='images/dalal/cframe_press_pune.jpg';" class="pdp-thumb-item active" onclick="switchMainImage(this)" alt="View 1" loading="lazy" decoding="async" width="80" height="60">
+                        <img src="images/dalal/hero_forging_press_thumb.webp" onerror="this.onerror=null; this.src='images/dalal/hero_forging_press.jpg';" class="pdp-thumb-item" onclick="switchMainImage(this)" alt="View 2" loading="lazy" decoding="async" width="80" height="60">
+                        <img src="images/dalal/pune_warehouse_yard_thumb.webp" onerror="this.onerror=null; this.src='images/dalal/pune_warehouse_yard.jpg';" class="pdp-thumb-item" onclick="switchMainImage(this)" alt="View 3" loading="lazy" decoding="async" width="80" height="60">
                     </div>
                 </div>
 
@@ -422,16 +422,21 @@ function switchMainImage(thumb) {
         // Badges & Images
         document.getElementById('pdp-id-tag').textContent = `Machine No: ${item.id}`;
         document.getElementById('pdp-location-tag').innerHTML = `<i class="fa fa-map-marker"></i> ${item.location}`;
-        document.getElementById('pdp-main-img').src = item.image;
+        const rawImg = item.image || 'images/dalal/cframe_press_pune.jpg';
+        const webpImg = rawImg.replace(/\.(jpe?g|png)$/i, '.webp');
+        const mainEl = document.getElementById('pdp-main-img');
+        mainEl.src = webpImg;
+        mainEl.onerror = function() { this.onerror = null; this.src = rawImg; };
         document.getElementById('pdp-wa-btn').href = `https://wa.me/919821232131?text=Hello%20Mr.%20Vinit%20Dalal,%20I%20am%20interested%20in%20${encodeURIComponent(item.name)}%20(Machine%20ID:%20${item.id})`;
 
-        // Update Thumbnails Switcher
+        // Update Thumbnails Switcher with Fast WebP Thumbs
         const thumbWrap = document.getElementById('pdp-thumbnails-wrap');
         if (thumbWrap) {
+            const thumbWebp = rawImg.replace(/\.(jpe?g|png)$/i, '_thumb.webp');
             thumbWrap.innerHTML = `
-                <img src="${item.image}" class="pdp-thumb-item active" onclick="switchMainImage(this)" alt="View 1">
-                <img src="images/dalal/logistics_heavy_transport.jpg" class="pdp-thumb-item" onclick="switchMainImage(this)" alt="Rigging View">
-                <img src="images/dalal/pune_warehouse_yard.jpg" class="pdp-thumb-item" onclick="switchMainImage(this)" alt="Yard Staging">
+                <img src="${thumbWebp}" onerror="this.onerror=null; this.src='${rawImg}';" class="pdp-thumb-item active" onclick="switchMainImage(this)" alt="View 1" loading="lazy" decoding="async" width="80" height="60">
+                <img src="images/dalal/logistics_heavy_transport_thumb.webp" onerror="this.onerror=null; this.src='images/dalal/logistics_heavy_transport.jpg';" class="pdp-thumb-item" onclick="switchMainImage(this)" alt="Rigging View" loading="lazy" decoding="async" width="80" height="60">
+                <img src="images/dalal/pune_warehouse_yard_thumb.webp" onerror="this.onerror=null; this.src='images/dalal/pune_warehouse_yard.jpg';" class="pdp-thumb-item" onclick="switchMainImage(this)" alt="Yard Staging" loading="lazy" decoding="async" width="80" height="60">
             `;
         }
 
