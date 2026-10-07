@@ -3129,10 +3129,18 @@ img {
    5. High Seas comparison table horizontal scroll on mobile
 ==================================================================== */
 
-/* --- Fix 1: OMPI header box — hide on mobile to prevent overlap --- */
+/* --- Fix 1: OMPI Technical Partner — show on mobile, stacked cleanly, no overlap --- */
 @media only screen and (max-width: 767px) {
   .main-header .info-box.ompi-upper-box {
-    display: none !important; /* Too crowded in header on small screens */
+    display: flex !important;          /* Keep visible */
+    width: 100% !important;
+    max-width: 100% !important;
+    border-left: 3px solid #f89d13 !important;
+    background: rgba(248, 157, 19, 0.06) !important;
+    flex: 0 0 auto !important;
+    margin: 0 !important;
+    position: relative !important;    /* No absolute positioning */
+    padding: 8px 12px 8px 46px !important;
   }
 }
 
