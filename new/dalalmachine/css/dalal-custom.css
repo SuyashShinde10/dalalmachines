@@ -5745,5 +5745,113 @@ textarea:focus-visible {
   opacity: 1 !important;
 }
 
+/* ====================================================================
+   Page Title Banner & Breadcrumbs (High-Contrast, Bright & Ultra-Crisp)
+   Fixes dark text visibility issue across all inner pages
+==================================================================== */
+.page-title {
+  position: relative !important;
+}
+
+.page-title .auto-container,
+.page-title .inner-container {
+  position: relative !important;
+  z-index: 5 !important;
+}
+
+.page-title h1,
+.page-title h2 {
+  position: relative !important;
+  z-index: 5 !important;
+  color: #ffffff !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.75) !important;
+}
+
+/* Breadcrumb Containers (Glassmorphic Pill for Maximum Legibility) */
+.page-title .bread-crumb,
+.page-title .page-breadcrumb {
+  position: relative !important;
+  z-index: 5 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+  gap: 8px 12px !important;
+  list-style: none !important;
+  padding: 6px 18px !important;
+  margin: 12px auto 0 !important;
+  background: rgba(15, 23, 42, 0.65) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 999px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* All Breadcrumb List Items */
+.page-title .bread-crumb li,
+.page-title .page-breadcrumb li {
+  color: #ffffff !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 1.4 !important;
+  letter-spacing: 0.2px !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Breadcrumb Links (Home / Previous Levels) */
+.page-title .bread-crumb li a,
+.page-title .page-breadcrumb li a {
+  color: #f89d13 !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+}
+
+.page-title .bread-crumb li a:hover,
+.page-title .page-breadcrumb li a:hover {
+  color: #ffd54f !important;
+  text-decoration: underline !important;
+  text-shadow: 0 0 10px rgba(248, 157, 19, 0.7) !important;
+}
+
+/* Bullet Separator */
+.page-title .bread-crumb li.bullet-sep,
+.page-title .bread-crumb li:nth-child(2):not(:last-child) {
+  color: #f89d13 !important;
+  font-weight: 800 !important;
+  opacity: 0.9 !important;
+}
+
+/* Current / Active Page Text */
+.page-title .bread-crumb li:last-child,
+.page-title .page-breadcrumb li:last-child {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9) !important;
+}
+
+@media (max-width: 767px) {
+  .page-title .bread-crumb,
+  .page-title .page-breadcrumb {
+    padding: 6px 14px !important;
+    font-size: 12px !important;
+    gap: 4px 8px !important;
+    border-radius: 20px !important;
+  }
+  .page-title .bread-crumb li,
+  .page-title .page-breadcrumb li {
+    font-size: 12px !important;
+  }
+}
+
 
 
