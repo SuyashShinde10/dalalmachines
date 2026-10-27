@@ -3883,7 +3883,20 @@ textarea:focus-visible {
   padding-left: 28px !important;
 }
 
-/* --- Quality Step & Technical Protocol Cards (High-Contrast & Ultra-Bright) --- */
+/* --- Equal-Height Cards System for Inspection & Facility Grids --- */
+.equal-height-row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: stretch !important;
+}
+
+.equal-height-row > [class*="col-"] {
+  display: flex !important;
+  flex-direction: column !important;
+  margin-bottom: 24px;
+}
+
+/* --- Quality Step & Technical Protocol Cards (High-Contrast, Ultra-Bright & Equal Height) --- */
 .quality-step-card {
   background: #ffffff !important;
   border: 1.5px solid #e2e8f0 !important;
@@ -3892,15 +3905,24 @@ textarea:focus-visible {
   padding: 32px 24px 28px !important;
   box-shadow: 0 12px 30px -4px rgba(15, 23, 42, 0.08), 0 4px 12px rgba(248, 157, 19, 0.06) !important;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease !important;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 1 auto !important;
 }
 
 .quality-step-card:hover {
   transform: translateY(-8px) !important;
   box-shadow: 0 24px 44px -6px rgba(248, 157, 19, 0.28), 0 10px 20px -2px rgba(15, 23, 42, 0.1) !important;
   border-color: #f89d13 !important;
+}
+
+.quality-step-card h4 {
+  min-height: 28px;
+}
+
+.quality-step-card > p {
+  flex-grow: 1 !important;
 }
 
 .quality-step-badge {
@@ -3929,7 +3951,7 @@ textarea:focus-visible {
   box-shadow: 0 8px 22px rgba(15, 23, 42, 0.35) !important;
 }
 
-/* --- Pune Facility & Physical Infrastructure Cards --- */
+/* --- Pune Facility & Physical Infrastructure Cards (Equal Height) --- */
 .stockyard-facility-card {
   background: #ffffff !important;
   border-radius: 12px !important;
@@ -3938,7 +3960,10 @@ textarea:focus-visible {
   border-bottom: 4px solid #f89d13 !important;
   box-shadow: 0 12px 30px -4px rgba(15, 23, 42, 0.09), 0 4px 12px rgba(0, 0, 0, 0.04) !important;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease !important;
-  height: 100%;
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 1 auto !important;
 }
 
 .stockyard-facility-card:hover {
@@ -3947,10 +3972,26 @@ textarea:focus-visible {
   border-color: #f89d13 !important;
 }
 
+.stockyard-facility-body {
+  padding: 24px 22px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  flex-grow: 1 !important;
+}
+
+.stockyard-facility-body h5 {
+  min-height: 26px;
+}
+
+.stockyard-facility-body > p {
+  flex-grow: 1 !important;
+}
+
 .stockyard-facility-thumb {
   height: 195px;
   overflow: hidden;
   position: relative;
+  flex-shrink: 0;
 }
 
 .stockyard-facility-thumb img {
