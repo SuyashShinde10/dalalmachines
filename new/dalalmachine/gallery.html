@@ -9,16 +9,29 @@
   <link href="css/style.css" rel="stylesheet">
   <link href="css/responsive.css" rel="stylesheet">
   <link href="css/font-awesome.css" rel="stylesheet">
-  <link href="css/dalal-custom.css?v=3.0" rel="stylesheet">
+  <link href="css/dalal-custom.css?v=5.0" rel="stylesheet">
   
   <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
+<!-- Preloader: Clean Enterprise Light with Dalal Logo -->
+<div class="preloader" id="dalal-preloader" aria-hidden="true">
+    <div class="enterprise-box">
+        <div class="enterprise-logo-wrap">
+            <img src="images/logo-dalal.png" class="enterprise-logo" alt="Dalal Machine Tools Agency Pvt. Ltd.">
+        </div>
+        <div class="enterprise-bar-track">
+            <div class="enterprise-bar-fill"></div>
+        </div>
+        <div class="enterprise-caption">Dalal Machine Tools</div>
+    </div>
+</div>
+
 <div class="page-wrapper">
+    
     <!-- Main Header -->
-        <!-- Main Header -->
     <header class="main-header">
         <!-- Header Top -->
         <div class="header-top">
@@ -134,8 +147,8 @@
                     <div class="outer-box">
                         <div class="link-box">
                             <a href="https://wa.me/919821232131?text=Hello%20Mr.%20Vinit%20Dalal,%20I%20have%20an%20urgent%20machinery%20requirement." 
-                               target="_blank" class="theme-btn btn-style-one" style="background:#f89d13; color:#111; font-weight:700; padding:10px 22px;">
-                                <i class="fa fa-whatsapp"></i> Quick RFQ
+                               target="_blank" class="theme-btn btn-style-one header-rfq-btn" style="background:#f89d13; color:#111; font-weight:700; padding:10px 22px; display:inline-flex; align-items:center; gap:8px;">
+                                <i class="fa fa-whatsapp" style="font-size:18px; line-height:1; vertical-align:middle; margin-right:4px;"></i> <span>Quick RFQ</span>
                             </a>
                         </div>
                     </div>
@@ -206,11 +219,257 @@
     <!-- Gallery Grid Area -->
     <section id="gallery-section-top" style="padding: 70px 0 90px; background:#f8fafc;">
         <div class="auto-container">
-            <div class="sec-title text-center" style="margin-bottom:45px;">
+            <div class="sec-title text-center" style="margin-bottom:35px;">
                 <span style="color:#f89d13; font-family:'Rajdhani'; font-size:16px; font-weight:700; text-transform:uppercase; letter-spacing:1px;">Historical Proof of Execution</span>
                 <h2 style="font-size:36px; font-weight:800; color:#1b212f;">Chronological Machinery Shipments (2025 - 2026)</h2>
+                <div class="text" style="color:#64748b; max-width:650px; margin:8px auto 0;">
+                    Click any shipment card to zoom into heavy rigging, customs offloading, and delivery verification.
+                </div>
             </div>
 
+            <!-- Gallery Category Filter Pills -->
+            <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom:24px;">
+                <button type="button" class="loc-filter-btn active gallery-filter-btn" data-type="all" onclick="window.filterGalleryByCategory('all', this)" style="cursor:pointer;">
+                    <i class="fa fa-th-large"></i> All Deliveries (18+)
+                </button>
+                <button type="button" class="loc-filter-btn gallery-filter-btn" data-type="forging" onclick="window.filterGalleryByCategory('forging', this)" style="cursor:pointer;">
+                    <i class="fa fa-fire"></i> Hot Forging Presses
+                </button>
+                <button type="button" class="loc-filter-btn gallery-filter-btn" data-type="coining" onclick="window.filterGalleryByCategory('coining', this)" style="cursor:pointer;">
+                    <i class="fa fa-compress"></i> Knuckle Coining
+                </button>
+                <button type="button" class="loc-filter-btn gallery-filter-btn" data-type="transport" onclick="window.filterGalleryByCategory('transport', this)" style="cursor:pointer;">
+                    <i class="fa fa-truck"></i> Port Rigging &amp; Trailers
+                </button>
+                <button type="button" class="loc-filter-btn gallery-filter-btn" data-type="imtex" onclick="window.filterGalleryByCategory('imtex', this)" style="cursor:pointer;">
+                    <i class="fa fa-certificate"></i> IMTEX 2026 Agency
+                </button>
+            </div>
+
+            <!-- Interactive View Mode Switcher -->
+            <div style="display:flex; justify-content:center; align-items:center; gap:12px; margin-bottom:28px;">
+                <div style="display:inline-flex; background:#0f172a; border:1px solid rgba(255,255,255,0.12); padding:4px; border-radius:30px; box-shadow:0 4px 15px rgba(0,0,0,0.15);">
+                    <button type="button" id="btn-view-polaroid" onclick="window.setGalleryViewMode('polaroid')" class="view-mode-btn" style="border:none; background:#f89d13; color:#111; font-weight:700; font-size:13px; padding:7px 20px; border-radius:24px; cursor:pointer; display:inline-flex; align-items:center; gap:8px; transition:all 0.25s ease;">
+                        <i class="fa fa-film"></i> Polaroid Line View
+                    </button>
+                    <button type="button" id="btn-view-grid" onclick="window.setGalleryViewMode('grid')" class="view-mode-btn" style="border:none; background:transparent; color:#94a3b8; font-weight:600; font-size:13px; padding:7px 20px; border-radius:24px; cursor:pointer; display:inline-flex; align-items:center; gap:8px; transition:all 0.25s ease;">
+                        <i class="fa fa-th-large"></i> Grid Catalog View
+                    </button>
+                </div>
+            </div>
+        </div><!-- /.auto-container -->
+
+        <!-- Expanded Cinema Container for Polaroid Line View -->
+        <div class="gallery-cinema-container" style="width:100%; max-width:1480px; margin:0 auto; padding:0 24px;">
+            <!-- Polaroid Line Carousel Interactive Section -->
+            <div id="polaroid-carousel-wrap" style="position:relative; width:100%; margin-bottom:50px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; padding:0 10px;">
+                    <span style="font-size:13px; color:#64748b; font-weight:600; display:inline-flex; align-items:center; gap:8px;">
+                        <i class="fa fa-hand-grab-o" style="color:#f89d13;"></i> Drag prints or use &larr;/&rarr; keys to swing photos along the sagging line
+                    </span>
+                    <span style="font-size:12px; color:#059669; background:#ecfdf5; border:1px solid #a7f3d0; padding:3px 12px; border-radius:12px; font-weight:700;">
+                        <i class="fa fa-check-circle"></i> Live Physics Pegged Line
+                    </span>
+                </div>
+                <div id="polaroid-line-carousel" style="width:100%; height:680px; min-height:600px; position:relative;"></div>
+            </div>
+        </div>
+
+        <div class="auto-container">
+
+            <!-- Inline Fail-Safe Gallery Controller & Category Filter -->
+            <script id="gallery-core-inline-script">
+            (function() {
+                window.DALAL_SHIPMENTS = [
+                    { image: "images/dalal/hero_forging_press.jpg", date: "July 2026", category: "forging", title: "Loading National 1000T Hot Forging Press", desc: "Dismantled in Thailand and safely shipped for an automotive forging customer in Rajkot, Gujarat." },
+                    { image: "images/dalal/knuckle_coining_press.jpg", date: "June 2026", category: "coining", title: "1000T Knuckle Joint Press (K8340) in Russia", desc: "Procured directly in Russia for our customer in Jamshedpur for precision cold sizing operations." },
+                    { image: "images/dalal/logistics_heavy_transport.jpg", date: "May 2026", category: "forging", title: "Dismantling 2T Hydraulic Hammer", desc: "Mr. Yatin overseeing expert rigging and dismantling of a 2 Ton hydraulic hammer in Rajkot for Mumbai client." },
+                    { image: "images/dalal/cframe_press_pune.jpg", date: "April 2026", category: "forging", title: "Loading Eumuco 315T from Pune", desc: "Dispatched from Pune stockyard via specialized trailer to leading forging enterprise in Ludhiana, Punjab." },
+                    { image: "images/dalal/hero_forging_press.jpg", date: "March 2026", category: "forging", title: "Komatsu 1600T & 2000T Purchased in Poland", desc: "Mr. Vinit Dalal personal site inspection and acquisition of 2 heavy Komatsu forging lines for Bangalore customer." },
+                    { image: "images/dalal/port_crane_logistics.jpg", date: "2026 Feature", category: "imtex", title: "Exhibiting at IMTEX Forming 2026", desc: "Exhibiting at Bangalore as official agents in India for DMT with ECAI forging lines and OMPI clutch systems." },
+                    { image: "images/dalal/hero_forging_press.jpg", date: "December 2025", category: "forging", title: "Voronezh 1600T (TMP) Hot Forging Press", desc: "Sourced and tested under live power in Ukraine, shipped to premier automotive forging plant in Faridabad." },
+                    { image: "images/dalal/cnc_boring_machine.jpg", date: "November 2025", category: "transport", title: "Kieserling MRP 100 Bar Peeling & Straightening Line", desc: "Imported from Germany directly under High Seas Sales for specialized bright steel bar manufacturing in Ahmedabad." },
+                    { image: "images/dalal/logistics_heavy_transport.jpg", date: "October 2025", category: "coining", title: "Dual 250T KB0034 Presses Customs Cleared", desc: "Seamless Nhava Sheva port handling with direct Bill of Entry clearance into Pune ready stock warehouse." },
+                    { image: "images/dalal/cnc_boring_machine.jpg", date: "September 2025", category: "transport", title: "TOS Varnsdorf 130mm CNC Horizontal Boring Mill", desc: "Procured from Czechia with full geometric alignment test logs, delivered to aerospace tier-1 in Bangalore." },
+                    { image: "images/dalal/knuckle_coining_press.jpg", date: "August 2025", category: "forging", title: "Enomoto 400T Friction Screw Press", desc: "Inspected at Osaka manufacturing facility and sea chartered to Mumbai for Rajkot precision hardware forge." },
+                    { image: "images/dalal/port_crane_logistics.jpg", date: "July 2025", category: "imtex", title: "DMT Turnkey High-Speed Forging Line Installation", desc: "Complete factory mechanical assembly and turnkey alignment for heavy industrial customer in Chennai." },
+                    { image: "images/dalal/logistics_heavy_transport.jpg", date: "May 2025", category: "transport", title: "6,300 Ton Heavy Forging Press Sea Charter", desc: "Heavy-lift breakbulk vessel chartered from European port directly to Mumbai Port with full stevedoring." },
+                    { image: "images/dalal/logistics_heavy_transport.jpg", date: "April 2025", category: "transport", title: "Goldhofer Multi-Axle Hydraulic Trailer Convoy", desc: "Specialized oversized transport convoy carrying 120-ton press crown from Mumbai to Ludhiana manufacturing plant." },
+                    { image: "images/dalal/port_crane_logistics.jpg", date: "March 2025", category: "transport", title: "High Seas Sales Title Transfer at Nhava Sheva", desc: "Zero demurrage customs handover with 100% GST input tax credit realized directly under client IEC code." },
+                    { image: "images/dalal/ompi_clutch_brake_unit.jpg", date: "February 2025", category: "imtex", title: "OMPI Pneumatic Clutch-Brake Retrofit Demo", desc: "Technical retrofitting demonstration replacing obsolete mechanical clutch with Italian pneumatic system." },
+                    { image: "images/dalal/knuckle_coining_press.jpg", date: "January 2025", category: "coining", title: "Kalinin K8440 1000T Knuckle Joint Power Test", desc: "Mr. Vinit Dalal on-site tolerance audit with dial indicator test under power prior to Russian containerization." },
+                    { image: "images/dalal/cframe_press_pune.jpg", date: "January 2025", category: "forging", title: "C-Frame Stamping Presses Dispatched from Pune", desc: "Ready stock delivery of 160T and 200T stamping presses to automotive tier-1 supplier in Sanand, Gujarat." }
+                ];
+                window.currentGalleryCategory = 'all';
+                window.currentGalleryPage = 1;
+                window.GALLERY_ITEMS_PER_PAGE = 6;
+
+                window.getFilteredShipments = function() {
+                    var list = window.DALAL_SHIPMENTS || [];
+                    if (window.currentGalleryCategory === 'all') return list;
+                    return list.filter(function(s) { return s.category === window.currentGalleryCategory; });
+                };
+
+                window.renderGallery = function(page) {
+                    var container = document.getElementById('gallery-items-container');
+                    if (!container) return;
+                    var filtered = window.getFilteredShipments();
+                    var totalPages = Math.ceil(filtered.length / window.GALLERY_ITEMS_PER_PAGE) || 1;
+                    window.currentGalleryPage = Math.max(1, Math.min(page || 1, totalPages));
+                    var startIdx = (window.currentGalleryPage - 1) * window.GALLERY_ITEMS_PER_PAGE;
+                    var pageItems = filtered.slice(startIdx, startIdx + window.GALLERY_ITEMS_PER_PAGE);
+
+                    if (pageItems.length === 0) {
+                        container.innerHTML = '<div class="col-12 text-center" style="padding: 60px 20px;"><i class="fa fa-ship" style="font-size:42px; color:#cbd5e1; margin-bottom:15px; display:block;"></i><h4 style="font-family:\'Barlow\', sans-serif; font-weight:700; color:#1e293b; font-size:22px;">No Shipments Found in this Category</h4><p style="color:#64748b; font-size:14px; margin-top:8px;">Select "All Deliveries" to view the complete historical log.</p><button type="button" class="theme-btn btn-style-one" onclick="window.filterGalleryByCategory(\'all\')" style="margin-top:16px; padding:8px 22px; font-size:13px; background:#f89d13; color:#111; font-weight:700;">Show All Deliveries</button></div>';
+                        window.renderPagination(0);
+                        return;
+                    }
+
+                    container.innerHTML = pageItems.map(function(item) {
+                        var rawImg = item.image || 'images/dalal/hero_forging_press.jpg';
+                        var thumbWebp = rawImg.replace(/\.(jpe?g|png)$/i, '_thumb.webp');
+                        var thumbJpg = rawImg.replace(/\.(jpe?g|png)$/i, '_thumb.jpg');
+                        var safeTitle = (item.title || '').replace(/'/g, "\\'");
+                        var safeDesc = (item.desc || '').replace(/'/g, "\\'");
+                        return '<div class="col-lg-4 col-md-6 col-sm-12" style="margin-bottom:30px;"><div class="gallery-item-card" onclick="window.openGalleryLightbox(\'' + rawImg + '\', \'' + safeTitle + '\', \'' + safeDesc + '\')" style="cursor:pointer; height:100%; transition:all 0.3s ease;"><div class="gallery-thumb-box" style="position:relative; overflow:hidden;"><picture><source srcset="' + thumbWebp + '" type="image/webp"><img src="' + thumbJpg + '" onerror="this.onerror=null; this.src=\'' + rawImg + '\';" alt="' + item.title + '" loading="lazy" decoding="async" width="370" height="240" style="width:100%; height:100%; object-fit:cover; display:block;"></picture><div style="position:absolute; top:12px; right:12px; background:rgba(0,0,0,0.6); color:#fff; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px;" title="Click to Zoom Image"><i class="fa fa-search-plus"></i></div></div><div class="gallery-content"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;"><span class="gallery-date-pill">' + item.date + '</span><span style="display:inline-flex; align-items:center; gap:4px; font-size:11px; font-weight:700; color:#059669; background:#ecfdf5; border:1px solid #a7f3d0; padding:2px 8px; border-radius:4px;"><i class="fa fa-check-circle"></i> Delivered</span></div><h4 class="gallery-title" style="margin-bottom:8px;">' + item.title + '</h4><p class="gallery-desc">' + item.desc + '</p></div></div></div>';
+                    }).join('');
+                    window.renderPagination(totalPages);
+                };
+
+                window.renderPagination = function(totalPages) {
+                    var paginList = document.getElementById('gallery-pagination-list');
+                    if (!paginList) return;
+                    if (totalPages <= 1) { paginList.innerHTML = ''; return; }
+                    var html = '';
+                    if (window.currentGalleryPage > 1) {
+                        html += '<li><a href="javascript:void(0)" class="page-nav-btn prev-btn" onclick="window.changeGalleryPage(' + (window.currentGalleryPage - 1) + ')">&larr; Prev</a></li>';
+                    }
+                    for (var i = 1; i <= totalPages; i++) {
+                        var activeClass = (i === window.currentGalleryPage) ? 'active' : '';
+                        html += '<li><a href="javascript:void(0)" class="page-num-btn ' + activeClass + '" onclick="window.changeGalleryPage(' + i + ')">' + i + '</a></li>';
+                    }
+                    if (window.currentGalleryPage < totalPages) {
+                        html += '<li><a href="javascript:void(0)" class="page-nav-btn next-btn" onclick="window.changeGalleryPage(' + (window.currentGalleryPage + 1) + ')">Next &rarr;</a></li>';
+                    }
+                    paginList.innerHTML = html;
+                };
+
+                window.changeGalleryPage = function(target) {
+                    var filtered = window.getFilteredShipments();
+                    var totalPages = Math.ceil(filtered.length / window.GALLERY_ITEMS_PER_PAGE) || 1;
+                    var newPage = window.currentGalleryPage;
+                    if (target === 'prev') newPage = Math.max(1, window.currentGalleryPage - 1);
+                    else if (target === 'next') newPage = Math.min(totalPages, window.currentGalleryPage + 1);
+                    else newPage = parseInt(target, 10) || 1;
+                    if (newPage !== window.currentGalleryPage) {
+                        window.renderGallery(newPage);
+                        var scrollTarget = document.getElementById('gallery-section-top');
+                        if (scrollTarget) scrollTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                };
+
+                window.filterGalleryByCategory = function(category, btn) {
+                    window.currentGalleryCategory = category || 'all';
+                    document.querySelectorAll('.gallery-filter-btn').forEach(function(b) {
+                        b.classList.remove('active');
+                    });
+                    if (btn && btn.classList) {
+                        btn.classList.add('active');
+                    } else {
+                        var m = document.querySelector('.gallery-filter-btn[data-type="' + category + '"]');
+                        if (m) m.classList.add('active');
+                    }
+                    window.renderGallery(1);
+
+                    // Sync Polaroid Line Carousel
+                    if (window.polaroidCarouselInstance && typeof window.polaroidCarouselInstance.setSlides === 'function') {
+                        var filtered = window.getFilteredShipments();
+                        var newSlides = filtered.map(function(s, idx) {
+                            return {
+                                image: s.image,
+                                title: s.title,
+                                caption: s.desc,
+                                alt: s.title,
+                                date: s.date,
+                                category: s.category,
+                                seed: idx + 1
+                            };
+                        });
+                        window.polaroidCarouselInstance = window.polaroidCarouselInstance.setSlides(newSlides);
+                    }
+                };
+
+                // View Mode Switcher
+                window.setGalleryViewMode = function(mode) {
+                    var polaroidWrap = document.getElementById('polaroid-carousel-wrap');
+                    var gridWrap = document.getElementById('gallery-grid-wrap');
+                    var btnPolaroid = document.getElementById('btn-view-polaroid');
+                    var btnGrid = document.getElementById('btn-view-grid');
+
+                    if (mode === 'grid') {
+                        if (polaroidWrap) polaroidWrap.style.display = 'none';
+                        if (gridWrap) gridWrap.style.display = 'block';
+                        if (btnPolaroid) {
+                            btnPolaroid.style.background = 'transparent';
+                            btnPolaroid.style.color = '#94a3b8';
+                        }
+                        if (btnGrid) {
+                            btnGrid.style.background = '#f89d13';
+                            btnGrid.style.color = '#111';
+                        }
+                    } else {
+                        if (polaroidWrap) polaroidWrap.style.display = 'block';
+                        if (gridWrap) gridWrap.style.display = 'none';
+                        if (btnPolaroid) {
+                            btnPolaroid.style.background = '#f89d13';
+                            btnPolaroid.style.color = '#111';
+                        }
+                        if (btnGrid) {
+                            btnGrid.style.background = 'transparent';
+                            btnGrid.style.color = '#94a3b8';
+                        }
+                    }
+                };
+
+                // Initialize Polaroid Carousel
+                window.initPolaroidLine = function() {
+                    var el = document.getElementById('polaroid-line-carousel');
+                    if (!el || !window.createPolaroidLineCarousel) return;
+                    var slides = (window.DALAL_SHIPMENTS || []).map(function(s, idx) {
+                        return {
+                            image: s.image,
+                            title: s.title,
+                            caption: s.desc,
+                            alt: s.title,
+                            date: s.date,
+                            category: s.category,
+                            seed: idx + 1
+                        };
+                    });
+
+                    window.polaroidCarouselInstance = window.createPolaroidLineCarousel(el, {
+                        slides: slides,
+                        height: 680,
+                        cardWidth: 320,
+                        sag: 36,
+                        swing: 1.1,
+                        autoplay: 4500,
+                        string: "#c9a67a",
+                        background: "#0c111c",
+                        ink: "#f8fafc",
+                        accent: "#f89d13",
+                        onCardClick: function(slide) {
+                            if (typeof window.openGalleryLightbox === 'function') {
+                                window.openGalleryLightbox(slide.image, slide.title, slide.caption);
+                            }
+                        }
+                    });
+                };
+            })();
+            </script>
+
+            <!-- Gallery Grid Catalog Wrapper (Toggled via View Switcher) -->
+            <div id="gallery-grid-wrap" style="display:none;">
             <div class="row gallery-grid-row" id="gallery-items-container">
                 <!-- 1 -->
                 <div class="col-lg-4 col-md-6 col-sm-12">
@@ -306,6 +565,7 @@
                     <li><a href="javascript:void(0)" class="page-nav-btn next-btn" onclick="changeGalleryPage('next')">Next &rarr;</a></li>
                 </ul>
             </div>
+            </div> <!-- End gallery-grid-wrap -->
         </div>
     </section>
 
@@ -319,10 +579,10 @@
                             <img src="images/logo-dalal-light.png" alt="Dalal Machine Tools Agency Pvt. Ltd." style="height: 44px; width: auto; max-height: 44px; display: block;">
                         </a>
                     </div>
-                    <p style="font-size:14px; line-height:1.7; color:#94a3b8; margin-bottom:20px;">
-                        Dalal Machine Tools Agency Pvt. Ltd. is one of India's premier dealers in quality second-hand metal forming presses and heavy machine tools.
+                    <p style="font-size:14.5px; line-height:1.7; color:#e2e8f0; margin-bottom:20px;">
+                        Dalal Machine Tools Agency Pvt. Ltd. is one of India's premier importers and dealers of quality second-hand forging equipment, mechanical stamping presses, and heavy CNC cutting machine tools.
                     </p>
-                    <div style="color:#cbd5e1; font-size:14px;"><strong>Managing Director:</strong> Mr. Vinit Dalal</div>
+                    <div style="color:#f1f5f9; font-size:14px;"><strong>Managing Director:</strong> Mr. Vinit Dalal</div>
                     <div class="footer-social-box">
                         <span class="footer-social-label">Follow Us:</span>
                         <div class="footer-social-links">
@@ -335,31 +595,42 @@
                 <div class="col-lg-2 col-md-6 col-sm-12" style="margin-bottom:30px;">
                     <h4 style="font-family:'Barlow'; font-size:18px; font-weight:700; color:#fff; margin-bottom:18px; border-bottom:2px solid #f89d13; display:inline-block; padding-bottom:5px;">Navigation</h4>
                     <ul style="list-style:none; padding:0; margin:0; line-height:2.2; font-size:14px;">
-                        <li><a href="index.html" style="color:#94a3b8; text-decoration:none;">Home</a></li>
-                        <li><a href="about.html" style="color:#94a3b8; text-decoration:none;">About Company</a></li>
-                        <li><a href="services.html" style="color:#94a3b8; text-decoration:none;">Services & High Seas</a></li>
-                        <li><a href="category.html" style="color:#94a3b8; text-decoration:none;">Machine Catalog</a></li>
-                        <li><a href="gallery.html" style="color:#94a3b8; text-decoration:none;">Shipment Gallery</a></li>
-                        <li><a href="contact.html" style="color:#94a3b8; text-decoration:none;">Contact Us</a></li>
+                        <li><a href="index.html" style="color:#cbd5e1; text-decoration:none;">Home</a></li>
+                        <li><a href="about.html" style="color:#cbd5e1; text-decoration:none;">About Company</a></li>
+                        <li><a href="services.html" style="color:#cbd5e1; text-decoration:none;">High Seas Sales</a></li>
+                        <li><a href="category.html" style="color:#cbd5e1; text-decoration:none;">Machine Catalog</a></li>
+                        <li><a href="brand-new-machinery.html" style="color:#cbd5e1; text-decoration:none;">Brand New Machinery</a></li>
+                        <li><a href="gallery.html" style="color:#cbd5e1; text-decoration:none;">Shipment Gallery</a></li>
+                        <li><a href="contact.html" style="color:#cbd5e1; text-decoration:none;">Contact Us</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12" style="margin-bottom:30px;">
                     <h4 style="font-family:'Barlow'; font-size:18px; font-weight:700; color:#fff; margin-bottom:18px; border-bottom:2px solid #f89d13; display:inline-block; padding-bottom:5px;">Top Categories</h4>
                     <ul style="list-style:none; padding:0; margin:0; line-height:2.2; font-size:14px;">
-                        <li><a href="category.html?category=c-frame-press" style="color:#94a3b8; text-decoration:none;">C-Frame Presses</a></li>
-                        <li><a href="category.html?category=hot-forging-press" style="color:#94a3b8; text-decoration:none;">Hot Forging Presses</a></li>
-                        <li><a href="category.html?category=knuckle-joint-press" style="color:#94a3b8; text-decoration:none;">Knuckle Joint Presses</a></li>
-                        <li><a href="category.html?location=pune" style="color:#94a3b8; text-decoration:none;">Pune Warehouse Stock</a></li>
+                        <li><a href="category.html?category=c-frame-press" style="color:#cbd5e1; text-decoration:none;">C-Frame Presses (80T - 250T)</a></li>
+                        <li><a href="category.html?category=hot-forging-press" style="color:#cbd5e1; text-decoration:none;">Hot Forging Presses (up to 6300T)</a></li>
+                        <li><a href="category.html?category=knuckle-joint-press" style="color:#cbd5e1; text-decoration:none;">Knuckle Joint Coining Presses</a></li>
+                        <li><a href="category.html?section=cutting" style="color:#cbd5e1; text-decoration:none;">Horizontal Boring Machines</a></li>
+                        <li><a href="category.html?location=pune" style="color:#cbd5e1; text-decoration:none;">Pune Warehouse Stock</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12" style="margin-bottom:30px;">
                     <h4 style="font-family:'Barlow'; font-size:18px; font-weight:700; color:#fff; margin-bottom:18px; border-bottom:2px solid #f89d13; display:inline-block; padding-bottom:5px;">Registered Office</h4>
-                    <p style="font-size:14px; line-height:1.6; color:#94a3b8;">
-                        <i class="fa fa-building" style="color:#f89d13;"></i> C-10, 3rd Floor, Commerce Centre, 78, Tardeo Main Road, Mumbai - 400034, India.
+                    <p style="font-size:14.5px; line-height:1.6; color:#e2e8f0; margin-bottom:10px;">
+                        <i class="fa fa-building" style="color:#f89d13;"></i> C-10, 3rd Floor, Commerce Centre, 78, Tardeo Main Road, Mumbai - 400034, Maharashtra, India.
                     </p>
-                    <p style="font-size:14px; color:#94a3b8;">
-                        <i class="fa fa-phone" style="color:#f89d13;"></i> +91-22-67439873 / +91 9821232131
+                    <p style="font-size:14.5px; color:#e2e8f0; margin-bottom:8px;">
+                        <i class="fa fa-phone" style="color:#f89d13;"></i> <a href="tel:+919821232131" style="color:#e2e8f0; text-decoration:none;">+91-22-67439873 / +91 9821232131</a>
                     </p>
+                    <p style="font-size:14.5px; color:#e2e8f0; margin-bottom:8px;">
+                        <i class="fa fa-envelope" style="color:#f89d13;"></i> <a href="mailto:dalalmachine@gmail.com" style="color:#e2e8f0; text-decoration:none;">dalalmachine@gmail.com</a>
+                    </p>
+                    <p style="font-size:13.5px; line-height:1.5; color:#f1f5f9; margin-bottom:12px;">
+                        <i class="fa fa-map-marker" style="color:#f89d13;"></i> <strong>Stockyard:</strong> Pune Industrial Machinery Yard
+                    </p>
+                    <div style="font-size:13.5px; color:#ffd54f;">
+                        <strong>Technical Partner:</strong> OMPI India LLP
+                    </div>
                 </div>
             </div>
                         <!-- Bottom Bar -->
@@ -378,6 +649,35 @@
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/script.js"></script>
-<script src="js/gallery-app.js"></script>
+<script src="js/polaroid-line-carousel.js"></script>
+<script src="js/gallery-app.js?v=6.0"></script>
+<script>
+  if (typeof window.initPolaroidLine === 'function') {
+    window.initPolaroidLine();
+  }
+</script>
+
+<!-- Interactive Image Lightbox Modal -->
+<div id="dalal-lightbox-modal" class="dalal-lightbox-backdrop" onclick="closeDalalLightbox(event)" role="dialog" aria-modal="true" aria-label="Machinery Photo Zoom">
+    <div class="dalal-lightbox-content" onclick="event.stopPropagation()">
+        <button type="button" class="dalal-lightbox-close" onclick="closeDalalLightbox()">&times;</button>
+        <img id="dalal-lightbox-img" src="" alt="Zoomed Machine" style="width:100%; max-height:75vh; object-fit:contain; display:block; background:#0f172a;">
+        <div style="padding:18px 24px; background:#1b212f; color:#fff;">
+            <h4 id="dalal-lightbox-title" style="font-family:'Barlow'; font-size:20px; font-weight:700; color:#f89d13; margin:0 0 6px;"></h4>
+            <p id="dalal-lightbox-desc" style="font-size:13.5px; color:#cbd5e1; margin:0; line-height:1.5;"></p>
+        </div>
+    </div>
+</div>
+
+<!-- Mobile Sticky Action Bar -->
+<div class="mobile-sticky-bar" aria-label="Mobile Contact Bar">
+    <a href="tel:+919821232131" class="mobile-sticky-btn call-btn">
+        <i class="fa fa-phone"></i> Call (+91 9821232131)
+    </a>
+    <a href="https://wa.me/919821232131?text=Hello%20Mr.%20Vinit%20Dalal,%20I%20have%20an%20urgent%20machinery%20inquiry." target="_blank" class="mobile-sticky-btn wa-btn">
+        <i class="fa fa-whatsapp"></i> Instant WhatsApp
+    </a>
+</div>
+
 </body>
 </html>

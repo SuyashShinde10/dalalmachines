@@ -9,16 +9,29 @@
   <link href="css/style.css" rel="stylesheet">
   <link href="css/responsive.css" rel="stylesheet">
   <link href="css/font-awesome.css" rel="stylesheet">
-  <link href="css/dalal-custom.css?v=3.3" rel="stylesheet">
+  <link href="css/dalal-custom.css?v=5.0" rel="stylesheet">
   
   <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
+<!-- Preloader: Clean Enterprise Light with Dalal Logo -->
+<div class="preloader" id="dalal-preloader" aria-hidden="true">
+    <div class="enterprise-box">
+        <div class="enterprise-logo-wrap">
+            <img src="images/logo-dalal.png" class="enterprise-logo" alt="Dalal Machine Tools Agency Pvt. Ltd.">
+        </div>
+        <div class="enterprise-bar-track">
+            <div class="enterprise-bar-fill"></div>
+        </div>
+        <div class="enterprise-caption">Dalal Machine Tools</div>
+    </div>
+</div>
+
 <div class="page-wrapper">
-        <!-- Main Header -->
-        <!-- Main Header -->
+    
+    <!-- Main Header -->
     <header class="main-header">
         <!-- Header Top -->
         <div class="header-top">
@@ -134,8 +147,8 @@
                     <div class="outer-box">
                         <div class="link-box">
                             <a href="https://wa.me/919821232131?text=Hello%20Mr.%20Vinit%20Dalal,%20I%20have%20an%20urgent%20machinery%20requirement." 
-                               target="_blank" class="theme-btn btn-style-one" style="background:#f89d13; color:#111; font-weight:700; padding:10px 22px;">
-                                <i class="fa fa-whatsapp"></i> Quick RFQ
+                               target="_blank" class="theme-btn btn-style-one header-rfq-btn" style="background:#f89d13; color:#111; font-weight:700; padding:10px 22px; display:inline-flex; align-items:center; gap:8px;">
+                                <i class="fa fa-whatsapp" style="font-size:18px; line-height:1; vertical-align:middle; margin-right:4px;"></i> <span>Quick RFQ</span>
                             </a>
                         </div>
                     </div>
@@ -209,16 +222,60 @@
             <div class="row">
                 
                 <!-- Left Sidebar: 26 Categories -->
+                <!-- Left Sidebar: 26 Categories & Filters -->
                 <div class="col-lg-3 col-md-12">
                     
                     <!-- Search Widget -->
-                    <div style="background:#fff; border:1px solid #e2e8f0; border-radius:8px; padding:20px; margin-bottom:25px;">
+                    <div style="background:#fff; border:1px solid #e2e8f0; border-radius:8px; padding:20px; margin-bottom:20px;">
                         <h4 style="font-size:16px; font-weight:700; color:#1b212f; margin-bottom:12px;">Search Inventory</h4>
                         <div class="input-group">
-                            <input type="text" id="machine-search-input" class="form-control" placeholder="Search by make, model, ton..." style="height:42px; font-size:13px;">
+                            <input type="text" id="machine-search-input" class="form-control" placeholder="Search make, model, ton..." style="height:42px; font-size:13px;" aria-label="Search machinery">
                             <div class="input-group-append">
                                 <span class="input-group-text" style="background:#f89d13; color:#111;"><i class="fa fa-search"></i></span>
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- Multi-Attribute Filters (Tonnage & Make) -->
+                    <div style="background:#fff; border:1px solid #e2e8f0; border-radius:8px; padding:20px; margin-bottom:20px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+                            <h4 style="font-size:16px; font-weight:700; color:#1b212f; margin:0;">Filter Specifications</h4>
+                            <button type="button" onclick="resetCatalogFilters()" style="background:none; border:none; color:#f89d13; font-size:12px; font-weight:700; cursor:pointer; padding:0;">
+                                <i class="fa fa-refresh"></i> Reset All
+                            </button>
+                        </div>
+                        
+                        <!-- Tonnage Range Filter -->
+                        <div style="margin-bottom:16px;">
+                            <label for="tonnage-filter-select" style="font-size:12px; font-weight:700; color:#475569; text-transform:uppercase; letter-spacing:0.5px; display:block; margin-bottom:6px;">
+                                Press Capacity / Tonnage
+                            </label>
+                            <select id="tonnage-filter-select" class="form-control" style="height:40px; font-size:13px; font-weight:600;">
+                                <option value="">All Tonnages (50T – 6,300T)</option>
+                                <option value="50-250">Light: 50T – 250T</option>
+                                <option value="250-1000">Medium: 250T – 1,000T</option>
+                                <option value="1000-2500">Heavy: 1,000T – 2,500T</option>
+                                <option value="2500+">Ultra-Heavy: 2,500T – 6,300T</option>
+                            </select>
+                        </div>
+
+                        <!-- Make / Manufacturer Filter -->
+                        <div style="margin-bottom:6px;">
+                            <label for="make-filter-select" style="font-size:12px; font-weight:700; color:#475569; text-transform:uppercase; letter-spacing:0.5px; display:block; margin-bottom:6px;">
+                                Manufacturer / Make
+                            </label>
+                            <select id="make-filter-select" class="form-control" style="height:40px; font-size:13px; font-weight:600;">
+                                <option value="">All Global Makes</option>
+                                <option value="Voronezh">TMP Voronezh (Russia)</option>
+                                <option value="National">National Machinery (USA)</option>
+                                <option value="Eumuco">Eumuco (Germany)</option>
+                                <option value="Schuler">Schuler (Germany)</option>
+                                <option value="Smeral">Smeral (Czech Republic)</option>
+                                <option value="Li Chin">Li Chin (Taiwan)</option>
+                                <option value="AIDA">AIDA / Komatsu (Japan)</option>
+                                <option value="Skoda">Skoda / Sedin (Czech / Russia)</option>
+                                <option value="TOS">TOS Varnsdorf (Czech)</option>
+                            </select>
                         </div>
                     </div>
 
@@ -277,16 +334,27 @@
                 <!-- Right Column: Catalog Grid & Filter Bar -->
                 <div class="col-lg-9 col-md-12">
                     
-                    <!-- Top Controls Bar -->
+                    <!-- Top Controls Bar with View Mode Switcher -->
                     <div style="background:#fff; border:1px solid #e2e8f0; border-radius:8px; padding:15px 20px; margin-bottom:25px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:12px;">
                         <div id="catalog-results-count" style="font-size:14px; font-weight:700; color:#1e293b;">
                             Showing Audited Machinery Inventory
                         </div>
-                        <div class="loc-filter-pill-bar loc-filter-compact">
-                            <button type="button" class="loc-filter-btn active" data-loc=""><i class="fa fa-th-large"></i> All Locations</button>
-                            <button type="button" class="loc-filter-btn" data-loc="pune"><i class="fa fa-map-marker"></i> In Stock PUNE</button>
-                            <button type="button" class="loc-filter-btn" data-loc="europe"><i class="fa fa-globe"></i> Europe Staging</button>
-                            <button type="button" class="loc-filter-btn" data-loc="thailand"><i class="fa fa-ship"></i> Thailand / Asia</button>
+                        <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+                            <div class="loc-filter-pill-bar loc-filter-compact">
+                                <button type="button" class="loc-filter-btn active" data-loc=""><i class="fa fa-th-large"></i> All Locations</button>
+                                <button type="button" class="loc-filter-btn" data-loc="pune"><i class="fa fa-map-marker"></i> In Stock PUNE</button>
+                                <button type="button" class="loc-filter-btn" data-loc="europe"><i class="fa fa-globe"></i> Europe Staging</button>
+                                <button type="button" class="loc-filter-btn" data-loc="thailand"><i class="fa fa-ship"></i> Thailand / Asia</button>
+                            </div>
+                            <!-- Grid vs Table View Mode -->
+                            <div class="view-mode-group">
+                                <button type="button" class="view-mode-btn active" data-mode="grid" id="view-mode-grid" title="Grid View" onclick="setCatalogViewMode('grid')">
+                                    <i class="fa fa-th-large"></i> Grid
+                                </button>
+                                <button type="button" class="view-mode-btn" data-mode="table" id="view-mode-table" title="Table View" onclick="setCatalogViewMode('table')">
+                                    <i class="fa fa-table"></i> Table
+                                </button>
+                            </div>
                         </div>
                     </div>
 
@@ -314,10 +382,10 @@
                             <img src="images/logo-dalal-light.png" alt="Dalal Machine Tools Agency Pvt. Ltd." style="height: 44px; width: auto; max-height: 44px; display: block;">
                         </a>
                     </div>
-                    <p style="font-size:14px; line-height:1.7; color:#94a3b8; margin-bottom:20px;">
-                        Dalal Machine Tools Agency Pvt. Ltd. is one of India's premier dealers in quality second-hand metal forming presses and heavy machine tools.
+                    <p style="font-size:14.5px; line-height:1.7; color:#e2e8f0; margin-bottom:20px;">
+                        Dalal Machine Tools Agency Pvt. Ltd. is one of India's premier importers and dealers of quality second-hand forging equipment, mechanical stamping presses, and heavy CNC cutting machine tools.
                     </p>
-                    <div style="color:#cbd5e1; font-size:14px;"><strong>Managing Director:</strong> Mr. Vinit Dalal</div>
+                    <div style="color:#f1f5f9; font-size:14px;"><strong>Managing Director:</strong> Mr. Vinit Dalal</div>
                     <div class="footer-social-box">
                         <span class="footer-social-label">Follow Us:</span>
                         <div class="footer-social-links">
@@ -330,31 +398,40 @@
                 <div class="col-lg-2 col-md-6 col-sm-12" style="margin-bottom:30px;">
                     <h4 style="font-family:'Barlow'; font-size:18px; font-weight:700; color:#fff; margin-bottom:18px; border-bottom:2px solid #f89d13; display:inline-block; padding-bottom:5px;">Navigation</h4>
                     <ul style="list-style:none; padding:0; margin:0; line-height:2.2; font-size:14px;">
-                        <li><a href="index.html" style="color:#94a3b8; text-decoration:none;">Home</a></li>
-                        <li><a href="about.html" style="color:#94a3b8; text-decoration:none;">About Company</a></li>
-                        <li><a href="services.html" style="color:#94a3b8; text-decoration:none;">Services & High Seas</a></li>
-                        <li><a href="category.html" style="color:#94a3b8; text-decoration:none;">Machine Catalog</a></li>
-                        <li><a href="gallery.html" style="color:#94a3b8; text-decoration:none;">Shipment Gallery</a></li>
-                        <li><a href="contact.html" style="color:#94a3b8; text-decoration:none;">Contact Us</a></li>
+                        <li><a href="index.html" style="color:#cbd5e1; text-decoration:none;">Home</a></li>
+                        <li><a href="about.html" style="color:#cbd5e1; text-decoration:none;">About Company</a></li>
+                        <li><a href="services.html" style="color:#cbd5e1; text-decoration:none;">Services & High Seas</a></li>
+                        <li><a href="category.html" style="color:#cbd5e1; text-decoration:none;">Machine Catalog</a></li>
+                        <li><a href="gallery.html" style="color:#cbd5e1; text-decoration:none;">Shipment Gallery</a></li>
+                        <li><a href="contact.html" style="color:#cbd5e1; text-decoration:none;">Contact Us</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12" style="margin-bottom:30px;">
                     <h4 style="font-family:'Barlow'; font-size:18px; font-weight:700; color:#fff; margin-bottom:18px; border-bottom:2px solid #f89d13; display:inline-block; padding-bottom:5px;">Top Categories</h4>
                     <ul style="list-style:none; padding:0; margin:0; line-height:2.2; font-size:14px;">
-                        <li><a href="category.html?category=c-frame-press" style="color:#94a3b8; text-decoration:none;">C-Frame Presses</a></li>
-                        <li><a href="category.html?category=hot-forging-press" style="color:#94a3b8; text-decoration:none;">Hot Forging Presses</a></li>
-                        <li><a href="category.html?category=knuckle-joint-press" style="color:#94a3b8; text-decoration:none;">Knuckle Joint Presses</a></li>
-                        <li><a href="category.html?location=pune" style="color:#94a3b8; text-decoration:none;">Pune Warehouse Stock</a></li>
+                        <li><a href="category.html?category=c-frame-press" style="color:#cbd5e1; text-decoration:none;">C-Frame Presses</a></li>
+                        <li><a href="category.html?category=hot-forging-press" style="color:#cbd5e1; text-decoration:none;">Hot Forging Presses</a></li>
+                        <li><a href="category.html?category=knuckle-joint-press" style="color:#cbd5e1; text-decoration:none;">Knuckle Joint Presses</a></li>
+                        <li><a href="category.html?location=pune" style="color:#cbd5e1; text-decoration:none;">Pune Warehouse Stock</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12" style="margin-bottom:30px;">
                     <h4 style="font-family:'Barlow'; font-size:18px; font-weight:700; color:#fff; margin-bottom:18px; border-bottom:2px solid #f89d13; display:inline-block; padding-bottom:5px;">Registered Office</h4>
-                    <p style="font-size:14px; line-height:1.6; color:#94a3b8;">
+                    <p style="font-size:14.5px; line-height:1.6; color:#e2e8f0; margin-bottom:10px;">
                         <i class="fa fa-building" style="color:#f89d13;"></i> C-10, 3rd Floor, Commerce Centre, 78, Tardeo Main Road, Mumbai - 400034, India.
                     </p>
-                    <p style="font-size:14px; color:#94a3b8;">
-                        <i class="fa fa-phone" style="color:#f89d13;"></i> +91-22-67439873 / +91 9821232131
+                    <p style="font-size:14.5px; color:#e2e8f0; margin-bottom:8px;">
+                        <i class="fa fa-phone" style="color:#f89d13;"></i> <a href="tel:+919821232131" style="color:#e2e8f0; text-decoration:none;">+91-22-67439873 / +91 9821232131</a>
                     </p>
+                    <p style="font-size:14.5px; color:#e2e8f0; margin-bottom:8px;">
+                        <i class="fa fa-envelope" style="color:#f89d13;"></i> <a href="mailto:dalalmachine@gmail.com" style="color:#e2e8f0; text-decoration:none;">dalalmachine@gmail.com</a>
+                    </p>
+                    <p style="font-size:13.5px; line-height:1.5; color:#f1f5f9; margin-bottom:12px;">
+                        <i class="fa fa-map-marker" style="color:#f89d13;"></i> <strong>Stockyard:</strong> Pune Industrial Machinery Yard
+                    </p>
+                    <div style="font-size:13.5px; color:#ffd54f;">
+                        <strong>Technical Partner:</strong> OMPI India LLP
+                    </div>
                 </div>
             </div>
                         <!-- Bottom Bar -->
@@ -375,6 +452,17 @@
 <script src="js/owl.js"></script>
 <script src="js/script.js"></script>
 <script src="js/catalog-data.js?v=2.9"></script>
-<script src="js/catalog-app.js?v=3.1"></script>
+<script src="js/catalog-app.js?v=4.0"></script>
+
+<!-- Mobile Sticky Action Bar -->
+<div class="mobile-sticky-bar" aria-label="Mobile Contact Bar">
+    <a href="tel:+919821232131" class="mobile-sticky-btn call-btn">
+        <i class="fa fa-phone"></i> Call (+91 9821232131)
+    </a>
+    <a href="https://wa.me/919821232131?text=Hello%20Mr.%20Vinit%20Dalal,%20I%20have%20an%20urgent%20machinery%20inquiry." target="_blank" class="mobile-sticky-btn wa-btn">
+        <i class="fa fa-whatsapp"></i> Instant WhatsApp
+    </a>
+</div>
+
 </body>
 </html>

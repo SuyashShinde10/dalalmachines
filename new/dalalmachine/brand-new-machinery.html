@@ -9,16 +9,29 @@
   <link href="css/style.css" rel="stylesheet">
   <link href="css/responsive.css" rel="stylesheet">
   <link href="css/font-awesome.css" rel="stylesheet">
-  <link href="css/dalal-custom.css?v=3.0" rel="stylesheet">
+  <link href="css/dalal-custom.css?v=5.0" rel="stylesheet">
   
   <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
+<!-- Preloader: Clean Enterprise Light with Dalal Logo -->
+<div class="preloader" id="dalal-preloader" aria-hidden="true">
+    <div class="enterprise-box">
+        <div class="enterprise-logo-wrap">
+            <img src="images/logo-dalal.png" class="enterprise-logo" alt="Dalal Machine Tools Agency Pvt. Ltd.">
+        </div>
+        <div class="enterprise-bar-track">
+            <div class="enterprise-bar-fill"></div>
+        </div>
+        <div class="enterprise-caption">Dalal Machine Tools</div>
+    </div>
+</div>
+
 <div class="page-wrapper">
+    
     <!-- Main Header -->
-        <!-- Main Header -->
     <header class="main-header">
         <!-- Header Top -->
         <div class="header-top">
@@ -134,8 +147,8 @@
                     <div class="outer-box">
                         <div class="link-box">
                             <a href="https://wa.me/919821232131?text=Hello%20Mr.%20Vinit%20Dalal,%20I%20have%20an%20urgent%20machinery%20requirement." 
-                               target="_blank" class="theme-btn btn-style-one" style="background:#f89d13; color:#111; font-weight:700; padding:10px 22px;">
-                                <i class="fa fa-whatsapp"></i> Quick RFQ
+                               target="_blank" class="theme-btn btn-style-one header-rfq-btn" style="background:#f89d13; color:#111; font-weight:700; padding:10px 22px; display:inline-flex; align-items:center; gap:8px;">
+                                <i class="fa fa-whatsapp" style="font-size:18px; line-height:1; vertical-align:middle; margin-right:4px;"></i> <span>Quick RFQ</span>
                             </a>
                         </div>
                     </div>
@@ -225,7 +238,7 @@
                         Inquire for Brand New Lines &rarr;
                     </a>
                 </div>
-                <div class="col-lg-6 col-md-12">
+                <div class="col-lg-6 col-md-12 brand-new-img-col">
                     <picture>
                         <source srcset="images/dalal/hero_forging_press.webp" type="image/webp">
                         <img src="images/dalal/hero_forging_press.jpg" alt="DMT ECAI Agency" loading="lazy" decoding="async" width="570" height="380" style="border-radius:8px; width:100%; box-shadow:0 12px 35px rgba(0,0,0,0.1); display:block;">
@@ -234,7 +247,7 @@
             </div>
 
             <!-- OMPI India Section -->
-            <div class="row align-items-center" style="background:#f8fafc; border-radius:12px; padding:40px 20px; border:1px solid #e2e8f0;">
+            <div class="row align-items-center ompi-partner-card" style="background:#ffffff; border-radius:12px; padding:40px 20px; border:1px solid #e2e8f0; box-shadow:0 10px 30px -4px rgba(15,23,42,0.10), 0 3px 8px -1px rgba(15,23,42,0.05);">
                 <div class="col-lg-5 col-md-12 text-center" style="margin-bottom:20px;">
                     <picture>
                         <source srcset="images/dalal/ompi_clutch_brake_unit.webp" type="image/webp">
@@ -253,6 +266,111 @@
                 </div>
             </div>
 
+            <!-- Brand New DMT & ECAI Machinery Specifications Matrix -->
+            <div class="row" style="margin-top:60px;">
+                <div class="col-12">
+                    <div style="border-bottom:2px solid #f89d13; padding-bottom:8px; margin-bottom:24px;">
+                        <span style="color:#f89d13; font-family:'Rajdhani'; font-size:14px; font-weight:700; text-transform:uppercase; letter-spacing:1px;">Product Lineup</span>
+                        <h3 style="font-family:'Barlow'; font-size:28px; font-weight:800; color:#1e293b; margin:4px 0 0;">
+                            Brand-New DMT with ECAI Machinery Program
+                        </h3>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped" style="font-size:14px;">
+                            <thead style="background:#1b212f; color:#fff;">
+                                <tr>
+                                    <th style="padding:12px 14px;">Series &amp; Model</th>
+                                    <th style="padding:12px 14px;">Machine Type</th>
+                                    <th style="padding:12px 14px;">Capacity Range</th>
+                                    <th style="padding:12px 14px;">Key Innovations</th>
+                                    <th style="padding:12px 14px;">Inquiry</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>DMT Series SP</strong></td>
+                                    <td>High-Speed CNC Servo Stamping Press</td>
+                                    <td>100 Ton – 1,200 Ton</td>
+                                    <td>Direct servo drive, programmable motion profiles, 40% energy savings</td>
+                                    <td><a href="contact.html?subject=DMT%20SP%20Inquiry" class="theme-btn btn-style-one" style="padding:6px 14px; font-size:12px; background:#f89d13; color:#111;">RFQ</a></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>DMT Series HFP</strong></td>
+                                    <td>Heavy Hot Forging Crank Press</td>
+                                    <td>630 Ton – 4,000 Ton</td>
+                                    <td>Rigid monoblock frame, automatic wedge adjustment, OMPI clutch system</td>
+                                    <td><a href="contact.html?subject=DMT%20HFP%20Inquiry" class="theme-btn btn-style-one" style="padding:6px 14px; font-size:12px; background:#f89d13; color:#111;">RFQ</a></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ECAI Series ABF</strong></td>
+                                    <td>Automated Billet Feeding &amp; De-scaler</td>
+                                    <td>Billets up to 180mm</td>
+                                    <td>High-speed optical inspection, optical pyrometer sorting, robotic loading</td>
+                                    <td><a href="contact.html?subject=ECAI%20ABF%20Inquiry" class="theme-btn btn-style-one" style="padding:6px 14px; font-size:12px; background:#f89d13; color:#111;">RFQ</a></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ECAI Heavy Manipulator</strong></td>
+                                    <td>Turnkey Forging Manipulator</td>
+                                    <td>3 Ton – 15 Ton Payload</td>
+                                    <td>Electro-hydraulic 6-axis precision movement, rail-bound or rubber-tyred</td>
+                                    <td><a href="contact.html?subject=ECAI%20Manipulator%20Inquiry" class="theme-btn btn-style-one" style="padding:6px 14px; font-size:12px; background:#f89d13; color:#111;">RFQ</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OMPI Clutch-Brake Sizing Guide Table -->
+            <div class="row" style="margin-top:50px;">
+                <div class="col-12">
+                    <div style="border-bottom:2px solid #f89d13; padding-bottom:8px; margin-bottom:24px;">
+                        <span style="color:#f89d13; font-family:'Rajdhani'; font-size:14px; font-weight:700; text-transform:uppercase; letter-spacing:1px;">OMPI Engineering Matrix</span>
+                        <h3 style="font-family:'Barlow'; font-size:28px; font-weight:800; color:#1e293b; margin:4px 0 0;">
+                            OMPI India Clutch-Brake Selection &amp; Sizing Chart
+                        </h3>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped" style="font-size:14px;">
+                            <thead style="background:#1b212f; color:#fff;">
+                                <tr>
+                                    <th style="padding:12px 14px;">OMPI Series</th>
+                                    <th style="padding:12px 14px;">Actuation Type</th>
+                                    <th style="padding:12px 14px;">Target Press Tonnage</th>
+                                    <th style="padding:12px 14px;">Torque Range (Nm)</th>
+                                    <th style="padding:12px 14px;">Application</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Series 0800</strong></td>
+                                    <td>Pneumatic Combined Unit</td>
+                                    <td>63 Ton – 250 Ton</td>
+                                    <td>250 – 3,500 Nm</td>
+                                    <td>C-Frame, OBI, and light progressive die presses</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Series 1800</strong></td>
+                                    <td>Heavy Duty Pneumatic Dual-Piston</td>
+                                    <td>300 Ton – 1,000 Ton</td>
+                                    <td>4,000 – 25,000 Nm</td>
+                                    <td>Straight-sided mechanical presses, deep drawing lines</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Series 2800</strong></td>
+                                    <td>High-Torque Hydraulic Clutch-Brake</td>
+                                    <td>1,000 Ton – 4,000 Ton</td>
+                                    <td>30,000 – 160,000 Nm</td>
+                                    <td>Hot forging crank presses, knuckle joint coining lines</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -266,10 +384,10 @@
                             <img src="images/logo-dalal-light.png" alt="Dalal Machine Tools Agency Pvt. Ltd." style="height: 44px; width: auto; max-height: 44px; display: block;">
                         </a>
                     </div>
-                    <p style="font-size:14px; line-height:1.7; color:#94a3b8; margin-bottom:20px;">
-                        Dalal Machine Tools Agency Pvt. Ltd. is one of India's premier dealers in quality second-hand metal forming presses and heavy machine tools.
+                    <p style="font-size:14.5px; line-height:1.7; color:#e2e8f0; margin-bottom:20px;">
+                        Dalal Machine Tools Agency Pvt. Ltd. is one of India's premier importers and dealers of quality second-hand forging equipment, mechanical stamping presses, and heavy CNC cutting machine tools.
                     </p>
-                    <div style="color:#cbd5e1; font-size:14px;"><strong>Managing Director:</strong> Mr. Vinit Dalal</div>
+                    <div style="color:#f1f5f9; font-size:14px;"><strong>Managing Director:</strong> Mr. Vinit Dalal</div>
                     <div class="footer-social-box">
                         <span class="footer-social-label">Follow Us:</span>
                         <div class="footer-social-links">
@@ -282,31 +400,42 @@
                 <div class="col-lg-2 col-md-6 col-sm-12" style="margin-bottom:30px;">
                     <h4 style="font-family:'Barlow'; font-size:18px; font-weight:700; color:#fff; margin-bottom:18px; border-bottom:2px solid #f89d13; display:inline-block; padding-bottom:5px;">Navigation</h4>
                     <ul style="list-style:none; padding:0; margin:0; line-height:2.2; font-size:14px;">
-                        <li><a href="index.html" style="color:#94a3b8; text-decoration:none;">Home</a></li>
-                        <li><a href="about.html" style="color:#94a3b8; text-decoration:none;">About Company</a></li>
-                        <li><a href="services.html" style="color:#94a3b8; text-decoration:none;">Services & High Seas</a></li>
-                        <li><a href="category.html" style="color:#94a3b8; text-decoration:none;">Machine Catalog</a></li>
-                        <li><a href="gallery.html" style="color:#94a3b8; text-decoration:none;">Shipment Gallery</a></li>
-                        <li><a href="contact.html" style="color:#94a3b8; text-decoration:none;">Contact Us</a></li>
+                        <li><a href="index.html" style="color:#cbd5e1; text-decoration:none;">Home</a></li>
+                        <li><a href="about.html" style="color:#cbd5e1; text-decoration:none;">About Company</a></li>
+                        <li><a href="services.html" style="color:#cbd5e1; text-decoration:none;">High Seas Sales</a></li>
+                        <li><a href="category.html" style="color:#cbd5e1; text-decoration:none;">Machine Catalog</a></li>
+                        <li><a href="brand-new-machinery.html" style="color:#cbd5e1; text-decoration:none;">Brand New Machinery</a></li>
+                        <li><a href="gallery.html" style="color:#cbd5e1; text-decoration:none;">Shipment Gallery</a></li>
+                        <li><a href="contact.html" style="color:#cbd5e1; text-decoration:none;">Contact Us</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12" style="margin-bottom:30px;">
                     <h4 style="font-family:'Barlow'; font-size:18px; font-weight:700; color:#fff; margin-bottom:18px; border-bottom:2px solid #f89d13; display:inline-block; padding-bottom:5px;">Top Categories</h4>
                     <ul style="list-style:none; padding:0; margin:0; line-height:2.2; font-size:14px;">
-                        <li><a href="category.html?category=c-frame-press" style="color:#94a3b8; text-decoration:none;">C-Frame Presses</a></li>
-                        <li><a href="category.html?category=hot-forging-press" style="color:#94a3b8; text-decoration:none;">Hot Forging Presses</a></li>
-                        <li><a href="category.html?category=knuckle-joint-press" style="color:#94a3b8; text-decoration:none;">Knuckle Joint Presses</a></li>
-                        <li><a href="category.html?location=pune" style="color:#94a3b8; text-decoration:none;">Pune Warehouse Stock</a></li>
+                        <li><a href="category.html?category=c-frame-press" style="color:#cbd5e1; text-decoration:none;">C-Frame Presses (80T - 250T)</a></li>
+                        <li><a href="category.html?category=hot-forging-press" style="color:#cbd5e1; text-decoration:none;">Hot Forging Presses (up to 6300T)</a></li>
+                        <li><a href="category.html?category=knuckle-joint-press" style="color:#cbd5e1; text-decoration:none;">Knuckle Joint Coining Presses</a></li>
+                        <li><a href="category.html?section=cutting" style="color:#cbd5e1; text-decoration:none;">Horizontal Boring Machines</a></li>
+                        <li><a href="category.html?location=pune" style="color:#cbd5e1; text-decoration:none;">Pune Warehouse Stock</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12" style="margin-bottom:30px;">
                     <h4 style="font-family:'Barlow'; font-size:18px; font-weight:700; color:#fff; margin-bottom:18px; border-bottom:2px solid #f89d13; display:inline-block; padding-bottom:5px;">Registered Office</h4>
-                    <p style="font-size:14px; line-height:1.6; color:#94a3b8;">
-                        <i class="fa fa-building" style="color:#f89d13;"></i> C-10, 3rd Floor, Commerce Centre, 78, Tardeo Main Road, Mumbai - 400034, India.
+                    <p style="font-size:14.5px; line-height:1.6; color:#e2e8f0; margin-bottom:10px;">
+                        <i class="fa fa-building" style="color:#f89d13;"></i> C-10, 3rd Floor, Commerce Centre, 78, Tardeo Main Road, Mumbai - 400034, Maharashtra, India.
                     </p>
-                    <p style="font-size:14px; color:#94a3b8;">
-                        <i class="fa fa-phone" style="color:#f89d13;"></i> +91-22-67439873 / +91 9821232131
+                    <p style="font-size:14.5px; color:#e2e8f0; margin-bottom:8px;">
+                        <i class="fa fa-phone" style="color:#f89d13;"></i> <a href="tel:+919821232131" style="color:#e2e8f0; text-decoration:none;">+91-22-67439873 / +91 9821232131</a>
                     </p>
+                    <p style="font-size:14.5px; color:#e2e8f0; margin-bottom:8px;">
+                        <i class="fa fa-envelope" style="color:#f89d13;"></i> <a href="mailto:dalalmachine@gmail.com" style="color:#e2e8f0; text-decoration:none;">dalalmachine@gmail.com</a>
+                    </p>
+                    <p style="font-size:13.5px; line-height:1.5; color:#f1f5f9; margin-bottom:12px;">
+                        <i class="fa fa-map-marker" style="color:#f89d13;"></i> <strong>Stockyard:</strong> Pune Industrial Machinery Yard
+                    </p>
+                    <div style="font-size:13.5px; color:#ffd54f;">
+                        <strong>Technical Partner:</strong> OMPI India LLP
+                    </div>
                 </div>
             </div>
                         <!-- Bottom Bar -->
@@ -325,5 +454,16 @@
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/script.js"></script>
+
+<!-- Mobile Sticky Action Bar -->
+<div class="mobile-sticky-bar" aria-label="Mobile Contact Bar">
+    <a href="tel:+919821232131" class="mobile-sticky-btn call-btn">
+        <i class="fa fa-phone"></i> Call (+91 9821232131)
+    </a>
+    <a href="https://wa.me/919821232131?text=Hello%20Mr.%20Vinit%20Dalal,%20I%20have%20an%20urgent%20machinery%20inquiry." target="_blank" class="mobile-sticky-btn wa-btn">
+        <i class="fa fa-whatsapp"></i> Instant WhatsApp
+    </a>
+</div>
+
 </body>
 </html>

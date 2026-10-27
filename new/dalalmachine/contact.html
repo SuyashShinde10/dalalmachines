@@ -9,16 +9,29 @@
   <link href="css/style.css" rel="stylesheet">
   <link href="css/responsive.css" rel="stylesheet">
   <link href="css/font-awesome.css" rel="stylesheet">
-  <link href="css/dalal-custom.css?v=3.0" rel="stylesheet">
+  <link href="css/dalal-custom.css?v=5.0" rel="stylesheet">
   
   <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
+<!-- Preloader: Clean Enterprise Light with Dalal Logo -->
+<div class="preloader" id="dalal-preloader" aria-hidden="true">
+    <div class="enterprise-box">
+        <div class="enterprise-logo-wrap">
+            <img src="images/logo-dalal.png" class="enterprise-logo" alt="Dalal Machine Tools Agency Pvt. Ltd.">
+        </div>
+        <div class="enterprise-bar-track">
+            <div class="enterprise-bar-fill"></div>
+        </div>
+        <div class="enterprise-caption">Dalal Machine Tools</div>
+    </div>
+</div>
+
 <div class="page-wrapper">
+    
     <!-- Main Header -->
-        <!-- Main Header -->
     <header class="main-header">
         <!-- Header Top -->
         <div class="header-top">
@@ -134,8 +147,8 @@
                     <div class="outer-box">
                         <div class="link-box">
                             <a href="https://wa.me/919821232131?text=Hello%20Mr.%20Vinit%20Dalal,%20I%20have%20an%20urgent%20machinery%20requirement." 
-                               target="_blank" class="theme-btn btn-style-one" style="background:#f89d13; color:#111; font-weight:700; padding:10px 22px;">
-                                <i class="fa fa-whatsapp"></i> Quick RFQ
+                               target="_blank" class="theme-btn btn-style-one header-rfq-btn" style="background:#f89d13; color:#111; font-weight:700; padding:10px 22px; display:inline-flex; align-items:center; gap:8px;">
+                                <i class="fa fa-whatsapp" style="font-size:18px; line-height:1; vertical-align:middle; margin-right:4px;"></i> <span>Quick RFQ</span>
                             </a>
                         </div>
                     </div>
@@ -210,7 +223,7 @@
                 
                 <!-- Contact Information Cards -->
                 <div class="col-lg-5 col-md-12" style="margin-bottom:30px;">
-                    <div style="background:#fff; border:1px solid #e2e8f0; border-radius:8px; padding:32px; box-shadow:0 8px 25px rgba(0,0,0,0.04); margin-bottom:25px;">
+                    <div class="contact-info-card" style="background:#fff; border:1px solid #e2e8f0; border-radius:8px; padding:32px; box-shadow:0 10px 28px -3px rgba(15,23,42,0.10), 0 3px 8px -1px rgba(15,23,42,0.05); margin-bottom:25px;">
                         <span style="color:#f89d13; font-family:'Rajdhani'; font-size:14px; font-weight:700; text-transform:uppercase; letter-spacing:1px;">Headquarters</span>
                         <h3 style="font-family:'Barlow'; font-size:24px; font-weight:800; color:#1b212f; margin:6px 0 15px;">Registered Office</h3>
                         
@@ -249,7 +262,7 @@
                     </div>
 
                     <!-- Warehouse Stockyard Notice -->
-                    <div style="background:#1b212f; color:#fff; border-radius:8px; padding:26px; border-left:4px solid #f89d13;">
+                    <div style="background:#1b212f; color:#fff; border-radius:8px; padding:26px; border-left:4px solid #f89d13; box-shadow:0 10px 28px rgba(15,23,42,0.25);">
                         <span style="color:#f89d13; font-family:'Rajdhani'; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:1px;">Physical Inspection Facility</span>
                         <h4 style="color:#ffffff; font-weight:700; font-size:20px; margin:4px 0 10px;">Pune Warehouse & Machine Yard</h4>
                         <p style="font-size:13.5px; color:#cbd5e1; margin-bottom:12px; line-height:1.65;">
@@ -257,6 +270,10 @@
                             <strong>Stockyard Location:</strong> Pune Industrial Machinery Stockyard, Pune Corridor, Maharashtra, India.<br>
                             <i class="fa fa-check-circle" style="color:#10b981; width:18px;"></i>
                             <strong>On-Site Inspection:</strong> Live power demonstration for C-Frame mechanical presses (80T - 250T) and coining presses.<br>
+                            <i class="fa fa-clock-o" style="color:#f89d13; width:18px;"></i>
+                            <strong>Yard Visiting Hours:</strong> Mon – Sat: 9:30 AM – 6:30 PM (Prior appointment recommended).<br>
+                            <i class="fa fa-road" style="color:#f89d13; width:18px;"></i>
+                            <strong>Route Guidance:</strong> Situated conveniently off the Pune-Mumbai Expressway corridor for heavy-trailer access.<br>
                             <i class="fa fa-phone" style="color:#f89d13; width:18px;"></i>
                             <strong>Inspection Coordinator:</strong> Mr. Vinit Dalal (<a href="tel:+919821232131" style="color:#ffd54f;">+91 9821232131</a>)
                         </p>
@@ -269,30 +286,39 @@
 
                 <!-- Form Column -->
                 <div class="col-lg-7 col-md-12">
-                    <div style="background:#fff; border:1px solid #e2e8f0; border-radius:8px; padding:35px; box-shadow:0 8px 25px rgba(0,0,0,0.04);">
-                        <span style="color:#f89d13; font-family:'Rajdhani'; font-size:14px; font-weight:700; text-transform:uppercase; letter-spacing:1px;">Send an Inquiry</span>
-                        <h3 style="font-family:'Barlow'; font-size:26px; font-weight:800; color:#1b212f; margin:6px 0 20px;">Direct Quotation & Machinery Requirement</h3>
+                    <div class="contact-form-card" style="background:#fff; border:1px solid #e2e8f0; border-radius:8px; padding:35px; box-shadow:0 10px 28px -3px rgba(15,23,42,0.10), 0 3px 8px -1px rgba(15,23,42,0.05);">
+                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:10px;">
+                            <span style="color:#f89d13; font-family:'Rajdhani'; font-size:14px; font-weight:700; text-transform:uppercase; letter-spacing:1px;">Send an Inquiry</span>
+                            <div style="display:inline-flex; align-items:center; gap:6px; background:#ecfdf5; border:1px solid #a7f3d0; color:#065f46; font-size:12px; font-weight:600; padding:4px 12px; border-radius:16px;">
+                                <i class="fa fa-clock-o" style="color:#10b981;"></i> Avg. RFQ Response: &lt; 2 Hours
+                            </div>
+                        </div>
+                        <h3 style="font-family:'Barlow'; font-size:26px; font-weight:800; color:#1b212f; margin:0 0 20px;">Direct Quotation & Machinery Requirement</h3>
 
                         <form id="contact-inquiry-form" onsubmit="event.preventDefault(); submitInquiry();">
+                            <!-- Anti-bot honeypot -->
+                            <input type="text" id="form-hp" name="_hp_company" style="display:none;" tabindex="-1" autocomplete="off">
+
                             <div class="row">
                                 <div class="col-md-6 form-group">
-                                    <label style="font-size:13px; font-weight:600; color:#334155;">Your Full Name *</label>
-                                    <input type="text" id="form-name" class="form-control" required style="height:46px; font-size:14px;">
+                                    <label for="form-name" style="font-size:13px; font-weight:600; color:#334155;">Your Full Name *</label>
+                                    <input type="text" id="form-name" class="form-control" required style="height:46px; font-size:14px;" placeholder="e.g. Rajiv Sharma">
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <label style="font-size:13px; font-weight:600; color:#334155;">Company Name *</label>
-                                    <input type="text" id="form-company" class="form-control" required style="height:46px; font-size:14px;">
+                                    <label for="form-company" style="font-size:13px; font-weight:600; color:#334155;">Company Name *</label>
+                                    <input type="text" id="form-company" class="form-control" required style="height:46px; font-size:14px;" placeholder="e.g. Acme Forgings Pvt Ltd">
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <label style="font-size:13px; font-weight:600; color:#334155;">Phone / Mobile Number *</label>
-                                    <input type="tel" id="form-phone" class="form-control" required style="height:46px; font-size:14px;">
+                                    <label for="form-phone" style="font-size:13px; font-weight:600; color:#334155;">Phone / Mobile Number *</label>
+                                    <input type="tel" id="form-phone" class="form-control" required style="height:46px; font-size:14px;" placeholder="+91 98200 00000">
+                                    <div id="phone-validation-msg" class="form-validation-error">Please enter a valid phone number with STD or country code.</div>
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <label style="font-size:13px; font-weight:600; color:#334155;">Email Address *</label>
-                                    <input type="email" id="form-email" class="form-control" required style="height:46px; font-size:14px;">
+                                    <label for="form-email" style="font-size:13px; font-weight:600; color:#334155;">Email Address *</label>
+                                    <input type="email" id="form-email" class="form-control" required style="height:46px; font-size:14px;" placeholder="rajiv@acmeforge.com">
                                 </div>
                                 <div class="col-12 form-group">
-                                    <label style="font-size:13px; font-weight:600; color:#334155;">Interested Machine Type or Tonnage Required</label>
+                                    <label for="form-machine-type" style="font-size:13px; font-weight:600; color:#334155;">Interested Machine Type or Tonnage Required</label>
                                     <select id="form-machine-type" class="form-control" style="height:46px; font-size:14px;">
                                         <option value="Hot Forging Press (1000T - 6300T)">Hot Forging Press (1000T - 6300T)</option>
                                         <option value="C-Frame Stamping Press (80T - 250T)">C-Frame Stamping Press (80T - 250T)</option>
@@ -304,13 +330,16 @@
                                     </select>
                                 </div>
                                 <div class="col-12 form-group">
-                                    <label style="font-size:13px; font-weight:600; color:#334155;">Detailed Technical Requirements / Message</label>
-                                    <textarea id="form-message" class="form-control" rows="4" placeholder="Mention required bed size, stroke, daylight, preferred make..." style="font-size:14px;"></textarea>
+                                    <label for="form-message" style="font-size:13px; font-weight:600; color:#334155;">Detailed Technical Requirements / Message</label>
+                                    <textarea id="form-message" class="form-control" rows="4" placeholder="Mention required bed size, stroke, daylight, preferred make, delivery timeline..." style="font-size:14px;"></textarea>
                                 </div>
                                 <div class="col-12">
                                     <button type="submit" class="theme-btn btn-style-one" style="padding:14px 32px; background:#f89d13; color:#111; font-weight:700; border:none; width:100%;">
-                                        <i class="fa fa-paper-plane"></i> Send Inquiry via WhatsApp & Email
+                                        <i class="fa fa-paper-plane"></i> Submit Quotation &amp; Notify on WhatsApp
                                     </button>
+                                    <p style="font-size:12px; color:#64748b; margin-top:10px; text-align:center;">
+                                        <i class="fa fa-lock" style="color:#10b981;"></i> Your inquiry is securely saved to our database and instantly notified to MD Mr. Vinit Dalal.
+                                    </p>
                                 </div>
                             </div>
                         </form>
@@ -319,11 +348,26 @@
 
             </div>
 
-            <!-- Embedded Google Map -->
+            <!-- Dual Interactive Google Map Embed -->
             <div class="row" style="margin-top:50px;">
                 <div class="col-12">
-                    <div style="border-radius:8px; overflow:hidden; border:1px solid #e2e8f0; height:380px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:14px; gap:10px;">
+                        <h4 style="font-family:'Barlow'; font-weight:800; font-size:22px; color:#1e293b; margin:0;">
+                            <i class="fa fa-map-marker" style="color:#f89d13;"></i> Facility Locations &amp; Navigation
+                        </h4>
+                        <!-- Dual Map Switcher Tabs -->
+                        <div class="map-switcher-bar" style="margin:0;">
+                            <button type="button" class="map-switch-btn active" data-map="mumbai">
+                                <i class="fa fa-building"></i> Mumbai Registered Office (Tardeo)
+                            </button>
+                            <button type="button" class="map-switch-btn" data-map="pune">
+                                <i class="fa fa-industry"></i> Pune Machine Yard (Stock &amp; Inspection)
+                            </button>
+                        </div>
+                    </div>
+                    <div style="border-radius:8px; overflow:hidden; border:1px solid #e2e8f0; height:400px; box-shadow:0 6px 20px rgba(0,0,0,0.06);">
                         <iframe 
+                            id="contact-map-iframe"
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3773.189569722304!2d72.81226027581177!3d18.96720798221379!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7ce6826079965%3A0xbcf03aebf6f6984f!2sCommerce%20Centre%2C%20Tardeo%2C%20Mumbai%2C%20Maharashtra%20400034!5e0!3m2!1sen!2sin!4v1700000000000" 
                             width="100%" 
                             height="100%" 
@@ -348,10 +392,10 @@
                             <img src="images/logo-dalal-light.png" alt="Dalal Machine Tools Agency Pvt. Ltd." style="height: 44px; width: auto; max-height: 44px; display: block;">
                         </a>
                     </div>
-                    <p style="font-size:14px; line-height:1.7; color:#94a3b8; margin-bottom:20px;">
-                        Dalal Machine Tools Agency Pvt. Ltd. is one of India's premier dealers in quality second-hand metal forming presses and heavy machine tools.
+                    <p style="font-size:14.5px; line-height:1.7; color:#e2e8f0; margin-bottom:20px;">
+                        Dalal Machine Tools Agency Pvt. Ltd. is one of India's premier importers and dealers of quality second-hand forging equipment, mechanical stamping presses, and heavy CNC cutting machine tools.
                     </p>
-                    <div style="color:#cbd5e1; font-size:14px;"><strong>Managing Director:</strong> Mr. Vinit Dalal</div>
+                    <div style="color:#f1f5f9; font-size:14px;"><strong>Managing Director:</strong> Mr. Vinit Dalal</div>
                     <div class="footer-social-box">
                         <span class="footer-social-label">Follow Us:</span>
                         <div class="footer-social-links">
@@ -364,34 +408,42 @@
                 <div class="col-lg-2 col-md-6 col-sm-12" style="margin-bottom:30px;">
                     <h4 style="font-family:'Barlow'; font-size:18px; font-weight:700; color:#fff; margin-bottom:18px; border-bottom:2px solid #f89d13; display:inline-block; padding-bottom:5px;">Navigation</h4>
                     <ul style="list-style:none; padding:0; margin:0; line-height:2.2; font-size:14px;">
-                        <li><a href="index.html" style="color:#94a3b8; text-decoration:none;">Home</a></li>
-                        <li><a href="about.html" style="color:#94a3b8; text-decoration:none;">About Company</a></li>
-                        <li><a href="services.html" style="color:#94a3b8; text-decoration:none;">Services & High Seas</a></li>
-                        <li><a href="category.html" style="color:#94a3b8; text-decoration:none;">Machine Catalog</a></li>
-                        <li><a href="gallery.html" style="color:#94a3b8; text-decoration:none;">Shipment Gallery</a></li>
-                        <li><a href="contact.html" style="color:#94a3b8; text-decoration:none;">Contact Us</a></li>
+                        <li><a href="index.html" style="color:#cbd5e1; text-decoration:none;">Home</a></li>
+                        <li><a href="about.html" style="color:#cbd5e1; text-decoration:none;">About Company</a></li>
+                        <li><a href="services.html" style="color:#cbd5e1; text-decoration:none;">High Seas Sales</a></li>
+                        <li><a href="category.html" style="color:#cbd5e1; text-decoration:none;">Machine Catalog</a></li>
+                        <li><a href="brand-new-machinery.html" style="color:#cbd5e1; text-decoration:none;">Brand New Machinery</a></li>
+                        <li><a href="gallery.html" style="color:#cbd5e1; text-decoration:none;">Shipment Gallery</a></li>
+                        <li><a href="contact.html" style="color:#cbd5e1; text-decoration:none;">Contact Us</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12" style="margin-bottom:30px;">
                     <h4 style="font-family:'Barlow'; font-size:18px; font-weight:700; color:#fff; margin-bottom:18px; border-bottom:2px solid #f89d13; display:inline-block; padding-bottom:5px;">Top Categories</h4>
                     <ul style="list-style:none; padding:0; margin:0; line-height:2.2; font-size:14px;">
-                        <li><a href="category.html?category=c-frame-press" style="color:#94a3b8; text-decoration:none;">C-Frame Presses</a></li>
-                        <li><a href="category.html?category=hot-forging-press" style="color:#94a3b8; text-decoration:none;">Hot Forging Presses</a></li>
-                        <li><a href="category.html?category=knuckle-joint-press" style="color:#94a3b8; text-decoration:none;">Knuckle Joint Presses</a></li>
-                        <li><a href="category.html?location=pune" style="color:#94a3b8; text-decoration:none;">Pune Warehouse Stock</a></li>
+                        <li><a href="category.html?category=c-frame-press" style="color:#cbd5e1; text-decoration:none;">C-Frame Presses (80T - 250T)</a></li>
+                        <li><a href="category.html?category=hot-forging-press" style="color:#cbd5e1; text-decoration:none;">Hot Forging Presses (up to 6300T)</a></li>
+                        <li><a href="category.html?category=knuckle-joint-press" style="color:#cbd5e1; text-decoration:none;">Knuckle Joint Coining Presses</a></li>
+                        <li><a href="category.html?section=cutting" style="color:#cbd5e1; text-decoration:none;">Horizontal Boring Machines</a></li>
+                        <li><a href="category.html?location=pune" style="color:#cbd5e1; text-decoration:none;">Pune Warehouse Stock</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12" style="margin-bottom:30px;">
                     <h4 style="font-family:'Barlow'; font-size:18px; font-weight:700; color:#fff; margin-bottom:18px; border-bottom:2px solid #f89d13; display:inline-block; padding-bottom:5px;">Registered Office</h4>
-                    <p style="font-size:14px; line-height:1.6; color:#94a3b8;">
-                        <i class="fa fa-building" style="color:#f89d13;"></i> C-10, 3rd Floor, Commerce Centre, 78, Tardeo Main Road, Mumbai - 400034, India.
+                    <p style="font-size:14.5px; line-height:1.6; color:#e2e8f0; margin-bottom:10px;">
+                        <i class="fa fa-building" style="color:#f89d13;"></i> C-10, 3rd Floor, Commerce Centre, 78, Tardeo Main Road, Mumbai - 400034, Maharashtra, India.
                     </p>
-                    <p style="font-size:14px; color:#94a3b8; margin-bottom:8px;">
-                        <i class="fa fa-phone" style="color:#f89d13;"></i> +91-22-67439873 / +91 9821232131
+                    <p style="font-size:14.5px; color:#e2e8f0; margin-bottom:8px;">
+                        <i class="fa fa-phone" style="color:#f89d13;"></i> <a href="tel:+919821232131" style="color:#e2e8f0; text-decoration:none;">+91-22-67439873 / +91 9821232131</a>
                     </p>
-                    <p style="font-size:13px; line-height:1.5; color:#cbd5e1;">
-                        <i class="fa fa-map-marker" style="color:#f89d13;"></i> <strong>Stockyard:</strong> Pune Industrial Machinery Yard, MH.
+                    <p style="font-size:14.5px; color:#e2e8f0; margin-bottom:8px;">
+                        <i class="fa fa-envelope" style="color:#f89d13;"></i> <a href="mailto:dalalmachine@gmail.com" style="color:#e2e8f0; text-decoration:none;">dalalmachine@gmail.com</a>
                     </p>
+                    <p style="font-size:13.5px; line-height:1.5; color:#f1f5f9; margin-bottom:12px;">
+                        <i class="fa fa-map-marker" style="color:#f89d13;"></i> <strong>Stockyard:</strong> Pune Industrial Machinery Yard
+                    </p>
+                    <div style="font-size:13.5px; color:#ffd54f;">
+                        <strong>Technical Partner:</strong> OMPI India LLP
+                    </div>
                 </div>
             </div>
                         <!-- Bottom Bar -->
@@ -412,22 +464,61 @@
 <script src="js/script.js"></script>
 <script>
 function submitInquiry() {
-    const name = document.getElementById('form-name').value;
-    const company = document.getElementById('form-company').value;
-    const phone = document.getElementById('form-phone').value;
+    const name = document.getElementById('form-name').value.trim();
+    const company = document.getElementById('form-company').value.trim();
+    const phone = document.getElementById('form-phone').value.trim();
+    const email = document.getElementById('form-email').value.trim();
     const type = document.getElementById('form-machine-type').value;
-    const msg = document.getElementById('form-message').value;
+    const msg = document.getElementById('form-message').value.trim();
+    const hp = document.getElementById('form-hp') ? document.getElementById('form-hp').value : '';
 
-    const text = `Hello Mr. Vinit Dalal,
-Name: ${name}
-Company: ${company}
-Phone: ${phone}
-Machine Required: ${type}
-Details: ${msg}`;
+    // Silent anti-spam honeypot
+    if (hp) return;
 
-    const waUrl = `https://wa.me/919821232131?text=${encodeURIComponent(text)}`;
-    window.open(waUrl, '_blank');
+    // Validate phone number (minimum 7 digits)
+    const digitsOnly = phone.replace(/\D/g, '');
+    const phoneErr = document.getElementById('phone-validation-msg');
+    if (digitsOnly.length < 7) {
+        if (phoneErr) {
+            phoneErr.style.display = 'block';
+            phoneErr.textContent = 'Please enter a valid mobile number with at least 7 digits.';
+        }
+        document.getElementById('form-phone').focus();
+        return;
+    } else if (phoneErr) {
+        phoneErr.style.display = 'none';
+    }
+
+    const payload = {
+        name: name,
+        company: company,
+        phone: phone,
+        email: email,
+        machineId: type,
+        machineName: type,
+        message: msg
+    };
+
+    if (typeof window.handleUnifiedInquiry === 'function') {
+        window.handleUnifiedInquiry(payload, 'contact-inquiry-form');
+    } else {
+        // Fallback directly to WhatsApp
+        const text = `Hello Mr. Vinit Dalal,\nName: ${name}\nCompany: ${company}\nPhone: ${phone}\nRequirement: ${type}\nDetails: ${msg}`;
+        window.open(`https://wa.me/919821232131?text=${encodeURIComponent(text)}`, '_blank');
+    }
 }
 </script>
+
+<!-- Mobile Sticky Call & WhatsApp Bar -->
+<div class="mobile-sticky-bar">
+    <a href="tel:+919821232131" class="mobile-sticky-btn call-btn">
+        <i class="fa fa-phone"></i> Call Direct (+91 9821232131)
+    </a>
+    <a href="https://wa.me/919821232131?text=Hello%20Mr.%20Vinit%20Dalal,%20I%20have%20an%20urgent%20machinery%20requirement." 
+       target="_blank" class="mobile-sticky-btn wa-btn">
+        <i class="fa fa-whatsapp"></i> WhatsApp RFQ
+    </a>
+</div>
+
 </body>
 </html>

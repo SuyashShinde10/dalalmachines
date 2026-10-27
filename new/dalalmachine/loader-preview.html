@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dalal Machine Tools - Custom Logo Loader Showcase</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/font-awesome.css">
+  <style>
+    :root {
+      --primary: #f89d13;
+      --primary-glow: rgba(248, 157, 19, 0.4);
+      --dark-bg: #090d14;
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Outfit', -apple-system, sans-serif;
+      background: var(--dark-bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px 80px;
+      overflow-x: hidden;
+    }
+
+    .hero-header {
+      text-align: center;
+      max-width: 800px;
+      margin-bottom: 40px;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: rgba(248, 157, 19, 0.12);
+      border: 1px solid rgba(248, 157, 19, 0.3);
+      border-radius: 999px;
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, var(--primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    p.subtitle {
+      color: var(--text-muted);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .grid-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      width: 100%;
+      max-width: 1100px;
+      margin-bottom: 40px;
+    }
+
+    .preview-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+
+    .preview-card:hover {
+      border-color: rgba(248, 157, 19, 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4), 0 0 24px rgba(248, 157, 19, 0.15);
+    }
+
+    .preview-card.featured {
+      border-color: rgba(248, 157, 19, 0.5);
+      background: linear-gradient(180deg, rgba(248, 157, 19, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+    }
+
+    .card-top {
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .card-top h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .tag {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #94a3b8;
+    }
+
+    .tag.gold {
+      background: var(--primary);
+      color: #000;
+    }
+
+    /* Live Mini Preview Canvas */
+    .mini-stage {
+      height: 220px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .mini-stage.dark {
+      background: #0b0f17;
+    }
+
+    .mini-stage.light {
+      background: #f8fafc;
+    }
+
+    .card-info {
+      padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .card-desc {
+      font-size: 13.5px;
+      color: #94a3b8;
+      line-height: 1.5;
+    }
+
+    .btn-test {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 20px;
+      background: rgba(248, 157, 19, 0.15);
+      color: var(--primary);
+      border: 1px solid rgba(248, 157, 19, 0.4);
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-test:hover {
+      background: var(--primary);
+      color: #000;
+      box-shadow: 0 4px 14px var(--primary-glow);
+    }
+
+    /* ==============================================================
+       FULLSCREEN OVERLAY LOADER IMPLEMENTATIONS
+       ============================================================== */
+    .fullscreen-loader-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      opacity: 0;
+      transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .fullscreen-loader-overlay.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .fullscreen-loader-overlay .dismiss-hint {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: all 0.2s;
+    }
+
+    .fullscreen-loader-overlay .dismiss-hint:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    /* -------------------------------------------------------------
+       CLEAN ENTERPRISE LIGHT (ACTIVE INSTALLED LOADER)
+       ------------------------------------------------------------- */
+    .loader-theme-light {
+      background: #ffffff;
+    }
+
+    .light-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .light-logo-wrap {
+      margin-bottom: 24px;
+      animation: dalalPulse 2s ease-in-out infinite;
+    }
+
+    .light-logo {
+      height: 52px;
+      width: auto;
+      display: block;
+    }
+
+    .light-bar-track {
+      width: 200px;
+      height: 3px;
+      background: #e2e8f0;
+      border-radius: 99px;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 12px;
+    }
+
+    .light-bar-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 35%;
+      background: #f89d13;
+      border-radius: 99px;
+      animation: dalalTrackSweep 1.5s infinite ease-in-out;
+    }
+
+    .light-caption {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #64748b;
+      text-transform: uppercase;
+    }
+
+    /* -------------------------------------------------------------
+       STYLE 3: INDUSTRIAL PRECISION COG / PERCENTAGE
+       ------------------------------------------------------------- */
+    .loader-theme-precision {
+      background: #07090e;
+    }
+
+    .precision-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .precision-ring-wrap {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .precision-svg-ring {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      animation: dalalRotate 3s linear infinite;
+    }
+
+    .precision-inner-logo {
+      width: 80px;
+      height: auto;
+      z-index: 2;
+      filter: drop-shadow(0 2px 8px rgba(248, 157, 19, 0.4));
+      animation: dalalPulse 2.4s infinite ease-in-out;
+    }
+
+    .precision-pct {
+      font-family: 'Space Grotesk', monospace;
+      font-size: 20px;
+      font-weight: 700;
+      color: #f89d13;
+      margin-bottom: 6px;
+      letter-spacing: 1px;
+    }
+
+    .precision-status {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #94a3b8;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    /* Animations */
+    @keyframes dalalShimmer {
+      0% { left: -100%; }
+      50%, 100% { left: 200%; }
+    }
+
+    @keyframes dalalFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    @keyframes dalalPulse {
+      0%, 100% { transform: scale(1); opacity: 0.95; }
+      50% { transform: scale(1.03); opacity: 1; }
+    }
+
+    @keyframes dalalTrackSweep {
+      0% { left: -40%; width: 30%; }
+      50% { left: 40%; width: 50%; }
+      100% { left: 100%; width: 30%; }
+    }
+
+    @keyframes dalalRotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Back Link */
+    .back-nav {
+      margin-top: 30px;
+    }
+
+    .back-nav a {
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+
+    .back-nav a:hover {
+      color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hero-header">
+    <div class="badge-pill">
+      <i class="fa fa-paint-brush"></i> Interactive Design Prototype
+    </div>
+    <h1>Custom Brand Logo Preloaders</h1>
+    <p class="subtitle">
+      Yes! Creating a custom loader using the <strong>Dalal Machine Tools</strong> logo is not only 100% possible, but also dramatically elevates the brand’s industrial prestige and perceived performance.
+    </p>
+  </div>
+
+  <div class="grid-options">
+
+    <!-- Clean Enterprise Light (Active) -->
+    <div class="preview-card featured">
+      <div class="card-top">
+        <h3>Clean Enterprise Light</h3>
+        <span class="tag gold">Active Installed</span>
+      </div>
+      <div class="mini-stage light">
+        <div class="light-box">
+          <div class="light-logo-wrap" style="transform: scale(0.75);">
+            <img src="images/logo-dalal.png" class="light-logo" alt="Dalal Dark">
+          </div>
+          <div class="light-bar-track" style="width: 150px;">
+            <div class="light-bar-fill"></div>
+          </div>
+          <div class="light-caption" style="font-size: 9px;">Dalal Machine Tools</div>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-desc">
+          Clean, corporate aesthetic seamlessly matching the current white header. Features a soft breathing logo animation and an orange brand progress line.
+        </div>
+        <button class="btn-test" onclick="showFullscreen('light')">
+          <i class="fa fa-play-circle"></i> Test Fullscreen Experience
+        </button>
+      </div>
+    </div>
+
+    <!-- Option 3: Industrial Precision Spinner -->
+    <div class="preview-card">
+      <div class="card-top">
+        <h3>3. Industrial Precision Cog</h3>
+        <span class="tag">Engineering</span>
+      </div>
+      <div class="mini-stage dark">
+        <div class="precision-box" style="transform: scale(0.75);">
+          <div class="precision-ring-wrap" style="width: 100px; height: 100px;">
+            <svg class="precision-svg-ring" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(248,157,19,0.15)" stroke-width="3"></circle>
+              <circle cx="50" cy="50" r="42" fill="none" stroke="#f89d13" stroke-width="3" stroke-dasharray="70 200" stroke-linecap="round"></circle>
+            </svg>
+            <img src="images/logo-small.png" class="precision-inner-logo" style="width: 50px;" alt="Icon">
+          </div>
+          <div class="precision-pct" style="font-size: 15px;">94%</div>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-desc">
+          Technical engineering theme featuring an animated rotating SVG precision dial around the Dalal icon badge with a real-time live percentage counter.
+        </div>
+        <button class="btn-test" onclick="showFullscreen('precision')">
+          <i class="fa fa-play-circle"></i> Test Fullscreen Experience
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="back-nav">
+    <a href="index.html"><i class="fa fa-arrow-left"></i> Return to Main Website</a>
+  </div>
+
+  <!-- Fullscreen Overlay Elements -->
+
+  <!-- 2. Light Fullscreen -->
+  <div id="fs-light" class="fullscreen-loader-overlay loader-theme-light">
+    <button class="dismiss-hint" style="color:#000; border-color: rgba(0,0,0,0.2); background: rgba(0,0,0,0.05);" onclick="hideFullscreen()">
+      <i class="fa fa-times"></i> Click or ESC to Exit
+    </button>
+    <div class="light-box">
+      <div class="light-logo-wrap">
+        <img src="images/logo-dalal.png" class="light-logo" alt="Dalal Logo">
+      </div>
+      <div class="light-bar-track">
+        <div class="light-bar-fill"></div>
+      </div>
+      <div class="light-caption">Dalal Machine Tools Agency Pvt. Ltd.</div>
+    </div>
+  </div>
+
+  <!-- 3. Precision Fullscreen -->
+  <div id="fs-precision" class="fullscreen-loader-overlay loader-theme-precision">
+    <button class="dismiss-hint" onclick="hideFullscreen()">
+      <i class="fa fa-times"></i> Click or ESC to Exit
+    </button>
+    <div class="precision-box">
+      <div class="precision-ring-wrap">
+        <svg class="precision-svg-ring" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(248,157,19,0.15)" stroke-width="4"></circle>
+          <circle cx="50" cy="50" r="42" fill="none" stroke="#f89d13" stroke-width="4" stroke-dasharray="60 200" stroke-linecap="round"></circle>
+        </svg>
+        <img src="images/logo-small.png" class="precision-inner-logo" alt="Icon">
+      </div>
+      <div class="precision-pct" id="live-pct">0%</div>
+      <div class="precision-status">Calibrating Heavy Machine Catalog...</div>
+    </div>
+  </div>
+
+  <script>
+    let pctInterval = null;
+
+    function showFullscreen(theme) {
+      hideFullscreen();
+      const el = document.getElementById('fs-' + theme);
+      if (!el) return;
+      el.classList.add('active');
+
+      if (theme === 'precision') {
+        let count = 0;
+        const pctEl = document.getElementById('live-pct');
+        pctEl.textContent = '0%';
+        clearInterval(pctInterval);
+        pctInterval = setInterval(() => {
+          count += Math.floor(Math.random() * 8) + 4;
+          if (count >= 100) {
+            count = 100;
+            pctEl.textContent = '100%';
+            clearInterval(pctInterval);
+            setTimeout(() => {
+              hideFullscreen();
+            }, 600);
+          } else {
+            pctEl.textContent = count + '%';
+          }
+        }, 50);
+      } else {
+        // Auto-dismiss simulation after 2.8s
+        setTimeout(() => {
+          if (el.classList.contains('active')) {
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            el.style.opacity = '0';
+            setTimeout(() => {
+              hideFullscreen();
+              el.style.opacity = '';
+            }, 600);
+          }
+        }, 2500);
+      }
+    }
+
+    function hideFullscreen() {
+      clearInterval(pctInterval);
+      document.querySelectorAll('.fullscreen-loader-overlay').forEach(el => {
+        el.classList.remove('active');
+        el.style.opacity = '';
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') hideFullscreen();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Statement of Work & Technical Specification - Dalal Machine Tools Agency Pvt. Ltd.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0f172a;       /* Slate Navy */
+      --secondary: #1e293b;     /* Deep Slate */
+      --border: #cbd5e1;        /* Crisp Technical Border */
+      --border-light: #e2e8f0;  /* Subtle Line */
+      --text: #1e293b;          /* Body Text */
+      --text-muted: #64748b;    /* Secondary Text */
+      --bg-light: #f8fafc;      /* Table / Box Fill */
+      --accent-warm: #b45309;   /* Industrial Amber */
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif;
+      background-color: #e2e8f0;
+      color: var(--text);
+      line-height: 1.35;
+      font-size: 7.6pt;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Web Preview Action Bar */
+    .action-bar {
+      max-width: 840px;
+      margin: 15px auto 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--primary);
+      color: white;
+      padding: 7px 16px;
+      border-radius: 6px;
+    }
+
+    .action-bar span {
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .btn-print {
+      background: #ffffff;
+      color: var(--primary);
+      border: none;
+      padding: 5px 12px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* Page Container */
+    .page-sheet {
+      width: 210mm;
+      height: 296mm;
+      margin: 15px auto;
+      background: #ffffff;
+      padding: 10mm 12mm 9mm 12mm;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .page-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    .doc-header {
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 6px;
+      margin-bottom: 7px;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2px;
+    }
+
+    .doc-tag {
+      font-size: 7.5pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--text-muted);
+    }
+
+    .doc-ref {
+      font-size: 8pt;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .doc-title {
+      font-size: 14.5pt;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1.15;
+      letter-spacing: -0.3px;
+    }
+
+    .doc-subtitle {
+      font-size: 8.5pt;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    /* Meta Table */
+    .meta-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 7.2pt;
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+    }
+
+    .meta-table td {
+      padding: 3px 6px;
+      border: 1px solid var(--border);
+      vertical-align: middle;
+    }
+
+    .meta-table td.lbl {
+      width: 18%;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-size: 6.5pt;
+      background: #f1f5f9;
+    }
+
+    .meta-table td.val {
+      width: 32%;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    /* Confidentiality Shield */
+    .shield-banner {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-left: 3px solid var(--accent-warm);
+      padding: 4px 7px;
+      margin-top: 5px;
+      font-size: 6.8pt;
+      color: #78350f;
+      line-height: 1.28;
+    }
+
+    /* Section Typography */
+    .sec-head {
+      font-size: 8.4pt;
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      margin-top: 6px;
+      margin-bottom: 4px;
+      padding-bottom: 2px;
+      border-bottom: 1.2px solid var(--primary);
+    }
+
+    p {
+      margin-bottom: 4px;
+      text-align: justify;
+      color: var(--text);
+      font-size: 7.4pt;
+      line-height: 1.32;
+    }
+
+    ul {
+      margin-left: 14px;
+      margin-bottom: 4px;
+      color: var(--text);
+      font-size: 7.3pt;
+      line-height: 1.28;
+    }
+
+    li {
+      margin-bottom: 1.5px;
+    }
+
+    strong {
+      color: var(--primary);
+    }
+
+    /* Feature Box */
+    .feature-box {
+      border: 1px solid var(--border);
+      background: #ffffff;
+      border-radius: 3px;
+      padding: 5px 8px;
+      margin-bottom: 5px;
+    }
+
+    .feature-title {
+      font-size: 7.8pt;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 2px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .feature-title::before {
+      content: "▪";
+      color: var(--primary);
+      font-size: 9pt;
+      line-height: 1;
+    }
+
+    /* Clean Table */
+    table.clean-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 3px 0 5px 0;
+      font-size: 7.2pt;
+      border: 1px solid var(--border);
+    }
+
+    table.clean-table th {
+      background: var(--primary);
+      color: white;
+      padding: 3.5px 5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 6.5pt;
+      letter-spacing: 0.3px;
+      text-align: left;
+      border: 1px solid var(--primary);
+    }
+
+    table.clean-table td {
+      padding: 2.8px 5px;
+      border: 1px solid var(--border);
+      vertical-align: top;
+      color: var(--text);
+      line-height: 1.24;
+    }
+
+    table.clean-table tr:nth-child(even) td {
+      background-color: var(--bg-light);
+    }
+
+    /* 24-Page 2-Column Grid Table */
+    .route-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 3px 0 5px 0;
+      font-size: 7.1pt;
+      border: 1px solid var(--border);
+    }
+
+    .route-table th {
+      background: var(--primary);
+      color: white;
+      padding: 3.5px 6px;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 6.5pt;
+      letter-spacing: 0.3px;
+      border: 1px solid var(--primary);
+    }
+
+    .route-table td {
+      padding: 2.5px 5px;
+      border: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.22;
+      font-size: 6.9pt;
+    }
+
+    .route-table tr:nth-child(even) td {
+      background-color: var(--bg-light);
+    }
+
+    .route-num {
+      font-weight: 800;
+      color: var(--primary);
+      display: inline-block;
+      width: 16px;
+    }
+
+    .route-name {
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .route-desc {
+      color: #334155;
+      font-size: 6.6pt;
+    }
+
+    /* Sign-off Section */
+    .sign-section {
+      margin-top: 6px;
+      padding-top: 4px;
+      border-top: 1.5px solid var(--border);
+    }
+
+    .sign-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 4px;
+    }
+
+    .sign-table td {
+      width: 50%;
+      border: 1px solid var(--border);
+      padding: 7px 10px;
+      background: var(--bg-light);
+      vertical-align: top;
+    }
+
+    .sign-title {
+      font-size: 7.6pt;
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      margin-bottom: 4px;
+      padding-bottom: 2px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sign-field {
+      font-size: 7.1pt;
+      color: var(--text-muted);
+      margin-bottom: 1.5px;
+    }
+
+    .sign-field strong {
+      color: var(--primary);
+    }
+
+    .sign-line {
+      height: 24px;
+      border-bottom: 1px dashed #64748b;
+      margin-bottom: 3px;
+    }
+
+    /* Running Footer */
+    .page-footer {
+      font-size: 6.3pt;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      border-top: 1px solid var(--border-light);
+      padding-top: 3px;
+      margin-top: 4px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+      }
+
+      .action-bar, .no-print {
+        display: none !important;
+      }
+
+      .page-sheet {
+        margin: 0;
+        width: 210mm;
+        height: 297mm;
+        padding: 9mm 12mm 8mm 12mm;
+        border: none;
+        box-shadow: none;
+        page-break-after: always;
+        break-after: page;
+      }
+
+      .page-sheet:last-child {
+        page-break-after: avoid;
+        break-after: avoid;
+      }
+
+      table.clean-table th, .route-table th {
+        background-color: #0f172a !important;
+        color: #ffffff !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .feature-box, .meta-table, .sign-table td, .shield-banner {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Web Action Bar -->
+  <div class="action-bar no-print">
+    <span>DALAL MACHINE TOOLS AGENCY PVT. LTD. — STATEMENT OF WORK (DMT-SOW-2026-FINAL)</span>
+    <button class="btn-print" onclick="window.print()">Print / Save PDF</button>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- PAGE 1: EXECUTIVE OVERVIEW & EXHAUSTIVE 24-PAGE ROUTE INVENTORY            -->
+  <!-- ========================================================================= -->
+  <div class="page-sheet">
+    <div class="page-content">
+      <header class="doc-header">
+        <div class="header-top">
+          <span class="doc-tag">Technical Statement of Work & Architectural Scope (SOW)</span>
+          <span class="doc-ref">REF: DMT-SOW-2026-FINAL</span>
+        </div>
+        <h1 class="doc-title">B2B MACHINERY WEB PORTAL & OPERATIONS SUITE</h1>
+        <div class="doc-subtitle">Turnkey Website Engineering, Catalog System, Staff Admin Hub & Production Deployment</div>
+
+        <table class="meta-table">
+          <tr>
+            <td class="lbl">Client Organization</td>
+            <td class="val">Dalal Machine Tools Agency Pvt. Ltd.</td>
+            <td class="lbl">Client Signatory</td>
+            <td class="val">Mr. Vinit Dalal (Managing Director)</td>
+          </tr>
+          <tr>
+            <td class="lbl">Lead Software Architect</td>
+            <td class="val">Suyash Shinde (Fullstack Engineer)</td>
+            <td class="lbl">Operating Facilities</td>
+            <td class="val">Mumbai HQ (Tardeo) & Chakan Yard (Pune)</td>
+          </tr>
+          <tr>
+            <td class="lbl">Industry Domain</td>
+            <td class="val">Heavy Metal Forming & Cutting Machinery</td>
+            <td class="lbl">Document Status</td>
+            <td class="val"><strong>Draft for Client Review & Sign-Off</strong></td>
+          </tr>
+          <tr>
+            <td class="lbl">Date of Issuance</td>
+            <td class="val">15 October 2026</td>
+            <td class="lbl">Proposal Validity</td>
+            <td class="val"><strong>10 Days (Valid Through 25 Oct 2026)</strong></td>
+          </tr>
+        </table>
+
+        <div class="shield-banner">
+          <strong>CONFIDENTIAL & PROPRIETARY NOTICE:</strong> This technical specification and architectural scope represent the proprietary work product of <strong>Suyash Shinde</strong>, formulated exclusively for the internal review of <strong>Dalal Machine Tools Agency Pvt. Ltd.</strong> Unauthorized reproduction, external distribution, or sharing with third-party software contractors for competitive benchmarking is strictly prohibited under the Indian Copyright Act, 1957.
+        </div>
+      </header>
+
+      <div class="sec-head">1.0 Executive Overview & Commercial Independence</div>
+      <p>
+        This Statement of Work (SOW) defines the technical and operational deliverables for the turnkey digital modernization of <strong>Dalal Machine Tools Agency Pvt. Ltd.</strong> With over 20+ years of pedigree as a premier stocking supplier of heavy metal forming, cutting machinery, and mechanical presses, the organization requires an enterprise-class digital platform to showcase its multi-thousand-ton inventory to industrial buyers across India and global export markets.
+      </p>
+      <p>
+        <strong>Independence of Commercial Agreement:</strong> This document governs <em>purely technical and functional deliverables</em>. All financial consideration, milestone payment amounts, bank remittance details, and statutory tax particulars are governed exclusively under separate <strong>Commercial Quotation / Invoice Ref: INV-SS-2026-001</strong>. Transfer of intellectual property, source code, and administrative credentials is strictly conditioned upon receipt of full commercial payment as defined in Clause 11.0.
+      </p>
+
+      <div class="sec-head">2.0 Exhaustive 24-Page Public Portal Route Inventory</div>
+      <p>
+        The public-facing web suite comprises exactly 24 fully engineered, responsive web pages (360px mobile to 1920px 4K desktop). Zero placeholder routes are utilized across the production deployment:
+      </p>
+
+      <table class="route-table">
+        <thead>
+          <tr>
+            <th style="width: 50%;">Division 1: Core Showcase, Sourcing & Conversion (Routes 01 to 12)</th>
+            <th style="width: 50%;">Division 2: Engineering Proof, Spares & RFQ Workflows (Routes 13 to 24)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="route-num">01</span><span class="route-name">Homepage (index.html):</span>
+              <span class="route-desc">Hero slider, 4 value pillars, featured machinery grid, High Seas banner, OMPI co-brand section.</span>
+            </td>
+            <td>
+              <span class="route-num">13</span><span class="route-name">Industry Journal (blog.html):</span>
+              <span class="route-desc">Global forging trends, European machinery availability, and technical maintenance articles.</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="route-num">02</span><span class="route-name">About Company (about.html):</span>
+              <span class="route-desc">20+ years pedigree, leadership, European/Japanese sourcing network, Chakan yard logistics.</span>
+            </td>
+            <td>
+              <span class="route-num">14</span><span class="route-name">Featured Article (blog-large-image.html):</span>
+              <span class="route-desc">Lead visual article layout with high-res machinery media assets and related catalog links.</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="route-num">03</span><span class="route-name">Import Services (services.html):</span>
+              <span class="route-desc">6 Pillars of machinery import, CIF shipping up to 6,300T, customs clearance, High Seas tool.</span>
+            </td>
+            <td>
+              <span class="route-num">15</span><span class="route-name">Inspection Case Study (blog-single.html):</span>
+              <span class="route-desc">Detailed walkthrough of heavy mechanical presses inspected overseas under power.</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="route-num">04</span><span class="route-name">Machinery Catalog (category.html):</span>
+              <span class="route-desc">26-category directory, instant faceted search, tonnage filters, yard location toggles.</span>
+            </td>
+            <td>
+              <span class="route-num">16</span><span class="route-name">Installation Projects (projects.html):</span>
+              <span class="route-desc">Case studies of 1,600T to 4,000T press line installations across auto component clusters.</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="route-num">05</span><span class="route-name">Product Detail Page (product.html):</span>
+              <span class="route-desc">High-res lightbox gallery, 10-row technical specification matrix, foundation drawings, WhatsApp RFQ.</span>
+            </td>
+            <td>
+              <span class="route-num">17</span><span class="route-name">Heavy Rigging Gallery (projects-modern.html):</span>
+              <span class="route-desc">Modern visual showcase of 80+ ton single-piece castings and foundation erections.</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="route-num">06</span><span class="route-name">Brand New Units (brand-new-machinery.html):</span>
+              <span class="route-desc">OMPI India LLP pneumatic clutch & brake units, safety valves, authorized representation.</span>
+            </td>
+            <td>
+              <span class="route-num">18</span><span class="route-name">Filtered Projects (projects-with-filter.html):</span>
+              <span class="route-desc">Filterable plant installations by sector (Forging, Stamping, Heavy Machining, Defense).</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="route-num">07</span><span class="route-name">Shipment Archive (gallery.html):</span>
+              <span class="route-desc">Photographic import ledger, container un-stuffing archive, heavy rigging at Chakan yard.</span>
+            </td>
+            <td>
+              <span class="route-num">19</span><span class="route-name">Turnkey Plant Project (projects-single.html):</span>
+              <span class="route-desc">Deep-dive case study of a complete forging press line commissioned at client factory premises.</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="route-num">08</span><span class="route-name">Contact Center (contact.html):</span>
+              <span class="route-desc">Mumbai HQ & Chakan yard address, interactive map, direct WhatsApp trigger, general RFQ form.</span>
+            </td>
+            <td>
+              <span class="route-num">20</span><span class="route-name">Tooling & Spares (shop.html):</span>
+              <span class="route-desc">Auxiliary tooling, die blocks, bolster plates, clutch linings, ready-stock wear parts.</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="route-num">09</span><span class="route-name">Express Inquiries (contact-2.html):</span>
+              <span class="route-desc">Quick-quote submission interface with capacity/tonnage selector and immediate sales routing.</span>
+            </td>
+            <td>
+              <span class="route-num">21</span><span class="route-name">Spares Detail (shop-single.html):</span>
+              <span class="route-desc">Technical specification view for specialized press spares, ejector pins, and lubrication units.</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="route-num">10</span><span class="route-name">Industrial FAQs (faqs.html):</span>
+              <span class="route-desc">Customs clearance walkthrough, High Seas benefits, under-power inspection, CIF terms.</span>
+            </td>
+            <td>
+              <span class="route-num">22</span><span class="route-name">Consolidated RFQ Cart (shoping-cart.html):</span>
+              <span class="route-desc">Multi-machine and tooling consolidation cart for bundled package inquiries.</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="route-num">11</span><span class="route-name">Client Endorsements (testimonial.html):</span>
+              <span class="route-desc">Automotive and aerospace forging customer reviews, delivery credentials, repeat client proof.</span>
+            </td>
+            <td>
+              <span class="route-num">23</span><span class="route-name">Formal RFQ Submission (checkout.html):</span>
+              <span class="route-desc">Structured multi-item quotation request dispatching client requirements to sales team inbox.</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="route-num">12</span><span class="route-name">Import Tariffs (pricing.html):</span>
+              <span class="route-desc">High Seas Sales savings structure, duty deferral benefits, and GST Input Tax Credit advisory.</span>
+            </td>
+            <td>
+              <span class="route-num">24</span><span class="route-name">Error Recovery (404.html):</span>
+              <span class="route-desc">Custom 404 error page directing misplaced visitors back to active machinery catalog categories.</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="page-footer">
+      <span>STATEMENT OF WORK — DALAL MACHINE TOOLS AGENCY PVT. LTD.</span>
+      <span>REF: DMT-SOW-2026-FINAL &bull; COMMERCIAL TERMS UNDER INV-SS-2026-001</span>
+      <span>PAGE 1 OF 4</span>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- PAGE 2: CATALOG TAXONOMY, CALCULATOR DISCLAIMER & ADMIN SYSTEMS            -->
+  <!-- ========================================================================= -->
+  <div class="page-sheet">
+    <div class="page-content">
+      <div class="sec-head">3.0 Machinery Directory (26 Categories) & Data Model</div>
+      <p>
+        The catalog structures Dalal's inventory across 26 distinct categories. The software architecture supports unlimited listings under each category:
+      </p>
+
+      <table class="clean-table">
+        <thead>
+          <tr>
+            <th style="width: 50%;">Metal Forming Machinery Division (16 Categories)</th>
+            <th style="width: 50%;">Metal Cutting Machinery Division (10 Categories)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              1. Hot Forging Presses (500T to 6,300T Crank & Eccentric)<br>
+              2. Knuckle Joint Coining & Sizing Presses<br>
+              3. Mechanical Power Presses (C-Frame & H-Frame)<br>
+              4. Hydraulic Deep Drawing & Stamping Presses<br>
+              5. Pneumatic & Air Drop Forging Hammers<br>
+              6. Counterblow Hammers (Beche, Lasco)<br>
+              7. Friction Screw Presses (Hasenclever, Weingarten)<br>
+              8. Cold Forging & Heading Machines<br>
+              9. Horizontal Forging Machines (Upsetters)<br>
+              10. Open Die Forging Presses & Manipulators<br>
+              11. Hydraulic & Mechanical Shearing Machines<br>
+              12. CNC & Hydraulic Press Brakes<br>
+              13. Plate Bending & 3-Roll / 4-Roll Bending Machines<br>
+              14. Section Bending & Profile Rolls<br>
+              15. High-Speed Blanking & Stamping Presses<br>
+              16. Forging Ring Rolling Machines
+            </td>
+            <td>
+              1. Horizontal Boring Machines (TOS, Skoda, Pama)<br>
+              2. Floor Type Horizontal Boring & Milling Machines<br>
+              3. Vertical Machining Centers (VMC 3-Axis / 5-Axis)<br>
+              4. Horizontal Machining Centers (HMC)<br>
+              5. Vertical Turning Lathes (VTL / Single & Double Column)<br>
+              6. Heavy Duty CNC & Conventional Lathes (Up to 12m Bed)<br>
+              7. Gear Hobbing Machines (Liebherr, Pfauter)<br>
+              8. Gear Shaping & Gear Grinding Machines<br>
+              9. Surface & Cylindrical Grinding Machines<br>
+              10. Plano Millers & Heavy Gantry Milling Machines
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="feature-box">
+        <div class="feature-title">Standardized Machine Technical Specification Grid (10 Parameters)</div>
+        <p>Every individual machine detail page displays a standardized engineering specification matrix:</p>
+        <ul>
+          <li><strong>Identification:</strong> Make (e.g. Voronezh, SMERAL, National), Model, Year of Manufacture, Origin (Germany, Japan, Russia, Taiwan).</li>
+          <li><strong>Mechanical Capacities:</strong> Nominal Force (Tonnage), Ram Stroke (mm), Continuous Strokes per Minute (SPM), Shut Height / Daylight (mm).</li>
+          <li><strong>Bed & Table Dimensions:</strong> Bed Size Length &times; Width (mm), Ram Face Dimensions (mm), Main Motor Rating (kW), Total Machine Weight (Tons).</li>
+          <li><strong>Operational Status:</strong> Location (Chakan Yard vs European/Asian Stock), Inspection Status (Seen Under Power seal), and Foundation Drawings availability.</li>
+        </ul>
+      </div>
+
+      <div class="sec-head">4.0 Interactive Calculators & Regulatory Disclaimers</div>
+
+      <div class="feature-box">
+        <div class="feature-title">High Seas Sales Savings & Customs Calculator (Indicative Tool)</div>
+        <p>Client-facing computational tool on the Services page allowing industrial buyers to estimate duty optimization under High Seas agreements:</p>
+        <ul>
+          <li><strong>Inputs:</strong> Machine Baseline CIF Capital Valuation, applicable Customs Duty tariff rate, Port Handling charges, and domestic freight.</li>
+          <li><strong>Computational Logic:</strong> Evaluates comparative landed outflow between standard post-customs procurement versus High Seas Sales transfer prior to clearance.</li>
+          <li><strong>STRICT REGULATORY & TAX DISCLAIMER:</strong> This calculator is an indicative, informational demonstration tool. It does <strong>not</strong> constitute statutory customs, taxation, or legal advice under the Customs Act, 1962, or GST legislation. Customs tariff schedules, duty concessions, and IGST rates vary by HSN classification and government notifications. All tariff formulas, duty percentages, and input variables must be supplied and validated by Dalal Machine Tools Agency Pvt. Ltd. The Consultant assumes zero liability for third-party tax assessments, buyer duty discrepancies, or customs authority penalties.</li>
+        </ul>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-title">1-Click WhatsApp Direct RFQ Lead Engine</div>
+        <p>Direct lead trigger passing pre-formatted machine metadata (Title, Model, Tonnage, Page URL) into an instant WhatsApp message directed to Dalal's designated sales number. <em>Note: Instant trigger execution is subject to client device operating system permissions and active network connectivity.</em></p>
+      </div>
+
+      <div class="sec-head">5.0 Staff Admin Portal (/admin) & Super-Admin Console (/superadmin)</div>
+
+      <div class="feature-box">
+        <div class="feature-title">In-House Staff Admin Operations Portal (/admin)</div>
+        <ul>
+          <li><strong>Inventory CRUD:</strong> Add new machinery, update mechanical specs (Stroke, Tonnage, Bed Dimensions, Motor), and upload photographic assets.</li>
+          <li><strong>Lifecycle Status Toggle:</strong> 1-Click status transitions between <code>Live (Active Catalog)</code>, <code>Draft (Under Verification)</code>, and <code>Sold Out (Archive)</code>.</li>
+          <li><strong>Photo Dropzone Uploader:</strong> Multi-image dropzone with automatic image aspect ratio normalization and thumbnail generation.</li>
+          <li><strong>Customer RFQ Lead Inbox:</strong> Consolidated inbox capturing web form submissions with Buyer Name, Company, Contact, Machine Requested, and Status tags.</li>
+          <li><strong>Stock Catalog CSV/Excel Export:</strong> Single-click stock list export generating a structured CSV/Excel spreadsheet of all live machines with full specifications.</li>
+        </ul>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-title">Super-Admin Governance & Security Console (/superadmin)</div>
+        <ul>
+          <li><strong>Executive Telemetry:</strong> Dashboard displaying active inventory count, lead pipeline volume, and database storage utilization.</li>
+          <li><strong>Staff Account Provisioning & RBAC:</strong> Creation and revocation of staff login credentials with Role-Based Access Control (SuperAdmin vs Sales Viewer).</li>
+          <li><strong>Immutable Security Audit Log:</strong> Chronological ledger capturing administrative events (user identity, action executed, timestamp, IP address).</li>
+          <li><strong>1-Click Database Snapshot Backup & Restore:</strong> Generates point-in-time JSON database snapshots for offsite archival, with immediate restore capability.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>STATEMENT OF WORK — DALAL MACHINE TOOLS AGENCY PVT. LTD.</span>
+      <span>REF: DMT-SOW-2026-FINAL &bull; COMMERCIAL TERMS UNDER INV-SS-2026-001</span>
+      <span>PAGE 2 OF 4</span>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- PAGE 3: TECHNICAL PERFORMANCE, HOSTING & CLIENT DEMARCATION                -->
+  <!-- ========================================================================= -->
+  <div class="page-sheet">
+    <div class="page-content">
+      <div class="sec-head">6.0 SEO, Generative AEO & Technical Performance Boundaries</div>
+
+      <div class="feature-box">
+        <div class="feature-title">Search Engine Optimization & Generative AEO Architecture</div>
+        <ul>
+          <li><strong>On-Page Technical SEO:</strong> Unique Meta Titles, keyword-optimized Descriptions, OpenGraph social sharing tags, and Canonical tags across all 24 individual pages.</li>
+          <li><strong>Dynamic XML Sitemap & Robots.txt:</strong> Automated sitemap generation directing Google search crawlers to index every machine category and product listing.</li>
+          <li><strong>Structured Schema Markup (JSON-LD):</strong> Implementation of <code>Organization</code>, <code>LocalBusiness</code> (Mumbai HQ & Chakan Yard coordinates), and <code>Product</code>/<code>ItemList</code> schemas to trigger rich snippets in Google search results.</li>
+          <li><strong>Generative AI Engine Optimization (AEO):</strong> Semantic content hierarchy structured to facilitate direct entity indexing and factual citations by conversational AI models (ChatGPT, Perplexity, Google AI Overviews).</li>
+          <li><strong>Google Search Console Verification & GA4:</strong> Official domain ownership verification via DNS TXT records, XML sitemap indexing submission, and GA4 property setup with custom event tracking for WhatsApp clicks and RFQ completions.</li>
+          <li><strong>Privacy Policy & Cookie Consent:</strong> Inclusion of a standardized Privacy Policy page and Cookie Consent banner covering RFQ personal data processing (Name, Mobile, Email) and GA4 cookie compliance.</li>
+          <li><strong>STRICT DISCLAIMER ON SEARCH ENGINE & AI PERFORMANCE:</strong> The Consultant delivers sound technical SEO and structured data architecture compliant with Google Search Central guidelines. However, search engine ranking positions, organic traffic volumes, indexing speeds, and third-party AI conversational citations are determined by proprietary algorithms outside the Consultant's control. No specific search ranking or third-party AI citation is guaranteed.</li>
+          <li><strong>Browser Performance Standard:</strong> Zero JavaScript console errors is guaranteed specifically on the formal acceptance sign-off date across current stable evergreen desktop and mobile browsers (Google Chrome, Microsoft Edge, Mozilla Firefox, Apple Safari). Page load latency metrics depend on client VPS hosting bandwidth and end-user network ISP conditions.</li>
+        </ul>
+      </div>
+
+      <div class="sec-head">7.0 Production Server Hosting & Infrastructure Demarcation</div>
+      <div class="feature-box">
+        <div class="feature-title">Production Server Setup, SSL & Security Hardening</div>
+        <ul>
+          <li><strong>Process Management Daemon:</strong> Configuration of PM2 Process Manager under Node.js runtime with automatic process recovery and static asset compression.</li>
+          <li><strong>Domain DNS Mapping & SSL (HTTPS):</strong> Full DNS configuration for official domain pointing (A-Records, CNAME records, and www canonical redirection) with Let's Encrypt TLS 1.3 automated renewal.</li>
+          <li><strong>Security Hardening:</strong> Rate limiting on administrative login routes (25 req/min) and RFQ endpoints (30 req/min), stored XSS input sanitization, security response headers (Helmet standard), and execution of a 24/24 regression test suite prior to live sign-off.</li>
+          <li><strong>Hosting Responsibility Demarcation:</strong> The Client is solely responsible for procuring, funding, and maintaining the underlying cloud VPS hosting environment (Ubuntu LTS) and domain registration. The Consultant's obligation is strictly limited to initial environment provisioning, software deployment, and server daemon configuration. Routine database backups reside within the client's VPS partition; off-site physical drive transfers and external disaster recovery storage are client operational responsibilities.</li>
+        </ul>
+      </div>
+
+      <div class="sec-head">8.0 Content Population, Client Dependencies & Deemed Acceptance</div>
+
+      <div class="feature-box">
+        <div class="feature-title">Content Population Boundary & Initial Seed Data</div>
+        <p>
+          The Consultant's obligation is to build the complete software engine, 24 page templates, responsive layouts, administrative systems, and populate an initial seed dataset of <strong>up to 15 representative machine listings</strong> (complete with specifications and sample photography) to demonstrate production standards. Final population of the remaining machinery inventory, machine specifications, high-res photos, client testimonials, and corporate copywriting is the operational responsibility of Dalal Machine Tools Agency Pvt. Ltd. via the self-service <code>/admin</code> portal.
+        </p>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-title">Client Dependencies, Feedback Timeline & Deemed Acceptance</div>
+        <ul>
+          <li><strong>Technical Dependencies:</strong> The Client shall furnish domain registrar DNS access, cloud VPS root credentials, and company visual assets within <strong>3 (three) business days</strong> of written request.</li>
+          <li><strong>Review Period & Deemed Acceptance:</strong> Upon demonstration of milestone deliverables on the staging server, the Client shall review and provide consolidated feedback within <strong>5 (five) business days</strong>. If no written defect notice is received within 5 business days, the milestone shall be formally deemed accepted.</li>
+          <li><strong>Change Request (CR) Governance:</strong> Any feature additions, structural workflow modifications, or new page templates requested outside this SOW shall be treated as a formal Change Request and quoted under separate scope.</li>
+        </ul>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-title">Third-Party Brand Clearance (OMPI India LLP) & Cross-Client Isolation</div>
+        <p>
+          <strong>Brand Authorization:</strong> The Client warrants that it holds valid, written authorization and intellectual property clearance from OMPI India LLP to display its trademarks and products on <code>brand-new-machinery.html</code>.<br>
+          <strong>Cross-Client Non-Disclosure:</strong> The Consultant maintains strict technical and commercial isolation between Dalal Machine Tools Agency Pvt. Ltd. and OMPI India LLP. No proprietary documentation, codebase architectures, commercial rates, or trade secrets shall be shared across client entities.
+        </p>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>STATEMENT OF WORK — DALAL MACHINE TOOLS AGENCY PVT. LTD.</span>
+      <span>REF: DMT-SOW-2026-FINAL &bull; COMMERCIAL TERMS UNDER INV-SS-2026-001</span>
+      <span>PAGE 3 OF 4</span>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- PAGE 4: VERIFICATION MILESTONES, IP SHIELD, WARRANTY & SIGN-OFF            -->
+  <!-- ========================================================================= -->
+  <div class="page-sheet">
+    <div class="page-content">
+      <div class="sec-head">9.0 Implementation Phases & Verification Milestones</div>
+      <table class="clean-table">
+        <thead>
+          <tr>
+            <th style="width: 15%;">Phase</th>
+            <th style="width: 35%;">Deliverables Included</th>
+            <th style="width: 50%;">Technical Verification & Acceptance Criteria</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Phase 1</strong></td>
+            <td>Information Architecture, 24-Page Web Suite, Design System & Responsive Layouts.</td>
+            <td>Full responsive layout demonstration across mobile, tablet, and desktop viewports with 0 JavaScript console errors.</td>
+          </tr>
+          <tr>
+            <td><strong>Phase 2</strong></td>
+            <td>26-Category Catalog, Faceted Filters, PDP Specification Matrix, High Seas Calculator, WhatsApp RFQ.</td>
+            <td>Catalog filtering tested across all 26 categories; WhatsApp lead generator verified on physical devices; calculator verified.</td>
+          </tr>
+          <tr>
+            <td><strong>Phase 3</strong></td>
+            <td>Staff Admin Portal (/admin), Super-Admin Console (/superadmin), Inventory CRUD, Stock CSV Export.</td>
+            <td>Admin CRUD demonstrated (add/edit/status toggle); photo dropzone tested; stock export verified in Excel; audit logs verified.</td>
+          </tr>
+          <tr>
+            <td><strong>Phase 4</strong></td>
+            <td>Production Server Daemon, Domain DNS Pointing, SSL Security, Google Search Console Verification & Handover.</td>
+            <td>Website live globally on official domain with green SSL lock; Google Search Console DNS verified; full administrative handover.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="sec-head">10.0 Scope Boundaries: Inclusions & Exclusions</div>
+      <table class="clean-table">
+        <thead>
+          <tr>
+            <th style="width: 50%; background: #1e293b;">10.1 INCLUDED IN PROJECT SCOPE</th>
+            <th style="width: 50%; background: #334155;">10.2 EXCLUDED (OUTSIDE SOFTWARE SCOPE)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <ul>
+                <li>Full engineering of 24 responsive web pages.</li>
+                <li>26-category machinery catalog architecture.</li>
+                <li>Standardized PDP specifications grid and lightbox.</li>
+                <li>High Seas Sales savings calculation tool.</li>
+                <li>1-Click WhatsApp direct RFQ lead engine.</li>
+                <li>Staff Admin Portal with inventory CRUD & CSV export.</li>
+                <li>Super-Admin console with RBAC & audit logging.</li>
+                <li>1-Click database snapshot backup & restore system.</li>
+                <li>On-page SEO, XML sitemaps, and Schema markup.</li>
+                <li>Google Search Console verification & GA4 setup.</li>
+                <li>Production server daemon setup & SSL security.</li>
+                <li>Complimentary 30-day post-launch technical warranty.</li>
+                <li>100% intellectual property & source code handover.</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li>Third-party annual domain registration renewals (maintained directly by Client with domain registrar).</li>
+                <li>Cloud VPS hosting server subscriptions or email accounts (managed directly by Client with hosting infrastructure provider).</li>
+                <li>Physical computer hardware repair, office networking cabling, or printer maintenance at Mumbai/Chakan offices.</li>
+                <li>Native mobile application development (iOS/Android app stores) outside the responsive web suite.</li>
+                <li>On-site international machinery photography visits to overseas seller yards in Europe, Japan, or Russia.</li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="sec-head">11.0 IP Handover, Background IP Carve-Out & Warranty vs AMC</div>
+      <p>
+        <strong>Intellectual Property Transfer Conditioned upon Full Payment:</strong> All customized application templates, client-specific database schemas, visual branding assets, and administrative access credentials created under this engagement become the exclusive intellectual property of <strong>Dalal Machine Tools Agency Pvt. Ltd.</strong> strictly upon receipt of full, final commercial settlement as stipulated in Commercial Invoice <code>INV-SS-2026-001</code>.
+      </p>
+      <p>
+        <strong>Consultant Background IP Carve-Out:</strong> Pre-existing software patterns, modular libraries, generic UI components, utility scripts, and reusable architectural toolchains developed prior to or independently of this engagement remain the proprietary intellectual property of Suyash Shinde. Dalal Machine Tools Agency Pvt. Ltd. is granted an irrevocable, perpetual, non-exclusive, royalty-free license to use, modify, and operate such components solely as part of the delivered platform.
+      </p>
+      <p>
+        <strong>Portfolio & Case Study Rights:</strong> The Consultant retains the perpetual right to display non-confidential project screenshots, performance metrics, and general case study descriptions in professional portfolios, resume credentials, and technical demonstrations.
+      </p>
+      <p>
+        <strong>Technical Warranty vs Change Request:</strong> The complimentary 30-day warranty commences from the official live domain deployment date and covers <em>Defects</em> (reproducible programming bugs or non-conformance with this SOW). The warranty strictly excludes <em>Change Requests</em> (new fields, layout alterations, copywriting revisions, new pages, or browser updates released after delivery date).
+      </p>
+      <p>
+        <strong>Optional Post-Warranty Support (AMC):</strong> Following the expiration of the 30-day warranty, Dalal Machine Tools Agency Pvt. Ltd. may elect to retain the Consultant under an ongoing <strong>Annual Maintenance Contract (AMC)</strong> at a mutually agreed monthly retainer covering regular database backup integrity checks, security patch updates, server OS maintenance, and priority bug troubleshooting.
+      </p>
+
+      <div class="sign-section">
+        <div class="sec-head" style="margin-top: 0; margin-bottom: 3px;">12.0 Formal Client Acceptance & Technical Delivery Sign-Off</div>
+        <p style="font-size: 7pt; color: var(--text-muted); margin-bottom: 4px;">
+          By signing below, the authorized representatives of Dalal Machine Tools Agency Pvt. Ltd. and the Lead Software Architect formally validate, accept, and sign off on this Technical Statement of Work (SOW):
+        </p>
+
+        <table class="sign-table">
+          <tr>
+            <td>
+              <div class="sign-title">Client Acceptance (Approving Authority)</div>
+              <div class="sign-field"><strong>Client Organization:</strong> Dalal Machine Tools Agency Pvt. Ltd.</div>
+              <div class="sign-field"><strong>Authorized Signatory:</strong> Mr. Vinit Dalal</div>
+              <div class="sign-field"><strong>Designation:</strong> Managing Director</div>
+              <div class="sign-field"><strong>Headquarters:</strong> Tardeo, Mumbai - 400034</div>
+              <div class="sign-line"></div>
+              <div class="sign-field"><strong>Signature & Company Seal:</strong></div>
+              <div class="sign-field"><strong>Date:</strong> _____________________ &nbsp;|&nbsp; <strong>Place:</strong> Mumbai / Pune</div>
+            </td>
+            <td>
+              <div class="sign-title">Engineering Acceptance (Technical Authority)</div>
+              <div class="sign-field"><strong>Consultant:</strong> Suyash Shinde</div>
+              <div class="sign-field"><strong>Role:</strong> Lead Software Architect & Solutions Engineer</div>
+              <div class="sign-field"><strong>Email:</strong> suyashshinde360@gmail.com &bull; <strong>Direct:</strong> +91 94056 61922</div>
+              <div class="sign-field"><strong>PAN / GST Status:</strong> Threshold Exemption (Sec 22(1) CGST Act, SAC 998314)</div>
+              <div class="sign-line"></div>
+              <div class="sign-field"><strong>Signature:</strong></div>
+              <div class="sign-field"><strong>Date:</strong> _____________________ &nbsp;|&nbsp; <strong>Place:</strong> Pune</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>STATEMENT OF WORK — DALAL MACHINE TOOLS AGENCY PVT. LTD.</span>
+      <span>REF: DMT-SOW-2026-FINAL &bull; COMMERCIAL TERMS UNDER INV-SS-2026-001</span>
+      <span>PAGE 4 OF 4</span>
+    </div>
+  </div>
+
+</body>
+</html>

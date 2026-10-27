@@ -7,6 +7,7 @@
   <link rel="shortcut icon" href="/new/dalalmachine/images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="/new/dalalmachine/css/font-awesome.css">
   <link rel="stylesheet" href="css/superadmin.css?v=2.2">
+  <link rel="stylesheet" href="/admin/css/admin-ai.css?v=1.0">
 </head>
 <body>
 
@@ -184,6 +185,42 @@
           </div>
         </div>
 
+        <!-- 4. AI Intelligence Engine & Gemini API Configuration -->
+        <div class="sa-card" style="margin-top: 24px;">
+          <div class="sa-card-header">
+            <div class="sa-card-title">
+              <i class="fa fa-magic" style="color: var(--sa-gold);"></i>
+              <span>AI Intelligence Engine & Google Gemini API</span>
+            </div>
+            <div id="ai-engine-status-pill" style="font-size: 11.5px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3);">
+              <i class="fa fa-circle" style="font-size: 8px;"></i> Loading AI Engine...
+            </div>
+          </div>
+          <div class="sa-card-body">
+            <p style="font-size: 13.5px; color: var(--sa-text-muted); margin-bottom: 20px;">
+              Configure Google Gemini API to power the customer chatbot, natural language machinery search, 1-click product form auto-fill, and admin ERP copilot. When no key is set, the built-in deterministic machinery intelligence engine runs automatically with zero downtime.
+            </p>
+
+            <div style="display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: flex-end;">
+              <div class="sa-form-group" style="margin-bottom: 0;">
+                <label class="sa-label">Google Gemini API Key (Gemini 2.0 Flash / 1.5 Flash)</label>
+                <input type="password" id="set-gemini-key" class="sa-input" placeholder="AIzaSy..." style="font-family: monospace;">
+                <small style="color: var(--sa-text-dim); display: block; margin-top: 6px;">
+                  Get your free Gemini API key from <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color: var(--sa-gold);">Google AI Studio &rarr;</a>
+                </small>
+              </div>
+              <div style="display: flex; gap: 8px;">
+                <button type="button" id="btn-toggle-key-visibility" class="sa-btn sa-btn-secondary" style="height: 40px; padding: 0 14px;" title="Show / Hide Key">
+                  <i class="fa fa-eye"></i>
+                </button>
+                <button type="button" id="btn-test-ai-key" class="sa-btn sa-btn-secondary" style="height: 40px; white-space: nowrap;">
+                  <i class="fa fa-bolt"></i> Test Connection
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </main>
   </div>
@@ -259,19 +296,71 @@
         const payload = {
           siteName: document.getElementById('set-sitename').value.trim(),
           whatsappNumber: document.getElementById('set-whatsapp').value.trim(),
-          contactEmail: document.getElementById('set-email').value.trim()
+          contactEmail: document.getElementById('set-email').value.trim(),
+          geminiApiKey: document.getElementById('set-gemini-key').value.trim()
         };
         const res = await SuperAdminCore.api('/api/system/settings', {
           method: 'PUT',
           body: JSON.stringify(payload)
         });
         if (res.success) {
-          SuperAdminCore.toast('Global settings updated successfully');
+          SuperAdminCore.toast('Global settings & AI configuration updated successfully');
+          checkAiStatus();
         } else {
           SuperAdminCore.toast(res.message || 'Failed to update settings', 'error');
         }
       });
+
+      // Toggle Key Visibility
+      document.getElementById('btn-toggle-key-visibility').addEventListener('click', () => {
+        const inp = document.getElementById('set-gemini-key');
+        inp.type = inp.type === 'password' ? 'text' : 'password';
+      });
+
+      // Test AI Key Connection
+      document.getElementById('btn-test-ai-key').addEventListener('click', async () => {
+        const key = document.getElementById('set-gemini-key').value.trim();
+        const btn = document.getElementById('btn-test-ai-key');
+        btn.disabled = true;
+        btn.innerHTML = `<i class="fa fa-spinner fa-spin"></i> Testing...`;
+
+        const res = await SuperAdminCore.api('/api/ai/test-key', {
+          method: 'POST',
+          body: JSON.stringify({ apiKey: key })
+        });
+
+        btn.disabled = false;
+        btn.innerHTML = `<i class="fa fa-bolt"></i> Test Connection`;
+
+        if (res.success) {
+          SuperAdminCore.toast(res.message || 'AI Connection Successful!');
+          checkAiStatus();
+        } else {
+          SuperAdminCore.toast(res.message || 'AI Key Test Failed', 'error');
+        }
+      });
     })();
+
+    async function checkAiStatus() {
+      try {
+        const res = await fetch('/api/ai/status');
+        const data = await res.json();
+        const pill = document.getElementById('ai-engine-status-pill');
+        if (data.success && pill) {
+          if (data.hasGeminiKey) {
+            pill.style.background = 'rgba(16, 185, 129, 0.15)';
+            pill.style.color = '#34d399';
+            pill.style.borderColor = 'rgba(16, 185, 129, 0.3)';
+            pill.innerHTML = `<i class="fa fa-check-circle"></i> Active: ${data.activeEngine}`;
+          } else {
+            pill.style.background = 'rgba(248, 157, 19, 0.15)';
+            pill.style.color = '#fbbf24';
+            pill.style.borderColor = 'rgba(248, 157, 19, 0.3)';
+            pill.innerHTML = `<i class="fa fa-cog"></i> Active: Built-in Machinery Intelligence`;
+          }
+        }
+      } catch (e) {}
+    }
 
     async function loadSettings() {
       const res = await SuperAdminCore.api('/api/system/settings');
@@ -279,8 +368,11 @@
         document.getElementById('set-sitename').value = res.settings.siteName || '';
         document.getElementById('set-whatsapp').value = res.settings.whatsappNumber || '';
         document.getElementById('set-email').value = res.settings.contactEmail || '';
+        document.getElementById('set-gemini-key').value = res.settings.geminiApiKey || '';
       }
+      checkAiStatus();
     }
   </script>
+  <script src="/admin/js/admin-ai.js?v=1.0"></script>
 </body>
 </html>

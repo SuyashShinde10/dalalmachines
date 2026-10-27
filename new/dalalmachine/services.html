@@ -9,16 +9,29 @@
   <link href="css/style.css" rel="stylesheet">
   <link href="css/responsive.css" rel="stylesheet">
   <link href="css/font-awesome.css" rel="stylesheet">
-  <link href="css/dalal-custom.css?v=3.0" rel="stylesheet">
+  <link href="css/dalal-custom.css?v=5.2" rel="stylesheet">
   
   <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
+<!-- Preloader: Clean Enterprise Light with Dalal Logo -->
+<div class="preloader" id="dalal-preloader" aria-hidden="true">
+    <div class="enterprise-box">
+        <div class="enterprise-logo-wrap">
+            <img src="images/logo-dalal.png" class="enterprise-logo" alt="Dalal Machine Tools Agency Pvt. Ltd.">
+        </div>
+        <div class="enterprise-bar-track">
+            <div class="enterprise-bar-fill"></div>
+        </div>
+        <div class="enterprise-caption">Dalal Machine Tools</div>
+    </div>
+</div>
+
 <div class="page-wrapper">
-        <!-- Main Header -->
-        <!-- Main Header -->
+    
+    <!-- Main Header -->
     <header class="main-header">
         <!-- Header Top -->
         <div class="header-top">
@@ -134,8 +147,8 @@
                     <div class="outer-box">
                         <div class="link-box">
                             <a href="https://wa.me/919821232131?text=Hello%20Mr.%20Vinit%20Dalal,%20I%20have%20an%20urgent%20machinery%20requirement." 
-                               target="_blank" class="theme-btn btn-style-one" style="background:#f89d13; color:#111; font-weight:700; padding:10px 22px;">
-                                <i class="fa fa-whatsapp"></i> Quick RFQ
+                               target="_blank" class="theme-btn btn-style-one header-rfq-btn" style="background:#f89d13; color:#111; font-weight:700; padding:10px 22px; display:inline-flex; align-items:center; gap:8px;">
+                                <i class="fa fa-whatsapp" style="font-size:18px; line-height:1; vertical-align:middle; margin-right:4px;"></i> <span>Quick RFQ</span>
                             </a>
                         </div>
                     </div>
@@ -203,74 +216,352 @@
         </div>
     </section>
 
-    <!-- The 6 Pillars Breakdown -->
+    <!-- The 6-Step Turnkey Import Workflow Timeline -->
     <section style="padding: 80px 0; background:#fff;">
         <div class="auto-container">
-            <div class="sec-title text-center" style="margin-bottom:50px;">
-                <span style="color:#f89d13; font-family:'Rajdhani'; font-size:16px; font-weight:700; text-transform:uppercase; letter-spacing:1px;">Complete Peace of Mind</span>
-                <h2 style="font-size:38px; font-weight:800; color:#1b212f;">The 6 Pillars of Dalal Machine Import Excellence</h2>
+            <div class="sec-title text-center" style="margin-bottom:30px;">
+                <span style="color:#f89d13; font-family:'Rajdhani'; font-size:16px; font-weight:700; text-transform:uppercase; letter-spacing:1px;">Seamless Turnkey Execution</span>
+                <h2 style="font-size:38px; font-weight:800; color:#1b212f;">The 6-Step Dalal Machine Import Journey</h2>
+                <div class="text" style="color:#64748b; max-width:680px; margin:10px auto 0;">
+                    From global sourcing hubs in Germany and Russia to Nhava Sheva customs clearance and factory floor commissioning in India.
+                </div>
             </div>
 
-            <div class="row clearfix services-pillar-row">
-                <!-- 1 -->
-                <div class="col-lg-4 col-md-6 col-sm-12 service-col">
-                    <div class="service-pillar-card">
-                        <div class="service-pillar-icon"><i class="fa fa-search"></i></div>
-                        <h4 class="service-pillar-title">1. Global Stock & Targeted Sourcing</h4>
-                        <p class="service-pillar-desc">We buy and stock presses across Europe and Russia, enabling instant dispatch from ready stock or targeted sourcing for custom tonnage.</p>
+            <!-- Interactive 6-Step Visual Workflow Slideshow -->
+            <div class="workflow-slideshow-container" id="workflow-slideshow">
+                <!-- Navigation Bar with Step Pills & Arrows -->
+                <div class="workflow-step-nav">
+                    <div class="workflow-step-pills">
+                        <button type="button" class="workflow-step-pill active" data-step="0">
+                            <span class="step-pill-num">01</span> Global Sourcing
+                        </button>
+                        <button type="button" class="workflow-step-pill" data-step="1">
+                            <span class="step-pill-num">02</span> Power Test Audit
+                        </button>
+                        <button type="button" class="workflow-step-pill" data-step="2">
+                            <span class="step-pill-num">03</span> High Seas (INR)
+                        </button>
+                        <button type="button" class="workflow-step-pill" data-step="3">
+                            <span class="step-pill-num">04</span> Sea Charter
+                        </button>
+                        <button type="button" class="workflow-step-pill" data-step="4">
+                            <span class="step-pill-num">05</span> Customs &amp; ITC
+                        </button>
+                        <button type="button" class="workflow-step-pill" data-step="5">
+                            <span class="step-pill-num">06</span> Factory Rigging
+                        </button>
+                    </div>
+                    <div class="workflow-nav-arrows">
+                        <button type="button" class="workflow-arrow-btn workflow-arrow-prev" aria-label="Previous Step">
+                            <i class="fa fa-chevron-left"></i>
+                        </button>
+                        <button type="button" class="workflow-arrow-btn workflow-arrow-next" aria-label="Next Step">
+                            <i class="fa fa-chevron-right"></i>
+                        </button>
                     </div>
                 </div>
-                <!-- 2 -->
-                <div class="col-lg-4 col-md-6 col-sm-12 service-col">
-                    <div class="service-pillar-card">
-                        <div class="service-pillar-icon"><i class="fa fa-play-circle"></i></div>
-                        <h4 class="service-pillar-title">2. Site Inspection Under Live Power</h4>
-                        <p class="service-pillar-desc">We provide inspection at the seller's site abroad with machines demonstrated under power. Foundation blueprints and operational history supplied.</p>
+
+                <!-- Viewport & Sliding Track -->
+                <div class="workflow-slideshow-viewport">
+                    <div class="workflow-slideshow-track">
+                        <!-- Step 1 -->
+                        <div class="timeline-step-slide" data-index="0">
+                            <div class="timeline-step-card">
+                                <div class="step-card-header">
+                                    <div class="timeline-step-num">01</div>
+                                    <div class="step-icon-badge"><i class="fa fa-globe"></i></div>
+                                </div>
+                                <h4 class="timeline-step-title">Global Stock &amp; Targeted Sourcing</h4>
+                                <p class="timeline-step-desc">
+                                    Immediate dispatch from standing stock in Europe/Pune or precision sourcing of requested tonnages (up to 6,300T) via verified industrial networks.
+                                </p>
+                                <div class="step-guarantee">
+                                    <i class="fa fa-check-circle"></i> Standing stock in Pune &amp; Europe yards
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="timeline-step-slide" data-index="1">
+                            <div class="timeline-step-card">
+                                <div class="step-card-header">
+                                    <div class="timeline-step-num">02</div>
+                                    <div class="step-icon-badge"><i class="fa fa-bolt"></i></div>
+                                </div>
+                                <h4 class="timeline-step-title">Site Power Test &amp; Engineering Audit</h4>
+                                <p class="timeline-step-desc">
+                                    Rigorous on-site testing under live power abroad. Ram parallelism, clutch engagement, foundation blueprints, and complete CE documentation verified.
+                                </p>
+                                <div class="step-guarantee">
+                                    <i class="fa fa-check-circle"></i> Live power video &amp; tolerance audit
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="timeline-step-slide" data-index="2">
+                            <div class="timeline-step-card">
+                                <div class="step-card-header">
+                                    <div class="timeline-step-num">03</div>
+                                    <div class="step-icon-badge"><i class="fa fa-file-text-o"></i></div>
+                                </div>
+                                <h4 class="timeline-step-title">High Seas Contract in Indian Rupees</h4>
+                                <p class="timeline-step-desc">
+                                    Sign High Seas Sales Agreement in INR. Zero foreign currency volatility, zero bank LC opening costs, and complete payment protection.
+                                </p>
+                                <div class="step-guarantee">
+                                    <i class="fa fa-check-circle"></i> 100% INR contract &amp; zero forex risk
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="timeline-step-slide" data-index="3">
+                            <div class="timeline-step-card">
+                                <div class="step-card-header">
+                                    <div class="timeline-step-num">04</div>
+                                    <div class="step-icon-badge"><i class="fa fa-ship"></i></div>
+                                </div>
+                                <h4 class="timeline-step-title">Heavy Sea Charter &amp; CIF Transit</h4>
+                                <p class="timeline-step-desc">
+                                    Specialized Breakbulk &amp; Flat-Rack vessel bookings. Export lashing, seaworthy packaging, and comprehensive transit marine insurance coverage.
+                                </p>
+                                <div class="step-guarantee">
+                                    <i class="fa fa-check-circle"></i> Sea-fastening &amp; transit marine insurance
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 5 -->
+                        <div class="timeline-step-slide" data-index="4">
+                            <div class="timeline-step-card">
+                                <div class="step-card-header">
+                                    <div class="timeline-step-num">05</div>
+                                    <div class="step-icon-badge"><i class="fa fa-shield"></i></div>
+                                </div>
+                                <h4 class="timeline-step-title">Nhava Sheva Customs &amp; Bill of Entry</h4>
+                                <p class="timeline-step-desc">
+                                    Direct Bill of Entry generated in client's company name at Nhava Sheva / Mumbai port, enabling 100% eligible GST Input Tax Credit (ITC).
+                                </p>
+                                <div class="step-guarantee">
+                                    <i class="fa fa-check-circle"></i> 100% eligible GST Input Tax Credit (ITC)
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 6 -->
+                        <div class="timeline-step-slide" data-index="5">
+                            <div class="timeline-step-card">
+                                <div class="step-card-header">
+                                    <div class="timeline-step-num">06</div>
+                                    <div class="step-icon-badge"><i class="fa fa-cogs"></i></div>
+                                </div>
+                                <h4 class="timeline-step-title">Factory Rigging &amp; OMPI Spares</h4>
+                                <p class="timeline-step-desc">
+                                    Multi-axle hydraulic trailer delivery to plant doorstep, foundation placement, and genuine OMPI India LLP clutch-brake retrofitting.
+                                </p>
+                                <div class="step-guarantee">
+                                    <i class="fa fa-check-circle"></i> Doorstep placement &amp; OMPI clutch support
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <!-- 3 -->
-                <div class="col-lg-4 col-md-6 col-sm-12 service-col">
-                    <div class="service-pillar-card">
-                        <div class="service-pillar-icon"><i class="fa fa-ship"></i></div>
-                        <h4 class="service-pillar-title">3. High Seas Sales Delivery in INR</h4>
-                        <p class="service-pillar-desc">Avoid all foreign currency fluctuation and overseas contract risk. Consignment title transferred on international waters with direct Bill of Entry in your name.</p>
-                    </div>
-                </div>
-                <!-- 4 -->
-                <div class="col-lg-4 col-md-6 col-sm-12 service-col">
-                    <div class="service-pillar-card">
-                        <div class="service-pillar-icon"><i class="fa fa-anchor"></i></div>
-                        <h4 class="service-pillar-title">4. CIF Shipments Up to 6,300 Tons</h4>
-                        <p class="service-pillar-desc">Extensive heavy-lift sea chartering experience delivering presses up to 6,300 Ton at the most competitive freight tariffs passed directly to the buyer.</p>
-                    </div>
-                </div>
-                <!-- 5 -->
-                <div class="col-lg-4 col-md-6 col-sm-12 service-col">
-                    <div class="service-pillar-card">
-                        <div class="service-pillar-icon"><i class="fa fa-shield"></i></div>
-                        <h4 class="service-pillar-title">5. Nhava Sheva & Mumbai Customs</h4>
-                        <p class="service-pillar-desc">We manage entire customs clearance, port handling, and stevedoring at Nhava Sheva & Mumbai Port on behalf of our customer with zero demurrage.</p>
-                    </div>
-                </div>
-                <!-- 6 -->
-                <div class="col-lg-4 col-md-6 col-sm-12 service-col">
-                    <div class="service-pillar-card">
-                        <div class="service-pillar-icon"><i class="fa fa-cogs"></i></div>
-                        <h4 class="service-pillar-title">6. OMPI Retrofit & Spares Support</h4>
-                        <p class="service-pillar-desc">Technical support and retrofit integration of OMPI India LLP pneumatic/hydraulic clutch-brake units to ensure peak safety and long lifecycle.</p>
-                    </div>
+
+                <!-- Bottom Pagination Dots Indicator -->
+                <div class="workflow-dots-wrap">
+                    <button type="button" class="workflow-dot active" data-slide="0" aria-label="Step 1"></button>
+                    <button type="button" class="workflow-dot" data-slide="1" aria-label="Step 2"></button>
+                    <button type="button" class="workflow-dot" data-slide="2" aria-label="Step 3"></button>
+                    <button type="button" class="workflow-dot" data-slide="3" aria-label="Step 4"></button>
+                    <button type="button" class="workflow-dot" data-slide="4" aria-label="Step 5"></button>
+                    <button type="button" class="workflow-dot" data-slide="5" aria-label="Step 6"></button>
                 </div>
             </div>
+
+            <script>
+            (function() {
+                function initWorkflowSlideshow() {
+                    var container = document.getElementById('workflow-slideshow');
+                    if (!container) return;
+
+                    var track = container.querySelector('.workflow-slideshow-track');
+                    var origSlides = container.querySelectorAll('.timeline-step-slide');
+                    var prevBtn = container.querySelector('.workflow-arrow-prev');
+                    var nextBtn = container.querySelector('.workflow-arrow-next');
+                    var pills = container.querySelectorAll('.workflow-step-pill');
+                    var dots = container.querySelectorAll('.workflow-dot');
+                    if (!track || !origSlides.length) return;
+
+                    var origCount = origSlides.length;
+
+                    // Clone all 6 original slides for seamless, uninterrupted infinite loop
+                    for (var i = 0; i < origCount; i++) {
+                        var clone = origSlides[i].cloneNode(true);
+                        clone.setAttribute('data-clone', 'true');
+                        track.appendChild(clone);
+                    }
+
+                    var allSlides = track.querySelectorAll('.timeline-step-slide');
+                    var current = 0;
+                    var isTransitioning = false;
+                    var autoInterval = null;
+
+                    function update(animate) {
+                        var slideElem = allSlides[0];
+                        if (!slideElem) return;
+
+                        var computedStyle = window.getComputedStyle(slideElem);
+                        var marginRight = parseFloat(computedStyle.marginRight) || 0;
+                        var stepAmount = slideElem.offsetWidth + marginRight;
+
+                        if (animate !== false) {
+                            track.style.transition = 'transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1)';
+                        } else {
+                            track.style.transition = 'none';
+                        }
+
+                        track.style.transform = 'translateX(-' + Math.round(current * stepAmount) + 'px)';
+
+                        var activeStep = current % origCount;
+                        pills.forEach(function(pill) {
+                            var pillStep = parseInt(pill.getAttribute('data-step'), 10);
+                            pill.classList.toggle('active', pillStep === activeStep);
+                        });
+
+                        dots.forEach(function(dot) {
+                            var dotSlide = parseInt(dot.getAttribute('data-slide'), 10);
+                            dot.classList.toggle('active', dotSlide === activeStep);
+                        });
+                    }
+
+                    // Seamless snap-back on infinite loop boundary
+                    track.addEventListener('transitionend', function(e) {
+                        if (e.target !== track) return;
+                        isTransitioning = false;
+                        if (current >= origCount) {
+                            current = current % origCount;
+                            update(false);
+                        }
+                    });
+
+                    function next() {
+                        if (isTransitioning) return;
+                        current++;
+                        isTransitioning = true;
+                        update(true);
+                    }
+
+                    function prev() {
+                        if (isTransitioning) return;
+                        if (current === 0) {
+                            current = origCount;
+                            update(false);
+                            void track.offsetWidth; // Force layout reflow
+                        }
+                        current--;
+                        isTransitioning = true;
+                        update(true);
+                    }
+
+                    function goToStep(stepIndex) {
+                        current = stepIndex % origCount;
+                        isTransitioning = true;
+                        update(true);
+                    }
+
+                    if (prevBtn) {
+                        prevBtn.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            prev();
+                        });
+                    }
+
+                    if (nextBtn) {
+                        nextBtn.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            next();
+                        });
+                    }
+
+                    pills.forEach(function(pill) {
+                        pill.addEventListener('click', function() {
+                            var idx = parseInt(this.getAttribute('data-step'), 10);
+                            if (!isNaN(idx)) {
+                                goToStep(idx);
+                            }
+                        });
+                    });
+
+                    dots.forEach(function(dot) {
+                        dot.addEventListener('click', function() {
+                            var idx = parseInt(this.getAttribute('data-slide'), 10);
+                            if (!isNaN(idx)) {
+                                goToStep(idx);
+                            }
+                        });
+                    });
+
+                    // Touch and mouse pointer swipe
+                    var startX = 0;
+                    var isDragging = false;
+                    var currentX = 0;
+
+                    track.addEventListener('pointerdown', function(e) {
+                        startX = e.clientX;
+                        isDragging = true;
+                        currentX = e.clientX;
+                    });
+
+                    window.addEventListener('pointermove', function(e) {
+                        if (!isDragging) return;
+                        currentX = e.clientX;
+                    });
+
+                    window.addEventListener('pointerup', function(e) {
+                        if (!isDragging) return;
+                        isDragging = false;
+                        var diff = currentX - startX;
+                        if (Math.abs(diff) > 40) {
+                            if (diff < 0) next();
+                            else prev();
+                        }
+                    });
+
+                    // Non-Stop Continuous Auto-Play (Never pauses on mouse hover)
+                    function startContinuousAutoPlay() {
+                        if (autoInterval) clearInterval(autoInterval);
+                        autoInterval = setInterval(function() {
+                            if (document.hidden) return;
+                            next();
+                        }, 3000); // Advances automatically every 3 seconds continuously
+                    }
+
+                    window.addEventListener('resize', function() {
+                        update(false);
+                    });
+
+                    update(false);
+                    startContinuousAutoPlay();
+                }
+
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', initWorkflowSlideshow);
+                } else {
+                    initWorkflowSlideshow();
+                }
+            })();
+            </script>
         </div>
     </section>
 
     <!-- Interactive High Seas Sales Calculator -->
-    <section style="padding: 70px 0; background: #f8fafc;">
+    <section class="hss-calculator-section" style="padding: 70px 0; background: #f8fafc;">
         <div class="auto-container">
-            <div class="row justify-content-center">
-                <div class="col-lg-10">
+            <div class="row calc-row-centered">
+                <div class="col-lg-10 col-lg-offset-1 col-md-12 col-md-offset-0 col-sm-12 calc-col-centered">
                     <div class="calc-container">
-                        <div class="row align-items-center">
+                        <div class="row" style="display: flex; flex-wrap: wrap; align-items: center;">
                             <div class="col-lg-6 col-md-12">
                                 <span style="color:#f89d13; font-family:'Rajdhani'; font-size:15px; font-weight:700; text-transform:uppercase; letter-spacing:1px;">Interactive Calculator</span>
                                 <h3 style="font-family:'Barlow'; font-size:30px; font-weight:800; color:#1e293b; margin-bottom:15px;">
@@ -298,7 +589,7 @@
                                 </button>
                             </div>
 
-                            <div class="col-lg-6 col-md-12" style="margin-top:20px;">
+                            <div class="col-lg-6 col-md-12 calc-result-col">
                                 <div class="calc-result-box">
                                     <div style="font-size:13px; color:#94a3b8; text-transform:uppercase; letter-spacing:1px; margin-bottom:4px;">Estimated INR Cost</div>
                                     <div class="calc-res-value" id="calc-val-inr">₹ 135.00 Lakhs</div>
@@ -321,6 +612,129 @@
         </div>
     </section>
 
+    <!-- High Seas Sales Legal, Customs & GST FAQ Section (Split Minimalist Design matching Home Page) -->
+    <section class="faq-split-section">
+        <div class="auto-container">
+            <div class="row faq-split-row">
+                
+                <!-- Left Sticky Column -->
+                <div class="col-lg-5 col-md-12">
+                    <div class="faq-split-left">
+                        <span class="faq-badge-pill">Finance &amp; Compliance Advisory</span>
+                        <h2 class="faq-split-title">High Seas Sales: Legal, Customs &amp; Tax FAQs</h2>
+                        <p class="faq-split-desc">
+                            Tailored guidance for Chief Financial Officers (CFOs), Company Secretaries, and Plant Procurement Committees on zero forex exposure, high seas legal title transfer, and 100% eligible GST Input Tax Credit (ITC).
+                        </p>
+                        <a href="https://wa.me/919821232131?text=Hello%20Mr.%20Vinit%20Dalal,%20I%20have%20a%20legal%20and%20compliance%20question%20regarding%20High%20Seas%20Sales." 
+                           target="_blank" class="faq-reachout-btn">
+                            <span>Consult Our CFO Desk</span>
+                            <i class="fa fa-phone"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Accordion Column -->
+                <div class="col-lg-7 col-md-12">
+                    <div class="faq-minimal-list" id="services-cfo-faq">
+                        
+                        <!-- Question 1 (Open by default) -->
+                        <div class="faq-minimal-item is-open">
+                            <button type="button" class="faq-minimal-btn" onclick="toggleDalalSplitFaq(this)" aria-expanded="true">
+                                <span class="faq-minimal-question">What is the legal validity of High Seas Sales under the Indian Customs Act?</span>
+                                <i class="fa fa-chevron-down faq-minimal-chevron"></i>
+                            </button>
+                            <div class="faq-minimal-answer">
+                                <p class="faq-minimal-answer-text">
+                                    A High Seas Sale (HSS) is recognized under Section 2(4) of the Customs Act, 1962, and the Indian Sale of Goods Act, 1930. The title of the consignment is transferred by endorsement of the Bill of Lading (B/L) on international high seas before the vessel crosses the territorial customs waters of India. The original importer (Dalal Machine Tools) legally assigns all import rights and title to the buyer.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Question 2 -->
+                        <div class="faq-minimal-item">
+                            <button type="button" class="faq-minimal-btn" onclick="toggleDalalSplitFaq(this)" aria-expanded="false">
+                                <span class="faq-minimal-question">How does our company claim 100% GST Input Tax Credit (ITC)?</span>
+                                <i class="fa fa-chevron-down faq-minimal-chevron"></i>
+                            </button>
+                            <div class="faq-minimal-answer">
+                                <p class="faq-minimal-answer-text">
+                                    Under GST Circular No. 33/2017-Customs, no IGST is levied at the time of signing the High Seas Agreement. Instead, Integrated GST (IGST) is assessed and paid only once when filing the Bill of Entry at Nhava Sheva (JNPT) or Mumbai Port in the buyer's name. This IGST payment is directly uploaded to ICEGATE and reflected in your GSTR-2B, making it 100% eligible for immediate Input Tax Credit (ITC) offset against your domestic output liabilities.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Question 3 -->
+                        <div class="faq-minimal-item">
+                            <button type="button" class="faq-minimal-btn" onclick="toggleDalalSplitFaq(this)" aria-expanded="false">
+                                <span class="faq-minimal-question">In whose name is the Customs Bill of Entry filed?</span>
+                                <i class="fa fa-chevron-down faq-minimal-chevron"></i>
+                            </button>
+                            <div class="faq-minimal-answer">
+                                <p class="faq-minimal-answer-text">
+                                    The Bill of Entry is officially assessed and filed directly under the <strong>Ultimate Buyer's Import-Export Code (IEC)</strong> and GSTIN. Dalal Machine Tools acts as the high seas facilitator and manages all Customs Broker (CHA) documentation, port stevedoring, and gateway clearance.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Question 4 -->
+                        <div class="faq-minimal-item">
+                            <button type="button" class="faq-minimal-btn" onclick="toggleDalalSplitFaq(this)" aria-expanded="false">
+                                <span class="faq-minimal-question">How does High Seas Sales protect us against foreign exchange rate risk?</span>
+                                <i class="fa fa-chevron-down faq-minimal-chevron"></i>
+                            </button>
+                            <div class="faq-minimal-answer">
+                                <p class="faq-minimal-answer-text">
+                                    When buying directly from European or Japanese sellers, Indian buyers face currency fluctuation between EUR/USD and INR during the 4 to 8 weeks of ocean transit. Under Dalal Machine Tools' High Seas contract, the total CIF price is fixed in Indian Rupees (INR). Dalal Machine Tools absorbs all hedging costs and foreign exchange volatility.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Question 5 -->
+                        <div class="faq-minimal-item">
+                            <button type="button" class="faq-minimal-btn" onclick="toggleDalalSplitFaq(this)" aria-expanded="false">
+                                <span class="faq-minimal-question">What documents are provided to our finance team for audit?</span>
+                                <i class="fa fa-chevron-down faq-minimal-chevron"></i>
+                            </button>
+                            <div class="faq-minimal-answer">
+                                <p class="faq-minimal-answer-text">
+                                    Your finance department receives a complete legal docket: (a) Notarized High Seas Sale Agreement on non-judicial stamp paper, (b) High Seas Commercial Invoice in INR, (c) Endorsed Original Bill of Lading, (d) Marine Cargo Insurance Policy certificate, and (e) Certified Chartered Engineer (CE) Inspection Report verifying machinery age, condition, and residual life.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Question 6 -->
+                        <div class="faq-minimal-item">
+                            <button type="button" class="faq-minimal-btn" onclick="toggleDalalSplitFaq(this)" aria-expanded="false">
+                                <span class="faq-minimal-question">Are international LC opening fees and SWIFT confirmation charges eliminated?</span>
+                                <i class="fa fa-chevron-down faq-minimal-chevron"></i>
+                            </button>
+                            <div class="faq-minimal-answer">
+                                <p class="faq-minimal-answer-text">
+                                    Yes. Unlike direct overseas imports requiring 100% advance foreign TT or costly foreign documentary Letters of Credit (LC) with bank margin blocks and confirmation fees, High Seas transactions are settled via domestic Indian RTGS/NEFT against milestone inspection and dispatch dockets, preserving your company's working capital limits.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Question 7 -->
+                        <div class="faq-minimal-item">
+                            <button type="button" class="faq-minimal-btn" onclick="toggleDalalSplitFaq(this)" aria-expanded="false">
+                                <span class="faq-minimal-question">How does Dalal Machine Tools prevent Nhava Sheva (JNPT) demurrage and container detention?</span>
+                                <i class="fa fa-chevron-down faq-minimal-chevron"></i>
+                            </button>
+                            <div class="faq-minimal-answer">
+                                <p class="faq-minimal-answer-text">
+                                    We negotiate 14 to 21 days of pre-approved container free-time directly with leading ocean carriers (Maersk, MSC, Hapag-Lloyd) before shipment. Our dedicated Mumbai Customs House Agent (CHA) team files prior Bill of Entry documentation ahead of vessel berthing, guaranteeing zero demurrage and expedited customs out-of-charge.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
     <!-- Main Footer -->
     <footer class="main-footer">
         <div class="auto-container">
@@ -331,10 +745,10 @@
                             <img src="images/logo-dalal-light.png" alt="Dalal Machine Tools Agency Pvt. Ltd." style="height: 44px; width: auto; max-height: 44px; display: block;">
                         </a>
                     </div>
-                    <p style="font-size:14px; line-height:1.7; color:#94a3b8; margin-bottom:20px;">
-                        Dalal Machine Tools Agency Pvt. Ltd. is one of India's premier dealers in quality second-hand metal forming presses and heavy machine tools.
+                    <p style="font-size:14.5px; line-height:1.7; color:#e2e8f0; margin-bottom:20px;">
+                        Dalal Machine Tools Agency Pvt. Ltd. is one of India's premier importers and dealers of quality second-hand forging equipment, mechanical stamping presses, and heavy CNC cutting machine tools.
                     </p>
-                    <div style="color:#cbd5e1; font-size:14px;"><strong>Managing Director:</strong> Mr. Vinit Dalal</div>
+                    <div style="color:#f1f5f9; font-size:14px;"><strong>Managing Director:</strong> Mr. Vinit Dalal</div>
                     <div class="footer-social-box">
                         <span class="footer-social-label">Follow Us:</span>
                         <div class="footer-social-links">
@@ -347,31 +761,40 @@
                 <div class="col-lg-2 col-md-6 col-sm-12" style="margin-bottom:30px;">
                     <h4 style="font-family:'Barlow'; font-size:18px; font-weight:700; color:#fff; margin-bottom:18px; border-bottom:2px solid #f89d13; display:inline-block; padding-bottom:5px;">Navigation</h4>
                     <ul style="list-style:none; padding:0; margin:0; line-height:2.2; font-size:14px;">
-                        <li><a href="index.html" style="color:#94a3b8; text-decoration:none;">Home</a></li>
-                        <li><a href="about.html" style="color:#94a3b8; text-decoration:none;">About Company</a></li>
-                        <li><a href="services.html" style="color:#94a3b8; text-decoration:none;">Services & High Seas</a></li>
-                        <li><a href="category.html" style="color:#94a3b8; text-decoration:none;">Machine Catalog</a></li>
-                        <li><a href="gallery.html" style="color:#94a3b8; text-decoration:none;">Shipment Gallery</a></li>
-                        <li><a href="contact.html" style="color:#94a3b8; text-decoration:none;">Contact Us</a></li>
+                        <li><a href="index.html" style="color:#cbd5e1; text-decoration:none;">Home</a></li>
+                        <li><a href="about.html" style="color:#cbd5e1; text-decoration:none;">About Company</a></li>
+                        <li><a href="services.html" style="color:#cbd5e1; text-decoration:none;">Services & High Seas</a></li>
+                        <li><a href="category.html" style="color:#cbd5e1; text-decoration:none;">Machine Catalog</a></li>
+                        <li><a href="gallery.html" style="color:#cbd5e1; text-decoration:none;">Shipment Gallery</a></li>
+                        <li><a href="contact.html" style="color:#cbd5e1; text-decoration:none;">Contact Us</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12" style="margin-bottom:30px;">
                     <h4 style="font-family:'Barlow'; font-size:18px; font-weight:700; color:#fff; margin-bottom:18px; border-bottom:2px solid #f89d13; display:inline-block; padding-bottom:5px;">Top Categories</h4>
                     <ul style="list-style:none; padding:0; margin:0; line-height:2.2; font-size:14px;">
-                        <li><a href="category.html?category=c-frame-press" style="color:#94a3b8; text-decoration:none;">C-Frame Presses</a></li>
-                        <li><a href="category.html?category=hot-forging-press" style="color:#94a3b8; text-decoration:none;">Hot Forging Presses</a></li>
-                        <li><a href="category.html?category=knuckle-joint-press" style="color:#94a3b8; text-decoration:none;">Knuckle Joint Presses</a></li>
-                        <li><a href="category.html?location=pune" style="color:#94a3b8; text-decoration:none;">Pune Warehouse Stock</a></li>
+                        <li><a href="category.html?category=c-frame-press" style="color:#cbd5e1; text-decoration:none;">C-Frame Presses</a></li>
+                        <li><a href="category.html?category=hot-forging-press" style="color:#cbd5e1; text-decoration:none;">Hot Forging Presses</a></li>
+                        <li><a href="category.html?category=knuckle-joint-press" style="color:#cbd5e1; text-decoration:none;">Knuckle Joint Presses</a></li>
+                        <li><a href="category.html?location=pune" style="color:#cbd5e1; text-decoration:none;">Pune Warehouse Stock</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12" style="margin-bottom:30px;">
                     <h4 style="font-family:'Barlow'; font-size:18px; font-weight:700; color:#fff; margin-bottom:18px; border-bottom:2px solid #f89d13; display:inline-block; padding-bottom:5px;">Registered Office</h4>
-                    <p style="font-size:14px; line-height:1.6; color:#94a3b8;">
+                    <p style="font-size:14.5px; line-height:1.6; color:#e2e8f0; margin-bottom:10px;">
                         <i class="fa fa-building" style="color:#f89d13;"></i> C-10, 3rd Floor, Commerce Centre, 78, Tardeo Main Road, Mumbai - 400034, India.
                     </p>
-                    <p style="font-size:14px; color:#94a3b8;">
-                        <i class="fa fa-phone" style="color:#f89d13;"></i> +91-22-67439873 / +91 9821232131
+                    <p style="font-size:14.5px; color:#e2e8f0; margin-bottom:8px;">
+                        <i class="fa fa-phone" style="color:#f89d13;"></i> <a href="tel:+919821232131" style="color:#e2e8f0; text-decoration:none;">+91-22-67439873 / +91 9821232131</a>
                     </p>
+                    <p style="font-size:14.5px; color:#e2e8f0; margin-bottom:8px;">
+                        <i class="fa fa-envelope" style="color:#f89d13;"></i> <a href="mailto:dalalmachine@gmail.com" style="color:#e2e8f0; text-decoration:none;">dalalmachine@gmail.com</a>
+                    </p>
+                    <p style="font-size:13.5px; line-height:1.5; color:#f1f5f9; margin-bottom:12px;">
+                        <i class="fa fa-map-marker" style="color:#f89d13;"></i> <strong>Stockyard:</strong> Pune Industrial Machinery Yard
+                    </p>
+                    <div style="font-size:13.5px; color:#ffd54f;">
+                        <strong>Technical Partner:</strong> OMPI India LLP
+                    </div>
                 </div>
             </div>
                         <!-- Bottom Bar -->
@@ -392,5 +815,16 @@
 <script src="js/owl.js"></script>
 <script src="js/script.js"></script>
 <script src="js/catalog-app.js?v=3.0"></script>
+
+<!-- Mobile Sticky Action Bar -->
+<div class="mobile-sticky-bar" aria-label="Mobile Contact Bar">
+    <a href="tel:+919821232131" class="mobile-sticky-btn call-btn">
+        <i class="fa fa-phone"></i> Call (+91 9821232131)
+    </a>
+    <a href="https://wa.me/919821232131?text=Hello%20Mr.%20Vinit%20Dalal,%20I%20have%20an%20urgent%20machinery%20inquiry." target="_blank" class="mobile-sticky-btn wa-btn">
+        <i class="fa fa-whatsapp"></i> Instant WhatsApp
+    </a>
+</div>
+
 </body>
 </html>

@@ -1472,6 +1472,15 @@ function getMachines(filterOptions = {}) {
       if (m.section !== filterOptions.section) return false;
     }
     if (filterOptions.location && !m.location.toLowerCase().includes(filterOptions.location.toLowerCase())) return false;
+    if (filterOptions.make && filterOptions.make !== 'all' && filterOptions.make !== '') {
+      if (!m.make.toLowerCase().includes(filterOptions.make.toLowerCase())) return false;
+    }
+    if (filterOptions.minTonnage !== undefined && filterOptions.minTonnage !== null && filterOptions.minTonnage > 0) {
+      if (m.tonnage && m.tonnage < filterOptions.minTonnage) return false;
+    }
+    if (filterOptions.maxTonnage !== undefined && filterOptions.maxTonnage !== null && filterOptions.maxTonnage > 0) {
+      if (m.tonnage && m.tonnage > filterOptions.maxTonnage) return false;
+    }
     if (filterOptions.query) {
       const q = filterOptions.query.toLowerCase();
       const match = m.name.toLowerCase().includes(q) ||
@@ -1484,3 +1493,4 @@ function getMachines(filterOptions = {}) {
     return true;
   });
 }
+

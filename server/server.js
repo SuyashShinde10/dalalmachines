@@ -14,6 +14,7 @@ const inquiryRoutes = require('./routes/inquiries');
 const userRoutes = require('./routes/users');
 const logRoutes = require('./routes/logs');
 const systemRoutes = require('./routes/system');
+const aiRoutes = require('./routes/ai');
 
 const app = express();
 
@@ -78,14 +79,16 @@ const inquiryLimiter = rateLimit({
 const staticOptions = {
   etag: true,
   lastModified: true,
+  maxAge: '1d',
   setHeaders: (res, filePath) => {
     if (/\.html$/i.test(filePath)) {
-      // HTML documents must always revalidate so layout & script updates take effect immediately
-      res.setHeader('Cache-Control', 'no-cache, must-revalidate');
+      // HTML documents revalidate quickly so content updates reflect, with short caching
+      res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
     } else if (/\.(jpg|jpeg|png|gif|webp|svg|ico|woff|woff2|ttf|eot)$/i.test(filePath)) {
       res.setHeader('Cache-Control', 'public, max-age=2592000, immutable'); // 30 days cache for immutable assets
     } else if (/\.(css|js)$/i.test(filePath)) {
-      res.setHeader('Cache-Control', 'public, max-age=86400, must-revalidate'); // 1 day cache for CSS & JS with revalidation
+      // High-performance caching for stylesheets and scripts with stale-while-revalidate for instant subsequent loads
+      res.setHeader('Cache-Control', 'public, max-age=86400, stale-while-revalidate=604800');
     }
   }
 };
@@ -151,6 +154,7 @@ app.use('/api/inquiries', inquiryLimiter, inquiryRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/logs', logRoutes);
 app.use('/api/system', systemRoutes);
+app.use('/api/ai', aiRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

@@ -21,105 +21,37 @@
         });
     }
     
-    //Hide Loading Box (Preloader)
+    // Instant Non-Blocking Preloader Release
     function handlePreloader() {
-        if ($('.preloader').length) {
-            $('.preloader').fadeOut(300);
+        var $pre = $('.preloader');
+        if ($pre.length) {
+            $pre.removeClass('nav-transitioning').addClass('loaded').hide();
         }
     }
 
-    // Premium Subtle Page Navigation Transition
-    function initPageTransitions() {
-        var $topBar = $('#dalal-page-loader-bar');
-        if (!$topBar.length) {
-            $topBar = $('<div id="dalal-page-loader-bar"></div>');
-            $('body').append($topBar);
-        }
-
-        // On initial page load: flash loader bar across and smoothly fade out
-        $topBar.css({ width: '100%', opacity: 1 });
-        setTimeout(function() {
-            $topBar.css({ opacity: 0 });
-            setTimeout(function() {
-                $topBar.css({ width: '0%' });
-            }, 250);
-        }, 120);
-
-        // Bind click on internal navigation links
-        $(document).on('click', 'a[href]', function(e) {
-            var $link = $(this);
-            var href = $link.attr('href');
-
-            // Skip if default was already prevented
-            if (e.isDefaultPrevented()) return;
-
-            // Allow new tabs: middle click, ctrl+click, cmd+click, shift+click, alt+click
-            if (e.which === 2 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-
-            // Skip invalid or non-navigation links
+    // High-Performance Instant Hover Prefetcher (Caches target page into HTTP cache on hover)
+    function initInstantNavigationPrefetch() {
+        var prefetched = {};
+        $(document).on('pointerenter mouseenter', 'a[href]', function() {
+            var href = $(this).attr('href');
             if (!href || href === '#' || href.indexOf('javascript:') === 0) return;
             if (href.indexOf('mailto:') === 0 || href.indexOf('tel:') === 0) return;
             if (href.indexOf('wa.me') !== -1 || href.indexOf('whatsapp') !== -1) return;
-            if ($link.attr('target') === '_blank') return;
-            if ($link.hasClass('no-transition') || $link.hasClass('lightbox-image') || $link.hasClass('popup-with-zoom-anim')) return;
-
-            // Anchor links on same page
+            if ($(this).attr('target') === '_blank') return;
             if (href.indexOf('#') === 0) return;
 
-            // Check if link points to another page or external domain
             try {
-                var testUrl = new URL(href, window.location.href);
-                // If different domain, let browser handle normally
-                if (testUrl.host !== window.location.host) return;
-                // If same URL with hash on same page
-                if (testUrl.pathname === window.location.pathname && testUrl.search === window.location.search && testUrl.hash) return;
-                // If exact same page URL
-                if (testUrl.href === window.location.href) return;
-            } catch (err) {
-                // If relative link, continue
-            }
-
-            // Start smooth exit transition
-            e.preventDefault();
-
-            // Animate top golden progress bar
-            $topBar.css({ width: '0%', opacity: 1 });
-            setTimeout(function() {
-                $topBar.css({ width: '80%' });
-            }, 20);
-
-            // Add leaving animation to page wrapper
-            var $wrapper = $('.page-wrapper');
-            $wrapper.addClass('page-leaving');
-
-            // Tactile feedback on link if in menu
-            $link.addClass('nav-link-transitioning');
-
-            // Smooth navigation timeout (220ms is the sweet spot: fast & fluid)
-            var targetUrl = href;
-            var navigated = false;
-
-            var timer = setTimeout(function() {
-                if (!navigated) {
-                    navigated = true;
-                    $topBar.css({ width: '100%' });
-                    window.location.href = targetUrl;
+                var url = new URL(href, window.location.href);
+                if (url.origin !== window.location.origin) return;
+                var cleanPath = url.pathname;
+                if (!prefetched[cleanPath] && cleanPath.endsWith('.html')) {
+                    prefetched[cleanPath] = true;
+                    var link = document.createElement('link');
+                    link.rel = 'prefetch';
+                    link.href = cleanPath;
+                    document.head.appendChild(link);
                 }
-            }, 220);
-
-            // Failsafe in case navigation is interrupted
-            setTimeout(function() {
-                $wrapper.removeClass('page-leaving');
-                $topBar.css({ opacity: 0 });
-                $link.removeClass('nav-link-transitioning');
-            }, 2500);
-        });
-
-        // BFCache (Back/Forward Cache) handler
-        window.addEventListener('pageshow', function(event) {
-            $('.page-wrapper').removeClass('page-leaving');
-            $('#dalal-page-loader-bar').css({ opacity: 0, width: '0%' });
-            $('.nav-link-transitioning').removeClass('nav-link-transitioning');
+            } catch (e) {}
         });
     }
 
@@ -135,12 +67,14 @@
         $('body').append(html);
     }
 
+    // Immediate execution on DOM ready - Zero artificial delay
     $(document).ready(function() {
         handlePreloader();
-        initPageTransitions();
+        initInstantNavigationPrefetch();
         initFloatingWhatsApp();
     });
-    setTimeout(handlePreloader, 400);
+    // Instant fallback
+    handlePreloader();
 
     //Update Header Style and Scroll to Top
     function headerStyle() {
@@ -1058,7 +992,197 @@
     bootstrapAnimatedLayer();
 
     /* ==========================================================================
-       When document is Scrollig, do
+       DALAL MASTER MOTION & INTERACTION SUITE v4.0
+       ========================================================================== */
+
+    // 1. Dynamic Rolling Number Count-Up
+    function initRollingCounters() {
+        if (!('IntersectionObserver' in window)) return;
+        var counters = document.querySelectorAll('.counter-roll:not(.counted)');
+        if (!counters.length) return;
+
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    var el = entry.target;
+                    el.classList.add('counted');
+                    var target = parseFloat(el.getAttribute('data-target')) || 0;
+                    var suffix = el.getAttribute('data-suffix') || '';
+                    var duration = 1800; // ms
+                    var startTime = performance.now();
+
+                    function step(now) {
+                        var progress = Math.min((now - startTime) / duration, 1);
+                        var easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+                        var currentVal = Math.floor(easeProgress * target);
+                        el.textContent = currentVal.toLocaleString() + suffix;
+                        if (progress < 1) requestAnimationFrame(step);
+                    }
+                    requestAnimationFrame(step);
+                    observer.unobserve(el);
+                }
+            });
+        }, { threshold: 0.25 });
+
+        counters.forEach(function(c) { observer.observe(c); });
+    }
+
+    // 2. Universal Floating WhatsApp Action Button (FAB)
+    function initFloatingWhatsApp() {
+        if (document.querySelector('.floating-wa-btn')) return;
+        var fab = document.createElement('a');
+        fab.className = 'floating-wa-btn';
+        fab.href = 'https://wa.me/919821232131?text=Hello%20Mr.%20Vinit%20Dalal,%20I%20have%20an%20urgent%20machinery%20requirement.';
+        fab.target = '_blank';
+        fab.rel = 'noopener noreferrer';
+        fab.setAttribute('aria-label', 'Chat with Mr. Vinit Dalal on WhatsApp');
+        fab.setAttribute('title', 'Direct WhatsApp with Managing Director (+91 9821232131)');
+        fab.innerHTML = '<i class="fa fa-whatsapp"></i>';
+        document.body.appendChild(fab);
+    }
+
+    // 3. Interactive Image Lightbox Modal
+    function initDalalLightbox() {
+        // Create modal backdrop if not present
+        if (!document.getElementById('dalal-lightbox-modal')) {
+            var lb = document.createElement('div');
+            lb.id = 'dalal-lightbox-modal';
+            lb.className = 'dalal-lightbox-backdrop';
+            lb.innerHTML = '<div class="dalal-lightbox-content">' +
+                '<button type="button" class="dalal-lightbox-close" aria-label="Close Lightbox">&times;</button>' +
+                '<img id="dalal-lightbox-view" src="" alt="Machinery Inspection Fullscreen" style="width:100%; height:auto; max-height:85vh; object-fit:contain; display:block;">' +
+                '<div id="dalal-lightbox-caption" style="padding:15px 20px; color:#fff; font-size:14px; font-weight:600; background:#131722;"></div>' +
+                '</div>';
+            document.body.appendChild(lb);
+
+            var closeBtn = lb.querySelector('.dalal-lightbox-close');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function() {
+                    lb.classList.remove('is-open');
+                });
+            }
+            lb.addEventListener('click', function(e) {
+                if (e.target === lb) lb.classList.remove('is-open');
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') lb.classList.remove('is-open');
+            });
+        }
+
+        // Delegate click for zoomable images
+        document.addEventListener('click', function(e) {
+            var target = e.target.closest('.gallery-thumb-box img, [data-lightbox], .pdp-main-img-wrap img');
+            if (!target) return;
+            var fullSrc = target.getAttribute('data-full') || target.src;
+            var caption = target.alt || 'Dalal Machine Tools Inspection View';
+            var lb = document.getElementById('dalal-lightbox-modal');
+            var img = document.getElementById('dalal-lightbox-view');
+            var cap = document.getElementById('dalal-lightbox-caption');
+            if (lb && img) {
+                img.src = fullSrc;
+                if (cap) cap.textContent = caption;
+                lb.classList.add('is-open');
+            }
+        });
+    }
+
+    // 4. CFO FAQ Accordion
+    function initCfoFaq() {
+        document.addEventListener('click', function(e) {
+            var btn = e.target.closest('.cfo-faq-btn');
+            if (!btn) return;
+            var box = btn.closest('.cfo-faq-box');
+            if (!box) return;
+            var isActive = box.classList.contains('active');
+            document.querySelectorAll('.cfo-faq-box').forEach(function(b) { b.classList.remove('active'); });
+            if (!isActive) box.classList.add('active');
+        });
+    }
+
+    // 5. Dual Map Switcher
+    function initMapSwitcher() {
+        document.addEventListener('click', function(e) {
+            var btn = e.target.closest('.map-switch-btn');
+            if (!btn) return;
+            var targetMap = btn.getAttribute('data-map');
+            document.querySelectorAll('.map-switch-btn').forEach(function(b) { b.classList.remove('active'); });
+            btn.classList.add('active');
+
+            var iframe = document.getElementById('contact-map-iframe');
+            if (!iframe) return;
+
+            if (targetMap === 'pune') {
+                // Pune Industrial Machinery Yard Corridor
+                iframe.src = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d121059.04360341757!2d73.79292671509172!3d18.52461645063469!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bf2e67461101%3A0x828d43bf9d082e33!2sPune%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1700000000000';
+            } else {
+                // Mumbai Commerce Centre, Tardeo
+                iframe.src = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3773.189569722304!2d72.81226027581177!3d18.96720798221379!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7ce6826079965%3A0xbcf03aebf6f6984f!2sCommerce%20Centre%2C%20Tardeo%2C%20Mumbai%2C%20Maharashtra%20400034!5e0!3m2!1sen!2sin!4v1700000000000';
+            }
+        });
+    }
+
+    // 6. Dual-Channel Lead Pipeline (Unified API persistence + WhatsApp notification)
+    window.handleUnifiedInquiry = function(formData, targetContainerId) {
+        var container = document.getElementById(targetContainerId);
+        var submitBtn = container ? container.querySelector('button[type="submit"]') : null;
+        var originalBtnHtml = submitBtn ? submitBtn.innerHTML : '';
+
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Securing Your Machinery Quotation...';
+        }
+
+        // Post to backend database
+        fetch('/api/inquiries', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+        })
+        .then(function(r) { return r.json(); })
+        .then(function(res) {
+            var refId = (res && res.inquiryId) ? res.inquiryId : ('INQ-' + Date.now().toString().slice(-6));
+            
+            // Render on-page confirmation toast
+            if (container) {
+                var toast = document.createElement('div');
+                toast.className = 'inquiry-success-toast';
+                toast.innerHTML = '<div style="display:flex; align-items:flex-start; gap:14px;">' +
+                    '<div style="width:40px; height:40px; border-radius:50%; background:#10b981; color:#fff; display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0;">' +
+                    '<i class="fa fa-check"></i></div>' +
+                    '<div>' +
+                    '<h4 style="margin:0 0 6px; font-weight:700; color:#1e293b; font-size:18px;">Quotation Request Registered!</h4>' +
+                    '<p style="margin:0 0 8px; font-size:14px; color:#475569; line-height:1.5;">Thank you, <strong>' + (formData.name || 'Valued Client') + '</strong>. Your inquiry for <strong>' + (formData.machineName || formData.machineId || 'Machinery') + '</strong> has been recorded.</p>' +
+                    '<span class="inquiry-ref-badge">Inquiry Ref: ' + refId + '</span>' +
+                    '<div style="margin-top:14px;">' +
+                    '<a href="https://wa.me/919821232131?text=' + encodeURIComponent('Hello Mr. Vinit Dalal, I submitted Inquiry Ref: ' + refId + ' for ' + (formData.machineName || formData.machineId || 'Machinery') + '. Name: ' + formData.name + ', Company: ' + (formData.company || 'N/A')) + '" ' +
+                    'target="_blank" class="theme-btn btn-style-one" style="padding:8px 18px; font-size:13px; background:#25D366; border-color:#25D366; color:#fff; font-weight:700; display:inline-flex; align-items:center; gap:6px;">' +
+                    '<i class="fa fa-whatsapp"></i> Notify Mr. Vinit Dalal on WhatsApp &rarr;</a>' +
+                    '</div>' +
+                    '</div></div>';
+                
+                container.parentNode.insertBefore(toast, container);
+                toast.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+
+            // Open WhatsApp window with pre-filled message
+            var waMsg = 'Hello Mr. Vinit Dalal,\nInquiry Ref: ' + refId + '\nName: ' + (formData.name || '') + '\nCompany: ' + (formData.company || '') + '\nPhone: ' + (formData.phone || '') + '\nRequirement: ' + (formData.machineName || formData.machineId || '') + '\nDetails: ' + (formData.message || '');
+            window.open('https://wa.me/919821232131?text=' + encodeURIComponent(waMsg), '_blank');
+        })
+        .catch(function() {
+            // Offline/direct WhatsApp fallback
+            var waMsg = 'Hello Mr. Vinit Dalal,\nName: ' + (formData.name || '') + '\nCompany: ' + (formData.company || '') + '\nRequirement: ' + (formData.machineName || formData.machineId || '') + '\nDetails: ' + (formData.message || '');
+            window.open('https://wa.me/919821232131?text=' + encodeURIComponent(waMsg), '_blank');
+        })
+        .finally(function() {
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnHtml;
+            }
+        });
+    };
+
+    /* ==========================================================================
+       When document is Scrolling, do
        ========================================================================== */
 
     $(window).on('scroll', function() {
@@ -1074,4 +1198,42 @@
         enableMasonry();
     });
 
+    // Modern Split Minimalist FAQ Accordion Toggle
+    window.toggleDalalSplitFaq = function(btn) {
+        var item = btn.closest('.faq-minimal-item');
+        if (!item) return;
+        var list = item.closest('.faq-minimal-list');
+        var isOpen = item.classList.contains('is-open');
+
+        // Close other items in the same list for clean accordion behavior
+        if (list) {
+            var siblingItems = list.querySelectorAll('.faq-minimal-item');
+            siblingItems.forEach(function(el) {
+                el.classList.remove('is-open');
+                var button = el.querySelector('.faq-minimal-btn');
+                if (button) button.setAttribute('aria-expanded', 'false');
+            });
+        }
+
+        // Toggle selected item
+        if (!isOpen) {
+            item.classList.add('is-open');
+            btn.setAttribute('aria-expanded', 'true');
+        }
+    };
+
+    function initCfoFaq() {
+        // Fallback compatibility
+    }
+
+    // Initialize Master Motion Suite on DOM ready
+    $(document).ready(function() {
+        initRollingCounters();
+        initFloatingWhatsApp();
+        initDalalLightbox();
+        initCfoFaq();
+        initMapSwitcher();
+    });
+
 })(window.jQuery);
+

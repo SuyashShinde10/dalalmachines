@@ -24,7 +24,8 @@ let db = {
     contactEmail: "info@dalalmachines.com",
     ompiEnabled: true,
     currency: "INR",
-    autoSyncCatalogJs: true
+    autoSyncCatalogJs: true,
+    geminiApiKey: process.env.GEMINI_API_KEY || ""
   }
 };
 

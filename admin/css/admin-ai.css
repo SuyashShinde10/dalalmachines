@@ -1,0 +1,428 @@
+/* ==========================================================================
+   Dalal Admin & Superadmin - AI Copilot & Productivity Tools Styles
+   Author: Suyash Shinde | Version: 2.0
+   ========================================================================== */
+
+:root {
+  --aic-gold: #f89d13;
+  --aic-gold-hover: #ffaa2b;
+  --aic-gold-bg: rgba(248, 157, 19, 0.12);
+  --aic-navy: #0f172a;
+  --aic-dark: #090e17;
+  --aic-surface: #1e293b;
+  --aic-border: rgba(255, 255, 255, 0.1);
+  --aic-text: #f1f5f9;
+  --aic-text-muted: #94a3b8;
+  --aic-hot: #ef4444;
+  --aic-warm: #f59e0b;
+  --aic-cool: #3b82f6;
+}
+
+/* AI Copilot Slide-In Drawer */
+.aic-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 99990;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.aic-drawer-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.aic-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 440px;
+  max-width: 100vw;
+  height: 100vh;
+  background: #0f172a;
+  border-left: 1px solid var(--aic-border);
+  box-shadow: -15px 0 45px rgba(0, 0, 0, 0.6);
+  z-index: 99995;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: 'Inter', sans-serif;
+  color: var(--aic-text);
+}
+
+.aic-drawer.active {
+  transform: translateX(0);
+}
+
+/* Drawer Header */
+.aic-drawer-header {
+  padding: 18px 20px;
+  background: #090e17;
+  border-bottom: 1px solid var(--aic-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.aic-brand-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.aic-brand-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background: linear-gradient(135deg, #f89d13 0%, #b45309 100%);
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  box-shadow: 0 4px 12px rgba(248, 157, 19, 0.3);
+}
+
+.aic-brand-text h3 {
+  font-family: 'Rajdhani', 'Barlow', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.aic-brand-text span {
+  font-size: 11.5px;
+  color: var(--aic-gold);
+  font-weight: 600;
+}
+
+.aic-close-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--aic-text-muted);
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.aic-close-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+/* Drawer Messages Area */
+.aic-drawer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: #090e17;
+}
+
+.aic-msg {
+  display: flex;
+  gap: 10px;
+  max-width: 92%;
+  animation: aicFade 0.2s ease;
+}
+
+@keyframes aicFade {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.aic-msg.user {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+
+.aic-msg.bot {
+  align-self: flex-start;
+}
+
+.aic-msg-content {
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-size: 13.5px;
+  line-height: 1.55;
+  word-break: break-word;
+}
+
+.aic-msg.bot .aic-msg-content {
+  background: #1e293b;
+  border: 1px solid var(--aic-border);
+  color: #e2e8f0;
+}
+
+.aic-msg.user .aic-msg-content {
+  background: linear-gradient(135deg, #f89d13 0%, #d97706 100%);
+  color: #0f172a;
+  font-weight: 600;
+}
+
+.aic-msg.bot .aic-msg-content h3 {
+  font-size: 15px;
+  margin: 0 0 6px 0;
+  color: var(--aic-gold);
+}
+
+.aic-msg.bot .aic-msg-content ul {
+  margin: 6px 0 6px 18px;
+  padding: 0;
+}
+
+/* Quick Prompts Chips */
+.aic-prompts-bar {
+  padding: 8px 14px;
+  background: #0d1527;
+  border-top: 1px solid var(--aic-border);
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.aic-prompt-chip {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #cbd5e1;
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 11.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.aic-prompt-chip:hover {
+  background: var(--aic-gold-bg);
+  border-color: var(--aic-gold);
+  color: #fff;
+}
+
+/* Drawer Input Area */
+.aic-drawer-footer {
+  padding: 14px;
+  background: #0f172a;
+  border-top: 1px solid var(--aic-border);
+  display: flex;
+  gap: 8px;
+}
+
+.aic-input {
+  flex: 1;
+  background: #090e17;
+  border: 1px solid var(--aic-border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: #fff;
+  font-size: 13.5px;
+  outline: none;
+}
+
+.aic-input:focus {
+  border-color: var(--aic-gold);
+}
+
+.aic-send-btn {
+  background: var(--aic-gold);
+  color: #0f172a;
+  border: none;
+  border-radius: 8px;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.aic-send-btn:hover {
+  background: var(--aic-gold-hover);
+}
+
+/* Floating AI Copilot Trigger for Admin */
+.aic-float-trigger {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 99980;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: #ffffff;
+  border: 1.5px solid var(--aic-gold);
+  border-radius: 9999px;
+  padding: 10px 18px 10px 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 20px rgba(248, 157, 19, 0.25);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.25s;
+  font-family: 'Rajdhani', 'Inter', sans-serif;
+  user-select: none;
+}
+
+.aic-float-trigger:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.5), 0 0 28px rgba(248, 157, 19, 0.35);
+}
+
+.aic-float-trigger-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--aic-gold);
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+}
+
+.aic-float-trigger-text {
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* Topbar Copilot Button */
+.btn-topbar-copilot {
+  background: rgba(248, 157, 19, 0.12);
+  color: var(--aic-gold);
+  border: 1px solid rgba(248, 157, 19, 0.35);
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.btn-topbar-copilot:hover {
+  background: var(--aic-gold);
+  color: #0f172a;
+  box-shadow: 0 4px 14px rgba(248, 157, 19, 0.3);
+}
+
+/* AI Auto-Fill Modal on Product Form */
+.aic-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 99998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.aic-modal-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.aic-modal {
+  background: #0f172a;
+  border: 1px solid var(--aic-border);
+  border-radius: 16px;
+  width: 580px;
+  max-width: 100%;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: aicModalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #f1f5f9;
+}
+
+@keyframes aicModalPop {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.aic-modal-header {
+  padding: 18px 22px;
+  background: #090e17;
+  border-bottom: 1px solid var(--aic-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.aic-modal-header h3 {
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+}
+
+.aic-modal-body {
+  padding: 22px;
+}
+
+.aic-modal-footer {
+  padding: 16px 22px;
+  background: #090e17;
+  border-top: 1px solid var(--aic-border);
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* Lead Score Badges in Inquiries */
+.aic-score-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.aic-score-hot {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.aic-score-warm {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.aic-score-general {
+  background: rgba(59, 130, 246, 0.15);
+  color: #3b82f6;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}

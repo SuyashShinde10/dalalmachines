@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Technical Specification & Scope of Work - Dalal Machine Tools Agency Pvt. Ltd.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* Corporate Executive Engineering Styling */
+    :root {
+      --primary: #0f172a;       /* Deep Slate Navy */
+      --secondary: #1e293b;     /* Dark Charcoal */
+      --accent: #1e3a8a;        /* Enterprise Steel Blue */
+      --border: #cbd5e1;        /* Crisp Technical Border */
+      --border-light: #e2e8f0;  /* Subtle Divider */
+      --text-main: #0f172a;     /* High Contrast Text */
+      --text-muted: #475569;    /* Secondary Text */
+      --bg-neutral: #f8fafc;    /* Clean Gray Surface */
+      --bg-zebra: #f1f5f9;      /* Table Row Alternate */
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f8fafc;
+      color: var(--text-main);
+      line-height: 1.55;
+      font-size: 11pt;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .document-wrapper {
+      max-width: 900px;
+      margin: 30px auto;
+      background: #ffffff;
+      padding: 60px 70px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Interactive Top Action Bar (Hidden in Print) */
+    .top-action-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--primary);
+      color: #ffffff;
+      padding: 12px 20px;
+      border-radius: 6px;
+      margin-bottom: 30px;
+    }
+
+    .top-action-bar span {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    .action-btn {
+      background: #ffffff;
+      color: var(--primary);
+      border: none;
+      padding: 7px 16px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+
+    .action-btn:hover {
+      background: #e2e8f0;
+    }
+
+    /* Document Header & Control */
+    .doc-header {
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 25px;
+      margin-bottom: 30px;
+    }
+
+    .doc-classification {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .doc-main-title {
+      font-size: 24pt;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+
+    .doc-subtitle {
+      font-size: 12pt;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 22px;
+      line-height: 1.4;
+    }
+
+    /* Document Control Information Table */
+    .doc-control-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      font-size: 9.5pt;
+      background: var(--bg-neutral);
+      border: 1px solid var(--border);
+    }
+
+    .doc-control-table td {
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .doc-control-table td.label {
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-size: 8.5pt;
+      width: 22%;
+      background: #edf2f7;
+    }
+
+    .doc-control-table td.value {
+      color: var(--text-main);
+      font-weight: 600;
+      width: 28%;
+    }
+
+    /* Section Headings */
+    h2.section-header {
+      font-size: 14pt;
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      margin-top: 32px;
+      margin-bottom: 14px;
+      padding-bottom: 6px;
+      border-bottom: 1.5px solid var(--primary);
+      break-after: avoid;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h3.sub-header {
+      font-size: 11.5pt;
+      font-weight: 700;
+      color: var(--secondary);
+      margin-top: 20px;
+      margin-bottom: 8px;
+      break-after: avoid;
+    }
+
+    p {
+      margin-bottom: 12px;
+      text-align: justify;
+      color: #1e293b;
+    }
+
+    ul, ol {
+      margin-left: 22px;
+      margin-bottom: 14px;
+      color: #1e293b;
+    }
+
+    li {
+      margin-bottom: 4px;
+    }
+
+    strong {
+      color: #0f172a;
+    }
+
+    /* Technical Callout Box */
+    .tech-box {
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      background: var(--bg-neutral);
+      padding: 14px 18px;
+      margin: 16px 0;
+      font-size: 10pt;
+      break-inside: avoid;
+    }
+
+    .tech-box-title {
+      font-weight: 700;
+      font-size: 10.5pt;
+      color: var(--primary);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Tables */
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0 20px 0;
+      font-size: 9.5pt;
+      border: 1px solid var(--border);
+    }
+
+    table.data-table th {
+      background: var(--primary);
+      color: #ffffff;
+      padding: 8px 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 8.5pt;
+      letter-spacing: 0.4px;
+      border: 1px solid var(--primary);
+      text-align: left;
+    }
+
+    table.data-table td {
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      vertical-align: top;
+      color: #1e293b;
+    }
+
+    table.data-table tr:nth-child(even) td {
+      background-color: var(--bg-neutral);
+    }
+
+    table.data-table td.code-cell {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5pt;
+      font-weight: 600;
+      color: #0f172a;
+    }
+
+    /* Code Block / JSON Schema */
+    pre.schema-block {
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 14px 16px;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5pt;
+      line-height: 1.45;
+      overflow-x: auto;
+      margin: 12px 0 16px 0;
+      border: 1px solid #334155;
+    }
+
+    /* Sign-off Section */
+    .sign-section {
+      margin-top: 35px;
+      padding-top: 25px;
+      border-top: 1.5px solid var(--border);
+      break-inside: avoid;
+    }
+
+    .sign-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    .sign-table td {
+      width: 50%;
+      border: 1px solid var(--border);
+      padding: 16px 20px;
+      background: var(--bg-neutral);
+      vertical-align: top;
+    }
+
+    .sign-box-title {
+      font-size: 10pt;
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 6px;
+    }
+
+    .sign-field {
+      font-size: 9.5pt;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .sign-field strong {
+      color: var(--text-main);
+    }
+
+    .signature-dash {
+      height: 45px;
+      border-bottom: 1px dashed #64748b;
+      margin-bottom: 8px;
+    }
+
+    /* Page Break Helper */
+    .page-break {
+      page-break-before: always;
+      break-before: page;
+    }
+
+    .avoid-break {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    /* Print Setup */
+    @page {
+      size: A4 portrait;
+      margin: 18mm 14mm 18mm 14mm;
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+        font-size: 9.5pt;
+      }
+
+      .document-wrapper {
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+        border: none;
+        box-shadow: none;
+      }
+
+      .top-action-bar, .no-print {
+        display: none !important;
+      }
+
+      table.data-table th {
+        background-color: #0f172a !important;
+        color: #ffffff !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .tech-box, .doc-control-table, .sign-table td {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="document-wrapper">
+
+  <!-- Interactive Toolbar for Browser View -->
+  <div class="top-action-bar no-print">
+    <span>DALAL MACHINE TOOLS AGENCY PVT. LTD. — PROJECT SPECIFICATION</span>
+    <button class="action-btn" onclick="window.print()">
+      <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/><path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zm1 2h4v2H6V3zm6 8v2H4v-2h8z"/></svg>
+      Print / Save as PDF
+    </button>
+  </div>
+
+  <!-- Document Header -->
+  <header class="doc-header">
+    <div class="doc-classification">
+      <span>TECHNICAL SPECIFICATION & SCOPE OF WORK (SOW)</span>
+      <span>DOCUMENT REF: DMT-SPEC-2026-FINAL</span>
+    </div>
+
+    <h1 class="doc-main-title">ENTERPRISE WEB PORTAL & OPERATIONS SUITE</h1>
+    <h2 class="doc-subtitle">Turnkey Software Architecture, Product Catalog Engine, High Seas Calculator, Dual Administrative Portals & Search Optimization</h2>
+
+    <!-- Document Control Metadata Table -->
+    <table class="doc-control-table">
+      <tr>
+        <td class="label">Client Organization</td>
+        <td class="value">Dalal Machine Tools Agency Pvt. Ltd.</td>
+        <td class="label">Document ID</td>
+        <td class="value">DMT-SPEC-2026-FINAL</td>
+      </tr>
+      <tr>
+        <td class="label">Client Signatory</td>
+        <td class="value">Mr. Vinit Dalal (Managing Director)</td>
+        <td class="label">Document Version</td>
+        <td class="value">Version 1.0 (Final Approved)</td>
+      </tr>
+      <tr>
+        <td class="label">Principal Engineer</td>
+        <td class="value">Suyash Shinde (Lead Software Architect)</td>
+        <td class="label">Operating Locations</td>
+        <td class="value">Mumbai HQ & Chakan Industrial Area Yard</td>
+      </tr>
+      <tr>
+        <td class="label">Primary Industry</td>
+        <td class="value">Heavy Metal Forming & Cutting Machinery</td>
+        <td class="label">Document Status</td>
+        <td class="value">Official Technical Specification</td>
+      </tr>
+    </table>
+  </header>
+
+  <!-- Section 1: Project Overview -->
+  <h2 class="section-header">1.0 Project Overview & Engineering Objectives</h2>
+
+  <p>
+    This Technical Statement of Work (SOW) defines the complete functional, architectural, and deployment deliverables for the fullstack digital transformation of <strong>Dalal Machine Tools Agency Pvt. Ltd.</strong> With over two decades of recognized standing in industrial machinery import, stocking, and supply, the organization requires an enterprise-class digital platform to showcase its multi-thousand-ton metal forming and cutting inventory to domestic and international industrial buyers.
+  </p>
+
+  <p>
+    The scope encompasses the end-to-end realization of a unified corporate platform consisting of five tightly integrated subsystems:
+  </p>
+
+  <ol>
+    <li><strong>Client-Facing B2B Machinery Portal:</strong> A fully responsive 24-page web interface housing the 26-category machine inventory, standardized technical specification matrices, and interactive lead acquisition funnels.</li>
+    <li><strong>Import Duty & High Seas Savings Calculator:</strong> An interactive computational engine calculating customs tariff optimization and GST Input Tax Credit (ITC) eligibility.</li>
+    <li><strong>Staff Operations Portal (<code>/admin</code>):</strong> A dedicated operations hub enabling staff to manage machine listings, update live/sold states, review inquiries, and export catalog data without developer intervention.</li>
+    <li><strong>Super-Admin Governance Console (<code>/superadmin</code>):</strong> A restricted management console providing system telemetry, role-based access control (RBAC), immutable security audit logs, and automated database snapshot backup/restore.</li>
+    <li><strong>Discoverability & Infrastructure Layer:</strong> Comprehensive technical SEO, JSON-LD Schema markup, Generative AI Engine Optimization (AEO), Google Search Console domain verification, GA4 conversion tracking, SSL certificate security, and production daemon configuration.</li>
+  </ol>
+
+  <div class="tech-box">
+    <div class="tech-box-title">Core Engineering Philosophy</div>
+    Zero third-party vendor lock-in. The platform is constructed entirely using clean, semantic web architecture (Semantic HTML5, CSS3, Vanilla JS, Node.js runtime, standard JSON schemas) ensuring high performance, zero runtime license fees, and complete intellectual property ownership for Dalal Machine Tools Agency Pvt. Ltd.
+  </div>
+
+  <!-- Section 2: Architecture -->
+  <h2 class="section-header">2.0 System Architecture & Technology Stack</h2>
+
+  <p>
+    The system utilizes a modular, decoupled client-server architecture engineered for sub-second page loads, maximum search crawler visibility, and straightforward on-premise or cloud hosting.
+  </p>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th style="width: 25%;">Layer</th>
+        <th style="width: 35%;">Technology / Framework</th>
+        <th style="width: 40%;">Architectural Role & Capability</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Presentation Layer</strong></td>
+        <td>HTML5, CSS3, Vanilla JS, Bootstrap UI</td>
+        <td>Server-rendered responsive UI supporting viewports from 360px mobile to 1920px 4K displays. Zero frontend framework overhead; zero JS console errors.</td>
+      </tr>
+      <tr>
+        <td><strong>Catalog Engine</strong></td>
+        <td>Faceted Filter Engine, Dynamic JSON Store</td>
+        <td>Client-side multi-parameter filtering by Category, Tonnage, Origin, and Yard Location with instant search execution (&lt;50ms response).</td>
+      </tr>
+      <tr>
+        <td><strong>Operations Backends</strong></td>
+        <td>Admin & Super-Admin Web Applications</td>
+        <td>Protected administrative routes (<code>/admin</code> and <code>/superadmin</code>) handling inventory CRUD, RFQ inbox workflow, RBAC, and JSON state persistence.</td>
+      </tr>
+      <tr>
+        <td><strong>Server & Daemon Layer</strong></td>
+        <td>Node.js Runtime with PM2 Process Manager</td>
+        <td>Non-blocking HTTP daemon with automatic cluster restarts, static asset compression, and connection pooling.</td>
+      </tr>
+      <tr>
+        <td><strong>Security Architecture</strong></td>
+        <td>Helmet Headers, Rate-Limiting, Sanitization</td>
+        <td>Brute-force protection on auth endpoints (25 req/min), RFQ endpoint rate limits (30 req/min), stored XSS escaping, and strict CORS policies.</td>
+      </tr>
+      <tr>
+        <td><strong>Data Persistence</strong></td>
+        <td>Structured JSON Database with Backup Engine</td>
+        <td>Relational-mapped file schema with 1-click snapshot creation, versioned timestamp archives, and automated rollback capability.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="page-break"></div>
+
+  <!-- Section 3: Functional Specifications -->
+  <h2 class="section-header">3.0 Detailed Functional Specifications</h2>
+
+  <h3 class="sub-header">3.1 Client-Facing B2B Machinery Portal (24 Pages)</h3>
+  <p>
+    The public portal serves as the primary sales conversion tool. The website is structured into 24 fully engineered pages ensuring complete topical coverage of Dalal Machine Tools' corporate heritage, machine inventory, sourcing solutions, and contact points:
+  </p>
+
+  <ul>
+    <li><strong>Homepage (<code>index.html</code>):</strong> Features an industrial hero slider with prominent technical metrics (e.g., 6,300 Ton capacity, 20+ years track record), 4 core value pillars, featured machine inventory grid, High Seas Sales savings feature banner, technical co-branding representation with <strong>OMPI India LLP</strong>, and customer credibility endorsements.</li>
+    <li><strong>About the Organization (<code>about.html</code>):</strong> Documents the 20+ year company background, executive management profile, European, Japanese, and Taiwanese sourcing network, and the dedicated Chakan Industrial Area machine testing yard.</li>
+    <li><strong>Services & Import Solutions (<code>services.html</code>):</strong> Breaks down the 6 Pillars of heavy machinery procurement: European stock sourcing, under-power inspection, High Seas contract structuring, CIF containerized/break-bulk shipping up to 6,300 Ton, Nhava Sheva / Mumbai port customs clearance, and heavy-haulage delivery.</li>
+    <li><strong>Machinery Category Directory (<code>category.html</code>):</strong> Unified catalog interface supporting faceted real-time search across 26 distinct metal forming and cutting categories with instant multi-parameter filters.</li>
+    <li><strong>Standardized Machine Detail Page (<code>product.html</code>):</strong> Standardized PDP featuring high-resolution photo galleries, a standardized 10-row engineering specification table, condition indicators, foundation drawings status, and direct WhatsApp RFQ triggers.</li>
+    <li><strong>Brand New Machinery & OMPI Co-Branding (<code>brand-new-machinery.html</code>):</strong> Dedicated engineering showcase for OMPI pneumatic clutch and brake combination units, safety valves, and industrial representation for IMTEX 2026.</li>
+    <li><strong>Photographic Import Archive & Yard Ledger (<code>gallery.html</code>):</strong> Verified visual record of arrived shipments, container un-stuffing, and heavy rigging operations conducted at the Chakan facility.</li>
+    <li><strong>Inquiry & Communications Center (<code>contact.html</code>):</strong> Dual-facility contact mapping (Mumbai Headquarters and Chakan Stock Yard), interactive coordinates, direct WhatsApp contact trigger, and multi-field RFQ request form.</li>
+    <li><strong>Error Recovery (<code>404.html</code>):</strong> Branded error recovery template with direct navigation paths back to primary machinery categories.</li>
+  </ul>
+
+  <h3 class="sub-header">3.2 Machinery Catalog Directory (26 Industrial Categories)</h3>
+  <p>
+    The inventory catalog covers 26 specialized machinery categories divided across two primary engineering divisions:
+  </p>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th style="width: 50%;">Metal Forming Machinery Division (16 Categories)</th>
+        <th style="width: 50%;">Metal Cutting Machinery Division (10 Categories)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1. Hot Forging Presses (Crank & Eccentric, 500T - 6300T)<br>
+            2. Knuckle Joint Coining & Sizing Presses<br>
+            3. Mechanical Power Presses (C-Frame & H-Frame)<br>
+            4. Hydraulic Deep Drawing & Stamping Presses<br>
+            5. Pneumatic & Air Drop Forging Hammers<br>
+            6. Counterblow Hammers (Beche, Lasco)<br>
+            7. Friction Screw Presses (Hasenclever, Weingarten)<br>
+            8. Cold Forging & Heading Machines<br>
+            9. Horizontal Forging Machines (Upsetters)<br>
+            10. Open Die Forging Presses & Manipulators<br>
+            11. Hydraulic & Mechanical Shearing Machines<br>
+            12. CNC & Hydraulic Press Brakes<br>
+            13. Plate Bending & 3-Roll / 4-Roll Bending Machines<br>
+            14. Section Bending & Profile Rolls<br>
+            15. High-Speed Blanking & Stamping Presses<br>
+            16. Forging Ring Rolling Machines</td>
+        <td>1. Horizontal Boring Machines (TOS, Skoda, Pama)<br>
+            2. Floor Type Horizontal Boring & Milling Machines<br>
+            3. Vertical Machining Centers (VMC 3-Axis / 5-Axis)<br>
+            4. Horizontal Machining Centers (HMC)<br>
+            5. Vertical Turning Lathes (VTL / Single & Double Column)<br>
+            6. Heavy Duty CNC & Conventional Lathes (Up to 12m Bed)<br>
+            7. Gear Hobbing Machines (Liebherr, Pfauter)<br>
+            8. Gear Shaping & Gear Grinding Machines<br>
+            9. Surface & Cylindrical Grinding Machines<br>
+            10. Plano Millers & Heavy Gantry Milling Machines</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="page-break"></div>
+
+  <h3 class="sub-header">3.3 Machine Technical Data Model (Schema Specification)</h3>
+  <p>
+    Every machine record adheres to a strict relational JSON schema to ensure uniformity across the catalog, administrative CRUD operations, and search engine structured data output:
+  </p>
+
+  <pre class="schema-block">
+{
+  "id": "forming-001",
+  "slug": "voronezh-k8542-1600-ton-hot-forging-press",
+  "title": "Voronezh K8542 1600 Ton Hot Forging Press",
+  "category": "metal-forming",
+  "subCategory": "hot-forging-press",
+  "make": "Voronezh (TMP)",
+  "model": "K8542",
+  "yearOfManufacture": 1988,
+  "condition": "Excellent - Inspected Under Power",
+  "location": "Warehouse, Europe",
+  "availability": "Ready Stock - Immediate Dispatch",
+  "primarySpecs": {
+    "nominalForceTons": 1600,
+    "ramStrokeMm": 300,
+    "strokesPerMinute": 85,
+    "shutHeightMm": 750,
+    "bedDimensionsMm": "1200 x 1200",
+    "ramDimensionsMm": "1000 x 1000",
+    "mainMotorPowerKw": 90,
+    "totalWeightTons": 85
+  },
+  "verificationStatus": {
+    "seenUnderPower": true,
+    "foundationDrawingsAvailable": true,
+    "serviceHistoryDocumented": true,
+    "highSeasSalesEligible": true
+  }
+}
+  </pre>
+
+  <h3 class="sub-header">3.4 1-Click WhatsApp Direct RFQ Lead Engine</h3>
+  <p>
+    To eliminate customer friction and bridge web inquiries directly to sales executives, every machine card and PDP includes an automated WhatsApp RFQ generator. Clicking the button executes a client-side URL builder:
+  </p>
+
+  <ul>
+    <li>Reads the active machine Title, Tonnage, Model, and URL.</li>
+    <li>Formats an encoded string: <em>"Hello Dalal Machines, I am interested in [Machine Title] (Ref: [ID]) currently listed on your portal. Please share full technical specifications, inspection report, and quotation details."</em></li>
+    <li>Directly triggers the WhatsApp application on mobile or WhatsApp Web on desktop without requiring manual typing.</li>
+  </ul>
+
+  <h3 class="sub-header">3.5 High Seas Sales & Import Finance Calculator</h3>
+  <p>
+    An interactive computational tool located on the Services page allowing industrial clients to estimate their procurement savings when purchasing high-value capital goods under High Seas Sales agreements:
+  </p>
+
+  <ul>
+    <li><strong>Inputs:</strong> Machine Baseline CIF Capital Valuation, applicable Customs Duty tariff rate, Port Clearance charges, and standard inland logistics.</li>
+    <li><strong>Computational Engine:</strong> Evaluates total landed expense under standard direct import versus High Seas Sales transfer prior to customs clearance.</li>
+    <li><strong>Output Display:</strong> Clear graphical summary demonstrating total cash outflow reduction, duty deferral benefits, and full 100% eligibility for GST Input Tax Credit (ITC).</li>
+  </ul>
+
+  <div class="page-break"></div>
+
+  <h3 class="sub-header">3.6 Staff Admin Operations Portal (<code>/admin</code>)</h3>
+  <p>
+    The internal operations portal provides an authenticated management environment for Dalal Machine Tools' administrative and sales personnel to oversee inventory and incoming inquiries:
+  </p>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th style="width: 25%;">Module</th>
+        <th style="width: 45%;">Functional Capability</th>
+        <th style="width: 30%;">Operational Outcome</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Inventory CRUD Engine</strong></td>
+        <td>Add new machinery, modify technical specs (Stroke, Tonnage, Bed Size, Motor), update physical yard location, and archive obsolete units.</td>
+        <td>Immediate catalog updates without code changes or developer support.</td>
+      </tr>
+      <tr>
+        <td><strong>Lifecycle State Toggle</strong></td>
+        <td>1-Click state switching between: <code>Live (Active Catalog)</code>, <code>Draft (Under Verification)</code>, and <code>Sold Out (Archive)</code>.</td>
+        <td>Prevents buyer inquiries on sold machines while retaining historical inventory logs.</td>
+      </tr>
+      <tr>
+        <td><strong>Photo Dropzone Uploader</strong></td>
+        <td>Client-side multi-image dropzone with automatic image aspect ratio normalization and thumbnail generation.</td>
+        <td>Streamlined visual asset uploads directly from mobile or desktop.</td>
+      </tr>
+      <tr>
+        <td><strong>RFQ Inquiries Inbox</strong></td>
+        <td>Consolidated lead inbox capturing web form submissions with Buyer Name, Company, Contact, Machine Requested, and Status tags (New, Quoted, Closed).</td>
+        <td>Complete sales lead traceability; eliminates dropped inquiries.</td>
+      </tr>
+      <tr>
+        <td><strong>Stock Catalog CSV Export</strong></td>
+        <td>Single-click export button generating a structured CSV/Excel spreadsheet of all live machines with full specifications.</td>
+        <td>Instant stock list generation for distribution during customer visits and exhibitions.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub-header">3.7 Super-Admin Governance & Security Console (<code>/superadmin</code>)</h3>
+  <p>
+    A protected governance console restricted to authorized company directors:
+  </p>
+
+  <ul>
+    <li><strong>Master System Telemetry:</strong> High-level overview displaying live inventory count, lead pipeline volume, and database storage utilization.</li>
+    <li><strong>Staff Account Provisioning & RBAC:</strong> Creation and revocation of staff login credentials with granular Role-Based Access Control (SuperAdmin vs Standard Operations Staff).</li>
+    <li><strong>Immutable Security Audit Log Ledger:</strong> Chronological ledger capturing every administrative event: user identity, action executed (create, edit, delete, status toggle), timestamp, and originating IP address.</li>
+    <li><strong>1-Click Database Snapshot Backup & Restore:</strong> Generates point-in-time JSON database snapshots downloadable for offsite archival, with immediate 1-click restore functionality to safeguard against human error.</li>
+  </ul>
+
+  <!-- Section 4: SEO & AEO -->
+  <h2 class="section-header">4.0 Technical SEO, Generative AEO & Webmaster Integration</h2>
+
+  <p>
+    Search engine optimization is embedded directly into the platform architecture to establish dominant organic search rankings for high-intent B2B machinery keywords:
+  </p>
+
+  <ul>
+    <li><strong>On-Page Technical SEO:</strong> Unique Meta Titles, keyword-dense Meta Descriptions, OpenGraph social sharing cards, and Canonical URL tags configured across all 24 individual pages.</li>
+    <li><strong>Automated Dynamic XML Sitemap & Robots.txt:</strong> Automatically generated <code>sitemap.xml</code> with strict crawl priority tags and <code>robots.txt</code> directing Googlebot to all catalog categories.</li>
+    <li><strong>Structured Rich Schema Markup (JSON-LD):</strong>
+      <ul>
+        <li><code>Organization</code> Schema: Official legal identity, registered office address, and contact endpoints.</li>
+        <li><code>LocalBusiness</code> Schema: Dual geocoded coordinates covering both the Tardeo Mumbai Headquarters and Chakan Stock Yard.</li>
+        <li><code>Product</code> & <code>ItemList</code> Schema: Formatted per Google Search Central standards to trigger rich snippet stars, inventory availability, and technical spec previews in search results.</li>
+      </ul>
+    </li>
+    <li><strong>Generative AI Engine Optimization (AEO):</strong> Semantic content hierarchy structured to facilitate direct entity indexing and factual citations by conversational AI models (ChatGPT, Perplexity AI, Google AI Overviews, Gemini).</li>
+    <li><strong>Google Search Console DNS Verification:</strong> Verification via DNS TXT records and submission of XML sitemaps for rapid indexing.</li>
+    <li><strong>Google Analytics 4 (GA4) Telemetry:</strong> Property configuration with custom event tracking for WhatsApp clicks, phone call taps, and RFQ form completions.</li>
+  </ul>
+
+  <div class="page-break"></div>
+
+  <!-- Section 5: Hosting & Security -->
+  <h2 class="section-header">5.0 Production Hosting, Server Architecture & Security Hardening</h2>
+
+  <p>
+    The production deployment architecture is engineered for 99.9% uptime, zero memory leaks, and enterprise-grade resilience:
+  </p>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th style="width: 28%;">Component</th>
+        <th style="width: 42%;">Configuration & Implementation Detail</th>
+        <th style="width: 30%;">Operational Benefit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Process Management</strong></td>
+        <td>PM2 Process Manager operating under Node.js runtime with automatic cluster restart on failure and log rotation.</td>
+        <td>Zero downtime; automatic self-healing daemon.</td>
+      </tr>
+      <tr>
+        <td><strong>Domain DNS Mapping</strong></td>
+        <td>Root domain A-Records, CNAME records, and automated 301 redirection from <code>www</code> to non-www canonical URL.</td>
+        <td>Eliminates duplicate content penalties; seamless web access.</td>
+      </tr>
+      <tr>
+        <td><strong>SSL / TLS Security</strong></td>
+        <td>Automated Let's Encrypt SSL certificate with TLS 1.3 encryption and automated 90-day renewal protocols.</td>
+        <td>End-to-end data encryption and green padlock browser trust.</td>
+      </tr>
+      <tr>
+        <td><strong>Rate Limiting Protection</strong></td>
+        <td>IP-based sliding window rate limiter: max 25 req/min on administrative login routes; max 30 req/min on public RFQ endpoints.</td>
+        <td>Prevents brute-force credential stuffing and spam bot abuse.</td>
+      </tr>
+      <tr>
+        <td><strong>XSS & Injection Defense</strong></td>
+        <td>Strict input sanitization escaping HTML entities on all form submissions; parameterized database writes.</td>
+        <td>Eliminates stored cross-site scripting (XSS) risks.</td>
+      </tr>
+      <tr>
+        <td><strong>Security Headers</strong></td>
+        <td>Helmet-compliant HTTP response headers: <code>X-Content-Type-Options: nosniff</code>, <code>X-Frame-Options: SAMEORIGIN</code>, <code>Referrer-Policy</code>.</td>
+        <td>Hardened protection against clickjacking and MIME sniffing.</td>
+      </tr>
+      <tr>
+        <td><strong>Regression Testing</strong></td>
+        <td>24/24 automated test runner verifying routing, layout rendering, search query parsing, and API responses prior to deployment.</td>
+        <td>Guarantees zero regression bugs upon live production release.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Section 6: Milestone Schedule -->
+  <h2 class="section-header">6.0 Technical Milestone Delivery Schedule</h2>
+
+  <p>
+    The project execution is organized into four sequential engineering phases with concrete verification and acceptance criteria:
+  </p>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th style="width: 15%;">Phase</th>
+        <th style="width: 35%;">Technical Deliverables</th>
+        <th style="width: 50%;">Verification & Acceptance Protocol</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Phase 1</strong></td>
+        <td>Design System, 24-Page Web Suite, Information Architecture, Mobile Optimization.</td>
+        <td>Full responsive layout demonstration across desktop, tablet, and mobile viewports with 0 JavaScript console errors.</td>
+      </tr>
+      <tr>
+        <td><strong>Phase 2</strong></td>
+        <td>26-Category Catalog, Faceted Search Filters, PDP Matrices, High Seas Calculator, WhatsApp RFQ.</td>
+        <td>Faceted filtering verified across all 26 categories; WhatsApp message generator tested on physical devices; calculator verified against duty schedules.</td>
+      </tr>
+      <tr>
+        <td><strong>Phase 3</strong></td>
+        <td>Staff Admin Portal (<code>/admin</code>), Super-Admin Console (<code>/superadmin</code>), RBAC, Audit Logs, Stock CSV Export.</td>
+        <td>Admin CRUD tested (add/edit/status toggle); photo dropzone verified; stock export tested in Excel; audit log integrity validated.</td>
+      </tr>
+      <tr>
+        <td><strong>Phase 4</strong></td>
+        <td>Production Server Daemon, Domain DNS Mapping, SSL (HTTPS), Google Search Console Verification, Sitemaps.</td>
+        <td>Domain live globally with green SSL lock; GSC domain DNS verification complete; XML sitemaps submitted; 24/24 test suite pass.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="page-break"></div>
+
+  <!-- Section 7: Scope Boundaries -->
+  <h2 class="section-header">7.0 Scope Boundaries: Inclusions & Exclusions</h2>
+
+  <p>
+    To ensure complete clarity and maintain focused technical execution, the boundaries of this engineering engagement are formally established:
+  </p>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th style="width: 50%; background: #1e293b;">7.1 INCLUDED IN SCOPE OF WORK</th>
+        <th style="width: 50%; background: #334155;">7.2 EXCLUDED (OUTSIDE SOFTWARE SCOPE)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <ul>
+            <li>Full engineering of 24 responsive web pages.</li>
+            <li>26-category machinery catalog architecture.</li>
+            <li>Standardized PDP specifications grid and lightbox.</li>
+            <li>High Seas Sales & GST savings calculator.</li>
+            <li>1-Click WhatsApp direct RFQ lead engine.</li>
+            <li>Staff Admin Portal with inventory CRUD & CSV export.</li>
+            <li>Super-Admin console with RBAC & audit logging.</li>
+            <li>1-Click database snapshot backup & restore system.</li>
+            <li>On-page SEO, XML sitemaps, and Schema markup.</li>
+            <li>Google Search Console verification & GA4 setup.</li>
+            <li>Production server daemon setup & SSL security.</li>
+            <li>Complimentary 30-day post-launch technical warranty.</li>
+            <li>100% intellectual property & code ownership transfer.</li>
+          </ul>
+        </td>
+        <td>
+          <ul>
+            <li>Third-party domain registration and annual registration renewals (maintained directly by Client with domain registrar).</li>
+            <li>Cloud VPS hosting server subscriptions or email hosting services (managed directly by Client with hosting infrastructure provider).</li>
+            <li>Physical computer hardware repair, networking cabling, or printer maintenance at Mumbai/Chakan offices.</li>
+            <li>Native mobile application development (iOS/Android app stores) outside the responsive web suite.</li>
+            <li>On-site international machinery photography visits to overseas seller yards in Europe, Japan, or Russia.</li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Section 8: IP Rights & Warranty -->
+  <h2 class="section-header">8.0 Intellectual Property, Code Handover & Technical Warranty</h2>
+
+  <p>
+    <strong>100% Intellectual Property Handover:</strong> Upon formal project delivery sign-off, all custom software architecture, frontend codebases, CSS design tokens, database schemas, administrative credentials, and deployment automation scripts become the exclusive, perpetual, and unencumbered intellectual property of <strong>Dalal Machine Tools Agency Pvt. Ltd.</strong> The client holds full rights to modify, rehost, or expand the codebase without recurring royalty obligations.
+  </p>
+
+  <p>
+    <strong>30-Day Technical Warranty:</strong> Commencing from the official live domain deployment date, a complimentary 30-day technical warranty is provided to promptly resolve any latent bugs, script errors, or functional inconsistencies within the defined scope under full warranty coverage.
+  </p>
+
+  <!-- Section 9: Sign-off & Acceptance Protocol -->
+  <div class="sign-section">
+    <h2 class="section-header" style="margin-top: 0;">9.0 Formal Sign-Off & Technical Delivery Handover Protocol</h2>
+
+    <p style="font-size: 10pt; color: var(--text-muted); margin-bottom: 12px;">
+      By signing below, the authorized representatives of Dalal Machine Tools Agency Pvt. Ltd. and the Principal Software Engineer formally validate, accept, and sign off on this Technical Specification & Scope of Work Document:
+    </p>
+
+    <table class="sign-table">
+      <tr>
+        <td>
+          <div class="sign-box-title">Client Acceptance (Approving Authority)</div>
+          <div class="sign-field"><strong>Organization:</strong> Dalal Machine Tools Agency Pvt. Ltd.</div>
+          <div class="sign-field"><strong>Authorized Signatory:</strong> Mr. Vinit Dalal</div>
+          <div class="sign-field"><strong>Designation:</strong> Managing Director</div>
+          <div class="sign-field"><strong>Headquarters:</strong> Tardeo, Mumbai - 400034</div>
+          <div class="signature-dash"></div>
+          <div class="sign-field"><strong>Signature & Company Seal:</strong></div>
+          <div class="sign-field"><strong>Date:</strong> _____________________ &nbsp;|&nbsp; <strong>Place:</strong> Mumbai / Pune</div>
+        </td>
+        <td>
+          <div class="sign-box-title">Engineering Acceptance (Technical Authority)</div>
+          <div class="sign-field"><strong>Consultant:</strong> Suyash Shinde</div>
+          <div class="sign-field"><strong>Role:</strong> Lead Software Architect & Solutions Engineer</div>
+          <div class="sign-field"><strong>Email:</strong> suyashshinde360@gmail.com</div>
+          <div class="sign-field"><strong>Location:</strong> Maharashtra, India</div>
+          <div class="signature-dash"></div>
+          <div class="sign-field"><strong>Signature:</strong></div>
+          <div class="sign-field"><strong>Date:</strong> _____________________ &nbsp;|&nbsp; <strong>Place:</strong> Pune</div>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -9,16 +9,29 @@
   <link href="css/style.css" rel="stylesheet">
   <link href="css/responsive.css" rel="stylesheet">
   <link href="css/font-awesome.css" rel="stylesheet">
-  <link href="css/dalal-custom.css?v=3.0" rel="stylesheet">
+  <link href="css/dalal-custom.css?v=5.0" rel="stylesheet">
   
   <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
+<!-- Preloader: Clean Enterprise Light with Dalal Logo -->
+<div class="preloader" id="dalal-preloader" aria-hidden="true">
+    <div class="enterprise-box">
+        <div class="enterprise-logo-wrap">
+            <img src="images/logo-dalal.png" class="enterprise-logo" alt="Dalal Machine Tools Agency Pvt. Ltd.">
+        </div>
+        <div class="enterprise-bar-track">
+            <div class="enterprise-bar-fill"></div>
+        </div>
+        <div class="enterprise-caption">Dalal Machine Tools</div>
+    </div>
+</div>
+
 <div class="page-wrapper">
+    
     <!-- Main Header -->
-        <!-- Main Header -->
     <header class="main-header">
         <!-- Header Top -->
         <div class="header-top">
@@ -134,8 +147,8 @@
                     <div class="outer-box">
                         <div class="link-box">
                             <a href="https://wa.me/919821232131?text=Hello%20Mr.%20Vinit%20Dalal,%20I%20have%20an%20urgent%20machinery%20requirement." 
-                               target="_blank" class="theme-btn btn-style-one" style="background:#f89d13; color:#111; font-weight:700; padding:10px 22px;">
-                                <i class="fa fa-whatsapp"></i> Quick RFQ
+                               target="_blank" class="theme-btn btn-style-one header-rfq-btn" style="background:#f89d13; color:#111; font-weight:700; padding:10px 22px; display:inline-flex; align-items:center; gap:8px;">
+                                <i class="fa fa-whatsapp" style="font-size:18px; line-height:1; vertical-align:middle; margin-right:4px;"></i> <span>Quick RFQ</span>
                             </a>
                         </div>
                     </div>
@@ -266,19 +279,26 @@
                         </div>
                     </div>
 
-                    <!-- RFQ CTA Buttons -->
-                    <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:30px;">
+                    <!-- RFQ & Action CTA Buttons -->
+                    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:24px;">
                         <a id="pdp-wa-btn" href="https://wa.me/919821232131?text=Hello%20Mr.%20Vinit%20Dalal,%20I%20am%20interested%20in%20LI%20CHIN%20200%20TON%20(Machine%20ID:%20P00031)" 
-                           target="_blank" class="theme-btn btn-style-one" style="padding:14px 28px; background:#25D366; border-color:#25D366; color:#fff; font-weight:700;">
+                           target="_blank" class="theme-btn btn-style-one" style="padding:12px 22px; background:#25D366; border-color:#25D366; color:#fff; font-weight:700;">
                             <i class="fa fa-whatsapp"></i> Inquire on WhatsApp
                         </a>
-                        <a href="tel:+919821232131" class="theme-btn btn-style-two" style="padding:14px 28px; border:2px solid #1b212f; color:#1b212f; font-weight:700;">
-                            <i class="fa fa-phone"></i> Call +91 9821232131
+                        <button type="button" class="theme-btn btn-style-one" data-toggle="modal" data-target="#inspectionModal" style="padding:12px 20px; background:#1b212f; color:#fff; font-weight:700;">
+                            <i class="fa fa-calendar-check-o" style="color:#f89d13;"></i> Book Yard Trial
+                        </button>
+                        <button type="button" onclick="printMachineSpecSheet()" class="theme-btn btn-style-two" style="padding:12px 20px; border:2px solid #cbd5e1; color:#1e293b; font-weight:700;">
+                            <i class="fa fa-file-pdf-o" style="color:#dc2626;"></i> Spec Sheet (PDF)
+                        </button>
+                        <a id="pdp-video-btn" href="https://wa.me/919821232131?text=Hello%20Mr.%20Vinit%20Dalal,%20please%20share%20the%20live%20power%20test%20video%20for%20machine%20LI%20CHIN%20200%20TON%20(P00031)." 
+                           target="_blank" class="theme-btn btn-style-two" style="padding:12px 20px; border:2px solid #f89d13; color:#b45309; font-weight:700; background:#fffbeb;">
+                            <i class="fa fa-play-circle" style="color:#f89d13;"></i> Request Power Video
                         </a>
                     </div>
 
                     <!-- Partner Card: OMPI India -->
-                    <div style="background:#fff8ee; border:1px solid rgba(248,157,19,0.4); border-radius:8px; padding:18px; display:flex; align-items:center; gap:15px;">
+                    <div style="background:#fff8ee; border:1px solid rgba(248,157,19,0.4); border-radius:8px; padding:18px; display:flex; align-items:center; gap:15px; box-shadow:0 6px 18px -2px rgba(248,157,19,0.18);">
                         <img src="images/dalal/ompi_clutch_brake_unit.jpg" alt="OMPI Clutch" style="width:70px; height:55px; object-fit:cover; border-radius:4px;">
                         <div>
                             <div style="font-size:14px; font-weight:700; color:#1b212f;">Need OMPI Clutch-Brake Retrofitting?</div>
@@ -289,32 +309,149 @@
                 </div>
             </div>
 
-            <!-- Technical Specification Table Block -->
-            <div class="row" style="margin-top:40px;">
+            <!-- Technical Specification Table Block (Printable Spec Sheet Area) -->
+            <div class="row" style="margin-top:40px;" id="pdp-printable-area">
                 <div class="col-12">
-                    <h3 style="font-family:'Barlow'; font-size:24px; font-weight:700; color:#1b212f; margin-bottom:18px; border-bottom:2px solid #f89d13; display:inline-block; padding-bottom:5px;">
-                        Full Technical Specifications
-                    </h3>
+                    <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #f89d13; padding-bottom:8px; margin-bottom:20px; flex-wrap:wrap; gap:10px;">
+                        <h3 style="font-family:'Barlow'; font-size:24px; font-weight:700; color:#1b212f; margin:0;">
+                            Full Technical Specifications &amp; Working Parameters
+                        </h3>
+                        <button type="button" onclick="printMachineSpecSheet()" class="theme-btn btn-style-two" style="padding:6px 16px; font-size:12.5px; border-color:#cbd5e1;">
+                            <i class="fa fa-print"></i> Print Datasheet
+                        </button>
+                    </div>
 
-                    <table class="table table-bordered table-striped" style="font-size:14px;">
-                        <tbody id="pdp-specs-tbody">
-                            <tr><th style="width:35%;">Capacity / Tonnage</th><td>200 Metric Tons</td></tr>
-                            <tr><th>Stroke Length</th><td>250 mm</td></tr>
-                            <tr><th>Operating Speed</th><td>25 to 45 strokes per minute (variable)</td></tr>
-                            <tr><th>Die Height (Shut Height)</th><td>410 mm</td></tr>
-                            <tr><th>Slide Area Dimensions</th><td>1,750 x 700 mm</td></tr>
-                            <tr><th>Bolster Bed Area</th><td>2,000 x 600 mm</td></tr>
-                            <tr><th>Main Drive Motor</th><td>20 HP x 4P (380V/415V, 50Hz)</td></tr>
-                            <tr><th>Pneumatic Die Cushion</th><td>14 Tons capacity (640 x 440 mm pad)</td></tr>
-                            <tr><th>Clutch & Brake Configuration</th><td>Wet Pneumatic Clutch (OMPI Compatible)</td></tr>
-                            <tr><th>Lubrication System</th><td>Automatic Centralized Recirculating Oil Lubrication</td></tr>
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped" style="font-size:14px;">
+                            <tbody id="pdp-specs-tbody">
+                                <tr><th style="width:35%;">Capacity / Tonnage</th><td>200 Metric Tons</td></tr>
+                                <tr><th>Stroke Length</th><td>250 mm</td></tr>
+                                <tr><th>Operating Speed</th><td>25 to 45 strokes per minute (variable)</td></tr>
+                                <tr><th>Die Height (Shut Height)</th><td>410 mm</td></tr>
+                                <tr><th>Slide Area Dimensions</th><td>1,750 x 700 mm</td></tr>
+                                <tr><th>Bolster Bed Area</th><td>2,000 x 600 mm</td></tr>
+                                <tr><th>Main Drive Motor</th><td>20 HP x 4P (380V/415V, 50Hz)</td></tr>
+                                <tr><th>Pneumatic Die Cushion</th><td>14 Tons capacity (640 x 440 mm pad)</td></tr>
+                                <tr><th>Clutch & Brake Configuration</th><td>Wet Pneumatic Clutch (OMPI Compatible)</td></tr>
+                                <tr><th>Lubrication System</th><td>Automatic Centralized Recirculating Oil Lubrication</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Direct RFQ Box for this Machine -->
+            <div class="row" style="margin-top:35px;">
+                <div class="col-12">
+                    <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:30px; box-shadow:0 4px 14px rgba(0,0,0,0.03);">
+                        <div id="pdp-inquiry-toast-slot"></div>
+                        <h4 style="font-family:'Barlow',sans-serif; font-size:22px; font-weight:700; color:#1e293b; margin-bottom:6px;">
+                            Request Quotation &amp; High Seas CIF Pricing for this Machine
+                        </h4>
+                        <p style="font-size:13.5px; color:#64748b; margin-bottom:20px;">
+                            Direct inquiry saved to our official system. Mr. Vinit Dalal will review and respond with comprehensive commercial terms within 2 hours.
+                        </p>
+                        <form id="pdp-quick-rfq-form" onsubmit="event.preventDefault(); submitPdpQuickRfq();">
+                            <div class="row">
+                                <div class="col-md-3 col-sm-6" style="margin-bottom:12px;">
+                                    <label style="font-size:12px; font-weight:700; color:#475569;">Your Name *</label>
+                                    <input type="text" id="pdp-rfq-name" class="form-control" placeholder="Full Name" required>
+                                </div>
+                                <div class="col-md-3 col-sm-6" style="margin-bottom:12px;">
+                                    <label style="font-size:12px; font-weight:700; color:#475569;">Company Name *</label>
+                                    <input type="text" id="pdp-rfq-company" class="form-control" placeholder="Company / Plant" required>
+                                </div>
+                                <div class="col-md-3 col-sm-6" style="margin-bottom:12px;">
+                                    <label style="font-size:12px; font-weight:700; color:#475569;">Phone / WhatsApp *</label>
+                                    <input type="tel" id="pdp-rfq-phone" class="form-control" placeholder="+91 98XXXXXXXX" required>
+                                </div>
+                                <div class="col-md-3 col-sm-6" style="margin-bottom:12px;">
+                                    <label style="font-size:12px; font-weight:700; color:#475569;">Official Email *</label>
+                                    <input type="email" id="pdp-rfq-email" class="form-control" placeholder="email@company.com" required>
+                                </div>
+                            </div>
+                            <div style="margin-top:8px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+                                <div style="font-size:12px; color:#64748b;">
+                                    <i class="fa fa-lock" style="color:#10b981;"></i> 100% Secure Enterprise RFQ. Dual Email &amp; WhatsApp Notification.
+                                </div>
+                                <button type="submit" class="theme-btn btn-style-one" style="background:#f89d13; color:#111; font-weight:700; padding:10px 28px;">
+                                    Submit Official RFQ &rarr;
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Similar / Alternative Machinery Recommendations -->
+            <div class="row" style="margin-top:50px;">
+                <div class="col-12">
+                    <div style="border-bottom:2px solid #e2e8f0; padding-bottom:10px; margin-bottom:25px;">
+                        <span style="font-family:'Rajdhani'; font-size:14px; font-weight:700; color:#f89d13; text-transform:uppercase; letter-spacing:1px;">Related Stock</span>
+                        <h3 style="font-family:'Barlow'; font-size:24px; font-weight:800; color:#1b212f; margin:4px 0 0;">
+                            Recommended Alternative Presses in Stock
+                        </h3>
+                    </div>
+                    <div class="row clearfix" id="pdp-recommendations-row">
+                        <!-- Populated by JavaScript -->
+                    </div>
                 </div>
             </div>
 
         </div>
     </section>
+
+    <!-- Inspection Booking Modal -->
+    <div class="modal fade" id="inspectionModal" tabindex="-1" role="dialog" aria-labelledby="inspectionModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="border-radius:10px; overflow:hidden; border:none; box-shadow:0 20px 40px rgba(0,0,0,0.2);">
+          <div class="modal-header" style="background:#1b212f; color:#fff; padding:18px 24px;">
+            <h5 class="modal-title" id="inspectionModalLabel" style="font-family:'Barlow',sans-serif; font-weight:700; font-size:20px; color:#fff; margin:0;">
+              <i class="fa fa-calendar-check-o" style="color:#f89d13; margin-right:8px;"></i> Book On-Site Yard Trial
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:#fff; opacity:0.8;">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" style="padding:24px;">
+            <p style="font-size:13.5px; color:#64748b; margin-bottom:16px;">
+              Visit our Pune Machinery Yard for a live trial under power. Foundation blueprints and geometric alignment testing provided.
+            </p>
+            <form id="yard-inspection-form" onsubmit="event.preventDefault(); submitYardInspection();">
+              <div class="form-group" style="margin-bottom:12px;">
+                <label style="font-size:12px; font-weight:700; color:#1e293b; margin-bottom:4px;">Your Full Name *</label>
+                <input type="text" id="insp-name" class="form-control" placeholder="e.g. Rajesh Sharma" required>
+              </div>
+              <div class="form-group" style="margin-bottom:12px;">
+                <label style="font-size:12px; font-weight:700; color:#1e293b; margin-bottom:4px;">Company / Forging Plant Name *</label>
+                <input type="text" id="insp-company" class="form-control" placeholder="e.g. Apex Forgings Pvt. Ltd." required>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group" style="margin-bottom:12px;">
+                    <label style="font-size:12px; font-weight:700; color:#1e293b; margin-bottom:4px;">Mobile / WhatsApp *</label>
+                    <input type="tel" id="insp-phone" class="form-control" placeholder="+91 98XXXXXXXX" required>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group" style="margin-bottom:12px;">
+                    <label style="font-size:12px; font-weight:700; color:#1e293b; margin-bottom:4px;">Preferred Visit Date</label>
+                    <input type="date" id="insp-date" class="form-control">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group" style="margin-bottom:18px;">
+                <label style="font-size:12px; font-weight:700; color:#1e293b; margin-bottom:4px;">Inspection Notes (Optional)</label>
+                <textarea id="insp-notes" class="form-control" rows="2" placeholder="e.g. Inspect clutch engagement, ram parallelism, run dry stroke"></textarea>
+              </div>
+              <button type="submit" class="theme-btn btn-style-one btn-block" style="background:#f89d13; color:#111; font-weight:700; padding:12px;">
+                <i class="fa fa-check-circle"></i> Confirm Inspection Booking
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Main Footer -->
     <footer class="main-footer">
@@ -326,10 +463,10 @@
                             <img src="images/logo-dalal-light.png" alt="Dalal Machine Tools Agency Pvt. Ltd." style="height: 44px; width: auto; max-height: 44px; display: block;">
                         </a>
                     </div>
-                    <p style="font-size:14px; line-height:1.7; color:#94a3b8; margin-bottom:20px;">
-                        Dalal Machine Tools Agency Pvt. Ltd. is one of India's premier dealers in quality second-hand metal forming presses and heavy machine tools.
+                    <p style="font-size:14.5px; line-height:1.7; color:#e2e8f0; margin-bottom:20px;">
+                        Dalal Machine Tools Agency Pvt. Ltd. is one of India's premier importers and dealers of quality second-hand forging equipment, mechanical stamping presses, and heavy CNC cutting machine tools.
                     </p>
-                    <div style="color:#cbd5e1; font-size:14px;"><strong>Managing Director:</strong> Mr. Vinit Dalal</div>
+                    <div style="color:#f1f5f9; font-size:14px;"><strong>Managing Director:</strong> Mr. Vinit Dalal</div>
                     <div class="footer-social-box">
                         <span class="footer-social-label">Follow Us:</span>
                         <div class="footer-social-links">
@@ -342,31 +479,42 @@
                 <div class="col-lg-2 col-md-6 col-sm-12" style="margin-bottom:30px;">
                     <h4 style="font-family:'Barlow'; font-size:18px; font-weight:700; color:#fff; margin-bottom:18px; border-bottom:2px solid #f89d13; display:inline-block; padding-bottom:5px;">Navigation</h4>
                     <ul style="list-style:none; padding:0; margin:0; line-height:2.2; font-size:14px;">
-                        <li><a href="index.html" style="color:#94a3b8; text-decoration:none;">Home</a></li>
-                        <li><a href="about.html" style="color:#94a3b8; text-decoration:none;">About Company</a></li>
-                        <li><a href="services.html" style="color:#94a3b8; text-decoration:none;">Services & High Seas</a></li>
-                        <li><a href="category.html" style="color:#94a3b8; text-decoration:none;">Machine Catalog</a></li>
-                        <li><a href="gallery.html" style="color:#94a3b8; text-decoration:none;">Shipment Gallery</a></li>
-                        <li><a href="contact.html" style="color:#94a3b8; text-decoration:none;">Contact Us</a></li>
+                        <li><a href="index.html" style="color:#cbd5e1; text-decoration:none;">Home</a></li>
+                        <li><a href="about.html" style="color:#cbd5e1; text-decoration:none;">About Company</a></li>
+                        <li><a href="services.html" style="color:#cbd5e1; text-decoration:none;">High Seas Sales</a></li>
+                        <li><a href="category.html" style="color:#cbd5e1; text-decoration:none;">Machine Catalog</a></li>
+                        <li><a href="brand-new-machinery.html" style="color:#cbd5e1; text-decoration:none;">Brand New Machinery</a></li>
+                        <li><a href="gallery.html" style="color:#cbd5e1; text-decoration:none;">Shipment Gallery</a></li>
+                        <li><a href="contact.html" style="color:#cbd5e1; text-decoration:none;">Contact Us</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12" style="margin-bottom:30px;">
                     <h4 style="font-family:'Barlow'; font-size:18px; font-weight:700; color:#fff; margin-bottom:18px; border-bottom:2px solid #f89d13; display:inline-block; padding-bottom:5px;">Top Categories</h4>
                     <ul style="list-style:none; padding:0; margin:0; line-height:2.2; font-size:14px;">
-                        <li><a href="category.html?category=c-frame-press" style="color:#94a3b8; text-decoration:none;">C-Frame Presses</a></li>
-                        <li><a href="category.html?category=hot-forging-press" style="color:#94a3b8; text-decoration:none;">Hot Forging Presses</a></li>
-                        <li><a href="category.html?category=knuckle-joint-press" style="color:#94a3b8; text-decoration:none;">Knuckle Joint Presses</a></li>
-                        <li><a href="category.html?location=pune" style="color:#94a3b8; text-decoration:none;">Pune Warehouse Stock</a></li>
+                        <li><a href="category.html?category=c-frame-press" style="color:#cbd5e1; text-decoration:none;">C-Frame Presses (80T - 250T)</a></li>
+                        <li><a href="category.html?category=hot-forging-press" style="color:#cbd5e1; text-decoration:none;">Hot Forging Presses (up to 6300T)</a></li>
+                        <li><a href="category.html?category=knuckle-joint-press" style="color:#cbd5e1; text-decoration:none;">Knuckle Joint Coining Presses</a></li>
+                        <li><a href="category.html?section=cutting" style="color:#cbd5e1; text-decoration:none;">Horizontal Boring Machines</a></li>
+                        <li><a href="category.html?location=pune" style="color:#cbd5e1; text-decoration:none;">Pune Warehouse Stock</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12" style="margin-bottom:30px;">
                     <h4 style="font-family:'Barlow'; font-size:18px; font-weight:700; color:#fff; margin-bottom:18px; border-bottom:2px solid #f89d13; display:inline-block; padding-bottom:5px;">Registered Office</h4>
-                    <p style="font-size:14px; line-height:1.6; color:#94a3b8;">
-                        <i class="fa fa-building" style="color:#f89d13;"></i> C-10, 3rd Floor, Commerce Centre, 78, Tardeo Main Road, Mumbai - 400034, India.
+                    <p style="font-size:14.5px; line-height:1.6; color:#e2e8f0; margin-bottom:10px;">
+                        <i class="fa fa-building" style="color:#f89d13;"></i> C-10, 3rd Floor, Commerce Centre, 78, Tardeo Main Road, Mumbai - 400034, Maharashtra, India.
                     </p>
-                    <p style="font-size:14px; color:#94a3b8;">
-                        <i class="fa fa-phone" style="color:#f89d13;"></i> +91-22-67439873 / +91 9821232131
+                    <p style="font-size:14.5px; color:#e2e8f0; margin-bottom:8px;">
+                        <i class="fa fa-phone" style="color:#f89d13;"></i> <a href="tel:+919821232131" style="color:#e2e8f0; text-decoration:none;">+91-22-67439873 / +91 9821232131</a>
                     </p>
+                    <p style="font-size:14.5px; color:#e2e8f0; margin-bottom:8px;">
+                        <i class="fa fa-envelope" style="color:#f89d13;"></i> <a href="mailto:dalalmachine@gmail.com" style="color:#e2e8f0; text-decoration:none;">dalalmachine@gmail.com</a>
+                    </p>
+                    <p style="font-size:13.5px; line-height:1.5; color:#f1f5f9; margin-bottom:12px;">
+                        <i class="fa fa-map-marker" style="color:#f89d13;"></i> <strong>Stockyard:</strong> Pune Industrial Machinery Yard
+                    </p>
+                    <div style="font-size:13.5px; color:#ffd54f;">
+                        <strong>Technical Partner:</strong> OMPI India LLP
+                    </div>
                 </div>
             </div>
                         <!-- Bottom Bar -->
@@ -479,30 +627,202 @@ function switchMainImage(thumb) {
                 }).join('');
             }
         }
+        // Populate Recommendations
+        populateRecommendations(item);
     }
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const mId = urlParams.get('id');
-    if (mId) {
-        let foundItem = null;
-        if (typeof DALAL_MACHINES !== 'undefined') {
-            foundItem = DALAL_MACHINES.find(m => m.id.toLowerCase() === mId.toLowerCase());
+    function populateRecommendations(currentItem) {
+        const row = document.getElementById('pdp-recommendations-row');
+        if (!row || typeof DALAL_MACHINES === 'undefined') return;
+
+        // Find alternatives: same section or category, excluding current
+        let alts = DALAL_MACHINES.filter(m => m.id !== currentItem.id && (m.category === currentItem.category || m.section === currentItem.section));
+        if (alts.length < 3) {
+            alts = DALAL_MACHINES.filter(m => m.id !== currentItem.id);
         }
-        if (foundItem) {
-            populatePDP(foundItem);
-        } else if (typeof fetch !== 'undefined') {
-            // Live API fetch for newly added custom machines
-            fetch(`/api/products/${mId}`)
-                .then(r => r.json())
-                .then(data => {
-                    if (data.success && data.product) {
-                        populatePDP(data.product);
-                    }
-                })
-                .catch(() => {});
+        const selected = alts.slice(0, 3);
+
+        row.innerHTML = selected.map(m => {
+            const rawImg = m.image || 'images/dalal/cframe_press_pune.jpg';
+            const thumbWebp = rawImg.replace(/\.(jpe?g|png)$/i, '_thumb.webp');
+            const thumbJpg = rawImg.replace(/\.(jpe?g|png)$/i, '_thumb.jpg');
+            const isPune = (m.location || '').toLowerCase().includes('pune');
+            const locIcon = isPune ? '<span class="live-radar-dot"></span>' : '<i class="fa fa-map-marker"></i>';
+            return `
+                <div class="col-lg-4 col-md-6 col-sm-12" style="margin-bottom:25px;">
+                    <div class="machine-item-card" style="box-shadow:0 4px 15px rgba(0,0,0,0.05);">
+                        <div class="machine-thumb-box" style="height:200px; position:relative; overflow:hidden;">
+                            <img src="${thumbWebp}" onerror="this.onerror=null; this.src='${thumbJpg}';" alt="${m.name}" style="width:100%; height:100%; object-fit:cover;">
+                            <span class="machine-location-pill" style="position:absolute; bottom:10px; left:10px; font-size:11px; padding:3px 8px; border-radius:4px; background:rgba(27,33,47,0.9); color:#fff;">
+                                ${locIcon} ${m.location}
+                            </span>
+                        </div>
+                        <div style="padding:18px;">
+                            <span style="font-size:11.5px; font-weight:700; color:#f89d13; text-transform:uppercase;">${m.categoryName || 'Press'}</span>
+                            <h4 style="font-size:16px; font-weight:700; color:#1e293b; margin:6px 0 10px; line-height:1.3;">
+                                <a href="product.html?id=${m.id}" style="color:#1e293b; text-decoration:none;">${m.name}</a>
+                            </h4>
+                            <div style="font-size:12.5px; color:#64748b; margin-bottom:14px;">
+                                <strong>Make:</strong> ${m.make} &bull; <strong>Capacity:</strong> ${m.tonnage > 0 ? m.tonnage + 'T' : 'Standard'}
+                            </div>
+                            <a href="product.html?id=${m.id}" class="theme-btn btn-style-one" style="padding:8px 16px; font-size:12px; background:#1b212f; color:#fff; font-weight:700; display:block; text-align:center;">
+                                View Full Specs &rarr;
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    // Print Branded Technical Datasheet
+    function printMachineSpecSheet() {
+        const title = document.getElementById('pdp-title')?.textContent || 'Technical Specification Sheet';
+        const idTag = document.getElementById('pdp-id-tag')?.textContent || '';
+        const specsHtml = document.getElementById('pdp-specs-tbody')?.innerHTML || '';
+        const make = document.getElementById('pdp-make')?.textContent || '';
+        const model = document.getElementById('pdp-model')?.textContent || '';
+        const year = document.getElementById('pdp-year')?.textContent || '';
+        const tonnage = document.getElementById('pdp-tonnage')?.textContent || '';
+        const loc = document.getElementById('pdp-loc')?.textContent || '';
+
+        const printWindow = window.open('', '_blank', 'width=850,height=900');
+        printWindow.document.write(`
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>${title} - Dalal Machine Tools Technical Datasheet</title>
+                <style>
+                    body { font-family: 'Segoe UI', Arial, sans-serif; color: #1e293b; padding: 30px; margin: 0; }
+                    .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #f89d13; padding-bottom: 15px; margin-bottom: 25px; }
+                    .logo-text { font-size: 22px; font-weight: 800; color: #1b212f; }
+                    .logo-sub { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #64748b; }
+                    .contact { text-align: right; font-size: 12px; color: #475569; line-height: 1.5; }
+                    h1 { font-size: 22px; color: #1b212f; margin: 0 0 8px; }
+                    .badge { display: inline-block; background: #10b981; color: #fff; padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 700; }
+                    .meta-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 14px; margin: 18px 0 25px; font-size: 13px; }
+                    .meta-item strong { display: block; font-size: 11px; text-transform: uppercase; color: #64748b; }
+                    table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 15px; }
+                    th, td { border: 1px solid #cbd5e1; padding: 9px 12px; text-align: left; }
+                    th { background: #f1f5f9; width: 40%; font-weight: 700; color: #1e293b; }
+                    .footer { margin-top: 40px; border-top: 1px solid #e2e8f0; padding-top: 15px; font-size: 11px; color: #64748b; text-align: center; }
+                </style>
+            </head>
+            <body>
+                <div class="header">
+                    <div>
+                        <div class="logo-text">DALAL MACHINE TOOLS AGENCY PVT. LTD.</div>
+                        <div class="logo-sub">Heavy Metal Working &amp; Forging Press Specialist</div>
+                    </div>
+                    <div class="contact">
+                        Commerce Centre, Tardeo, Mumbai - 400034<br>
+                        Phone: +91 9821232131 | dalalmachine@gmail.com
+                    </div>
+                </div>
+
+                <h1>${title}</h1>
+                <div class="badge">${idTag}</div>
+
+                <div class="meta-grid">
+                    <div class="meta-item"><strong>Make:</strong> ${make}</div>
+                    <div class="meta-item"><strong>Model:</strong> ${model}</div>
+                    <div class="meta-item"><strong>Year:</strong> ${year}</div>
+                    <div class="meta-item"><strong>Capacity:</strong> ${tonnage}</div>
+                    <div class="meta-item"><strong>Location:</strong> ${loc}</div>
+                    <div class="meta-item"><strong>Terms:</strong> High Seas Sales (INR)</div>
+                </div>
+
+                <h3>Full Engineering Specifications</h3>
+                <table>
+                    <tbody>
+                        ${specsHtml}
+                    </tbody>
+                </table>
+
+                <div class="footer">
+                    Inspection under live power arranged upon request. Subject to prior sale.<br>
+                    Official Document Generated by Dalal Machine Tools Agency Pvt. Ltd. &copy; 2026
+                </div>
+            </body>
+            </html>
+        `);
+        printWindow.document.close();
+        printWindow.focus();
+        setTimeout(() => { printWindow.print(); }, 500);
+    }
+
+    // Submit PDP Quick RFQ
+    function submitPdpQuickRfq() {
+        const name = document.getElementById('pdp-rfq-name').value.trim();
+        const company = document.getElementById('pdp-rfq-company').value.trim();
+        const phone = document.getElementById('pdp-rfq-phone').value.trim();
+        const email = document.getElementById('pdp-rfq-email').value.trim();
+        const machineTitle = document.getElementById('pdp-title')?.textContent || 'Machinery';
+        const machineId = document.getElementById('pdp-id-tag')?.textContent || 'P00031';
+
+        if (window.handleUnifiedInquiry) {
+            window.handleUnifiedInquiry({
+                name,
+                company,
+                phone,
+                email,
+                machineId,
+                machineName: machineTitle,
+                message: `Requesting CIF commercial quote and power test records for ${machineTitle} (${machineId})`
+            }, 'pdp-inquiry-toast-slot');
+            document.getElementById('pdp-quick-rfq-form').reset();
         }
     }
-});
+
+    // Submit Yard Inspection Request
+    function submitYardInspection() {
+        const name = document.getElementById('insp-name').value.trim();
+        const company = document.getElementById('insp-company').value.trim();
+        const phone = document.getElementById('insp-phone').value.trim();
+        const date = document.getElementById('insp-date').value;
+        const notes = document.getElementById('insp-notes').value.trim();
+        const machineTitle = document.getElementById('pdp-title')?.textContent || 'Machinery';
+        const machineId = document.getElementById('pdp-id-tag')?.textContent || 'P00031';
+
+        if (window.handleUnifiedInquiry) {
+            window.handleUnifiedInquiry({
+                name,
+                company,
+                phone,
+                email: 'inspection@dalalmachine.in',
+                machineId,
+                machineName: machineTitle,
+                message: `[ON-SITE YARD TRIAL REQUEST] Preferred Date: ${date || 'Earliest available'}. Notes: ${notes || 'General inspection under power.'}`
+            }, 'pdp-inquiry-toast-slot');
+            $('#inspectionModal').modal('hide');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const mId = urlParams.get('id');
+        let currentItem = null;
+        if (mId && typeof DALAL_MACHINES !== 'undefined') {
+            currentItem = DALAL_MACHINES.find(m => m.id.toLowerCase() === mId.toLowerCase());
+        }
+        if (currentItem) {
+            populatePDP(currentItem);
+        } else if (typeof DALAL_MACHINES !== 'undefined' && DALAL_MACHINES.length > 0) {
+            // Default to first machine
+            populatePDP(DALAL_MACHINES[0]);
+        }
+    });
 </script>
+
+<!-- Mobile Sticky Action Bar -->
+<div class="mobile-sticky-bar" aria-label="Mobile Contact Bar">
+    <a href="tel:+919821232131" class="mobile-sticky-btn call-btn">
+        <i class="fa fa-phone"></i> Call (+91 9821232131)
+    </a>
+    <a href="https://wa.me/919821232131?text=Hello%20Mr.%20Vinit%20Dalal,%20I%20have%20an%20urgent%20machinery%20inquiry." target="_blank" class="mobile-sticky-btn wa-btn">
+        <i class="fa fa-whatsapp"></i> Instant WhatsApp
+    </a>
+</div>
+
 </body>
 </html>

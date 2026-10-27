@@ -10,6 +10,7 @@
   <link rel="shortcut icon" href="/new/dalalmachine/images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="/new/dalalmachine/css/font-awesome.css">
   <link rel="stylesheet" href="css/admin.css?v=2.2">
+  <link rel="stylesheet" href="css/admin-ai.css?v=1.0">
 </head>
 <body>
 
@@ -320,6 +321,9 @@
                   <option value="quoted" ${i.status === 'quoted' ? 'selected' : ''}>QUOTATION SENT</option>
                   <option value="closed" ${i.status === 'closed' ? 'selected' : ''}>CLOSED / WON</option>
                 </select>
+                <button type="button" class="btn-sm" style="margin-top: 6px; background: rgba(248,157,19,0.12); color: #b45309; border: 1px solid rgba(248,157,19,0.3); border-radius: 4px; font-weight: 700; font-size: 11px; cursor: pointer; padding: 4px 6px; width: 100%; display: flex; align-items: center; justify-content: center; gap: 4px;" onclick='handleAIInquiryClick("${esc(i.id)}")'>
+                  <i class="fa fa-magic"></i> AI Score &amp; Reply
+                </button>
               </td>
             </tr>
           `;
@@ -413,6 +417,14 @@
         AdminCore.toast(res.message || 'Status update failed', 'error');
       }
     }
+
+    function handleAIInquiryClick(id) {
+      const inq = allInquiries.find(i => i.id === id);
+      if (inq && window.openAIInquiryAnalysis) {
+        window.openAIInquiryAnalysis(inq);
+      }
+    }
   </script>
+  <script src="js/admin-ai.js?v=1.0"></script>
 </body>
 </html>
