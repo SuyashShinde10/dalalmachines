@@ -21,11 +21,14 @@
         });
     }
     
-    // Instant Non-Blocking Preloader Release
+    // Smooth Brand Logo Preloader Release with Fade-Out
     function handlePreloader() {
         var $pre = $('.preloader');
-        if ($pre.length) {
-            $pre.removeClass('nav-transitioning').addClass('loaded').hide();
+        if ($pre.length && !$pre.hasClass('loaded')) {
+            $pre.addClass('loaded');
+            setTimeout(function() {
+                $pre.hide();
+            }, 400);
         }
     }
 
@@ -67,14 +70,19 @@
         $('body').append(html);
     }
 
-    // Immediate execution on DOM ready - Zero artificial delay
+    // DOM ready - Show branded logo for a brief polished moment, then smoothly fade out
     $(document).ready(function() {
-        handlePreloader();
+        setTimeout(function() {
+            handlePreloader();
+        }, 400);
         initInstantNavigationPrefetch();
         initFloatingWhatsApp();
     });
-    // Instant fallback
-    handlePreloader();
+
+    // Safety fallback: Never trap the user even on slow network
+    setTimeout(function() {
+        handlePreloader();
+    }, 1200);
 
     //Update Header Style and Scroll to Top
     function headerStyle() {

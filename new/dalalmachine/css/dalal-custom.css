@@ -1865,10 +1865,26 @@ h1, h2, h3, h4, h5, h6, .sec-title h2, .main-header .navigation > li > a {
 
 /* ====================================================================
    Dalal Brand Logo Preloader (Clean Enterprise Light Theme)
-   Active on Initial Load & Page-to-Page Navigation
+   Active on Initial Load with Smooth Fade-Out
 ==================================================================== */
 .preloader {
-  display: none !important;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 9999999;
+  background-color: #ffffff !important;
+  background-image: none !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.preloader.loaded {
   opacity: 0 !important;
   visibility: hidden !important;
   pointer-events: none !important;
