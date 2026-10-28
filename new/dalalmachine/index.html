@@ -12,7 +12,7 @@
   <link href="css/font-awesome.css" rel="stylesheet">
   <link href="css/flaticon.css" rel="stylesheet">
   <link href="css/owl.css" rel="stylesheet">
-  <link href="css/dalal-custom.css?v=5.2" rel="stylesheet">
+  <link href="css/dalal-custom.css?v=5.6" rel="stylesheet">
   
   <!-- Favicon -->
   <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
@@ -1858,33 +1858,71 @@
         </div>
     </section>
 
-    <!-- Pune Stockyard Inspection Invitation Banner -->
-    <section style="padding: 20px 0 70px; background: #ffffff;">
-        <div class="auto-container">
-            <div class="stockyard-invite-banner">
-                <div class="row align-items-center" style="padding: 0 40px;">
-                    <div class="col-lg-8 col-md-12">
-                        <span style="color:#f89d13; font-family:'Rajdhani'; font-size:14px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;">
-                            Physical Machine Stockyard
-                        </span>
-                        <h3 style="font-family:'Barlow'; font-size:32px; font-weight:800; color:#ffffff; margin:6px 0 14px;">
-                            Inspect Machinery Under Live Power at Our Pune Yard
-                        </h3>
-                        <p style="font-size:15px; color:#cbd5e1; line-height:1.7; max-width:680px; margin-bottom:18px;">
-                            Bring your engineering directors and technicians for live trials on mechanical C-Frame presses (80T - 250T) and coining equipment. Equipped with 50-ton overhead EOT cranes and continuous industrial power.
-                        </p>
-                        <div style="display:flex; gap:20px; flex-wrap:wrap; font-size:13px; color:#ffd54f;">
-                            <span><i class="fa fa-map-marker"></i> Pune-Mumbai Expressway Corridor</span>
-                            <span><i class="fa fa-clock-o"></i> Mon – Sat: 9:30 AM – 6:30 PM</span>
-                            <span><i class="fa fa-bolt"></i> Live Power Cycling Ready</span>
+    <!-- Pune Stockyard Inspection Invitation (Integrated with React Bits <ScrollExpand /> Component) -->
+    <section class="scroll-expand-section" id="pune-stockyard-section" aria-label="Physical Machine Stockyard Tour">
+        <div class="scroll-expand" id="stockyard-scroll-expand" data-scroll-expand="true">
+            <div class="scroll-expand__track">
+                <div class="scroll-expand__stage">
+                    
+                    <!-- Expanding Media Frame with Smooth Clip-Path -->
+                    <div class="scroll-expand__frame">
+                        <picture>
+                            <source srcset="images/dalal/cframe_press_pune.webp" type="image/webp">
+                            <img class="scroll-expand__media" src="images/dalal/cframe_press_pune.jpg" alt="Pune Warehouse Machinery Stockyard" draggable="false">
+                        </picture>
+                        <div class="scroll-expand__scrim"></div>
+                        
+                        <!-- Full Content Overlay (Fades in as frame expands) -->
+                        <div class="scroll-expand__overlay">
+                            <div class="stockyard-expanded-content">
+                                <span class="stockyard-tagline">
+                                    <i class="fa fa-industry"></i> Physical Machine Stockyard
+                                </span>
+                                <h2 class="stockyard-heading">
+                                    Inspect Machinery Under Live Power at Our Pune Yard
+                                </h2>
+                                <p class="stockyard-description">
+                                    Bring your engineering directors and technicians for live trials on mechanical C-Frame presses (80T - 250T) and coining equipment. Equipped with 50-ton overhead EOT cranes and continuous industrial power.
+                                </p>
+                                <div class="stockyard-specs-grid">
+                                    <div class="stockyard-spec-item">
+                                        <i class="fa fa-map-marker"></i>
+                                        <span>Pune-Mumbai Expressway Corridor</span>
+                                    </div>
+                                    <div class="stockyard-spec-item">
+                                        <i class="fa fa-clock-o"></i>
+                                        <span>Mon – Sat: 9:30 AM – 6:30 PM</span>
+                                    </div>
+                                    <div class="stockyard-spec-item">
+                                        <i class="fa fa-bolt"></i>
+                                        <span>Live Power Cycling Ready</span>
+                                    </div>
+                                </div>
+                                <div class="stockyard-actions">
+                                    <a href="https://wa.me/919821232131?text=Hello%20Mr.%20Vinit%20Dalal,%20I%20would%20like%20to%20schedule%20a%20site%20visit%20at%20your%20Pune%20Stockyard." 
+                                       target="_blank" class="stockyard-btn-whatsapp">
+                                        <i class="fa fa-whatsapp"></i> Book Yard Visit on WhatsApp
+                                    </a>
+                                    <a href="tel:+919821232131" class="stockyard-btn-call">
+                                        <i class="fa fa-phone"></i> Call Mr. Vinit Dalal
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-12 text-lg-right text-left" style="margin-top:25px;">
-                        <a href="https://wa.me/919821232131?text=Hello%20Mr.%20Vinit%20Dalal,%20I%20would%20like%20to%20schedule%20a%20site%20visit%20at%20your%20Pune%20Stockyard." 
-                           target="_blank" class="theme-btn btn-style-one" style="padding:14px 28px; background:#f89d13; color:#111; font-weight:700; font-size:14.5px; display:inline-flex; align-items:center; justify-content:center; gap:10px;">
-                            <i class="fa fa-calendar" style="font-size:16px; margin-right:4px;"></i> <span>Book Yard Visit on WhatsApp</span>
-                        </a>
+
+                    <!-- Resting Pre-Scroll Title (Lifts away as frame expands) -->
+                    <div class="scroll-expand__title">
+                        <div class="stockyard-resting-card">
+                            <div class="stockyard-resting-badge">
+                                <span class="pulse-indicator"></span> Physical Machine Stockyard
+                            </div>
+                            <h3 class="stockyard-resting-heading">Inspect Machinery Under Live Power at Our Pune Yard</h3>
+                            <p class="stockyard-resting-sub">Mechanical C-Frame presses (80T - 250T) & coining lines standing ready</p>
+                        </div>
                     </div>
+
+
                 </div>
             </div>
         </div>
@@ -1990,6 +2028,7 @@
 <script src="js/script.js"></script>
 <script src="js/catalog-data.js?v=2.9"></script>
 <script src="js/catalog-app.js?v=3.1"></script>
+<script src="js/scroll-expand.js?v=2.0"></script>
 <script>
 $(document).ready(function() {
     if ($('.main-slider-carousel').length && typeof $.fn.owlCarousel !== 'undefined') {
@@ -2005,6 +2044,41 @@ $(document).ready(function() {
                 navText: ['<span class="fa fa-angle-left"></span>', '<span class="fa fa-angle-right"></span>']
             });
         }
+    }
+
+    // High-Precision 3D Micro-Tilt on Mousemove for 4-Pillars Cards
+    var pillarCards = document.querySelectorAll('.pillar-card');
+    if (pillarCards.length && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        pillarCards.forEach(function(card) {
+            var isHovered = false;
+            var rAF = null;
+
+            card.addEventListener('mouseenter', function() {
+                isHovered = true;
+            });
+
+            card.addEventListener('mousemove', function(e) {
+                if (!isHovered) return;
+                if (rAF) cancelAnimationFrame(rAF);
+
+                rAF = requestAnimationFrame(function() {
+                    var rect = card.getBoundingClientRect();
+                    var x = e.clientX - rect.left;
+                    var y = e.clientY - rect.top;
+                    var centerX = rect.width / 2;
+                    var centerY = rect.height / 2;
+                    var rotateX = ((y - centerY) / centerY) * -5.5; // smooth subtle tilt
+                    var rotateY = ((x - centerX) / centerX) * 5.5;
+                    card.style.transform = 'translateY(-12px) scale(1.025) perspective(850px) rotateX(' + rotateX.toFixed(2) + 'deg) rotateY(' + rotateY.toFixed(2) + 'deg)';
+                });
+            });
+
+            card.addEventListener('mouseleave', function() {
+                isHovered = false;
+                if (rAF) cancelAnimationFrame(rAF);
+                card.style.transform = '';
+            });
+        });
     }
 });
 </script>
