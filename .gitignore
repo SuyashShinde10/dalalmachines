@@ -31,6 +31,9 @@ package-lock.json
 
 # Database temporary files & uploads
 server/data/db.json.tmp
+server/data/*.tmp
+server/data/security_events.json
+server/data/blacklist.json
 server/data/uploads/*
 !server/data/uploads/.gitkeep
 

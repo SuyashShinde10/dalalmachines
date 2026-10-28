@@ -354,5 +354,68 @@ router.get('/broadcast-banner', (req, res) => {
   }
 });
 
+// 11. Security Shield & Intrusion Defense Endpoints
+const honeypot = require('../security/honeypot');
+const routeShield = require('../security/routeShield');
+
+router.get('/security/status', (req, res) => {
+  try {
+    const stats = honeypot.getSecurityStats();
+    res.json({
+      success: true,
+      lockdownActive: routeShield.getLockdownStatus(),
+      gatewayKey: config.PORTAL_GATEWAY_KEY,
+      gatewayAccessUrl: `/portal-gate?key=${config.PORTAL_GATEWAY_KEY}&to=dev`,
+      allowedDevIps: config.ALLOWED_DEV_IPS,
+      ...stats
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, message: 'Failed to load security status: ' + err.message });
+  }
+});
+
+router.post('/security/unban', (req, res) => {
+  try {
+    const { ip } = req.body || {};
+    if (!ip) return res.status(400).json({ success: false, message: 'IP address is required.' });
+    const unbanned = honeypot.unbanIp(ip);
+    res.json({
+      success: true,
+      message: unbanned ? `IP ${ip} released from firewall blacklist.` : `IP ${ip} was not found in active blacklist.`
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, message: 'Failed to unban IP: ' + err.message });
+  }
+});
+
+router.post('/security/ban', (req, res) => {
+  try {
+    const { ip, reason } = req.body || {};
+    if (!ip) return res.status(400).json({ success: false, message: 'IP address is required.' });
+    honeypot.banIp(ip, reason || 'Manually banned by Lead Developer');
+    res.json({
+      success: true,
+      message: `IP ${ip} added to firewall blacklist.`
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, message: 'Failed to ban IP: ' + err.message });
+  }
+});
+
+router.post('/security/lockdown', (req, res) => {
+  try {
+    const { enabled } = req.body || {};
+    const state = routeShield.togglePortalLockdown(enabled);
+    res.json({
+      success: true,
+      lockdownActive: state,
+      message: state ? 'EMERGENCY LOCKDOWN ENGAGED. All admin/dev routes cloaked as 404.' : 'EMERGENCY LOCKDOWN DISENGAGED. Normal gateway access restored.'
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, message: 'Failed to toggle lockdown: ' + err.message });
+  }
+});
+
 module.exports = router;
+
 

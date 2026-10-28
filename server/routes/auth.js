@@ -91,6 +91,7 @@ router.get('/me', authenticateToken, (req, res) => {
 // POST /api/auth/logout
 router.post('/logout', (req, res) => {
   res.clearCookie('admin_token');
+  res.clearCookie(config.GATEWAY_COOKIE_NAME);
   return res.json({ success: true, message: 'Logged out successfully.' });
 });
 

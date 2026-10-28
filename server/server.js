@@ -20,6 +20,11 @@ const systemRoutes = require('./routes/system');
 const aiRoutes = require('./routes/ai');
 const devRoutes = require('./routes/dev');
 
+// Enterprise SecOps & Concealment Engine
+const honeypot = require('./security/honeypot');
+const gateway = require('./security/gateway');
+const routeShield = require('./security/routeShield');
+
 const app = express();
 
 // 1. Gzip/Brotli Compression & Disable information disclosure
@@ -55,6 +60,33 @@ app.use(cors({
 app.use(express.json({ limit: '20mb' }));
 app.use(express.urlencoded({ extended: true, limit: '20mb' }));
 app.use(cookieParser());
+
+// 4c. SecOps Firewall: Drop traffic from actively blacklisted IPs
+app.use(honeypot.blacklistGuardMiddleware);
+
+// 4d. Authorized Staff Portal Gateway Endpoints (Secret Key Gatekeeper)
+app.get('/portal-gate', gateway.handleGatewayEntry);
+app.post('/portal-gate', gateway.handleGatewayEntry);
+app.get('/portal-exit', gateway.handleGatewayRevoke);
+
+// 4e. Honeypot Deception Traps: Detect & auto-ban scanners probing common attack paths
+const honeypotPatterns = [
+  /^\/wp-(admin|login|includes|content)/i,
+  /^\/administrator/i,
+  /^\/admin\.php/i,
+  /^\/(cpanel|phpmyadmin|pma|mysql|dbadmin)/i,
+  /^\/(\.env|\.git|config\.json|web\.config|xmlrpc\.php)/i,
+  /^\/(actuator|shell|cmd)/i
+];
+app.use((req, res, next) => {
+  const p = req.path.toLowerCase();
+  for (const pattern of honeypotPatterns) {
+    if (pattern.test(p)) {
+      return honeypot.honeypotHandler(req, res);
+    }
+  }
+  next();
+});
 
 // 4b. Enforce Zero-Cache on all Administrative, Developer, & API Portals (Instant Duplex Sync)
 app.use((req, res, next) => {
@@ -141,6 +173,10 @@ app.use((req, res, next) => {
 });
 
 app.use('/uploads', express.static(config.UPLOADS_DIR, staticOptions));
+
+// 6b. Pre-Flight Route Shield: Cloaks /admin, /superadmin, and /dev as HTTP 404 to all unauthorized visitors
+app.use(routeShield.routeShieldMiddleware);
+
 app.use('/admin', express.static(config.ADMIN_DIR, staticOptions));
 app.use('/superadmin', express.static(config.SUPERADMIN_DIR, staticOptions));
 app.use('/dev', express.static(config.DEV_DIR, staticOptions));
@@ -194,6 +230,16 @@ app.get('/api/health', (req, res) => {
     timestamp: new Date().toISOString(),
     uptime: process.uptime()
   });
+});
+
+// 9. Standard 404 Fallback for any unknown path
+app.use((req, res) => {
+  res.status(404);
+  const page404 = path.join(config.PUBLIC_DIR, '404.html');
+  if (fs.existsSync(page404)) {
+    return res.sendFile(page404);
+  }
+  return res.send('404 Not Found');
 });
 
 // Global Error Handler

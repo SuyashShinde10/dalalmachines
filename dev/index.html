@@ -783,10 +783,129 @@
 
         <!-- TAB 5: SecOps & Security Headers -->
         <div id="tab-security" class="tab-section">
+          <!-- SecOps Quick Actions & Gateway Control -->
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:18px; margin-bottom:24px;">
+            <!-- Gateway Pass Card -->
+            <div class="stat-card" style="border-left: 4px solid #10b981;">
+              <div class="stat-top">
+                <span class="stat-label">Staff Portal Gateway Gatekeeper</span>
+                <div class="stat-icon green"><i class="fa fa-key"></i></div>
+              </div>
+              <div class="stat-value" style="font-size: 16px; font-family: 'JetBrains Mono', monospace; color: #065f46;" id="sec-gateway-key">dmta-ops-2026</div>
+              <div class="stat-desc" style="margin-top:8px;">
+                <button type="button" class="btn-primary" style="padding:6px 12px; font-size:12px;" onclick="copyGatewayLink()">
+                  <i class="fa fa-copy"></i> Copy Gateway URL
+                </button>
+                <span id="gateway-copy-feedback" style="font-size:11px; color:#059669; margin-left:8px; display:none;">Copied!</span>
+              </div>
+            </div>
+
+            <!-- Route Cloaking (HTTP 404 Disguise) Card -->
+            <div class="stat-card" style="border-left: 4px solid #3b82f6;">
+              <div class="stat-top">
+                <span class="stat-label">Route Cloaking (Decoy 404)</span>
+                <div class="stat-icon blue"><i class="fa fa-user-secret"></i></div>
+              </div>
+              <div class="stat-value" style="font-size: 16px; color: #1e40af;">ACTIVE &bull; 404 DECOY</div>
+              <div class="stat-desc">Unauthorized visitors hitting /admin or /dev receive standard 404 Not Found</div>
+            </div>
+
+            <!-- Honeypot Defense Engine Card -->
+            <div class="stat-card" style="border-left: 4px solid #f59e0b;">
+              <div class="stat-top">
+                <span class="stat-label">Honeypot Traps & Auto-Banning</span>
+                <div class="stat-icon gold"><i class="fa fa-crosshairs"></i></div>
+              </div>
+              <div class="stat-value" style="font-size: 16px; color: #b45309;" id="sec-banned-count">0 Banned IPs</div>
+              <div class="stat-desc">Trapping /wp-admin, /.env, /cpanel, /phpmyadmin probes</div>
+            </div>
+
+            <!-- Emergency Portal Lockdown Switch -->
+            <div class="stat-card" style="border-left: 4px solid #ef4444;" id="sec-lockdown-card">
+              <div class="stat-top">
+                <span class="stat-label">Emergency Portal Lockdown</span>
+                <div class="stat-icon red"><i class="fa fa-lock"></i></div>
+              </div>
+              <div class="stat-value" style="font-size: 16px;" id="sec-lockdown-status">DISENGAGED</div>
+              <div class="stat-desc" style="margin-top:8px;">
+                <button type="button" id="btn-toggle-lockdown" class="btn-secondary" style="padding:6px 12px; font-size:12px; border-color:#dc2626; color:#dc2626;" onclick="toggleLockdown()">
+                  <i class="fa fa-power-off"></i> Engage Lockdown
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Active Firewall Blacklist Table -->
+          <div class="admin-card" style="margin-bottom: 24px;">
+            <div class="card-header" style="display:flex; justify-content:space-between; align-items:center;">
+              <div class="card-title">
+                <i class="fa fa-ban" style="color: #ef4444;"></i>
+                <span>Firewall Blacklist & Auto-Banned Attackers</span>
+              </div>
+              <div style="display:flex; gap:8px;">
+                <input type="text" id="manual-ban-ip" placeholder="e.g. 192.168.1.100" style="padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px; font-size:12px;">
+                <button type="button" class="btn-secondary" style="padding:6px 12px; font-size:12px;" onclick="manualBanIp()">
+                  <i class="fa fa-plus"></i> Ban IP
+                </button>
+                <button type="button" class="btn-secondary" style="padding:6px 12px; font-size:12px;" onclick="fetchSecurityStatus()">
+                  <i class="fa fa-refresh"></i> Refresh
+                </button>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Offending IP</th>
+                    <th>Reason / Probed Route</th>
+                    <th>Banned At</th>
+                    <th>Expiration</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="sec-blacklist-tbody">
+                  <tr>
+                    <td colspan="5" style="text-align:center; color:#64748b; padding:20px;">No malicious IPs currently blacklisted. All systems nominal.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Live Intrusion & Honeypot Probes Log -->
+          <div class="admin-card" style="margin-bottom: 24px;">
+            <div class="card-header">
+              <div class="card-title">
+                <i class="fa fa-shield" style="color: #3b82f6;"></i>
+                <span>Real-Time Intrusion & Honeypot Probes Audit Log</span>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Time</th>
+                    <th>Client IP</th>
+                    <th>Probed Target</th>
+                    <th>Severity</th>
+                    <th>Auto-Banned</th>
+                    <th>Details</th>
+                  </tr>
+                </thead>
+                <tbody id="sec-events-tbody">
+                  <tr>
+                    <td colspan="6" style="text-align:center; color:#64748b; padding:20px;">No intrusion probes detected yet.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Enterprise Defense Standards Summary -->
           <div class="admin-card">
             <div class="card-header">
               <div class="card-title">
-                <i class="fa fa-shield" style="color: #10b981;"></i>
+                <i class="fa fa-check-shield" style="color: #10b981;"></i>
                 <span>Enterprise Security Posture & Privacy Safeguards</span>
               </div>
             </div>
@@ -802,9 +921,21 @@
                 </thead>
                 <tbody>
                   <tr>
+                    <td><strong>Route Cloaking (Decoy 404)</strong></td>
+                    <td><code>routeShieldMiddleware</code></td>
+                    <td>Returns identical HTTP 404 for /admin & /dev to unauthenticated visitors</td>
+                    <td><span class="status-pill active"><span class="status-dot green"></span>ENFORCED</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Honeypot Deception Traps</strong></td>
+                    <td>Regex AutoShield + Fail2Ban</td>
+                    <td>Auto-traps and bans scanners probing /wp-admin, /.env, /cpanel</td>
+                    <td><span class="status-pill active"><span class="status-dot green"></span>ACTIVE</span></td>
+                  </tr>
+                  <tr>
                     <td><strong>Customer PII Shield</strong></td>
                     <td>Strict Route Redaction & Exclusion</td>
-                    <td>Guarantees zero customer names, phone numbers, or quotes reach the developer view</td>
+                    <td>Guarantees zero customer names, phone numbers, or quotes reach developer console</td>
                     <td><span class="status-pill active"><span class="status-dot green"></span>ENFORCED</span></td>
                   </tr>
                   <tr>
@@ -816,7 +947,7 @@
                   <tr>
                     <td><strong>HTTP Security Headers</strong></td>
                     <td>Helmet 8.3.0 Engine</td>
-                    <td>Sets Cross-Origin Resource Policy for CDNs, prevents clickjacking & MIME-sniffing</td>
+                    <td>Sets Cross-Origin Resource Policy, prevents clickjacking & MIME-sniffing</td>
                     <td><span class="status-pill active"><span class="status-dot green"></span>ACTIVE</span></td>
                   </tr>
                   <tr>
@@ -824,12 +955,6 @@
                     <td>25 attempts / 15-min IP window</td>
                     <td>Blocks automated credential-stuffing attacks on login routes</td>
                     <td><span class="status-pill active"><span class="status-dot green"></span>ENFORCED</span></td>
-                  </tr>
-                  <tr>
-                    <td><strong>CORS Policy Whitelist</strong></td>
-                    <td>Restricted domain array</td>
-                    <td>Only permits authorized origins (dalalmachines.com & localhost) to invoke APIs</td>
-                    <td><span class="status-pill active"><span class="status-dot green"></span>WHITELISTED</span></td>
                   </tr>
                 </tbody>
               </table>
@@ -876,6 +1001,7 @@
       if (tabName === 'doodle') fetchBannerConfig();
       if (tabName === 'catalog') fetchCatalogAudit();
       if (tabName === 'api') executeApiWorkbench();
+      if (tabName === 'security') fetchSecurityStatus();
     }
 
     // Sidebar Mobile Drawer Toggle
@@ -1381,6 +1507,172 @@
           renderUptime();
         }
       });
+
+      // Live listen to security intrusion alerts
+      devSocket.on('security:intrusion_alert', (evt) => {
+        console.warn('[SecOps Alert] Intrusion detected:', evt);
+        fetchSecurityStatus();
+      });
+    }
+
+    // SecOps & Firewall Management Logic
+    let currentSecurityData = null;
+
+    async function fetchSecurityStatus() {
+      try {
+        const res = await fetch('/api/dev/security/status');
+        const data = await res.json();
+        if (!data.success) return;
+        currentSecurityData = data;
+
+        // Update Key & Gateway URL
+        const keyEl = document.getElementById('sec-gateway-key');
+        if (keyEl) keyEl.textContent = data.gatewayKey || 'dmta-ops-2026';
+
+        // Update Banned Count
+        const countEl = document.getElementById('sec-banned-count');
+        if (countEl) countEl.textContent = `${data.activeBansCount || 0} Banned IP${data.activeBansCount === 1 ? '' : 's'}`;
+
+        // Update Lockdown Status
+        const lockStatusEl = document.getElementById('sec-lockdown-status');
+        const lockBtn = document.getElementById('btn-toggle-lockdown');
+        const lockCard = document.getElementById('sec-lockdown-card');
+        if (data.lockdownActive) {
+          if (lockStatusEl) {
+            lockStatusEl.textContent = 'ENGAGED • 404 CLOAK';
+            lockStatusEl.style.color = '#dc2626';
+          }
+          if (lockBtn) {
+            lockBtn.innerHTML = '<i class="fa fa-unlock"></i> Disengage Lockdown';
+            lockBtn.style.background = '#dc2626';
+            lockBtn.style.color = '#ffffff';
+          }
+          if (lockCard) lockCard.style.background = '#fef2f2';
+        } else {
+          if (lockStatusEl) {
+            lockStatusEl.textContent = 'DISENGAGED (NORMAL)';
+            lockStatusEl.style.color = '#10b981';
+          }
+          if (lockBtn) {
+            lockBtn.innerHTML = '<i class="fa fa-power-off"></i> Engage Lockdown';
+            lockBtn.style.background = '';
+            lockBtn.style.color = '#dc2626';
+          }
+          if (lockCard) lockCard.style.background = '';
+        }
+
+        // Render Blacklist Table
+        const blTbody = document.getElementById('sec-blacklist-tbody');
+        if (blTbody) {
+          if (!data.activeBans || data.activeBans.length === 0) {
+            blTbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#64748b; padding:20px;">No malicious IPs currently blacklisted. All systems nominal.</td></tr>';
+          } else {
+            blTbody.innerHTML = data.activeBans.map(b => `
+              <tr>
+                <td><code style="background:#fee2e2; color:#991b1b; padding:2px 6px; border-radius:4px; font-weight:700;">${b.ip}</code></td>
+                <td><span style="font-size:12.5px; color:#475569;">${b.reason || 'Intrusion probe'}</span></td>
+                <td><span style="font-size:12px; color:#64748b;">${new Date(b.bannedAt).toLocaleTimeString()}</span></td>
+                <td><span style="font-size:12px; color:#64748b;">${b.expiresAt ? new Date(b.expiresAt).toLocaleTimeString() : 'Permanent'}</span></td>
+                <td>
+                  <button type="button" class="btn-secondary" style="padding:4px 8px; font-size:11px;" onclick="unbanIp('${b.ip}')">
+                    <i class="fa fa-unlock"></i> Unban
+                  </button>
+                </td>
+              </tr>
+            `).join('');
+          }
+        }
+
+        // Render Security Probes Table
+        const evTbody = document.getElementById('sec-events-tbody');
+        if (evTbody) {
+          if (!data.recentEvents || data.recentEvents.length === 0) {
+            evTbody.innerHTML = '<tr><td colspan="6" style="text-align:center; color:#64748b; padding:20px;">No intrusion probes detected yet.</td></tr>';
+          } else {
+            evTbody.innerHTML = data.recentEvents.map(e => `
+              <tr>
+                <td><span style="font-size:11.5px; color:#64748b;">${new Date(e.timestamp).toLocaleTimeString()}</span></td>
+                <td><code style="font-size:12px;">${e.ip}</code></td>
+                <td><code style="font-size:12px; color:#b45309;">${e.path || '/'}</code></td>
+                <td><span class="status-pill active" style="background:${e.severity === 'HIGH' ? '#fee2e2' : '#fef3c7'}; color:${e.severity === 'HIGH' ? '#991b1b' : '#92400e'};">${e.severity}</span></td>
+                <td>${e.autoBanned ? '<span style="color:#dc2626; font-weight:700;">YES (Banned)</span>' : '<span style="color:#059669;">NO</span>'}</td>
+                <td><span style="font-size:12px; color:#475569;">${e.message || 'Probe logged'}</span></td>
+              </tr>
+            `).join('');
+          }
+        }
+      } catch (err) {
+        console.error('Failed to load security status:', err);
+      }
+    }
+
+    function copyGatewayLink() {
+      const key = (currentSecurityData && currentSecurityData.gatewayKey) || 'dmta-ops-2026';
+      const fullUrl = `${window.location.origin}/portal-gate?key=${key}&to=dev`;
+      navigator.clipboard.writeText(fullUrl).then(() => {
+        const fb = document.getElementById('gateway-copy-feedback');
+        if (fb) {
+          fb.style.display = 'inline';
+          setTimeout(() => { fb.style.display = 'none'; }, 3000);
+        }
+      });
+    }
+
+    async function toggleLockdown() {
+      const currentState = currentSecurityData ? currentSecurityData.lockdownActive : false;
+      const targetState = !currentState;
+      const confirmMsg = targetState
+        ? 'WARNING: You are about to engage EMERGENCY PORTAL LOCKDOWN. All admin, superadmin, and dev URLs will return HTTP 404 to all users except developer session. Proceed?'
+        : 'Lift Emergency Portal Lockdown and restore standard gateway operations?';
+      if (!confirm(confirmMsg)) return;
+
+      try {
+        const res = await fetch('/api/dev/security/lockdown', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ enabled: targetState })
+        });
+        const data = await res.json();
+        alert(data.message);
+        fetchSecurityStatus();
+      } catch (err) {
+        alert('Failed to toggle lockdown: ' + err.message);
+      }
+    }
+
+    async function unbanIp(ip) {
+      if (!confirm(`Release IP ${ip} from firewall blacklist?`)) return;
+      try {
+        const res = await fetch('/api/dev/security/unban', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ip })
+        });
+        const data = await res.json();
+        alert(data.message);
+        fetchSecurityStatus();
+      } catch (err) {
+        alert('Failed to unban IP: ' + err.message);
+      }
+    }
+
+    async function manualBanIp() {
+      const input = document.getElementById('manual-ban-ip');
+      const ip = input ? input.value.trim() : '';
+      if (!ip) return alert('Please enter an IP address to ban.');
+      try {
+        const res = await fetch('/api/dev/security/ban', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ip, reason: 'Manual ban from Developer SecOps panel' })
+        });
+        const data = await res.json();
+        alert(data.message);
+        if (input) input.value = '';
+        fetchSecurityStatus();
+      } catch (err) {
+        alert('Failed to ban IP: ' + err.message);
+      }
     }
 
     // Startup
@@ -1390,6 +1682,7 @@
       fetchCatalogAudit();
       fetchAdminAccounts();
       fetchBannerConfig();
+      fetchSecurityStatus();
       executeApiWorkbench();
     });
   </script>
