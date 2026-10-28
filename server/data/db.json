@@ -9,7 +9,10 @@
       "name": "System Developer",
       "active": true,
       "createdAt": "2026-10-06T09:58:03.305Z",
-      "lastLogin": "2026-10-06T16:40:05.718Z"
+      "lastLogin": "2026-10-06T16:40:05.718Z",
+      "blockedByDeveloper": false,
+      "blockedReason": "",
+      "blockedAt": null
     },
     {
       "id": "usr_admin",
@@ -20,7 +23,10 @@
       "name": "Dalal Inventory Admin",
       "active": true,
       "createdAt": "2026-10-06T09:58:03.484Z",
-      "lastLogin": "2026-10-13T14:14:12.318Z"
+      "lastLogin": "2026-10-28T13:27:39.272Z",
+      "blockedByDeveloper": false,
+      "blockedReason": "",
+      "blockedAt": null
     }
   ],
   "products": [
@@ -1953,6 +1959,259 @@
   ],
   "logs": [
     {
+      "id": "log_1b769e4c",
+      "timestamp": "2026-10-28T13:28:17.234Z",
+      "userId": "usr_dev",
+      "username": "developer_console",
+      "role": "developer",
+      "action": "USER_UNBLOCKED_BY_DEVELOPER",
+      "target": "developer",
+      "details": "Developer unblocked/restored SUPERADMIN [developer].",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_ad4eae7f",
+      "timestamp": "2026-10-28T13:28:17.227Z",
+      "userId": "usr_dev",
+      "username": "developer_console",
+      "role": "developer",
+      "action": "USER_UNBLOCKED_BY_DEVELOPER",
+      "target": "admin",
+      "details": "Developer unblocked/restored ADMIN [admin].",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_7be783af",
+      "timestamp": "2026-10-28T13:28:07.649Z",
+      "userId": "usr_dev",
+      "username": "developer_console",
+      "role": "developer",
+      "action": "USER_UNBLOCKED_BY_DEVELOPER",
+      "target": "admin",
+      "details": "Developer unblocked/restored ADMIN [admin].",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_3804f8b8",
+      "timestamp": "2026-10-28T13:27:39.885Z",
+      "userId": "usr_dev",
+      "username": "developer_console",
+      "role": "developer",
+      "action": "USER_BLOCKED_BY_DEVELOPER",
+      "target": "admin",
+      "details": "Developer suspended ADMIN [admin]. Reason: E2E Automated Sync Verification Test",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_a33fe7fa",
+      "timestamp": "2026-10-28T13:27:39.286Z",
+      "userId": "usr_admin",
+      "username": "admin",
+      "role": "admin",
+      "action": "USER_LOGIN",
+      "target": "AUTH",
+      "details": "User logged in successfully from ::1",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_685b366f",
+      "timestamp": "2026-10-28T13:27:39.083Z",
+      "userId": "usr_dev",
+      "username": "developer_console",
+      "role": "developer",
+      "action": "USER_UNBLOCKED_BY_DEVELOPER",
+      "target": "admin",
+      "details": "Developer unblocked/restored ADMIN [admin].",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_b82d1141",
+      "timestamp": "2026-10-28T13:27:18.702Z",
+      "userId": "usr_dev",
+      "username": "developer_console",
+      "role": "developer",
+      "action": "USER_UNBLOCKED_BY_DEVELOPER",
+      "target": "admin",
+      "details": "Developer unblocked/restored ADMIN [admin].",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_3c8b6519",
+      "timestamp": "2026-10-28T13:01:38.896Z",
+      "userId": "usr_dev",
+      "username": "developer_console",
+      "role": "developer",
+      "action": "USER_BLOCKED_BY_DEVELOPER",
+      "target": "developer",
+      "details": "Developer suspended SUPERADMIN [developer]. Reason: Account suspended by Lead System Developer for security audit and operational review.",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_23111509",
+      "timestamp": "2026-10-28T13:01:24.296Z",
+      "userId": "usr_dev",
+      "username": "developer_console",
+      "role": "developer",
+      "action": "USER_BLOCKED_BY_DEVELOPER",
+      "target": "admin",
+      "details": "Developer suspended ADMIN [admin]. Reason: Account suspended by Lead System Developer for security audit and operational review.",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_4524f23a",
+      "timestamp": "2026-10-28T12:55:10.010Z",
+      "userId": "usr_dev",
+      "username": "developer_console",
+      "role": "developer",
+      "action": "USER_UNBLOCKED_BY_DEVELOPER",
+      "target": "admin",
+      "details": "Developer unblocked/restored ADMIN [admin].",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_d4b1c70a",
+      "timestamp": "2026-10-28T12:55:09.985Z",
+      "userId": "usr_dev",
+      "username": "developer_console",
+      "role": "developer",
+      "action": "DEVELOPER_BANNER_UPDATED",
+      "target": "DASHBOARD_BANNER",
+      "details": "Developer updated banner. Active: true, Style: doodle-festive",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_f2b76d87",
+      "timestamp": "2026-10-28T12:55:09.961Z",
+      "userId": "usr_dev",
+      "username": "developer_console",
+      "role": "developer",
+      "action": "USER_BLOCKED_BY_DEVELOPER",
+      "target": "admin",
+      "details": "Developer suspended ADMIN [admin]. Reason: Real-time WebSocket security verification test",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_60debf03",
+      "timestamp": "2026-10-28T12:55:09.816Z",
+      "userId": "usr_admin",
+      "username": "admin",
+      "role": "admin",
+      "action": "USER_LOGIN",
+      "target": "AUTH",
+      "details": "User logged in successfully from ::1",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_6b0c05ed",
+      "timestamp": "2026-10-28T12:55:00.800Z",
+      "userId": "usr_dev",
+      "username": "developer_console",
+      "role": "developer",
+      "action": "USER_UNBLOCKED_BY_DEVELOPER",
+      "target": "admin",
+      "details": "Developer unblocked/restored ADMIN [admin].",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_3001cbca",
+      "timestamp": "2026-10-28T12:53:22.203Z",
+      "userId": "usr_dev",
+      "username": "developer_console",
+      "role": "developer",
+      "action": "USER_BLOCKED_BY_DEVELOPER",
+      "target": "admin",
+      "details": "Developer suspended ADMIN [admin]. Reason: Real-time WebSocket security verification test",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_15cbdd6f",
+      "timestamp": "2026-10-28T12:53:22.020Z",
+      "userId": "usr_admin",
+      "username": "admin",
+      "role": "admin",
+      "action": "USER_LOGIN",
+      "target": "AUTH",
+      "details": "User logged in successfully from ::1",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_6ffb52c0",
+      "timestamp": "2026-10-28T12:51:33.019Z",
+      "userId": "usr_dev",
+      "username": "developer_console",
+      "role": "developer",
+      "action": "USER_UNBLOCKED_BY_DEVELOPER",
+      "target": "admin",
+      "details": "Developer unblocked/restored ADMIN [admin].",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_fe2349dc",
+      "timestamp": "2026-10-28T12:37:37.777Z",
+      "userId": "usr_dev",
+      "username": "developer_console",
+      "role": "developer",
+      "action": "USER_BLOCKED_BY_DEVELOPER",
+      "target": "admin",
+      "details": "Developer suspended ADMIN [admin]. Reason: Account suspended by Lead System Developer for security audit and operational review.",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_ad5e4628",
+      "timestamp": "2026-10-28T12:32:04.618Z",
+      "userId": "usr_dev",
+      "username": "developer_console",
+      "role": "developer",
+      "action": "DEVELOPER_BANNER_UPDATED",
+      "target": "DASHBOARD_BANNER",
+      "details": "Developer updated banner. Active: true, Style: doodle-gold",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_ae9bd7b8",
+      "timestamp": "2026-10-28T12:31:44.517Z",
+      "userId": "usr_admin",
+      "username": "admin",
+      "role": "admin",
+      "action": "USER_LOGIN",
+      "target": "AUTH",
+      "details": "User logged in successfully from ::1",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_4f477c05",
+      "timestamp": "2026-10-28T12:31:32.542Z",
+      "userId": "usr_dev",
+      "username": "developer_console",
+      "role": "developer",
+      "action": "USER_UNBLOCKED_BY_DEVELOPER",
+      "target": "admin",
+      "details": "Developer unblocked/restored ADMIN [admin].",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_cd6ce48e",
+      "timestamp": "2026-10-28T12:31:10.003Z",
+      "userId": "usr_dev",
+      "username": "developer_console",
+      "role": "developer",
+      "action": "USER_BLOCKED_BY_DEVELOPER",
+      "target": "admin",
+      "details": "Developer suspended ADMIN [admin]. Reason: Scheduled SecOps maintenance and credential audit by Lead Developer",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_9cb94314",
+      "timestamp": "2026-10-28T12:01:24.012Z",
+      "userId": "usr_admin",
+      "username": "admin",
+      "role": "admin",
+      "action": "USER_LOGIN",
+      "target": "AUTH",
+      "details": "User logged in successfully from ::1",
+      "ip": "127.0.0.1"
+    },
+    {
       "id": "log_16fce00e",
       "timestamp": "2026-10-13T14:14:12.332Z",
       "userId": "usr_admin",
@@ -3565,5 +3824,17 @@
     "ompiEnabled": true,
     "currency": "INR",
     "autoSyncCatalogJs": true
+  },
+  "developerBanner": {
+    "active": true,
+    "style": "doodle-festive",
+    "badgeText": "REAL-TIME DOODLE ACTIVE",
+    "title": "WebSocket Realtime Sync Live",
+    "message": "Instant duplex updates across website and dashboards verified.",
+    "icon": "fa-star",
+    "linkText": "Explore Machines",
+    "linkUrl": "/admin/products.html",
+    "dismissable": true,
+    "updatedAt": "2026-10-28T12:55:09.980Z"
   }
 }

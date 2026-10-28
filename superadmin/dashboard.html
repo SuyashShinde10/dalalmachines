@@ -104,6 +104,9 @@
       </header>
 
       <div class="sa-content">
+        <!-- Developer Broadcast & Google Doodle Banner Slot -->
+        <div id="developer-doodle-banner-slot"></div>
+
         <!-- Hero Section (Stratify Inspired) -->
         <div class="sa-hero-box">
           <div class="sa-hero-pill">
@@ -214,12 +217,14 @@
     </main>
   </div>
 
-  <script src="js/superadmin-core.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/superadmin-core.js?v=5.0"></script>
   <script>
     (async () => {
       const user = await SuperAdminCore.requireAuth();
       if (!user) return;
 
+      SuperAdminCore.loadDeveloperBanner();
       loadMasterData();
 
       // Force Sync Button

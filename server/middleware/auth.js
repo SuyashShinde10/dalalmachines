@@ -21,7 +21,21 @@ function authenticateToken(req, res, next) {
     const decoded = jwt.verify(token, config.JWT_SECRET);
     // Verify user still exists and is active in DB
     const user = db.getUserById(decoded.id);
-    if (!user || !user.active) {
+    if (!user) {
+      return res.status(403).json({ success: false, message: 'User account is inactive or not found.' });
+    }
+    if (user.blockedByDeveloper) {
+      return res.status(403).json({ 
+        success: false, 
+        blockedByDeveloper: true, 
+        role: user.role,
+        reason: user.blockedReason || 'Account suspended by Lead System Developer.',
+        blockedReason: user.blockedReason || 'Account suspended by Lead System Developer.',
+        blockedAt: user.blockedAt || null,
+        message: `Account Suspended: Access revoked by System Developer. Reason: ${user.blockedReason || 'Administrative suspension'}` 
+      });
+    }
+    if (!user.active) {
       return res.status(403).json({ success: false, message: 'User account is inactive or not found.' });
     }
     req.user = {

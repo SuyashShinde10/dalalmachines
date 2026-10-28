@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const db = require('../db');
+const realtime = require('../realtime');
 const { requireAdmin } = require('../middleware/auth');
 const upload = require('../middleware/upload');
 
@@ -70,6 +71,7 @@ router.post('/', requireAdmin, (req, res) => {
 
   try {
     const created = db.createProduct(req.body, req.user);
+    realtime.broadcastCatalogUpdate({ action: 'CREATED', product: created });
     res.status(201).json({
       success: true,
       message: `${created.isCustom ? 'Custom' : 'Standard'} machine created successfully.`,
@@ -89,6 +91,7 @@ router.put('/:id', requireAdmin, (req, res) => {
 
   try {
     const updated = db.updateProduct(req.params.id, req.body, req.user);
+    realtime.broadcastCatalogUpdate({ action: 'UPDATED', product: updated });
     res.json({
       success: true,
       message: 'Machine details updated successfully.',
@@ -108,6 +111,7 @@ router.delete('/:id', requireAdmin, (req, res) => {
 
   const success = db.deleteProduct(req.params.id, req.user);
   if (success) {
+    realtime.broadcastCatalogUpdate({ action: 'DELETED', product: existing });
     res.json({ success: true, message: `Machine ${existing.name} (${existing.id}) deleted successfully.` });
   } else {
     res.status(500).json({ success: false, message: 'Failed to delete machine.' });

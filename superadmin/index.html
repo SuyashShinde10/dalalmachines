@@ -125,11 +125,20 @@
     </div>
   </div>
 
-  <script src="js/superadmin-core.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/superadmin-core.js?v=5.0"></script>
   <script>
-    const existing = SuperAdminCore.getUser();
-    if (SuperAdminCore.getToken() && existing && existing.role === 'superadmin') {
-      window.location.href = '/superadmin/dashboard.html';
+    // Check if redirected due to real-time developer suspension
+    const saParams = new URLSearchParams(window.location.search);
+    if (saParams.get('blocked') === '1') {
+      SuperAdminCore.clearSession();
+      const reason = saParams.get('reason') || 'Master executive account suspended by System Developer.';
+      showBlockedAlert({ role: 'Super Admin', blockedReason: reason });
+    } else {
+      const existing = SuperAdminCore.getUser();
+      if (SuperAdminCore.getToken() && existing && existing.role === 'superadmin') {
+        window.location.href = '/superadmin/dashboard.html';
+      }
     }
 
     const form = document.getElementById('sa-login-form');
@@ -174,6 +183,8 @@
           setTimeout(() => {
             window.location.href = '/superadmin/dashboard.html';
           }, 400);
+        } else if (res.blockedByDeveloper) {
+          showBlockedAlert(res);
         } else {
           showError(res.message || 'Invalid super admin credentials.');
         }
@@ -184,6 +195,35 @@
         submitBtn.innerHTML = '<i class="fa fa-lock"></i> Authenticate & Enter Console';
       }
     });
+
+    function showBlockedAlert(res) {
+      alertBox.style.display = 'block';
+      alertBox.style.background = '#fef2f2';
+      alertBox.style.color = '#991b1b';
+      alertBox.style.border = '2px solid #ef4444';
+      alertBox.style.boxShadow = '0 10px 25px -5px rgba(239, 68, 68, 0.2)';
+      alertBox.innerHTML = `
+        <div style="display: flex; gap: 12px; align-items: flex-start; text-align: left;">
+          <div style="width: 36px; height: 36px; border-radius: 50%; background: #fee2e2; color: #dc2626; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;">
+            <i class="fa fa-ban"></i>
+          </div>
+          <div style="flex: 1;">
+            <div style="font-size: 13.5px; font-weight: 800; color: #991b1b; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">
+              🚫 Master Console Revoked by Developer
+            </div>
+            <div style="font-size: 12.5px; font-weight: 600; color: #7f1d1d; line-height: 1.45; margin-bottom: 8px;">
+              Your <strong>${SuperAdminCore.escapeHTML(res.role || 'Super Admin')}</strong> account has been suspended by the Lead System Developer.
+            </div>
+            <div style="background: #ffffff; border: 1px dashed #f87171; border-radius: 8px; padding: 8px 10px; font-size: 12px; color: #991b1b; font-family: monospace; margin-bottom: 8px;">
+              <strong>Reason:</strong> ${SuperAdminCore.escapeHTML(res.blockedReason || 'Security audit or infrastructure quarantine.')}
+            </div>
+            <div style="font-size: 11.5px; color: #b91c1c;">
+              <i class="fa fa-shield"></i> System developer intervention required to unfreeze this master executive account.
+            </div>
+          </div>
+        </div>
+      `;
+    }
 
     function showError(msg) {
       alertBox.style.display = 'block';

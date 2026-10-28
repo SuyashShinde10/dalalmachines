@@ -17,5 +17,6 @@ module.exports = {
   PUBLIC_DIR: path.join(__dirname, '..', 'new', 'dalalmachine'),
   ADMIN_DIR: path.join(__dirname, '..', 'admin'),
   SUPERADMIN_DIR: path.join(__dirname, '..', 'superadmin'),
+  DEV_DIR: path.join(__dirname, '..', 'dev'),
   CATALOG_JS_PATH: path.join(__dirname, '..', 'new', 'dalalmachine', 'js', 'catalog-data.js')
 };

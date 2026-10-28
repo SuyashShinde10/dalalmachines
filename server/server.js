@@ -6,7 +6,10 @@ const { rateLimit } = require('express-rate-limit');
 const cookieParser = require('cookie-parser');
 const fs = require('fs');
 const path = require('path');
+const http = require('http');
 const config = require('./config');
+const db = require('./db');
+const realtime = require('./realtime');
 
 const authRoutes = require('./routes/auth');
 const productRoutes = require('./routes/products');
@@ -15,6 +18,7 @@ const userRoutes = require('./routes/users');
 const logRoutes = require('./routes/logs');
 const systemRoutes = require('./routes/system');
 const aiRoutes = require('./routes/ai');
+const devRoutes = require('./routes/dev');
 
 const app = express();
 
@@ -52,6 +56,17 @@ app.use(express.json({ limit: '20mb' }));
 app.use(express.urlencoded({ extended: true, limit: '20mb' }));
 app.use(cookieParser());
 
+// 4b. Enforce Zero-Cache on all Administrative, Developer, & API Portals (Instant Duplex Sync)
+app.use((req, res, next) => {
+  const p = req.path.toLowerCase();
+  if (p.startsWith('/admin') || p.startsWith('/superadmin') || p.startsWith('/dev') || p.startsWith('/api')) {
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+  }
+  next();
+});
+
 // 5. Rate Limiting Protection (Brute-Force & DoS Prevention)
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -81,13 +96,20 @@ const staticOptions = {
   lastModified: true,
   maxAge: '1d',
   setHeaders: (res, filePath) => {
+    // Admin, Superadmin, and Dev portals must NEVER be cached to ensure instant real-time synchronization
+    const normalized = filePath.replace(/\\/g, '/');
+    if (normalized.includes('/admin/') || normalized.includes('/superadmin/') || normalized.includes('/dev/')) {
+      res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+      res.setHeader('Pragma', 'no-cache');
+      res.setHeader('Expires', '0');
+      return;
+    }
+
     if (/\.html$/i.test(filePath)) {
-      // HTML documents revalidate quickly so content updates reflect, with short caching
       res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
     } else if (/\.(jpg|jpeg|png|gif|webp|svg|ico|woff|woff2|ttf|eot)$/i.test(filePath)) {
       res.setHeader('Cache-Control', 'public, max-age=2592000, immutable'); // 30 days cache for immutable assets
     } else if (/\.(css|js)$/i.test(filePath)) {
-      // High-performance caching for stylesheets and scripts with stale-while-revalidate for instant subsequent loads
       res.setHeader('Cache-Control', 'public, max-age=86400, stale-while-revalidate=604800');
     }
   }
@@ -121,6 +143,7 @@ app.use((req, res, next) => {
 app.use('/uploads', express.static(config.UPLOADS_DIR, staticOptions));
 app.use('/admin', express.static(config.ADMIN_DIR, staticOptions));
 app.use('/superadmin', express.static(config.SUPERADMIN_DIR, staticOptions));
+app.use('/dev', express.static(config.DEV_DIR, staticOptions));
 app.use('/new/dalalmachine', express.static(config.PUBLIC_DIR, staticOptions));
 app.use('/new/Machinery', express.static(config.PUBLIC_DIR, staticOptions)); // backward compatibility alias
 app.use('/', express.static(config.PUBLIC_DIR, staticOptions));
@@ -146,6 +169,10 @@ app.get('/superadmin', (req, res) => {
   res.sendFile(path.join(config.SUPERADMIN_DIR, 'index.html'));
 });
 
+app.get('/dev', (req, res) => {
+  res.sendFile(path.join(config.DEV_DIR, 'index.html'));
+});
+
 // 8. API Routes with Rate Limiting Guards
 app.use('/api/auth/login', authLimiter);
 app.use('/api/auth', authRoutes);
@@ -153,8 +180,12 @@ app.use('/api/products', productRoutes);
 app.use('/api/inquiries', inquiryLimiter, inquiryRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/logs', logRoutes);
+app.get('/api/system/developer-banner', (req, res) => {
+  res.json({ success: true, banner: db.getDeveloperBanner() });
+});
 app.use('/api/system', systemRoutes);
 app.use('/api/ai', aiRoutes);
+app.use('/api/dev', devRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
@@ -174,14 +205,18 @@ app.use((err, req, res, next) => {
   });
 });
 
-// Start Server
+// Start Server with Real-Time WebSockets Engine
 const PORT = config.PORT;
-const server = app.listen(PORT, () => {
+const server = http.createServer(app);
+realtime.initRealtime(server);
+
+server.listen(PORT, () => {
   console.log(`=======================================================`);
   console.log(` Dalal Machine Tools - Fullstack Backend & Admin Portal `);
   console.log(`=======================================================`);
   console.log(` Web Server:    http://localhost:${PORT}/`);
   console.log(` Admin Portal:  http://localhost:${PORT}/admin/`);
+  console.log(` WebSockets:    Socket.IO Active on ws://localhost:${PORT}/`);
   console.log(` API Endpoint:  http://localhost:${PORT}/api/health`);
   console.log(` Security:      Helmet ON, RateLimiter ON, /hub REMOVED `);
   console.log(`=======================================================`);

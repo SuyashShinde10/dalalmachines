@@ -122,6 +122,9 @@
 
       <!-- Page Body -->
       <div class="admin-content">
+        <!-- Developer Broadcast & Google Doodle Banner Slot -->
+        <div id="developer-doodle-banner-slot"></div>
+
         <!-- Hero Greeting Section (Stratify Inspired) -->
         <div class="hero-greeting-box">
           <div class="hero-greeting-pill">
@@ -287,7 +290,8 @@
     </main>
   </div>
 
-  <script src="js/admin-core.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/admin-core.js?v=5.0"></script>
   <script>
     (async () => {
       const user = await AdminCore.requireAuth();
@@ -301,6 +305,7 @@
       if (topName) topName.textContent = user.name || user.username;
       if (topAvatar) topAvatar.textContent = (user.name || user.username).charAt(0).toUpperCase();
 
+      AdminCore.loadDeveloperBanner();
       loadDashboardData();
     })();
 

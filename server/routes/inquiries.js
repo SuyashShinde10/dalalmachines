@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
+const realtime = require('../realtime');
 const { requireAdmin } = require('../middleware/auth');
 
 // POST /api/inquiries (Public from Contact & PDP forms)
@@ -18,6 +19,14 @@ router.post('/', (req, res) => {
     machineId,
     machineName,
     message
+  });
+
+  // REAL-TIME BROADCAST: Notify operations staff immediately (Zero PII to Developer)
+  realtime.broadcastInquiry({
+    id: inquiry.id,
+    machineName: inquiry.machineName,
+    company: inquiry.company,
+    timestamp: inquiry.createdAt
   });
 
   res.status(201).json({

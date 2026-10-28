@@ -254,6 +254,106 @@ module.exports = {
     }
   },
 
+  // Developer Governance (Block/Unblock Admin & Superadmin - ZERO Client Data)
+  getAdminAccountsForDev: () => {
+    return db.users
+      .filter(u => u.role === 'admin' || u.role === 'superadmin' || u.role === 'staff')
+      .map(({ passwordHash, ...safe }) => ({
+        id: safe.id,
+        username: safe.username,
+        name: safe.name,
+        email: safe.email,
+        role: safe.role,
+        active: safe.active !== false,
+        blockedByDeveloper: Boolean(safe.blockedByDeveloper),
+        blockedReason: safe.blockedReason || '',
+        blockedAt: safe.blockedAt || null,
+        createdAt: safe.createdAt,
+        lastLogin: safe.lastLogin
+      }));
+  },
+  blockUserByDeveloper: (id, reason, actor = { id: 'usr_dev', username: 'developer_console', role: 'developer' }) => {
+    const user = db.users.find(u => u.id === id);
+    if (!user) return null;
+    user.active = false;
+    user.blockedByDeveloper = true;
+    user.blockedReason = reason || 'Account suspended by Lead System Developer.';
+    user.blockedAt = new Date().toISOString();
+    saveDb();
+
+    module.exports.addLog({
+      userId: actor.id,
+      username: actor.username,
+      role: 'developer',
+      action: 'USER_BLOCKED_BY_DEVELOPER',
+      target: user.username,
+      details: `Developer suspended ${user.role.toUpperCase()} [${user.username}]. Reason: ${user.blockedReason}`
+    });
+
+    const { passwordHash, ...safe } = user;
+    return safe;
+  },
+  unblockUserByDeveloper: (id, actor = { id: 'usr_dev', username: 'developer_console', role: 'developer' }) => {
+    const user = db.users.find(u => u.id === id);
+    if (!user) return null;
+    user.active = true;
+    user.blockedByDeveloper = false;
+    user.blockedReason = '';
+    user.blockedAt = null;
+    saveDb();
+
+    module.exports.addLog({
+      userId: actor.id,
+      username: actor.username,
+      role: 'developer',
+      action: 'USER_UNBLOCKED_BY_DEVELOPER',
+      target: user.username,
+      details: `Developer unblocked/restored ${user.role.toUpperCase()} [${user.username}].`
+    });
+
+    const { passwordHash, ...safe } = user;
+    return safe;
+  },
+
+  // Developer Google Doodle / Dashboard Banner
+  getDeveloperBanner: () => {
+    if (!db.developerBanner) {
+      db.developerBanner = {
+        active: false,
+        style: 'doodle-gold',
+        badgeText: '✨ DEVELOPER DOODLE SPOTLIGHT',
+        title: 'Dalal Engineering Live Stockyard Milestone',
+        message: 'High Seas import clearance and 4,000T Forging Press trial slots are now active across Pune and Ludhiana yards.',
+        icon: 'fa-trophy',
+        linkText: 'Explore Machines',
+        linkUrl: '/admin/products.html',
+        dismissable: true,
+        updatedAt: new Date().toISOString()
+      };
+    }
+    return db.developerBanner;
+  },
+  setDeveloperBanner: (bannerData, actor = { id: 'usr_dev', username: 'developer_console', role: 'developer' }) => {
+    const current = module.exports.getDeveloperBanner();
+    db.developerBanner = {
+      ...current,
+      ...bannerData,
+      updatedAt: new Date().toISOString()
+    };
+    saveDb();
+
+    module.exports.addLog({
+      userId: actor.id,
+      username: actor.username,
+      role: 'developer',
+      action: 'DEVELOPER_BANNER_UPDATED',
+      target: 'DASHBOARD_BANNER',
+      details: `Developer updated banner. Active: ${db.developerBanner.active}, Style: ${db.developerBanner.style}`
+    });
+
+    return db.developerBanner;
+  },
+
   // Products
   getProducts: (filters = {}) => {
     let list = [...db.products];

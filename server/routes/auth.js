@@ -18,6 +18,17 @@ router.post('/login', (req, res) => {
     return res.status(401).json({ success: false, message: 'Invalid credentials. User not found.' });
   }
 
+  if (user.blockedByDeveloper) {
+    return res.status(403).json({
+      success: false,
+      blockedByDeveloper: true,
+      blockedReason: user.blockedReason || 'This account has been suspended by the Lead System Developer.',
+      blockedAt: user.blockedAt || null,
+      role: user.role,
+      message: `ACCOUNT SUSPENDED: This ${user.role} account has been blocked by the System Developer. Reason: ${user.blockedReason || 'Administrative suspension'}. Contact system developer for clearance.`
+    });
+  }
+
   if (!user.active) {
     return res.status(403).json({ success: false, message: 'Your account has been deactivated. Contact super admin.' });
   }

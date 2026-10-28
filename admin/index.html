@@ -110,9 +110,16 @@
     </div>
   </div>
 
-  <script src="js/admin-core.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/admin-core.js?v=5.0"></script>
   <script>
-    if (AdminCore.getToken() && AdminCore.getUser()) {
+    // Check if redirected due to real-time developer suspension
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('blocked') === '1') {
+      AdminCore.clearSession();
+      const reason = urlParams.get('reason') || 'Account suspended by Lead System Developer.';
+      showBlockedAlert({ role: 'Admin', blockedReason: reason });
+    } else if (AdminCore.getToken() && AdminCore.getUser()) {
       window.location.href = '/admin/dashboard.html';
     }
 
@@ -154,6 +161,8 @@
           setTimeout(() => {
             window.location.href = '/admin/dashboard.html';
           }, 400);
+        } else if (res.blockedByDeveloper) {
+          showBlockedAlert(res);
         } else {
           showError(res.message || 'Invalid username or password.');
         }
@@ -164,6 +173,35 @@
         submitBtn.innerHTML = '<i class="fa fa-sign-in"></i> Sign In to Operations';
       }
     });
+
+    function showBlockedAlert(res) {
+      alertBox.style.display = 'block';
+      alertBox.style.background = '#fef2f2';
+      alertBox.style.color = '#991b1b';
+      alertBox.style.border = '2px solid #ef4444';
+      alertBox.style.boxShadow = '0 10px 25px -5px rgba(239, 68, 68, 0.2)';
+      alertBox.innerHTML = `
+        <div style="display: flex; gap: 12px; align-items: flex-start; text-align: left;">
+          <div style="width: 36px; height: 36px; border-radius: 50%; background: #fee2e2; color: #dc2626; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;">
+            <i class="fa fa-ban"></i>
+          </div>
+          <div style="flex: 1;">
+            <div style="font-size: 13.5px; font-weight: 800; color: #991b1b; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">
+              🚫 Access Suspended by Developer
+            </div>
+            <div style="font-size: 12.5px; font-weight: 600; color: #7f1d1d; line-height: 1.45; margin-bottom: 8px;">
+              Your <strong>${AdminCore.escapeHTML(res.role || 'Staff')}</strong> account has been placed on administrative hold by the Lead System Developer.
+            </div>
+            <div style="background: #ffffff; border: 1px dashed #f87171; border-radius: 8px; padding: 8px 10px; font-size: 12px; color: #991b1b; font-family: monospace; margin-bottom: 8px;">
+              <strong>Reason:</strong> ${AdminCore.escapeHTML(res.blockedReason || 'Security audit or operational review.')}
+            </div>
+            <div style="font-size: 11.5px; color: #b91c1c;">
+              <i class="fa fa-shield"></i> Contact Lead System Developer (SecOps) via Developer Console for clearance.
+            </div>
+          </div>
+        </div>
+      `;
+    }
 
     function showError(msg) {
       alertBox.style.display = 'block';
