@@ -562,5 +562,39 @@ const SuperAdminCore = {
         }
       } catch (e) {}
     }, 4000);
+  },
+
+  // ==========================================================================
+  // SUPER ADMIN UI-MATCHED SKELETON COMPONENT ENGINE
+  // ==========================================================================
+  renderTableSkeleton: (tbodyEl, columns = 5, rows = 5) => {
+    if (typeof tbodyEl === 'string') tbodyEl = document.getElementById(tbodyEl);
+    if (!tbodyEl) return;
+    let html = '';
+    for (let r = 0; r < rows; r++) {
+      html += '<tr class="sa-skeleton-row">';
+      for (let c = 0; c < columns; c++) {
+        if (c === 0) {
+          html += '<td><div class="sa-skeleton-shimmer sa-skeleton-text" style="width: 80px;"></div></td>';
+        } else if (c === 1) {
+          html += '<td><div class="sa-skeleton-shimmer sa-skeleton-title" style="width: ' + (50 + (r % 3) * 15) + '%;"></div></td>';
+        } else if (c === columns - 1) {
+          html += '<td><div class="sa-skeleton-shimmer sa-skeleton-btn"></div></td>';
+        } else if (c === columns - 2) {
+          html += '<td><div class="sa-skeleton-shimmer sa-skeleton-pill"></div></td>';
+        } else {
+          html += '<td><div class="sa-skeleton-shimmer sa-skeleton-text" style="width: ' + (45 + (r % 2) * 25) + '%;"></div></td>';
+        }
+      }
+      html += '</tr>';
+    }
+    tbodyEl.innerHTML = html;
+  },
+
+  renderKpiSkeleton: (elementIds = []) => {
+    elementIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = '<span class="sa-skeleton-shimmer sa-skeleton-kpi"></span>';
+    });
   }
 };

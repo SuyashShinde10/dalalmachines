@@ -1288,3 +1288,69 @@ body.sa-sidebar-collapsed .sa-main {
     justify-content: center;
   }
 }
+
+
+/* ==========================================================================
+   SUPER ADMIN EXECUTIVE SKELETON SHIMMER SYSTEM
+   ========================================================================== */
+@keyframes saSkeletonShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.sa-skeleton-shimmer {
+  background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+  background-size: 200% 100%;
+  animation: saSkeletonShimmer 1.5s infinite ease-in-out;
+  border-radius: 6px;
+  display: inline-block;
+  pointer-events: none;
+  vertical-align: middle;
+}
+
+.sa-skeleton-text {
+  height: 14px;
+  border-radius: 4px;
+  margin-bottom: 6px;
+}
+
+.sa-skeleton-title {
+  height: 20px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+}
+
+.sa-skeleton-kpi {
+  height: 38px;
+  width: 80px;
+  border-radius: 8px;
+  margin: 6px 0;
+}
+
+.sa-skeleton-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.sa-skeleton-pill {
+  width: 76px;
+  height: 24px;
+  border-radius: 9999px;
+}
+
+.sa-skeleton-btn {
+  width: 74px;
+  height: 30px;
+  border-radius: 8px;
+}
+
+.sa-skeleton-row td {
+  padding: 14px 16px;
+  vertical-align: middle;
+}

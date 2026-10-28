@@ -611,5 +611,39 @@ const AdminCore = {
         }
       } catch (e) {}
     }, 4000);
+  },
+
+  // ==========================================================================
+  // UI-MATCHED SKELETON COMPONENT ENGINE
+  // ==========================================================================
+  renderTableSkeleton: (tbodyEl, columns = 5, rows = 5) => {
+    if (typeof tbodyEl === 'string') tbodyEl = document.getElementById(tbodyEl);
+    if (!tbodyEl) return;
+    let html = '';
+    for (let r = 0; r < rows; r++) {
+      html += '<tr class="skeleton-table-row">';
+      for (let c = 0; c < columns; c++) {
+        if (c === 0) {
+          html += '<td><div class="skeleton-shimmer skeleton-img"></div></td>';
+        } else if (c === 1) {
+          html += '<td><div class="skeleton-shimmer skeleton-title" style="width: ' + (55 + (r % 3) * 15) + '%;"></div><div class="skeleton-shimmer skeleton-text" style="width: 35%;"></div></td>';
+        } else if (c === columns - 1) {
+          html += '<td><div class="skeleton-shimmer skeleton-btn"></div></td>';
+        } else if (c === columns - 2) {
+          html += '<td><div class="skeleton-shimmer skeleton-pill"></div></td>';
+        } else {
+          html += '<td><div class="skeleton-shimmer skeleton-text" style="width: ' + (40 + (r % 2) * 20) + '%;"></div></td>';
+        }
+      }
+      html += '</tr>';
+    }
+    tbodyEl.innerHTML = html;
+  },
+
+  renderKpiSkeleton: (elementIds = []) => {
+    elementIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = '<span class="skeleton-shimmer skeleton-kpi-val"></span>';
+    });
   }
 };

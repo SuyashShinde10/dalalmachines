@@ -160,7 +160,30 @@
                   </tr>
                 </thead>
                 <tbody id="sa-users-tbody">
-                  <tr><td colspan="6" style="text-align: center; padding: 24px;">Loading accounts...</td></tr>
+                                    <tr class="sa-skeleton-row">
+                    <td><div class="sa-skeleton-shimmer sa-skeleton-title" style="width: 140px;"></div></td>
+                    <td><div class="sa-skeleton-shimmer sa-skeleton-text" style="width: 90px;"></div></td>
+                    <td><div class="sa-skeleton-shimmer sa-skeleton-text" style="width: 160px;"></div></td>
+                    <td><div class="sa-skeleton-shimmer sa-skeleton-pill"></div></td>
+                    <td><div class="sa-skeleton-shimmer sa-skeleton-pill"></div></td>
+                    <td style="text-align: right;"><div class="sa-skeleton-shimmer sa-skeleton-btn"></div></td>
+                  </tr>
+                  <tr class="sa-skeleton-row">
+                    <td><div class="sa-skeleton-shimmer sa-skeleton-title" style="width: 120px;"></div></td>
+                    <td><div class="sa-skeleton-shimmer sa-skeleton-text" style="width: 80px;"></div></td>
+                    <td><div class="sa-skeleton-shimmer sa-skeleton-text" style="width: 150px;"></div></td>
+                    <td><div class="sa-skeleton-shimmer sa-skeleton-pill"></div></td>
+                    <td><div class="sa-skeleton-shimmer sa-skeleton-pill"></div></td>
+                    <td style="text-align: right;"><div class="sa-skeleton-shimmer sa-skeleton-btn"></div></td>
+                  </tr>
+                  <tr class="sa-skeleton-row">
+                    <td><div class="sa-skeleton-shimmer sa-skeleton-title" style="width: 150px;"></div></td>
+                    <td><div class="sa-skeleton-shimmer sa-skeleton-text" style="width: 100px;"></div></td>
+                    <td><div class="sa-skeleton-shimmer sa-skeleton-text" style="width: 170px;"></div></td>
+                    <td><div class="sa-skeleton-shimmer sa-skeleton-pill"></div></td>
+                    <td><div class="sa-skeleton-shimmer sa-skeleton-pill"></div></td>
+                    <td style="text-align: right;"><div class="sa-skeleton-shimmer sa-skeleton-btn"></div></td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -189,6 +212,21 @@
         }
         SuperAdminCore.socket.on('user:status_changed', () => loadUsers());
         SuperAdminCore.socket.on('dev:account_status_changed', () => loadUsers());
+      }
+      attachUserStream();
+
+      // Real-time synchronization for user account changes
+      function attachUserStream() {
+        if (!SuperAdminCore.socket) {
+          setTimeout(attachUserStream, 300);
+          return;
+        }
+        SuperAdminCore.socket.on('user:status_changed', (data) => {
+          loadUsers();
+        });
+        SuperAdminCore.socket.on('dev:account_status_changed', (data) => {
+          loadUsers();
+        });
       }
       attachUserStream();
 
@@ -229,6 +267,21 @@
             SuperAdminCore.toast('User created successfully');
             hideForm();
             loadUsers();
+
+      // Real-time synchronization for user account changes
+      function attachUserStream() {
+        if (!SuperAdminCore.socket) {
+          setTimeout(attachUserStream, 300);
+          return;
+        }
+        SuperAdminCore.socket.on('user:status_changed', (data) => {
+          loadUsers();
+        });
+        SuperAdminCore.socket.on('dev:account_status_changed', (data) => {
+          loadUsers();
+        });
+      }
+      attachUserStream();
           } else {
             SuperAdminCore.toast(res.message || 'Failed to create user', 'error');
           }
@@ -240,6 +293,21 @@
             SuperAdminCore.toast('User updated successfully');
             hideForm();
             loadUsers();
+
+      // Real-time synchronization for user account changes
+      function attachUserStream() {
+        if (!SuperAdminCore.socket) {
+          setTimeout(attachUserStream, 300);
+          return;
+        }
+        SuperAdminCore.socket.on('user:status_changed', (data) => {
+          loadUsers();
+        });
+        SuperAdminCore.socket.on('dev:account_status_changed', (data) => {
+          loadUsers();
+        });
+      }
+      attachUserStream();
           } else {
             SuperAdminCore.toast(res.message || 'Failed to update user', 'error');
           }
@@ -311,6 +379,21 @@
       if (res.success) {
         SuperAdminCore.toast(`Account ${newActive ? 'activated' : 'suspended'}`);
         loadUsers();
+
+      // Real-time synchronization for user account changes
+      function attachUserStream() {
+        if (!SuperAdminCore.socket) {
+          setTimeout(attachUserStream, 300);
+          return;
+        }
+        SuperAdminCore.socket.on('user:status_changed', (data) => {
+          loadUsers();
+        });
+        SuperAdminCore.socket.on('dev:account_status_changed', (data) => {
+          loadUsers();
+        });
+      }
+      attachUserStream();
       } else {
         SuperAdminCore.toast(res.message || 'Status change failed', 'error');
       }
@@ -322,6 +405,21 @@
       if (res.success) {
         SuperAdminCore.toast('Account removed');
         loadUsers();
+
+      // Real-time synchronization for user account changes
+      function attachUserStream() {
+        if (!SuperAdminCore.socket) {
+          setTimeout(attachUserStream, 300);
+          return;
+        }
+        SuperAdminCore.socket.on('user:status_changed', (data) => {
+          loadUsers();
+        });
+        SuperAdminCore.socket.on('dev:account_status_changed', (data) => {
+          loadUsers();
+        });
+      }
+      attachUserStream();
       } else {
         SuperAdminCore.toast(res.message || 'Delete failed', 'error');
       }
