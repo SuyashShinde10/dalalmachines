@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
+const realtime = require('../realtime');
 const { requireSuperAdmin } = require('../middleware/auth');
 
 // All routes here require Super Admin role
@@ -31,6 +32,7 @@ router.post('/', (req, res) => {
 
   try {
     const created = db.createUser({ username, email, password, role, name }, req.user);
+    realtime.broadcastUserChange({ action: 'CREATED', user: created });
     res.status(201).json({ success: true, message: 'User account created successfully.', user: created });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
@@ -57,6 +59,7 @@ router.put('/:id', (req, res) => {
 
   try {
     const updated = db.updateUser(req.params.id, req.body, req.user);
+    realtime.broadcastUserChange({ action: 'UPDATED', user: updated });
     res.json({ success: true, message: 'User updated successfully.', user: updated });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
@@ -83,6 +86,7 @@ router.delete('/:id', (req, res) => {
 
   const ok = db.deleteUser(req.params.id, req.user);
   if (ok) {
+    realtime.broadcastUserChange({ action: 'DELETED', user });
     res.json({ success: true, message: `User ${user.username} deleted successfully.` });
   } else {
     res.status(500).json({ success: false, message: 'Failed to delete user.' });

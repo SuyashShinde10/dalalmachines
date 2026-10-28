@@ -161,6 +161,29 @@
         currentLogPage = 1;
         renderLogTable();
       });
+
+      // Real-time Live Security Audit Trail Streaming
+      function attachLogStream() {
+        if (!SuperAdminCore.socket) {
+          setTimeout(attachLogStream, 300);
+          return;
+        }
+        SuperAdminCore.socket.on('audit:log_entry', (entry) => {
+          allLogs.unshift(entry);
+          const tag = document.getElementById('log-count-tag');
+          if (tag) tag.textContent = `${allLogs.length} Total Events Logged`;
+          if (currentLogPage === 1) {
+            renderLogTable();
+            const firstRow = document.querySelector('#sa-logs-tbody tr');
+            if (firstRow) {
+              firstRow.style.transition = 'background 0.8s ease';
+              firstRow.style.background = 'rgba(16, 185, 129, 0.15)';
+              setTimeout(() => { firstRow.style.background = 'transparent'; }, 1500);
+            }
+          }
+        });
+      }
+      attachLogStream();
     })();
 
     async function loadLogs() {

@@ -23,7 +23,7 @@
       "name": "Dalal Inventory Admin",
       "active": true,
       "createdAt": "2026-10-06T09:58:03.484Z",
-      "lastLogin": "2026-10-28T13:27:39.272Z",
+      "lastLogin": "2026-10-28T13:33:03.965Z",
       "blockedByDeveloper": false,
       "blockedReason": "",
       "blockedAt": null
@@ -40,7 +40,7 @@
       "model": "HD-4000-SPECIAL",
       "year": 2024,
       "tonnage": 4000,
-      "location": "In Stock PUNE",
+      "location": "In Stock PUNE (Audited Live)",
       "condition": "Factory Refurbished - Live Trial Ready",
       "image": "images/dalal/hero_forging_press.jpg",
       "galleryImages": [
@@ -63,7 +63,7 @@
       "brochurePdf": null,
       "status": "active",
       "createdAt": "2026-10-06T10:09:42.259Z",
-      "updatedAt": "2026-10-06T10:09:42.259Z",
+      "updatedAt": "2026-10-28T13:50:32.709Z",
       "createdBy": "admin"
     },
     {
@@ -1657,6 +1657,30 @@
   ],
   "inquiries": [
     {
+      "id": "inq_2c940f02",
+      "name": "Kalyani Forge Lead",
+      "email": "",
+      "phone": "9822001122",
+      "company": "",
+      "machineId": null,
+      "machineName": "4000T Forging Press",
+      "message": "",
+      "status": "new",
+      "createdAt": "2026-10-28T13:50:32.684Z"
+    },
+    {
+      "id": "inq_783a0e5f",
+      "name": "Kalyani Forge Lead",
+      "email": "",
+      "phone": "9822001122",
+      "company": "",
+      "machineId": null,
+      "machineName": "4000T Forging Press",
+      "message": "",
+      "status": "new",
+      "createdAt": "2026-10-28T13:49:32.292Z"
+    },
+    {
       "id": "inq_c8d1c984",
       "name": "Suresh Singhania",
       "email": "suresh@singhaniaforge.com",
@@ -1959,8 +1983,52 @@
   ],
   "logs": [
     {
-      "id": "log_1b769e4c",
-      "timestamp": "2026-10-28T13:28:17.234Z",
+      "id": "log_f46d5a19",
+      "timestamp": "2026-10-28T13:50:32.721Z",
+      "userId": "usr_admin",
+      "username": "admin",
+      "role": "admin",
+      "action": "PRODUCT_UPDATED",
+      "target": "P00099-CUST",
+      "details": "Updated details for machine Custom 4000T Hydraulic Closed Die Forging Press with OMPI Clutch",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_b56cfc9f",
+      "timestamp": "2026-10-28T13:50:32.637Z",
+      "userId": "usr_dev",
+      "username": "developer_console",
+      "role": "developer",
+      "action": "DEVELOPER_BANNER_UPDATED",
+      "target": "DASHBOARD_BANNER",
+      "details": "Developer updated banner. Active: true, Style: doodle-gold",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_ffb40c99",
+      "timestamp": "2026-10-28T13:33:03.975Z",
+      "userId": "usr_admin",
+      "username": "admin",
+      "role": "admin",
+      "action": "USER_LOGIN",
+      "target": "AUTH",
+      "details": "User logged in successfully from ::1",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_e8d17ebc",
+      "timestamp": "2026-10-28T13:32:56.838Z",
+      "userId": "usr_dev",
+      "username": "developer_console",
+      "role": "developer",
+      "action": "USER_UNBLOCKED_BY_DEVELOPER",
+      "target": "admin",
+      "details": "Developer unblocked/restored ADMIN [admin].",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_756c3fbd",
+      "timestamp": "2026-10-28T13:32:52.477Z",
       "userId": "usr_dev",
       "username": "developer_console",
       "role": "developer",
@@ -1970,14 +2038,47 @@
       "ip": "127.0.0.1"
     },
     {
-      "id": "log_ad4eae7f",
-      "timestamp": "2026-10-28T13:28:17.227Z",
+      "id": "log_5ef1354c",
+      "timestamp": "2026-10-28T13:32:32.741Z",
+      "userId": "usr_dev",
+      "username": "developer_console",
+      "role": "developer",
+      "action": "USER_BLOCKED_BY_DEVELOPER",
+      "target": "developer",
+      "details": "Developer suspended SUPERADMIN [developer]. Reason: Account suspended by Lead System Developer for security audit and operational review.",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_40a719f3",
+      "timestamp": "2026-10-28T13:32:01.321Z",
+      "userId": "usr_dev",
+      "username": "developer_console",
+      "role": "developer",
+      "action": "USER_BLOCKED_BY_DEVELOPER",
+      "target": "admin",
+      "details": "Developer suspended ADMIN [admin]. Reason: Account suspended by Lead System Developer for security audit and operational review.",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_0a095325",
+      "timestamp": "2026-10-28T13:31:53.494Z",
+      "userId": "usr_admin",
+      "username": "admin",
+      "role": "admin",
+      "action": "USER_LOGIN",
+      "target": "AUTH",
+      "details": "User logged in successfully from ::1",
+      "ip": "127.0.0.1"
+    },
+    {
+      "id": "log_1ecc8581",
+      "timestamp": "2026-10-28T13:31:41.985Z",
       "userId": "usr_dev",
       "username": "developer_console",
       "role": "developer",
       "action": "USER_UNBLOCKED_BY_DEVELOPER",
-      "target": "admin",
-      "details": "Developer unblocked/restored ADMIN [admin].",
+      "target": "developer",
+      "details": "Developer unblocked/restored SUPERADMIN [developer].",
       "ip": "127.0.0.1"
     },
     {
@@ -3827,14 +3928,14 @@
   },
   "developerBanner": {
     "active": true,
-    "style": "doodle-festive",
-    "badgeText": "REAL-TIME DOODLE ACTIVE",
-    "title": "WebSocket Realtime Sync Live",
-    "message": "Instant duplex updates across website and dashboards verified.",
-    "icon": "fa-star",
+    "style": "doodle-gold",
+    "badgeText": "✨ DEVELOPER DOODLE SPOTLIGHT",
+    "title": "WS Duplex System Test",
+    "message": "Testing system-wide sync",
+    "icon": "fa-trophy",
     "linkText": "Explore Machines",
     "linkUrl": "/admin/products.html",
     "dismissable": true,
-    "updatedAt": "2026-10-28T12:55:09.980Z"
+    "updatedAt": "2026-10-28T13:50:32.629Z"
   }
 }

@@ -539,6 +539,10 @@ module.exports = {
       db.logs = db.logs.slice(0, 1000);
     }
     saveDb();
+    try {
+      const realtime = require('./realtime');
+      realtime.broadcastLogEntry(entry);
+    } catch (e) {}
     return entry;
   },
 

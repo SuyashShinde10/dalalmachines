@@ -76,6 +76,22 @@ function initRealtime(server) {
     });
   });
 
+  // Stream lightweight live telemetry to developer console every 3 seconds
+  setInterval(() => {
+    if (!io) return;
+    const mem = process.memoryUsage();
+    io.to('developer').emit('telemetry:tick', {
+      uptimeSeconds: Math.floor(process.uptime()),
+      memory: {
+        rssMB: (mem.rss / (1024 * 1024)).toFixed(1),
+        heapUsedMB: (mem.heapUsed / (1024 * 1024)).toFixed(1),
+        heapTotalMB: (mem.heapTotal / (1024 * 1024)).toFixed(1)
+      },
+      activeSockets: io.engine ? io.engine.clientsCount : 0,
+      timestamp: new Date().toISOString()
+    });
+  }, 3000);
+
   console.log('[WebSocket] Real-Time Engine initialized with Socket.IO on port ' + config.PORT);
   return io;
 }
@@ -158,6 +174,43 @@ function broadcastInquiry({ id, machineName, company, timestamp }) {
   // NOTE: Developer channel is intentionally EXCLUDED to maintain Zero-PII privacy!
 }
 
+// 6. Inquiry Status Updated (Admin / Super Admin room sync)
+function broadcastInquiryStatusChanged({ id, status, updatedBy }) {
+  if (!io) return;
+  const payload = { id, status, updatedBy, timestamp: new Date().toISOString() };
+  io.to('admin').emit('inquiry:status_changed', payload);
+  io.to('superadmin').emit('inquiry:status_changed', payload);
+}
+
+// 7. Security & Activity Audit Log Stream
+function broadcastLogEntry(entry) {
+  if (!io) return;
+  // Stream to Super Admin live forensic console
+  io.to('superadmin').emit('audit:log_entry', entry);
+
+  // Send sanitized (non-PII) version to developer console
+  if (entry.action && (entry.action.startsWith('USER_') || entry.action.startsWith('SYS_') || entry.action.startsWith('BANNER_') || entry.action.startsWith('CATALOG_'))) {
+    io.to('developer').emit('dev:audit_event', {
+      timestamp: entry.timestamp,
+      action: entry.action,
+      username: entry.username,
+      target: entry.target
+    });
+  }
+}
+
+// 8. Administrative User Account Changed (Created / Updated / Deleted)
+function broadcastUserChange({ action, user }) {
+  if (!io) return;
+  const payload = {
+    action,
+    user: user ? { id: user.id, username: user.username, role: user.role, name: user.name, active: user.active } : null,
+    timestamp: new Date().toISOString()
+  };
+  io.to('superadmin').emit('user:status_changed', payload);
+  io.to('developer').emit('dev:account_status_changed', payload);
+}
+
 module.exports = {
   initRealtime,
   getIO,
@@ -165,6 +218,9 @@ module.exports = {
   broadcastAccountUnblocked,
   broadcastBannerUpdate,
   broadcastCatalogUpdate,
-  broadcastInquiry
+  broadcastInquiry,
+  broadcastInquiryStatusChanged,
+  broadcastLogEntry,
+  broadcastUserChange
 };
 

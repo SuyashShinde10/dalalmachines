@@ -182,6 +182,16 @@
 
       loadUsers();
 
+      function attachUserStream() {
+        if (!SuperAdminCore.socket) {
+          setTimeout(attachUserStream, 300);
+          return;
+        }
+        SuperAdminCore.socket.on('user:status_changed', () => loadUsers());
+        SuperAdminCore.socket.on('dev:account_status_changed', () => loadUsers());
+      }
+      attachUserStream();
+
       const cardForm = document.getElementById('card-create-user');
       const openBtn = document.getElementById('btn-open-create');
       const closeBtn = document.getElementById('btn-close-form');

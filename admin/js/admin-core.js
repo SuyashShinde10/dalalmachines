@@ -368,7 +368,20 @@ const AdminCore = {
           const count = parseInt(badge.textContent, 10) || 0;
           badge.textContent = count + 1;
         }
+        const badge2 = document.getElementById('badge-inquiries');
+        if (badge2) {
+          const count = parseInt(badge2.textContent, 10) || 0;
+          badge2.textContent = count + 1;
+        }
         if (typeof loadInquiries === 'function') loadInquiries();
+        if (typeof loadDashboardData === 'function') loadDashboardData();
+      });
+
+      // 5. EVENT: Inquiry Status Updated Across Sessions
+      socket.on('inquiry:status_changed', (data) => {
+        console.log('[RealTime] Inquiry status changed:', data);
+        if (typeof loadInquiries === 'function') loadInquiries();
+        if (typeof loadDashboardData === 'function') loadDashboardData();
       });
     }
 

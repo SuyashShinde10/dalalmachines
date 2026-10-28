@@ -341,6 +341,17 @@ const SuperAdminCore = {
         SuperAdminCore.toast(`🔔 New Buyer RFQ: ${data.machineName || 'Machinery Lead'} (${data.company || 'Enterprise'})`, 'info');
         if (typeof loadMasterData === 'function') loadMasterData();
       });
+
+      // 5. EVENT: Inquiry Status Updated Across Sessions
+      socket.on('inquiry:status_changed', (data) => {
+        if (typeof loadMasterData === 'function') loadMasterData();
+      });
+
+      // 6. EVENT: Administrative Accounts Changed
+      socket.on('user:status_changed', (data) => {
+        if (typeof loadMasterData === 'function') loadMasterData();
+        if (typeof loadUsers === 'function') loadUsers();
+      });
     }
 
     if (typeof io === 'undefined') {

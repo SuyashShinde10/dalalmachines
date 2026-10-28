@@ -54,6 +54,7 @@ router.put('/:id', requireAdmin, (req, res) => {
     return res.status(404).json({ success: false, message: 'Inquiry not found.' });
   }
 
+  realtime.broadcastInquiryStatusChanged({ id: updated.id, status: updated.status, updatedBy: req.user.username });
   res.json({ success: true, message: 'Inquiry status updated.', inquiry: updated });
 });
 

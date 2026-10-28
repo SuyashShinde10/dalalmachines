@@ -1335,6 +1335,19 @@
       devSocket.on('catalog:inventory_synced', () => {
         fetchCatalogAudit();
       });
+
+      // Live listen to real-time telemetry vitals tick
+      devSocket.on('telemetry:tick', (data) => {
+        if (!data) return;
+        const memEl = document.getElementById('kpi-memory');
+        const heapEl = document.getElementById('kpi-heap-desc');
+        if (memEl && data.memory) memEl.textContent = `${data.memory.rssMB} MB`;
+        if (heapEl && data.memory) heapEl.textContent = `Heap: ${data.memory.heapUsedMB} MB / ${data.memory.heapTotalMB} MB • Active Sockets: ${data.activeSockets}`;
+        if (data.uptimeSeconds !== undefined) {
+          baseUptimeSec = data.uptimeSeconds;
+          renderUptime();
+        }
+      });
     }
 
     // Startup
