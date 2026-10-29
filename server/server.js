@@ -19,6 +19,7 @@ const logRoutes = require('./routes/logs');
 const systemRoutes = require('./routes/system');
 const aiRoutes = require('./routes/ai');
 const devRoutes = require('./routes/dev');
+const seoRoutes = require('./routes/seo');
 
 // Enterprise SecOps & Concealment Engine
 const honeypot = require('./security/honeypot');
@@ -100,6 +101,19 @@ app.use(honeypot.blacklistGuardMiddleware);
 app.get('/portal-gate', gateway.handleGatewayEntry);
 app.post('/portal-gate', gateway.handleGatewayEntry);
 app.get('/portal-exit', gateway.handleGatewayRevoke);
+
+// 4d2. PWA Manifest & Service Worker Endpoints (Offline Warehouse Mode)
+app.get('/manifest.json', (req, res) => {
+  res.sendFile(path.join(config.PUBLIC_DIR, 'manifest.json'));
+});
+app.get('/sw.js', (req, res) => {
+  res.setHeader('Content-Type', 'application/javascript');
+  res.setHeader('Service-Worker-Allowed', '/');
+  res.sendFile(path.join(config.PUBLIC_DIR, 'sw.js'));
+});
+
+// 4d3. Dynamic Dynamic XML Sitemap & Robots.txt Engine (GEO/AEO/SEO)
+app.use('/', seoRoutes);
 
 // 4e. Honeypot Deception Traps: Detect & auto-ban scanners probing common attack paths
 const honeypotPatterns = [

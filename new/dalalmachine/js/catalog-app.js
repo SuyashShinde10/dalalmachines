@@ -381,6 +381,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Bind AI Machinery Matchmaker button
+  const aiMatchmakerBtn = document.getElementById('ai-matchmaker-btn');
+  if (aiMatchmakerBtn) {
+    aiMatchmakerBtn.addEventListener('click', () => {
+      const q = (searchInput && searchInput.value.trim()) ? searchInput.value.trim() : 'Hot Forging Press 1600 Ton in Pune';
+      const aiInput = document.getElementById('dai-input');
+      const aiLauncher = document.getElementById('dai-launcher');
+      const aiWidget = document.getElementById('dai-widget');
+      if (aiWidget && !aiWidget.classList.contains('active')) {
+        if (aiLauncher) aiLauncher.click();
+      }
+      if (aiInput) {
+        aiInput.value = q;
+        aiInput.focus();
+        const sendBtn = document.getElementById('dai-btn-send');
+        if (sendBtn) sendBtn.click();
+      }
+    });
+  }
+
   // Bind location buttons
   locationFilters.forEach(btn => {
     btn.addEventListener('click', (e) => {

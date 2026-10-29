@@ -1,0 +1,25 @@
+{
+  "name": "Dalal Machine Tools Agency Pvt. Ltd.",
+  "short_name": "Dalal Machinery",
+  "description": "Heavy Metal Forming & Metal Cutting Machinery Stockist & Technical Importer in Pune Yard, India.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0f172a",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/new/dalalmachine/images/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/new/dalalmachine/images/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "productivity", "utilities"]
+}

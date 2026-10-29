@@ -9,7 +9,7 @@
       "name": "System Developer",
       "active": true,
       "createdAt": "2026-10-06T09:58:03.305Z",
-      "lastLogin": "2026-10-29T10:42:30.815Z",
+      "lastLogin": "2026-10-29T11:23:15.101Z",
       "blockedByDeveloper": false,
       "blockedReason": "",
       "blockedAt": null
@@ -23,7 +23,7 @@
       "name": "Dalal Inventory Admin",
       "active": true,
       "createdAt": "2026-10-06T09:58:03.484Z",
-      "lastLogin": "2026-10-29T10:47:49.074Z",
+      "lastLogin": "2026-10-29T11:23:21.461Z",
       "blockedByDeveloper": false,
       "blockedReason": "",
       "blockedAt": null
@@ -1657,6 +1657,42 @@
   ],
   "inquiries": [
     {
+      "id": "inq_cc948de5",
+      "name": "Test Machine ",
+      "email": "security-audit@dalalmachines.com",
+      "phone": "+91 99999 88888",
+      "company": "",
+      "machineId": null,
+      "machineName": null,
+      "message": "",
+      "status": "new",
+      "createdAt": "2026-10-29T11:23:15.161Z"
+    },
+    {
+      "id": "inq_42e26f26",
+      "name": "Mr. Rajesh Verma",
+      "email": "rajesh@vermaforgings.com",
+      "phone": "+91 9876543210",
+      "company": "Verma Forgings Ltd",
+      "machineId": null,
+      "machineName": "1600T Russian Hot Forging Press",
+      "message": "Need CIF Nhava Sheva quote and live power trial schedule.",
+      "status": "new",
+      "createdAt": "2026-10-29T11:23:01.203Z"
+    },
+    {
+      "id": "inq_7180fb38",
+      "name": "Mr. Rajesh Verma",
+      "email": "rajesh@vermaforgings.com",
+      "phone": "+91 9876543210",
+      "company": "Verma Forgings Ltd",
+      "machineId": null,
+      "machineName": "1600T Russian Hot Forging Press",
+      "message": "Need CIF Nhava Sheva quote and live power trial schedule.",
+      "status": "new",
+      "createdAt": "2026-10-29T11:21:34.878Z"
+    },
+    {
       "id": "inq_9d64a103",
       "name": "Test Machine ",
       "email": "security-audit@dalalmachines.com",
@@ -1994,6 +2030,97 @@
     }
   ],
   "logs": [
+    {
+      "id": "log_812d2612",
+      "timestamp": "2026-10-29T11:23:21.468Z",
+      "userId": "usr_admin",
+      "username": "admin",
+      "role": "admin",
+      "action": "USER_LOGIN",
+      "target": "AUTH",
+      "details": "User logged in successfully from ::1",
+      "ip": "127.0.0.1",
+      "prevHash": "6937e6a2287adcb1ef8faa45d98fc869403fcf934140eb2226f5141548c53f42",
+      "hash": "2c0e91e3635b0c541f3b9aa94325322d6169d1ad57f8127ae9e830e092a77da6"
+    },
+    {
+      "id": "log_2dac6c03",
+      "timestamp": "2026-10-29T11:23:15.233Z",
+      "userId": "usr_superadmin",
+      "username": "developer",
+      "role": "superadmin",
+      "action": "PRODUCT_DELETED",
+      "target": "P000258",
+      "details": "Deleted machine Benchmark Hydraulic Stamping Machine",
+      "ip": "127.0.0.1",
+      "prevHash": "4c9356d04744fd4ce1df09738dce52b90c19ee70d0dccaadeae350936741eeef",
+      "hash": "6937e6a2287adcb1ef8faa45d98fc869403fcf934140eb2226f5141548c53f42"
+    },
+    {
+      "id": "log_c3f8c1e7",
+      "timestamp": "2026-10-29T11:23:15.200Z",
+      "userId": "usr_superadmin",
+      "username": "developer",
+      "role": "superadmin",
+      "action": "PRODUCT_CREATED",
+      "target": "P000258",
+      "details": "Created machine Benchmark Hydraulic Stamping Machine (Standard Machine)",
+      "ip": "127.0.0.1",
+      "prevHash": "24c84b5962c4ee4735f14c0248e317ea7839b310b03da92ca3eddd133b6b9d6e",
+      "hash": "4c9356d04744fd4ce1df09738dce52b90c19ee70d0dccaadeae350936741eeef"
+    },
+    {
+      "id": "log_c54ac6db",
+      "timestamp": "2026-10-29T11:23:15.167Z",
+      "userId": "system_notification",
+      "username": "LEAD_DISPATCHER",
+      "role": "system",
+      "action": "INQUIRY_ALERT_DISPATCHED",
+      "target": "inq_cc948de5",
+      "details": "Generated WhatsApp alert payload for buyer Test Machine  (N/A) requesting Machinery",
+      "ip": "127.0.0.1",
+      "prevHash": "b4133dc87093de23ab526a7ab2a5e88d94023059298ebd7a63867904f89613f8",
+      "hash": "24c84b5962c4ee4735f14c0248e317ea7839b310b03da92ca3eddd133b6b9d6e"
+    },
+    {
+      "id": "log_112d6764",
+      "timestamp": "2026-10-29T11:23:15.126Z",
+      "userId": "usr_superadmin",
+      "username": "developer",
+      "role": "superadmin",
+      "action": "USER_LOGIN",
+      "target": "AUTH",
+      "details": "User logged in successfully from ::1",
+      "ip": "127.0.0.1",
+      "prevHash": "76dd770ca8e9823192c22967a2a442a5820b734b711bcb1d3ff5a337fda0745b",
+      "hash": "b4133dc87093de23ab526a7ab2a5e88d94023059298ebd7a63867904f89613f8"
+    },
+    {
+      "id": "log_b873a72c",
+      "timestamp": "2026-10-29T11:23:01.209Z",
+      "userId": "system_notification",
+      "username": "LEAD_DISPATCHER",
+      "role": "system",
+      "action": "INQUIRY_ALERT_DISPATCHED",
+      "target": "inq_42e26f26",
+      "details": "Generated WhatsApp alert payload for buyer Mr. Rajesh Verma (Verma Forgings Ltd) requesting 1600T Russian Hot Forging Press",
+      "ip": "127.0.0.1",
+      "prevHash": "75ce60f9113f34c087d4703e3d32eb9ed1f8367ed0202861ab5426e38cc78cdb",
+      "hash": "76dd770ca8e9823192c22967a2a442a5820b734b711bcb1d3ff5a337fda0745b"
+    },
+    {
+      "id": "log_7209442c",
+      "timestamp": "2026-10-29T11:21:34.890Z",
+      "userId": "system_notification",
+      "username": "LEAD_DISPATCHER",
+      "role": "system",
+      "action": "INQUIRY_ALERT_DISPATCHED",
+      "target": "inq_7180fb38",
+      "details": "Generated WhatsApp alert payload for buyer Mr. Rajesh Verma (Verma Forgings Ltd) requesting 1600T Russian Hot Forging Press",
+      "ip": "127.0.0.1",
+      "prevHash": "00a44cc9b63ba63c110b0d972e36ca15d16d613824a15d01d602f18a69fda0e6",
+      "hash": "75ce60f9113f34c087d4703e3d32eb9ed1f8367ed0202861ab5426e38cc78cdb"
+    },
     {
       "id": "log_4f233fde",
       "timestamp": "2026-10-29T10:47:49.101Z",

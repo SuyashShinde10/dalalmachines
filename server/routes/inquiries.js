@@ -3,9 +3,10 @@ const router = express.Router();
 const db = require('../db');
 const realtime = require('../realtime');
 const { requireAdmin } = require('../middleware/auth');
+const { dispatchInquiryAlerts } = require('../notifications/alertEngine');
 
 // POST /api/inquiries (Public from Contact & PDP forms)
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   const { name, email, phone, company, machineId, machineName, message } = req.body;
   if (!name || (!email && !phone)) {
     return res.status(400).json({ success: false, message: 'Please provide your name and contact phone or email.' });
@@ -29,10 +30,14 @@ router.post('/', (req, res) => {
     timestamp: inquiry.createdAt
   });
 
+  // DISPATCH ALERTS: Instant WhatsApp lead payload & staff notification
+  const alertInfo = await dispatchInquiryAlerts(inquiry);
+
   res.status(201).json({
     success: true,
     message: 'Thank you! Your quotation request has been submitted to Dalal Machine Tools.',
-    inquiryId: inquiry.id
+    inquiryId: inquiry.id,
+    whatsappContactUrl: alertInfo.whatsappUrl
   });
 });
 

@@ -16,8 +16,6 @@
   function initDalalAI() {
     const el = document.getElementById('dai-widget-container');
     if (el) el.remove();
-    return;
-
 
     // Supported Languages Config
     const LANGUAGES = {
@@ -486,6 +484,9 @@
           <div class="dai-product-actions">
             <a href="${pdpUrl}" class="dai-btn-card-pdp" target="_blank">
               <i class="fa fa-external-link"></i> ${cfg.viewSpecs}
+            </a>
+            <a href="/api/products/${id}/spec-sheet" class="dai-btn-card-pdp" style="background:#0f172a; border-color:#f89d13; color:#f89d13;" target="_blank" title="Official 1-Click PDF Spec Sheet">
+              <i class="fa fa-file-pdf-o"></i> PDF
             </a>
             <a href="${waUrl}" class="dai-btn-card-wa" target="_blank">
               <i class="fa fa-whatsapp"></i> ${cfg.getQuote}

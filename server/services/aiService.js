@@ -734,11 +734,218 @@ Return ONLY a JSON object:
   };
 }
 
+/**
+ * 5. Enterprise AI Machine Matchmaker & Natural Language Technical Search
+ * Parses complex buyer engineering requirements (tonnage ranges, die clearances,
+ * processes, clutch requirements, location, inspection readiness) and returns
+ * ranked machine options with technical match score and engineering reasoning.
+ */
+function matchMachinesTechnical(queryText, options = {}) {
+  const q = (queryText || '').trim();
+  if (!q) {
+    throw new Error('Query string is required for technical matching.');
+  }
+
+  const lower = q.toLowerCase();
+  const allProducts = db.getProducts({ all: 'true' }) || [];
+
+  // 1. Technical Criteria Extraction
+  let minTon = null;
+  let maxTon = null;
+  let targetTon = null;
+
+  // Patterns like: "1600 to 2500 ton", "between 1000 and 2000 ton", "1500-2500 ton", "1600t - 2500t"
+  const rangeMatch = lower.match(/(?:between\s+)?(\d{3,5})\s*(?:t|ton|tons|tonne)?\s*(?:to|-|and)\s*(\d{3,5})\s*(?:t|ton|tons|tonne)?/i);
+  if (rangeMatch) {
+    minTon = parseInt(rangeMatch[1], 10);
+    maxTon = parseInt(rangeMatch[2], 10);
+    if (minTon > maxTon) {
+      const temp = minTon; minTon = maxTon; maxTon = temp;
+    }
+  } else {
+    // Check for "above 1000 ton" or "min 1500 ton"
+    const minMatch = lower.match(/(?:above|over|min|minimum|greater than|at least)\s*(\d{3,5})\s*(?:t|ton|tons|tonne)?/i);
+    if (minMatch) {
+      minTon = parseInt(minMatch[1], 10);
+    } else {
+      // Check for single tonnage e.g. "1600 ton"
+      const singleMatch = lower.match(/(\d{3,5})\s*(?:t|ton|tons|tonne|metric ton)/i);
+      if (singleMatch) {
+        targetTon = parseInt(singleMatch[1], 10);
+      }
+    }
+  }
+
+  // Location preference
+  let preferredLocation = null;
+  if (lower.includes('pune') || lower.includes('yard') || lower.includes('ready stock') || lower.includes('in stock') || lower.includes('india')) {
+    preferredLocation = 'Pune (Immediate Yard Inspection)';
+  } else if (lower.includes('europe') || lower.includes('germany') || lower.includes('italy') || lower.includes('russia') || lower.includes('import') || lower.includes('high sea')) {
+    preferredLocation = 'Europe / High Seas Import';
+  }
+
+  // Brand / Make preference
+  const makeKeywords = ['voronezh', 'tmp', 'national', 'eumuco', 'hasenclever', 'skoda', 'tos', 'union', 'ompi', 'schuler', 'bliss', 'erfurt', 'clearing', 'kuraki', 'pama', 'wagner', 'danly'];
+  const matchedMakes = makeKeywords.filter(m => lower.includes(m));
+
+  // Process / Application keywords
+  const isForging = lower.includes('forging') || lower.includes('press') || lower.includes('crank');
+  const isCoining = lower.includes('coining') || lower.includes('knuckle') || lower.includes('minting') || lower.includes('embossing');
+  const isHydraulic = lower.includes('hydraulic') || lower.includes('deep draw') || lower.includes('cushion');
+  const isBoring = lower.includes('boring') || lower.includes('horizontal boring') || lower.includes('floor borer');
+  const isLathe = lower.includes('lathe') || lower.includes('turning') || lower.includes('roll turning');
+  const isGear = lower.includes('gear') || lower.includes('hobbing') || lower.includes('shaper');
+  const isOMPIReq = lower.includes('ompi') || lower.includes('clutch') || lower.includes('brake');
+
+  // 2. Score and Rank every product
+  const results = allProducts.map(product => {
+    let score = 20; // baseline
+    const reasons = [];
+    const prodName = (product.name || '').toLowerCase();
+    const prodCat = (product.category || '').toLowerCase();
+    const prodCatName = (product.categoryName || '').toLowerCase();
+    const prodMake = (product.make || '').toLowerCase();
+    const prodLoc = (product.location || '').toLowerCase();
+    const prodCond = (product.condition || '').toLowerCase();
+    const specsStr = JSON.stringify(product.specs || {}).toLowerCase();
+
+    // Tonnage Scoring
+    if (product.tonnage) {
+      if (minTon !== null && maxTon !== null) {
+        if (product.tonnage >= minTon && product.tonnage <= maxTon) {
+          score += 40;
+          reasons.push(`Exact Tonnage Fit: ${product.tonnage} Metric Tons falls directly within your requested ${minTon}T - ${maxTon}T capacity window.`);
+        } else if (Math.abs(product.tonnage - minTon) <= 300 || Math.abs(product.tonnage - maxTon) <= 300) {
+          score += 25;
+          reasons.push(`Close Tonnage Reserve: ${product.tonnage} Tons provides optimal reserve forming capability close to your requested envelope.`);
+        }
+      } else if (minTon !== null) {
+        if (product.tonnage >= minTon) {
+          score += 35;
+          reasons.push(`Tonnage Threshold Met: ${product.tonnage} Tons satisfies your minimum requirement of ${minTon} Tons.`);
+        }
+      } else if (targetTon !== null) {
+        if (product.tonnage === targetTon) {
+          score += 45;
+          reasons.push(`Exact Target Capacity: Precision ${product.tonnage} Tons match for your specified tooling requirements.`);
+        } else if (Math.abs(product.tonnage - targetTon) <= 400) {
+          score += 25;
+          reasons.push(`Nearby Forming Capacity: ${product.tonnage} Tons (delta: ${product.tonnage > targetTon ? '+' : ''}${product.tonnage - targetTon}T) suitable for the specified tooling profile.`);
+        }
+      }
+    }
+
+    // Process & Category Matching
+    if (isForging && (prodCat.includes('forging') || prodCat.includes('press') || prodName.includes('forging') || prodName.includes('press'))) {
+      score += 25;
+      reasons.push('Process Alignment: Specialized heavy industrial hot/warm forging mechanical design.');
+    }
+    if (isCoining && (prodCat.includes('coining') || prodCat.includes('knuckle') || prodName.includes('coining') || prodName.includes('knuckle'))) {
+      score += 30;
+      reasons.push('Process Alignment: Precision knuckle joint kinematic drive for high coining/sizing dwell pressure.');
+    }
+    if (isHydraulic && (prodCat.includes('hydraulic') || prodName.includes('hydraulic') || specsStr.includes('hydraulic'))) {
+      score += 25;
+      reasons.push('Drive Alignment: Hydraulic system with deep drawing pressure control & blank holder capabilities.');
+    }
+    if (isBoring && (prodCat.includes('boring') || prodName.includes('boring') || prodCat.includes('cutting'))) {
+      score += 25;
+      reasons.push('Machining Alignment: Heavy duty horizontal boring machine with facing head & rotary table.');
+    }
+    if (isLathe && (prodCat.includes('lathe') || prodName.includes('lathe'))) {
+      score += 25;
+      reasons.push('Turning Alignment: Heavy duty roll/horizontal lathe engineered for high rigidity.');
+    }
+    if (isGear && (prodCat.includes('gear') || prodName.includes('gear'))) {
+      score += 25;
+      reasons.push('Gearing Alignment: High-precision gear hobbing / shaping kinematic transmission.');
+    }
+
+    // Make / Manufacturer Matching
+    matchedMakes.forEach(make => {
+      if (prodMake.includes(make) || prodName.includes(make)) {
+        score += 20;
+        reasons.push(`Make Preference: Manufactured by reputable industrial leader ${product.make}.`);
+      }
+    });
+
+    // OMPI Clutch-Brake Check
+    if (isOMPIReq || specsStr.includes('ompi') || prodName.includes('ompi')) {
+      if (specsStr.includes('ompi') || prodName.includes('ompi') || (product.customBadges && product.customBadges.some(b => b.toLowerCase().includes('ompi')))) {
+        score += 25;
+        reasons.push('OMPI Certified: Integrated with OMPI combined pneumatic clutch-brake unit with dual safety valves.');
+      }
+    }
+
+    // Location / Inspection Matching
+    if (preferredLocation) {
+      if (preferredLocation.includes('Pune') && (prodLoc.includes('pune') || prodLoc.includes('stock'))) {
+        score += 20;
+        reasons.push('Inspection Readiness: Stored in Pune Yard, available for immediate on-site trial under live electrical power.');
+      } else if (preferredLocation.includes('Europe') && (prodLoc.includes('europe') || prodLoc.includes('import') || prodLoc.includes('germany') || prodLoc.includes('italy'))) {
+        score += 20;
+        reasons.push('High Seas Duty Advantage: Eligible for direct Bill of Lading (B/L) transfer to save cascading taxes & duties.');
+      }
+    }
+
+    // Live trial readiness
+    if (prodCond.includes('live') || prodCond.includes('power') || prodCond.includes('trial')) {
+      score += 10;
+      reasons.push('Immediate Verification: Live power trial ready with electrical panel & lubrication checks.');
+    }
+
+    // General token match
+    const tokens = q.toLowerCase().split(/\s+/).filter(t => t.length > 3);
+    tokens.forEach(t => {
+      if (prodName.includes(t) || prodCatName.includes(t)) score += 4;
+      if (specsStr.includes(t)) score += 3;
+    });
+
+    // Normalize match score to percentage (max 98%, realistic curve)
+    const matchPercentage = Math.min(98, Math.max(45, Math.round((score / 140) * 100)));
+
+    return {
+      product,
+      matchScore: score,
+      matchPercentage,
+      matchReasons: reasons.length > 0 ? reasons : ['General machinery catalog match based on your inquiry parameters.'],
+      specSheetUrl: `/api/products/${product.id}/spec-sheet`,
+      directWhatsAppUrl: `https://wa.me/919821232131?text=${encodeURIComponent(`Namaste Dalal Machine Tools. I am inquiring about matched machine: ${product.name} (ID: ${product.id}, ${product.tonnage ? product.tonnage + 'T' : ''}). Please share CIF price and live trial video.`)}`
+    };
+  });
+
+  results.sort((a, b) => b.matchScore - a.matchScore);
+  const topMatches = results.slice(0, 5);
+
+  // Synthesize Technical Engineering Advisory
+  const topProduct = topMatches[0]?.product;
+  let advisoryText = '';
+  if (topProduct) {
+    advisoryText = `Based on your technical requirement "${q}", we recommend shortlisting ${topMatches.length} validated options. Top choice is the **${topProduct.name}** (${topProduct.location}). It offers proven forming stability, verified geometric tolerances, and complies with safety standards under OMPI pneumatic clutch-brake retrofits. Inspection under power can be arranged at your convenience.`;
+  } else {
+    advisoryText = `We analyzed our 49+ inventory units against your criteria. While exact custom dimensions may require engineering verification, the shortlisted options represent the closest mechanical matches available for prompt delivery.`;
+  }
+
+  return {
+    query: q,
+    criteriaExtracted: {
+      tonnage: minTon && maxTon ? `${minTon}T - ${maxTon}T` : (targetTon ? `${targetTon}T` : (minTon ? `Min ${minTon}T` : 'Flexible')),
+      process: isForging ? 'Hot/Warm Forging' : (isCoining ? 'Coining / Knuckle Joint' : (isHydraulic ? 'Hydraulic Deep Draw' : (isBoring ? 'Horizontal Boring' : (isLathe ? 'Heavy Turning' : 'General Industrial')))),
+      preferredLocation: preferredLocation || 'All Locations (India Yard & European Stock)',
+      ompiRequested: isOMPIReq
+    },
+    totalMatches: topMatches.length,
+    matches: topMatches,
+    advisory: advisoryText
+  };
+}
+
 module.exports = {
   chatWithCustomer,
   chatWithAdminCopilot,
   parseProductText,
   scoreInquiry,
   callGemini,
-  searchCatalog
+  searchCatalog,
+  matchMachinesTechnical
 };

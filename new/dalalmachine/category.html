@@ -10,7 +10,10 @@
   <link href="css/responsive.css" rel="stylesheet">
   <link href="css/font-awesome.css" rel="stylesheet">
   <link href="css/dalal-custom.css?v=5.0" rel="stylesheet">
+  <link href="css/dalal-ai.css?v=3.0" rel="stylesheet">
   
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0f172a">
   <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -228,12 +231,15 @@
                     <!-- Search Widget -->
                     <div style="background:#fff; border:1px solid #e2e8f0; border-radius:8px; padding:20px; margin-bottom:20px;">
                         <h4 style="font-size:16px; font-weight:700; color:#1b212f; margin-bottom:12px;">Search Inventory</h4>
-                        <div class="input-group">
+                                                <div class="input-group">
                             <input type="text" id="machine-search-input" class="form-control" placeholder="Search make, model, ton..." style="height:42px; font-size:13px;" aria-label="Search machinery">
                             <div class="input-group-append">
                                 <span class="input-group-text" style="background:#f89d13; color:#111;"><i class="fa fa-search"></i></span>
                             </div>
                         </div>
+                        <button type="button" id="ai-matchmaker-btn" class="btn btn-sm btn-block" style="margin-top:10px; background:linear-gradient(135deg, #0f172a, #1e293b); color:#f89d13; font-weight:700; border:1px solid rgba(248,157,19,0.5); border-radius:6px; padding:8px 12px; font-size:12.5px; display:flex; align-items:center; justify-content:center; gap:8px; cursor:pointer;">
+                          <i class="fa fa-magic"></i> AI Machinery Matchmaker
+                        </button>
                     </div>
 
                     <!-- Multi-Attribute Filters (Tonnage & Make) -->
@@ -467,5 +473,6 @@
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="js/dalal-realtime.js?v=5.0"></script>
+<script src="js/dalal-ai.js?v=4.0"></script>
 </body>
 </html>

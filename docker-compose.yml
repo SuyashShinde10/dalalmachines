@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: dalal-machinery-platform
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=production
+      - PORT=5000
+      - JWT_SECRET=${JWT_SECRET:-dalal_enterprise_production_jwt_secret_2026_super_strong}
+      - SECURITY_DEVICE_SALT=${SECURITY_DEVICE_SALT:-dalal_zero_trust_defense_salt_2026}
+      - SITE_URL=${SITE_URL:-https://dalalmachines.com}
+      - CLOAKED_GATE_KEY=${CLOAKED_GATE_KEY:-dmta-ops-2026}
+      - WHATSAPP_DISPATCH_PHONE=${WHATSAPP_DISPATCH_PHONE:-919821232131}
+      - NOTIFY_STAFF_EMAIL=${NOTIFY_STAFF_EMAIL:-dalalmachine@gmail.com}
+    volumes:
+      - ./server/data:/app/server/data
+      - ./uploads:/app/uploads
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 2048M
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:5000/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "5"

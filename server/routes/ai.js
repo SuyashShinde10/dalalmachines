@@ -65,6 +65,31 @@ router.post('/chat', chatLimiter, async (req, res) => {
   }
 });
 
+// POST /api/ai/matchmaker (Enterprise AI Machinery Matchmaker & Technical Search)
+router.post('/matchmaker', chatLimiter, async (req, res) => {
+  try {
+    const { query, options } = req.body;
+    if (!query || typeof query !== 'string' || query.trim() === '') {
+      return res.status(400).json({
+        success: false,
+        message: 'Industrial search query is required (e.g. "1600 ton forging press Pune").'
+      });
+    }
+
+    const matchResult = aiService.matchMachinesTechnical(query.trim(), options);
+    res.json({
+      success: true,
+      ...matchResult
+    });
+  } catch (err) {
+    console.error('[AI Matchmaker Error]:', err);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to execute technical machine matchmaker: ' + err.message
+    });
+  }
+});
+
 // POST /api/ai/admin/copilot (Staff Admin & Superadmin Operations Assistant)
 router.post('/admin/copilot', requireAdmin, async (req, res) => {
   try {

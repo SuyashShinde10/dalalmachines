@@ -5,6 +5,13 @@
   <title>Dalal Machine Tools Agency Pvt. Ltd. | Used Metal Working Machinery & Forging Presses</title>
   <meta name="description" content="One of India's largest dealers in used metal working machinery, heavy forging presses, and CNC machine tools. 20+ years of global sourcing with High Seas Sales and live power inspection abroad.">
   
+  <!-- Progressive Web App (PWA) Manifest & Theme -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Dalal Machinery">
+  
   <!-- Stylesheets -->
   <link href="css/bootstrap.css" rel="stylesheet">
   <link href="css/style.css?v=2.0" rel="stylesheet">
@@ -13,6 +20,7 @@
   <link href="css/flaticon.css" rel="stylesheet">
   <link href="css/owl.css" rel="stylesheet">
   <link href="css/dalal-custom.css?v=5.6" rel="stylesheet">
+  <link href="css/dalal-ai.css?v=3.0" rel="stylesheet">
   
   <!-- Favicon -->
   <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
@@ -27,7 +35,54 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
 
-  <!-- Schema.org JSON-LD FAQ Structure for SEO/AEO -->
+    <!-- Schema.org JSON-LD Organization & WebSite for SEO/AEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://dalalmachines.com/#organization",
+        "name": "Dalal Machine Tools Agency Pvt. Ltd.",
+        "alternateName": ["Dalal Machine Tools", "Dalal Machinery", "DMTA"],
+        "url": "https://dalalmachines.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://dalalmachines.com/new/dalalmachine/images/logo-dalal.png"
+        },
+        "description": "Premier Indian importer, stockist, and distributor of heavy metal forming forging presses and CNC machine tools with OMPI India technical clutch-brake partnership.",
+        "founder": { "@type": "Person", "name": "Mr. Dalal" },
+        "foundingDate": "1985",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "C-10, Commerce Centre, 78, Tardeo Main Road",
+          "addressLocality": "Mumbai",
+          "addressRegion": "Maharashtra",
+          "postalCode": "400034",
+          "addressCountry": "IN"
+        },
+        "contactPoint": [
+          { "@type": "ContactPoint", "telephone": "+91-9821232131", "contactType": "sales", "areaServed": "IN", "availableLanguage": ["English", "Hindi", "Gujarati", "Marathi"] },
+          { "@type": "ContactPoint", "telephone": "+91-22-67439873", "contactType": "customer service", "areaServed": "IN" }
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://dalalmachines.com/#website",
+        "url": "https://dalalmachines.com",
+        "name": "Dalal Machine Tools Agency",
+        "publisher": { "@id": "https://dalalmachines.com/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://dalalmachines.com/new/dalalmachine/category.html?query={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    ]
+  }
+  </script>
+
+<!-- Schema.org JSON-LD FAQ Structure for SEO/AEO -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -2096,5 +2151,13 @@ $(document).ready(function() {
 <!-- Real-Time WebSocket Synchronization Client -->
 <script src="/socket.io/socket.io.js"></script>
 <script src="js/dalal-realtime.js?v=5.0"></script>
+<script src="js/dalal-ai.js?v=4.0"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(() => {});
+      });
+    }
+  </script>
 </body>
 </html>

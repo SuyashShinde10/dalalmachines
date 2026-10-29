@@ -1,0 +1,11 @@
+node_modules
+npm-debug.log
+.git
+.gitignore
+.gemini
+.system_generated
+*.log
+.env
+.env.local
+.DS_Store
+Thumbs.db

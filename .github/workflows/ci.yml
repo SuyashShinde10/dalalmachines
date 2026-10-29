@@ -1,0 +1,46 @@
+name: Dalal Enterprise CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  verify-and-test:
+    name: Automated Verification & SecOps Audit
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Syntax & Structural Validation
+        run: |
+          node -c server/server.js
+          node -c server/services/aiService.js
+          node -c server/services/pdfGenerator.js
+          node -c server/notifications/alertEngine.js
+          node -c server/security/defenseInDepth.js
+          node -c server/performance/cacheEngine.js
+
+      - name: Run SecOps Cryptographic Test Suite
+        run: node test_secops.js
+
+      - name: Run Top 1% Zero-Trust Fortress Test Suite
+        run: node test_top1_suite.js
+
+      - name: Run End-to-End Full Platform Simulation
+        run: node test_e2e_full_simulation.js
+
+      - name: Verify Docker Container Build
+        run: docker build -t dalal-machinery-platform:test .

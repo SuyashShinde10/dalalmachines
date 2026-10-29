@@ -106,6 +106,7 @@ class CacheEngine {
       const cached = this.get(cacheKey);
 
       if (cached) {
+        res.setHeader('X-Cache', 'HIT');
         res.setHeader('X-Cache-Engine', 'HIT-IN-MEMORY');
         res.setHeader('ETag', cached.etag);
         res.setHeader('Vary', 'Accept-Encoding');
@@ -122,6 +123,7 @@ class CacheEngine {
       }
 
       // Cache Miss: Intercept res.send / res.json
+      res.setHeader('X-Cache', 'MISS');
       res.setHeader('X-Cache-Engine', 'MISS');
       const originalSend = res.send.bind(res);
 

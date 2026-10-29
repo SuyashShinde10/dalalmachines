@@ -6,6 +6,7 @@ const realtime = require('../realtime');
 const cacheEngine = require('../performance/cacheEngine');
 const { requireAdmin } = require('../middleware/auth');
 const upload = require('../middleware/upload');
+const { generateSpecSheetHtml } = require('../services/pdfGenerator');
 
 // GET /api/products (Public or Admin with In-Memory Micro-Cache)
 router.get('/', cacheEngine.middleware(30), (req, res) => {
@@ -42,6 +43,21 @@ router.get('/:id', cacheEngine.middleware(30), (req, res) => {
     return res.status(404).json({ success: false, message: 'Machine not found.' });
   }
   res.json({ success: true, product });
+});
+
+// GET /api/products/:id/spec-sheet (1-Click Printable PDF Spec Sheet & Official Quotation)
+router.get('/:id/spec-sheet', (req, res) => {
+  const product = db.getProductById(req.params.id);
+  if (!product) {
+    return res.status(404).send('Machine listing not found.');
+  }
+  const buyerName = req.query.buyer || req.query.client || 'Valued Industrial Client';
+  const price = req.query.price || product.priceText || 'Price On Request';
+  const quoteNo = req.query.quoteNo;
+
+  const html = generateSpecSheetHtml(product, { buyerName, price, quoteNo });
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  res.send(html);
 });
 
 // POST /api/products/upload (Image / PDF Upload)
