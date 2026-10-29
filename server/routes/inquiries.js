@@ -47,6 +47,57 @@ router.get('/', requireAdmin, (req, res) => {
   res.json({ success: true, count: list.length, inquiries: list });
 });
 
+// GET /api/inquiries/export/csv (1-Click CSV/Excel Download for Laptop Storage)
+router.get('/export/csv', requireAdmin, (req, res) => {
+  try {
+    const inquiries = db.getInquiries() || [];
+
+    // Helper to escape CSV values
+    const escapeCsv = (val) => {
+      if (val === null || val === undefined) return '""';
+      const str = String(val).replace(/"/g, '""');
+      return `"${str}"`;
+    };
+
+    const headers = [
+      'Inquiry ID',
+      'Date & Time',
+      'Buyer Name',
+      'Company Name',
+      'Phone Number',
+      'Email Address',
+      'Machine Requested',
+      'Message / Requirement',
+      'Lead Status'
+    ];
+
+    let csvContent = '\uFEFF' + headers.join(',') + '\r\n';
+
+    inquiries.forEach(inq => {
+      const row = [
+        escapeCsv(inq.id || ''),
+        escapeCsv(inq.createdAt ? new Date(inq.createdAt).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }) : ''),
+        escapeCsv(inq.name || ''),
+        escapeCsv(inq.company || 'N/A'),
+        escapeCsv(inq.phone || 'N/A'),
+        escapeCsv(inq.email || 'N/A'),
+        escapeCsv(inq.machineName || inq.machineId || 'General Inquiry'),
+        escapeCsv((inq.message || '').replace(/[\r\n]+/g, ' ')),
+        escapeCsv((inq.status || 'new').toUpperCase())
+      ];
+      csvContent += row.join(',') + '\r\n';
+    });
+
+    const dateStr = new Date().toISOString().split('T')[0];
+    res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+    res.setHeader('Content-Disposition', `attachment; filename="dalal_leads_export_${dateStr}.csv"`);
+    return res.send(csvContent);
+  } catch (err) {
+    console.error('[CSV Export Error]:', err);
+    res.status(500).json({ success: false, message: 'Failed to export CSV: ' + err.message });
+  }
+});
+
 // PUT /api/inquiries/:id (Update Status)
 router.put('/:id', requireAdmin, (req, res) => {
   const { status } = req.body;

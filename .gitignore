@@ -35,6 +35,8 @@ server/data/security_events.json
 server/data/blacklist.json
 server/data/uploads/*
 !server/data/uploads/.gitkeep
+server/data/backups/*
+!server/data/backups/.gitkeep
 
 # Application logs
 *.log

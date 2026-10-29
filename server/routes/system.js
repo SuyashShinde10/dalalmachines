@@ -46,12 +46,46 @@ router.put('/settings', (req, res) => {
   res.json({ success: true, message: 'Settings saved successfully.', settings: updated });
 });
 
-// GET /api/system/backup
+// GET /api/system/backup (Download Latest DB snapshot)
 router.get('/backup', (req, res) => {
   const backup = db.getBackup();
   res.setHeader('Content-Type', 'application/json');
   res.setHeader('Content-Disposition', `attachment; filename=dalal_backup_${Date.now()}.json`);
   res.send(JSON.stringify(backup, null, 2));
+});
+
+// GET /api/system/backups (List rolling daily backups)
+router.get('/backups', (req, res) => {
+  const backupEngine = require('../services/backupEngine');
+  res.json({ success: true, backups: backupEngine.listBackups() });
+});
+
+// POST /api/system/backups/create (Trigger immediate manual backup)
+router.post('/backups/create', (req, res) => {
+  const backupEngine = require('../services/backupEngine');
+  const result = backupEngine.createDailyBackup();
+  if (result && result.success) {
+    res.json({ success: true, message: 'Backup created successfully.', backup: result.fileName });
+  } else {
+    res.status(500).json({ success: false, message: 'Failed to create backup: ' + (result ? result.error : 'Unknown error') });
+  }
+});
+
+// GET /api/system/backups/download/:filename (Download specific backup file)
+router.get('/backups/download/:filename', (req, res) => {
+  const path = require('path');
+  const fs = require('fs');
+  const backupEngine = require('../services/backupEngine');
+  const safeFilename = path.basename(req.params.filename);
+  const targetPath = path.join(backupEngine.BACKUP_DIR, safeFilename);
+
+  if (!fs.existsSync(targetPath)) {
+    return res.status(404).json({ success: false, message: 'Backup file not found.' });
+  }
+
+  res.setHeader('Content-Type', 'application/json');
+  res.setHeader('Content-Disposition', `attachment; filename="${safeFilename}"`);
+  res.sendFile(targetPath);
 });
 
 // POST /api/system/restore

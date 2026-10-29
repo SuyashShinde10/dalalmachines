@@ -239,13 +239,14 @@
         const token = SuperAdminCore.getToken();
         const res = await fetch('/api/system/backup', { headers: { 'Authorization': `Bearer ${token}` } });
         const data = await res.json();
-        if (data.success && data.backup) {
-          const blob = new Blob([JSON.stringify(data.backup, null, 2)], { type: 'application/json' });
+        const backupData = data.backup || data;
+        if (backupData && (backupData.products || backupData.users)) {
+          const blob = new Blob([JSON.stringify(backupData, null, 2)], { type: 'application/json' });
           const a = document.createElement('a');
           a.href = URL.createObjectURL(blob);
           a.download = `dalal_db_snapshot_${new Date().toISOString().slice(0, 10)}.json`;
           a.click();
-          SuperAdminCore.toast('Snapshot exported and downloaded');
+          SuperAdminCore.toast('Snapshot exported and downloaded successfully');
         } else {
           SuperAdminCore.toast('Backup failed', 'error');
         }

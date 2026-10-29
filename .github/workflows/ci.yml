@@ -73,6 +73,9 @@ jobs:
           echo "=== 5. Running Exposed Files Scanner ==="
           node scripts/check-exposed.js
 
+          echo "=== 6. Running Growth Engine & Offline Backup Verification Suite ==="
+          node test_growth_and_backup.js
+
           # 4. Clean shutdown of background server
           echo "All test suites passed cleanly! Shutting down test server..."
           kill -9 $SERVER_PID 2>/dev/null || true

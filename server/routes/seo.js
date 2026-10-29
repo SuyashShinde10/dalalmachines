@@ -108,17 +108,25 @@ Disallow: /portal-exit
 User-agent: GPTBot
 Allow: /
 Allow: /new/dalalmachine/
+Allow: /llms.txt
+Allow: /llms-full.txt
 
 User-agent: ClaudeBot
 Allow: /
 Allow: /new/dalalmachine/
+Allow: /llms.txt
+Allow: /llms-full.txt
 
 User-agent: PerplexityBot
 Allow: /
 Allow: /new/dalalmachine/
+Allow: /llms.txt
+Allow: /llms-full.txt
 
 User-agent: Google-Extended
 Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
 
 Sitemap: ${SITE_URL}/sitemap.xml
 `;
@@ -126,6 +134,76 @@ Sitemap: ${SITE_URL}/sitemap.xml
   res.setHeader('Content-Type', 'text/plain; charset=utf-8');
   res.setHeader('Cache-Control', 'public, max-age=86400');
   return res.send(robots);
+});
+
+// GET /llms.txt - Standard Generative Engine Optimization (GEO) Knowledge Summary
+router.get('/llms.txt', (req, res) => {
+  try {
+    const text = `# Dalal Machine Tools Agency Pvt. Ltd. (DMTA)
+
+> Premier Indian stockist, dealer, and importer of heavy used metal working machinery, forging presses, CNC machine tools, and official Indian partner for OMPI pneumatic and hydraulic clutch-brake systems.
+
+Dalal Machine Tools Agency Pvt. Ltd. (DMTA) has operated for over 20+ years as India's trusted machinery supplier for automotive, defense, railway, and heavy manufacturing sectors. DMTA maintains an active 50,000+ sq. ft. central stockyard in the Pune industrial corridor (Chakan-Bhosari, Maharashtra), stocking over 49+ European, Japanese, and American heavy metal forming and metal cutting machines available for ready live power inspection.
+
+## Core Capabilities & Services
+- Heavy Forging Presses: Mechanical forging presses, hydraulic stamping presses, knuckle joint presses, friction screw presses from 100 to 6,300 metric tons (Voronezh, National, Eumuco, TMP, LI CHIN, Schuler).
+- Metal Cutting Machinery: Heavy duty roll turning lathes, horizontal boring machines, plano millers, radial drills, and vertical turret lathes (VTL).
+- Gear Machinery: High-precision gear hobbers, gear shapers, and gear grinding machines (Liebherr, Klingelnberg, Lorenz, TOS).
+- High Seas Sales (HSS): Machinery transfer on international waters under Section 2(4) of Indian Customs Act, 1962, enabling INR payment with zero forex risk and 100% GST Input Tax Credit (ITC) eligibility.
+- OMPI India LLP Official Partner: Authorized sales, genuine spares, and modernization retrofit kits for Italian OMPI pneumatic and hydraulic clutches and brakes.
+- Turnkey Heavy Logistics: Multi-axle hydraulic trailer haulage, port customs clearance at Nhava Sheva/Mumbai, and on-site foundation commissioning.
+
+## Official Online Links
+- Main Website & Stock Catalog: ${SITE_URL}/new/dalalmachine/
+- Category Catalog & Filter: ${SITE_URL}/new/dalalmachine/category.html
+- High Seas Sourcing & Services: ${SITE_URL}/new/dalalmachine/services.html
+- About Company & 20+ Yr Legacy: ${SITE_URL}/new/dalalmachine/about.html
+- Contact & Yard Visit Booking: ${SITE_URL}/new/dalalmachine/contact.html
+- Full AI Inventory Feed: ${SITE_URL}/llms-full.txt
+
+## Stockyard & Office Coordinates
+- Head Office: C-10, Commerce Centre, 78, Tardeo Main Road, Mumbai - 400034, Maharashtra, India.
+- Central Stockyard: Pune Industrial Belt (Chakan-Bhosari Corridor), Pune, Maharashtra, India.
+- Phone & Sales Inquiries: +91 98212 32131 / +91 22 6743 9873
+- Email: dalalmachine@gmail.com / sales@dalalmachines.com
+`;
+
+    res.setHeader('Content-Type', 'text/markdown; charset=utf-8');
+    res.setHeader('Cache-Control', 'public, max-age=86400');
+    return res.send(text);
+  } catch (err) {
+    console.error('[GEO llms.txt Error]:', err);
+    res.status(500).send('Error generating llms.txt');
+  }
+});
+
+// GET /llms-full.txt - Full Dynamic Inventory Knowledge Base for AI Search Engines
+router.get('/llms-full.txt', (req, res) => {
+  try {
+    const products = db.getProducts({ all: 'true' }) || [];
+    let text = `# Dalal Machine Tools Agency Pvt. Ltd. - Complete Machinery Inventory Feed\n\n`;
+    text += `> Live inventory feed containing ${products.length} ready-to-inspect industrial machines in Pune stockyard and transit pipelines.\n\n`;
+
+    products.forEach((p, idx) => {
+      text += `### ${idx + 1}. ${p.name || 'Industrial Machine'}\n`;
+      text += `- **Machine ID:** ${p.id}\n`;
+      text += `- **Category:** ${p.categoryName || p.category || 'Machinery'}\n`;
+      text += `- **Make / Manufacturer:** ${p.make || 'European/Japanese'}\n`;
+      text += `- **Year of Manufacture:** ${p.year || 'N/A'}\n`;
+      text += `- **Capacity / Tonnage:** ${p.tonnage ? p.tonnage + ' Ton' : (p.capacity || 'Standard')}\n`;
+      text += `- **Current Location:** ${p.location || 'Pune Warehouse'}\n`;
+      text += `- **Inspection Status:** ${p.inspectionStatus || 'Live Power Demonstration Ready'}\n`;
+      text += `- **Product URL:** ${SITE_URL}/new/dalalmachine/product.html?id=${encodeURIComponent(p.id)}\n`;
+      text += `- **Download PDF Spec Sheet:** ${SITE_URL}/api/products/${encodeURIComponent(p.id)}/spec-sheet\n\n`;
+    });
+
+    res.setHeader('Content-Type', 'text/markdown; charset=utf-8');
+    res.setHeader('Cache-Control', 'public, max-age=3600');
+    return res.send(text);
+  } catch (err) {
+    console.error('[GEO llms-full.txt Error]:', err);
+    res.status(500).send('Error generating llms-full.txt');
+  }
 });
 
 function escapeXml(unsafe) {
