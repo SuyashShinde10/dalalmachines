@@ -23,7 +23,7 @@
       "name": "Dalal Inventory Admin",
       "active": true,
       "createdAt": "2026-10-06T09:58:03.484Z",
-      "lastLogin": "2026-10-28T13:33:03.965Z",
+      "lastLogin": "2026-10-29T10:47:49.074Z",
       "blockedByDeveloper": false,
       "blockedReason": "",
       "blockedAt": null
@@ -1994,6 +1994,19 @@
     }
   ],
   "logs": [
+    {
+      "id": "log_4f233fde",
+      "timestamp": "2026-10-29T10:47:49.101Z",
+      "userId": "usr_admin",
+      "username": "admin",
+      "role": "admin",
+      "action": "USER_LOGIN",
+      "target": "AUTH",
+      "details": "User logged in successfully from ::1",
+      "ip": "127.0.0.1",
+      "prevHash": "1e74a9482e294db322b359bba3285e8ec4a1f90104fcc2a871e5d2af11fcee3d",
+      "hash": "00a44cc9b63ba63c110b0d972e36ca15d16d613824a15d01d602f18a69fda0e6"
+    },
     {
       "id": "log_fc6064a5",
       "timestamp": "2026-10-29T10:42:30.923Z",
