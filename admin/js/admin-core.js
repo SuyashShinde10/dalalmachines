@@ -156,6 +156,69 @@ const AdminCore = {
           }
         });
       });
+
+      // Add close button inside mobile drawer header
+      const sidebarHeader = sidebar.querySelector('.sidebar-header');
+      if (sidebarHeader && !sidebarHeader.querySelector('.sidebar-drawer-close')) {
+        const closeBtn = document.createElement('button');
+        closeBtn.className = 'sidebar-drawer-close';
+        closeBtn.innerHTML = '&times;';
+        closeBtn.title = 'Close Navigation Menu';
+        closeBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          sidebar.classList.remove('open');
+          backdrop.classList.remove('active');
+        });
+        sidebarHeader.appendChild(closeBtn);
+      }
+    }
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && sidebar && sidebar.classList.contains('open')) {
+        sidebar.classList.remove('open');
+        backdrop.classList.remove('active');
+      }
+    });
+
+    // ── Auto-Inject Enterprise Mobile Bottom Navigation Bar ──
+    if (!document.querySelector('.admin-mobile-bottom-nav')) {
+      const pathname = window.location.pathname.toLowerCase();
+      const isDashboard = pathname.includes('dashboard') || pathname.endsWith('/admin') || pathname.endsWith('/admin/');
+      const isProducts = pathname.includes('products');
+      const isProductForm = pathname.includes('product-form');
+      const isInquiries = pathname.includes('inquiries');
+
+      const bottomNav = document.createElement('nav');
+      bottomNav.className = 'admin-mobile-bottom-nav';
+      bottomNav.setAttribute('aria-label', 'Mobile Bottom Navigation');
+      bottomNav.innerHTML = `
+        <a href="/admin/dashboard.html" class="admin-bottom-nav-item ${isDashboard ? 'active' : ''}">
+          <i class="fa fa-tachometer"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="/admin/products.html" class="admin-bottom-nav-item ${isProducts ? 'active' : ''}">
+          <i class="fa fa-cubes"></i>
+          <span>Machinery</span>
+        </a>
+        <a href="/admin/product-form.html" class="admin-bottom-nav-item action-primary ${isProductForm ? 'active' : ''}">
+          <div class="nav-icon-circle"><i class="fa fa-plus"></i></div>
+          <span>Add Machine</span>
+        </a>
+        <a href="/admin/inquiries.html" class="admin-bottom-nav-item ${isInquiries ? 'active' : ''}">
+          <i class="fa fa-envelope-o"></i>
+          <span>RFQs</span>
+        </a>
+        <a href="javascript:void(0)" id="bottom-nav-menu-btn" class="admin-bottom-nav-item">
+          <i class="fa fa-bars"></i>
+          <span>Menu</span>
+        </a>
+      `;
+      document.body.appendChild(bottomNav);
+
+      document.getElementById('bottom-nav-menu-btn')?.addEventListener('click', (e) => {
+        toggleMenu(e);
+      });
     }
 
     // Restore desktop collapsed preference

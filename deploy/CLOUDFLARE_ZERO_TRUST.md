@@ -82,3 +82,4 @@ Ensure that the honeypot paths (`/wp-admin`, `/.env`, `/phpmyadmin`) are **NOT**
 * [x] Probe to `/wp-admin` or `/.env` triggers the SecOps Honeypot and emits a real-time WebSocket alert.
 * [x] Accessing `/portal-gate?key=dmta-ops-2026` grants the 12-hour signed gateway pass and unlocks staff login.
 * [x] Developer console can view intruder logs and unban/ban IPs with 1 click.
+

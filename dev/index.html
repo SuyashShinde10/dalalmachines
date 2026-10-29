@@ -82,6 +82,106 @@
       display: inline-block;
       pointer-events: none;
     }
+
+    /* Mobile Bottom Navigation for Developer Console */
+    .dev-mobile-bottom-nav {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .dev-mobile-bottom-nav {
+        display: flex !important;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 62px;
+        background: rgba(15, 23, 42, 0.97);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-top: 1px solid rgba(51, 65, 85, 0.85);
+        z-index: 2100;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.35);
+        padding: 0 6px;
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+        align-items: center;
+        justify-content: space-around;
+      }
+
+      .dev-bottom-nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        height: 100%;
+        color: #94a3b8;
+        text-decoration: none;
+        font-size: 10px;
+        font-weight: 600;
+        gap: 3px;
+        transition: all 0.2s ease;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .dev-bottom-nav-item i {
+        font-size: 17px;
+        transition: transform 0.2s ease;
+      }
+
+      .dev-bottom-nav-item.active {
+        color: #38bdf8 !important;
+        font-weight: 700;
+      }
+
+      .dev-bottom-nav-item.active i {
+        transform: translateY(-2px);
+        color: #38bdf8 !important;
+      }
+
+      .admin-main {
+        padding-bottom: calc(85px + env(safe-area-inset-bottom, 0px)) !important;
+      }
+
+      /* Compact topbar badges to prevent overflow */
+      #ws-status-text {
+        display: none !important;
+      }
+      #ws-status-badge {
+        padding: 6px 10px !important;
+      }
+      .topbar-right > div:nth-child(2) span:last-child {
+        display: none !important;
+      }
+      .topbar-right > div:nth-child(2) {
+        padding: 6px 10px !important;
+      }
+
+      .endpoint-select-input {
+        min-width: 0 !important;
+        width: 100% !important;
+      }
+
+      .card-header {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 12px !important;
+      }
+
+      .card-header > div:last-child {
+        width: 100% !important;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .card-header > div:last-child input,
+      .card-header > div:last-child button {
+        flex: 1;
+        min-width: 110px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1002,13 +1102,117 @@
       if (tabName === 'catalog') fetchCatalogAudit();
       if (tabName === 'api') executeApiWorkbench();
       if (tabName === 'security') fetchSecurityStatus();
+
+      // Mobile: Auto-close sidebar drawer upon tab selection
+      if (window.innerWidth <= 992) {
+        const sidebar = document.querySelector('.admin-sidebar');
+        const backdrop = document.querySelector('.admin-mobile-backdrop');
+        if (sidebar) sidebar.classList.remove('open');
+        if (backdrop) backdrop.classList.remove('active');
+      }
+
+      // Update active state in mobile bottom navigation
+      document.querySelectorAll('.dev-bottom-nav-item').forEach(item => {
+        item.classList.remove('active');
+        if (item.getAttribute('data-tab') === tabName) {
+          item.classList.add('active');
+        }
+      });
     }
 
-    // Sidebar Mobile Drawer Toggle
+    // ── Universal Mobile Sidebar Drawer & Backdrop System ──
     const toggleBtn = document.getElementById('btn-sidebar-toggle');
-    if (toggleBtn) {
-      toggleBtn.addEventListener('click', () => {
-        document.querySelector('.admin-sidebar').classList.toggle('open');
+    const sidebar = document.querySelector('.admin-sidebar');
+
+    let backdrop = document.querySelector('.admin-mobile-backdrop');
+    if (!backdrop) {
+      backdrop = document.createElement('div');
+      backdrop.className = 'admin-mobile-backdrop';
+      document.body.appendChild(backdrop);
+    }
+
+    function toggleDevMenu(e) {
+      if (e) e.stopPropagation();
+      if (window.innerWidth <= 992) {
+        if (sidebar) {
+          sidebar.classList.toggle('open');
+          backdrop.classList.toggle('active', sidebar.classList.contains('open'));
+        }
+      } else {
+        document.body.classList.toggle('sidebar-collapsed');
+      }
+    }
+
+    if (toggleBtn) toggleBtn.addEventListener('click', toggleDevMenu);
+    backdrop.addEventListener('click', () => {
+      if (sidebar) sidebar.classList.remove('open');
+      backdrop.classList.remove('active');
+    });
+
+    // Close on tap outside
+    document.addEventListener('click', (e) => {
+      if (window.innerWidth <= 992 && sidebar && sidebar.classList.contains('open')) {
+        if (!sidebar.contains(e.target) && toggleBtn && !toggleBtn.contains(e.target)) {
+          sidebar.classList.remove('open');
+          backdrop.classList.remove('active');
+        }
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && sidebar && sidebar.classList.contains('open')) {
+        sidebar.classList.remove('open');
+        backdrop.classList.remove('active');
+      }
+    });
+
+    // Add close button to sidebar header for mobile
+    const sidebarHeader = sidebar ? sidebar.querySelector('.sidebar-header') : null;
+    if (sidebarHeader && !sidebarHeader.querySelector('.sidebar-drawer-close')) {
+      const closeBtn = document.createElement('button');
+      closeBtn.className = 'sidebar-drawer-close';
+      closeBtn.innerHTML = '&times;';
+      closeBtn.title = 'Close Navigation Menu';
+      closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (sidebar) sidebar.classList.remove('open');
+        if (backdrop) backdrop.classList.remove('active');
+      });
+      sidebarHeader.appendChild(closeBtn);
+    }
+
+    // ── Auto-Inject Dev Mobile Bottom Navigation Bar ──
+    if (!document.querySelector('.dev-mobile-bottom-nav')) {
+      const devBottomNav = document.createElement('nav');
+      devBottomNav.className = 'dev-mobile-bottom-nav';
+      devBottomNav.setAttribute('aria-label', 'Developer Console Navigation');
+      devBottomNav.innerHTML = `
+        <a href="javascript:void(0)" class="dev-bottom-nav-item active" data-tab="vitals" onclick="showDevTab('vitals');">
+          <i class="fa fa-tachometer"></i>
+          <span>Vitals</span>
+        </a>
+        <a href="javascript:void(0)" class="dev-bottom-nav-item" data-tab="security" onclick="showDevTab('security');">
+          <i class="fa fa-shield"></i>
+          <span>SecOps</span>
+        </a>
+        <a href="javascript:void(0)" class="dev-bottom-nav-item" data-tab="governance" onclick="showDevTab('governance');">
+          <i class="fa fa-users"></i>
+          <span>Accounts</span>
+        </a>
+        <a href="javascript:void(0)" class="dev-bottom-nav-item" data-tab="api" onclick="showDevTab('api');">
+          <i class="fa fa-terminal"></i>
+          <span>API Bench</span>
+        </a>
+        <a href="javascript:void(0)" id="dev-bottom-nav-menu-btn" class="dev-bottom-nav-item">
+          <i class="fa fa-bars"></i>
+          <span>Menu</span>
+        </a>
+      `;
+      document.body.appendChild(devBottomNav);
+
+      document.getElementById('dev-bottom-nav-menu-btn')?.addEventListener('click', (e) => {
+        toggleDevMenu(e);
       });
     }
 

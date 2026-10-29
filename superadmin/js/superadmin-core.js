@@ -145,6 +145,69 @@ const SuperAdminCore = {
           }
         });
       });
+
+      // Add close button inside mobile drawer header
+      const saHeader = sidebar.querySelector('.sa-sidebar-header');
+      if (saHeader && !saHeader.querySelector('.sa-drawer-close')) {
+        const closeBtn = document.createElement('button');
+        closeBtn.className = 'sa-drawer-close';
+        closeBtn.innerHTML = '&times;';
+        closeBtn.title = 'Close Navigation Menu';
+        closeBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          sidebar.classList.remove('open');
+          backdrop.classList.remove('active');
+        });
+        saHeader.appendChild(closeBtn);
+      }
+    }
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && sidebar && sidebar.classList.contains('open')) {
+        sidebar.classList.remove('open');
+        backdrop.classList.remove('active');
+      }
+    });
+
+    // ── Auto-Inject Enterprise SuperAdmin Mobile Bottom Navigation Bar ──
+    if (!document.querySelector('.sa-mobile-bottom-nav')) {
+      const pathname = window.location.pathname.toLowerCase();
+      const isDashboard = pathname.includes('dashboard') || pathname.endsWith('/superadmin') || pathname.endsWith('/superadmin/');
+      const isUsers = pathname.includes('users');
+      const isLogs = pathname.includes('logs');
+      const isSettings = pathname.includes('settings');
+
+      const bottomNav = document.createElement('nav');
+      bottomNav.className = 'sa-mobile-bottom-nav';
+      bottomNav.setAttribute('aria-label', 'SuperAdmin Mobile Navigation');
+      bottomNav.innerHTML = `
+        <a href="/superadmin/dashboard.html" class="sa-bottom-nav-item ${isDashboard ? 'active' : ''}">
+          <i class="fa fa-tachometer"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="/superadmin/users.html" class="sa-bottom-nav-item ${isUsers ? 'active' : ''}">
+          <i class="fa fa-users"></i>
+          <span>Users</span>
+        </a>
+        <a href="/superadmin/logs.html" class="sa-bottom-nav-item ${isLogs ? 'active' : ''}">
+          <i class="fa fa-shield"></i>
+          <span>Sec Logs</span>
+        </a>
+        <a href="/superadmin/settings.html" class="sa-bottom-nav-item ${isSettings ? 'active' : ''}">
+          <i class="fa fa-database"></i>
+          <span>Sync Engine</span>
+        </a>
+        <a href="javascript:void(0)" id="sa-bottom-nav-menu-btn" class="sa-bottom-nav-item">
+          <i class="fa fa-bars"></i>
+          <span>Menu</span>
+        </a>
+      `;
+      document.body.appendChild(bottomNav);
+
+      document.getElementById('sa-bottom-nav-menu-btn')?.addEventListener('click', (e) => {
+        toggleSaMenu(e);
+      });
     }
 
     // Restore desktop preference
