@@ -2380,9 +2380,11 @@ h1, h2, h3, h4, h5, h6, .sec-title h2, .main-header .navigation > li > a {
   transition: transform 0.15s ease, filter 0.15s ease !important;
 }
 
-/* Smooth Scrolling */
-html {
-  scroll-behavior: smooth;
+/* Smooth Scrolling for keyboard and anchor focus only, preserving native 60/120fps momentum physics for mousewheel and touch gestures */
+@media (prefers-reduced-motion: no-preference) {
+  :root:focus-within {
+    scroll-behavior: smooth;
+  }
 }
 
 /* Accessibility: Respect Reduced Motion Preference */
@@ -5702,223 +5704,85 @@ textarea:focus-visible {
   color: #ffffff;
 }
 
-/* --- 24. React Bits <ScrollExpand /> Component & Stockyard Banner --- */
+/* --- 24. High-Performance Hardware-Accelerated Stockyard Showcase Banner --- */
+.stockyard-showcase-section,
 .scroll-expand-section {
   position: relative;
-  background: #ffffff !important;
   width: 100%;
-  overflow: clip;
-}
-
-.scroll-expand {
-  position: relative;
-  width: 100%;
-  background: #ffffff;
-}
-
-.scroll-expand--scroller {
-  overflow-y: auto;
-  overflow-x: hidden;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  overscroll-behavior: contain;
-}
-
-.scroll-expand--scroller::-webkit-scrollbar {
-  display: none;
-}
-
-.scroll-expand__track {
-  position: relative;
-  width: 100%;
-  background: #ffffff;
-}
-
-.scroll-expand__stage {
-  position: sticky;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
+  min-height: 540px;
+  padding: 100px 20px;
+  background: #0f172a;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  --se-title-size: 3rem;
-  background: #ffffff !important;
-  transform: translateZ(0);
-}
-
-.scroll-expand__frame {
-  position: absolute;
-  inset: 0;
-  clip-path: inset(22% 14% 22% 14% round 24px);
-  -webkit-clip-path: inset(22% 14% 22% 14% round 24px);
-  will-change: clip-path;
-  box-shadow: 0 25px 50px -10px rgba(15, 23, 42, 0.18), 0 0 0 2px rgba(248, 157, 19, 0.7) !important;
-  background: #0f172a;
-  overflow: hidden;
+  border-top: 2px solid rgba(248, 157, 19, 0.4);
+  border-bottom: 2px solid rgba(248, 157, 19, 0.4);
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
 
-.scroll-expand__media {
+.stockyard-showcase-bg {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.stockyard-showcase-img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  will-change: transform;
-  transform-origin: center center;
-  user-select: none;
-  -webkit-user-drag: none;
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
+  object-position: center;
+  transform: translateZ(0) scale(1.02);
+  -webkit-transform: translateZ(0) scale(1.02);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
 
-.scroll-expand__scrim {
+.stockyard-showcase-section:hover .stockyard-showcase-img,
+.scroll-expand-section:hover .stockyard-showcase-img {
+  transform: translateZ(0) scale(1.05);
+  -webkit-transform: translateZ(0) scale(1.05);
+}
+
+.stockyard-showcase-scrim {
   position: absolute;
   inset: 0;
-  pointer-events: none;
   background: linear-gradient(
     to bottom,
-    rgba(15, 23, 42, 0.65) 0%,
+    rgba(15, 23, 42, 0.72) 0%,
     rgba(15, 23, 42, 0.88) 50%,
     rgba(15, 23, 42, 0.96) 100%
   );
-  opacity: 0;
-  will-change: opacity;
-  transform: translateZ(0);
+  z-index: 2;
+  pointer-events: none;
 }
 
-.scroll-expand__overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 40px 24px;
-  opacity: 0;
-  will-change: opacity, transform;
+.stockyard-showcase-section .auto-container,
+.scroll-expand-section .auto-container {
+  position: relative;
   z-index: 5;
-  pointer-events: none;
-  transform: translateZ(0);
-}
-
-.scroll-expand__title {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  padding: 0 24px;
+  width: 100%;
   text-align: center;
-  pointer-events: none;
-  will-change: opacity, transform;
-  z-index: 4;
+}
+
+/* GPU Hardware Acceleration for zero-jank fixed & sticky elements */
+.main-header,
+.sticky-header,
+.mobile-sticky-bar,
+.scroll-to-top,
+.dalal-wa-float {
   transform: translateZ(0);
-}
-
-.scroll-expand__hint {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  pointer-events: none;
-  will-change: opacity, transform;
-  z-index: 6;
-  transform: translateZ(0);
-}
-
-/* Resting Preview Card Styling */
-.stockyard-resting-card {
-  background: rgba(15, 23, 42, 0.90);
-  border: 1.5px solid rgba(248, 157, 19, 0.6);
-  padding: 30px 42px;
-  border-radius: 16px;
-  max-width: 660px;
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
-  text-align: center;
-  transform: translateZ(0);
-}
-
-.stockyard-resting-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 13.5px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: #f89d13;
-  margin-bottom: 8px;
-}
-
-.pulse-indicator {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  background: #10b981;
-  border-radius: 50%;
-  box-shadow: 0 0 10px #10b981;
-  animation: pulseDot 1.8s infinite;
-}
-
-@keyframes pulseDot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(0.85); }
-}
-
-.stockyard-resting-heading {
-  font-family: 'Barlow', sans-serif;
-  font-size: 26px;
-  font-weight: 800;
-  color: #ffffff;
-  line-height: 1.25;
-  margin: 0 0 8px 0;
-}
-
-.stockyard-resting-sub {
-  font-size: 14px;
-  color: #cbd5e1;
-  margin: 0;
-}
-
-/* Scroll Hint Pill */
-.scroll-hint-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 9px 22px;
-  background: #0f172a;
-  border: 1.5px solid #f89d13;
-  border-radius: 999px;
-  font-size: 13.5px;
-  font-weight: 700;
-  color: #ffffff;
-  letter-spacing: 0.3px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18), 0 0 14px rgba(248, 157, 19, 0.3);
-}
-
-.scroll-hint-pill i {
-  color: #f89d13;
-  animation: hintBounce 1.5s infinite ease-in-out;
-}
-
-@keyframes hintBounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(3px); }
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 /* Expanded Content Styling */

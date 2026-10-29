@@ -84,21 +84,37 @@
         handlePreloader();
     }, 1200);
 
-    //Update Header Style and Scroll to Top
+    //Update Header Style and Scroll to Top (Optimized 60/120fps with state latch)
+    var isHeaderFixedState = null;
+    var isScrollLinkVisible = null;
+    var scrollRafPending = false;
+
     function headerStyle() {
         if ($('.main-header').length) {
-            var windowpos = $(window).scrollTop();
-            var siteHeader = $('.main-header');
-            var sticky_Header = $('.sticky-header');
-            var scrollLink = $('.scroll-to-top');
-            if (windowpos >= 300) {
-                sticky_Header.addClass("animated slideInDown")
-                siteHeader.addClass('fixed-header');
-                scrollLink.fadeIn(300);
-            } else {
-                sticky_Header.removeClass("animated slideInDown")
-                siteHeader.removeClass('fixed-header');
-                scrollLink.fadeOut(300);
+            var windowpos = window.pageYOffset || document.documentElement.scrollTop || 0;
+            var isScrolled = windowpos >= 300;
+
+            if (isScrolled !== isHeaderFixedState) {
+                isHeaderFixedState = isScrolled;
+                var siteHeader = $('.main-header');
+                var sticky_Header = $('.sticky-header');
+                if (isScrolled) {
+                    sticky_Header.addClass("animated slideInDown");
+                    siteHeader.addClass('fixed-header');
+                } else {
+                    sticky_Header.removeClass("animated slideInDown");
+                    siteHeader.removeClass('fixed-header');
+                }
+            }
+
+            if (isScrolled !== isScrollLinkVisible) {
+                isScrollLinkVisible = isScrolled;
+                var scrollLink = $('.scroll-to-top');
+                if (isScrolled) {
+                    scrollLink.stop(true, true).fadeIn(200);
+                } else {
+                    scrollLink.stop(true, true).fadeOut(200);
+                }
             }
         }
     }
@@ -817,18 +833,17 @@
     }
 
 
-    //Fact Counter + Text Count
+    //Fact Counter + Text Count (Ultra-smooth IntersectionObserver without scroll polling)
     if ($('.count-box').length) {
-        $('.count-box').appear(function() {
-
-            var $t = $(this),
+        var startCountAnimation = function(element) {
+            var $t = $(element),
                 n = $t.find(".count-text").attr("data-stop"),
-                r = parseInt($t.find(".count-text").attr("data-speed"), 10);
+                r = parseInt($t.find(".count-text").attr("data-speed"), 10) || 2000;
 
             if (!$t.hasClass("counted")) {
                 $t.addClass("counted");
                 $({
-                    countNum: $t.find(".count-text").text()
+                    countNum: parseFloat($t.find(".count-text").text()) || 0
                 }).animate({
                     countNum: n
                 }, {
@@ -842,8 +857,26 @@
                     }
                 });
             }
+        };
 
-        }, { accY: 0 });
+        if ('IntersectionObserver' in window) {
+            var countObserver = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        startCountAnimation(entry.target);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            document.querySelectorAll('.count-box').forEach(function(box) {
+                countObserver.observe(box);
+            });
+        } else if ($.fn.appear) {
+            $('.count-box').appear(function() {
+                startCountAnimation(this);
+            });
+        }
     }
 
 
@@ -949,7 +982,7 @@
             animateClass: 'animated', // animation css class (default is animated)
             offset: 0, // distance to the element when triggering the animation (default is 0)
             mobile: false, // trigger animations on mobile devices (default is true)
-            live: true // act on asynchronously loaded content (default is true)
+            live: false // turned off to eliminate 50ms polling interval
         });
         wow.init();
     }
@@ -1193,9 +1226,16 @@
        When document is Scrolling, do
        ========================================================================== */
 
-    $(window).on('scroll', function() {
-        headerStyle();
-    });
+    // Passive Hardware-Accelerated RAF Scroll Listener
+    window.addEventListener('scroll', function() {
+        if (!scrollRafPending) {
+            window.requestAnimationFrame(function() {
+                headerStyle();
+                scrollRafPending = false;
+            });
+            scrollRafPending = true;
+        }
+    }, { passive: true });
 
     /* ==========================================================================
        When document is loaded, do
