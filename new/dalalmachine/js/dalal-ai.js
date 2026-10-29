@@ -16,6 +16,7 @@
   function initDalalAI() {
     const el = document.getElementById('dai-widget-container');
     if (el) el.remove();
+    return;
 
     // Supported Languages Config
     const LANGUAGES = {
