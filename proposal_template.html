@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Unified Digital Enterprise Ecosystem Proposal - Dalal Machine Tools & OMPI India</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 12mm 14mm 14mm 14mm;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #0f172a;
+      background: #ffffff;
+      font-size: 11pt;
+      line-height: 1.5;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .page {
+      padding: 10px 0;
+    }
+    .page-break {
+      page-break-after: always;
+      break-after: page;
+    }
+
+    /* Header & Branding */
+    .header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #0f172a;
+      padding-bottom: 14px;
+      margin-bottom: 22px;
+    }
+    .brand-title {
+      font-size: 18pt;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.5px;
+    }
+    .brand-subtitle {
+      font-size: 9.5pt;
+      font-weight: 600;
+      color: #b45309;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .doc-meta {
+      text-align: right;
+      font-size: 8.5pt;
+      color: #64748b;
+    }
+    .doc-meta strong {
+      color: #0f172a;
+    }
+
+    /* Titles & Headings */
+    h1 {
+      font-size: 17pt;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 8px;
+    }
+    h2 {
+      font-size: 12.5pt;
+      font-weight: 700;
+      color: #0f172a;
+      margin: 16px 0 8px;
+      border-left: 4px solid #f59e0b;
+      padding-left: 8px;
+    }
+    p {
+      margin-bottom: 10px;
+      color: #334155;
+      font-size: 10pt;
+    }
+
+    /* Summary Card */
+    .summary-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 18px;
+    }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .summary-item {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 10px;
+    }
+    .summary-label {
+      font-size: 8pt;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+    }
+    .summary-val {
+      font-size: 11pt;
+      font-weight: 800;
+      color: #0f172a;
+      margin-top: 2px;
+    }
+
+    /* Architecture Grid */
+    .two-col-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+    .col-card {
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .col-card.accent {
+      border-color: #f59e0b;
+      background: #fffbeb;
+    }
+    .card-title {
+      font-size: 11.5pt;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 7.5pt;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: #0f172a;
+      color: #ffffff;
+    }
+    .badge.gold {
+      background: #f59e0b;
+      color: #0f172a;
+    }
+
+    ul.bullet-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 6px 0;
+    }
+    ul.bullet-list li {
+      font-size: 9pt;
+      color: #334155;
+      margin-bottom: 5px;
+      padding-left: 14px;
+      position: relative;
+      line-height: 1.35;
+    }
+    ul.bullet-list li::before {
+      content: "■";
+      color: #f59e0b;
+      font-size: 6pt;
+      position: absolute;
+      left: 0;
+      top: 3px;
+    }
+
+    /* Tables */
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0 16px;
+      font-size: 8.8pt;
+    }
+    table.data-table th, table.data-table td {
+      border: 1px solid #cbd5e1;
+      padding: 7px 10px;
+      text-align: left;
+    }
+    table.data-table th {
+      background: #0f172a;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 8.5pt;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    table.data-table tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+    .total-row td {
+      background: #f1f5f9 !important;
+      font-weight: 800;
+      color: #0f172a;
+      font-size: 9.5pt;
+    }
+
+    /* Modules 4-Grid */
+    .module-quad {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin: 10px 0;
+    }
+    .quad-item {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 10px 12px;
+    }
+    .quad-head {
+      font-size: 9.5pt;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 4px;
+      border-bottom: 1px solid #cbd5e1;
+      padding-bottom: 3px;
+    }
+
+    /* Sign-off Block */
+    .signature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 24px;
+      padding-top: 16px;
+      border-top: 1.5px dashed #cbd5e1;
+    }
+    .sig-box {
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 14px;
+      background: #f8fafc;
+    }
+    .sig-line {
+      margin-top: 40px;
+      border-top: 1px solid #475569;
+      font-size: 8.5pt;
+      font-weight: 700;
+      color: #0f172a;
+      padding-top: 4px;
+    }
+
+    /* Footer */
+    .doc-footer {
+      margin-top: 16px;
+      text-align: center;
+      font-size: 8pt;
+      color: #94a3b8;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== PAGE 1 ==================== -->
+  <div class="page page-break">
+    <div class="header-bar">
+      <div>
+        <div class="brand-title">Dalal Machine Tools & OMPI India</div>
+        <div class="brand-subtitle">Unified Digital Enterprise Ecosystem &mdash; Strategic Roadmap</div>
+      </div>
+      <div class="doc-meta">
+        <div>Ref: <strong>DMTA-OMPI-PROP-2026</strong></div>
+        <div>Date: <strong>October 2026</strong></div>
+        <div>Duration: <strong>8 Months Hybrid Retainer</strong></div>
+      </div>
+    </div>
+
+    <h1>Strategic Technology Proposal &amp; Master Roadmap</h1>
+    <p style="font-size: 9.5pt; line-height: 1.45; margin-bottom: 12px;">
+      This proposal establishes a <strong>Single, Integrated Digital Infrastructure</strong> engineered specifically for the complementary business operations of <strong>Dalal Machine Tools Agency Pvt. Ltd.</strong> (Heavy capital machinery sales, 49+ inventory, 50,000 sq. ft. Pune stockyard) and <strong>OMPI India LLP</strong> (Authorized Italian pneumatic/hydraulic clutch-brake systems, landed import costing, and aftermarket spare parts distribution).
+    </p>
+
+    <div class="summary-box">
+      <div style="font-size: 10pt; font-weight: 700; color: #0f172a;">Executive Engagement Overview (Plan 1 Model)</div>
+      <div class="summary-grid">
+        <div class="summary-item">
+          <div class="summary-label">Total Commercial Fee</div>
+          <div class="summary-val" style="color: #047857;">&#8377;7,60,000 Flat</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-label">Upfront Advance (Month 1)</div>
+          <div class="summary-val">&#8377;2,00,000</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-label">Monthly Retainer (7 Months)</div>
+          <div class="summary-val">&#8377;80,000 / mo</div>
+        </div>
+      </div>
+    </div>
+
+    <h2>1. The Strategic Advantage of a Unified System</h2>
+    <p>
+      In the heavy engineering and forging press sector, machine buyers and clutch maintenance customers are the exact same manufacturing plants (automotive forging, defense, stamping, and railways). Treating these companies as two isolated IT projects with commercial agencies creates duplicate overheads, disconnected customer logs, and costs upwards of <strong>&#8377;25 to &#8377;35 Lakhs</strong>.
+    </p>
+
+    <div class="two-col-grid">
+      <div class="col-card">
+        <div class="card-title">
+          <span>Dalal Machine Tools Platform</span>
+          <span class="badge">Go-Live: Month 1</span>
+        </div>
+        <ul class="bullet-list">
+          <li><strong>Heavy Machinery Catalog:</strong> 49+ ready machines across 26 categories.</li>
+          <li><strong>Pune Stockyard Showcase:</strong> 50,000 sq. ft. Chakan-Bhosari warehouse view.</li>
+          <li><strong>1-Click Branded PDF Spec Sheets:</strong> A4 technical datasheets with letterhead.</li>
+          <li><strong>Instant WhatsApp RFQ:</strong> Pre-filled machine routing directly to sales staff.</li>
+          <li><strong>Google SEO + AI Search (GEO):</strong> Search engine rank + <code>/llms.txt</code> feeds.</li>
+          <li><strong>1-Click Excel Leads Export:</strong> Secure offline buyer lead downloads.</li>
+        </ul>
+      </div>
+
+      <div class="col-card accent">
+        <div class="card-title">
+          <span>OMPI India Central ERP</span>
+          <span class="badge gold">30+ Modules</span>
+        </div>
+        <ul class="bullet-list">
+          <li><strong>Sales Cycle:</strong> Enquiries, Costing sheets, Multi-revision Quotes with PDF.</li>
+          <li><strong>Italy Landed Cost Engine:</strong> EUR to INR FX rate, Customs duty &amp; freight.</li>
+          <li><strong>Spares &amp; SKU Warehouse:</strong> Real-time bin locations, reorder thresholds.</li>
+          <li><strong>Service Job Cards:</strong> Digital logs for client machine clutch retrofits.</li>
+          <li><strong>Finance &amp; Gate Passes:</strong> GST Invoicing, credit notes &amp; dispatch gate passes.</li>
+          <li><strong>&#8377;0 Cloud Cost:</strong> On-Premise local LAN access with 100% data privacy.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>2. Industry Market Rate Comparison</h2>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Deliverable Scope</th>
+          <th>Established IT Agency Rate</th>
+          <th>Our Strategic Partnership Rate</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Dalal Machine Tools Platform</strong> (Public Catalog, PDF Engine, SEO/GEO, Backups)</td>
+          <td>&#8377;4,80,000 &ndash; &#8377;7,30,000</td>
+          <td style="color: #047857; font-weight: 700;">Included in Ecosystem</td>
+        </tr>
+        <tr>
+          <td><strong>OMPI Central Business ERP</strong> (30+ Modules, Local LAN Deployment)</td>
+          <td>&#8377;18,00,000 &ndash; &#8377;25,00,000</td>
+          <td style="color: #047857; font-weight: 700;">Included in Ecosystem</td>
+        </tr>
+        <tr>
+          <td><strong>8 Months Continuous Maintenance &amp; Staff Training</strong></td>
+          <td>&#8377;2,40,000 &ndash; &#8377;3,60,000</td>
+          <td style="color: #047857; font-weight: 700;">Included in Ecosystem</td>
+        </tr>
+        <tr class="total-row">
+          <td>TOTAL ESTIMATED COMMERCIAL VALUE</td>
+          <td>&#8377;25,20,000 &ndash; &#8377;35,90,000 + GST</td>
+          <td style="color: #047857; font-size: 10.5pt;">&#8377;7,60,000 Flat</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="doc-footer">Page 1 of 3 &bull; Unified Enterprise Digital Ecosystem &bull; Dalal Machine Tools &amp; OMPI India</div>
+  </div>
+
+  <!-- ==================== PAGE 2 ==================== -->
+  <div class="page page-break">
+    <div class="header-bar">
+      <div>
+        <div class="brand-title">OMPI India Central ERP Scope</div>
+        <div class="brand-subtitle">Detailed 30+ Operational Modules &mdash; Functional Blueprint</div>
+      </div>
+      <div class="doc-meta">
+        <div>Ref: <strong>DMTA-OMPI-PROP-2026</strong></div>
+        <div>Deployment: <strong>Local PC / Office LAN (&#8377;0 Cloud Cost)</strong></div>
+      </div>
+    </div>
+
+    <h1>Comprehensive Breakdown of OMPI ERP Modules</h1>
+    <p>
+      The OMPI ERP system is structured across 4 functional engines covering all aspects of sales, international procurement from OMPI Italy, warehouse stock keeping, field servicing, and GST billing:
+    </p>
+
+    <div class="module-quad">
+      <div class="quad-item">
+        <div class="quad-head">1. Sales &amp; Customer Pipeline (10 Modules)</div>
+        <ul class="bullet-list">
+          <li><strong>Customer Master:</strong> Billing/shipping branches, GSTIN, PAN.</li>
+          <li><strong>Customer 360&deg; View:</strong> Single-pane audit of all client documents.</li>
+          <li><strong>Enquiry Pipeline:</strong> Status stages with mandatory lost analysis.</li>
+          <li><strong>Costing Sheet:</strong> Landed cost, gross margin % &amp; profit analytics.</li>
+          <li><strong>Quotation Engine:</strong> Immutable revisions (V1, V2) with approvals.</li>
+          <li><strong>Customer PO (CPO):</strong> PO validation, delivery terms &amp; variance check.</li>
+          <li><strong>Sales Order (SO):</strong> Confirmed orders linked to sourcing desk.</li>
+          <li><strong>Proforma Invoice (PI):</strong> Configurable milestone splits (e.g. 30/50/20).</li>
+          <li><strong>Communication Log:</strong> Time-stamped staff follow-up history.</li>
+          <li><strong>Approval Workflow:</strong> Manager authorization for custom quotes.</li>
+        </ul>
+      </div>
+
+      <div class="quad-item">
+        <div class="quad-head">2. Purchase &amp; Italy Landed Cost (7 Modules)</div>
+        <ul class="bullet-list">
+          <li><strong>Supplier Master:</strong> OMPI Italy &amp; domestic tooling vendor profiles.</li>
+          <li><strong>Supplier Enquiries &amp; RFQs:</strong> Price &amp; lead-time requests to Italy.</li>
+          <li><strong>Supplier Quotations:</strong> Multi-vendor comparison &amp; exchange tracking.</li>
+          <li><strong>Supplier PO (SPO):</strong> Advance, BL milestone &amp; dispatch terms.</li>
+          <li><strong>Multi-Currency FX Engine:</strong> Live EUR to INR conversion.</li>
+          <li><strong>Customs &amp; Duty Calculator:</strong> Landed unit cost (Freight + Port).</li>
+          <li><strong>Goods Receipt Note (GRN):</strong> Physical tally against customs packing list.</li>
+        </ul>
+      </div>
+
+      <div class="quad-item">
+        <div class="quad-head">3. Warehouse, Spares &amp; Retrofits (8 Modules)</div>
+        <ul class="bullet-list">
+          <li><strong>SKU Spares Inventory:</strong> Clutch plates, friction discs, seals, valves.</li>
+          <li><strong>Bin Location Engine:</strong> Rack/bin coordinate mapping in Pune godown.</li>
+          <li><strong>Stock Transfer:</strong> Inter-warehouse transfers between branches.</li>
+          <li><strong>Delivery Challans (DC):</strong> Full and partial dispatch challans.</li>
+          <li><strong>Gate Passes:</strong> Returnable &amp; non-returnable security gate passes.</li>
+          <li><strong>Digital Job Work Cards:</strong> On-site technician press clutch retrofits.</li>
+          <li><strong>Quality Control (QC):</strong> Defect logging, tolerance and rework tracking.</li>
+          <li><strong>RMA &amp; Warranty Claims:</strong> Damaged unit returns to factory.</li>
+        </ul>
+      </div>
+
+      <div class="quad-item">
+        <div class="quad-head">4. Finance, Reports &amp; Admin (8 Modules)</div>
+        <ul class="bullet-list">
+          <li><strong>GST Sales Invoicing:</strong> Automated CGST/SGST/IGST (HSN 8483).</li>
+          <li><strong>Credit &amp; Debit Notes:</strong> Rate variance adjustments &amp; returns.</li>
+          <li><strong>Accounts Receivable Ledger:</strong> Payment receipts &amp; ageing tracker.</li>
+          <li><strong>Order Profitability Analytics:</strong> Gross profit per transaction.</li>
+          <li><strong>Global Search Engine:</strong> Search across serial number, item code, PO.</li>
+          <li><strong>Automated PDF &amp; Email Engine:</strong> 1-Click branded dispatch.</li>
+          <li><strong>Role-Based Security (RBAC):</strong> Granular permissions by department.</li>
+          <li><strong>Disaster Recovery:</strong> Automated 3-tier rolling database backups.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>3. Zero Recurring Cloud Cost &amp; On-Premise LAN Architecture</h2>
+    <p>
+      Unlike SAP or Odoo (which charge mandatory recurring subscriptions of &#8377;2,000 to &#8377;3,500/user/month), the OMPI ERP runs directly on your central office PC or laptop. Staff members access the system via Google Chrome or Edge over your local office Wi-Fi network (e.g. <code>http://192.168.1.50:3000</code>). Sensitive financial margins and supplier costs never leave your physical premises.
+    </p>
+
+    <div class="doc-footer">Page 2 of 3 &bull; Unified Enterprise Digital Ecosystem &bull; Dalal Machine Tools &amp; OMPI India</div>
+  </div>
+
+  <!-- ==================== PAGE 3 ==================== -->
+  <div class="page">
+    <div class="header-bar">
+      <div>
+        <div class="brand-title">Commercial Agreement &amp; Milestones</div>
+        <div class="brand-subtitle">Plan 1 Payment Terms &mdash; Formal Acceptance</div>
+      </div>
+      <div class="doc-meta">
+        <div>Ref: <strong>DMTA-OMPI-PROP-2026</strong></div>
+        <div>Model: <strong>Plan 1 (Advance + Monthly Salary Retainer)</strong></div>
+      </div>
+    </div>
+
+    <h1>Commercial Schedule &amp; Milestone Deliverables</h1>
+    <p>
+      The investment is structured to deliver immediate revenue impact via the Dalal sales platform in Month 1, followed by a predictable monthly retainer covering OMPI ERP rollout and all-inclusive maintenance:
+    </p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width: 14%;">Timeline</th>
+          <th style="width: 66%;">Deliverable Scope &amp; Milestones</th>
+          <th style="width: 20%; text-align: right;">Amount (INR)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Month 1 (Advance)</strong></td>
+          <td>
+            <strong>Signing &amp; Mobilization Milestone:</strong><br>
+            &bull; Immediate Go-Live of <strong>Dalal Machine Tools Platform</strong> on live domain.<br>
+            &bull; Activation of Google SEO, AI Search feeds (<code>/llms.txt</code>), and WhatsApp routing.<br>
+            &bull; Base database architecture, user authentication, and RBAC setup for OMPI ERP.
+          </td>
+          <td style="text-align: right; font-weight: 700; color: #047857;">&#8377;2,00,000</td>
+        </tr>
+        <tr>
+          <td><strong>Month 2</strong></td>
+          <td>Customer Master, Customer 360&deg; Profile, and Enquiry Management Pipeline.</td>
+          <td style="text-align: right;">&#8377;80,000</td>
+        </tr>
+        <tr>
+          <td><strong>Month 3</strong></td>
+          <td>Costing Sheet, Multi-Revision Quotation Engine (PDF) with Manager Approval Workflows.</td>
+          <td style="text-align: right;">&#8377;80,000</td>
+        </tr>
+        <tr>
+          <td><strong>Month 4</strong></td>
+          <td>Supplier POs &amp; <strong>Italy Landed Cost Engine</strong> (EUR to INR currency conversion + Duty).</td>
+          <td style="text-align: right;">&#8377;80,000</td>
+        </tr>
+        <tr>
+          <td><strong>Month 5</strong></td>
+          <td>Spares &amp; SKU Warehouse Inventory Management, Bin Tracking &amp; Stock Transfer.</td>
+          <td style="text-align: right;">&#8377;80,000</td>
+        </tr>
+        <tr>
+          <td><strong>Month 6</strong></td>
+          <td>Digital Job Work Cards (Clutch retrofits), QC Inspection, and Dispatch Gate Passes.</td>
+          <td style="text-align: right;">&#8377;80,000</td>
+        </tr>
+        <tr>
+          <td><strong>Month 7</strong></td>
+          <td>GST Sales Invoicing, Credit/Debit Notes, and Accounts Receivable Customer Ledger.</td>
+          <td style="text-align: right;">&#8377;80,000</td>
+        </tr>
+        <tr>
+          <td><strong>Month 8</strong></td>
+          <td>
+            <strong>Final Handover Milestone:</strong><br>
+            &bull; Local Office PC/Laptop LAN configuration for multi-user staff access.<br>
+            &bull; Staff onboarding, training, and automated 3-tier backup setup.<br>
+            &bull; 100% Source Code &amp; Intellectual Property Handover.
+          </td>
+          <td style="text-align: right; font-weight: 700;">&#8377;80,000</td>
+        </tr>
+        <tr class="total-row">
+          <td colspan="2">TOTAL COMMERCIAL INVESTMENT (8 MONTHS COMPLETE ECOSYSTEM)</td>
+          <td style="text-align: right; color: #047857; font-size: 11pt;">&#8377;7,60,000</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>4. Scope Boundaries &amp; Mutual Terms</h2>
+    <ul class="bullet-list" style="font-size: 8.5pt;">
+      <li><strong>IP Retention &amp; Source Code Ownership:</strong> All custom source code, architecture, and database designs remain the exclusive intellectual property (IP) of the Consultant until all invoices totaling &#8377;7,60,000 are paid in full. Complete perpetual unencumbered IP ownership transfers to the Client upon Month 8 clearance.</li>
+      <li><strong>Work Suspension &amp; Due Date:</strong> Invoices are raised on the 1st of each calendar month, payable within 7 business days (subject to statutory TDS under Section 194J). In the event of non-payment exceeding 10 calendar days, the Consultant reserves the legal right to pause work until cleared.</li>
+      <li><strong>All-Inclusive Scope Maintenance:</strong> Routine bug fixes, UI adjustments, data corrections, and template updates strictly within the agreed scope are <strong>100% free of charge</strong> during the 8-month contract.</li>
+      <li><strong>Exclusions (Out-of-Scope):</strong> Third-party physical hardware (printers, LAN cabling, computer servicing), biometric attendance hardware, and native mobile apps are excluded and quoted separately.</li>
+    </ul>
+
+    <div class="signature-grid">
+      <div class="sig-box">
+        <div style="font-size: 8.5pt; font-weight: 800; color: #64748b; text-transform: uppercase;">Accepted &amp; Approved By (Client)</div>
+        <div style="font-size: 10pt; font-weight: 800; color: #0f172a; margin-top: 4px;">Dalal Machine Tools Agency / OMPI India LLP</div>
+        <div class="sig-line">Authorized Signatory &amp; Company Seal &bull; Date</div>
+      </div>
+      <div class="sig-box">
+        <div style="font-size: 8.5pt; font-weight: 800; color: #64748b; text-transform: uppercase;">Submitted By (Consultant)</div>
+        <div style="font-size: 10pt; font-weight: 800; color: #0f172a; margin-top: 4px;">Technology Consultant &amp; Solutions Architect</div>
+        <div class="sig-line">Developer / Consultant Signature &bull; Date</div>
+      </div>
+    </div>
+
+    <div class="doc-footer">Page 3 of 3 &bull; Unified Enterprise Digital Ecosystem &bull; Dalal Machine Tools &amp; OMPI India</div>
+  </div>
+
+</body>
+</html>
+
