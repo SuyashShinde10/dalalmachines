@@ -117,3 +117,4 @@
 4. **Lead Inquiries**:
    - Risk: Spam flooding, database bloat.
    - Defense: `inquiryLimiter` (30 requests per hour per IP), deep prototype pollution sanitization, chained cryptographic audit logging.
+

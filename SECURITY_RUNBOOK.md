@@ -74,3 +74,4 @@ If you suspect an active intrusion, unauthorized account access, or leaked crede
    node -e "const sec = require('./server/security/defenseInDepth'); console.log(sec.verifyAuditChain());"
    ```
 2. Verify `server/data/db.json` has not been modified or corrupted. Restore from the most recent backup if necessary.
+

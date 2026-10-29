@@ -15,14 +15,14 @@ jobs:
       - name: Checkout Source Code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js 20.x
+      - name: Setup Node.js 22.x
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: 'npm'
 
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
 
       - name: Syntax & Structural Validation
         run: |
@@ -33,15 +33,32 @@ jobs:
           node -c server/security/defenseInDepth.js
           node -c server/performance/cacheEngine.js
 
+      - name: Start Background Server
+        run: |
+          node server/server.js &
+          for i in {1..20}; do
+            if curl -s http://localhost:5000/api/health | grep -q "ok"; then
+              echo "Server successfully booted on port 5000"
+              break
+            fi
+            echo "Waiting for server to become healthy..."
+            sleep 1
+          done
+
       - name: Run SecOps Cryptographic Test Suite
         run: node test_secops.js
 
       - name: Run Top 1% Zero-Trust Fortress Test Suite
         run: node test_top1_suite.js
 
+      - name: Run 6 Enterprise Pillars Verification
+        run: node test_enterprise_pillars.js
+
       - name: Run End-to-End Full Platform Simulation
         run: node test_e2e_full_simulation.js
 
+      - name: Verify Exposed Files Scanner
+        run: node scripts/check-exposed.js
+
       - name: Verify Docker Container Build
         run: docker build -t dalal-machinery-platform:test .
-

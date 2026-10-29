@@ -15,7 +15,6 @@ $RECYCLE.BIN/
 # Node dependencies
 node_modules/
 server/node_modules/
-package-lock.json
 
 # IDE and Editor settings
 .vscode/
