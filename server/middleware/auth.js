@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const config = require('../config');
 const db = require('../db');
+const { verifyClientFingerprint } = require('../security/defenseInDepth');
 
 function authenticateToken(req, res, next) {
   let token = null;
@@ -19,6 +20,16 @@ function authenticateToken(req, res, next) {
 
   try {
     const decoded = jwt.verify(token, config.JWT_SECRET);
+
+    // Zero-Trust Session Verification: Anti-Token-Hijacking Device Fingerprint Guard
+    if (decoded.fp && !verifyClientFingerprint(req, decoded.fp)) {
+      return res.status(401).json({
+        success: false,
+        sessionHijackDetected: true,
+        message: 'Security Alert: Token device fingerprint mismatch. Session was initiated on a different device/network.'
+      });
+    }
+
     // Verify user still exists and is active in DB
     const user = db.getUserById(decoded.id);
     if (!user) {

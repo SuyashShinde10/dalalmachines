@@ -24,6 +24,8 @@ const devRoutes = require('./routes/dev');
 const honeypot = require('./security/honeypot');
 const gateway = require('./security/gateway');
 const routeShield = require('./security/routeShield');
+const defenseInDepth = require('./security/defenseInDepth');
+const cacheEngine = require('./performance/cacheEngine');
 
 const app = express();
 
@@ -31,12 +33,35 @@ const app = express();
 app.use(compression());
 app.disable('x-powered-by');
 
-// 2. HTTP Security Headers via Helmet
+// 2. Bank-Grade HTTP Security Headers & CSP Level 3 Defense
 app.use(helmet({
-  contentSecurityPolicy: false, // allow Google Fonts, external CDNs & machinery images
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://cdnjs.cloudflare.com", "https://fonts.googleapis.com"],
+      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://cdnjs.cloudflare.com"],
+      fontSrc: ["'self'", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com", "data:"],
+      imgSrc: ["'self'", "data:", "blob:", "https:"],
+      connectSrc: ["'self'", "ws:", "wss:", "http:", "https:"],
+      frameAncestors: ["'none'"],
+      baseUri: ["'self'"],
+      formAction: ["'self'"]
+    }
+  },
   crossOriginEmbedderPolicy: false,
-  crossOriginResourcePolicy: { policy: "cross-origin" }
+  crossOriginOpenerPolicy: { policy: "same-origin-allow-popups" },
+  crossOriginResourcePolicy: { policy: "cross-origin" },
+  hsts: { maxAge: 63072000, includeSubDomains: true, preload: true },
+  frameguard: { action: "deny" },
+  noSniff: true,
+  referrerPolicy: { policy: "strict-origin-when-cross-origin" }
 }));
+
+// Restrict sensitive hardware APIs (Permissions-Policy)
+app.use((req, res, next) => {
+  res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), payment=()');
+  next();
+});
 
 // 3. Safe CORS Configuration
 const allowedOrigins = [
@@ -60,6 +85,12 @@ app.use(cors({
 app.use(express.json({ limit: '20mb' }));
 app.use(express.urlencoded({ extended: true, limit: '20mb' }));
 app.use(cookieParser());
+
+// 4a. Deep Recursive Request Sanitization & Prototype Pollution Guard
+app.use(defenseInDepth.deepSanitizeMiddleware);
+
+// 4b. CSRF & State-Changing Mutation Guard
+app.use('/api', defenseInDepth.csrfGuardMiddleware);
 
 // 4c. SecOps Firewall: Drop traffic from actively blacklisted IPs
 app.use(honeypot.blacklistGuardMiddleware);

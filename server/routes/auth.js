@@ -5,16 +5,34 @@ const jwt = require('jsonwebtoken');
 const config = require('../config');
 const db = require('../db');
 const { authenticateToken } = require('../middleware/auth');
+const {
+  checkAccountLockout,
+  recordFailedLogin,
+  recordSuccessfulLogin,
+  generateClientFingerprint
+} = require('../security/defenseInDepth');
 
 // POST /api/auth/login
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
   const { identifier, password } = req.body;
   if (!identifier || !password) {
     return res.status(400).json({ success: false, message: 'Please provide username/email and password.' });
   }
 
+  // 1. Check Account-Level Lockout (Brute-Force & Credential Stuffing Defense)
+  const lockout = checkAccountLockout(identifier);
+  if (lockout.locked) {
+    return res.status(429).json({
+      success: false,
+      locked: true,
+      remainingSeconds: lockout.remainingSeconds,
+      message: `Account is temporarily locked due to excessive failed attempts. Try again in ${lockout.remainingSeconds} seconds.`
+    });
+  }
+
   const user = db.getUserByUsernameOrEmail(identifier);
   if (!user) {
+    await recordFailedLogin(identifier, req);
     return res.status(401).json({ success: false, message: 'Invalid credentials. User not found.' });
   }
 
@@ -35,19 +53,27 @@ router.post('/login', (req, res) => {
 
   const isMatch = bcrypt.compareSync(password, user.passwordHash);
   if (!isMatch) {
+    await recordFailedLogin(identifier, req);
     return res.status(401).json({ success: false, message: 'Invalid password. Please try again.' });
   }
+
+  // Clear failure records on successful login
+  recordSuccessfulLogin(identifier);
 
   // Update last login
   db.updateUserLoginTimestamp(user.id);
 
-  // Sign JWT
+  // Generate client device fingerprint (Anti-Session-Replay)
+  const fp = generateClientFingerprint(req);
+
+  // Sign JWT with client device fingerprint
   const token = jwt.sign(
     {
       id: user.id,
       username: user.username,
       email: user.email,
-      role: user.role
+      role: user.role,
+      fp
     },
     config.JWT_SECRET,
     { expiresIn: config.JWT_EXPIRY }

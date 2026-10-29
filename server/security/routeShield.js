@@ -5,6 +5,7 @@ const config = require('../config');
 const db = require('../db');
 const { hasValidGatewayPass } = require('./gateway');
 const { getClientIp, recordSecurityEvent } = require('./honeypot');
+const { verifyClientFingerprint } = require('./defenseInDepth');
 
 // In-memory runtime lockdown state
 global.PORTAL_LOCKDOWN = false;
@@ -37,6 +38,9 @@ function getAuthenticatedUser(req) {
 
   try {
     const decoded = jwt.verify(token, config.JWT_SECRET);
+    if (decoded.fp && !verifyClientFingerprint(req, decoded.fp)) {
+      return null; // Stolen token fingerprint mismatch: drop privileges immediately
+    }
     const user = db.getUserById(decoded.id);
     if (!user || !user.active) return null;
     return user;

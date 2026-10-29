@@ -9,7 +9,7 @@
       "name": "System Developer",
       "active": true,
       "createdAt": "2026-10-06T09:58:03.305Z",
-      "lastLogin": "2026-10-06T16:40:05.718Z",
+      "lastLogin": "2026-10-29T10:42:30.815Z",
       "blockedByDeveloper": false,
       "blockedReason": "",
       "blockedAt": null
@@ -1657,6 +1657,18 @@
   ],
   "inquiries": [
     {
+      "id": "inq_9d64a103",
+      "name": "Test Machine ",
+      "email": "security-audit@dalalmachines.com",
+      "phone": "+91 99999 88888",
+      "company": "",
+      "machineId": null,
+      "machineName": null,
+      "message": "",
+      "status": "new",
+      "createdAt": "2026-10-29T10:42:30.849Z"
+    },
+    {
       "id": "inq_2c940f02",
       "name": "Kalyani Forge Lead",
       "email": "",
@@ -1982,6 +1994,84 @@
     }
   ],
   "logs": [
+    {
+      "id": "log_fc6064a5",
+      "timestamp": "2026-10-29T10:42:30.923Z",
+      "userId": "usr_superadmin",
+      "username": "developer",
+      "role": "superadmin",
+      "action": "PRODUCT_DELETED",
+      "target": "P000726",
+      "details": "Deleted machine Benchmark Hydraulic Stamping Machine",
+      "ip": "127.0.0.1",
+      "prevHash": "5b93576da5af6d3547387e389342fe3ba6242752ae3253f34b562aa23b098a34",
+      "hash": "1e74a9482e294db322b359bba3285e8ec4a1f90104fcc2a871e5d2af11fcee3d"
+    },
+    {
+      "id": "log_8d685201",
+      "timestamp": "2026-10-29T10:42:30.879Z",
+      "userId": "usr_superadmin",
+      "username": "developer",
+      "role": "superadmin",
+      "action": "PRODUCT_CREATED",
+      "target": "P000726",
+      "details": "Created machine Benchmark Hydraulic Stamping Machine (Standard Machine)",
+      "ip": "127.0.0.1",
+      "prevHash": "726f3ff7fc6a4a50b48c674f49bc7aacc847daed8c7129d4382ac8017acb37b2",
+      "hash": "5b93576da5af6d3547387e389342fe3ba6242752ae3253f34b562aa23b098a34"
+    },
+    {
+      "id": "log_3f6f5af7",
+      "timestamp": "2026-10-29T10:42:30.823Z",
+      "userId": "usr_superadmin",
+      "username": "developer",
+      "role": "superadmin",
+      "action": "USER_LOGIN",
+      "target": "AUTH",
+      "details": "User logged in successfully from ::1",
+      "ip": "127.0.0.1",
+      "prevHash": "8b853dc5636c7a52f357d2d4b336afb609c9ca3a629c72dd91927f9112ca328c",
+      "hash": "726f3ff7fc6a4a50b48c674f49bc7aacc847daed8c7129d4382ac8017acb37b2"
+    },
+    {
+      "id": "log_2e633cd8",
+      "timestamp": "2026-10-29T10:42:01.024Z",
+      "userId": "usr_superadmin",
+      "username": "developer",
+      "role": "superadmin",
+      "action": "PRODUCT_DELETED",
+      "target": "P000687",
+      "details": "Deleted machine Benchmark Hydraulic Stamping Machine",
+      "ip": "127.0.0.1",
+      "prevHash": "473c2d6b97a0157fff473a182ce34a2c8909871b0d61fd7105ca1e9b700344cf",
+      "hash": "8b853dc5636c7a52f357d2d4b336afb609c9ca3a629c72dd91927f9112ca328c"
+    },
+    {
+      "id": "log_577f7092",
+      "timestamp": "2026-10-29T10:42:00.978Z",
+      "userId": "usr_superadmin",
+      "username": "developer",
+      "role": "superadmin",
+      "action": "PRODUCT_CREATED",
+      "target": "P000687",
+      "details": "Created machine Benchmark Hydraulic Stamping Machine (Standard Machine)",
+      "ip": "127.0.0.1",
+      "prevHash": "31dc034d0fedb0e8a2615409a0b2343ccd94cf5175fbf6d1be42c41d7c76cf4c",
+      "hash": "473c2d6b97a0157fff473a182ce34a2c8909871b0d61fd7105ca1e9b700344cf"
+    },
+    {
+      "id": "log_f9f0d642",
+      "timestamp": "2026-10-29T10:42:00.919Z",
+      "userId": "usr_superadmin",
+      "username": "developer",
+      "role": "superadmin",
+      "action": "USER_LOGIN",
+      "target": "AUTH",
+      "details": "User logged in successfully from ::1",
+      "ip": "127.0.0.1",
+      "prevHash": "GENESIS_HASH_DMTA_2026",
+      "hash": "31dc034d0fedb0e8a2615409a0b2343ccd94cf5175fbf6d1be42c41d7c76cf4c"
+    },
     {
       "id": "log_f46d5a19",
       "timestamp": "2026-10-28T13:50:32.721Z",

@@ -7,6 +7,7 @@ const http = require('http');
 const config = require('../config');
 const db = require('../db');
 const realtime = require('../realtime');
+const cacheEngine = require('../performance/cacheEngine');
 
 /**
  * STRICT CLIENT PRIVACY SHIELD MIDDLEWARE:
@@ -53,6 +54,7 @@ router.get('/telemetry', (req, res) => {
       heapUsedMB: Math.round(mem.heapUsed / 1024 / 1024),
       externalMB: Math.round(mem.external / 1024 / 1024)
     },
+    cacheEngine: cacheEngine.getTelemetry(),
     server: {
       port: config.PORT,
       compression: 'gzip/brotli enabled',
@@ -361,16 +363,32 @@ const routeShield = require('../security/routeShield');
 router.get('/security/status', (req, res) => {
   try {
     const stats = honeypot.getSecurityStats();
+    const auditChain = db.verifyAuditIntegrity();
     res.json({
       success: true,
       lockdownActive: routeShield.getLockdownStatus(),
       gatewayKey: config.PORTAL_GATEWAY_KEY,
       gatewayAccessUrl: `/portal-gate?key=${config.PORTAL_GATEWAY_KEY}&to=dev`,
       allowedDevIps: config.ALLOWED_DEV_IPS,
+      auditChainVerified: auditChain.valid,
+      auditLogCount: auditChain.count,
+      auditLatestHash: auditChain.latestHash || 'GENESIS',
       ...stats
     });
   } catch (err) {
     res.status(500).json({ success: false, message: 'Failed to load security status: ' + err.message });
+  }
+});
+
+router.get('/security/audit-verify', (req, res) => {
+  try {
+    const auditChain = db.verifyAuditIntegrity();
+    res.json({
+      success: true,
+      ...auditChain
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, message: 'Failed to verify audit chain: ' + err.message });
   }
 });
 

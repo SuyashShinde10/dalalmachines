@@ -3,11 +3,12 @@ const router = express.Router();
 const path = require('path');
 const db = require('../db');
 const realtime = require('../realtime');
+const cacheEngine = require('../performance/cacheEngine');
 const { requireAdmin } = require('../middleware/auth');
 const upload = require('../middleware/upload');
 
-// GET /api/products (Public or Admin)
-router.get('/', (req, res) => {
+// GET /api/products (Public or Admin with In-Memory Micro-Cache)
+router.get('/', cacheEngine.middleware(30), (req, res) => {
   const { section, category, location, query, status, all } = req.query;
   
   const filters = { section, category, location, query };
@@ -27,7 +28,7 @@ router.get('/', (req, res) => {
 });
 
 // GET /api/products/categories
-router.get('/categories', (req, res) => {
+router.get('/categories', cacheEngine.middleware(60), (req, res) => {
   res.json({
     success: true,
     categories: db.getCategories()
@@ -35,7 +36,7 @@ router.get('/categories', (req, res) => {
 });
 
 // GET /api/products/:id
-router.get('/:id', (req, res) => {
+router.get('/:id', cacheEngine.middleware(30), (req, res) => {
   const product = db.getProductById(req.params.id);
   if (!product) {
     return res.status(404).json({ success: false, message: 'Machine not found.' });

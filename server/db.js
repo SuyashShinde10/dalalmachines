@@ -3,6 +3,22 @@ const path = require('path');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 const config = require('./config');
+const cacheEngine = require('./performance/cacheEngine');
+const { computeLogHash, verifyAuditChain } = require('./security/defenseInDepth');
+
+// In-Memory High-Speed Indexing Engine for O(1) Lookups
+const productIndex = new Map();
+
+function rebuildProductIndex() {
+  productIndex.clear();
+  if (Array.isArray(db.products)) {
+    for (const p of db.products) {
+      if (p && p.id) {
+        productIndex.set(p.id, p);
+      }
+    }
+  }
+}
 
 // Ensure data directories exist
 if (!fs.existsSync(config.DATA_DIR)) {
@@ -44,6 +60,7 @@ function loadDb() {
     try {
       const content = fs.readFileSync(config.DB_FILE, 'utf8');
       db = JSON.parse(content);
+      rebuildProductIndex();
       return;
     } catch (err) {
       console.error('Error reading db.json, re-initializing...', err);
@@ -152,6 +169,7 @@ function loadDb() {
   ];
 
   saveDb();
+  rebuildProductIndex();
 }
 
 // Write back to catalog-data.js so static client pages stay 100% updated
@@ -383,7 +401,8 @@ module.exports = {
     return list;
   },
   getProductById: (id) => {
-    return db.products.find(p => p.id === id);
+    if (!id) return null;
+    return productIndex.get(id) || db.products.find(p => p.id === id) || null;
   },
   createProduct: (productData, actor) => {
     // Generate machine ID if not provided
@@ -423,7 +442,9 @@ module.exports = {
 
     db.products.unshift(newProduct);
     saveDb();
+    rebuildProductIndex();
     syncToCatalogJs();
+    cacheEngine.invalidate('/api/products');
 
     module.exports.addLog({
       userId: actor.id,
@@ -445,7 +466,9 @@ module.exports = {
     });
 
     saveDb();
+    rebuildProductIndex();
     syncToCatalogJs();
+    cacheEngine.invalidate('/api/products');
 
     module.exports.addLog({
       userId: actor.id,
@@ -465,7 +488,9 @@ module.exports = {
     const deleted = db.products[idx];
     db.products.splice(idx, 1);
     saveDb();
+    rebuildProductIndex();
     syncToCatalogJs();
+    cacheEngine.invalidate('/api/products');
 
     module.exports.addLog({
       userId: actor.id,
@@ -522,6 +547,9 @@ module.exports = {
     return db.logs.slice(0, limit);
   },
   addLog: ({ userId, username, role, action, target, details, ip }) => {
+    const prevEntry = db.logs && db.logs.length > 0 ? db.logs[0] : null;
+    const prevHash = prevEntry && prevEntry.hash ? prevEntry.hash : 'GENESIS_HASH_DMTA_2026';
+
     const entry = {
       id: 'log_' + crypto.randomUUID().slice(0, 8),
       timestamp: new Date().toISOString(),
@@ -531,8 +559,12 @@ module.exports = {
       action,
       target: target || '-',
       details: details || '',
-      ip: ip || '127.0.0.1'
+      ip: ip || '127.0.0.1',
+      prevHash,
+      hash: ''
     };
+    entry.hash = computeLogHash(entry, prevHash);
+
     db.logs.unshift(entry);
     // Keep last 1000 logs
     if (db.logs.length > 1000) {
@@ -581,5 +613,7 @@ module.exports = {
     });
     return true;
   },
+  verifyAuditIntegrity: () => verifyAuditChain(db.logs),
+  rebuildProductIndex,
   syncToCatalogJs
 };
