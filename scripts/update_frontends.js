@@ -205,3 +205,4 @@ if (!prod.includes('dalal-product-schema') && prod.includes('function populatePD
 
 fs.writeFileSync(prodPath, prod, 'utf8');
 console.log('product.html updated successfully.');
+

@@ -459,3 +459,4 @@ function escapeHtml(str) {
 module.exports = {
   generateSpecSheetHtml
 };
+

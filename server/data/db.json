@@ -1657,6 +1657,18 @@
   ],
   "inquiries": [
     {
+      "id": "inq_03b979e1",
+      "name": "Mr. Rajesh Verma",
+      "email": "rajesh@vermaforgings.com",
+      "phone": "+91 9876543210",
+      "company": "Verma Forgings Ltd",
+      "machineId": null,
+      "machineName": "1600T Russian Hot Forging Press",
+      "message": "Need CIF Nhava Sheva quote and live power trial schedule.",
+      "status": "new",
+      "createdAt": "2026-10-29T11:24:04.546Z"
+    },
+    {
       "id": "inq_cc948de5",
       "name": "Test Machine ",
       "email": "security-audit@dalalmachines.com",
@@ -2030,6 +2042,19 @@
     }
   ],
   "logs": [
+    {
+      "id": "log_2309a164",
+      "timestamp": "2026-10-29T11:24:04.554Z",
+      "userId": "system_notification",
+      "username": "LEAD_DISPATCHER",
+      "role": "system",
+      "action": "INQUIRY_ALERT_DISPATCHED",
+      "target": "inq_03b979e1",
+      "details": "Generated WhatsApp alert payload for buyer Mr. Rajesh Verma (Verma Forgings Ltd) requesting 1600T Russian Hot Forging Press",
+      "ip": "127.0.0.1",
+      "prevHash": "2c0e91e3635b0c541f3b9aa94325322d6169d1ad57f8127ae9e830e092a77da6",
+      "hash": "ce2bb130ce805c6e2a0b56f6226f694ce7c548d1559b6df7c7bed4b5bc0beceb"
+    },
     {
       "id": "log_812d2612",
       "timestamp": "2026-10-29T11:23:21.468Z",
