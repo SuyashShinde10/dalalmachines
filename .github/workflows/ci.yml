@@ -33,32 +33,49 @@ jobs:
           node -c server/security/defenseInDepth.js
           node -c server/performance/cacheEngine.js
 
-      - name: Start Background Server
+      - name: Start Server & Execute All Verification Test Suites
         run: |
+          # 1. Start server in background within this step
           node server/server.js &
-          for i in {1..20}; do
-            if curl -s http://localhost:5000/api/health | grep -q "ok"; then
-              echo "Server successfully booted on port 5000"
+          SERVER_PID=$!
+          echo "Server started with PID: $SERVER_PID"
+
+          # 2. Wait up to 30 seconds for health check
+          SERVER_READY=false
+          for i in $(seq 1 30); do
+            if curl -s http://127.0.0.1:5000/api/health | grep -q "ok"; then
+              echo "Server successfully booted and healthy on port 5000 (after ${i}s)"
+              SERVER_READY=true
               break
             fi
-            echo "Waiting for server to become healthy..."
+            echo "Waiting for server to become healthy (${i}/30)..."
             sleep 1
           done
 
-      - name: Run SecOps Cryptographic Test Suite
-        run: node test_secops.js
+          if [ "$SERVER_READY" = false ]; then
+            echo "Error: Server failed to start within 30 seconds"
+            exit 1
+          fi
 
-      - name: Run Top 1% Zero-Trust Fortress Test Suite
-        run: node test_top1_suite.js
+          # 3. Execute all test suites while server is guaranteed alive
+          echo "=== 1. Running SecOps Cryptographic Test Suite ==="
+          node test_secops.js
 
-      - name: Run 6 Enterprise Pillars Verification
-        run: node test_enterprise_pillars.js
+          echo "=== 2. Running Top 1% Zero-Trust Fortress Test Suite ==="
+          node test_top1_suite.js
 
-      - name: Run End-to-End Full Platform Simulation
-        run: node test_e2e_full_simulation.js
+          echo "=== 3. Running 6 Enterprise Pillars Verification ==="
+          node test_enterprise_pillars.js
 
-      - name: Verify Exposed Files Scanner
-        run: node scripts/check-exposed.js
+          echo "=== 4. Running End-to-End Full Platform Simulation ==="
+          node test_e2e_full_simulation.js
+
+          echo "=== 5. Running Exposed Files Scanner ==="
+          node scripts/check-exposed.js
+
+          # 4. Clean shutdown of background server
+          echo "All test suites passed cleanly! Shutting down test server..."
+          kill -9 $SERVER_PID 2>/dev/null || true
 
       - name: Verify Docker Container Build
         run: docker build -t dalal-machinery-platform:test .

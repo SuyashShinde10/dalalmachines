@@ -32,7 +32,6 @@ COPY superadmin ./superadmin
 COPY dev ./dev
 COPY new ./new
 COPY server ./server
-COPY uploads ./uploads
 
 # Ensure permissions for data and uploads directories
 RUN mkdir -p /app/server/data /app/uploads && \
