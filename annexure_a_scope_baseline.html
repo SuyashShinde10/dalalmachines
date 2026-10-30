@@ -315,6 +315,7 @@
           <ul class="bullet-list" style="margin-bottom: 0;">
             <li><strong>Super-Admin Security Center:</strong> Zero-trust cloaking returning HTTP 404 to unauthorized users, cryptographic signed gate pass cookies (<code>dmta_gate_pass</code>), and developer audit console.</li>
             <li><strong>Cryptographic Tamper-Evident Audit Log:</strong> SHA-256 hashed ledger tracking staff logins, inventory modifications, and inquiry dispatches.</li>
+            <li><strong>Cryptographic Salting &amp; Rate Limiting:</strong> Bcrypt (10 salt rounds) protection with zero plaintext storage, plus multi-tier adaptive rate limiting on auth and quotation APIs.</li>
           </ul>
         </div>
       </div>
