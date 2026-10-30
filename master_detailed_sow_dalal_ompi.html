@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Master Detailed Statement of Work (SOW) - Dalal Machine Tools &amp; OMPI India</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 7mm 9mm 7mm 9mm;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #0f172a;
+      background: #ffffff;
+      font-size: 7.9pt;
+      line-height: 1.28;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .page {
+      height: 283mm;
+      max-height: 283mm;
+      overflow: hidden;
+      box-sizing: border-box;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      page-break-after: always;
+      break-after: page;
+      padding: 1px 0;
+    }
+    .page:last-child {
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+    .page-content {
+      flex: 1;
+    }
+
+    /* Header Bar */
+    .header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #0f172a;
+      border-top: 3px solid #d97706;
+      padding-top: 4px;
+      padding-bottom: 5px;
+      margin-bottom: 6px;
+    }
+    .brand-title {
+      font-size: 11.8pt;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.4px;
+      text-transform: uppercase;
+    }
+    .brand-subtitle {
+      font-size: 7pt;
+      font-weight: 700;
+      color: #b45309;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-top: 1px;
+    }
+    .doc-meta {
+      text-align: right;
+      font-size: 6.7pt;
+      color: #64748b;
+      line-height: 1.26;
+    }
+    .doc-meta strong {
+      color: #0f172a;
+      font-weight: 700;
+    }
+
+    /* Headings */
+    h1 {
+      font-size: 11pt;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 3px;
+      letter-spacing: -0.3px;
+    }
+    h2 {
+      font-size: 8.4pt;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 5px 0 3px;
+      border-left: 3px solid #d97706;
+      padding-left: 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    h3 {
+      font-size: 7.7pt;
+      font-weight: 800;
+      color: #1e3a8a;
+      margin: 4px 0 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.2px;
+    }
+    p {
+      margin-bottom: 3.5px;
+      color: #334155;
+      font-size: 7.7pt;
+      line-height: 1.26;
+    }
+
+    /* Grids & Cards */
+    .two-col-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+    .three-col-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+    .col-card {
+      background: #ffffff;
+      border: 1.2px solid #cbd5e1;
+      border-radius: 4px;
+      padding: 5px 7px;
+    }
+    .col-card.accent {
+      border-color: #d97706;
+      background: #fffdf7;
+    }
+    .col-card.blue-tint {
+      border-color: #1e3a8a;
+      background: #f8fafc;
+    }
+    .col-card.green-tint {
+      border-color: #059669;
+      background: #f0fdf4;
+    }
+    .card-title {
+      font-size: 7.9pt;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 3px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 2px;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 6.2pt;
+      font-weight: 800;
+      padding: 1px 4px;
+      border-radius: 3px;
+      background: #0f172a;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+    .badge.gold { background: #b45309; }
+    .badge.green { background: #047857; }
+    .badge.blue { background: #1e3a8a; }
+
+    /* Bullet Lists */
+    ul.bullet-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 3px 0;
+    }
+    ul.bullet-list li {
+      position: relative;
+      padding-left: 10px;
+      margin-bottom: 2px;
+      font-size: 7.3pt;
+      color: #334155;
+      line-height: 1.24;
+    }
+    ul.bullet-list li::before {
+      content: "\2022";
+      position: absolute;
+      left: 0;
+      color: #d97706;
+      font-weight: bold;
+      font-size: 8.5pt;
+    }
+
+    /* Tables */
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 3px 0 4px 0;
+      font-size: 7.2pt;
+    }
+    table.data-table th, table.data-table td {
+      border: 1px solid #cbd5e1;
+      padding: 2.5px 5px;
+      text-align: left;
+      vertical-align: middle;
+    }
+    table.data-table th {
+      background: #0f172a;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 6.7pt;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    table.data-table tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+    table.data-table tr.total-row td {
+      background: #ecfdf5;
+      border-top: 2px solid #059669;
+      font-weight: 800;
+      color: #065f46;
+    }
+
+    /* Quad Layout */
+    .module-quad {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px;
+      margin: 3px 0;
+    }
+    .quad-item {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      padding: 4.5px 6.5px;
+    }
+    .quad-head {
+      font-size: 7.4pt;
+      font-weight: 800;
+      color: #0f172a;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 1.5px;
+      margin-bottom: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    /* Callouts */
+    .callout-box {
+      background: #f8fafc;
+      border-left: 3px solid #0f172a;
+      border-radius: 4px;
+      padding: 4px 7px;
+      margin: 3.5px 0;
+      font-size: 7.2pt;
+      line-height: 1.25;
+    }
+
+    /* Signature Grid */
+    .signature-grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    .sig-box {
+      border: 1.2px dashed #94a3b8;
+      border-radius: 4px;
+      padding: 4px 6px;
+      background: #fafafa;
+    }
+    .sig-line {
+      margin-top: 14px;
+      border-top: 1px solid #0f172a;
+      padding-top: 2px;
+      font-size: 6.4pt;
+      color: #64748b;
+      line-height: 1.2;
+    }
+
+    .doc-footer {
+      border-top: 1px solid #e2e8f0;
+      padding-top: 3px;
+      font-size: 6.6pt;
+      color: #94a3b8;
+      text-align: center;
+      margin-top: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== PAGE 1: COVER, PREAMBLE & JOINT COMMERCIAL ARCHITECTURE ==================== -->
+  <div class="page">
+    <div class="page-content">
+      <div class="header-bar">
+        <div>
+          <div class="brand-title">Consolidated Master Statement of Work (SOW)</div>
+          <div class="brand-subtitle">Unified Technical Specifications &bull; Dalal Machine Tools &amp; OMPI India</div>
+        </div>
+        <div class="doc-meta">
+          <div>Document Ref: <strong>DMTA-OMPI-SOW-2026-v1.0</strong></div>
+          <div>Effective Date: <strong>30 October 2026</strong></div>
+          <div>Attachment To: <strong>Proposal DMTA-OMPI-PROP-2026-v1.0</strong></div>
+          <div>Classification: <strong>STRICTLY CONFIDENTIAL</strong></div>
+        </div>
+      </div>
+
+      <!-- Formal Entity Identification Block -->
+      <div class="two-col-grid" style="margin-bottom: 5px;">
+        <div class="col-card blue-tint">
+          <div class="card-title">
+            <span>Client Entities (Joint Beneficiaries)</span>
+            <span class="badge blue">Corporate Principals</span>
+          </div>
+          <div style="font-size: 7.2pt; margin-bottom: 3px;">
+            <strong>1. Dalal Machine Tools Agency Pvt. Ltd.</strong><br>
+            <span style="color: #64748b; font-size: 6.7pt;">Regd. Office: 202/203, Tardeo AC Market Building, Tardeo Road, Mumbai 400034, MH, India.</span><br>
+            <span style="color: #64748b; font-size: 6.7pt;">Pune Stockyard: Gat No. 248/2, Chakan Industrial Area Phase II, Vasuli, Pune 410501.</span>
+          </div>
+          <div style="font-size: 7.2pt;">
+            <strong>2. OMPI India LLP</strong><br>
+            <span style="color: #64748b; font-size: 6.7pt;">Regd. Office: Plot No. W-112, S-Block, MIDC Bhosari Industrial Area, Pune 411026, MH, India.</span>
+          </div>
+        </div>
+
+        <div class="col-card green-tint">
+          <div class="card-title">
+            <span>Technology Consultant (System Architect)</span>
+            <span class="badge green">Engineering Practice</span>
+          </div>
+          <div style="font-size: 7.2pt; margin-bottom: 3px;">
+            <strong>Suyash Shinde</strong> &mdash; Lead Solutions Architect &amp; Enterprise Consultant<br>
+            <span style="color: #64748b; font-size: 6.7pt;">Office: Baner, Pune 411045, Maharashtra, India</span><br>
+            <span style="color: #64748b; font-size: 6.7pt;">Direct Phone / WhatsApp: +91 94038 92055 &bull; Email: suyashshinde360@gmail.com</span><br>
+            <span style="color: #64748b; font-size: 6.7pt;">Tax Status: PAN provided on invoice &bull; GST Status: Not Registered (CGST Sec 22 Threshold)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout-box" style="border-left-color: #d97706; background: #fffdf5; padding: 4.5px 8px; margin-bottom: 5px;">
+        <strong>Binding Scope Agreement &amp; Document Hierarchy:</strong> This Consolidated Master Statement of Work (SOW) defines the exact, complete, and legally binding engineering deliverables for both <strong>Dalal Machine Tools Agency Pvt. Ltd.</strong> and <strong>OMPI India LLP</strong>. Pursuant to Section 1 of Proposal <code>DMTA-OMPI-PROP-2026-v1.0</code>, this document supersedes and consolidates all prior informal emails, drafts, and individual SOWs into a single authoritative baseline.
+      </div>
+
+      <h1>Master Engagement Architecture &amp; Entity Commercial Split</h1>
+      <p>
+        The engagement is structured into two distinct, standalone operational scopes unified under one integrated technology architecture. Each entity receives dedicated deliverables, distinct commercial invoicing, and decoupled intellectual property transfer:
+      </p>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width: 28%;">Scope Domain &amp; Entity</th>
+            <th style="width: 44%;">Core Deliverable Scope</th>
+            <th style="width: 14%;">Timeline</th>
+            <th style="width: 14%; text-align: right;">Fixed Fee</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>PART A: SOW-01 (Dalal Platform)</strong><br><span style="font-size: 6.6pt; color: #64748b;">Dalal Machine Tools Agency Pvt. Ltd.</span></td>
+            <td>24-Page Public Portal, High Seas Sales Calculator, 60 Machine Catalog, Staff/Super-Admin Portals, WhatsApp RFQ, SEO, GEO feeds, GA4 Telemetry.</td>
+            <td>Month 1 (Go-Live)</td>
+            <td style="text-align: right; font-weight: 700; color: #1e3a8a;">&#8377;2,00,000 Flat</td>
+          </tr>
+          <tr>
+            <td><strong>PART B: SOW-02 (OMPI ERP System)</strong><br><span style="font-size: 6.6pt; color: #64748b;">OMPI India LLP</span></td>
+            <td>Italian Clutch-Brake Web Showcase, Customer Portal &amp; Central Business ERP (33 Modules across Sales, Landed Cost, Spares &amp; GST).</td>
+            <td>Months 2&ndash;8 (7 Sprints)</td>
+            <td style="text-align: right; font-weight: 700; color: #065f46;">&#8377;5,60,000 Flat</td>
+          </tr>
+          <tr>
+            <td><strong>Integrated Maintenance &amp; Training</strong><br><span style="font-size: 6.6pt; color: #64748b;">Joint Operational Inclusions</span></td>
+            <td>Defect remediation during 8-month lifecycle + up to 12 hours staff training at Pune yard with video walkthroughs and PDF User Manual.</td>
+            <td>Full Lifecycle</td>
+            <td style="text-align: right; font-weight: 700; color: #047857;">Included (&#8377;0)</td>
+          </tr>
+          <tr class="total-row">
+            <td colspan="3">TOTAL UNIFIED ENGAGEMENT INVESTMENT (WEBSITE &#8377;2,00,000 + OMPI ERP &#8377;5,60,000)</td>
+            <td style="text-align: right; font-size: 8.8pt; font-weight: 800; color: #047857;">&#8377;7,60,000 Flat</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Master SOW Document Structure &amp; Navigation Index</h2>
+      <div class="three-col-grid" style="margin-top: 3px;">
+        <div class="col-card" style="border-left: 3px solid #1e3a8a;">
+          <div style="font-weight: 800; color: #1e3a8a; font-size: 7.6pt; text-transform: uppercase;">Part A: SOW-01 (Dalal)</div>
+          <div style="font-size: 6.9pt; color: #475569; margin-top: 2px;">
+            &bull; 24-Page Public Catalog Sitemap<br>
+            &bull; 10-Parameter Technical Grid<br>
+            &bull; High Seas Savings Calculator<br>
+            &bull; 1-Click PDF Spec Sheet Engine<br>
+            &bull; WhatsApp Routing &amp; Telemetry<br>
+            &bull; Staff CMS &amp; Super-Admin Console<br>
+            &bull; 60 Machine Upload Protocol
+          </div>
+        </div>
+        <div class="col-card" style="border-left: 3px solid #065f46;">
+          <div style="font-weight: 800; color: #065f46; font-size: 7.6pt; text-transform: uppercase;">Part B: SOW-02 (OMPI ERP)</div>
+          <div style="font-size: 6.9pt; color: #475569; margin-top: 2px;">
+            &bull; OMPI Web Showcase &amp; Portal<br>
+            &bull; Sales Pipeline (10 Modules)<br>
+            &bull; Italy Landed Cost (7 Modules)<br>
+            &bull; Spares Warehouse (8 Modules)<br>
+            &bull; Finance &amp; GST (8 Modules)<br>
+            &bull; On-Premise LAN Hardware Specs<br>
+            &bull; 7-Sprint Phased Roadmap
+          </div>
+        </div>
+        <div class="col-card" style="border-left: 3px solid #b45309;">
+          <div style="font-weight: 800; color: #b45309; font-size: 7.6pt; text-transform: uppercase;">Part C: Governance</div>
+          <div style="font-size: 6.9pt; color: #475569; margin-top: 2px;">
+            &bull; 12-Hour Staff Training Protocol<br>
+            &bull; Explicit Scope Exclusions<br>
+            &bull; Change Request (CR) Protocol<br>
+            &bull; Early Termination Protection<br>
+            &bull; Defect Dispute &amp; Payment Integrity<br>
+            &bull; Formal Execution Signatures
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="doc-footer">Page 1 of 7 &bull; Master Detailed SOW (v1.0 &bull; 30 Oct 2026) &bull; Dalal Machine Tools &amp; OMPI India</div>
+  </div>
+
+  <!-- ==================== PAGE 2: PART A - SOW-01: DALAL WEB PLATFORM SPECIFICATION ==================== -->
+  <div class="page">
+    <div class="page-content">
+      <div class="header-bar">
+        <div>
+          <div class="brand-title">Part A: SOW-01 &mdash; Dalal Machine Tools Platform</div>
+          <div class="brand-subtitle">B2B Heavy Machinery Digital Catalog, Calculators &amp; Lead Engine</div>
+        </div>
+        <div class="doc-meta">
+          <div>Entity: <strong>Dalal Machine Tools Agency Pvt. Ltd.</strong></div>
+          <div>Deliverable Code: <strong>SOW-01-DMTA</strong></div>
+          <div>Commercial Allocation: <strong>&#8377;2,00,000 Flat</strong></div>
+          <div>Target Delivery: <strong>Month 1 (Go-Live)</strong></div>
+        </div>
+      </div>
+
+      <h1>1.0 Executive Scope &amp; Commercial Purpose</h1>
+      <p>
+        SOW-01 delivers a high-performance, mobile-responsive B2B heavy machinery web platform engineered to showcase 50,000 sq. ft. of capital presses, forging equipment, and metal-forming machinery stock at the Chakan stockyard in Pune to corporate manufacturing buyers across India.
+      </p>
+
+      <h2>1.1 Full 24-Page Public Information Architecture</h2>
+      <p style="font-size: 7.5pt; margin-bottom: 3px;">
+        The public web platform comprises exactly 24 interconnected, high-performance responsive pages structured across 4 functional tiers:
+      </p>
+      <div class="two-col-grid" style="margin-bottom: 3.5px;">
+        <div class="col-card">
+          <div class="card-title">
+            <span>Corporate &amp; Stockyard Hub (Tier 1 &amp; 2)</span>
+            <span class="badge blue">6 Pages</span>
+          </div>
+          <ul class="bullet-list" style="margin-bottom: 0;">
+            <li><strong>Page 1 (Homepage):</strong> Hero inventory spotlight, live tonnage search, recent warehouse arrivals, buyer trust credentials, and corporate overview.</li>
+            <li><strong>Page 2 (About the Agency):</strong> 20+ years industrial heritage, leadership credentials, national client base, and technical machinery inspection methodology.</li>
+            <li><strong>Page 3 (Pune Stockyard Showcase):</strong> 50,000 sq. ft. central warehouse showcase, live power testing bay, overhead crane infrastructure, and live trial booking.</li>
+            <li><strong>Page 4 (High Seas Sales Calculator):</strong> Interactive customs duty, IGST, port handling, and landed capital cost comparison engine.</li>
+            <li><strong>Page 5 (Technical Inspection &amp; Services):</strong> Machinery reconditioning, power testing protocols, and OMPI clutch conversion capabilities.</li>
+            <li><strong>Page 6 (Contact Us &amp; Directions):</strong> Stockyard GPS coordinates, office locations (Mumbai HQ + Pune yard), inquiry forms, and direct calling links.</li>
+          </ul>
+        </div>
+
+        <div class="col-card">
+          <div class="card-title">
+            <span>Machinery Categories &amp; Policies (Tier 3 &amp; 4)</span>
+            <span class="badge gold">18 Pages</span>
+          </div>
+          <ul class="bullet-list" style="margin-bottom: 0;">
+            <li><strong>Pages 7&ndash;18 (12 Core Machinery Categories):</strong> Dedicated listing portals for Mechanical Forging Presses, Hydraulic Presses, Pneumatic Friction Clutch Presses, Knuckle Joint Presses, Plate Bending Rolls, Shearing Machines, Press Brakes, Drop Forging Hammers, Milling Centers, Lathes, Surface Grinders, and Toolroom Machinery.</li>
+            <li><strong>Pages 19&ndash;21 (Specialized Industrial Pages):</strong> European Machinery Imports Showcase, Automotive Press Lines, and Heavy Forging Solutions.</li>
+            <li><strong>Page 22 (Standard Dynamic Machine Detail):</strong> Reusable parametric template rendering rich technical specifications, photo galleries, PDF datasheets, and WhatsApp RFQ.</li>
+            <li><strong>Pages 23&ndash;24 (Compliance &amp; Legal):</strong> Formal Privacy Policy and Terms of Commercial Use.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>1.2 Standardized 10-Parameter Machinery Engineering Grid</h2>
+      <p style="font-size: 7.5pt; margin-bottom: 3px;">
+        Every machinery item rendered within the catalog conforms to a standardized 10-point technical engineering specification schema:
+      </p>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width: 25%;">Parameter Field</th>
+            <th style="width: 45%;">Engineering Description &amp; Schema Standard</th>
+            <th style="width: 30%;">Buyer Committee Utility</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1. Machine Model &amp; Make</strong></td>
+            <td>Manufacturer name, European/Japanese origin, model designation.</td>
+            <td>Brand heritage &amp; reliability rating</td>
+          </tr>
+          <tr>
+            <td><strong>2. Rated Tonnage Capacity</strong></td>
+            <td>Nominal pressing force in Metric Tons (e.g. 400T, 1600T, 4000T).</td>
+            <td>Primary sizing &amp; forging capability filter</td>
+          </tr>
+          <tr>
+            <td><strong>3. Stroke Length &amp; Adjustment</strong></td>
+            <td>Slide travel distance (mm) and motorized slide adjustment range.</td>
+            <td>Die shut-height &amp; tooling compatibility</td>
+          </tr>
+          <tr>
+            <td><strong>4. Continuous Speed (SPM)</strong></td>
+            <td>Strokes per minute rating under continuous and single-stroke modes.</td>
+            <td>Production cycle time &amp; output throughput</td>
+          </tr>
+          <tr>
+            <td><strong>5. Bed &amp; Bolster Dimensions</strong></td>
+            <td>Left-to-Right &times; Front-to-Back platen dimensions (mm).</td>
+            <td>Die footprint &amp; bolster plate clearance</td>
+          </tr>
+          <tr>
+            <td><strong>6. Die Shut Height (SDAU)</strong></td>
+            <td>Distance between bed and slide with stroke down, adjustment up.</td>
+            <td>Existing customer tooling fitment verification</td>
+          </tr>
+          <tr>
+            <td><strong>7. Clutch &amp; Brake Mechanism</strong></td>
+            <td>Pneumatic friction, hydraulic, or mechanical unit (OMPI compatible).</td>
+            <td>Safety compliance, cycle speed, and retrofit status</td>
+          </tr>
+          <tr>
+            <td><strong>8. Main Drive Motor Power</strong></td>
+            <td>Electrical motor rating in kW / HP, voltage, and flywheel RPM.</td>
+            <td>Factory power substation capacity requirement</td>
+          </tr>
+          <tr>
+            <td><strong>9. Gross Physical Weight</strong></td>
+            <td>Total assembled machine weight in Metric Tons (approx. MT).</td>
+            <td>Foundation civil design &amp; transport logistics</td>
+          </tr>
+          <tr>
+            <td><strong>10. Physical Condition &amp; Trial</strong></td>
+            <td>Operational status: Under Power, Fully Tested, As-Inspected.</td>
+            <td>Readiness for immediate live stockyard inspection</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>1.3 Interactive High Seas Sales Savings &amp; Customs Duty Calculator</h2>
+      <p style="font-size: 7.5pt;">
+        An interactive, client-facing financial estimation tool enabling corporate manufacturing buyers to calculate projected capital savings when purchasing machinery on a High Seas Sale basis versus domestic cleared stock:
+      </p>
+      <div class="col-card blue-tint" style="margin-top: 2px;">
+        <ul class="bullet-list" style="margin-bottom: 0;">
+          <li><strong>Input Parameters:</strong> Base Machine Purchase Price (EUR/USD/INR), Basic Customs Duty (BCD) %, Port Handling &amp; Wharfage charges, Inland Transit Freight to buyer plant.</li>
+          <li><strong>Computational Output:</strong> Calculation of IGST (18%), statutory landing charges, high-seas commercial markup, and net landed capital savings in INR.</li>
+          <li><strong>Commercial Disclaimer:</strong> Calculator is strictly an indicative computational utility; final customs assessment remains subject to Indian Customs evaluation and client's licensed Customs Housing Agent (CHA).</li>
+        </ul>
+      </div>
+    </div>
+    <div class="doc-footer">Page 2 of 7 &bull; Master Detailed SOW (v1.0 &bull; 30 Oct 2026) &bull; Dalal Machine Tools Platform (SOW-01)</div>
+  </div>
+
+  <!-- ==================== PAGE 3: PART A - SOW-01: CONVERSION, CMS & DATA PROTOCOL ==================== -->
+  <div class="page">
+    <div class="page-content">
+      <div class="header-bar">
+        <div>
+          <div class="brand-title">Part A: SOW-01 &mdash; Dalal Platform (Contd.)</div>
+          <div class="brand-subtitle">Conversion Engines, Security CMS &amp; Catalog Upload Protocols</div>
+        </div>
+        <div class="doc-meta">
+          <div>Entity: <strong>Dalal Machine Tools Agency Pvt. Ltd.</strong></div>
+          <div>Catalog Ceiling: <strong>Up to 60 Machinery Stock Items</strong></div>
+          <div>Security: <strong>Zero-Trust Cloaking &bull; SHA-256 Ledger</strong></div>
+          <div>Classification: <strong>STRICTLY CONFIDENTIAL</strong></div>
+        </div>
+      </div>
+
+      <h1>1.4 Sales Conversion Engines &amp; Technical Discovery Architecture</h1>
+      <div class="two-col-grid">
+        <div class="col-card">
+          <div class="card-title">
+            <span>1-Click Branded PDF Spec Sheet Generator</span>
+            <span class="badge blue">Committee Asset</span>
+          </div>
+          <ul class="bullet-list">
+            <li><strong>Automated PDF Engine:</strong> Generates a clean, print-ready A4 technical datasheet dynamically rendered from live catalog parameters.</li>
+            <li><strong>Institutional Letterhead:</strong> Features official Dalal Machine Tools corporate branding, registered Mumbai HQ &amp; Pune stockyard addresses, and contact numbers.</li>
+            <li><strong>Buyer Committee Utility:</strong> Enables purchase managers to download and present uniform machine specifications directly to internal technical vetting boards.</li>
+          </ul>
+        </div>
+
+        <div class="col-card">
+          <div class="card-title">
+            <span>Direct WhatsApp RFQ Routing &amp; Telemetry</span>
+            <span class="badge gold">Lead Acceleration</span>
+          </div>
+          <ul class="bullet-list">
+            <li><strong>Instant WhatsApp Routing:</strong> "Request Quotation" buttons construct pre-filled WhatsApp click-to-chat links routed directly to the Director's phone.</li>
+            <li><strong>Pre-Populated RFQ Tags:</strong> Inquiries include exact Machine SKU, Model, Rated Tonnage, buyer contact details, and timestamp.</li>
+            <li><strong>1-Click CSV/Excel Leads Export:</strong> Inquiries logged to local database with 1-click RFC-4180 CSV export featuring UTF-8 BOM for Microsoft Excel.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>1.5 Google SEO, AI Search (GEO) &amp; Web Telemetry Infrastructure</h2>
+      <div class="col-card" style="margin-bottom: 4px;">
+        <div class="two-col-grid" style="margin-bottom: 0;">
+          <ul class="bullet-list" style="margin-bottom: 0;">
+            <li><strong>Dynamic XML Sitemaps:</strong> Dynamic XML sitemap generator indexing 83 canonical URLs with Google Image extensions for machinery photos.</li>
+            <li><strong>Schema.org Rich Data:</strong> Comprehensive JSON-LD structured data for <code>LocalBusiness</code>, <code>Product</code>, and <code>BreadcrumbList</code>.</li>
+            <li><strong>AI Search (GEO) Feeds:</strong> Live <code>/llms.txt</code> and <code>/llms-full.txt</code> feeds formatted for AI search crawlers (GPTBot, ClaudeBot, Perplexity).</li>
+          </ul>
+          <ul class="bullet-list" style="margin-bottom: 0;">
+            <li><strong>Robots.txt Crawler Governance:</strong> Grants explicit access to high-intent search crawlers while disallowing admin routes.</li>
+            <li><strong>Web Telemetry:</strong> Google Tag Manager container (<code>GTM-DMTA2026</code>) and GA4 custom events for datasheet downloads, trial bookings, and RFQs.</li>
+            <li><strong>Google Search Console:</strong> DNS ownership verification and dynamic sitemap ping configuration.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>1.6 Staff Admin Operations CMS &amp; Super-Admin Security Center</h2>
+      <div class="two-col-grid" style="margin-bottom: 4px;">
+        <div class="col-card blue-tint">
+          <div class="card-title">
+            <span>Staff Admin CMS Portal (<code>/admin</code>)</span>
+            <span class="badge blue">Operations</span>
+          </div>
+          <ul class="bullet-list" style="margin-bottom: 0;">
+            <li><strong>Machinery Inventory Management:</strong> Complete CRUD interface for creating, updating, archiving, and categorizing machinery stock items.</li>
+            <li><strong>Availability Toggles:</strong> 1-click status switches: <code>In Stock</code>, <code>Under Inspection</code>, <code>Reserved</code>, and <code>Sold</code>.</li>
+            <li><strong>Lead Management Dashboard:</strong> Centralized inbox of buyer inquiries, trial bookings, and contact requests with follow-up tracking.</li>
+          </ul>
+        </div>
+
+        <div class="col-card green-tint">
+          <div class="card-title">
+            <span>Super-Admin Security Center (<code>/superadmin</code>)</span>
+            <span class="badge green">Zero-Trust SecOps</span>
+          </div>
+          <ul class="bullet-list" style="margin-bottom: 0;">
+            <li><strong>Zero-Trust Cloaked Decoy:</strong> Unauthorized probes on admin routes return standard HTTP 404 (Not Found) to hide admin surfaces from scanners.</li>
+            <li><strong>Cryptographic Gate Pass:</strong> Access requires secure portal passcode issuing cryptographically signed cookies (<code>dmta_gate_pass</code>).</li>
+            <li><strong>Tamper-Evident SHA-256 Audit Log:</strong> Cryptographic hash-chained audit ledger tracking logins, inventory updates, and lead dispatches.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>1.7 Catalog Population Protocol &amp; 60-Machine Ceiling</h2>
+      <div class="callout-box" style="border-left-color: #047857; background: #ecfdf5; padding: 4px 8px;">
+        <strong>Division of Catalog Onboarding Responsibilities:</strong>
+        <ul class="bullet-list" style="margin: 2px 0 0 0;">
+          <li><strong>Client Deliverables:</strong> Client shall provide technical machine specifications, dimensions, and high-resolution photographs organized within a standardized Excel/CSV template provided by Consultant.</li>
+          <li><strong>Consultant Ingestion &amp; Verification:</strong> Consultant will programmatically validate, ingest, format, optimize images, and publish <strong>up to 60 distinct machinery stock items</strong> into the production catalog.</li>
+          <li><strong>Out-of-Scope Data Entry:</strong> Physical typing of paper records or catalog onboarding exceeding 60 items is quotable under a separate Change Request.</li>
+        </ul>
+      </div>
+
+      <h2>1.8 SOW-01 Milestone Deliverable &amp; IP Transfer Protocol</h2>
+      <p style="font-size: 7.4pt;">
+        Dalal Platform deliverables are completed in Month 1 upon Go-Live acceptance. Following Go-Live acceptance AND full clearance of the &#8377;2,00,000 mobilization fee, Consultant executes a <strong>formal written Deed of Intellectual Property Assignment</strong> transferring full custom source code, templates, and digital assets to Dalal Machine Tools Agency Pvt. Ltd. within 7 business days.
+      </p>
+    </div>
+    <div class="doc-footer">Page 3 of 7 &bull; Master Detailed SOW (v1.0 &bull; 30 Oct 2026) &bull; Dalal Machine Tools Platform (SOW-01)</div>
+  </div>
+
+  <!-- ==================== PAGE 4: PART B - SOW-02: OMPI ERP (ENGINES 1 & 2) ==================== -->
+  <div class="page">
+    <div class="page-content">
+      <div class="header-bar">
+        <div>
+          <div class="brand-title">Part B: SOW-02 &mdash; OMPI India Central ERP System</div>
+          <div class="brand-subtitle">Commercial Architecture &bull; Sales Pipeline &bull; Italy Landed Cost Engine</div>
+        </div>
+        <div class="doc-meta">
+          <div>Entity: <strong>OMPI India LLP</strong></div>
+          <div>Deliverable Code: <strong>SOW-02-OMPI</strong></div>
+          <div>Commercial Allocation: <strong>&#8377;5,60,000 Flat (7 Sprints)</strong></div>
+          <div>Architecture: <strong>ACID SQLite on Local LAN</strong></div>
+        </div>
+      </div>
+
+      <h1>2.0 Executive Scope &amp; Industrial Context</h1>
+      <p>
+        SOW-02 delivers a centralized on-premise Enterprise Resource Planning (ERP) suite and dedicated public web showcase engineered for <strong>OMPI India LLP</strong> as the authorized national distributor for <strong>OMPI Italy (Modena)</strong> industrial pneumatic/hydraulic clutch-brake systems, mechanical units, and press retrofit spares.
+      </p>
+
+      <h2>2.1 OMPI India Digital Web Showcase &amp; Customer Portal</h2>
+      <div class="two-col-grid" style="margin-bottom: 4px;">
+        <div class="col-card blue-tint">
+          <div class="card-title">
+            <span>Italian Clutch-Brake Web Showcase</span>
+            <span class="badge blue">Brand Portal</span>
+          </div>
+          <ul class="bullet-list" style="margin-bottom: 0;">
+            <li><strong>Official Partnership Showcase:</strong> Professional brand showcase highlighting authorized distributorship for OMPI Italy (Modena).</li>
+            <li><strong>Product Series Catalog:</strong> Pneumatic combined clutch-brakes (Series 4000, 5000), hydraulic units, rotating unions, and safety dual valves.</li>
+            <li><strong>Retrofit Technical Inquiry Forms:</strong> Structured technical forms capturing client press tonnage, shaft dimensions, and clutch requirements.</li>
+          </ul>
+        </div>
+
+        <div class="col-card green-tint">
+          <div class="card-title">
+            <span>Customer &amp; Technician Service Portal</span>
+            <span class="badge green">Field Operations</span>
+          </div>
+          <ul class="bullet-list" style="margin-bottom: 0;">
+            <li><strong>Service Job Card Lookup:</strong> Enables client manufacturing plants to track the overhaul, retrofit, or warranty status of press clutch units.</li>
+            <li><strong>Downloadable Technical Bulletins:</strong> Italian mounting schematics, torque calculation formulas, air pressure charts, and maintenance manuals.</li>
+            <li><strong>Unified Lead Injection:</strong> Public web inquiries flow directly into the OMPI Central ERP sales enquiry pipeline without manual re-entry.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h1>3.0 Comprehensive 33-Module Functional ERP Specification</h1>
+      <p style="font-size: 7.5pt; margin-bottom: 3px;">
+        The OMPI Central ERP is organized across 4 dedicated operational engines comprising exactly 33 documented modules:
+      </p>
+
+      <h2>Engine 1: Sales, CRM &amp; Multi-Revision Pipeline (10 Modules)</h2>
+      <table class="data-table" style="margin-bottom: 4px;">
+        <thead>
+          <tr>
+            <th style="width: 25%;">Module Name</th>
+            <th style="width: 50%;">Core Functional Capabilities</th>
+            <th style="width: 25%;">Business Output</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1. Customer Master</strong></td>
+            <td>Comprehensive buyer database with multiple billing/shipping addresses, GSTIN, PAN, credit limits, and payment terms.</td>
+            <td>Verified customer accounts</td>
+          </tr>
+          <tr>
+            <td><strong>2. Customer 360&deg; Profile</strong></td>
+            <td>Single-pane view aggregating full customer order history, active quotations, pending job work cards, and outstanding dues.</td>
+            <td>Unified account audit</td>
+          </tr>
+          <tr>
+            <td><strong>3. Enquiry Pipeline</strong></td>
+            <td>Stage-based deal tracking (New, Under Technical Review, Costed, Quoted, Won, Lost) with mandatory lost-deal forensics.</td>
+            <td>Sales velocity tracker</td>
+          </tr>
+          <tr>
+            <td><strong>4. Costing Sheets</strong></td>
+            <td>Commercial margin calculator capturing base landed cost, freight, transit insurance, overheads, and target gross margin %.</td>
+            <td>Protected profit margins</td>
+          </tr>
+          <tr>
+            <td><strong>5. Quotation Engine</strong></td>
+            <td>Multi-revision quotation generator producing immutable versions (V1, V2, V3) with audit trails and manager authorization.</td>
+            <td>Revision-controlled quotes</td>
+          </tr>
+          <tr>
+            <td><strong>6. Customer PO (CPO)</strong></td>
+            <td>CPO registration, price and delivery terms cross-matching against quotation, and discrepancy variance alerts.</td>
+            <td>Validated customer orders</td>
+          </tr>
+          <tr>
+            <td><strong>7. Sales Order (SO)</strong></td>
+            <td>Formal sales order generation linking confirmed customer orders directly to warehouse stock or back-to-back Italian factory POs.</td>
+            <td>Locked order commitments</td>
+          </tr>
+          <tr>
+            <td><strong>8. Proforma Invoice (PI)</strong></td>
+            <td>Configurable milestone commercial proforma invoicing with advance payment schedules (e.g. 30% advance, 50% on BL, 20% on delivery).</td>
+            <td>Statutory commercial PIs</td>
+          </tr>
+          <tr>
+            <td><strong>9. Communication Log</strong></td>
+            <td>Time-stamped audit log recording staff phone calls, email interactions, site visit notes, and technical follow-ups.</td>
+            <td>Account interaction history</td>
+          </tr>
+          <tr>
+            <td><strong>10. Approval Workflow</strong></td>
+            <td>Management override hierarchy requiring Director/Partner digital approval for quotes with margins below standard thresholds.</td>
+            <td>Enforced discount controls</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Engine 2: Purchase &amp; Italy Landed Cost Engine (7 Modules)</h2>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width: 25%;">Module Name</th>
+            <th style="width: 50%;">Core Functional Capabilities</th>
+            <th style="width: 25%;">Business Output</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>11. Supplier Master</strong></td>
+            <td>Profiles for OMPI Italy (Modena) and domestic tooling/seal vendors, contact parameters, bank wire instructions, and terms.</td>
+            <td>Approved supplier directory</td>
+          </tr>
+          <tr>
+            <td><strong>12. Supplier RFQs</strong></td>
+            <td>Generates structured price and lead-time requests directly to OMPI Italy in EUR with machine serial references.</td>
+            <td>Standardized factory RFQs</td>
+          </tr>
+          <tr>
+            <td><strong>13. Supplier Quotations</strong></td>
+            <td>Multi-vendor quotation logging, price comparison matrices, validity tracking, and international freight options.</td>
+            <td>Comparative purchase audit</td>
+          </tr>
+          <tr>
+            <td><strong>14. Supplier PO (SPO)</strong></td>
+            <td>Formal international purchase orders in EUR with Italian delivery incoterms (FOB/CIF), milestone terms, and dispatch schedules.</td>
+            <td>Official EUR purchase orders</td>
+          </tr>
+          <tr>
+            <td><strong>15. Multi-Currency FX Engine</strong></td>
+            <td>EUR to INR conversion tracking via manual rate entry or online fetch (when internet connected) with historical FX rate logging.</td>
+            <td>Transparent currency audit</td>
+          </tr>
+          <tr>
+            <td><strong>16. Landed Cost Calculator</strong></td>
+            <td>Calculates exact landed unit cost in INR: Base Invoice Price + Ocean/Air Freight + Basic Customs Duty (BCD) + Port Clearance.</td>
+            <td>True landed unit cost</td>
+          </tr>
+          <tr>
+            <td><strong>17. Goods Receipt Note (GRN)</strong></td>
+            <td>Warehouse receipt verification tallying physical Italian shipments against packing lists with damage inspection logging.</td>
+            <td>Formal stock intake record</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="doc-footer">Page 4 of 7 &bull; Master Detailed SOW (v1.0 &bull; 30 Oct 2026) &bull; OMPI India Central ERP (SOW-02)</div>
+  </div>
+
+  <!-- ==================== PAGE 5: PART B - SOW-02: OMPI ERP (ENGINES 3 & 4) ==================== -->
+  <div class="page">
+    <div class="page-content">
+      <div class="header-bar">
+        <div>
+          <div class="brand-title">Part B: SOW-02 &mdash; OMPI ERP (Contd.)</div>
+          <div class="brand-subtitle">Warehouse &bull; Spares &bull; Retrofits &bull; Finance &bull; GST Invoicing</div>
+        </div>
+        <div class="doc-meta">
+          <div>Entity: <strong>OMPI India LLP</strong></div>
+          <div>Modules: <strong>Engine 3 (8 Modules) + Engine 4 (8 Modules)</strong></div>
+          <div>Tax Engine: <strong>Automated GST (HSN 8483)</strong></div>
+          <div>Classification: <strong>STRICTLY CONFIDENTIAL</strong></div>
+        </div>
+      </div>
+
+      <h2>Engine 3: Spares Inventory, Godown &amp; Field Retrofits (8 Modules)</h2>
+      <table class="data-table" style="margin-bottom: 4px;">
+        <thead>
+          <tr>
+            <th style="width: 25%;">Module Name</th>
+            <th style="width: 50%;">Core Functional Capabilities</th>
+            <th style="width: 25%;">Business Output</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>18. SKU Spares Inventory</strong></td>
+            <td>Stock tracking for Italian clutch plates, friction linings, brake discs, air seals, springs, and dual valves with min-stock alert thresholds.</td>
+            <td>Real-time warehouse stock</td>
+          </tr>
+          <tr>
+            <td><strong>19. Godown Bin Mapping</strong></td>
+            <td>Precise rack/shelf/bin coordinate mapping in the Pune godown to accelerate physical picking and reduce technician dispatch errors.</td>
+            <td>Visual inventory locating</td>
+          </tr>
+          <tr>
+            <td><strong>20. Stock Transfers</strong></td>
+            <td>Inter-warehouse transfer challans and tracking between Pune godown, consignment stock locations, and customer site staging areas.</td>
+            <td>Reconciled stock movement</td>
+          </tr>
+          <tr>
+            <td><strong>21. Delivery Challans (DC)</strong></td>
+            <td>Generates statutory delivery challans for full dispatches, partial deliveries, and replacement parts with vehicle details.</td>
+            <td>Official dispatch challans</td>
+          </tr>
+          <tr>
+            <td><strong>22. Security Gate Passes</strong></td>
+            <td>Generates Returnable (RGP) and Non-Returnable (NRGP) security gate passes for plant equipment, tools, and contractor movements.</td>
+            <td>Audited warehouse security</td>
+          </tr>
+          <tr>
+            <td><strong>23. Digital Job Work Cards</strong></td>
+            <td>Field service cards for technicians performing press clutch retrofits, friction lining relining, torque testing, and emergency overhauls.</td>
+            <td>Tracked retrofit labor</td>
+          </tr>
+          <tr>
+            <td><strong>24. Quality Control (QC)</strong></td>
+            <td>Incoming inspection logs for new Italian shipments and outgoing inspection certificates for overhauled clutch-brake units.</td>
+            <td>Certified QC documentation</td>
+          </tr>
+          <tr>
+            <td><strong>25. RMA &amp; Warranty Claims</strong></td>
+            <td>Logging and tracking of damaged, defective, or warranty replacement units returned to OMPI Italy with fault forensics.</td>
+            <td>Factory warranty claims</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Engine 4: Finance, GST Accounting &amp; Administration (8 Modules)</h2>
+      <table class="data-table" style="margin-bottom: 4px;">
+        <thead>
+          <tr>
+            <th style="width: 25%;">Module Name</th>
+            <th style="width: 50%;">Core Functional Capabilities</th>
+            <th style="width: 25%;">Business Output</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>26. GST Sales Invoicing</strong></td>
+            <td>Automated tax invoicing calculating CGST, SGST, and IGST for industrial clutches, press spares, and service labor under HSN 8483.</td>
+            <td>Compliant GST tax invoices</td>
+          </tr>
+          <tr>
+            <td><strong>27. Credit &amp; Debit Notes</strong></td>
+            <td>Statutory credit/debit note generation for rate variance adjustments, post-dispatch discounts, and returned goods.</td>
+            <td>Reconciled tax credit notes</td>
+          </tr>
+          <tr>
+            <td><strong>28. Accounts Receivable</strong></td>
+            <td>Customer payment recording (NEFT/RTGS/Cheque), invoice reconciliation, and automated aging analysis (30, 60, 90+ days).</td>
+            <td>Cash collection ledger</td>
+          </tr>
+          <tr>
+            <td><strong>29. Profitability Analytics</strong></td>
+            <td>Real-time gross profit analytics per sales invoice, product category, customer account, and field retrofit job.</td>
+            <td>Actionable margin analytics</td>
+          </tr>
+          <tr>
+            <td><strong>30. Universal Global Search</strong></td>
+            <td>Instant multi-entity search bar across all 33 modules searching PO numbers, serial numbers, part codes, customers, and invoice IDs.</td>
+            <td>Sub-second data lookup</td>
+          </tr>
+          <tr>
+            <td><strong>31. Automated PDF Dispatch</strong></td>
+            <td>1-Click branded PDF generation for sales orders, proformas, tax invoices, and quotation packages on official letterhead.</td>
+            <td>Instant document dispatch</td>
+          </tr>
+          <tr>
+            <td><strong>32. Role-Based Access (RBAC)</strong></td>
+            <td>Granular security permissions by role (Director, Sales Manager, Accountant, Godown Supervisor, Field Technician).</td>
+            <td>Strict data access isolation</td>
+          </tr>
+          <tr>
+            <td><strong>33. Disaster Recovery Engine</strong></td>
+            <td>Automated rolling 3-tier local database snapshot engine protecting business records against system crashes or user error.</td>
+            <td>Automated backup archives</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout-box" style="border-left-color: #1e3a8a; background: #f8fafc; padding: 4px 8px;">
+        <strong>Statutory Tax Disclaimer:</strong> The GST invoicing and landed cost calculation engines are administrative computational utilities. Regulatory tax filing, HSN tariff classification, input tax credit (ITC) reconciliation, and statutory tax compliance remain solely the legal responsibility of OMPI India LLP and their Chartered Accountants.
+      </div>
+    </div>
+    <div class="doc-footer">Page 5 of 7 &bull; Master Detailed SOW (v1.0 &bull; 30 Oct 2026) &bull; OMPI India Central ERP (SOW-02)</div>
+  </div>
+
+  <!-- ==================== PAGE 6: PART B - SOW-02: LAN SPECS, SECURITY & SPRINT ROADMAP ==================== -->
+  <div class="page">
+    <div class="page-content">
+      <div class="header-bar">
+        <div>
+          <div class="brand-title">Part B: SOW-02 &mdash; LAN Specs &amp; Sprint Roadmap</div>
+          <div class="brand-subtitle">On-Premise Infrastructure &bull; SecOps Standards &bull; 7 Monthly Sprints</div>
+        </div>
+        <div class="doc-meta">
+          <div>Entity: <strong>OMPI India LLP</strong></div>
+          <div>Hosting Model: <strong>Zero Cloud SaaS (Save &#8377;2.5L+/Yr)</strong></div>
+          <div>Security: <strong>Bcrypt 10 Rounds &bull; Rate Limiter</strong></div>
+          <div>Classification: <strong>STRICTLY CONFIDENTIAL</strong></div>
+        </div>
+      </div>
+
+      <h1>2.4 On-Premise LAN Infrastructure &amp; Technical Specifications</h1>
+      <p style="font-size: 7.5pt; margin-bottom: 3px;">
+        The OMPI Central ERP operates completely on-premise within the Pune office local area network (<code>http://192.168.x.x:3000</code>). This eliminates ongoing third-party SaaS cloud subscription fees (saving <strong>&#8377;2,50,000+ annually</strong>) and keeps confidential Italian pricing margins strictly inside the client's premises:
+      </p>
+
+      <div class="two-col-grid" style="margin-bottom: 4px;">
+        <div class="col-card blue-tint">
+          <div class="card-title">
+            <span>Minimum Host PC Hardware Specs</span>
+            <span class="badge blue">Client Domain</span>
+          </div>
+          <ul class="bullet-list" style="margin-bottom: 0;">
+            <li><strong>Host Computer:</strong> Dedicated Desktop PC or Server powered by Intel Core i5/i7 (8th Gen+) or AMD Ryzen 5+, 16 GB DDR4/DDR5 RAM, and 512 GB NVMe SSD storage.</li>
+            <li><strong>Dedicated UPS &amp; Power:</strong> Dedicated UPS with minimum 30-minute battery backup to prevent database write corruption during unexpected power outages.</li>
+            <li><strong>Local Network Connectivity:</strong> Standard Gigabit Ethernet switch or Wi-Fi 6 router connecting staff laptops and office desktops.</li>
+            <li><strong>Client Maintenance Scope:</strong> Hardware maintenance, electrical power supply, Windows/Linux OS licensing, and commercial antivirus protection remain client responsibilities.</li>
+          </ul>
+        </div>
+
+        <div class="col-card green-tint">
+          <div class="card-title">
+            <span>Architecture, Concurrency &amp; SecOps</span>
+            <span class="badge green">Engineering Baseline</span>
+          </div>
+          <ul class="bullet-list" style="margin-bottom: 0;">
+            <li><strong>Concurrency Baseline:</strong> High-performance ACID SQLite architecture optimized for <strong>up to 15&ndash;20 concurrent staff users</strong> across sales, warehouse, and accounts.</li>
+            <li><strong>Cryptographic Salting:</strong> Bcrypt with 10 salt rounds (<code>bcrypt.genSaltSync(10)</code>) protecting all user passwords; zero plain-text credentials stored anywhere.</li>
+            <li><strong>Adaptive Rate Limiting:</strong> Automated IP-based request throttling protecting authentication routes against brute-force attacks.</li>
+            <li><strong>Defined 3-Tier Backups:</strong> Tier 1: Daily local SQLite snapshot; Tier 2: Daily synchronized mirror copy to external USB drive; Tier 3: Weekly encrypted off-site cloud archive.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>2.5 OMPI ERP 7-Sprint Implementation Phasing &amp; Milestone Schedule</h2>
+      <p style="font-size: 7.5pt; margin-bottom: 3px;">
+        The ERP system is engineered and deployed across 7 structured monthly sprints, with invoicing linked directly to milestone verification:
+      </p>
+
+      <table class="data-table" style="margin-bottom: 4px;">
+        <thead>
+          <tr>
+            <th style="width: 14%;">Sprint &amp; Timeline</th>
+            <th style="width: 58%;">Milestone Functional Scope &amp; Deliverables</th>
+            <th style="width: 14%;">Review Window</th>
+            <th style="width: 14%; text-align: right;">Milestone Fee</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Sprint 1 (Month 2)</strong></td>
+            <td><strong>Customer Pipeline Foundation:</strong> Customer Master, Customer 360&deg; Profile, Enquiry Pipeline, and Communication Log.</td>
+            <td>7 Business Days</td>
+            <td style="text-align: right; font-weight: 700; color: #065f46;">&#8377;80,000</td>
+          </tr>
+          <tr>
+            <td><strong>Sprint 2 (Month 3)</strong></td>
+            <td><strong>Quotation &amp; Costing Engine:</strong> Costing Sheets, Multi-Revision Quotation Engine (PDF), and Manager Approval Workflow.</td>
+            <td>7 Business Days</td>
+            <td style="text-align: right; font-weight: 700; color: #065f46;">&#8377;80,000</td>
+          </tr>
+          <tr>
+            <td><strong>Sprint 3 (Month 4)</strong></td>
+            <td><strong>Italy Purchase &amp; Landed Cost Engine:</strong> Supplier Master, SPO in EUR, Multi-Currency FX Engine, and Customs Landed Cost Calculator.</td>
+            <td>7 Business Days</td>
+            <td style="text-align: right; font-weight: 700; color: #065f46;">&#8377;80,000</td>
+          </tr>
+          <tr>
+            <td><strong>Sprint 4 (Month 5)</strong></td>
+            <td><strong>Warehouse Spares &amp; Godown Logistics:</strong> SKU Spares Inventory, Pune Godown Bin Mapping, Stock Transfers, and Delivery Challans.</td>
+            <td>7 Business Days</td>
+            <td style="text-align: right; font-weight: 700; color: #065f46;">&#8377;80,000</td>
+          </tr>
+          <tr>
+            <td><strong>Sprint 5 (Month 6)</strong></td>
+            <td><strong>Retrofit Job Cards &amp; Field Operations:</strong> Digital Job Work Cards, Security Gate Passes (RGP/NRGP), QC Inspection, and Warranty RMA.</td>
+            <td>7 Business Days</td>
+            <td style="text-align: right; font-weight: 700; color: #065f46;">&#8377;80,000</td>
+          </tr>
+          <tr>
+            <td><strong>Sprint 6 (Month 7)</strong></td>
+            <td><strong>Finance &amp; Commercial Billing:</strong> GST Sales Invoicing (HSN 8483), Credit/Debit Notes, and Accounts Receivable Aging Tracker.</td>
+            <td>7 Business Days</td>
+            <td style="text-align: right; font-weight: 700; color: #065f46;">&#8377;80,000</td>
+          </tr>
+          <tr>
+            <td><strong>Sprint 7 (Month 8)</strong></td>
+            <td><strong>Final Handover, LAN Setup &amp; Staff Training:</strong> Multi-user LAN setup, staff onboarding, user manual, and final sign-off.</td>
+            <td>7 Business Days</td>
+            <td style="text-align: right; font-weight: 700; color: #065f46;">&#8377;80,000</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout-box" style="border-left-color: #047857; background: #f0fdf4; padding: 4px 8px;">
+        <strong>SOW-02 Acceptance &amp; IP Assignment Protocol:</strong> Client has 7 business days following delivery of each sprint to review and log defects. If no reproducible defect report is received within 7 business days, the sprint deliverable is deemed accepted. Upon full clearance of the final Month 8 fee (completing the full &#8377;5,60,000 ERP fee), Consultant executes a <strong>formal written Deed of Intellectual Property Assignment</strong> transferring custom ERP code, schemas, and assets to OMPI India LLP within 7 business days.
+      </div>
+    </div>
+    <div class="doc-footer">Page 6 of 7 &bull; Master Detailed SOW (v1.0 &bull; 30 Oct 2026) &bull; OMPI India Central ERP (SOW-02)</div>
+  </div>
+
+  <!-- ==================== PAGE 7: PART C - GOVERNANCE, EXCLUSIONS & FORMAL SIGN-OFF ==================== -->
+  <div class="page">
+    <div class="page-content">
+      <div class="header-bar">
+        <div>
+          <div class="brand-title">Part C: Common Governance &amp; Formal Authorization</div>
+          <div class="brand-subtitle">Training Protocol &bull; Scope Boundaries &bull; Multi-Entity Sign-Off</div>
+        </div>
+        <div class="doc-meta">
+          <div>Document Ref: <strong>DMTA-OMPI-SOW-2026-v1.0</strong></div>
+          <div>Governing Law: <strong>Republic of India (Jurisdiction: Pune)</strong></div>
+          <div>Stamp Duty: <strong>Maharashtra Stamp Act (50:50 Shared)</strong></div>
+          <div>Classification: <strong>COMMERCIAL &bull; STRICTLY CONFIDENTIAL</strong></div>
+        </div>
+      </div>
+
+      <h1>3.1 Staff Training Protocol &amp; In-Scope Maintenance</h1>
+      <div class="two-col-grid" style="margin-bottom: 3.5px;">
+        <div class="col-card">
+          <div class="card-title">
+            <span>Staff Onboarding &amp; Training (12 Hours)</span>
+            <span class="badge blue">Empowerment</span>
+          </div>
+          <ul class="bullet-list" style="margin-bottom: 0;">
+            <li><strong>Structured Training Delivery:</strong> Up to 12 hours total across structured on-site and remote sessions at the Pune yard for up to 8 staff members.</li>
+            <li><strong>Recorded Video Walkthroughs:</strong> Step-by-step video tutorials demonstrating quotation creation, inventory updates, and landed cost calculations.</li>
+            <li><strong>PDF User Training Manual:</strong> Comprehensive illustrated PDF manual for ongoing onboarding of future administrative personnel.</li>
+          </ul>
+        </div>
+
+        <div class="col-card">
+          <div class="card-title">
+            <span>In-Scope Maintenance &amp; Stability Warranty</span>
+            <span class="badge green">Support Coverage</span>
+          </div>
+          <ul class="bullet-list" style="margin-bottom: 0;">
+            <li><strong>8-Month Active Lifecycle Coverage:</strong> Bug remediation and logic corrections matching the 33-module specification included at &#8377;0 during engagement.</li>
+            <li><strong>Support Hours &amp; Response SLA:</strong> Mon&ndash;Sat 10:00 AM &ndash; 6:30 PM IST (Sundays off) with initial triage response within 1 business day.</li>
+            <li><strong>30-Day Post-Handover Warranty:</strong> 30-day warranty post-handover for reproducible defects; ongoing support thereafter via optional AMC.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>3.2 Explicit Scope Exclusions (Quoted Separately via Change Request)</h2>
+      <table class="data-table" style="margin-bottom: 3.5px;">
+        <thead>
+          <tr>
+            <th style="width: 30%;">Excluded Capability</th>
+            <th style="width: 50%;">Explicit Operational Boundary</th>
+            <th style="width: 20%;">Commercial Policy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Hardware &amp; Physical Infrastructure</strong></td>
+            <td>Server PC hardware, laptops, UPS units, Ethernet switches, Wi-Fi routers, and physical cabling.</td>
+            <td style="color: #64748b;">Client Procured</td>
+          </tr>
+          <tr>
+            <td><strong>Manual Backlog Data Entry</strong></td>
+            <td>Manual physical typing of historical paper invoices, physical stock ledger books, or legacy records.</td>
+            <td style="color: #64748b;">Client Responsibility</td>
+          </tr>
+          <tr>
+            <td><strong>Photography &amp; Videography</strong></td>
+            <td>Professional photo shoots, machine spec authoring, video tours, or drone footage of machinery at Pune yard.</td>
+            <td style="color: #64748b;">Client Provided</td>
+          </tr>
+          <tr>
+            <td><strong>Corrupt Legacy Migration</strong></td>
+            <td>Cleansing or programmatic ETL conversion from corrupt, unstructured historical Excel spreadsheets.</td>
+            <td style="color: #b45309;">Quoted Separately</td>
+          </tr>
+          <tr>
+            <td><strong>Native Mobile App Packages</strong></td>
+            <td>Native Apple App Store (.ipa) and Google Play Store (.apk) app packaging (responsive PWA included).</td>
+            <td style="color: #b45309;">Phase 2 Roadmap</td>
+          </tr>
+          <tr>
+            <td><strong>Government e-Invoicing (IRN) API</strong></td>
+            <td>Automated real-time IRN/QR generation via government GSP portal (requires client GSP account).</td>
+            <td style="color: #b45309;">Quoted Separately</td>
+          </tr>
+          <tr>
+            <td><strong>Third-Party ERP Connectors</strong></td>
+            <td>Direct live bidirectional REST APIs connecting to third-party suites (e.g. Tally Prime API, SAP).</td>
+            <td style="color: #b45309;">Quoted Separately</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>3.3 Change Request Governance &amp; Termination Shield</h2>
+      <div class="callout-box" style="border-left-color: #d97706; background: #fffdf5; padding: 4px 8px; margin-bottom: 4px;">
+        <strong>Change Request &amp; Termination Protection:</strong> Any addition or modification beyond the documented 33 modules or 60 catalog items requires a formal signed Change Request (CR) with written quotation prior to work commencing. Either party may terminate on 30 days' written notice; Consultant may terminate on 7 days' written notice if invoices remain unpaid &gt;30 calendar days. If Client terminates prior to completion, all completed milestones and active sprint retainers remain payable in full, and the Month 1 advance is strictly non-refundable. Undisputed invoice portions must be paid on schedule.
+      </div>
+
+      <!-- Formal 3-Block Execution Grid -->
+      <div class="signature-grid-3">
+        <div class="sig-box">
+          <div style="font-size: 6.5pt; font-weight: 800; color: #64748b; text-transform: uppercase;">Accepted By (Client 1 &bull; Part A)</div>
+          <div style="font-size: 7.4pt; font-weight: 800; color: #0f172a; margin-top: 1px;">Dalal Machine Tools Agency Pvt. Ltd.</div>
+          <div style="font-size: 6.3pt; color: #475569; margin-top: 1px;">Name: ____________________________________</div>
+          <div style="font-size: 6.3pt; color: #475569;">Designation: Director &bull; CIN: __________________</div>
+          <div style="font-size: 6.3pt; color: #475569;">GSTIN: ____________________________________</div>
+          <div class="sig-line">Signature &amp; Seal &bull; Date: ___________</div>
+        </div>
+
+        <div class="sig-box">
+          <div style="font-size: 6.5pt; font-weight: 800; color: #64748b; text-transform: uppercase;">Accepted By (Client 2 &bull; Part B)</div>
+          <div style="font-size: 7.4pt; font-weight: 800; color: #0f172a; margin-top: 1px;">OMPI India LLP</div>
+          <div style="font-size: 6.3pt; color: #475569; margin-top: 1px;">Name: ____________________________________</div>
+          <div style="font-size: 6.3pt; color: #475569;">Designation: Designated Partner &bull; LLPIN: ________</div>
+          <div style="font-size: 6.3pt; color: #475569;">GSTIN: ____________________________________</div>
+          <div class="sig-line">Signature &amp; Seal &bull; Date: ___________</div>
+        </div>
+
+        <div class="sig-box">
+          <div style="font-size: 6.5pt; font-weight: 800; color: #64748b; text-transform: uppercase;">Committed By (Consultant)</div>
+          <div style="font-size: 7.4pt; font-weight: 800; color: #0f172a; margin-top: 1px;">Technology Consultant</div>
+          <div style="font-size: 6.3pt; color: #475569; margin-top: 1px;">Suyash Shinde &bull; Lead Solutions Architect</div>
+          <div style="font-size: 6.3pt; color: #475569;">Baner, Pune 411045, MH &bull; +91 94038 92055</div>
+          <div style="font-size: 6.3pt; color: #475569;">suyashshinde360@gmail.com &bull; PAN on invoice</div>
+          <div class="sig-line">Authorized Signature &bull; Date: ___________</div>
+        </div>
+      </div>
+    </div>
+    <div class="doc-footer">Page 7 of 7 &bull; Master Detailed SOW (v1.0 &bull; 30 Oct 2026) &bull; Common Governance &amp; Sign-Off</div>
+  </div>
+
+</body>
+</html>
