@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Consultant Profile &amp; Billing Remittance Particulars - Suyash Shinde</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 8mm 10mm 8mm 10mm;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #0f172a;
+      background: #ffffff;
+      font-size: 8.2pt;
+      line-height: 1.34;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .page {
+      height: 281mm;
+      max-height: 281mm;
+      overflow: hidden;
+      box-sizing: border-box;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      page-break-after: avoid;
+      break-after: avoid;
+      padding: 2px 0;
+    }
+    .page-content {
+      flex: 1;
+    }
+
+    /* Top Corporate Header */
+    .header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #0f172a;
+      border-top: 3px solid #d97706;
+      padding-top: 5px;
+      padding-bottom: 6px;
+      margin-bottom: 8px;
+    }
+    .brand-title {
+      font-size: 13pt;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.4px;
+      text-transform: uppercase;
+    }
+    .brand-subtitle {
+      font-size: 7.4pt;
+      font-weight: 700;
+      color: #b45309;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-top: 1px;
+    }
+    .doc-meta {
+      text-align: right;
+      font-size: 6.8pt;
+      color: #64748b;
+      line-height: 1.28;
+    }
+    .doc-meta strong {
+      color: #0f172a;
+      font-weight: 700;
+    }
+
+    h1 {
+      font-size: 11.5pt;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 3px;
+      letter-spacing: -0.3px;
+    }
+    h2 {
+      font-size: 8.6pt;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 7px 0 3.5px;
+      border-left: 3px solid #d97706;
+      padding-left: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    p {
+      margin-bottom: 4px;
+      color: #334155;
+      font-size: 7.9pt;
+      line-height: 1.3;
+    }
+
+    .two-col-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .col-card {
+      background: #ffffff;
+      border: 1.2px solid #cbd5e1;
+      border-radius: 4px;
+      padding: 6px 9px;
+    }
+    .card-title {
+      font-size: 8.2pt;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 2.5px;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 6.2pt;
+      font-weight: 800;
+      padding: 1.5px 4.5px;
+      border-radius: 3px;
+      background: #0f172a;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+    .badge.gold { background: #b45309; }
+    .badge.green { background: #047857; }
+    .badge.blue { background: #1e3a8a; }
+
+    .data-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 2.5px 0;
+      border-bottom: 1px dashed #e2e8f0;
+      font-size: 7.5pt;
+    }
+    .data-row:last-child {
+      border-bottom: none;
+    }
+    .data-label {
+      color: #64748b;
+      font-weight: 600;
+    }
+    .data-value {
+      color: #0f172a;
+      font-weight: 700;
+      text-align: right;
+    }
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .callout-box {
+      background: #f8fafc;
+      border-left: 3px solid #0f172a;
+      border-radius: 4px;
+      padding: 5px 8px;
+      margin: 5px 0;
+      font-size: 7.4pt;
+      line-height: 1.28;
+    }
+
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 4px 0 6px 0;
+      font-size: 7.4pt;
+    }
+    table.data-table th, table.data-table td {
+      border: 1px solid #cbd5e1;
+      padding: 3px 6px;
+      text-align: left;
+      vertical-align: middle;
+    }
+    table.data-table th {
+      background: #0f172a;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 6.8pt;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    table.data-table tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+    table.data-table tr.total-row td {
+      background: #ecfdf5;
+      border-top: 2px solid #059669;
+      font-weight: 800;
+      color: #065f46;
+    }
+
+    .sig-container {
+      margin-top: 8px;
+      border: 1.2px dashed #94a3b8;
+      border-radius: 4px;
+      padding: 6px 10px;
+      background: #fafafa;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .sig-line {
+      margin-top: 24px;
+      border-top: 1px solid #0f172a;
+      padding-top: 2px;
+      font-size: 6.6pt;
+      color: #64748b;
+      width: 220px;
+      text-align: center;
+    }
+
+    .doc-footer {
+      border-top: 1px solid #e2e8f0;
+      padding-top: 3px;
+      font-size: 6.6pt;
+      color: #94a3b8;
+      text-align: center;
+      margin-top: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page">
+    <div class="page-content">
+      <div class="header-bar">
+        <div>
+          <div class="brand-title">Consultant Profile &amp; Billing Particulars</div>
+          <div class="brand-subtitle">Statutory Identification &bull; Tax Compliance &bull; Electronic Remittance Details</div>
+        </div>
+        <div class="doc-meta">
+          <div>Document Ref: <strong>DMTA-OMPI-PROP-2026-v1.0 / CONSULTANT-PROFILE</strong></div>
+          <div>Recipient Entities: <strong>Dalal Machine Tools &amp; OMPI India</strong></div>
+          <div>Effective Date: <strong>30 October 2026</strong></div>
+          <div>Classification: <strong>COMMERCIAL &bull; STRICTLY CONFIDENTIAL</strong></div>
+        </div>
+      </div>
+
+      <h1>Technology Consultant &amp; Architectural Practice Particulars</h1>
+      <p>
+        This document provides comprehensive corporate identification, statutory tax details, and electronic wire remittance instructions for <strong>Dalal Machine Tools Agency Pvt. Ltd.</strong> and <strong>OMPI India LLP</strong> to facilitate vendor onboarding, formal invoicing, and statutory TDS compliance:
+      </p>
+
+      <div class="two-col-grid">
+        <!-- Card 1: Professional Identification -->
+        <div class="col-card">
+          <div class="card-title">
+            <span>1. Consultant Identification</span>
+            <span class="badge blue">Professional</span>
+          </div>
+          <div class="data-row">
+            <span class="data-label">Full Legal Name:</span>
+            <span class="data-value">Suyash Shinde</span>
+          </div>
+          <div class="data-row">
+            <span class="data-label">Designation / Role:</span>
+            <span class="data-value">Lead Solutions Architect &amp; Enterprise Consultant</span>
+          </div>
+          <div class="data-row">
+            <span class="data-label">Practice Focus:</span>
+            <span class="data-value">Industrial ERP, Customs Costing &amp; Enterprise Web</span>
+          </div>
+          <div class="data-row">
+            <span class="data-label">Office Address:</span>
+            <span class="data-value">Baner, Pune 411045, Maharashtra, India</span>
+          </div>
+          <div class="data-row">
+            <span class="data-label">Official Email:</span>
+            <span class="data-value mono">suyashshinde360@gmail.com</span>
+          </div>
+          <div class="data-row">
+            <span class="data-label">Direct Mobile / WhatsApp:</span>
+            <span class="data-value mono">+91 94038 92055</span>
+          </div>
+        </div>
+
+        <!-- Card 2: Statutory Tax Profile -->
+        <div class="col-card">
+          <div class="card-title">
+            <span>2. Statutory Tax &amp; Regulatory Profile</span>
+            <span class="badge gold">Tax Compliance</span>
+          </div>
+          <div class="data-row">
+            <span class="data-label">Permanent Account Number (PAN):</span>
+            <span class="data-value mono">[Provided on Invoice / On Record]</span>
+          </div>
+          <div class="data-row">
+            <span class="data-label">GST Registration Status:</span>
+            <span class="data-value" style="color: #b45309;">GST: Not Registered (Threshold Exempt)</span>
+          </div>
+          <div class="data-row">
+            <span class="data-label">GST Exemption Basis:</span>
+            <span class="data-value">Section 22(1) CGST Act 2017 (&lt;&#8377;20L Threshold)</span>
+          </div>
+          <div class="data-row">
+            <span class="data-label">Applicable Statutory TDS:</span>
+            <span class="data-value">Section 194J (Professional / Technical Services)</span>
+          </div>
+          <div class="data-row">
+            <span class="data-label">TDS Compliance Prerequisite:</span>
+            <span class="data-value">Client to deposit timely &amp; issue Form 16A</span>
+          </div>
+          <div class="data-row">
+            <span class="data-label">Service Accounting Code (SAC):</span>
+            <span class="data-value mono">998315 (IT System Architecture &amp; Design)</span>
+          </div>
+        </div>
+      </div>
+
+      <h2>3. Electronic Banking &amp; Wire Remittance Particulars</h2>
+      <p style="font-size: 7.7pt;">
+        All milestone payments, mobilization fees, and sprint retainers shall be transferred via NEFT, RTGS, or IMPS into the designated consultant business bank account:
+      </p>
+
+      <div class="col-card" style="margin-bottom: 6px; background: #f8fafc; border-color: #047857;">
+        <div class="two-col-grid" style="margin-bottom: 0;">
+          <div>
+            <div class="data-row">
+              <span class="data-label">Beneficiary / Account Name:</span>
+              <span class="data-value">Suyash Shinde</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Bank Name:</span>
+              <span class="data-value">State Bank of India / HDFC Bank</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Account Type:</span>
+              <span class="data-value">Savings / Current Account</span>
+            </div>
+          </div>
+          <div>
+            <div class="data-row">
+              <span class="data-label">Account Number:</span>
+              <span class="data-value mono">[Provided upon Invoice / On Record]</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Bank IFSC Code:</span>
+              <span class="data-value mono">[Provided upon Invoice / On Record]</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">UPI ID:</span>
+              <span class="data-value mono">suyashshinde360@upi / 9403892055@upi</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h2>4. Entity-Wise Invoicing &amp; Payment Schedule Summary</h2>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width: 25%;">Billed Legal Entity</th>
+            <th style="width: 35%;">Deliverable Component</th>
+            <th style="width: 20%;">Schedule &amp; Terms</th>
+            <th style="width: 20%; text-align: right;">Gross Fee (INR)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Dalal Machine Tools Agency Pvt. Ltd.</strong></td>
+            <td>Dalal Web Platform (24 Pages, 60 Machinery Catalog, High Seas Calc, Staff/Admin CMS, GA4)</td>
+            <td>Month 1 Advance Mobilization (Upon Signing)</td>
+            <td style="text-align: right; font-weight: 700; color: #1e3a8a;">&#8377;2,00,000</td>
+          </tr>
+          <tr>
+            <td><strong>OMPI India LLP</strong></td>
+            <td>OMPI Central ERP System (33 Documented Modules across 4 Functional Engines)</td>
+            <td>7 Monthly Sprints @ &#8377;80,000 / mo (Months 2&ndash;8 on milestone delivery)</td>
+            <td style="text-align: right; font-weight: 700; color: #065f46;">&#8377;5,60,000</td>
+          </tr>
+          <tr class="total-row">
+            <td colspan="3">TOTAL COMBINED ENGAGEMENT INVESTMENT (DALAL + OMPI)</td>
+            <td style="text-align: right; font-size: 8.8pt; font-weight: 800; color: #047857;">&#8377;7,60,000 Flat</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout-box" style="border-left-color: #1e3a8a; background: #f0fdf4; margin-bottom: 5px;">
+        <strong>Remittance Advice Protocol:</strong> Upon remitting payments via RTGS/NEFT, please email the Bank Transaction Reference / UTR Number along with the respective entity name to <code>suyashshinde360@gmail.com</code> for instant receipt confirmation and formal ledger reconciliation.
+      </div>
+
+      <div class="sig-container">
+        <div>
+          <div style="font-size: 7.4pt; font-weight: 800; color: #0f172a;">SUYASH SHINDE</div>
+          <div style="font-size: 6.8pt; color: #64748b;">Lead Solutions Architect &amp; Enterprise Technology Consultant</div>
+          <div style="font-size: 6.8pt; color: #64748b;">Baner, Pune 411045, Maharashtra, India</div>
+        </div>
+        <div>
+          <div class="sig-line">Authorized Signatory &bull; Date: ___________</div>
+        </div>
+      </div>
+    </div>
+    <div class="doc-footer">Page 1 of 1 &bull; Consultant Profile &amp; Billing Particulars &bull; Ref: DMTA-OMPI-PROP-2026-v1.0 / CONSULTANT-PROFILE</div>
+  </div>
+
+</body>
+</html>
