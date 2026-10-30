@@ -18,14 +18,14 @@ Dear Sirs,
 
 I am pleased to formally submit the finalized **Turnkey Master Technology Proposal (v1.0)** and accompanying **Technical Scope Baseline Specification** for establishing the unified digital infrastructure and operational software ecosystem for **Dalal Machine Tools Agency Pvt. Ltd.** and **OMPI India LLP**.
 
-As agreed during our strategic consultations, this engagement consolidates both complementary entities under a single unified technology partnership (delivering approx. **₹17.60 Lakhs to ₹28.30 Lakhs in direct capital savings** compared to fragmented IT agency quotes) with clean, separate commercial allocation and entity-specific IP ownership.
+As agreed during our strategic consultations, this engagement consolidates both complementary entities under a single unified technology partnership (delivering approx. **₹17.60 Lakhs to ₹28.30 Lakhs in estimated capital savings** compared to estimated commercial IT company replacement quotes) with clean, separate commercial allocation and entity-specific IP ownership.
 
 ---
 
 ### Attached Core Dispatch Package:
 1. **Master Commercial Proposal (Tier 1 &bull; v1.0 &bull; 5 Pages):**  
    `UNIFIED_ENTERPRISE_PROPOSAL_TIER_1_760K.pdf`  
-   *Executive summary, indicative industry replacement benchmarks, milestone payment schedule, SLAs, and comprehensive legal governance terms.*
+   *Executive summary, estimated IT company replacement cost benchmarks, milestone payment schedule, SLAs, and comprehensive legal governance terms.*
 2. **Annexure A: Technical Scope Baseline &amp; Specification (2 Pages):**  
    `ANNEXURE_A_TECHNICAL_SCOPE_BASELINE.pdf`  
    *The binding technical specification covering the Dalal 24-page platform (up to 60 machinery items), OMPI web showcase &amp; customer portal, 33 documented OMPI ERP modules across 4 functional engines, and explicit boundary exclusions.*
