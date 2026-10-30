@@ -128,9 +128,8 @@
     var readProgress = function() {
       if (!options.enabled || span <= 0) return 1;
       if (options.useWindowScroll) {
-        var scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
-        var top = trackTop - scrollY;
-        return clamp(-top / span, 0, 1);
+        var rect = track.getBoundingClientRect();
+        return clamp(-rect.top / span, 0, 1);
       }
       return clamp(element.scrollTop / span, 0, 1);
     };
