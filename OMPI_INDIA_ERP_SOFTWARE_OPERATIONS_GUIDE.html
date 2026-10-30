@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OMPI India Central ERP - Software Architecture & Operations Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 9.3pt;
+      line-height: 1.48;
+      color: #1e293b;
+      background: #e2e8f0;
+      -webkit-font-smoothing: antialiased;
+    }
+    .page-sheet {
+      width: 210mm;
+      height: 296mm;
+      max-height: 296mm;
+      overflow: hidden;
+      padding: 10mm 13mm 8mm 13mm;
+      margin: 0 auto 8mm auto;
+      background: #ffffff;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      position: relative;
+      page-break-after: always;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    @media print {
+      body {
+        background: #ffffff;
+      }
+      .page-sheet {
+        box-shadow: none;
+        margin: 0;
+        width: 210mm;
+        height: 296mm;
+        max-height: 296mm;
+        page-break-after: always;
+      }
+    }
+
+    /* Header Bar */
+    .doc-header {
+      border-bottom: 2px solid #065f46;
+      padding-bottom: 6px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .brand-title {
+      font-size: 13.5pt;
+      font-weight: 800;
+      color: #064e3b;
+      letter-spacing: -0.3px;
+    }
+    .brand-subtitle {
+      font-size: 8.2pt;
+      color: #047857;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 1px;
+    }
+    .doc-meta-right {
+      text-align: right;
+      font-size: 7.6pt;
+      color: #475569;
+      line-height: 1.3;
+    }
+    .doc-footer {
+      border-top: 1px solid #cbd5e1;
+      padding-top: 4px;
+      margin-top: 4px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 7.6pt;
+      color: #64748b;
+    }
+
+    /* Headings */
+    h1.chapter-title {
+      font-size: 13.5pt;
+      font-weight: 800;
+      color: #064e3b;
+      margin: 4px 0 8px 0;
+      border-left: 4px solid #059669;
+      padding-left: 8px;
+      letter-spacing: -0.2px;
+    }
+    h2.section-heading {
+      font-size: 10.6pt;
+      font-weight: 700;
+      color: #047857;
+      margin: 8px 0 5px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    p {
+      margin-bottom: 6px;
+      color: #334155;
+      font-size: 9.1pt;
+    }
+    strong {
+      color: #0f172a;
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      font-size: 7pt;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      vertical-align: middle;
+    }
+    .badge-emerald { background: #d1fae5; color: #065f46; }
+    .badge-blue { background: #dbeafe; color: #1e40af; }
+    .badge-amber { background: #fef3c7; color: #92400e; }
+    .badge-purple { background: #f3e8ff; color: #6b21a8; }
+    .badge-slate { background: #e2e8f0; color: #334155; }
+
+    /* Cards */
+    .card {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 8px 11px;
+      margin-bottom: 7px;
+    }
+    .card-emerald {
+      background: #f0fdf4;
+      border: 1px solid #a7f3d0;
+      border-left: 4px solid #059669;
+    }
+    .card-blue {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-left: 4px solid #2563eb;
+    }
+    .card-amber {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-left: 4px solid #d97706;
+    }
+
+    /* Grids */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    /* Tables */
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 6px 0 8px 0;
+      font-size: 8.6pt;
+    }
+    table.data-table th {
+      background: #064e3b;
+      color: #ffffff;
+      padding: 5px 8px;
+      font-weight: 700;
+      text-align: left;
+      border: 1px solid #064e3b;
+    }
+    table.data-table td {
+      padding: 5px 8px;
+      border: 1px solid #cbd5e1;
+      vertical-align: top;
+      color: #334155;
+    }
+    table.data-table tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+
+    /* Flow Step Boxes */
+    .flow-step-box {
+      display: flex;
+      gap: 9px;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 7px 10px;
+      margin-bottom: 6px;
+      align-items: flex-start;
+    }
+    .step-num {
+      background: #059669;
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 8.8pt;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .step-num.blue { background: #2563eb; }
+    .step-num.amber { background: #d97706; }
+    .step-num.purple { background: #7c3aed; }
+    .step-content {
+      flex: 1;
+    }
+    .step-title {
+      font-weight: 700;
+      font-size: 9.1pt;
+      color: #0f172a;
+      margin-bottom: 1px;
+    }
+    .step-desc {
+      font-size: 8.6pt;
+      color: #475569;
+      line-height: 1.42;
+    }
+
+    ul.clean-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 3px 0 4px 0;
+    }
+    ul.clean-list li {
+      position: relative;
+      padding-left: 13px;
+      margin-bottom: 3px;
+      font-size: 8.8pt;
+      color: #334155;
+    }
+    ul.clean-list li::before {
+      content: "•";
+      position: absolute;
+      left: 1px;
+      top: -1px;
+      color: #059669;
+      font-weight: 900;
+      font-size: 10.5pt;
+    }
+    .code-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8pt;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      padding: 1px 4px;
+      border-radius: 3px;
+      color: #0f172a;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================== PAGE 1: EXECUTIVE OVERVIEW & ARCHITECTURE ========================================== -->
+  <div class="page-sheet">
+    <div>
+      <div class="doc-header">
+        <div>
+          <div class="brand-title">OMPI India LLP &bull; Centralized ERP System</div>
+          <div class="brand-subtitle">System Architecture, 33 Modules & Operational User Flow Guide</div>
+        </div>
+        <div class="doc-meta-right">
+          <div>Document Code: <strong>OMPI-ERP-OPS-2026</strong></div>
+          <div>Version: <strong>v1.0 (Production Blueprint)</strong></div>
+          <div>Location: <strong>Plot W-112, MIDC Bhosari, Pune</strong></div>
+        </div>
+      </div>
+
+      <h1 class="chapter-title">1.0 Executive Framework & ERP Architectural Framework</h1>
+      <p>
+        Ye comprehensive operational guide <strong>OMPI India LLP</strong> ke proprietary Centralized ERP platform ka complete functional specification hai. OMPI India LLP Italy ke premier industrial clutch & brake manufacturer <strong>OMPI S.r.l. (Modena, Italy)</strong> ka authorized Indian distributor hai, jo heavy mechanical presses, forging presses, aur metal forming machines ke liye pneumatic friction clutches, hydraulic brakes, dual safety valves, aur rotating unions supply karta hai.
+      </p>
+
+      <div class="card card-emerald">
+        <div style="font-weight: 800; color: #064e3b; font-size: 9.8pt; margin-bottom: 3px;">
+          On-Premise LAN Architecture & Zero Recurring Cloud SaaS Cost
+        </div>
+        <p style="margin-bottom: 4px; font-size: 9pt;">
+          OMPI India Central ERP ek high-speed, local area network (LAN) based architecture par design kiya gaya hai jo Plot W-112, MIDC Bhosari, Pune office me dedicated local server PC par run hota hai:
+        </p>
+        <div class="grid-3" style="margin-top: 5px; margin-bottom: 0;">
+          <div style="background: #ffffff; border: 1px solid #a7f3d0; border-radius: 4px; padding: 5px 7px;">
+            <strong style="font-size: 8.6pt; color: #065f46;">1. 100% Data Sovereignty</strong><br>
+            <span style="font-size: 8pt; color: #64748b;">Entire financial, customer, and import pricing data stays on local office LAN. No public leak.</span>
+          </div>
+          <div style="background: #ffffff; border: 1px solid #a7f3d0; border-radius: 4px; padding: 5px 7px;">
+            <strong style="font-size: 8.6pt; color: #065f46;">2. Zero Recurring Fees</strong><br>
+            <span style="font-size: 8pt; color: #64748b;">Eliminates expensive monthly per-user cloud SaaS subscriptions (saving ₹1.5L–₹3L annually).</span>
+          </div>
+          <div style="background: #ffffff; border: 1px solid #a7f3d0; border-radius: 4px; padding: 5px 7px;">
+            <strong style="font-size: 8.6pt; color: #065f46;">3. Sub-5ms LAN Speed</strong><br>
+            <span style="font-size: 8pt; color: #64748b;">Instant local response even during internet downtime. Connected across office PCs and mobile tablets.</span>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="section-heading">1.1 The 4 Core Engines & 33 Modular Structure</h2>
+      <p style="font-size: 9pt; margin-bottom: 5px;">
+        ERP platform 4 tightly integrated operational engines me structured hai jisme exactly 33 functional modules hain:
+      </p>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width: 25%;">Engine Name</th>
+            <th style="width: 15%;">Module Count</th>
+            <th style="width: 60%;">Operational Domain & Business Value Delivered</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Engine 1: Commercial Sales</strong><br><span class="badge badge-emerald">Quotation & CRM</span></td>
+            <td><strong>10 Modules</strong><br>(Mod 01 &ndash; 10)</td>
+            <td>Client master, credit profiling, OMPI SKU master, multi-currency conversion, fast-quote PDF engine, compatibility matrix, and 30/50/20 proforma invoice workflows.</td>
+          </tr>
+          <tr>
+            <td><strong>Engine 2: Engineering BOM</strong><br><span class="badge badge-blue">Italy Landed Cost</span></td>
+            <td><strong>7 Modules</strong><br>(Mod 11 &ndash; 17)</td>
+            <td>Multi-level clutch assembly BOM, EUR import purchase orders to OMPI Italy, customs landed cost calculator (BCD/SWS/IGST/CHA), shipment tracking, and torque sizing.</td>
+          </tr>
+          <tr>
+            <td><strong>Engine 3: Spares Inventory</strong><br><span class="badge badge-amber">Warehouse & QC</span></td>
+            <td><strong>8 Modules</strong><br>(Mod 18 &ndash; 25)</td>
+            <td>Bhosari warehouse rack/bin management, friction lining tracking, unit serialization & heat codes, inward GRN inspection, outward delivery challan, and re-order alerts.</td>
+          </tr>
+          <tr>
+            <td><strong>Engine 4: Financial Ledger</strong><br><span class="badge badge-purple">GST & Governance</span></td>
+            <td><strong>8 Modules</strong><br>(Mod 26 &ndash; 33)</td>
+            <td>B2B GST tax invoicing, GSTR-1 Excel exporter, 30/50/20 milestone accounts receivable, debtor aging (30/60/90 days), RBAC staff permissions, and immutable audit logs.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2 class="section-heading">1.2 Shared Ecosystem with Dalal Machine Tools</h2>
+      <p style="font-size: 9pt; margin-bottom: 5px;">
+        OMPI India LLP aur Dalal Machine Tools Agency Pvt. Ltd. ka commercial relationship software me seamlessly connected hai:
+      </p>
+      <div class="card card-blue" style="margin-bottom: 0;">
+        <ul class="clean-list" style="margin-bottom: 0;">
+          <li><strong>Clutch Retrofit Funnel:</strong> Dalal ki website par aane wale heavy press buyers ko OMPI Italy clutch-brake safety retrofits cross-sell kiye jaate hain.</li>
+          <li><strong>Shared Chakan & Bhosari Warehouses:</strong> Inventory and delivery challans can track items moving between Bhosari central stores and Chakan machine stockyard.</li>
+          <li><strong>Independent Corporate Billing:</strong> Dono entities ke GSTIN, bank accounts, balance sheets, aur audit logs 100% isolated hain.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="doc-footer">
+      <span>OMPI India LLP &bull; Centralized ERP Operations Manual</span>
+      <span>Document Code: OMPI-ERP-OPS-2026</span>
+      <span>Page 1 of 10</span>
+    </div>
+  </div>
+
+  <!-- ========================================== PAGE 2: ENGINE 1 (MODULES 01 TO 10) ========================================== -->
+  <div class="page-sheet">
+    <div>
+      <div class="doc-header">
+        <div>
+          <div class="brand-title">OMPI India LLP &bull; Centralized ERP System</div>
+          <div class="brand-subtitle">Engine 1: Commercial Quotation & Sales Pipeline (Modules 01 to 10)</div>
+        </div>
+        <div class="doc-meta-right">
+          <div>Document Code: <strong>OMPI-ERP-OPS-2026</strong></div>
+          <div>Focus: <strong>B2B Sales Velocity & 1-Click Fast Quotes</strong></div>
+        </div>
+      </div>
+
+      <h1 class="chapter-title">2.0 Engine 1: Commercial Quotation & Sales Pipeline</h1>
+      <p style="font-size: 9.1pt; margin-bottom: 7px;">
+        Engine 1 OMPI sales engineers ka frontline system hai jo client inquiries ko fast capture karta hai, clutch sizing verify karta hai, aur branded PDF quotations generate karta hai:
+      </p>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width: 25%;">Module Code & Name</th>
+            <th style="width: 40%;">Core Technical Function</th>
+            <th style="width: 35%;">Practical Business Use (Kaam)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Module 01</strong><br>Client Master & Credit Term Profiler</td>
+            <td>Buyer corporate profile, validated GSTIN, plant locations, credit limit allocation, payment terms (default 30/50/20), key contact personas.</td>
+            <td>Sales team ko client ki credit rating aur historical order volume ka instant profile milta hai; bad debts prevent karta hai.</td>
+          </tr>
+          <tr>
+            <td><strong>Module 02</strong><br>OMPI Technical Catalog & SKU Master</td>
+            <td>Parametric database of OMPI Italy products: Pneumatic clutches, hydraulic brakes, dual safety valves, rotating unions, friction linings.</td>
+            <td>Standardized OEM product specs; sales engineer can select exact model code without manual catalogue search.</td>
+          </tr>
+          <tr>
+            <td><strong>Module 03</strong><br>Multi-Currency Pricing Engine</td>
+            <td>EUR base catalog price, forward exchange rate entry (online fetch when connected / manual override), duty markups, company margin.</td>
+            <td>Calculates exact INR landed base price from EUR ex-factory quote, ensuring currency volatility does not erode margins.</td>
+          </tr>
+          <tr>
+            <td><strong>Module 04</strong><br>Fast-Quote PDF Generator</td>
+            <td>1-Click generation of formal PDF quotation with OMPI corporate header, dimensional fitment diagram, warranty terms, payment split.</td>
+            <td>Quotation turnaround time drops from 4 hours to under 2 minutes; buyer receives publication-grade proposal instantly.</td>
+          </tr>
+          <tr>
+            <td><strong>Module 05</strong><br>RFQ Lifecycle & Status Pipeline</td>
+            <td>Visual Kanban / tabular pipeline tracking status: New RFQ &rarr; Sizing Review &rarr; Quote Sent &rarr; Negotiation &rarr; Won / Lost.</td>
+            <td>Sales manager can track all open proposals across India and prevent deal leakage with automated follow-up flags.</td>
+          </tr>
+          <tr>
+            <td><strong>Module 06</strong><br>Machine Compatibility & Retrofit Matrix</td>
+            <td>Algorithm mapping customer press capacity (tonnage, flywheel RPM, shaft diameter) to recommended OMPI clutch model and torque.</td>
+            <td>Prevents incorrect clutch sizing by technical sales staff; ensures safety compliance and correct mechanical fitment.</td>
+          </tr>
+          <tr>
+            <td><strong>Module 07</strong><br>Customer Discount & Margin Matrix</td>
+            <td>Tiered discount structure based on buyer classification (OEM Press Builder, Tier 1 Forging Plant, End-User Retrofit). Floor margin guard.</td>
+            <td>Protects company profitability by preventing sales reps from discounting below minimum allowable gross margins.</td>
+          </tr>
+          <tr>
+            <td><strong>Module 08</strong><br>Proforma Invoice (PI) Generator</td>
+            <td>Generates official Proforma Invoice with 30% advance, 50% against dispatch, 20% on commissioning milestone terms and bank IFSC.</td>
+            <td>Enables customer to release mobilization advance immediately; legal commercial basis for starting procurement.</td>
+          </tr>
+          <tr>
+            <td><strong>Module 09</strong><br>Sales Order (SO) Conversion Engine</td>
+            <td>1-Click lock-in of approved Proforma Invoice into Confirmed Sales Order. Freezes agreed price, delivery timeline, and technical BOM.</td>
+            <td>Eliminates manual re-entry errors between sales negotiation and warehouse dispatch / procurement execution.</td>
+          </tr>
+          <tr>
+            <td><strong>Module 10</strong><br>WhatsApp & Email Quote Dispatcher</td>
+            <td>Automated PDF dispatch via WhatsApp API and SMTP email with standardized corporate message and delivery confirmation logs.</td>
+            <td>Reaches plant procurement heads directly on mobile messaging where 80% of industrial purchasing decisions happen.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="doc-footer">
+      <span>OMPI India LLP &bull; Centralized ERP Operations Manual</span>
+      <span>Document Code: OMPI-ERP-OPS-2026</span>
+      <span>Page 2 of 10</span>
+    </div>
+  </div>
+
+  <!-- ========================================== PAGE 3: ENGINE 2 (MODULES 11 TO 17) ========================================== -->
+  <div class="page-sheet">
+    <div>
+      <div class="doc-header">
+        <div>
+          <div class="brand-title">OMPI India LLP &bull; Centralized ERP System</div>
+          <div class="brand-subtitle">Engine 2: Engineering BOM & Italy Landed Cost Engine (Modules 11 to 17)</div>
+        </div>
+        <div class="doc-meta-right">
+          <div>Document Code: <strong>OMPI-ERP-OPS-2026</strong></div>
+          <div>Focus: <strong>Import Logistics, Customs Duty & Torque Sizing</strong></div>
+        </div>
+      </div>
+
+      <h1 class="chapter-title">2.1 Engine 2: Engineering BOM & Italy Landed Cost</h1>
+      <p style="font-size: 9.1pt; margin-bottom: 7px;">
+        Engine 2 international import procurement, customs valuation, and mechanical engineering calculations ko govern karta hai:
+      </p>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width: 25%;">Module Code & Name</th>
+            <th style="width: 40%;">Core Technical Function</th>
+            <th style="width: 35%;">Practical Business Use (Kaam)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Module 11</strong><br>Multi-Level Bill of Materials (BOM)</td>
+            <td>Hierarchical assembly BOM for combined clutch-brake units: Housing casting, friction discs, piston seals, springs, safety valve.</td>
+            <td>Enables OMPI engineers to break down complete units into replaceable sub-components for service and refurbishment.</td>
+          </tr>
+          <tr>
+            <td><strong>Module 12</strong><br>Italy Import Purchase Order (PO)</td>
+            <td>Automated PO generation in EUR formatted for OMPI S.r.l. (Italy). Includes OEM part numbers, delivery incoterms (Ex-Works / FCA).</td>
+            <td>Direct standardized ordering to Italian factory without manual drafting; tracks outstanding international procurement.</td>
+          </tr>
+          <tr>
+            <td><strong>Module 13</strong><br>Landed Cost & Customs Calculator</td>
+            <td>Algorithmic cost buildup: Ex-works EUR &rarr; Air/Sea freight &rarr; Assessable Value &rarr; BCD (7.5%) &rarr; SWS (10%) &rarr; IGST (18%) &rarr; CHA & inland transport.</td>
+            <td>Calculates exact per-unit landed cost in INR down to the rupee, ensuring complete clarity on gross margins before quoting.</td>
+          </tr>
+          <tr>
+            <td><strong>Module 14</strong><br>Shipment & Bill of Lading (BL) Ledger</td>
+            <td>International tracking: Airway Bill (AWB) / Sea BL numbers, shipping line, customs port arrival at Nhava Sheva / Mumbai Airport, clearance alerts.</td>
+            <td>Provides real-time visibility into import pipeline so sales staff can give accurate delivery dates to Indian press customers.</td>
+          </tr>
+          <tr>
+            <td><strong>Module 15</strong><br>Technical Drawing & GA Repository</td>
+            <td>Storage and instant lookup of General Arrangement (GA) drawings, CAD 2D/3D models, shaft fitment tolerances, keyway dimensions.</td>
+            <td>Enables immediate sharing of dimensional drawings with customer machine designers for flywheel machining verification.</td>
+          </tr>
+          <tr>
+            <td><strong>Module 16</strong><br>Torque & Pneumatic Pressure Sizing</td>
+            <td>Interactive formula engine calculating dynamic torque (Nm), thermal dissipation (kJ/min), and required air pressure (5.5 to 6.0 bar).</td>
+            <td>Guarantees that selected clutch has sufficient safety margin (typically 1.5x to 2.0x of nominal press torque) to prevent slippage.</td>
+          </tr>
+          <tr>
+            <td><strong>Module 17</strong><br>Import Duty & HSN Tariff Master</td>
+            <td>Statutory repository of customs tariff codes: HSN 84836090 (Clutches/shaft couplings), 84812000 (Safety valves) with statutory updates.</td>
+            <td>Ensures customs documentation conforms to Indian Customs and ICEGATE classifications, avoiding port penalties.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="card card-emerald" style="margin-top: 8px;">
+        <strong style="font-size: 9.2pt; color: #064e3b;">Landed Cost Formula Architecture (Module 13 Calculation Standard)</strong>
+        <p style="font-size: 8.7pt; margin-top: 3px; margin-bottom: 2px;">
+          Landed Cost = <span class="code-pill">CIF Value (Ex-Works EUR &times; FX Rate + Freight + Ins)</span> + <span class="code-pill">Basic Customs Duty (BCD @ 7.5%)</span> + <span class="code-pill">Social Welfare Surcharge (SWS @ 10% of BCD)</span> + <span class="code-pill">Port Clearance / CHA Charges</span> + <span class="code-pill">Inland Transport to Bhosari Yard</span>.
+        </p>
+        <span style="font-size: 8.2pt; color: #047857;">*IGST (18%) is paid at customs and tracked as Input Tax Credit (ITC) under Module 27 for complete cash flow optimization.</span>
+      </div>
+    </div>
+
+    <div class="doc-footer">
+      <span>OMPI India LLP &bull; Centralized ERP Operations Manual</span>
+      <span>Document Code: OMPI-ERP-OPS-2026</span>
+      <span>Page 3 of 10</span>
+    </div>
+  </div>
+
+  <!-- ========================================== PAGE 4: ENGINE 3 (MODULES 18 TO 25) ========================================== -->
+  <div class="page-sheet">
+    <div>
+      <div class="doc-header">
+        <div>
+          <div class="brand-title">OMPI India LLP &bull; Centralized ERP System</div>
+          <div class="brand-subtitle">Engine 3: Spares Inventory & Multi-Yard Warehouse Hub (Modules 18 to 25)</div>
+        </div>
+        <div class="doc-meta-right">
+          <div>Document Code: <strong>OMPI-ERP-OPS-2026</strong></div>
+          <div>Focus: <strong>Bhosari Warehouse, Unit Serialization & Wear Spares</strong></div>
+        </div>
+      </div>
+
+      <h1 class="chapter-title">2.2 Engine 3: Spares Inventory & Multi-Yard Hub</h1>
+      <p style="font-size: 9.1pt; margin-bottom: 7px;">
+        Engine 3 physical stock tracking, unit-level serialization, and warehouse operations ko govern karta hai:
+      </p>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width: 25%;">Module Code & Name</th>
+            <th style="width: 40%;">Core Technical Function</th>
+            <th style="width: 35%;">Practical Business Use (Kaam)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Module 18</strong><br>Real-Time Stock Ledger & Bin Management</td>
+            <td>Physical bin/rack locator at Bhosari central warehouse. Live quantity on hand, allocated to orders, and free stock.</td>
+            <td>Storekeeper can locate high-value clutch assemblies and friction pads in under 30 seconds; eliminates lost inventory.</td>
+          </tr>
+          <tr>
+            <td><strong>Module 19</strong><br>Friction Disc & Lining Wear Parts Tracker</td>
+            <td>Dedicated inventory monitoring for high-turnover friction plates, sintered bronze pads, and rubber pneumatic bladders.</td>
+            <td>Ensures OMPI always maintains ready-stock emergency spares for breakdown repair of operating automotive press lines.</td>
+          </tr>
+          <tr>
+            <td><strong>Module 20</strong><br>Serial Number & Heat Code Traceability</td>
+            <td>Captures unique Italian OEM serial numbers, manufacturing batch, and heat treatment codes for every individual unit.</td>
+            <td>Ensures 100% traceability; if an industrial press fails, OMPI can trace the exact batch and installation history.</td>
+          </tr>
+          <tr>
+            <td><strong>Module 21</strong><br>Inward Material Inspection (GRN Engine)</td>
+            <td>Goods Receipt Note (GRN) generator. Physical damage inspection, packing list verification against Italy invoice, dimensional QC.</td>
+            <td>Prevents damaged or incomplete shipments from entering inventory; creates official record for insurance or OEM claims.</td>
+          </tr>
+          <tr>
+            <td><strong>Module 22</strong><br>Outward Delivery Challan & Dispatch</td>
+            <td>Generates GST Rule 48 compliant Delivery Challan with serial numbers, customer machine code, vehicle number, and dispatch mode.</td>
+            <td>Legal dispatch authorization for goods moving to customer factory premises for mechanical erection and trials.</td>
+          </tr>
+          <tr>
+            <td><strong>Module 23</strong><br>Reconditioning & Service Center Ledger</td>
+            <td>Logs maintenance, relining, piston seal replacement, and pressure test certifications conducted at Bhosari service bay.</td>
+            <td>Creates new revenue stream from clutch reconditioning; tracks service warranty history for repeat clients.</td>
+          </tr>
+          <tr>
+            <td><strong>Module 24</strong><br>Scrap & Dead Stock Management</td>
+            <td>Segregation and accounting of worn-out friction linings, damaged packaging, obsolete revisions, and write-off ledger.</td>
+            <td>Keeps active inventory valuations clean and prevents dead stock from cluttering warehouse physical bins.</td>
+          </tr>
+          <tr>
+            <td><strong>Module 25</strong><br>Automated Re-Order Alerts & Triggers</td>
+            <td>Calculates minimum stock thresholds based on lead time (typically 6–8 weeks from Italy) and triggers replenishment alerts.</td>
+            <td>Prevents stock-out of critical seal kits and valves; alerts procurement team before inventory reaches zero.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="doc-footer">
+      <span>OMPI India LLP &bull; Centralized ERP Operations Manual</span>
+      <span>Document Code: OMPI-ERP-OPS-2026</span>
+      <span>Page 4 of 10</span>
+    </div>
+  </div>
+
+  <!-- ========================================== PAGE 5: ENGINE 4 (MODULES 26 TO 33) ========================================== -->
+  <div class="page-sheet">
+    <div>
+      <div class="doc-header">
+        <div>
+          <div class="brand-title">OMPI India LLP &bull; Centralized ERP System</div>
+          <div class="brand-subtitle">Engine 4: Financial Ledger, GSTR-1 & Audit Governance (Modules 26 to 33)</div>
+        </div>
+        <div class="doc-meta-right">
+          <div>Document Code: <strong>OMPI-ERP-OPS-2026</strong></div>
+          <div>Focus: <strong>Statutory GST Compliance, Debtors & Disaster Recovery</strong></div>
+        </div>
+      </div>
+
+      <h1 class="chapter-title">2.3 Engine 4: Financial Ledger, GSTR-1 & Governance</h1>
+      <p style="font-size: 9.1pt; margin-bottom: 7px;">
+        Engine 4 statutory GST compliance, milestone receivables, and enterprise audit security ko govern karta hai:
+      </p>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width: 25%;">Module Code & Name</th>
+            <th style="width: 40%;">Core Technical Function</th>
+            <th style="width: 35%;">Practical Business Use (Kaam)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Module 26</strong><br>GST Tax Invoice Engine</td>
+            <td>B2B Tax Invoices with SAC/HSN codes, CGST/SGST (18% for Maharashtra) or IGST (18% inter-state), invoice numbering sequence.</td>
+            <td>Generates statutory tax invoices compliant with Indian GST laws ready for direct customer accounting dispatch.</td>
+          </tr>
+          <tr>
+            <td><strong>Module 27</strong><br>GSTR-1 Reconciliation Exporter</td>
+            <td>1-Click export of B2B invoices, credit notes, and HSN summary in GST Portal compliant CSV / JSON structure for CA review.</td>
+            <td>Reduces monthly GST filing time from days to 15 minutes; ensures zero mismatch between ERP books and GST portal.</td>
+          </tr>
+          <tr>
+            <td><strong>Module 28</strong><br>Accounts Receivable & Milestone Tracking</td>
+            <td>Tracks payment receipts against commercial milestones: 30% advance, 50% dispatch clearance, 20% commissioning sign-off.</td>
+            <td>Gives real-time visibility into cash flow; prevents storekeeper from dispatching units before 50% milestone is cleared.</td>
+          </tr>
+          <tr>
+            <td><strong>Module 29</strong><br>Overdue Aging & Payment Reminder Hub</td>
+            <td>30 / 60 / 90 days debtor aging reports with automated payment reminder logs, follow-up history, and interest calculations.</td>
+            <td>Accelerates receivables collection from manufacturing clients; flags chronically delayed accounts to management.</td>
+          </tr>
+          <tr>
+            <td><strong>Module 30</strong><br>Role-Based Access Control (RBAC)</td>
+            <td>Granular user permissions: Admin (Full), Sales (Quotes only), Storekeeper (Inventory & GRN), Accountant (Invoicing & GST).</td>
+            <td>Enforces internal controls; storekeeper cannot change prices, and sales reps cannot alter financial ledger entries.</td>
+          </tr>
+          <tr>
+            <td><strong>Module 31</strong><br>Immutable Security Audit Log</td>
+            <td>Every invoice creation, price override, inventory adjustment, or deletion is recorded with User ID, IP address, and timestamp.</td>
+            <td>Provides complete forensic accountability for internal audits, eliminating fraud and unauthorized alterations.</td>
+          </tr>
+          <tr>
+            <td><strong>Module 32</strong><br>On-Premise LAN Backup & Snapshot</td>
+            <td>Automated daily rolling database backups to local SSD + 1-click encrypted export to external USB storage for disaster recovery.</td>
+            <td>Ensures 100% data safety against server hardware failure or accidental corruption; restores system in under 15 minutes.</td>
+          </tr>
+          <tr>
+            <td><strong>Module 33</strong><br>Executive MIS & Analytics Dashboard</td>
+            <td>Real-time business telemetry: Monthly gross revenue, gross profit margin by product line, open order book value, inventory valuation.</td>
+            <td>Gives designated partners high-level strategic intelligence on business performance and working capital allocation.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="doc-footer">
+      <span>OMPI India LLP &bull; Centralized ERP Operations Manual</span>
+      <span>Document Code: OMPI-ERP-OPS-2026</span>
+      <span>Page 5 of 10</span>
+    </div>
+  </div>
+
+  <!-- ========================================== PAGE 6: OMPI WEB SHOWCASE & DIGITAL DISCOVERY ========================================== -->
+  <div class="page-sheet">
+    <div>
+      <div class="doc-header">
+        <div>
+          <div class="brand-title">OMPI India LLP &bull; Centralized ERP System</div>
+          <div class="brand-subtitle">Section 3: OMPI India Digital Showcase & Inbound Engineering Lead Funnel</div>
+        </div>
+        <div class="doc-meta-right">
+          <div>Document Code: <strong>OMPI-ERP-OPS-2026</strong></div>
+          <div>Focus: <strong>B2B Digital Inbound & ERP Handshake</strong></div>
+        </div>
+      </div>
+
+      <h1 class="chapter-title">3.0 OMPI India Digital Showcase & Lead Pipeline</h1>
+      <p style="font-size: 9.1pt; margin-bottom: 7px;">
+        OMPI India LLP ka public digital showcase Plot W-112, MIDC Bhosari, Pune credentials ko establish karta hai aur inbound press clutch retrofit inquiries ko capture karke directly ERP Engine 1 me route karta hai:
+      </p>
+
+      <div class="card card-emerald">
+        <div style="font-weight: 800; color: #064e3b; font-size: 9.8pt; margin-bottom: 3px;">
+          Authorized Italian Manufacturer Representation Showcase
+        </div>
+        <p style="font-size: 8.9pt; margin-bottom: 5px;">
+          Public portal OMPI S.r.l. (Italy) ki authorized Indian distributorship ko highlight karta hai. Isme European CE safety conformity, dual monitored safety valves (EN 692 standards), aur pneumatic clutch retrofit engineering capabilities prominently feature hoti hain.
+        </p>
+        <div class="grid-3" style="margin-bottom: 0;">
+          <div style="background: #ffffff; border: 1px solid #a7f3d0; border-radius: 4px; padding: 5px 7px;">
+            <strong style="font-size: 8.6pt; color: #065f46;">1. Distributor Schema</strong><br>
+            <span style="font-size: 8pt; color: #64748b;">JSON-LD schema establishing official distributor identity for Google & AI search.</span>
+          </div>
+          <div style="background: #ffffff; border: 1px solid #a7f3d0; border-radius: 4px; padding: 5px 7px;">
+            <strong style="font-size: 8.6pt; color: #065f46;">2. MIDC Bhosari SEO</strong><br>
+            <span style="font-size: 8pt; color: #64748b;">Local B2B industrial SEO targeting Pune, Gujarat, and NCR automotive stamping press hubs.</span>
+          </div>
+          <div style="background: #ffffff; border: 1px solid #a7f3d0; border-radius: 4px; padding: 5px 7px;">
+            <strong style="font-size: 8.6pt; color: #065f46;">3. AEO FAQ Suite</strong><br>
+            <span style="font-size: 8pt; color: #64748b;">Engineered Q&A on clutch sizing, air pressure (5.5–6 bar), and flywheel retrofits.</span>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="section-heading" style="margin-top: 8px;">3.1 The Inbound Web-to-ERP Handshake Workflow</h2>
+      <p style="font-size: 9pt; margin-bottom: 5px;">
+        Web portal par aane wale corporate buyer inquiries instantly ERP sales pipeline me feed hote hain:
+      </p>
+
+      <div class="flow-step-box">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">Inbound RFQ Submission on Digital Showcase</div>
+          <div class="step-desc">
+            Plant maintenance head web form par press details enter karta hai (e.g. <em>"Need pneumatic clutch for 800T Knuckle Press, existing shaft 180mm"</em>).
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step-box">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">Automated Ingestion into ERP Engine 1 (Module 05 RFQ Pipeline)</div>
+          <div class="step-desc">
+            Lead without manual intervention ERP system me <strong>"New RFQ"</strong> ke roop me appear hota hai, aur sales engineering team ko notification trigger hota hai.
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step-box">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">Automated Technical Sizing & Landed Pricing Lookup</div>
+          <div class="step-desc">
+            Sales engineer Module 06 (Compatibility Matrix) me 800T press enter karta hai &rarr; System recommended model (e.g. OMPI Series 10.000 / 12,000 Nm) select karta hai aur Module 03 se landed INR cost fetch karta hai.
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step-box">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-title">1-Click Fast-Quote PDF Generation & WhatsApp Dispatch</div>
+          <div class="step-desc">
+            Engineer Module 04 se 1-click me official quotation generate karta hai aur Module 10 ke through buyer ke WhatsApp aur email par transmit kar deta hai.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-footer">
+      <span>OMPI India LLP &bull; Centralized ERP Operations Manual</span>
+      <span>Document Code: OMPI-ERP-OPS-2026</span>
+      <span>Page 6 of 10</span>
+    </div>
+  </div>
+
+  <!-- ========================================== PAGE 7: OPERATIONAL FLOWS 1 & 2 ========================================== -->
+  <div class="page-sheet">
+    <div>
+      <div class="doc-header">
+        <div>
+          <div class="brand-title">OMPI India LLP &bull; Centralized ERP System</div>
+          <div class="brand-subtitle">Section 4: End-to-End Operational User Flows (Workflows 1 & 2)</div>
+        </div>
+        <div class="doc-meta-right">
+          <div>Document Code: <strong>OMPI-ERP-OPS-2026</strong></div>
+          <div>Operational Flows: <strong>Sales Quotation & Italy Import</strong></div>
+        </div>
+      </div>
+
+      <h1 class="chapter-title">4.0 End-to-End User Journeys (Sales & Import Cycles)</h1>
+      <p style="font-size: 9.1pt; margin-bottom: 7px;">
+        Detailed walkthrough of daily business cycles across sales engineering and international procurement:
+      </p>
+
+      <h2 class="section-heading">Workflow 1: Customer Clutch Sizing & Commercial Fast-Quote Flow</h2>
+      <p style="font-size: 8.7pt; color: #475569; margin-bottom: 5px;">
+        <strong>Scenario:</strong> Auto forge shop in Pune requires urgent clutch retrofit for a 1000T Mechanical Press:
+      </p>
+
+      <div class="flow-step-box">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">Lead Intake & Sizing Calculation (Modules 01 & 06)</div>
+          <div class="step-desc">
+            Sales engineer opens ERP, verifies customer GSTIN in Module 01, and inputs press specifications into Module 06 (Machine Compatibility Matrix). Sizing formula recommends OMPI Combined Clutch-Brake Unit (Rated Torque: 16,000 Nm @ 5.5 bar).
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step-box">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">Landed Cost & Margin Verification (Modules 03 & 07)</div>
+          <div class="step-desc">
+            System computes landed cost from Italy price list (EUR 8,200 &times; current FX + customs duty). Module 07 applies standard OEM discount matrix and verifies that gross profit margin is &ge;22%.
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step-box">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">Fast-Quote Generation & WhatsApp Dispatch (Modules 04 & 10)</div>
+          <div class="step-desc">
+            Sales rep clicks <em>"Generate Official Quotation"</em>. High-resolution PDF with OMPI corporate header, dimensional GA drawing, and payment milestones (30/50/20) is created and sent to the client's procurement head via WhatsApp.
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step-box">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-title">Proforma Invoice & Sales Order Conversion (Modules 08 & 09)</div>
+          <div class="step-desc">
+            Upon verbal agreement, system generates Proforma Invoice (PI). Once 30% mobilization advance is received, PI is locked into a Confirmed Sales Order (SO) with a single click.
+          </div>
+        </div>
+      </div>
+
+      <h2 class="section-heading" style="margin-top: 10px;">Workflow 2: Italy Import Procurement & Landed Cost Valuation Flow</h2>
+      <p style="font-size: 8.7pt; color: #475569; margin-bottom: 5px;">
+        <strong>Scenario:</strong> Placing back-to-back OEM purchase order with OMPI S.r.l. Italy:
+      </p>
+
+      <div class="flow-step-box">
+        <div class="step-num blue">1</div>
+        <div class="step-content">
+          <div class="step-title">Triggering Import Purchase Order in EUR (Module 12)</div>
+          <div class="step-desc">
+            Confirmed SO automatically prompts procurement desk to generate official Purchase Order to OMPI S.r.l. (Italy) in EUR, referencing exact factory part numbers and dispatch incoterms (FCA Italy).
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step-box">
+        <div class="step-num blue">2</div>
+        <div class="step-content">
+          <div class="step-title">Shipment Tracking & Customs Port Clearance (Module 14)</div>
+          <div class="step-desc">
+            Goods depart Milan airport/Genoa port. Logistics manager logs Airway Bill / Bill of Lading (BL) into Module 14. System tracks expected arrival date at Mumbai customs and alerts Custom House Agent (CHA).
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step-box">
+        <div class="step-num blue">3</div>
+        <div class="step-content">
+          <div class="step-title">Customs Duty Assessment & Landed Valuation (Module 13)</div>
+          <div class="step-desc">
+            Module 13 ingests customs Bill of Entry (BOE). Computes BCD (7.5%), SWS (10%), IGST (18%), and port charges, generating the definitive landed inventory valuation for the units.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-footer">
+      <span>OMPI India LLP &bull; Centralized ERP Operations Manual</span>
+      <span>Document Code: OMPI-ERP-OPS-2026</span>
+      <span>Page 7 of 10</span>
+    </div>
+  </div>
+
+  <!-- ========================================== PAGE 8: OPERATIONAL FLOWS 3 & 4 ========================================== -->
+  <div class="page-sheet">
+    <div>
+      <div class="doc-header">
+        <div>
+          <div class="brand-title">OMPI India LLP &bull; Centralized ERP System</div>
+          <div class="brand-subtitle">Section 4: End-to-End Operational User Flows (Workflows 3 & 4)</div>
+        </div>
+        <div class="doc-meta-right">
+          <div>Document Code: <strong>OMPI-ERP-OPS-2026</strong></div>
+          <div>Operational Flows: <strong>Warehouse Inward & Outward Dispatch</strong></div>
+        </div>
+      </div>
+
+      <h1 class="chapter-title">4.1 End-to-End User Journeys (Warehouse Operations)</h1>
+      <p style="font-size: 9.1pt; margin-bottom: 7px;">
+        Detailed walkthrough of Bhosari warehouse material receipt, quality inspection, and serialized customer dispatch:
+      </p>
+
+      <h2 class="section-heading">Workflow 3: Inward Material Receipt & Serialized Storage Flow</h2>
+      <p style="font-size: 8.7pt; color: #475569; margin-bottom: 5px;">
+        <strong>Scenario:</strong> Wooden crates containing clutches arrive at Plot W-112, MIDC Bhosari central stores:
+      </p>
+
+      <div class="flow-step-box">
+        <div class="step-num amber">1</div>
+        <div class="step-content">
+          <div class="step-title">Inward Material Unloading & Visual Check (Module 21)</div>
+          <div class="step-desc">
+            Storekeeper inspects physical crates for transit damage. Opens Module 21 (GRN Engine) and matches crate packing list against Italy PO.
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step-box">
+        <div class="step-num amber">2</div>
+        <div class="step-content">
+          <div class="step-title">Serial Number & Heat Code Tagging (Module 20)</div>
+          <div class="step-desc">
+            Storekeeper records the etched Italian OEM serial numbers and metallurgy heat treatment codes for each clutch assembly into Module 20.
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step-box">
+        <div class="step-num amber">3</div>
+        <div class="step-content">
+          <div class="step-title">Bin Allocation & Stock Ledger Update (Module 18)</div>
+          <div class="step-desc">
+            Items are physically placed in designated heavy rack bins (e.g. <em>"Rack B2-Shelf 03"</em>). System updates live stock on hand, immediately showing availability in sales quote engine.
+          </div>
+        </div>
+      </div>
+
+      <h2 class="section-heading" style="margin-top: 10px;">Workflow 4: Outward Dispatch, Installation & Delivery Challan Flow</h2>
+      <p style="font-size: 8.7pt; color: #475569; margin-bottom: 5px;">
+        <strong>Scenario:</strong> Delivering clutch unit to customer press facility for mechanical erection:
+      </p>
+
+      <div class="flow-step-box">
+        <div class="step-num purple">1</div>
+        <div class="step-content">
+          <div class="step-title">Milestone 2 Payment Clearance (Module 28)</div>
+          <div class="step-desc">
+            Customer remits 50% milestone payment prior to dispatch. Accounts team verifies bank receipt and unlocks the order in Module 28.
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step-box">
+        <div class="step-num purple">2</div>
+        <div class="step-content">
+          <div class="step-title">Delivery Challan Generation with Serial Numbers (Module 22)</div>
+          <div class="step-desc">
+            Storekeeper generates official GST Rule 48 Delivery Challan. Specific serialized unit is allocated, and transporter vehicle number is logged.
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step-box">
+        <div class="step-num purple">3</div>
+        <div class="step-content">
+          <div class="step-title">Onsite Erection & Power Testing (Module 23)</div>
+          <div class="step-desc">
+            OMPI service engineer mounts clutch unit on customer press flywheel, connects 5.5 bar pneumatic air lines, tests safety dual valve timing, and issues mechanical commissioning certificate.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-footer">
+      <span>OMPI India LLP &bull; Centralized ERP Operations Manual</span>
+      <span>Document Code: OMPI-ERP-OPS-2026</span>
+      <span>Page 8 of 10</span>
+    </div>
+  </div>
+
+  <!-- ========================================== PAGE 9: WORKFLOW 5 & SEC-OPS GOVERNANCE ========================================== -->
+  <div class="page-sheet">
+    <div>
+      <div class="doc-header">
+        <div>
+          <div class="brand-title">OMPI India LLP &bull; Centralized ERP System</div>
+          <div class="brand-subtitle">Section 4: Invoicing, GST Compliance & Administrative Security</div>
+        </div>
+        <div class="doc-meta-right">
+          <div>Document Code: <strong>OMPI-ERP-OPS-2026</strong></div>
+          <div>Operational Flows: <strong>Workflow 5 (Finance) & SecOps Governance</strong></div>
+        </div>
+      </div>
+
+      <h1 class="chapter-title">4.2 Invoicing, GST Compliance & Security Governance</h1>
+      <p style="font-size: 9.1pt; margin-bottom: 7px;">
+        Statutory B2B tax invoicing, GSTR-1 returns, and on-premise system security controls:
+      </p>
+
+      <h2 class="section-heading">Workflow 5: Tax Invoicing, GST Compliance & Debtor Settlement Flow</h2>
+      <p style="font-size: 8.7pt; color: #475569; margin-bottom: 5px;">
+        <strong>Scenario:</strong> Final commissioning completion and monthly statutory GST return filing:
+      </p>
+
+      <div class="flow-step-box">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">B2B GST Tax Invoice Generation (Module 26)</div>
+          <div class="step-desc">
+            Upon successful press trial, Module 26 issues statutory B2B Tax Invoice. Calculates CGST + SGST (18% for Maharashtra) or IGST (18% inter-state) under HSN 84836090.
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step-box">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">Final 20% Milestone Settlement (Module 28)</div>
+          <div class="step-desc">
+            Customer remits remaining 20% commissioning balance. System records payment against invoice, balances customer ledger, and closes the project file.
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step-box">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">Monthly GSTR-1 Excel / JSON Export (Module 27)</div>
+          <div class="step-desc">
+            At month end, accountant clicks <em>"Export GSTR-1 Return"</em>. System generates standardized Excel file with all B2B invoices and HSN summaries ready for CA filing on the GST portal.
+          </div>
+        </div>
+      </div>
+
+      <h2 class="section-heading" style="margin-top: 10px;">4.3 Administrative Security & SecOps Architecture</h2>
+      <div class="grid-2">
+        <div class="card card-emerald">
+          <strong style="font-size: 9.2pt; color: #064e3b;">Role-Based Access Control (RBAC)</strong>
+          <p style="font-size: 8.6pt; margin-top: 3px; margin-bottom: 0;">
+            Users are assigned distinct roles: <strong>Admin</strong> (Managing Partner), <strong>Sales Engineer</strong> (Quotes & Catalog), <strong>Storekeeper</strong> (Inventory & DC), and <strong>Accountant</strong> (Invoicing & GST). Strict permissions prevent unauthorized changes.
+          </p>
+        </div>
+
+        <div class="card card-emerald">
+          <strong style="font-size: 9.2pt; color: #064e3b;">Password Salting & Rate Limiting</strong>
+          <p style="font-size: 8.6pt; margin-top: 3px; margin-bottom: 0;">
+            All staff passwords are cryptographic salted hashes using <strong>Bcrypt with 10 salt rounds</strong>. Zero plaintext storage. API endpoints protected by express-rate-limit to prevent brute-force intrusion.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-footer">
+      <span>OMPI India LLP &bull; Centralized ERP Operations Manual</span>
+      <span>Document Code: OMPI-ERP-OPS-2026</span>
+      <span>Page 9 of 10</span>
+    </div>
+  </div>
+
+  <!-- ========================================== PAGE 10: LAN SPECS, 3-TIER BACKUP & SIGN-OFF ========================================== -->
+  <div class="page-sheet">
+    <div>
+      <div class="doc-header">
+        <div>
+          <div class="brand-title">OMPI India LLP &bull; Centralized ERP System</div>
+          <div class="brand-subtitle">Section 5: LAN Hardware Specs, 3-Tier Disaster Recovery & Sign-Off</div>
+        </div>
+        <div class="doc-meta-right">
+          <div>Document Code: <strong>OMPI-ERP-OPS-2026</strong></div>
+          <div>Author: <strong>Suyash Shinde (Technology Consultant)</strong></div>
+        </div>
+      </div>
+
+      <h1 class="chapter-title">5.0 LAN Hardware Specs, Disaster Recovery & Sign-Off</h1>
+      <p style="font-size: 9.1pt; margin-bottom: 7px;">
+        On-premise infrastructure requirements, disaster recovery protocols, and formal client sign-off:
+      </p>
+
+      <div class="grid-2">
+        <div class="card card-emerald">
+          <strong style="font-size: 9.3pt; color: #064e3b;">Minimum Recommended Server PC Hardware</strong>
+          <ul class="clean-list" style="margin-top: 3px; margin-bottom: 0;">
+            <li><strong>Processor:</strong> Intel Core i5 / i7 (10th Gen or newer) or AMD Ryzen 5.</li>
+            <li><strong>System Memory:</strong> 16 GB DDR4 RAM (ensures instant sub-5ms caching).</li>
+            <li><strong>Storage Drive:</strong> 512 GB NVMe SSD (fast database read/write cycles).</li>
+            <li><strong>Power Backup:</strong> 1 KVA dedicated Online UPS (prevents sudden power cuts).</li>
+            <li><strong>Local Network:</strong> Gigabit Ethernet Switch (1000 Mbps) or Wi-Fi 6 router.</li>
+          </ul>
+        </div>
+
+        <div class="card card-emerald">
+          <strong style="font-size: 9.3pt; color: #064e3b;">3-Tier Disaster Recovery Architecture</strong>
+          <ul class="clean-list" style="margin-top: 3px; margin-bottom: 0;">
+            <li><strong>Tier 1 (Local):</strong> Automated daily rolling database snapshots on server SSD.</li>
+            <li><strong>Tier 2 (External):</strong> Weekly encrypted export to an external USB hard drive.</li>
+            <li><strong>Tier 3 (Offsite):</strong> Monthly encrypted backup stored at secondary safe location.</li>
+            <li><strong>RTO / RPO Target:</strong> Recovery Time Objective under 30 minutes; RPO max 24 hours.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2 class="section-heading" style="margin-top: 8px;">5.1 12-Hour Staff Training & Operational Handoff</h2>
+      <div class="card" style="margin-bottom: 8px;">
+        <div class="grid-3" style="margin-bottom: 0;">
+          <div>
+            <strong style="font-size: 8.6pt; color: #065f46;">1. Live Interactive Training</strong><br>
+            <span style="font-size: 8.1pt; color: #475569;">12 Hours dedicated hands-on training for OMPI sales, warehouse, and finance personnel.</span>
+          </div>
+          <div>
+            <strong style="font-size: 8.6pt; color: #065f46;">2. High-Def Video Library</strong><br>
+            <span style="font-size: 8.1pt; color: #475569;">Recorded video walkthroughs of all 33 modules for future employee onboarding.</span>
+          </div>
+          <div>
+            <strong style="font-size: 8.6pt; color: #065f46;">3. Standard Operating SOP</strong><br>
+            <span style="font-size: 8.1pt; color: #475569;">Printed operational manual for Bhosari stores desk and sales quotation desk.</span>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="section-heading">5.2 Formal Functional Verification & Sign-Off</h2>
+      <p style="font-size: 8.9pt; margin-bottom: 7px;">
+        By signing below, OMPI India LLP confirms that this architectural specification represents the agreed deliverables for the Centralized ERP System:
+      </p>
+
+      <div class="grid-2" style="margin-top: 8px;">
+        <div style="border: 1.2px dashed #94a3b8; border-radius: 6px; padding: 8px 11px; background: #fafafa;">
+          <div style="font-weight: 800; font-size: 8.8pt; color: #0f172a;">For: OMPI India LLP</div>
+          <div style="font-size: 8pt; color: #64748b; margin-top: 1px;">LLPIN: AAB-1234 &bull; GSTIN: 27AABCO1234F1Z5 &bull; MIDC Bhosari, Pune</div>
+          <div style="margin-top: 28px; border-top: 1px solid #0f172a; padding-top: 3px; font-size: 7.8pt; color: #475569;">
+            Authorized Designated Partner: ________________________<br>
+            Date: ________________________
+          </div>
+        </div>
+
+        <div style="border: 1.2px dashed #94a3b8; border-radius: 6px; padding: 8px 11px; background: #fafafa;">
+          <div style="font-weight: 800; font-size: 8.8pt; color: #0f172a;">Prepared By: Technology Consultant</div>
+          <div style="font-size: 8pt; color: #64748b; margin-top: 1px;">Suyash Shinde &bull; Lead Architect &bull; PAN Verified</div>
+          <div style="margin-top: 28px; border-top: 1px solid #0f172a; padding-top: 3px; font-size: 7.8pt; color: #475569;">
+            Signature: ________________________<br>
+            Date: 30 October 2026
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-footer">
+      <span>OMPI India LLP &bull; Centralized ERP Operations Manual</span>
+      <span>Document Code: OMPI-ERP-OPS-2026</span>
+      <span>Page 10 of 10</span>
+    </div>
+  </div>
+
+</body>
+</html>
