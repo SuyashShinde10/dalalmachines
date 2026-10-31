@@ -106,7 +106,7 @@
               </p>
 
               <div style="margin-bottom: 24px;">
-                <button id="btn-download-backup" class="sa-btn sa-btn-primary" style="width: 100%; justify-content: center;">
+                <button id="btn-download-backup" class="sa-btn sa-btn-primary" style="width: 100%; justify-content: center;" data-tooltip="Export complete database JSON snapshot to your computer">
                   <i class="fa fa-download"></i> Download Full Database JSON Snapshot
                 </button>
               </div>
@@ -114,8 +114,8 @@
               <div style="border-top: 1px solid var(--sa-border); padding-top: 20px;">
                 <label class="sa-label">Restore Database from JSON Snapshot</label>
                 <div class="sa-restore-group" style="display: flex; gap: 10px;">
-                  <input type="file" id="file-restore" accept=".json" class="sa-input" style="padding: 7px 10px;">
-                  <button type="button" id="btn-restore" class="sa-btn sa-btn-secondary" style="white-space: nowrap;">
+                  <input type="file" id="file-restore" accept=".json" class="sa-input" style="padding: 7px 10px;" data-tooltip="Select backup JSON file from your machine">
+                  <button type="button" id="btn-restore" class="sa-btn sa-btn-secondary" style="white-space: nowrap;" data-tooltip="Upload and restore database from local JSON snapshot file">
                     <i class="fa fa-upload"></i> Restore
                   </button>
                 </div>
@@ -144,7 +144,7 @@
                 <div style="font-size: 12px; color: var(--sa-text-muted); margin-top: 4px;">Destination: <code>/new/Machinery/js/catalog-data.js</code></div>
               </div>
 
-              <button id="btn-force-sync-2" class="sa-btn sa-btn-primary" style="width: 100%; justify-content: center;">
+              <button id="btn-force-sync-2" class="sa-btn sa-btn-primary" style="width: 100%; justify-content: center;" data-tooltip="Recompile dynamic DB inventory into static catalog-data.js">
                 <i class="fa fa-refresh"></i> Force Catalog Static Re-Export
               </button>
             </div>

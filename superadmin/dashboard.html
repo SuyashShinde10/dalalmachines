@@ -18,14 +18,14 @@
     <!-- Sidebar -->
     <aside class="sa-sidebar">
       <div class="sa-sidebar-header">
-        <a href="dashboard.html" class="sa-brand-badge">
+        <a href="dashboard.html" class="sa-brand-badge" data-tooltip="Dalal Master Executive Governance Portal">
           <img src="/new/dalalmachine/images/logo-dalal.png" alt="Dalal Machine Tools" style="max-height: 38px; width: auto; object-fit: contain;">
           <span class="sa-brand-badge-tag">MASTER</span>
         </a>
       </div>
 
       <!-- Top User Card (Stratify Style) -->
-      <div class="sa-sidebar-user-top">
+      <div class="sa-sidebar-user-top" data-tooltip="Logged in as Master Super Admin">
         <div style="display: flex; align-items: center; gap: 10px; min-width: 0;">
           <div class="sa-user-avatar" id="sa-user-avatar">D</div>
           <div class="sa-user-meta">
@@ -38,41 +38,41 @@
 
       <nav class="sa-nav">
         <div class="sa-nav-section-title">Master Telemetry</div>
-        <a href="dashboard.html" class="sa-nav-link active">
+        <a href="dashboard.html" class="sa-nav-link active" data-tooltip="System KPIs, Telemetry & Master Controls" data-tooltip-pos="right">
           <i class="fa fa-dashboard"></i>
           <span>Executive Overview</span>
         </a>
 
         <div class="sa-nav-section-title">Security & Governance</div>
-        <a href="users.html" class="sa-nav-link">
+        <a href="users.html" class="sa-nav-link" data-tooltip="Manage staff credentials and role permissions" data-tooltip-pos="right">
           <i class="fa fa-users"></i>
           <span>Admin Team Accounts</span>
           <span class="sa-nav-badge" id="sa-badge-users">...</span>
         </a>
-        <a href="logs.html" class="sa-nav-link">
+        <a href="logs.html" class="sa-nav-link" data-tooltip="Immutable SHA-256 chained activity logs" data-tooltip-pos="right">
           <i class="fa fa-shield"></i>
           <span>Security Audit Trail</span>
         </a>
 
         <div class="sa-nav-section-title">Database & Engine</div>
-        <a href="settings.html" class="sa-nav-link">
+        <a href="settings.html" class="sa-nav-link" data-tooltip="Daily rolling snapshots & JSON backups" data-tooltip-pos="right">
           <i class="fa fa-database"></i>
           <span>Database Backups & Sync</span>
         </a>
 
         <div class="sa-nav-section-title">Operations Portal</div>
-        <a href="/admin/dashboard.html" target="_blank" class="sa-nav-link">
+        <a href="/admin/dashboard.html" target="_blank" class="sa-nav-link" data-tooltip="Switch to operational inventory panel" data-tooltip-pos="right">
           <i class="fa fa-external-link"></i>
           <span>Open Staff Admin &rarr;</span>
         </a>
-        <a href="/new/dalalmachine/index.html" target="_blank" class="sa-nav-link">
+        <a href="/new/dalalmachine/index.html" target="_blank" class="sa-nav-link" data-tooltip="Preview live customer website in new tab" data-tooltip-pos="right">
           <i class="fa fa-globe"></i>
           <span>Open Public Website &rarr;</span>
         </a>
       </nav>
 
       <div class="sa-sidebar-footer">
-        <button class="sa-btn-logout-sidebar sa-btn-logout" title="Exit Master Console">
+        <button class="sa-btn-logout-sidebar sa-btn-logout" data-tooltip="Securely exit Super Admin session">
           <i class="fa fa-power-off"></i>
           <span>Exit Console</span>
         </button>
@@ -83,7 +83,7 @@
     <main class="sa-main">
       <header class="sa-topbar">
         <div class="sa-topbar-left">
-          <button id="sa-btn-toggle" class="sa-btn-toggle" title="Toggle Side Menu">
+          <button id="sa-btn-toggle" class="sa-btn-toggle" data-tooltip="Collapse or expand sidebar navigation">
             <i class="fa fa-bars"></i>
             <span>Menu</span>
           </button>
@@ -92,11 +92,11 @@
           </div>
         </div>
         <div class="sa-topbar-right">
-          <a href="/admin/dashboard.html" target="_blank" class="sa-btn-link">
+          <a href="/admin/dashboard.html" target="_blank" class="sa-btn-link" data-tooltip="Switch to operational inventory panel">
             <i class="fa fa-cubes"></i>
             <span>Staff Inventory Portal &rarr;</span>
           </a>
-          <button class="sa-btn-logout" title="Sign Out">
+          <button class="sa-btn-logout" data-tooltip="End super admin session">
             <i class="fa fa-sign-out"></i>
             <span>Exit Console</span>
           </button>
@@ -119,7 +119,7 @@
 
         <!-- KPI Telemetry Grid -->
         <div class="sa-kpi-grid">
-          <div class="sa-kpi-card">
+          <div class="sa-kpi-card" data-tooltip="Total verified heavy machines registered in database">
             <div class="sa-kpi-header">
               <span class="sa-kpi-label">Audited Machinery</span>
               <div class="sa-kpi-icon" style="background:#fef3c7; color:#d97706;"><i class="fa fa-cubes"></i></div>
@@ -128,7 +128,7 @@
             <div class="sa-kpi-sub">Total heavy machines in catalog</div>
           </div>
 
-          <div class="sa-kpi-card">
+          <div class="sa-kpi-card" data-tooltip="Total RFQ quotation inquiries received from industrial buyers">
             <div class="sa-kpi-header">
               <span class="sa-kpi-label">Quotation Inquiries</span>
               <div class="sa-kpi-icon" style="background:#eff6ff; color:#2563eb;"><i class="fa fa-envelope-open"></i></div>
@@ -137,7 +137,7 @@
             <div class="sa-kpi-sub">Buyer leads received</div>
           </div>
 
-          <div class="sa-kpi-card">
+          <div class="sa-kpi-card" data-tooltip="Active operational administrator and superadmin accounts">
             <div class="sa-kpi-header">
               <span class="sa-kpi-label">Staff & Admin Users</span>
               <div class="sa-kpi-icon" style="background:#f5f3ff; color:#7c3aed;"><i class="fa fa-users"></i></div>
@@ -146,7 +146,7 @@
             <div class="sa-kpi-sub">Authorized team accounts</div>
           </div>
 
-          <div class="sa-kpi-card">
+          <div class="sa-kpi-card" data-tooltip="Server process health, memory usage, and background sync engines">
             <div class="sa-kpi-header">
               <span class="sa-kpi-label">System Health</span>
               <div class="sa-kpi-icon" style="background:#ecfdf5; color:#059669;"><i class="fa fa-heartbeat"></i></div>
@@ -165,7 +165,7 @@
                 <i class="fa fa-shield" style="color: #6366f1;"></i>
                 <span>Live Security & Operational Audit Trail</span>
               </div>
-              <a href="logs.html" class="sa-btn sa-btn-secondary" style="font-size: 12px; padding: 6px 14px;">Full Ledger &rarr;</a>
+              <a href="logs.html" class="sa-btn sa-btn-secondary" style="font-size: 12px; padding: 6px 14px;" data-tooltip="Inspect complete cryptographic SHA-256 audit log">Full Ledger &rarr;</a>
             </div>
             <div class="sa-card-body" style="padding: 0;">
               <div class="sa-table-wrap">

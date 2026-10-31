@@ -2624,3 +2624,96 @@ body.sidebar-collapsed .admin-main {
     display: none !important;
   }
 }
+
+/* ==========================================================================
+   ENTERPRISE ULTRA-SLEEK TOOLTIP SYSTEM (PANELS ONLY: ADMIN & DEV)
+   ========================================================================== */
+.dmta-tooltip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999999;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate3d(0, 0, 0) scale(0.96);
+  transition: opacity 0.16s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.16s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.16s;
+  background: #0f172a;
+  color: #f8fafc;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 11.5px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.2px;
+  padding: 6px 11px;
+  border-radius: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 10px 25px -4px rgba(0, 0, 0, 0.45), 0 3px 8px -2px rgba(0, 0, 0, 0.25);
+  max-width: 280px;
+  text-align: center;
+  word-wrap: break-word;
+  white-space: normal;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.dmta-tooltip.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+/* Tooltip Caret / Arrow */
+.dmta-tooltip-arrow {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #0f172a;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+
+.dmta-tooltip[data-placement="top"] .dmta-tooltip-arrow {
+  bottom: -4px;
+  left: 50%;
+  margin-left: -4px;
+  border-top: none;
+  border-left: none;
+}
+
+.dmta-tooltip[data-placement="bottom"] .dmta-tooltip-arrow {
+  top: -4px;
+  left: 50%;
+  margin-left: -4px;
+  border-bottom: none;
+  border-right: none;
+}
+
+.dmta-tooltip[data-placement="left"] .dmta-tooltip-arrow {
+  right: -4px;
+  top: 50%;
+  margin-top: -4px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.dmta-tooltip[data-placement="right"] .dmta-tooltip-arrow {
+  left: -4px;
+  top: 50%;
+  margin-top: -4px;
+  border-right: none;
+  border-top: none;
+}
+
+.dmta-tooltip-icon {
+  font-size: 12px;
+  color: #f59e0b;
+  flex-shrink: 0;
+}
+

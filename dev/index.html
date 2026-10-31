@@ -208,56 +208,56 @@
 
       <nav class="sidebar-nav">
         <div class="nav-section-title">Developer Modules</div>
-        <a href="#vitals" class="nav-link active" onclick="showDevTab('vitals', this); return false;">
+        <a href="#vitals" class="nav-link active" onclick="showDevTab('vitals', this); return false;" data-tooltip="Live CPU, heap memory, server uptime & micro-cache telemetry" data-tooltip-pos="right">
           <i class="fa fa-tachometer"></i>
           <span>System Vitals</span>
         </a>
-        <a href="#governance" class="nav-link" onclick="showDevTab('governance', this); return false;">
+        <a href="#governance" class="nav-link" onclick="showDevTab('governance', this); return false;" data-tooltip="Developer Killswitch: Suspend or unblock staff accounts" data-tooltip-pos="right">
           <i class="fa fa-user-times"></i>
           <span>Account Governance</span>
           <span class="nav-badge" style="background:#fee2e2; color:#b91c1c;" id="sidebar-blocked-badge">Control</span>
         </a>
-        <a href="#doodle" class="nav-link" onclick="showDevTab('doodle', this); return false;">
+        <a href="#doodle" class="nav-link" onclick="showDevTab('doodle', this); return false;" data-tooltip="Broadcast motivational banners & announcements to staff dashboards" data-tooltip-pos="right">
           <i class="fa fa-paint-brush"></i>
           <span>Google Doodle Studio</span>
           <span class="nav-badge" style="background:#fef3c7; color:#b45309;" id="sidebar-banner-status">Broadcast</span>
         </a>
-        <a href="#tests" class="nav-link" onclick="showDevTab('tests', this); return false;">
+        <a href="#tests" class="nav-link" onclick="showDevTab('tests', this); return false;" data-tooltip="Execute automated test suite across all REST API endpoints" data-tooltip-pos="right">
           <i class="fa fa-play-circle"></i>
           <span>Smoke Test Runner</span>
           <span class="nav-badge" style="background:#ecfdf5; color:#047857;">100% Pass</span>
         </a>
-        <a href="#api" class="nav-link" onclick="showDevTab('api', this); return false;">
+        <a href="#api" class="nav-link" onclick="showDevTab('api', this); return false;" data-tooltip="Interactive REST endpoint query & telemetry inspector" data-tooltip-pos="right">
           <i class="fa fa-terminal"></i>
           <span>API Workbench</span>
         </a>
-        <a href="#catalog" class="nav-link" onclick="showDevTab('catalog', this); return false;">
+        <a href="#catalog" class="nav-link" onclick="showDevTab('catalog', this); return false;" data-tooltip="Audit database inventory integrity & image availability" data-tooltip-pos="right">
           <i class="fa fa-cubes"></i>
           <span>Catalog & Asset Health</span>
           <span class="nav-badge" id="sidebar-machines-count">49</span>
         </a>
-        <a href="#security" class="nav-link" onclick="showDevTab('security', this); return false;">
+        <a href="#security" class="nav-link" onclick="showDevTab('security', this); return false;" data-tooltip="Inspect live honeypots, firewall IP blacklist & emergency lockdown" data-tooltip-pos="right">
           <i class="fa fa-shield"></i>
           <span>SecOps & Headers</span>
         </a>
 
         <div class="nav-section-title">Other Portals</div>
-        <a href="/admin/index.html" target="_blank" class="nav-link">
+        <a href="/admin/index.html" target="_blank" class="nav-link" data-tooltip="Open operations inventory management panel" data-tooltip-pos="right">
           <i class="fa fa-cogs"></i>
           <span>Staff Admin Portal &rarr;</span>
         </a>
-        <a href="/superadmin/index.html" target="_blank" class="nav-link">
+        <a href="/superadmin/index.html" target="_blank" class="nav-link" data-tooltip="Open executive governance panel" data-tooltip-pos="right">
           <i class="fa fa-lock"></i>
           <span>Superadmin Console &rarr;</span>
         </a>
-        <a href="/new/dalalmachine/index.html" target="_blank" class="nav-link">
+        <a href="/new/dalalmachine/index.html" target="_blank" class="nav-link" data-tooltip="Preview live customer portal in new tab" data-tooltip-pos="right">
           <i class="fa fa-external-link"></i>
           <span>View Public Website &rarr;</span>
         </a>
       </nav>
 
       <!-- Sidebar Status Widget (Stratify Inspired) -->
-      <div class="sidebar-status-card" style="border-left: 4px solid #10b981;">
+      <div class="sidebar-status-card" style="border-left: 4px solid #10b981;" data-tooltip="Zero Client PII: Customer identities and inquiries strictly redacted">
         <div class="sidebar-status-title">
           <i class="fa fa-shield" style="color: #10b981;"></i>
           <span>Zero Client PII Active</span>
@@ -274,7 +274,7 @@
       <!-- Topbar -->
       <header class="admin-topbar">
         <div class="topbar-left">
-          <button id="btn-sidebar-toggle" class="btn-sidebar-toggle" title="Toggle Side Menu">
+          <button id="btn-sidebar-toggle" class="btn-sidebar-toggle" data-tooltip="Collapse or expand sidebar navigation">
             <i class="fa fa-bars"></i>
             <span>Menu</span>
           </button>
@@ -283,15 +283,15 @@
           </div>
         </div>
         <div class="topbar-right">
-          <div id="ws-status-badge" style="display:inline-flex; align-items:center; gap:8px; background:#eff6ff; border:1px solid #bfdbfe; padding:6px 14px; border-radius:9999px; font-size:12px; font-weight:700; color:#1d4ed8;">
+          <div id="ws-status-badge" style="display:inline-flex; align-items:center; gap:8px; background:#eff6ff; border:1px solid #bfdbfe; padding:6px 14px; border-radius:9999px; font-size:12px; font-weight:700; color:#1d4ed8;" data-tooltip="Socket.IO real-time duplex synchronization active">
             <span id="ws-status-dot" style="width:8px; height:8px; border-radius:50%; background:#2563eb; box-shadow:0 0 8px #2563eb; display:inline-block;"></span>
             <span id="ws-status-text">WS: Connecting...</span>
           </div>
-          <div style="display:inline-flex; align-items:center; gap:8px; background:#ecfdf5; border:1px solid #a7f3d0; padding:6px 14px; border-radius:9999px; font-size:12px; font-weight:700; color:#047857;">
+          <div style="display:inline-flex; align-items:center; gap:8px; background:#ecfdf5; border:1px solid #a7f3d0; padding:6px 14px; border-radius:9999px; font-size:12px; font-weight:700; color:#047857;" data-tooltip="Backend Express server running on port 5000">
             <span style="width:8px; height:8px; border-radius:50%; background:#10b981; box-shadow:0 0 8px #10b981; display:inline-block;"></span>
             <span>Port 5000 (Live)</span>
           </div>
-          <a href="/new/dalalmachine/index.html" target="_blank" class="btn-public-site">
+          <a href="/new/dalalmachine/index.html" target="_blank" class="btn-public-site" data-tooltip="Preview customer-facing website in new tab">
             <i class="fa fa-external-link"></i>
             <span>Public Site</span>
           </a>
@@ -407,11 +407,11 @@
                 </div>
               </div>
               <div style="display: flex; gap: 10px; margin-top: 10px;">
-                <button class="btn-primary" onclick="fetchTelemetry(true);" style="font-size: 12.5px; padding: 8px 16px;">
+                <button class="btn-primary" onclick="fetchTelemetry(true);" style="font-size: 12.5px; padding: 8px 16px;" data-tooltip="Poll latest server telemetry metrics">
                   <i class="fa fa-refresh"></i>
                   <span>Refresh Telemetry</span>
                 </button>
-                <a href="/dev-hub.html" class="btn-secondary" style="font-size: 12.5px; padding: 8px 14px;">
+                <a href="/dev-hub.html" class="btn-secondary" style="font-size: 12.5px; padding: 8px 14px;" data-tooltip="Open full engineering developer hub">
                   <i class="fa fa-th"></i>
                   <span>Open Dev Hub</span>
                 </a>
@@ -426,7 +426,7 @@
                 <i class="fa fa-cogs" style="color: var(--brand-gold-dark);"></i>
                 <span>Runtime Configuration & Environment Details</span>
               </div>
-              <button class="btn-secondary" onclick="fetchTelemetry(true);" style="font-size: 12px; padding: 6px 14px;">
+              <button class="btn-secondary" onclick="fetchTelemetry(true);" style="font-size: 12px; padding: 6px 14px;" data-tooltip="Refresh CPU, memory, and cache telemetry">
                 <i class="fa fa-refresh"></i> Refresh
               </button>
             </div>
@@ -506,7 +506,7 @@
                 <i class="fa fa-users" style="color: #6366f1;"></i>
                 <span>Staff & Administrative Account Master Controls</span>
               </div>
-              <button class="btn-secondary" onclick="fetchAdminAccounts();" style="font-size: 12px; padding: 6px 14px;">
+              <button class="btn-secondary" onclick="fetchAdminAccounts();" style="font-size: 12px; padding: 6px 14px;" data-tooltip="Reload list of administrative accounts from database">
                 <i class="fa fa-refresh"></i> Refresh Accounts
               </button>
             </div>
@@ -647,10 +647,10 @@
                   </label>
 
                   <div style="display: flex; gap: 10px;">
-                    <button type="button" class="btn-secondary" onclick="fetchBannerConfig();">
+                    <button type="button" class="btn-secondary" onclick="fetchBannerConfig();" data-tooltip="Reset form to currently saved broadcast banner">
                       <i class="fa fa-undo"></i> Reset to Saved
                     </button>
-                    <button type="submit" id="btn-save-banner" class="btn-primary" style="padding: 10px 24px;">
+                    <button type="submit" id="btn-save-banner" class="btn-primary" style="padding: 10px 24px;" data-tooltip="Save and broadcast banner live to all open dashboards">
                       <i class="fa fa-paper-plane"></i> Save & Broadcast Doodle
                     </button>
                   </div>
@@ -668,7 +668,7 @@
                 <i class="fa fa-play-circle" style="color: #10b981;"></i>
                 <span>Automated Public Routes & API Smoke Tests</span>
               </div>
-              <button id="btn-run-tests" class="btn-primary" onclick="runSmokeTests();" style="font-size: 13px; padding: 8px 18px;">
+              <button id="btn-run-tests" class="btn-primary" onclick="runSmokeTests();" style="font-size: 13px; padding: 8px 18px;" data-tooltip="Execute automated test suite across all REST API endpoints">
                 <i class="fa fa-play"></i> Run All 11 Smoke Tests
               </button>
             </div>
@@ -893,7 +893,7 @@
               </div>
               <div class="stat-value" style="font-size: 16px; font-family: 'JetBrains Mono', monospace; color: #065f46;" id="sec-gateway-key">dmta-ops-2026</div>
               <div class="stat-desc" style="margin-top:8px;">
-                <button type="button" class="btn-primary" style="padding:6px 12px; font-size:12px;" onclick="copyGatewayLink()">
+                <button type="button" class="btn-primary" style="padding:6px 12px; font-size:12px;" onclick="copyGatewayLink()" data-tooltip="Copy 12-hour signed gateway pass URL to clipboard">
                   <i class="fa fa-copy"></i> Copy Gateway URL
                 </button>
                 <span id="gateway-copy-feedback" style="font-size:11px; color:#059669; margin-left:8px; display:none;">Copied!</span>
@@ -901,7 +901,7 @@
             </div>
 
             <!-- Route Cloaking (HTTP 404 Disguise) Card -->
-            <div class="stat-card" style="border-left: 4px solid #3b82f6;">
+            <div class="stat-card" style="border-left: 4px solid #3b82f6;" data-tooltip="Unauthorized scanners probe gets genuine 404 Not Found">
               <div class="stat-top">
                 <span class="stat-label">Route Cloaking (Decoy 404)</span>
                 <div class="stat-icon blue"><i class="fa fa-user-secret"></i></div>
@@ -911,7 +911,7 @@
             </div>
 
             <!-- Honeypot Defense Engine Card -->
-            <div class="stat-card" style="border-left: 4px solid #f59e0b;">
+            <div class="stat-card" style="border-left: 4px solid #f59e0b;" data-tooltip="Detects & auto-bans scanners looking for WordPress, .env, or phpMyAdmin">
               <div class="stat-top">
                 <span class="stat-label">Honeypot Traps & Auto-Banning</span>
                 <div class="stat-icon gold"><i class="fa fa-crosshairs"></i></div>
@@ -921,14 +921,14 @@
             </div>
 
             <!-- Emergency Portal Lockdown Switch -->
-            <div class="stat-card" style="border-left: 4px solid #ef4444;" id="sec-lockdown-card">
+            <div class="stat-card" style="border-left: 4px solid #ef4444;" id="sec-lockdown-card" data-tooltip="Instantly cloaks entire portal to all users except Super Admin">
               <div class="stat-top">
                 <span class="stat-label">Emergency Portal Lockdown</span>
                 <div class="stat-icon red"><i class="fa fa-lock"></i></div>
               </div>
               <div class="stat-value" style="font-size: 16px;" id="sec-lockdown-status">DISENGAGED</div>
               <div class="stat-desc" style="margin-top:8px;">
-                <button type="button" id="btn-toggle-lockdown" class="btn-secondary" style="padding:6px 12px; font-size:12px; border-color:#dc2626; color:#dc2626;" onclick="toggleLockdown()">
+                <button type="button" id="btn-toggle-lockdown" class="btn-secondary" style="padding:6px 12px; font-size:12px; border-color:#dc2626; color:#dc2626;" onclick="toggleLockdown()" data-tooltip="Toggle Emergency Lockdown 404 Cloak">
                   <i class="fa fa-power-off"></i> Engage Lockdown
                 </button>
               </div>
@@ -943,11 +943,11 @@
                 <span>Firewall Blacklist & Auto-Banned Attackers</span>
               </div>
               <div style="display:flex; gap:8px;">
-                <input type="text" id="manual-ban-ip" placeholder="e.g. 192.168.1.100" style="padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px; font-size:12px;">
-                <button type="button" class="btn-secondary" style="padding:6px 12px; font-size:12px;" onclick="manualBanIp()">
+                <input type="text" id="manual-ban-ip" placeholder="e.g. 192.168.1.100" style="padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px; font-size:12px;" data-tooltip="Enter IP address to blacklist">
+                <button type="button" class="btn-secondary" style="padding:6px 12px; font-size:12px;" onclick="manualBanIp()" data-tooltip="Add IP address to active firewall blacklist">
                   <i class="fa fa-plus"></i> Ban IP
                 </button>
-                <button type="button" class="btn-secondary" style="padding:6px 12px; font-size:12px;" onclick="fetchSecurityStatus()">
+                <button type="button" class="btn-secondary" style="padding:6px 12px; font-size:12px;" onclick="fetchSecurityStatus()" data-tooltip="Refresh live honeypot traps & firewall telemetry">
                   <i class="fa fa-refresh"></i> Refresh
                 </button>
               </div>
@@ -1067,6 +1067,7 @@
   </div>
 
   <script src="/socket.io/socket.io.js"></script>
+  <script src="/admin/js/dmta-tooltip.js"></script>
   <script>
     // Tab Switching matching Admin Portal patterns
     function showDevTab(tabName, linkEl) {
@@ -1410,8 +1411,8 @@
             : '<span style="color:#94a3b8; font-size:12px;">Normal operations</span>';
 
           const actionBtn = isBlocked
-            ? `<button class="btn-primary" style="background:#059669; border-color:#059669; font-size:12px; padding:6px 14px;" onclick="unblockAccount('${acc.id}', '${escapeHtml(acc.username)}');"><i class="fa fa-unlock"></i> Unblock / Restore</button>`
-            : `<button class="btn-secondary" style="color:#dc2626; border-color:#fca5a5; font-size:12px; padding:6px 14px;" onclick="openBlockModal('${acc.id}', '${escapeHtml(acc.username)}', '${acc.role}');"><i class="fa fa-ban"></i> Suspend Account</button>`;
+            ? `<button class="btn-primary" style="background:#059669; border-color:#059669; font-size:12px; padding:6px 14px;" onclick="unblockAccount('${acc.id}', '${escapeHtml(acc.username)}');" data-tooltip="Restore staff member login access"><i class="fa fa-unlock"></i> Unblock / Restore</button>`
+            : `<button class="btn-secondary" style="color:#dc2626; border-color:#fca5a5; font-size:12px; padding:6px 14px;" onclick="openBlockModal('${acc.id}', '${escapeHtml(acc.username)}', '${acc.role}');" data-tooltip="Developer Killswitch: Instantly suspend staff account & terminate session"><i class="fa fa-ban"></i> Suspend Account</button>`;
 
           return `
             <tr>
