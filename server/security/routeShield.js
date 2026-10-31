@@ -55,9 +55,10 @@ function routeShieldMiddleware(req, res, next) {
   const isAdminPath = p === '/admin' || p.startsWith('/admin/');
   const isSuperAdminPath = p === '/superadmin' || p.startsWith('/superadmin/');
   const isDevPath = p === '/dev' || p.startsWith('/dev/');
+  const isDevApiPath = (p === '/api/dev' || p.startsWith('/api/dev/')) && p !== '/api/dev/broadcast-banner';
 
-  // If not accessing protected admin/dev/superadmin panels, continue normally
-  if (!isAdminPath && !isSuperAdminPath && !isDevPath) {
+  // If not accessing protected admin/dev/superadmin panels or developer APIs, continue normally
+  if (!isAdminPath && !isSuperAdminPath && !isDevPath && !isDevApiPath) {
     return next();
   }
 
@@ -86,8 +87,8 @@ function routeShieldMiddleware(req, res, next) {
     return sendCloaked404(res, req, 'Missing gateway pass');
   }
 
-  // 3. Developer Console Security Layer
-  if (isDevPath) {
+  // 3. Developer Console & Developer API Security Layer
+  if (isDevPath || isDevApiPath) {
     // Check IP restriction if configured
     if (!isDevIpAllowed(req)) {
       recordSecurityEvent({
@@ -95,9 +96,9 @@ function routeShieldMiddleware(req, res, next) {
         severity: 'HIGH',
         ip,
         path: req.originalUrl,
-        message: `IP ${ip} attempted to access developer console but is not in ALLOWED_DEV_IPS whitelist.`
+        message: `IP ${ip} attempted to access developer endpoint but is not in ALLOWED_DEV_IPS whitelist.`
       });
-      return sendCloaked404(res, req, 'IP not whitelisted for developer console');
+      return sendCloaked404(res, req, 'IP not whitelisted for developer endpoint');
     }
 
     // If user is logged in as superadmin or developer
