@@ -326,7 +326,7 @@ const SuperAdminCore = {
               </a>
             ` : ''}
             ${dismissable ? `
-              <button type="button" class="doodle-close-btn" title="Dismiss banner" onclick="SuperAdminCore.dismissDeveloperBanner()">
+              <button type="button" class="doodle-close-btn" title="Dismiss banner" onclick="(function(b){if(window.SuperAdminCore&&SuperAdminCore.dismissDeveloperBanner){SuperAdminCore.dismissDeveloperBanner(b);}else{var p=b.closest('.dev-doodle-banner');if(p)p.remove();try{sessionStorage.setItem('dalal_dismissed_doodle_banner','1');localStorage.setItem('dalal_dismissed_doodle_banner','1');}catch(e){}}})(this)">
                 <i class="fa fa-times"></i>
               </button>
             ` : ''}
@@ -338,15 +338,22 @@ const SuperAdminCore = {
     }
   },
 
-  dismissDeveloperBanner: () => {
-    const el = document.getElementById('active-doodle-banner');
+  dismissDeveloperBanner: (btn) => {
+    const el = (btn && btn.closest) ? btn.closest('.dev-doodle-banner') : (document.getElementById('active-doodle-banner') || document.querySelector('.dev-doodle-banner'));
     if (el) {
       el.style.opacity = '0';
       el.style.transform = 'translateY(-10px)';
       el.style.transition = 'all 0.25s ease';
-      setTimeout(() => el.remove(), 250);
+      setTimeout(() => {
+        el.remove();
+        const slot = document.getElementById('developer-doodle-banner-slot');
+        if (slot) slot.innerHTML = '';
+      }, 250);
     }
-    try { sessionStorage.setItem('dalal_dismissed_doodle_banner', '1'); } catch (err) {}
+    try {
+      sessionStorage.setItem('dalal_dismissed_doodle_banner', '1');
+      localStorage.setItem('dalal_dismissed_doodle_banner', '1');
+    } catch (err) {}
   },
 
   // ==========================================================================
@@ -580,7 +587,7 @@ const SuperAdminCore = {
             </a>
           ` : ''}
           ${dismissable ? `
-            <button type="button" class="doodle-close-btn" title="Dismiss banner" onclick="SuperAdminCore.dismissDeveloperBanner()">
+            <button type="button" class="doodle-close-btn" title="Dismiss banner" onclick="(function(b){if(window.SuperAdminCore&&SuperAdminCore.dismissDeveloperBanner){SuperAdminCore.dismissDeveloperBanner(b);}else{var p=b.closest('.dev-doodle-banner');if(p)p.remove();try{sessionStorage.setItem('dalal_dismissed_doodle_banner','1');localStorage.setItem('dalal_dismissed_doodle_banner','1');}catch(e){}}})(this)">
               <i class="fa fa-times"></i>
             </button>
           ` : ''}
@@ -829,3 +836,6 @@ const SuperAdminCore = {
   DmtaTooltip.init();
 })();
 
+
+
+if (typeof window !== 'undefined') { window.SuperAdminCore = SuperAdminCore; }

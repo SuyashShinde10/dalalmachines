@@ -9,7 +9,7 @@
       "name": "System Developer",
       "active": true,
       "createdAt": "2026-10-06T09:58:03.305Z",
-      "lastLogin": "2026-10-31T14:47:16.280Z",
+      "lastLogin": "2026-11-01T13:42:11.126Z",
       "blockedByDeveloper": false,
       "blockedReason": "",
       "blockedAt": null
@@ -23,7 +23,7 @@
       "name": "Dalal Inventory Admin",
       "active": true,
       "createdAt": "2026-10-06T09:58:03.484Z",
-      "lastLogin": "2026-10-30T09:54:42.391Z",
+      "lastLogin": "2026-11-01T13:45:05.471Z",
       "blockedByDeveloper": false,
       "blockedReason": "",
       "blockedAt": null
@@ -2510,6 +2510,32 @@
     }
   ],
   "logs": [
+    {
+      "id": "log_50a9958c",
+      "timestamp": "2026-11-01T13:45:05.489Z",
+      "userId": "usr_admin",
+      "username": "admin",
+      "role": "admin",
+      "action": "USER_LOGIN",
+      "target": "AUTH",
+      "details": "User logged in successfully from ::1",
+      "ip": "127.0.0.1",
+      "prevHash": "47cbe3413b91ae089076b5664df6ec911521eb88b0cef017c801b2679ef51c75",
+      "hash": "e0ecd054abed7f5e99a84490910877cb1e00c2e38cccca55bc2b7b21961b5af6"
+    },
+    {
+      "id": "log_45f86708",
+      "timestamp": "2026-11-01T13:42:11.199Z",
+      "userId": "usr_superadmin",
+      "username": "developer",
+      "role": "superadmin",
+      "action": "USER_LOGIN",
+      "target": "AUTH",
+      "details": "User logged in successfully from ::1",
+      "ip": "127.0.0.1",
+      "prevHash": "20aae41893e5dedf585f60b032b238a437edd7b258891b858e06c613ff0148fe",
+      "hash": "47cbe3413b91ae089076b5664df6ec911521eb88b0cef017c801b2679ef51c75"
+    },
     {
       "id": "log_84c1b48d",
       "timestamp": "2026-10-31T14:47:33.931Z",
@@ -6015,7 +6041,7 @@
     "autoSyncCatalogJs": true
   },
   "developerBanner": {
-    "active": true,
+    "active": false,
     "style": "doodle-gold",
     "badgeText": "✨ DEVELOPER DOODLE SPOTLIGHT",
     "title": "WS Duplex System Test",
