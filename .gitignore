@@ -43,3 +43,6 @@ server/data/backups/*
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+ 
+# Office temporary lock files
+~$*

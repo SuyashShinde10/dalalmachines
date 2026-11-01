@@ -6,7 +6,7 @@
 
 **From:**  
 * **Suyash Shinde**, Lead Solutions Architect &amp; Enterprise Technology Consultant  
-  Baner, Pune 411045, Maharashtra, India | Phone: +91 94038 92055 | Email: `suyashshinde360@gmail.com`  
+  Pimpri, Pune 411018, Maharashtra, India | Phone: +91 96070 28594 | Email: `suyashshinde360@gmail.com`  
 
 **Date of Issuance:** 30 October 2026  
 **Proposal Reference:** `DMTA-OMPI-PROP-2026-v1.0`  
@@ -66,5 +66,5 @@ Sincerely,
 
 **Suyash Shinde**  
 Lead Solutions Architect &amp; Enterprise Technology Consultant  
-Baner, Pune 411045, Maharashtra, India  
-Phone: +91 94038 92055 | Email: suyashshinde360@gmail.com  
+Pimpri, Pune 411018, Maharashtra, India  
+Phone: +91 96070 28594 | Email: suyashshinde360@gmail.com  

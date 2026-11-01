@@ -459,7 +459,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- Overlapping 4-Pillars Section -->
     <section class="pillars-section">
         <div class="auto-container">
-            <div class="row clearfix">
+            <div class="row clearfix" data-animated-content="true" data-stagger="0.12" data-distance="60" data-direction="vertical" data-ease="power3.out">
                 <!-- Pillar 1 -->
                 <div class="col-lg-3 col-md-6 col-sm-12" style="margin-bottom:20px;">
                     <div class="pillar-card">
@@ -545,7 +545,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- Machinery Catalog Section (Live Interactive Filter) -->
     <section class="services-section" style="padding: 80px 0; background: #f8fafc;">
         <div class="auto-container">
-            <div class="sec-title text-center" style="margin-bottom:40px;">
+            <div class="sec-title text-center" style="margin-bottom:40px;" data-animated-content="true" data-wipe="up" data-distance="40" data-duration="0.8">
                 <span class="title" style="color:#f89d13; font-family:'Rajdhani'; font-size:16px; font-weight:700; text-transform:uppercase; letter-spacing:1px;">Active Inventory</span>
                 <h2 style="font-size:38px; font-weight:800; color:#1b212f;">Featured Metal Working & Forging Machinery</h2>
                 <div class="text" style="color:#64748b; max-width:650px; margin:10px auto 0;">
@@ -2205,5 +2205,7 @@ $(document).ready(function() {
   </script>
   <!-- B2B Conversion & Telemetry Layer -->
   <script src="js/dalal-analytics.js"></script>
+  <!-- React Bits <AnimatedContent /> GSAP Runtime Component -->
+  <script src="js/animated-content.js"></script>
 </body>
 </html>

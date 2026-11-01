@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Master SOW & Architectural Proposal | Dalal Machine Tools & OMPI India</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-page: #f1f5f9;
+      --bg-slide: #ffffff;
+      --bg-card: #f8fafc;
+      --border-card: #e2e8f0;
+      --text-main: #0f172a;
+      --text-body: #334155;
+      --text-muted: #64748b;
+      --navy-primary: #1e3a8a;
+      --dalal-blue: #1d4ed8;
+      --dalal-bg: #eff6ff;
+      --ompi-green: #047857;
+      --ompi-bg: #ecfdf5;
+      --amber: #b45309;
+      --amber-bg: #fef3c7;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 0;
+      gap: 32px;
+    }
+
+    .slide {
+      width: 1280px;
+      height: 720px;
+      background: var(--bg-slide);
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
+      position: relative;
+      overflow: hidden;
+      padding: 36px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      page-break-after: always;
+      border: 1px solid var(--border-card);
+    }
+
+    /* Slide Header */
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 1px solid var(--border-card);
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+    }
+
+    .header-left .category-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--navy-primary);
+      margin-bottom: 4px;
+    }
+
+    .header-left h2 {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.3px;
+    }
+
+    .header-left p {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    .badge {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      padding: 5px 12px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: var(--navy-primary);
+    }
+
+    /* Slide Content Areas */
+    .slide-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 16px;
+      overflow: hidden;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      height: 100%;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 18px;
+      height: 100%;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 16px;
+      height: 100%;
+    }
+
+    .grid-5 {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+      height: 100%;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 6px;
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      position: relative;
+      border-top: 3.5px solid var(--navy-primary);
+    }
+
+    .card.blue-top { border-top-color: var(--dalal-blue); }
+    .card.green-top { border-top-color: var(--ompi-green); }
+    .card.amber-top { border-top-color: var(--amber); }
+
+    .card.dalal-bg { background: var(--dalal-bg); }
+    .card.ompi-bg { background: var(--ompi-bg); }
+
+    .card h3 {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 12px;
+    }
+
+    .card-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .card-list li {
+      font-size: 11.5px;
+      line-height: 1.45;
+      color: var(--text-body);
+    }
+
+    .card-list li strong {
+      color: var(--text-main);
+      font-weight: 700;
+    }
+
+    /* Tables */
+    .custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+    }
+
+    .custom-table th {
+      background: var(--navy-primary);
+      color: #ffffff;
+      text-align: left;
+      padding: 8px 12px;
+      font-weight: 700;
+      font-size: 11px;
+    }
+
+    .custom-table td {
+      padding: 7px 12px;
+      border-bottom: 1px solid var(--border-card);
+      color: var(--text-body);
+      line-height: 1.35;
+    }
+
+    .custom-table tr:nth-child(even) td {
+      background: var(--bg-card);
+    }
+
+    .custom-table td.code-cell {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--dalal-blue);
+      font-weight: 600;
+    }
+
+    .custom-table td.strong-cell {
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    /* Running Footer */
+    .slide-footer {
+      border-top: 1px solid var(--border-card);
+      padding-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10.5px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .slide-footer .counter {
+      font-weight: 700;
+      color: var(--navy-primary);
+      letter-spacing: 0.5px;
+    }
+
+    /* Print styling for crisp PDF output */
+    @media print {
+      body {
+        padding: 0;
+        background: transparent;
+        gap: 0;
+      }
+      .slide {
+        box-shadow: none;
+        border-radius: 0;
+        border: none;
+        width: 13.333in;
+        height: 7.5in;
+        padding: 0.4in 0.55in;
+        page-break-inside: avoid;
+      }
+      .nav-bar { display: none !important; }
+    }
+
+    /* Floating navigation bar */
+    .nav-bar {
+      position: fixed;
+      bottom: 20px;
+      background: #ffffff;
+      border: 1px solid var(--border-card);
+      padding: 8px 18px;
+      border-radius: 30px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      z-index: 1000;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .nav-btn {
+      background: var(--navy-primary);
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .nav-btn:hover { background: #172554; }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Nav Controls -->
+  <div class="nav-bar">
+    <button class="nav-btn" onclick="prevSlide()">&#8592; Previous</button>
+    <span id="nav-counter">Slide 1 of 22</span>
+    <button class="nav-btn" onclick="nextSlide()">Next &#8594;</button>
+    <button class="nav-btn" style="background: #475569;" onclick="toggleFullscreen()">Fullscreen</button>
+  </div>
+
+  <!-- SLIDE 1: COVER SLIDE -->
+  <div class="slide" id="slide-1">
+    <div style="background: var(--bg-card); border: 1px solid var(--border-card); border-radius: 4px; padding: 6px 14px; text-align: center; font-size: 10px; font-weight: 700; color: var(--navy-primary); letter-spacing: 0.8px;">
+      PROPOSED STATEMENT OF WORK (SOW) &bull; ARCHITECTURAL ENGINEERING BLUEPRINT
+    </div>
+
+    <div style="margin-top: 10px;">
+      <h1 style="font-size: 34px; font-weight: 800; color: var(--text-main); letter-spacing: -0.5px;">Unified Digital Modernization Blueprint</h1>
+      <h2 style="font-size: 16px; font-weight: 700; color: var(--dalal-blue); margin-top: 4px;">Dalal Machine Tools Agency Pvt. Ltd. (B2B Web Portal) &amp; OMPI India LLP (Centralized ERP)</h2>
+      <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 8px; line-height: 1.5; max-width: 95%;">
+        A comprehensive pre-kickoff technical specification outlining how both systems will be engineered from the ground up to automate heavy machinery sales inquiries and streamline Italian clutch import operations upon project initiation.
+      </p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 10px;">
+      <div class="card blue-top" style="padding: 14px;">
+        <h3 style="font-size: 12.5px; color: var(--dalal-blue); margin-bottom: 6px;">Dual Platform Scope</h3>
+        <p style="font-size: 11px; color: var(--text-body); line-height: 1.4;">B2B Machine Showcase Web Portal for Dalal + Centralized 33-Module Office ERP for OMPI India.</p>
+      </div>
+      <div class="card blue-top" style="padding: 14px;">
+        <h3 style="font-size: 12.5px; color: var(--dalal-blue); margin-bottom: 6px;">24 Public Web Pages</h3>
+        <p style="font-size: 11px; color: var(--text-body); line-height: 1.4;">Complete machine catalog with tonnage filters, instant PDF spec downloads, and direct WhatsApp lead routing.</p>
+      </div>
+      <div class="card green-top" style="padding: 14px;">
+        <h3 style="font-size: 12.5px; color: var(--ompi-green); margin-bottom: 6px;">33 Office ERP Modules</h3>
+        <p style="font-size: 11px; color: var(--text-body); line-height: 1.4;">Custom quoting, instant clutch sizing calculations, international import costing, and Bhosari stock control.</p>
+      </div>
+      <div class="card amber-top" style="padding: 14px;">
+        <h3 style="font-size: 12.5px; color: var(--amber); margin-bottom: 6px;">Bank-Grade Security</h3>
+        <p style="font-size: 11px; color: var(--text-body); line-height: 1.4;">Role-based staff login protecting sensitive buy-prices, profit margins, and customer inquiries.</p>
+      </div>
+    </div>
+
+    <div style="background: #ffffff; border: 1px solid var(--border-card); border-radius: 6px; padding: 10px 16px; display: flex; justify-content: space-between; align-items: center;">
+      <div>
+        <div style="font-size: 11.5px; font-weight: 700; color: var(--text-main);">Author: Suyash Shinde &bull; Pimpri, Pune &bull; +91 96070 28594</div>
+        <div style="font-size: 10.5px; color: var(--text-muted); margin-top: 2px;">Project Status: Pre-Kickoff Engineering Architecture Proposal &bull; Commercial investment positioned on Slide 21.</div>
+      </div>
+      <div class="badge">CONFIDENTIAL &bull; INTERNAL USE ONLY</div>
+    </div>
+
+    <div class="slide-footer">
+      <span>STATEMENT OF WORK (SOW) &bull; DALAL MACHINE TOOLS &amp; OMPI INDIA</span>
+      <span class="counter">SLIDE 01 / 22</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: SYSTEM ARCHITECTURE -->
+  <div class="slide" id="slide-2">
+    <div class="slide-header">
+      <div class="header-left">
+        <div class="category-tag">02 | System Architecture</div>
+        <h2>How the Proposed Solution Operates</h2>
+        <p>Designed for ease of use by factory buyers, office sales engineers, and warehouse stock handlers</p>
+      </div>
+      <div class="badge">Architecture</div>
+    </div>
+    <div class="slide-body">
+      <div class="grid-3">
+        <div class="card blue-top">
+          <h3>1. Public Web Showroom</h3>
+          <ul class="card-list">
+            <li><strong>Client Facing Portal:</strong> Fast, mobile-friendly 24-page website specifically built for Dalal Machine Tools Agency.</li>
+            <li><strong>Tonnage Search Filters:</strong> Factory purchase managers can filter stock by tonnage (400T, 630T, 1000T, 1600T, 2500T) and machine condition.</li>
+            <li><strong>Instant Spec Sheets:</strong> One-click download of branded technical specification PDFs for internal plant management approvals.</li>
+            <li><strong>Direct Lead Capture:</strong> Instant WhatsApp integration connecting interested machinery buyers directly to the Chakan yard sales team.</li>
+          </ul>
+        </div>
+        <div class="card green-top">
+          <h3>2. Centralized Office ERP</h3>
+          <ul class="card-list">
+            <li><strong>Internal Operations Suite:</strong> Secure 33-module operations system built specifically for OMPI India LLP's Pune office and warehouse.</li>
+            <li><strong>Automated Sizing Calculator:</strong> Engineers input press RPM and torque to automatically select the correct Italian OMPI clutch model in seconds.</li>
+            <li><strong>True Landed Cost Engine:</strong> Automatically calculates import duty, port customs clearance, freight, and Euro-to-INR conversions.</li>
+            <li><strong>Stock &amp; Spares Control:</strong> Live tracking of friction discs, seals, and valves in Bhosari depot to prevent stockouts.</li>
+          </ul>
+        </div>
+        <div class="card amber-top">
+          <h3>3. Secure Infrastructure</h3>
+          <ul class="card-list">
+            <li><strong>Zero Cloud Lock-in:</strong> Runs on local office PCs in Bhosari with optional secure cloud sync for remote director access.</li>
+            <li><strong>Automated Daily Backups:</strong> Tri-level data protection: local daily snapshots, external drive backup, and encrypted cloud archive.</li>
+            <li><strong>Role-Based Security:</strong> Sales staff can create quotations but cannot view confidential supplier margins or director records.</li>
+            <li><strong>No Monthly SaaS Fees:</strong> 100% custom-built for you with perpetual software ownership and zero recurring user subscription fees.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>STATEMENT OF WORK (SOW) &bull; DALAL MACHINE TOOLS &amp; OMPI INDIA</span>
+      <span class="counter">SLIDE 02 / 22</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: TECH SELECTION -->
+  <div class="slide" id="slide-3">
+    <div class="slide-header">
+      <div class="header-left">
+        <div class="category-tag">03 | Technology Selection</div>
+        <h2>Built on Modern, Proven Business Technology</h2>
+        <p>Why each technology was chosen for your long-term speed, security, and low operating costs</p>
+      </div>
+      <div class="badge">Tech Strategy</div>
+    </div>
+    <div class="slide-body">
+      <div class="grid-4">
+        <div class="card blue-top">
+          <h3 style="color: var(--dalal-blue);">Ultra-Fast Web Engine (Node.js & Modern HTML5)</h3>
+          <ul class="card-list">
+            <li><strong>Business Benefit:</strong> Pages load in under 1.5 seconds on mobile phones and laptops even on 4G connections.</li>
+            <li><strong>Why It Matters:</strong> Plant directors searching for machinery on their phones will never face lagging pages or broken screens.</li>
+            <li><strong>Zero Maintenance:</strong> Built to run stably 24/7 without requiring expensive daily technical maintenance.</li>
+          </ul>
+        </div>
+        <div class="card green-top">
+          <h3 style="color: var(--ompi-green);">Industrial-Grade Database (PostgreSQL)</h3>
+          <ul class="card-list">
+            <li><strong>Business Benefit:</strong> The world's most trusted relational database used by global industrial enterprises.</li>
+            <li><strong>Why It Matters:</strong> Ensures zero data loss or duplicate records when 10 different staff members access stock simultaneously.</li>
+            <li><strong>Full Data Ownership:</strong> All your machine catalogs, customer contacts, and quotation records remain 100% under your ownership.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 style="color: var(--navy-primary);">Local LAN + Cloud Versatility (Node.js)</h3>
+          <ul class="card-list">
+            <li><strong>Business Benefit:</strong> Can run completely offline inside your Bhosari office LAN server without needing an active internet connection.</li>
+            <li><strong>Why It Matters:</strong> Work never stops during internet outages; quotes and inventory updates continue seamlessly.</li>
+            <li><strong>Future Ready:</strong> Easily synchronizes with private cloud whenever directors travel abroad to Italy or trade exhibitions.</li>
+          </ul>
+        </div>
+        <div class="card amber-top">
+          <h3 style="color: var(--amber);">Bank-Grade Data Security (Role-Based RBAC)</h3>
+          <ul class="card-list">
+            <li><strong>Business Benefit:</strong> Strict password authentication and role-based permissions for every team member.</li>
+            <li><strong>Why It Matters:</strong> Yard staff see machine locations, sales engineers create quotes, but profit margins remain restricted to directors.</li>
+            <li><strong>Audit Trails:</strong> Every quotation discount and inventory adjustment is logged with staff name and timestamp.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>STATEMENT OF WORK (SOW) &bull; DALAL MACHINE TOOLS &amp; OMPI INDIA</span>
+      <span class="counter">SLIDE 03 / 22</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: 24 PAGES PART 1 -->
+  <div class="slide" id="slide-4">
+    <div class="slide-header">
+      <div class="header-left">
+        <div class="category-tag">04 | Website Structure</div>
+        <h2>Public Showroom &amp; Inventory Pages (Routes 01 to 08)</h2>
+        <p>Detailed breakdown of the first 8 web pages, their structure, and their commercial purpose</p>
+      </div>
+      <div class="badge">24 Public Routes</div>
+    </div>
+    <div class="slide-body">
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th style="width: 15%;">Page Name</th>
+            <th style="width: 18%;">Website Address</th>
+            <th style="width: 25%;">Key Customer Sections</th>
+            <th style="width: 42%;">Business Purpose &amp; Commercial Value ('Kaam')</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="strong-cell">01. Homepage</td>
+            <td class="code-cell">/</td>
+            <td>Hero Banner, Category Grid, Featured Presses</td>
+            <td>Primary brand showcase; displays high-ticket forging &amp; stamping presses to establish immediate credibility.</td>
+          </tr>
+          <tr>
+            <td class="strong-cell">02. About Us</td>
+            <td class="code-cell">/about</td>
+            <td>Company Profile, Chakan Yard & Leadership</td>
+            <td>Builds buyer trust by detailing Chakan stockyard infrastructure, crane handling facilities, and management background.</td>
+          </tr>
+          <tr>
+            <td class="strong-cell">03. Machine Catalog</td>
+            <td class="code-cell">/inventory</td>
+            <td>Filter by Tonnage, Make, Category</td>
+            <td>Interactive inventory portal allowing factory buyers to instantly find presses matching their exact plant requirements.</td>
+          </tr>
+          <tr>
+            <td class="strong-cell">04. Machine Details</td>
+            <td class="code-cell">/inventory/[slug]</td>
+            <td>High-Res Gallery, Full Technical Specs, Video</td>
+            <td>Detailed showcase giving stroke rate, die height, bed size, motor HP, inspection status, and WhatsApp RFQ button.</td>
+          </tr>
+          <tr>
+            <td class="strong-cell">05. Stamping Presses</td>
+            <td class="code-cell">/category/mechanical</td>
+            <td>Straight-side, C-frame, link motion presses</td>
+            <td>Dedicated category for automotive component stampers seeking high-precision sheet metal stamping lines.</td>
+          </tr>
+          <tr>
+            <td class="strong-cell">06. Forging Presses</td>
+            <td class="code-cell">/category/forging</td>
+            <td>Hot forging, cold sizing, knuckle-joint presses</td>
+            <td>Showcases heavy capital forging presses targeted at auto ancillaries, defense, and heavy engineering suppliers.</td>
+          </tr>
+          <tr>
+            <td class="strong-cell">07. Hydraulic Presses</td>
+            <td class="code-cell">/category/hydraulic</td>
+            <td>Deep drawing, hydroforming, spotting presses</td>
+            <td>Lists hydraulic machinery for composite molding, sheet hydroforming, and precision tool tryout operations.</td>
+          </tr>
+          <tr>
+            <td class="strong-cell">08. Horizontal Borers</td>
+            <td class="code-cell">/category/boring</td>
+            <td>Floor borers, table borers, milling centers</td>
+            <td>Caters to heavy fabrication plants machining large engine blocks, earthmoving equipment, and gear casings.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="slide-footer">
+      <span>STATEMENT OF WORK (SOW) &bull; DALAL MACHINE TOOLS &amp; OMPI INDIA</span>
+      <span class="counter">SLIDE 04 / 22</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: 24 PAGES PART 2 -->
+  <div class="slide" id="slide-5">
+    <div class="slide-header">
+      <div class="header-left">
+        <div class="category-tag">04 | Website Structure</div>
+        <h2>Technical Categories &amp; Commercial Tools (Routes 09 to 16)</h2>
+        <p>Manufacturer brand showcases, machine procurement forms, and Chakan yard facilities</p>
+      </div>
+      <div class="badge">24 Public Routes</div>
+    </div>
+    <div class="slide-body">
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th style="width: 15%;">Page Name</th>
+            <th style="width: 18%;">Website Address</th>
+            <th style="width: 25%;">Key Customer Sections</th>
+            <th style="width: 42%;">Business Purpose &amp; Commercial Value ('Kaam')</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="strong-cell">09. Brand: AIDA</td>
+            <td class="code-cell">/brand/aida</td>
+            <td>Japanese AIDA Stamping Presses, Specs</td>
+            <td>Showcases premium Japanese AIDA presses known for tight tolerances in high-precision automotive stamping.</td>
+          </tr>
+          <tr>
+            <td class="strong-cell">10. Brand: Schuler</td>
+            <td class="code-cell">/brand/schuler</td>
+            <td>German Schuler Transfer &amp; Forging Lines</td>
+            <td>Features tier-1 German mechanical and hydraulic press lines for large automotive body panel manufacturers.</td>
+          </tr>
+          <tr>
+            <td class="strong-cell">11. Brand: Seyi</td>
+            <td class="code-cell">/brand/seyi</td>
+            <td>Taiwanese Seyi Precision Presses, Feeders</td>
+            <td>Highlights versatile mid-tonnage stamping presses popular among electrical stamping and auto component makers.</td>
+          </tr>
+          <tr>
+            <td class="strong-cell">12. Brand: Komatsu</td>
+            <td class="code-cell">/brand/komatsu</td>
+            <td>Japanese Komatsu Mechanical Presses</td>
+            <td>Presents ultra-durable Komatsu production presses renowned for heavy stamping and forging longevity.</td>
+          </tr>
+          <tr>
+            <td class="strong-cell">13. Sell Your Machine</td>
+            <td class="code-cell">/sell-machine</td>
+            <td>Upload Form, Tonnage, Photos, Yard Location</td>
+            <td>Lead generation portal for plant closures and factory upgrades wanting to sell used machinery directly to Dalal.</td>
+          </tr>
+          <tr>
+            <td class="strong-cell">14. Yard Inspection</td>
+            <td class="code-cell">/yard-facility</td>
+            <td>Stockyard Facility & Testing Bays</td>
+            <td>Proves physical stockyard capability: Heavy crane facilities, power supply, and live machine demonstration bays.</td>
+          </tr>
+          <tr>
+            <td class="strong-cell">15. Retrofit Services</td>
+            <td class="code-cell">/services/retrofits</td>
+            <td>PLC Upgrades, Lubrication, Safety Overhauls</td>
+            <td>Explains machine modernization services: CE safety compliance, pneumatic retrofits, and electrical upgrades.</td>
+          </tr>
+          <tr>
+            <td class="strong-cell">16. Spare Parts</td>
+            <td class="code-cell">/services/spares</td>
+            <td>Bolster Plates, Bushings, Clutches, Lubricants</td>
+            <td>Assists press owners in procuring hard-to-find replacement components, tie rods, and bolster assemblies.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="slide-footer">
+      <span>STATEMENT OF WORK (SOW) &bull; DALAL MACHINE TOOLS &amp; OMPI INDIA</span>
+      <span class="counter">SLIDE 05 / 22</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: 24 PAGES PART 3 -->
+  <div class="slide" id="slide-6">
+    <div class="slide-header">
+      <div class="header-left">
+        <div class="category-tag">04 | Website Structure</div>
+        <h2>Inquiry Capture, Trust &amp; Compliance (Routes 17 to 24)</h2>
+        <p>Lead capture forms, yard location, legal terms, and machine data feeds for AI search engines</p>
+      </div>
+      <div class="badge">24 Public Routes</div>
+    </div>
+    <div class="slide-body">
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th style="width: 15%;">Page Name</th>
+            <th style="width: 18%;">Website Address</th>
+            <th style="width: 25%;">Key Customer Sections</th>
+            <th style="width: 42%;">Business Purpose &amp; Commercial Value ('Kaam')</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="strong-cell">17. Machinery Search</td>
+            <td class="code-cell">/search</td>
+            <td>Keyword Search, Tonnage Range, Year Filter</td>
+            <td>Global search enabling buyers to find specific machinery by brand name, tonnage, or model number in under a second.</td>
+          </tr>
+          <tr>
+            <td class="strong-cell">18. Request for Quote</td>
+            <td class="code-cell">/rfq</td>
+            <td>Machine Selection, Plant Name, WhatsApp Input</td>
+            <td>Captures high-intent buyer inquiries and immediately alerts Dalal sales directors via WhatsApp and email.</td>
+          </tr>
+          <tr>
+            <td class="strong-cell">19. Contact &amp; Yard</td>
+            <td class="code-cell">/contact</td>
+            <td>Google Map Pin, Phone, Email, Visiting Hours</td>
+            <td>Facilitates factory visits to the Chakan stockyard with clear directions, driving routes, and direct contact numbers.</td>
+          </tr>
+          <tr>
+            <td class="strong-cell">20. Machinery Blog</td>
+            <td class="code-cell">/blog</td>
+            <td>Industry Articles, Maintenance Guides, Trends</td>
+            <td>Publishes press maintenance tips and industry articles to drive consistent organic Google search traffic.</td>
+          </tr>
+          <tr>
+            <td class="strong-cell">21. Article Reader</td>
+            <td class="code-cell">/blog/[slug]</td>
+            <td>Deep Content, Inspection Checklists, Spec Sheets</td>
+            <td>Provides in-depth technical guides that establish Dalal Machine Tools as India's premier machinery authority.</td>
+          </tr>
+          <tr>
+            <td class="strong-cell">22. Privacy Policy</td>
+            <td class="code-cell">/privacy-policy</td>
+            <td>Data Protection, Lead Privacy, DPDP 2023</td>
+            <td>Fulfills statutory Indian legal requirements (Digital Personal Data Protection Act 2023) for collecting lead data.</td>
+          </tr>
+          <tr>
+            <td class="strong-cell">23. Terms of Service</td>
+            <td class="code-cell">/terms</td>
+            <td>Machinery Sale Terms, Inspection Governance</td>
+            <td>Defines clear commercial terms: 'As-Is Where-Is' inspection terms, quotation validity, and yard access rules.</td>
+          </tr>
+          <tr>
+            <td class="strong-cell">24. AI Search Feed</td>
+            <td class="code-cell">/llms.txt</td>
+            <td>Structured Machine Data for AI Search Engines</td>
+            <td>Feeds formatted machine data to AI search engines (ChatGPT, Perplexity, Gemini) so they recommend Dalal.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="slide-footer">
+      <span>STATEMENT OF WORK (SOW) &bull; DALAL MACHINE TOOLS &amp; OMPI INDIA</span>
+      <span class="counter">SLIDE 06 / 22</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 7: SEARCH VISIBILITY -->
+  <div class="slide" id="slide-7">
+    <div class="slide-header">
+      <div class="header-left">
+        <div class="category-tag">05 | Search Visibility</div>
+        <h2>How Customers Find Dalal Machinery Online</h2>
+        <p>Plain-English explanation of how your website will attract factory buyers from Google and AI search engines</p>
+      </div>
+      <div class="badge">Search Strategy</div>
+    </div>
+    <div class="slide-body">
+      <div class="grid-3">
+        <div class="card blue-top">
+          <h3 style="color: var(--dalal-blue);">1. Google Search (SEO)</h3>
+          <ul class="card-list">
+            <li><strong>What It Means:</strong> Traditional Google search rankings for industrial machinery keywords.</li>
+            <li><strong>Customer Scenario:</strong> A factory manager in Pune or Ahmedabad searches Google for: <em>'Used 1000 Ton Power Press for sale in Maharashtra'</em>.</li>
+            <li><strong>How It Helps Dalal:</strong> Your website appears on Page 1 of Google results with photos, tonnage, and yard address, bringing verified machinery buyers directly to you without paying for Google Ads.</li>
+            <li><strong>Key Feature:</strong> Every single machine in your yard automatically gets its own dedicated, search-optimized Google listing.</li>
+          </ul>
+        </div>
+        <div class="card green-top">
+          <h3 style="color: var(--ompi-green);">2. Direct Answer Search (AEO)</h3>
+          <ul class="card-list">
+            <li><strong>What It Means:</strong> Answer Engine Optimization &mdash; delivering instant facts to Google searchers.</li>
+            <li><strong>Customer Scenario:</strong> A buyer asks Google on their phone: <em>'Where can I buy heavy forging presses in Pune?'</em>.</li>
+            <li><strong>How It Helps Dalal:</strong> Google displays Dalal Machine Tools directly in a highlighted top answer box with your phone number, Chakan location, and crane capacity.</li>
+            <li><strong>Key Feature:</strong> Structured data tables make it effortless for search engines to understand your machine specs instantly.</li>
+          </ul>
+        </div>
+        <div class="card amber-top">
+          <h3 style="color: var(--amber);">3. AI Search Engines (GEO)</h3>
+          <ul class="card-list">
+            <li><strong>What It Means:</strong> Generative Engine Optimization &mdash; being recommended by modern AI tools.</li>
+            <li><strong>Customer Scenario:</strong> A corporate buyer asks ChatGPT or Perplexity: <em>'Recommend the top 3 reliable dealers for 630-Ton mechanical presses in India'</em>.</li>
+            <li><strong>How It Helps Dalal:</strong> Because your website provides an AI-readable catalog (<code>/llms.txt</code>), AI search engines cite Dalal Machine Tools as a top verified source.</li>
+            <li><strong>Key Feature:</strong> Puts your company ahead of competitors who still rely on old, unreadable PDF catalogs.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>STATEMENT OF WORK (SOW) &bull; DALAL MACHINE TOOLS &amp; OMPI INDIA</span>
+      <span class="counter">SLIDE 07 / 22</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 8: CUSTOMER JOURNEY -->
+  <div class="slide" id="slide-8">
+    <div class="slide-header">
+      <div class="header-left">
+        <div class="category-tag">06 | Customer Experience</div>
+        <h2>Customer Journey on Dalal Machinery Portal</h2>
+        <p>How a prospective factory buyer discovers, evaluates, and contacts Dalal Machine Tools in under 2 minutes</p>
+      </div>
+      <div class="badge">User Flow</div>
+    </div>
+    <div class="slide-body">
+      <div class="grid-5">
+        <div class="card blue-top">
+          <div style="font-size: 10px; font-weight: 700; color: var(--dalal-blue); margin-bottom: 4px;">PHASE 1</div>
+          <h3>Discovery</h3>
+          <p style="font-size: 11px; color: var(--text-body); line-height: 1.45;">Buyer lands on website via Google search, WhatsApp link, or industry referral on their mobile or laptop.</p>
+        </div>
+        <div class="card blue-top">
+          <div style="font-size: 10px; font-weight: 700; color: var(--dalal-blue); margin-bottom: 4px;">PHASE 2</div>
+          <h3>Smart Filter</h3>
+          <p style="font-size: 11px; color: var(--text-body); line-height: 1.45;">Buyer filters machines by Tonnage (e.g. 800 Ton), Type (Mechanical Stamping), and Origin (Japan/Germany).</p>
+        </div>
+        <div class="card green-top">
+          <div style="font-size: 10px; font-weight: 700; color: var(--ompi-green); margin-bottom: 4px;">PHASE 3</div>
+          <h3>Evaluation</h3>
+          <p style="font-size: 11px; color: var(--text-body); line-height: 1.45;">Buyer inspects high-resolution yard photos, stroke specs, die dimensions, and machine test-run video.</p>
+        </div>
+        <div class="card amber-top">
+          <div style="font-size: 10px; font-weight: 700; color: var(--amber); margin-bottom: 4px;">PHASE 4</div>
+          <h3>Spec Download</h3>
+          <p style="font-size: 11px; color: var(--text-body); line-height: 1.45;">Buyer downloads branded PDF technical spec sheet with one click to share with their managing director.</p>
+        </div>
+        <div class="card" style="border-top-color: var(--navy-primary);">
+          <div style="font-size: 10px; font-weight: 700; color: var(--navy-primary); margin-bottom: 4px;">PHASE 5</div>
+          <h3>Direct Lead</h3>
+          <p style="font-size: 11px; color: var(--text-body); line-height: 1.45;">Buyer clicks 'Inquire on WhatsApp' or submits RFQ form; Dalal sales team receives lead instantly with full machine details.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>STATEMENT OF WORK (SOW) &bull; DALAL MACHINE TOOLS &amp; OMPI INDIA</span>
+      <span class="counter">SLIDE 08 / 22</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 9: YARD ADMIN WORKFLOW -->
+  <div class="slide" id="slide-9">
+    <div class="slide-header">
+      <div class="header-left">
+        <div class="category-tag">07 | Inventory Operations</div>
+        <h2>How Dalal Staff Manages Stock at Chakan Yard</h2>
+        <p>Simple 2-minute inventory update workflow designed for yard managers without technical computer training</p>
+      </div>
+      <div class="badge">Staff Workflow</div>
+    </div>
+    <div class="slide-body">
+      <div class="grid-2">
+        <div class="card blue-top">
+          <h3 style="color: var(--dalal-blue);">Adding &amp; Updating Machinery in 2 Minutes</h3>
+          <ul class="card-list">
+            <li><strong>Step 1: Capture Photos:</strong> Yard staff photograph incoming machinery at Chakan yard using their smartphone.</li>
+            <li><strong>Step 2: Simple Form Entry:</strong> Open secure admin portal on phone or office laptop. Enter machine tonnage, manufacturer (AIDA, Schuler), year, and key specifications.</li>
+            <li><strong>Step 3: Instant Live Update:</strong> Click 'Publish'. The machine immediately appears on the website with full technical specifications and inquiry buttons.</li>
+            <li><strong>Step 4: Status Toggle:</strong> When a client pays an advance deposit, change status from 'Available' to 'Reserved' or 'Sold' with a single click.</li>
+            <li><strong>Practical Benefit:</strong> Never show sold machines by mistake. Always present fresh, accurate yard stock to serious industrial buyers.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 style="color: var(--navy-primary);">Lead Management &amp; Customer Inquiries</h3>
+          <ul class="card-list">
+            <li><strong>Instant Lead Notification:</strong> Whenever a customer submits an inquiry or downloads a spec sheet, Dalal directors receive an instant WhatsApp alert.</li>
+            <li><strong>Centralized Inquiries Inbox:</strong> All buyer requests are organized in one clean screen showing customer name, company, phone number, and machine of interest.</li>
+            <li><strong>Zero Lead Loss:</strong> Staff can mark leads as 'Contacted', 'Quotation Sent', or 'Yard Visit Scheduled', ensuring high-value machine deals are followed up.</li>
+            <li><strong>Customer Database:</strong> Builds an organized internal registry of Indian stamping and forging press buyers for future machine dispatches.</li>
+            <li><strong>Commercial Result:</strong> Faster response times convert serious inquiries into closed sales before competitors can respond.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>STATEMENT OF WORK (SOW) &bull; DALAL MACHINE TOOLS &amp; OMPI INDIA</span>
+      <span class="counter">SLIDE 09 / 22</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 10: OMPI ERP OVERVIEW -->
+  <div class="slide" id="slide-10">
+    <div class="slide-header">
+      <div class="header-left">
+        <div class="category-tag">08 | ERP Department Map</div>
+        <h2>OMPI India Centralized ERP: 33 Modules</h2>
+        <p>Organized into 5 streamlined business departments to run daily sales, Italian imports, and warehouse operations</p>
+      </div>
+      <div class="badge">ERP Scope</div>
+    </div>
+    <div class="slide-body" style="gap: 10px;">
+      <div class="card blue-top" style="padding: 10px 16px;">
+        <h3 style="font-size: 13px; color: var(--dalal-blue); margin-bottom: 2px;">1. Sales &amp; Inquiries (Modules 01-07)</h3>
+        <p style="font-size: 11px; color: var(--text-body);">Customer records, inquiry logging, quotation generation, revisions, discount controls, and win-loss tracking.</p>
+      </div>
+      <div class="card green-top" style="padding: 10px 16px;">
+        <h3 style="font-size: 13px; color: var(--ompi-green); margin-bottom: 2px;">2. Engineering Sizing (Modules 08-13)</h3>
+        <p style="font-size: 11px; color: var(--text-body);">Clutch sizing calculator, torque ratings, press flywheel formulas, CAD drawing links, and technical datasheets.</p>
+      </div>
+      <div class="card amber-top" style="padding: 10px 16px;">
+        <h3 style="font-size: 13px; color: var(--amber); margin-bottom: 2px;">3. Imports &amp; Customs (Modules 14-19)</h3>
+        <p style="font-size: 11px; color: var(--text-body);">Shipments from European principal, container tracking, port customs duty, port clearance, and true landed costs.</p>
+      </div>
+      <div class="card" style="padding: 10px 16px; border-top-color: var(--navy-primary);">
+        <h3 style="font-size: 13px; color: var(--navy-primary); margin-bottom: 2px;">4. Bhosari Depot (Modules 20-26)</h3>
+        <p style="font-size: 11px; color: var(--text-body);">Spare parts stock, friction discs, safety valves, rotary unions, bin locations, minimum level alerts, and delivery challans.</p>
+      </div>
+      <div class="card" style="padding: 10px 16px; border-top-color: #475569;">
+        <h3 style="font-size: 13px; color: #475569; margin-bottom: 2px;">5. Billing &amp; GST (Modules 27-33)</h3>
+        <p style="font-size: 11px; color: var(--text-body);">18% GST invoicing, milestone receipts (30/50/20), payment aging ledger, sales reports, and export compliance.</p>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>STATEMENT OF WORK (SOW) &bull; DALAL MACHINE TOOLS &amp; OMPI INDIA</span>
+      <span class="counter">SLIDE 10 / 22</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 11: SALES MODULES 01-07 -->
+  <div class="slide" id="slide-11">
+    <div class="slide-header">
+      <div class="header-left">
+        <div class="category-tag">09 | ERP Sales Workflow</div>
+        <h2>Sales Operations &amp; Instant Quotation Generation</h2>
+        <p>How OMPI sales engineers create professional customer quotations in 60 seconds instead of hours on Excel</p>
+      </div>
+      <div class="badge">Modules 01-07</div>
+    </div>
+    <div class="slide-body">
+      <div class="grid-2">
+        <div class="card blue-top">
+          <h3 style="color: var(--dalal-blue);">Sales Modules 01 to 04</h3>
+          <ul class="card-list">
+            <li><strong>Mod 01: Customer Registry:</strong> Centralized address book for press manufacturers, forging units, and stamping plants across India.</li>
+            <li><strong>Mod 02: Inquiry &amp; RFQ Inbox:</strong> Logs every incoming customer requirement with press details, target delivery date, and assigned sales engineer.</li>
+            <li><strong>Mod 03: 60-Second Quote Builder:</strong> Select clutch model, spare discs, or valves from the database; system automatically compiles an official OMPI India GST quotation.</li>
+            <li><strong>Mod 04: Revision Tracker:</strong> When a customer requests changes, create Revision 1, Revision 2 with clear audit records. Old quotes are never lost or overwritten.</li>
+          </ul>
+        </div>
+        <div class="card green-top">
+          <h3 style="color: var(--ompi-green);">Sales Modules 05 to 07</h3>
+          <ul class="card-list">
+            <li><strong>Mod 05: Discount Approval Guard:</strong> Sales engineers can offer standard pricing. Special discounts above 5% automatically prompt for Director authorization.</li>
+            <li><strong>Mod 06: PDF Quotation Generator:</strong> Generates branded PDF quotations with official OMPI letterhead, technical specs, payment terms, and warranty terms.</li>
+            <li><strong>Mod 07: Win-Loss Analytics:</strong> Tracks quotation status (Won, Under Negotiation, Lost) to identify which press manufacturers buy consistently and why deals are lost.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>STATEMENT OF WORK (SOW) &bull; DALAL MACHINE TOOLS &amp; OMPI INDIA</span>
+      <span class="counter">SLIDE 11 / 22</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 12: ENGINEERING SIZING MODULES 08-13 -->
+  <div class="slide" id="slide-12">
+    <div class="slide-header">
+      <div class="header-left">
+        <div class="category-tag">10 | Engineering Sizing</div>
+        <h2>Automated Italian Clutch Selection Engine</h2>
+        <p>Eliminating engineering sizing errors by digitizing Italian manufacturer formulas into automated software</p>
+      </div>
+      <div class="badge">Modules 08-13</div>
+    </div>
+    <div class="slide-body">
+      <div class="grid-2">
+        <div class="card green-top">
+          <h3 style="color: var(--ompi-green);">Engineering Sizing Modules 08 to 10</h3>
+          <ul class="card-list">
+            <li><strong>Mod 08: Clutch Sizing Calculator:</strong> Engineer enters press tonnage (e.g. 630T), strokes per minute (SPM), and flywheel inertia. The system calculates required torque in Nm instantly.</li>
+            <li><strong>Mod 09: Model Matching Engine:</strong> Automatically selects the perfect OMPI clutch-brake combination unit from the master catalog, matching exact mechanical press safety factors.</li>
+            <li><strong>Mod 10: Thermal Dissipation Check:</strong> Calculates heat generation during continuous press engagement to ensure the clutch will not overheat during high-speed stamping shifts.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 style="color: var(--navy-primary);">Engineering Modules 11 to 13</h3>
+          <ul class="card-list">
+            <li><strong>Mod 11: Bill of Materials (BOM):</strong> Automatically lists all required sub-components: friction discs, return springs, piston seals, and solenoid valves for the selected unit.</li>
+            <li><strong>Mod 12: Technical Drawing Links:</strong> Instant access to certified Italian dimension drawings (PDF &amp; DXF) to send directly to customer tool designers.</li>
+            <li><strong>Mod 13: Retrofit Configuration Guide:</strong> Step-by-step shaft mounting and air-line pressure guidelines for replacing outdated clutches on older Indian and European presses.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>STATEMENT OF WORK (SOW) &bull; DALAL MACHINE TOOLS &amp; OMPI INDIA</span>
+      <span class="counter">SLIDE 12 / 22</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 13: IMPORT OPERATIONS MODULES 14-19 -->
+  <div class="slide" id="slide-13">
+    <div class="slide-header">
+      <div class="header-left">
+        <div class="category-tag">11 | Import Operations</div>
+        <h2>Tracking Italian Shipments &amp; Customs Clearance</h2>
+        <p>Automating port customs clearance, import tariffs, shipment documentation, and true landed cost calculations</p>
+      </div>
+      <div class="badge">Modules 14-19</div>
+    </div>
+    <div class="slide-body">
+      <div class="grid-2">
+        <div class="card amber-top">
+          <h3 style="color: var(--amber);">Import Tracking Modules 14 to 16</h3>
+          <ul class="card-list">
+            <li><strong>Mod 14: Italian PO Management:</strong> Tracks purchase orders sent to OMPI S.r.l. factory in European principal factory with production readiness dates and commercial invoices.</li>
+            <li><strong>Mod 15: Shipment &amp; Container Tracker:</strong> Monitors air shipments and ocean containers from international departure port to port customs (JNPT) with Bill of Lading (BL) and courier tracking.</li>
+            <li><strong>Mod 16: Customs Duty Calculator:</strong> Applies exact Indian customs tariffs (Basic Customs Duty + Social Welfare Surcharge + IGST) based on standard HS codes for clutches.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 style="color: var(--navy-primary);">Landed Cost &amp; Transfer Modules 17 to 19</h3>
+          <ul class="card-list">
+            <li><strong>Mod 17: True Landed Cost Engine:</strong> Combines Euro invoice amount, foreign exchange rate, freight, insurance, port handling, and customs duty into an exact per-unit INR cost.</li>
+            <li><strong>Mod 18: High Seas Sale Documentation:</strong> Generates compliant documentation when a complete clutch unit is transferred on High Seas directly to an Indian press builder before customs clearance.</li>
+            <li><strong>Mod 19: Currency Fluctuation Protection:</strong> Alerts sales team when Euro-to-INR currency exchange rates move significantly, protecting company profit margins on open orders.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>STATEMENT OF WORK (SOW) &bull; DALAL MACHINE TOOLS &amp; OMPI INDIA</span>
+      <span class="counter">SLIDE 13 / 22</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 14: WAREHOUSE & STOCK MODULES 20-26 -->
+  <div class="slide" id="slide-14">
+    <div class="slide-header">
+      <div class="header-left">
+        <div class="category-tag">12 | Warehouse Control</div>
+        <h2>Bhosari Depot Inventory &amp; Critical Spares</h2>
+        <p>Real-time stock visibility for friction linings, seals, valves, and rotating unions with safety stock alerts</p>
+      </div>
+      <div class="badge">Modules 20-26</div>
+    </div>
+    <div class="slide-body">
+      <div class="grid-2">
+        <div class="card green-top">
+          <h3 style="color: var(--ompi-green);">Depot Operations Modules 20 to 23</h3>
+          <ul class="card-list">
+            <li><strong>Mod 20: Central Spares Inventory:</strong> Real-time ledger of all friction discs, seal kits, dual solenoid valves, and rotary couplings in the Bhosari warehouse.</li>
+            <li><strong>Mod 21: Bin &amp; Rack Location Tracking:</strong> Every spare part is mapped to its exact shelf and rack location in Bhosari for fast picking and dispatch.</li>
+            <li><strong>Mod 22: Low Stock Warning System:</strong> Automatically alerts stores staff when high-turnover friction plates or valves drop below safe minimum levels.</li>
+            <li><strong>Mod 23: Goods Receipt Note (GRN):</strong> Inspection workflow for logging incoming parts arriving from Italy or local machining suppliers.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 style="color: var(--navy-primary);">Stock Movement Modules 24 to 26</h3>
+          <ul class="card-list">
+            <li><strong>Mod 24: Outward Delivery Challans:</strong> Generates official delivery challans with serial numbers for spares dispatched to customer factories across India.</li>
+            <li><strong>Mod 25: Assembly &amp; Fitting Kit Tracking:</strong> Groups required friction discs, seals, and pins into ready-to-dispatch overhaul kits for on-site press maintenance.</li>
+            <li><strong>Mod 26: Annual Stock Audit &amp; Valuation:</strong> Generates instant physical inventory valuation reports for company auditors and year-end balance sheets.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>STATEMENT OF WORK (SOW) &bull; DALAL MACHINE TOOLS &amp; OMPI INDIA</span>
+      <span class="counter">SLIDE 14 / 22</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 15: BILLING & GST MODULES 27-33 -->
+  <div class="slide" id="slide-15">
+    <div class="slide-header">
+      <div class="header-left">
+        <div class="category-tag">13 | Commercial Billing</div>
+        <h2>GST Invoicing, Milestone Payments &amp; Ledgers</h2>
+        <p>Commercial management tailored to industrial machinery payment terms, GST compliance, and cash flow tracking</p>
+      </div>
+      <div class="badge">Modules 27-33</div>
+    </div>
+    <div class="slide-body">
+      <div class="grid-2">
+        <div class="card blue-top">
+          <h3 style="color: var(--dalal-blue);">Billing Modules 27 to 30</h3>
+          <ul class="card-list">
+            <li><strong>Mod 27: 18% GST Tax Invoicing:</strong> Generates compliant GST tax invoices with HSN codes, CGST/SGST/IGST breakdown, and e-invoice compatibility.</li>
+            <li><strong>Mod 28: Milestone Payment Tracking:</strong> Tracks multi-stage customer payments common in machinery sales: 30% advance with order, 50% before dispatch, and 20% on commissioning.</li>
+            <li><strong>Mod 29: Customer Outstanding Ledger:</strong> Shows aging of unpaid bills (30 days, 60 days, 90+ days) so staff can follow up pending payments professionally.</li>
+            <li><strong>Mod 30: Multi-Depot Billing Support:</strong> Facilitates billing from Bhosari warehouse or direct consignment transfers to customer plants across different states.</li>
+          </ul>
+        </div>
+        <div class="card green-top">
+          <h3 style="color: var(--ompi-green);">Financial &amp; Reporting Modules 31 to 33</h3>
+          <ul class="card-list">
+            <li><strong>Mod 31: Sales Commission Calculator:</strong> Tracks individual sales engineer performance and calculates accurate incentives on completed deals.</li>
+            <li><strong>Mod 32: Margin &amp; Profitability Reports:</strong> Provides directors with exact gross margin analysis per clutch unit sold, comparing purchase cost against selling price.</li>
+            <li><strong>Mod 33: Executive Dashboard:</strong> High-level visual summary for Managing Partners showing monthly sales volume, pending inquiries, inventory value, and cash flow.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>STATEMENT OF WORK (SOW) &bull; DALAL MACHINE TOOLS &amp; OMPI INDIA</span>
+      <span class="counter">SLIDE 15 / 22</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 16: ROLES & PERMISSIONS -->
+  <div class="slide" id="slide-16">
+    <div class="slide-header">
+      <div class="header-left">
+        <div class="category-tag">14 | Security &amp; Roles</div>
+        <h2>Staff Permissions &amp; Commercial Confidentiality</h2>
+        <p>How role-based access keeps your purchase prices, supplier discounts, and profit margins completely secure</p>
+      </div>
+      <div class="badge">Access Control</div>
+    </div>
+    <div class="slide-body">
+      <div class="grid-4">
+        <div class="card">
+          <h3 style="color: var(--navy-primary);">Managing Directors &amp; Partners</h3>
+          <ul class="card-list">
+            <li><strong>Role Scope:</strong> Can view everything: supplier purchase costs, profit margins, company financial reports, user permissions, and master settings.</li>
+            <li><strong>Data Protection:</strong> Unrestricted executive authority across both systems.</li>
+          </ul>
+        </div>
+        <div class="card blue-top">
+          <h3 style="color: var(--dalal-blue);">Sales Engineers</h3>
+          <ul class="card-list">
+            <li><strong>Role Scope:</strong> Can create quotations, look up stock availability, and log customer inquiries. Cannot see supplier purchase costs or alter protected profit margins.</li>
+            <li><strong>Data Protection:</strong> Restricted to authorized customer screens only.</li>
+          </ul>
+        </div>
+        <div class="card green-top">
+          <h3 style="color: var(--ompi-green);">Engineering &amp; Technical Staff</h3>
+          <ul class="card-list">
+            <li><strong>Role Scope:</strong> Can use clutch sizing calculations, access technical drawings, and generate Bills of Materials. Cannot view financial billing data.</li>
+            <li><strong>Data Protection:</strong> Technical access only; commercial tabs are hidden.</li>
+          </ul>
+        </div>
+        <div class="card amber-top">
+          <h3 style="color: var(--amber);">Bhosari Warehouse In-Charge</h3>
+          <ul class="card-list">
+            <li><strong>Role Scope:</strong> Can update physical stock in/out, create delivery challans, and view rack locations. Cannot view customer pricing or financial balances.</li>
+            <li><strong>Data Protection:</strong> Inventory management restricted; zero financial visibility.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>STATEMENT OF WORK (SOW) &bull; DALAL MACHINE TOOLS &amp; OMPI INDIA</span>
+      <span class="counter">SLIDE 16 / 22</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 17: ACCEPTANCE CRITERIA -->
+  <div class="slide" id="slide-17">
+    <div class="slide-header">
+      <div class="header-left">
+        <div class="category-tag">15 | Acceptance Criteria</div>
+        <h2>47 Mandatory Quality &amp; Integrity Checks</h2>
+        <p>Automated verification standards that both systems must pass prior to go-live sign-off</p>
+      </div>
+      <div class="badge">Quality Assurance</div>
+    </div>
+    <div class="slide-body">
+      <div class="grid-3">
+        <div class="card green-top">
+          <h3 style="color: var(--ompi-green);">1. Calculation Integrity</h3>
+          <ul class="card-list">
+            <li><strong>Clutch Torque Accuracy:</strong> Torque formulas verified against official OMPI Italy engineering tables across 50 sample presses.</li>
+            <li><strong>Landed Cost Formulas:</strong> Customs duty, freight, and foreign currency calculations verified against actual historical import bills of entry.</li>
+            <li><strong>GST Math Validation:</strong> Ensures zero rounding errors on CGST, SGST, IGST calculations and invoice totals across all quotation revisions.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 style="color: var(--navy-primary);">2. Data Security &amp; Access</h3>
+          <ul class="card-list">
+            <li><strong>Zero Margin Leakage:</strong> Strict verification that sales engineers and warehouse staff can never access director-level cost margins.</li>
+            <li><strong>Database Redundancy:</strong> Automated verification that simulated power cuts or network interruptions do not corrupt open orders.</li>
+            <li><strong>Secure Password Hashing:</strong> All user credentials stored with bank-grade encryption; zero plaintext passwords anywhere in the system.</li>
+          </ul>
+        </div>
+        <div class="card blue-top">
+          <h3 style="color: var(--dalal-blue);">3. Mobile &amp; Real-World Speed</h3>
+          <ul class="card-list">
+            <li><strong>1.5-Second Mobile Load:</strong> Website performance verified on 4G mobile connections to ensure machinery buyers experience zero lag.</li>
+            <li><strong>PDF Generation Speed:</strong> Quotation PDFs and machine spec sheets must generate in under 2 seconds without hanging the screen.</li>
+            <li><strong>Cross-Device Usability:</strong> Tested seamlessly across Android smartphones, iPhones, iPads, and office desktop monitors.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>STATEMENT OF WORK (SOW) &bull; DALAL MACHINE TOOLS &amp; OMPI INDIA</span>
+      <span class="counter">SLIDE 17 / 22</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 18: IMPLEMENTATION ROADMAP -->
+  <div class="slide" id="slide-18">
+    <div class="slide-header">
+      <div class="header-left">
+        <div class="category-tag">16 | Implementation Plan</div>
+        <h2>Proposed 8-Month Phased Rollout Schedule</h2>
+        <p>Structured step-by-step engineering roadmap upon contract sign-off ensuring zero disruption to daily work</p>
+      </div>
+      <div class="badge">Project Timeline</div>
+    </div>
+    <div class="slide-body" style="gap: 12px;">
+      <div class="card blue-top" style="padding: 12px 18px;">
+        <h3 style="font-size: 13px; color: var(--dalal-blue); margin-bottom: 3px;">Phase 1: Architecture &amp; Foundations (Months 1-2)</h3>
+        <p style="font-size: 11.5px; color: var(--text-body);">Gather exact machine catalog parameters, finalize warehouse bin structures, design secure database schemas, and create high-fidelity screen mockups for Director review.</p>
+      </div>
+      <div class="card blue-top" style="padding: 12px 18px;">
+        <h3 style="font-size: 13px; color: var(--dalal-blue); margin-bottom: 3px;">Phase 2: Dalal Website &amp; OMPI Sizing Engine (Months 3-4)</h3>
+        <p style="font-size: 11.5px; color: var(--text-body);">Build and launch the 24-page Dalal Machinery Showroom with Google SEO optimization. Concurrently engineer the OMPI clutch sizing calculator and instant quote builder.</p>
+      </div>
+      <div class="card green-top" style="padding: 12px 18px;">
+        <h3 style="font-size: 13px; color: var(--ompi-green); margin-bottom: 3px;">Phase 3: Import Operations &amp; Warehouse Depot (Months 5-6)</h3>
+        <p style="font-size: 11.5px; color: var(--text-body);">Develop international shipment tracking, customs duty calculators, landed cost engine, and Bhosari warehouse inventory management with safety stock alerts.</p>
+      </div>
+      <div class="card green-top" style="padding: 12px 18px;">
+        <h3 style="font-size: 13px; color: var(--ompi-green); margin-bottom: 3px;">Phase 4: Billing, GST, Testing &amp; Handover (Months 7-8)</h3>
+        <p style="font-size: 11.5px; color: var(--text-body);">Implement 18% GST invoicing, milestone receipts, execute all 47 security and calculation tests, conduct staff training workshops, and hand over 100% source code.</p>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>STATEMENT OF WORK (SOW) &bull; DALAL MACHINE TOOLS &amp; OMPI INDIA</span>
+      <span class="counter">SLIDE 18 / 22</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 19: TRAINING & SUPPORT -->
+  <div class="slide" id="slide-19">
+    <div class="slide-header">
+      <div class="header-left">
+        <div class="category-tag">17 | Training &amp; Support</div>
+        <h2>Staff Onboarding, Video Guides &amp; Manuals</h2>
+        <p>Ensuring your team in Chakan and Bhosari can operate both systems effortlessly from day one</p>
+      </div>
+      <div class="badge">Knowledge Transfer</div>
+    </div>
+    <div class="slide-body">
+      <div class="grid-3">
+        <div class="card blue-top">
+          <h3 style="color: var(--dalal-blue);">1. Hands-on Training</h3>
+          <ul class="card-list">
+            <li><strong>12 Dedicated Training Hours:</strong> Interactive training sessions conducted in Hindi, Marathi, or English for sales engineers and yard staff.</li>
+            <li><strong>Role-Specific Guidance:</strong> Separate focused sessions for yard inventory managers, technical sales engineers, and office accounting staff.</li>
+            <li><strong>Real-World Practice:</strong> Staff practice creating live quotes and adding stock using sample machine specs before full go-live.</li>
+          </ul>
+        </div>
+        <div class="card green-top">
+          <h3 style="color: var(--ompi-green);">2. Video Walkthroughs</h3>
+          <ul class="card-list">
+            <li><strong>Recorded Video Library:</strong> High-definition screen recording videos explaining every single module and screen step-by-step.</li>
+            <li><strong>Future-Proof Onboarding:</strong> Whenever you hire a new sales coordinator or storekeeper, they can watch the videos and start working immediately.</li>
+            <li><strong>Lifetime Reference:</strong> Stored on your office server so staff can refer to them anytime without calling external consultants.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 style="color: var(--navy-primary);">3. Standard Operating SOP</h3>
+          <ul class="card-list">
+            <li><strong>Printed Reference Manual:</strong> Comprehensive operational reference manual provided for the yard desk and Bhosari sales office.</li>
+            <li><strong>Quick Reference Cheat Sheets:</strong> Laminated 1-page quick-start sheets for generating quotes, uploading photos, and printing delivery challans.</li>
+            <li><strong>Direct Escalation Support:</strong> Direct priority technical support during the entire initial go-live and rollout period.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>STATEMENT OF WORK (SOW) &bull; DALAL MACHINE TOOLS &amp; OMPI INDIA</span>
+      <span class="counter">SLIDE 19 / 22</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 20: COMPARATIVE VALUE ANALYSIS -->
+  <div class="slide" id="slide-20">
+    <div class="slide-header">
+      <div class="header-left">
+        <div class="category-tag">18 | Value Comparison</div>
+        <h2>Why a Custom Solution Delivers Maximum Value</h2>
+        <p>Comparing custom software against generic off-the-shelf software (SAP, Tally, Salesforce)</p>
+      </div>
+      <div class="badge">Strategic Value</div>
+    </div>
+    <div class="slide-body">
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th style="width: 20%;">Evaluation Factor</th>
+            <th style="width: 26%;">Generic Commercial Software</th>
+            <th style="width: 26%;">Proposed Custom Solution</th>
+            <th style="width: 28%;">Direct Business Benefit to You</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="strong-cell">Monthly Subscription Fees</td>
+            <td>Charges Rs. 3,500 to Rs. 7,000 per user per month. Costs Rs. 4L-8L every single year.</td>
+            <td class="strong-cell" style="color: var(--ompi-green);">Rs. 0 recurring software license fees. 100% owned by your company permanently.</td>
+            <td>Saves over Rs. 15-20 Lakhs over 3 years; zero recurring vendor lock-in.</td>
+          </tr>
+          <tr>
+            <td class="strong-cell">Clutch Sizing Automation</td>
+            <td>Cannot calculate mechanical press torque or flywheel inertia. Requires manual Excel work.</td>
+            <td class="strong-cell" style="color: var(--ompi-green);">Built-in automated sizing engine designed specifically for OMPI clutch-brake units.</td>
+            <td>Eliminates sizing errors; generates accurate customer quotes in 60 seconds.</td>
+          </tr>
+          <tr>
+            <td class="strong-cell">Customs &amp; Landed Costing</td>
+            <td>Generic systems cannot handle Indian customs duty, port clearance fees, and foreign currency conversion.</td>
+            <td class="strong-cell" style="color: var(--ompi-green);">Tailored landed cost engine calculates exact per-unit landed INR cost to warehouse.</td>
+            <td>Protects gross profit margins from currency swings and port expense leakage.</td>
+          </tr>
+          <tr>
+            <td class="strong-cell">Yard Inventory Workflow</td>
+            <td>Complex screens designed for large retailers with 50 unnecessary accounting fields.</td>
+            <td class="strong-cell" style="color: var(--ompi-green);">Fast 2-minute mobile upload built specifically for Chakan heavy machinery yard.</td>
+            <td>Yard staff actually use the software without needing computer degrees.</td>
+          </tr>
+          <tr>
+            <td class="strong-cell">Source Code Ownership</td>
+            <td>You never own the software; if you stop paying monthly fees, you lose all your data.</td>
+            <td class="strong-cell" style="color: var(--ompi-green);">100% full source code, database, and design assets belong to you forever.</td>
+            <td>Total business independence; you control your digital destiny permanently.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="slide-footer">
+      <span>STATEMENT OF WORK (SOW) &bull; DALAL MACHINE TOOLS &amp; OMPI INDIA</span>
+      <span class="counter">SLIDE 20 / 22</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 21: COMMERCIAL INVESTMENT -->
+  <div class="slide" id="slide-21">
+    <div class="slide-header">
+      <div class="header-left">
+        <div class="category-tag">19 | Commercial Terms</div>
+        <h2>Commercial Investment &amp; Transparent Payment Terms</h2>
+        <p>Flat, fixed-fee investment covering complete engineering, testing, training, and source code transfer</p>
+      </div>
+      <div class="badge">Investment Terms</div>
+    </div>
+    <div class="slide-body">
+      <div class="grid-2">
+        <div class="card blue-top dalal-bg">
+          <h3 style="color: var(--dalal-blue);">Unified Project Investment Breakdown</h3>
+          <ul class="card-list">
+            <li><strong>Total Fixed Investment:</strong> Rs. 7,60,000 (All-inclusive flat engineering fee covering both complete platforms).</li>
+            <li><strong>Dalal B2B Web Showroom:</strong> Rs. 2,00,000 (24-page high-speed portal, tonnage filters, WhatsApp lead capture, Google SEO).</li>
+            <li><strong>OMPI Centralized ERP:</strong> Rs. 5,60,000 (33 modules, clutch sizing engine, international import costing, Bhosari inventory).</li>
+            <li><strong>No Hidden Charges:</strong> Includes complete architecture, user interface design, testing, staff training, and handover.</li>
+            <li><strong>Ongoing Operational Costs:</strong> Client pays third-party pass-through expenses directly at actuals (domain, cloud VPS hosting, WhatsApp API credits).</li>
+          </ul>
+        </div>
+        <div class="card green-top ompi-bg">
+          <h3 style="color: var(--ompi-green);">Transparent 3-Stage Milestone Payment Schedule</h3>
+          <ul class="card-list">
+            <li><strong>Milestone 1: 30% Advance (Rs. 2,28,000):</strong> Mobilization fee upon contract sign-off to initiate database architecture, user workflows, and UI design mockups.</li>
+            <li><strong>Milestone 2: 40% Mid-Term (Rs. 3,04,000):</strong> Payable upon live deployment of the Dalal 24-page Web Showroom and verified completion of the OMPI Clutch Sizing Engine.</li>
+            <li><strong>Milestone 3: 30% Handover (Rs. 2,28,000):</strong> Payable upon successful completion of all 33 ERP modules, staff training, and full transfer of 100% source code.</li>
+            <li><strong>Commercial Governance:</strong> Governed by Master Statement of Work. Invoices payable within 7 business days subject to standard statutory TDS.</li>
+            <li><strong>Risk Protection:</strong> You only pay subsequent milestones after seeing and approving real, working software.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>STATEMENT OF WORK (SOW) &bull; DALAL MACHINE TOOLS &amp; OMPI INDIA</span>
+      <span class="counter">SLIDE 21 / 22</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 22: GOVERNANCE & HANDOVER -->
+  <div class="slide" id="slide-22">
+    <div class="slide-header">
+      <div class="header-left">
+        <div class="category-tag">20 | Governance &amp; Handover</div>
+        <h2>Intellectual Property Ownership &amp; Handover Terms</h2>
+        <p>Clear legal ownership, strict business confidentiality, and direct lead architect contact</p>
+      </div>
+      <div class="badge">Governance</div>
+    </div>
+    <div class="slide-body">
+      <div class="grid-3">
+        <div class="card amber-top">
+          <h3 style="color: var(--amber);">1. Strict Confidentiality &amp; NDA</h3>
+          <ul class="card-list">
+            <li><strong>Internal Distribution Only:</strong> This document, technical specifications, and database designs are formulated exclusively for Dalal &amp; OMPI.</li>
+            <li><strong>Non-Disclosure Covenant:</strong> Will not be shared with competitors, third-party software brokers, or outside agencies.</li>
+            <li><strong>Data Protection:</strong> Client machine pricing, Italian supplier invoices, and customer RFQ data remain strictly confidential.</li>
+          </ul>
+        </div>
+        <div class="card green-top">
+          <h3 style="color: var(--ompi-green);">2. 100% Code &amp; IP Transfer</h3>
+          <ul class="card-list">
+            <li><strong>Complete Source Code Ownership:</strong> Upon final milestone payment, 100% perpetual ownership of all source code, database structures, and designs transfers to you.</li>
+            <li><strong>Self-Hosted Freedom:</strong> You can host the software on your own private cloud or local Bhosari office server with zero vendor dependency.</li>
+            <li><strong>Custom Algorithms:</strong> Proprietary OMPI clutch sizing formulas and BOM configurations remain your exclusive company asset.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 style="color: var(--navy-primary);">3. Project Lead Contact</h3>
+          <ul class="card-list">
+            <li><strong>Technical Consultant:</strong> Suyash Shinde (Software Consultant).</li>
+            <li><strong>Office Location:</strong> Pimpri, Pune, Maharashtra 411018.</li>
+            <li><strong>Direct Contact:</strong> Phone: +91 96070 28594 | Email: suyashshinde360@gmail.com.</li>
+            <li><strong>Next Steps Protocol:</strong> Formal Statement of Work (SOW) review with Managing Directors prior to contract finalization and project kickoff.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>STATEMENT OF WORK (SOW) &bull; DALAL MACHINE TOOLS &amp; OMPI INDIA</span>
+      <span class="counter">SLIDE 22 / 22</span>
+    </div>
+  </div>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 22;
+
+    function showSlide(n) {
+      if (n < 1) n = 1;
+      if (n > totalSlides) n = totalSlides;
+      currentSlide = n;
+      const el = document.getElementById(`slide-${n}`);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        document.getElementById('nav-counter').innerText = `Slide ${n} of ${totalSlides}`;
+      }
+    }
+
+    function prevSlide() { showSlide(currentSlide - 1); }
+    function nextSlide() { showSlide(currentSlide + 1); }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {});
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'f' || e.key === 'F') {
+        toggleFullscreen();
+      }
+    });
+  </script>
+</body>
+</html>
