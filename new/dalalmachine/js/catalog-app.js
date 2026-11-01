@@ -139,20 +139,20 @@ document.addEventListener('DOMContentLoaded', () => {
             <h4 class="machine-title" title="${m.name}">${m.name}</h4>
             <div class="machine-specs-grid">
               <div class="spec-item" title="${m.tonnage > 0 ? m.tonnage + ' Tons' : 'Precision CNC'}">
-                <span class="label">Capacity / Tonnage</span>
+                <span class="label"><i class="fa fa-balance-scale"></i> Capacity</span>
                 <span class="val">${m.tonnage > 0 ? m.tonnage + ' Tons' : 'Precision CNC'}</span>
               </div>
               <div class="spec-item" title="${m.year || 'Standard'}">
-                <span class="label">Mfg. Year</span>
+                <span class="label"><i class="fa fa-calendar"></i> Mfg. Year</span>
                 <span class="val">${m.year || 'Standard'}</span>
               </div>
               <div class="spec-item" title="${m.model || '-'}">
-                <span class="label">Model Code</span>
+                <span class="label"><i class="fa fa-hashtag"></i> Model</span>
                 <span class="val">${m.model || '-'}</span>
               </div>
-              <div class="spec-item" title="Inspected & Ready for Live Trial">
-                <span class="label">Ready Status</span>
-                <span class="val" style="color: #16a34a;"><i class="fa fa-check-circle" style="font-size:11px; margin-right:2px;"></i> Inspected</span>
+              <div class="spec-item" title="Inspected & Ready for Live Demonstration">
+                <span class="label"><i class="fa fa-shield"></i> Status</span>
+                <span class="val status-val"><i class="fa fa-check-circle"></i> Inspected</span>
               </div>
             </div>
             <div class="machine-card-footer">
