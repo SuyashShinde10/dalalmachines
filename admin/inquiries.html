@@ -10,7 +10,7 @@
   <link rel="shortcut icon" href="/new/dalalmachine/images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="/new/dalalmachine/css/font-awesome.css">
   <link rel="stylesheet" href="css/admin.css?v=2.2">
-  <link rel="stylesheet" href="css/admin-ai.css?v=1.0">
+  <link rel="stylesheet" href="css/admin-ai.css?v=4.0">
 </head>
 <body>
 
@@ -207,6 +207,7 @@
   <script src="js/admin-core.js?v=5.0"></script>
   <script>
     let allInquiries = [];
+    window.allInquiries = allInquiries;
     let currentPage = 1;
     let pageSize = 10;
 
@@ -223,6 +224,7 @@
       const res = await AdminCore.api('/api/inquiries');
       if (res.success) {
         allInquiries = res.inquiries;
+        window.allInquiries = allInquiries;
         document.getElementById('badge-inquiries').textContent = allInquiries.length;
         renderInquiries();
       } else {
@@ -350,7 +352,7 @@
                   <option value="quoted" ${i.status === 'quoted' ? 'selected' : ''}>QUOTATION SENT</option>
                   <option value="closed" ${i.status === 'closed' ? 'selected' : ''}>CLOSED / WON</option>
                 </select>
-                <button type="button" class="btn-sm" style="margin-top: 6px; background: rgba(248,157,19,0.12); color: #b45309; border: 1px solid rgba(248,157,19,0.3); border-radius: 4px; font-weight: 700; font-size: 11px; cursor: pointer; padding: 4px 6px; width: 100%; display: flex; align-items: center; justify-content: center; gap: 4px;" onclick='handleAIInquiryClick("${esc(i.id)}")'>
+                <button type="button" class="btn-sm btn-ai-score" data-inquiry-id="${esc(i.id)}" style="margin-top: 6px; background: rgba(248,157,19,0.12); color: #b45309; border: 1px solid rgba(248,157,19,0.3); border-radius: 4px; font-weight: 700; font-size: 11px; cursor: pointer; padding: 4px 6px; width: 100%; display: flex; align-items: center; justify-content: center; gap: 4px;" onclick='openAILeadScore("${esc(i.id)}")'>
                   <i class="fa fa-magic"></i> AI Score &amp; Reply
                 </button>
               </td>
@@ -447,136 +449,34 @@
       }
     }
 
-    function closeAIModal() {
-      const modal = document.getElementById('aic-inquiry-modal');
-      if (modal) {
-        modal.classList.remove('active');
-        modal.style.display = 'none';
+    function openAILeadScore(id) {
+      if (typeof window.openAIInquiryAnalysis === 'function') {
+        window.openAIInquiryAnalysis(id);
+      } else if (typeof window.handleAIInquiryClick === 'function') {
+        window.handleAIInquiryClick(id);
+      } else {
+        console.warn('AI copilot script initializing...');
       }
     }
+    window.openAILeadScore = openAILeadScore;
+    window.handleAIInquiryClick = openAILeadScore;
 
-    async function handleAIInquiryClick(id) {
-      const inq = allInquiries.find(i => String(i.id) === String(id));
-      if (!inq) {
-        AdminCore.toast('Inquiry data not found.', 'error');
-        return;
-      }
-
-      const modal = document.getElementById('aic-inquiry-modal');
-      const body = document.getElementById('aic-inquiry-body');
-      const waBtn = document.getElementById('aic-inquiry-copy-wa');
-      if (!modal || !body) return;
-
-      modal.style.display = 'flex';
-      modal.classList.add('active');
-      body.innerHTML = `
-        <div style="text-align: center; padding: 36px 20px;">
-          <i class="fa fa-spinner fa-spin" style="font-size: 28px; color: #f89d13;"></i>
-          <div style="margin-top: 14px; font-weight: 700; color: #fff; font-size: 14px;">Analyzing inquiry with Dalal AI Lead Engine...</div>
-          <div style="margin-top: 6px; font-size: 12px; color: #94a3b8;">Scoring buyer intent &amp; generating smart WhatsApp draft</div>
-        </div>
-      `;
-
-      try {
-        const token = AdminCore.getToken() || localStorage.getItem('superadmin_token') || localStorage.getItem('admin_token');
-        const res = await fetch('/api/ai/score-inquiry', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': token ? `Bearer ${token}` : ''
-          },
-          body: JSON.stringify({ inquiry: inq })
+    // Delegated click listener for dynamic rows
+    document.addEventListener('DOMContentLoaded', () => {
+      const tbody = document.getElementById('inquiries-tbody');
+      if (tbody) {
+        tbody.addEventListener('click', (e) => {
+          const btn = e.target.closest('.btn-ai-score');
+          if (btn) {
+            e.preventDefault();
+            const id = btn.getAttribute('data-inquiry-id');
+            if (id) openAILeadScore(id);
+          }
         });
-        const data = await res.json();
-
-        if (data.success && data.analysis) {
-          const a = data.analysis;
-          const scoreClass = a.leadScore === 'HOT' ? 'aic-score-hot' : a.leadScore === 'WARM' ? 'aic-score-warm' : 'aic-score-general';
-          const scoreIcon = a.leadScore === 'HOT' ? '🔥' : a.leadScore === 'WARM' ? '⚡' : '📋';
-
-          let matchedHtml = '';
-          if (a.matchedMachines && a.matchedMachines.length > 0) {
-            matchedHtml = `
-              <div style="margin-top: 14px;">
-                <div style="font-size: 11px; font-weight: 700; color: #f89d13; letter-spacing: 0.5px; margin-bottom: 6px; text-transform: uppercase;">RECOMMENDED CATALOG MATCHES:</div>
-                ${a.matchedMachines.map(m => `
-                  <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 8px 12px; margin-bottom: 6px; font-size: 12.5px; display: flex; justify-content: space-between; align-items: center;">
-                    <span><strong style="color:#fff;">${AdminCore.escapeHTML(m.name)}</strong> <span style="color:#94a3b8; font-size:11.5px;">(${m.location || 'Pune Yard'})</span></span>
-                    <a href="/new/dalalmachine/product.html?id=${m.id}" target="_blank" style="color: #f89d13; font-size: 11.5px; text-decoration: none; font-weight: 700;">View Specs &rarr;</a>
-                  </div>
-                `).join('')}
-              </div>
-            `;
-          }
-
-          body.innerHTML = `
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 12px;">
-              <div>
-                <div style="font-size: 16px; font-weight: 700; color: #fff;">${AdminCore.escapeHTML(inq.name)}</div>
-                <div style="font-size: 12px; color: #94a3b8;">${AdminCore.escapeHTML(inq.company || 'Individual Buyer')} &bull; ${AdminCore.escapeHTML(inq.phone || inq.email || 'No Phone')}</div>
-              </div>
-              <div class="aic-score-badge ${scoreClass}">
-                ${scoreIcon} ${a.leadScore} LEAD
-              </div>
-            </div>
-
-            <div style="background: rgba(248, 157, 19, 0.08); border: 1px solid rgba(248, 157, 19, 0.25); border-radius: 8px; padding: 12px; margin-bottom: 14px; font-size: 13px; line-height: 1.5; color: #f1f5f9;">
-              <strong style="color: #f89d13;">AI Lead Analysis:</strong> ${AdminCore.escapeHTML(a.scoreReason)}
-            </div>
-
-            ${matchedHtml}
-
-            <div style="margin-top: 14px;">
-              <div style="font-size: 11px; font-weight: 700; color: #fff; letter-spacing: 0.5px; margin-bottom: 6px; text-transform: uppercase;">READY-TO-SEND WHATSAPP / EMAIL REPLY:</div>
-              <textarea id="aic-wa-reply-text" style="width: 100%; height: 130px; background: #090e17; color: #e2e8f0; border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 10px; font-size: 12.5px; line-height: 1.5; outline: none; font-family: inherit;">${AdminCore.escapeHTML(a.suggestedWhatsAppReply)}</textarea>
-            </div>
-          `;
-
-          // WhatsApp Trigger
-          const phoneNum = (inq.phone || '').replace(/[^0-9]/g, '');
-          if (waBtn) {
-            waBtn.onclick = () => {
-              const textEl = document.getElementById('aic-wa-reply-text');
-              const text = encodeURIComponent(textEl ? textEl.value : a.suggestedWhatsAppReply);
-              const url = phoneNum ? `https://wa.me/${phoneNum}?text=${text}` : `https://wa.me/?text=${text}`;
-              window.open(url, '_blank');
-            };
-          }
-        } else {
-          body.innerHTML = `<div style="color:#ef4444; padding:20px;">Analysis failed: ${data.message || 'Unknown error'}</div>`;
-        }
-      } catch (err) {
-        body.innerHTML = `<div style="color:#ef4444; padding:20px;">Error connecting to AI service: ${err.message}</div>`;
       }
-    }
-
-    window.openAIInquiryAnalysis = handleAIInquiryClick;
+    });
   </script>
 
-  <!-- Self-Contained AI Lead Scoring Modal -->
-  <div class="aic-modal-backdrop" id="aic-inquiry-modal" style="display:none;">
-    <div class="aic-modal" style="width: 620px;">
-      <div class="aic-modal-header" style="padding: 16px 20px; background: #090e17; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: space-between;">
-        <h3 style="margin: 0; font-size: 16px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px;">
-          <i class="fa fa-magic" style="color: #f89d13;"></i> AI Lead Analysis &amp; WhatsApp Reply
-        </h3>
-        <button type="button" class="aic-close-btn" onclick="closeAIModal()" style="background: none; border: none; color: #94a3b8; font-size: 20px; cursor: pointer; line-height: 1;">&times;</button>
-      </div>
-      <div class="aic-modal-body" id="aic-inquiry-body" style="padding: 20px;">
-        <div style="text-align: center; padding: 30px;">
-          <i class="fa fa-spinner fa-spin" style="font-size: 26px; color: #f89d13;"></i>
-          <div style="margin-top: 10px; font-weight: 600; color: #fff;">Analyzing lead with AI...</div>
-        </div>
-      </div>
-      <div class="aic-modal-footer" style="padding: 14px 20px; background: #090e17; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center;">
-        <button type="button" class="btn btn-secondary btn-sm" onclick="closeAIModal()" style="background: rgba(255,255,255,0.08); color: #fff; border: 1px solid rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 6px; cursor: pointer;">Close</button>
-        <button type="button" class="btn btn-primary btn-sm" id="aic-inquiry-copy-wa" style="background: #10b981; color: #fff; font-weight: 700; border: none; padding: 8px 18px; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
-          <i class="fa fa-whatsapp"></i> <span>Open in WhatsApp</span>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <script src="js/admin-ai.js?v=1.0"></script>
+  <script src="js/admin-ai.js?v=4.0"></script>
 </body>
 </html>

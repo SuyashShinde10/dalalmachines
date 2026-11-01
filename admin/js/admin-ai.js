@@ -15,6 +15,10 @@
   function initAdminAI() {
     if (document.getElementById('aic-copilot-container')) return;
 
+    // Remove legacy or duplicate inquiry modal if any exists in DOM
+    const legacyModal = document.getElementById('aic-inquiry-modal');
+    if (legacyModal) legacyModal.remove();
+
     // 1. Build and Inject Drawer UI
     const container = document.createElement('div');
     container.id = 'aic-copilot-container';
@@ -364,34 +368,66 @@
   // Feature: Inquiry Lead Scoring & Smart WhatsApp Reply
   // -------------------------------------------------------------
   function initInquiryLeadScoring() {
-    // Expose global helper for inquiries page table
-    window.openAIInquiryAnalysis = async function (inquiryData) {
+    // Expose robust global helpers for inquiries page table
+    async function executeInquiryScore(inquiryData) {
       const modal = document.getElementById('aic-inquiry-modal');
       const body = document.getElementById('aic-inquiry-body');
       const waBtn = document.getElementById('aic-inquiry-copy-wa');
-      const closeBtn = document.getElementById('aic-inquiry-close');
-      const doneBtn = document.getElementById('aic-inquiry-done');
+      const closeBtn = document.getElementById('aic-inquiry-close') || (modal ? modal.querySelector('.aic-close-btn') : null);
+      const doneBtn = document.getElementById('aic-inquiry-done') || (modal ? modal.querySelector('.btn-secondary') : null);
 
+      if (!modal || !body) return;
+
+      // Handle ID string or object payload seamlessly
+      let inq = inquiryData;
+      if (typeof inq === 'string') {
+        let found = (window.allInquiries || []).find(x => String(x.id) === String(inq));
+        if (!found) {
+          try {
+            const resInq = await fetch('/api/inquiries');
+            const inqData = await resInq.json();
+            if (inqData.success && Array.isArray(inqData.inquiries)) {
+              window.allInquiries = inqData.inquiries;
+              found = inqData.inquiries.find(x => String(x.id) === String(inq));
+            }
+          } catch (_) {}
+        }
+        inq = found || { id: inquiryData, name: 'Customer Inquiry' };
+      }
+
+      modal.style.display = 'flex';
       modal.classList.add('active');
       body.innerHTML = `
-        <div style="text-align: center; padding: 40px;">
+        <div style="text-align: center; padding: 40px 20px;">
           <i class="fa fa-spinner fa-spin" style="font-size: 28px; color: var(--aic-gold);"></i>
-          <div style="margin-top: 12px; font-weight: 600;">Analyzing inquiry with AI Lead Engine...</div>
+          <div style="margin-top: 14px; font-weight: 700; color: #fff; font-size: 14px;">Analyzing inquiry with Dalal AI Lead Engine...</div>
+          <div style="margin-top: 6px; font-size: 12px; color: var(--aic-text-muted);">Scoring buyer intent &amp; generating smart WhatsApp draft</div>
         </div>
       `;
 
-      closeBtn.onclick = () => modal.classList.remove('active');
-      doneBtn.onclick = () => modal.classList.remove('active');
+      const closeModal = () => {
+        modal.classList.remove('active');
+        modal.style.display = 'none';
+      };
+
+      if (closeBtn) closeBtn.onclick = closeModal;
+      if (doneBtn) doneBtn.onclick = closeModal;
+      modal.onclick = (e) => {
+        if (e.target === modal) closeModal();
+      };
 
       try {
-        const token = localStorage.getItem('admin_token') || localStorage.getItem('superadmin_token');
+        const token = (window.AdminCore && window.AdminCore.getToken && window.AdminCore.getToken()) ||
+                      localStorage.getItem('admin_token') ||
+                      localStorage.getItem('superadmin_token') || '';
+
         const res = await fetch('/api/ai/score-inquiry', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'Authorization': token ? `Bearer ${token}` : ''
           },
-          body: JSON.stringify({ inquiry: inquiryData })
+          body: JSON.stringify({ inquiry: inq })
         });
         const data = await res.json();
         if (data.success && data.analysis) {
@@ -406,7 +442,7 @@
                 <div style="font-size: 12px; font-weight: 700; color: var(--aic-gold); margin-bottom: 6px;">RECOMMENDED CATALOG MATCHES:</div>
                 ${a.matchedMachines.map(m => `
                   <div style="background: #1e293b; border: 1px solid var(--aic-border); border-radius: 6px; padding: 8px 12px; margin-bottom: 6px; font-size: 13px; display: flex; justify-content: space-between; align-items: center;">
-                    <span><strong>${escapeHTML(m.name)}</strong> (${m.location})</span>
+                    <span><strong>${escapeHTML(m.name)}</strong> (${escapeHTML(m.location || 'Pune Yard')})</span>
                     <a href="/new/dalalmachine/product.html?id=${m.id}" target="_blank" style="color: var(--aic-gold); font-size: 11.5px; text-decoration: none;">View Specs &rarr;</a>
                   </div>
                 `).join('')}
@@ -417,15 +453,15 @@
           body.innerHTML = `
             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; border-bottom: 1px solid var(--aic-border); padding-bottom: 12px;">
               <div>
-                <div style="font-size: 16px; font-weight: 700; color: #fff;">${escapeHTML(inquiryData.name)}</div>
-                <div style="font-size: 12px; color: var(--aic-text-muted);">${escapeHTML(inquiryData.company || 'Private Buyer')} &bull; ${escapeHTML(inquiryData.phone || inquiryData.email || 'No Phone')}</div>
+                <div style="font-size: 16px; font-weight: 700; color: #fff;">${escapeHTML(inq.name || 'Inquiry')}</div>
+                <div style="font-size: 12px; color: var(--aic-text-muted);">${escapeHTML(inq.company || 'Private Buyer')} &bull; ${escapeHTML(inq.phone || inq.email || 'No Phone')}</div>
               </div>
               <div class="aic-score-badge ${scoreClass}">
                 ${scoreIcon} ${a.leadScore} LEAD
               </div>
             </div>
 
-            <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--aic-border); border-radius: 8px; padding: 12px; margin-bottom: 14px; font-size: 13px;">
+            <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--aic-border); border-radius: 8px; padding: 12px; margin-bottom: 14px; font-size: 13px; line-height: 1.5; color: #f1f5f9;">
               <strong style="color: var(--aic-gold);">AI Lead Analysis:</strong> ${escapeHTML(a.scoreReason)}
             </div>
 
@@ -433,24 +469,32 @@
 
             <div style="margin-top: 14px;">
               <div style="font-size: 12px; font-weight: 700; color: #fff; margin-bottom: 6px;">READY-TO-SEND WHATSAPP / EMAIL REPLY:</div>
-              <textarea id="aic-wa-reply-text" style="width: 100%; height: 130px; background: #090e17; color: #e2e8f0; border: 1px solid var(--aic-border); border-radius: 8px; padding: 10px; font-size: 12.5px; line-height: 1.5;">${escapeHTML(a.suggestedWhatsAppReply)}</textarea>
+              <textarea id="aic-wa-reply-text" style="width: 100%; height: 130px; background: #090e17; color: #e2e8f0; border: 1px solid var(--aic-border); border-radius: 8px; padding: 10px; font-size: 12.5px; line-height: 1.5; outline: none; font-family: inherit;">${escapeHTML(a.suggestedWhatsAppReply)}</textarea>
             </div>
           `;
 
           // WhatsApp Trigger
-          const phoneNum = (inquiryData.phone || '').replace(/[^0-9]/g, '');
-          waBtn.onclick = () => {
-            const text = encodeURIComponent(document.getElementById('aic-wa-reply-text').value);
-            const url = phoneNum ? `https://wa.me/${phoneNum}?text=${text}` : `https://wa.me/?text=${text}`;
-            window.open(url, '_blank');
-          };
+          const phoneNum = (inq.phone || '').replace(/[^0-9]/g, '');
+          if (waBtn) {
+            waBtn.onclick = () => {
+              const textEl = document.getElementById('aic-wa-reply-text');
+              const text = encodeURIComponent(textEl ? textEl.value : a.suggestedWhatsAppReply);
+              const url = phoneNum ? `https://wa.me/${phoneNum}?text=${text}` : `https://wa.me/?text=${text}`;
+              window.open(url, '_blank');
+            };
+          }
         } else {
-          body.innerHTML = `<div style="color:#ef4444; padding:20px;">Analysis failed: ${data.message}</div>`;
+          body.innerHTML = `<div style="color:#ef4444; padding:20px;">Analysis failed: ${data.message || 'Unknown error'}</div>`;
         }
       } catch (err) {
         body.innerHTML = `<div style="color:#ef4444; padding:20px;">Error: ${err.message}</div>`;
       }
-    };
+    }
+
+    // Expose under all common alias names for fail-safe compatibility
+    window.openAIInquiryAnalysis = executeInquiryScore;
+    window.openAILeadScore = executeInquiryScore;
+    window.handleAIInquiryClick = executeInquiryScore;
   }
 
   function escapeHTML(str) {
