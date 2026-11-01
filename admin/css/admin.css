@@ -1599,15 +1599,17 @@ body.sidebar-collapsed .admin-main {
   transform: translateY(-1px);
 }
 
-.pagination-btn.active {
-  background: #0f172a;
-  color: #ffffff;
-  border-color: #0f172a;
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.18);
-  cursor: default;
+.pagination-btn.active,
+.pagination-btn.active:disabled {
+  background: #0f172a !important;
+  color: #ffffff !important;
+  border-color: #0f172a !important;
+  opacity: 1 !important;
+  cursor: default !important;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.28) !important;
 }
 
-.pagination-btn:disabled {
+.pagination-btn:disabled:not(.active) {
   opacity: 0.35;
   cursor: not-allowed;
   background: #f8fafc;
