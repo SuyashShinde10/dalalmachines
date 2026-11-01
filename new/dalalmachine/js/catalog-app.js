@@ -311,7 +311,7 @@ document.addEventListener('DOMContentLoaded', () => {
         gridContainer.innerHTML = buildEmptyState();
         return;
       }
-      gridContainer.innerHTML = displayList.map(buildCardHTML).join('');
+      gridContainer.innerHTML = displayList.map(buildCardHTML).join('');\n      if (window.AnimatedContent && typeof window.AnimatedContent.init === 'function') {\n        window.AnimatedContent.init();\n      }
       return;
     }
 
@@ -341,6 +341,9 @@ document.addEventListener('DOMContentLoaded', () => {
       gridContainer.innerHTML = pageItems.map(buildCardHTML).join('');
     }
     renderPagination(totalItems, PAGE_SIZE, currentPage);
+    if (window.AnimatedContent && typeof window.AnimatedContent.init === "function") {
+      window.AnimatedContent.init();
+    }
   }
 
   function buildEmptyState() {

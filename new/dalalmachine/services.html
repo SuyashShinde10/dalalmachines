@@ -228,7 +228,7 @@
             </div>
 
             <!-- Interactive 6-Step Visual Workflow Slideshow -->
-            <div class="workflow-slideshow-container" id="workflow-slideshow">
+            <div class="workflow-slideshow-container" id="workflow-slideshow" data-animated-content="true" data-wipe="center" data-duration="1.1" data-scale="0.98">
                 <!-- Navigation Bar with Step Pills & Arrows -->
                 <div class="workflow-step-nav">
                     <div class="workflow-step-pills">
@@ -635,7 +635,7 @@
 
                 <!-- Right Accordion Column -->
                 <div class="col-lg-7 col-md-12">
-                    <div class="faq-minimal-list" id="services-cfo-faq">
+                    <div class="faq-minimal-list" id="services-cfo-faq" data-animated-content="true" data-direction="vertical" data-stagger="0.06" data-distance="50">
                         
                         <!-- Question 1 (Open by default) -->
                         <div class="faq-minimal-item is-open">
@@ -829,5 +829,7 @@
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="js/dalal-realtime.js?v=5.0"></script>
+  <!-- React Bits <AnimatedContent /> GSAP Runtime Component -->
+  <script src="js/animated-content.js"></script>
 </body>
 </html>

@@ -371,7 +371,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             Showing Audited Machinery Inventory
                         </div>
                         <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
-                            <div class="loc-filter-pill-bar loc-filter-compact">
+                            <div class="loc-filter-pill-bar loc-filter-compact" data-animated-content="true" data-direction="horizontal" data-distance="40" data-stagger="0.05">
                                 <button type="button" class="loc-filter-btn active" data-loc=""><i class="fa fa-th-large"></i> All Locations</button>
                                 <button type="button" class="loc-filter-btn" data-loc="pune"><i class="fa fa-map-marker"></i> In Stock PUNE</button>
                                 <button type="button" class="loc-filter-btn" data-loc="europe"><i class="fa fa-globe"></i> Europe Staging</button>
@@ -390,7 +390,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </div>
 
                     <!-- Machine Grid (Injected by catalog-app.js) -->
-                    <div class="row clearfix" id="catalog-grid-container">
+                    <div class="row clearfix" id="catalog-grid-container" data-animated-content="true" data-direction="vertical" data-distance="60" data-stagger="0.07" data-threshold="0.05">
                         <!-- Populated by JavaScript -->
                     </div>
 
@@ -500,5 +500,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script src="js/dalal-realtime.js?v=5.0"></script>
   <!-- B2B Conversion & Telemetry Layer -->
   <script src="js/dalal-analytics.js"></script>
+  <!-- React Bits <AnimatedContent /> GSAP Runtime Component -->
+  <script src="js/animated-content.js"></script>
 </body>
 </html>
