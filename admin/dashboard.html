@@ -55,14 +55,14 @@
           <span>Add Custom Machine</span>
         </a>
         <a href="inquiries.html" class="nav-link" data-tooltip="View incoming buyer quotation requests" data-tooltip-pos="right">
-          <i class="fa fa-envelope-open"></i>
+          <i class="fa fa-inbox"></i>
           <span>Customer RFQs</span>
           <span class="nav-badge" id="badge-inquiries-count">...</span>
         </a>
 
         <div class="nav-section-title">User Account</div>
         <a href="settings.html" class="nav-link" data-tooltip="Manage your admin profile & security password" data-tooltip-pos="right">
-          <i class="fa fa-user-circle"></i>
+          <i class="fa fa-user"></i>
           <span>My Profile & Password</span>
         </a>
 
@@ -169,11 +169,11 @@
             </div>
             <div class="suggestion-body">
               <div class="suggestion-avatar">
-                <i class="fa fa-envelope-open"></i>
+                <i class="fa fa-inbox"></i>
               </div>
               <div class="suggestion-content">
-                <span class="suggestion-title">Review 3 Active Customer RFQ Leads</span>
-                <span class="suggestion-meta">Inquiries from Kalyani Technoforge & Gujarat Heavy Forgings need quotes.</span>
+                <span class="suggestion-title" id="suggestion-rfq-title">Review Active Customer RFQ Leads</span>
+                <span class="suggestion-meta" id="suggestion-rfq-meta">New buyer inquiries waiting for quotation review.</span>
               </div>
             </div>
             <div style="display: flex; gap: 10px; margin-top: 4px;">
@@ -409,6 +409,28 @@
       if (inqRes.success) {
         const inqs = inqRes.inquiries;
         document.getElementById('badge-inquiries-count').textContent = inqs.length;
+
+        // Dynamic Suggested Next Action Widget
+        const newInqs = inqs.filter(i => i.status === 'new');
+        const sugTitle = document.getElementById('suggestion-rfq-title');
+        const sugMeta = document.getElementById('suggestion-rfq-meta');
+        if (sugTitle && sugMeta) {
+          if (newInqs.length > 0) {
+            sugTitle.textContent = `Review ${newInqs.length} Active Customer RFQ Leads`;
+            const companyNames = newInqs
+              .map(i => i.company || i.name)
+              .filter(Boolean)
+              .slice(0, 2);
+            if (companyNames.length > 0) {
+              sugMeta.textContent = `Inquiries from ${companyNames.join(' & ')} need quotation response.`;
+            } else {
+              sugMeta.textContent = `New inquiries waiting for quotation response.`;
+            }
+          } else {
+            sugTitle.textContent = `All Customer RFQ Leads Handled ✨`;
+            sugMeta.textContent = `All customer quotation requests are up to date!`;
+          }
+        }
 
         const recentInqs = inqs.slice(0, 5);
         const inqTbody = document.getElementById('recent-inquiries-tbody');
