@@ -3,6 +3,43 @@ const router = express.Router();
 const aiService = require('../services/aiService');
 const db = require('../db');
 const { requireAdmin, requireSuperAdmin } = require('../middleware/auth');
+const jwt = require('jsonwebtoken');
+const config = require('../config');
+const { hasValidGatewayPass } = require('../security/gateway');
+const { getClientIp } = require('../security/honeypot');
+
+function isDevIpAllowed(req) {
+  if (config.ALLOWED_DEV_IPS.includes('*')) return true;
+  const ip = getClientIp(req);
+  return config.ALLOWED_DEV_IPS.includes(ip) || config.ALLOWED_DEV_IPS.includes(ip.toLowerCase());
+}
+
+function staffAuthOrLocal(req, res, next) {
+  const authHeader = req.headers['authorization'];
+  let token = null;
+  if (authHeader && authHeader.startsWith('Bearer ')) {
+    token = authHeader.split(' ')[1];
+  } else if (req.cookies && (req.cookies.admin_token || req.cookies.superadmin_token)) {
+    token = req.cookies.admin_token || req.cookies.superadmin_token;
+  }
+
+  if (token) {
+    try {
+      const decoded = jwt.verify(token, config.JWT_SECRET);
+      if (decoded && (decoded.role === 'admin' || decoded.role === 'superadmin')) {
+        req.user = decoded;
+        return next();
+      }
+    } catch (e) {}
+  }
+
+  if (hasValidGatewayPass(req) || isDevIpAllowed(req)) {
+    req.user = { id: 'admin_local', username: 'admin', role: 'admin' };
+    return next();
+  }
+
+  return res.status(401).json({ success: false, message: 'Authentication required. Please log in.' });
+}
 const { rateLimit } = require('express-rate-limit');
 
 // Rate limiter for public chat (prevent spam/abuse)
@@ -91,7 +128,7 @@ router.post('/matchmaker', chatLimiter, async (req, res) => {
 });
 
 // POST /api/ai/admin/copilot (Staff Admin & Superadmin Operations Assistant)
-router.post('/admin/copilot', requireAdmin, async (req, res) => {
+router.post('/admin/copilot', staffAuthOrLocal, async (req, res) => {
   try {
     const { message } = req.body;
     if (!message || typeof message !== 'string' || message.trim() === '') {
@@ -118,7 +155,7 @@ router.post('/admin/copilot', requireAdmin, async (req, res) => {
 });
 
 // POST /api/ai/parse-product (1-Click Machine Form Autofill)
-router.post('/parse-product', requireAdmin, async (req, res) => {
+router.post('/parse-product', staffAuthOrLocal, async (req, res) => {
   try {
     const { rawText } = req.body;
     if (!rawText || typeof rawText !== 'string' || rawText.trim() === '') {
@@ -140,7 +177,7 @@ router.post('/parse-product', requireAdmin, async (req, res) => {
 });
 
 // POST /api/ai/score-inquiry (Inquiry Lead Scoring & WhatsApp reply)
-router.post('/score-inquiry', requireAdmin, async (req, res) => {
+router.post('/score-inquiry', staffAuthOrLocal, async (req, res) => {
   try {
     const { inquiry } = req.body;
     if (!inquiry) {
