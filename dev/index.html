@@ -208,35 +208,35 @@
 
       <nav class="sidebar-nav">
         <div class="nav-section-title">Developer Modules</div>
-        <a href="#vitals" class="nav-link active" onclick="showDevTab('vitals', this); return false;" data-tooltip="Live CPU, heap memory, server uptime & micro-cache telemetry" data-tooltip-pos="right">
+        <a href="#vitals" class="nav-link active" data-tab="vitals" onclick="showDevTab('vitals', this); return false;" data-tooltip="Live CPU, heap memory, server uptime & micro-cache telemetry" data-tooltip-pos="right">
           <i class="fa fa-tachometer"></i>
           <span>System Vitals</span>
         </a>
-        <a href="#governance" class="nav-link" onclick="showDevTab('governance', this); return false;" data-tooltip="Developer Killswitch: Suspend or unblock staff accounts" data-tooltip-pos="right">
+        <a href="#governance" class="nav-link" data-tab="governance" onclick="showDevTab('governance', this); return false;" data-tooltip="Developer Killswitch: Suspend or unblock staff accounts" data-tooltip-pos="right">
           <i class="fa fa-user-times"></i>
           <span>Account Governance</span>
           <span class="nav-badge" style="background:#fee2e2; color:#b91c1c;" id="sidebar-blocked-badge">Control</span>
         </a>
-        <a href="#doodle" class="nav-link" onclick="showDevTab('doodle', this); return false;" data-tooltip="Broadcast motivational banners & announcements to staff dashboards" data-tooltip-pos="right">
+        <a href="#doodle" class="nav-link" data-tab="doodle" onclick="showDevTab('doodle', this); return false;" data-tooltip="Broadcast motivational banners & announcements to staff dashboards" data-tooltip-pos="right">
           <i class="fa fa-paint-brush"></i>
           <span>Google Doodle Studio</span>
           <span class="nav-badge" style="background:#fef3c7; color:#b45309;" id="sidebar-banner-status">Broadcast</span>
         </a>
-        <a href="#tests" class="nav-link" onclick="showDevTab('tests', this); return false;" data-tooltip="Execute automated test suite across all REST API endpoints" data-tooltip-pos="right">
+        <a href="#tests" class="nav-link" data-tab="tests" onclick="showDevTab('tests', this); return false;" data-tooltip="Execute automated test suite across all REST API endpoints" data-tooltip-pos="right">
           <i class="fa fa-play-circle"></i>
           <span>Smoke Test Runner</span>
           <span class="nav-badge" style="background:#ecfdf5; color:#047857;">100% Pass</span>
         </a>
-        <a href="#api" class="nav-link" onclick="showDevTab('api', this); return false;" data-tooltip="Interactive REST endpoint query & telemetry inspector" data-tooltip-pos="right">
+        <a href="#api" class="nav-link" data-tab="api" onclick="showDevTab('api', this); return false;" data-tooltip="Interactive REST endpoint query & telemetry inspector" data-tooltip-pos="right">
           <i class="fa fa-terminal"></i>
           <span>API Workbench</span>
         </a>
-        <a href="#catalog" class="nav-link" onclick="showDevTab('catalog', this); return false;" data-tooltip="Audit database inventory integrity & image availability" data-tooltip-pos="right">
+        <a href="#catalog" class="nav-link" data-tab="catalog" onclick="showDevTab('catalog', this); return false;" data-tooltip="Audit database inventory integrity & image availability" data-tooltip-pos="right">
           <i class="fa fa-cubes"></i>
           <span>Catalog & Asset Health</span>
           <span class="nav-badge" id="sidebar-machines-count">49</span>
         </a>
-        <a href="#security" class="nav-link" onclick="showDevTab('security', this); return false;" data-tooltip="Inspect live honeypots, firewall IP blacklist & emergency lockdown" data-tooltip-pos="right">
+        <a href="#security" class="nav-link" data-tab="security" onclick="showDevTab('security', this); return false;" data-tooltip="Inspect live honeypots, firewall IP blacklist & emergency lockdown" data-tooltip-pos="right">
           <i class="fa fa-shield"></i>
           <span>SecOps & Headers</span>
         </a>
@@ -1069,21 +1069,42 @@
   <script src="/socket.io/socket.io.js"></script>
   <script src="/admin/js/dmta-tooltip.js"></script>
   <script>
-    // Tab Switching matching Admin Portal patterns
-    function showDevTab(tabName, linkEl) {
+    // Tab Switching matching Admin Portal patterns & Hash-Based Routing
+    const validDevTabs = ['vitals', 'governance', 'doodle', 'tests', 'api', 'catalog', 'security'];
+
+    function showDevTab(rawTabName, linkEl, updateHash = true) {
+      const tabName = (rawTabName || '').toLowerCase().replace('#', '').trim();
+      const activeTab = validDevTabs.includes(tabName) ? tabName : 'vitals';
+
+      // 1. Hide all tab sections, display target section
       document.querySelectorAll('.tab-section').forEach(sec => sec.classList.remove('active'));
+      const targetSection = document.getElementById('tab-' + activeTab);
+      if (targetSection) {
+        targetSection.classList.add('active');
+      }
+
+      // 2. Update Sidebar Active State
       document.querySelectorAll('.sidebar-nav .nav-link').forEach(link => link.classList.remove('active'));
-
-      const targetSection = document.getElementById('tab-' + tabName);
-      if (targetSection) targetSection.classList.add('active');
-
-      if (linkEl) {
+      if (linkEl && linkEl.classList && linkEl.classList.contains('nav-link')) {
         linkEl.classList.add('active');
       } else {
-        const found = Array.from(document.querySelectorAll('.sidebar-nav .nav-link')).find(l => l.getAttribute('href') === '#' + tabName);
+        const found = document.querySelector(`.sidebar-nav .nav-link[data-tab="${activeTab}"]`) ||
+                      Array.from(document.querySelectorAll('.sidebar-nav .nav-link')).find(l => l.getAttribute('href') === '#' + activeTab);
         if (found) found.classList.add('active');
       }
 
+      // 3. Keep URL Hash synchronized so reloads & bookmarks land on the right tab
+      if (updateHash) {
+        if (window.location.hash !== '#' + activeTab) {
+          try {
+            history.pushState(null, '', '#' + activeTab);
+          } catch (_) {
+            window.location.hash = '#' + activeTab;
+          }
+        }
+      }
+
+      // 4. Update Topbar Section Breadcrumb Title
       const titles = {
         'vitals': 'System Vitals & Architecture Telemetry',
         'governance': 'Staff & Administrative Account Governance (Developer Controls)',
@@ -1093,18 +1114,24 @@
         'catalog': 'Machinery Catalog & Asset Health',
         'security': 'SecOps & Security Headers'
       };
-      if (titles[tabName]) {
-        document.getElementById('topbar-current-section').textContent = titles[tabName];
+      const titleEl = document.getElementById('topbar-current-section');
+      if (titleEl && titles[activeTab]) {
+        titleEl.textContent = titles[activeTab];
       }
 
-      if (tabName === 'vitals') fetchTelemetry();
-      if (tabName === 'governance') fetchAdminAccounts();
-      if (tabName === 'doodle') fetchBannerConfig();
-      if (tabName === 'catalog') fetchCatalogAudit();
-      if (tabName === 'api') executeApiWorkbench();
-      if (tabName === 'security') fetchSecurityStatus();
+      // 5. Trigger resilient tab data fetch with error boundaries
+      try {
+        if (activeTab === 'vitals') fetchTelemetry();
+        else if (activeTab === 'governance') fetchAdminAccounts();
+        else if (activeTab === 'doodle') fetchBannerConfig();
+        else if (activeTab === 'catalog') fetchCatalogAudit();
+        else if (activeTab === 'api') executeApiWorkbench();
+        else if (activeTab === 'security') fetchSecurityStatus();
+      } catch (err) {
+        console.warn('[DevConsole] Data fetch notice:', err);
+      }
 
-      // Mobile: Auto-close sidebar drawer upon tab selection
+      // 6. Mobile: Auto-close sidebar drawer upon tab selection
       if (window.innerWidth <= 992) {
         const sidebar = document.querySelector('.admin-sidebar');
         const backdrop = document.querySelector('.admin-mobile-backdrop');
@@ -1112,14 +1139,35 @@
         if (backdrop) backdrop.classList.remove('active');
       }
 
-      // Update active state in mobile bottom navigation
+      // 7. Update active state in mobile bottom navigation
       document.querySelectorAll('.dev-bottom-nav-item').forEach(item => {
         item.classList.remove('active');
-        if (item.getAttribute('data-tab') === tabName) {
+        if (item.getAttribute('data-tab') === activeTab) {
           item.classList.add('active');
         }
       });
     }
+
+    // Dynamic Hashchange Listener for browser Back/Forward & direct anchor jumps
+    window.addEventListener('hashchange', () => {
+      const h = (window.location.hash || '').replace('#', '').trim();
+      if (h) showDevTab(h, null, false);
+    });
+
+    // Sidebar navigation event delegation: ensures clicks anywhere on sidebar buttons switch reliably
+    document.addEventListener('DOMContentLoaded', () => {
+      const nav = document.querySelector('.sidebar-nav');
+      if (nav) {
+        nav.addEventListener('click', (e) => {
+          const link = e.target.closest('.nav-link[href^="#"]');
+          if (link) {
+            e.preventDefault();
+            const tab = link.getAttribute('href').replace('#', '').trim();
+            showDevTab(tab, link, true);
+          }
+        });
+      }
+    });
 
     // ── Universal Mobile Sidebar Drawer & Backdrop System ──
     const toggleBtn = document.getElementById('btn-sidebar-toggle');
@@ -1228,7 +1276,7 @@
         if (!data.success) return;
 
         document.getElementById('kpi-node-version').textContent = data.system.nodeVersion;
-        document.getElementById('kpi-os-desc').textContent = `${data.system.platform} (${data.system.arch}) &bull; ${data.system.cpus} CPUs`;
+        document.getElementById('kpi-os-desc').textContent = `${data.system.platform} (${data.system.arch}) • ${data.system.cpus} CPUs`;
         document.getElementById('kpi-pid').textContent = data.system.pid;
         document.getElementById('kpi-memory').textContent = `${data.memory.rssMB} MB`;
         document.getElementById('kpi-heap-desc').textContent = `Heap: ${data.memory.heapUsedMB} MB / ${data.memory.heapTotalMB} MB`;
@@ -1880,15 +1928,23 @@
       }
     }
 
-    // Startup
+    // Startup & Initial Hash Navigation Resolution
     document.addEventListener('DOMContentLoaded', () => {
       initDevRealtime();
-      fetchTelemetry();
+
+      // Resolve initial tab from URL hash (e.g. #governance, #doodle, #tests, etc.)
+      const initialHash = (window.location.hash || '').replace('#', '').trim();
+      if (initialHash && validDevTabs.includes(initialHash)) {
+        showDevTab(initialHash, null, false);
+      } else {
+        showDevTab('vitals', null, false);
+      }
+
+      // Pre-fetch module data in parallel for instantaneous navigation
       fetchCatalogAudit();
       fetchAdminAccounts();
       fetchBannerConfig();
       fetchSecurityStatus();
-      executeApiWorkbench();
     });
   </script>
 
