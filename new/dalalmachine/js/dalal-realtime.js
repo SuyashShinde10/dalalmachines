@@ -102,10 +102,6 @@
       toast.style.transform = 'translateY(16px)';
     }, 4000);
   }
-    } catch (e) {
-      console.debug('Public WebSocket offline:', e);
-    }
-  }
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initPublicRealtime);

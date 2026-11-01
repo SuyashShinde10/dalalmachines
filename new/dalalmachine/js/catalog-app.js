@@ -311,7 +311,10 @@ document.addEventListener('DOMContentLoaded', () => {
         gridContainer.innerHTML = buildEmptyState();
         return;
       }
-      gridContainer.innerHTML = displayList.map(buildCardHTML).join('');\n      if (window.AnimatedContent && typeof window.AnimatedContent.init === 'function') {\n        window.AnimatedContent.init();\n      }
+      gridContainer.innerHTML = displayList.map(buildCardHTML).join('');
+      if (window.AnimatedContent && typeof window.AnimatedContent.animateCards === 'function') {
+        window.AnimatedContent.animateCards(gridContainer);
+      }
       return;
     }
 
@@ -341,8 +344,8 @@ document.addEventListener('DOMContentLoaded', () => {
       gridContainer.innerHTML = pageItems.map(buildCardHTML).join('');
     }
     renderPagination(totalItems, PAGE_SIZE, currentPage);
-    if (window.AnimatedContent && typeof window.AnimatedContent.init === "function") {
-      window.AnimatedContent.init();
+    if (window.AnimatedContent && typeof window.AnimatedContent.animateCards === 'function') {
+      window.AnimatedContent.animateCards(gridContainer);
     }
   }
 

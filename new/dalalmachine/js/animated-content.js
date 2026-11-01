@@ -1,12 +1,6 @@
 /**
  * AnimatedContent - React Bits Component Adapter for Dalal Machine Tools
- * Variant: JavaScript + CSS (GSAP + ScrollTrigger)
- * 
- * Mirrors the exact props, wipes, and physics of React Bits <AnimatedContent />:
- * - distance, direction, reverse, duration, ease, initialOpacity, animateOpacity
- * - scale, blur, rotate, tilt, wipe ('up'|'down'|'left'|'right'|'center')
- * - threshold, delay, stagger, staggerFrom, trigger ('scroll'|'mount'), once, scrub
- * - prefers-reduced-motion compliance and automatic cleanup
+ * Variant: JavaScript + CSS (GSAP + ScrollTrigger with Safe Native Fallback)
  */
 
 (function (window, document) {
@@ -40,7 +34,6 @@
       return;
     }
 
-    // Dynamic loader for GSAP CDN if not already included on the page
     var gsapLoaded = !!window.gsap;
     var stLoaded = !!window.ScrollTrigger;
 
@@ -64,19 +57,31 @@
           checkReady();
         }
       };
+      script1.onerror = function() {
+        console.warn('AnimatedContent: GSAP CDN failed to load; using native visible fallback.');
+      };
       document.head.appendChild(script1);
     } else if (!stLoaded) {
       var script2 = document.createElement('script');
       script2.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js';
       script2.onload = checkReady;
+      script2.onerror = function() {
+        console.warn('AnimatedContent: ScrollTrigger CDN failed to load; using native visible fallback.');
+      };
       document.head.appendChild(script2);
     }
   }
 
   function initAnimatedElement(el) {
-    if (!el || el.dataset.animatedContentInitialized === 'true') return;
-    el.dataset.animatedContentInitialized = 'true';
+    if (!el) return;
+    if (el.dataset.animatedContentInitialized === 'true') return;
 
+    // Never lock dynamic catalog grid if it has 0 children
+    if (el.id === 'catalog-grid-container' && el.children.length === 0) {
+      return;
+    }
+
+    el.dataset.animatedContentInitialized = 'true';
     var ds = el.dataset;
 
     var distance = parseNum(ds.distance, 100);
@@ -98,20 +103,25 @@
     var trigger = ds.trigger || 'scroll';
     var once = parseBool(ds.once, true);
     var scrub = ds.scrub ? (ds.scrub === 'true' ? true : parseNum(ds.scrub, true)) : false;
-    var disappearAfter = parseNum(ds.disappearAfter, 0);
-    var disappearDuration = parseNum(ds.disappearDuration, 0.5);
-    var disappearEase = ds.disappearEase || 'power3.in';
 
-    var container = ds.container ? document.querySelector(ds.container) : (document.getElementById('snap-main-container') || null);
+    var container = ds.container ? document.querySelector(ds.container) : null;
     var reduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)').matches : false;
 
+    // If animating a grid container, target children
     var targets = stagger > 0 && el.children.length ? Array.from(el.children) : [el];
     var horizontal = direction === 'horizontal';
     var axis = horizontal ? 'x' : 'y';
     var sign = reverse ? -1 : 1;
     var mask = WIPES[wipe] || null;
 
-    gsap.set(el, { visibility: 'visible' });
+    if (!window.gsap) {
+      // Graceful fallback: keep visible
+      el.style.visibility = 'visible';
+      el.style.opacity = '1';
+      return;
+    }
+
+    gsap.set(el, { visibility: 'visible', opacity: 1 });
 
     if (reduce) {
       gsap.set(targets, { opacity: 1, x: 0, y: 0, scale: 1 });
@@ -152,39 +162,21 @@
       from['--ac-wipe'] = 0;
       to['--ac-wipe'] = 1;
     }
-    if (stagger > 0) {
+    if (stagger > 0 && targets.length > 1) {
       to.stagger = { each: stagger, from: staggerFrom };
     }
 
     var settle = function () {
-      if (scrub) return;
       gsap.set(targets, { clearProps: mask ? 'filter,transform,maskImage,webkitMaskImage' : 'filter,transform' });
-    };
-
-    var disappear = function () {
-      if (disappearAfter <= 0) return;
-      var out = {
-        scale: 0.8,
-        opacity: animateOpacity ? initialOpacity : 0,
-        delay: disappearAfter,
-        duration: disappearDuration,
-        ease: disappearEase
-      };
-      out[axis] = -distance * sign;
-      if (blur > 0) out.filter = 'blur(' + blur + 'px)';
-      if (stagger > 0) out.stagger = { each: stagger, from: staggerFrom };
-      gsap.to(targets, out);
+      gsap.set(el, { visibility: 'visible', opacity: 1 });
     };
 
     var tl = gsap.timeline({
       paused: true,
-      onComplete: function () {
-        settle();
-        if (once && !scrub) disappear();
-      }
+      onComplete: settle
     });
 
-    tl.fromTo(targets, from, to, scrub ? 0 : Math.max(delay, 0));
+    tl.fromTo(targets, from, to, Math.max(delay, 0));
 
     if (trigger === 'mount') {
       tl.play();
@@ -193,18 +185,6 @@
 
     var start = 'top ' + ((1 - threshold) * 100) + '%';
 
-    if (scrub) {
-      ScrollTrigger.create({
-        trigger: el,
-        scroller: container,
-        start: start,
-        end: 'top ' + Math.max((1 - threshold) * 100 - 45, 5) + '%',
-        scrub: scrub === true ? true : Math.max(Number(scrub) || 0, 0.01),
-        animation: tl
-      });
-      return;
-    }
-
     ScrollTrigger.create({
       trigger: el,
       scroller: container,
@@ -212,13 +192,34 @@
       once: once,
       onEnter: function () {
         tl.play();
-      },
-      onLeaveBack: once
-        ? undefined
-        : function () {
-            if (mask) gsap.set(targets, { maskImage: mask, webkitMaskImage: mask });
-            tl.reverse();
-          }
+      }
+    });
+  }
+
+  // Helper dedicated to dynamically injected cards (catalog-app.js)
+  function animateCards(container) {
+    if (!container) return;
+    container.style.visibility = 'visible';
+    container.style.opacity = '1';
+
+    var cards = container.children;
+    if (!cards || cards.length === 0) return;
+
+    ensureGsapAndScrollTrigger(function () {
+      if (!window.gsap) return;
+      var cardArray = Array.from(cards);
+      gsap.fromTo(
+        cardArray,
+        { opacity: 0, y: 35 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: 'power3.out',
+          stagger: 0.08,
+          clearProps: 'transform,opacity'
+        }
+      );
     });
   }
 
@@ -226,23 +227,25 @@
     ensureGsapAndScrollTrigger(function () {
       var elements = document.querySelectorAll('[data-animated-content="true"], .animated-content');
       for (var i = 0; i < elements.length; i++) {
+        // Skip empty catalog grid on initial pass; catalog-app will call animateCards
+        if (elements[i].id === 'catalog-grid-container' && elements[i].children.length === 0) {
+          continue;
+        }
         initAnimatedElement(elements[i]);
       }
     });
   }
 
-  // Auto-init on DOMContentLoaded
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initAll);
   } else {
     initAll();
   }
 
-  // Export to window
   window.AnimatedContent = {
     init: initAll,
-    animate: initAnimatedElement
+    animate: initAnimatedElement,
+    animateCards: animateCards
   };
 
 })(window, document);
-
