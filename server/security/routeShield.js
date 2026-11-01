@@ -73,7 +73,6 @@ function routeShieldMiddleware(req, res, next) {
   const user = getAuthenticatedUser(req);
   const hasGatePass = hasValidGatewayPass(req);
   const ip = getClientIp(req);
-  const isLocalOrWhitelisted = isDevIpAllowed(req);
 
   // 1. Emergency Lockdown Enforcement
   if (global.PORTAL_LOCKDOWN) {
@@ -82,9 +81,8 @@ function routeShieldMiddleware(req, res, next) {
     }
   }
 
-  // 2. Complete Obscurity Gate
-  // Only external, non-whitelisted requests without login or gate pass get cloaked as 404
-  if (!isLocalOrWhitelisted && !user && !hasGatePass) {
+  // 2. Complete Obscurity Gate: If neither logged in NOR carrying the Gateway Passkey cookie
+  if (!user && !hasGatePass) {
     recordSecurityEvent({
       type: 'CLOAKED_ROUTE_PROBE',
       severity: 'LOW',
@@ -113,7 +111,7 @@ function routeShieldMiddleware(req, res, next) {
       return next();
     }
 
-    if (hasGatePass || isLocalOrWhitelisted) {
+    if (hasGatePass) {
       return next();
     }
 
