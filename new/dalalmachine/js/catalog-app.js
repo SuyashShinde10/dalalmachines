@@ -128,14 +128,13 @@ document.addEventListener('DOMContentLoaded', () => {
             </picture>
             <span class="machine-location-pill">${locIcon} ${m.location}</span>
             <span class="machine-stock-badge">ID: ${m.id}</span>
+            <label class="machine-thumb-compare" title="Add to Machine Comparison">
+              <input type="checkbox" onchange="toggleCompareMachine('${m.id}')" ${isCompared ? 'checked' : ''}>
+              <span>Compare</span>
+            </label>
           </div>
           <div class="machine-info-content">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-              <div class="machine-cat-label" style="margin-bottom:0;">${m.categoryName} &bull; ${m.make}</div>
-              <label style="font-size:11.5px; font-weight:600; color:#64748b; cursor:pointer; margin:0; display:inline-flex; align-items:center; gap:4px;">
-                <input type="checkbox" onchange="toggleCompareMachine('${m.id}')" ${isCompared ? 'checked' : ''} style="cursor:pointer; accent-color:#f89d13;"> Compare
-              </label>
-            </div>
+            <div class="machine-cat-label">${m.categoryName} &bull; ${m.make}</div>
             <h4 class="machine-title" title="${m.name}">${m.name}</h4>
             <div class="machine-specs-grid">
               <div class="spec-item" title="${m.tonnage > 0 ? m.tonnage + ' Tons' : 'Precision CNC'}">
@@ -148,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
               <div class="spec-item" title="${m.model || '-'}">
                 <span class="label"><i class="fa fa-hashtag"></i> Model</span>
-                <span class="val">${m.model || '-'}</span>
+                <span class="val model-val">${m.model || '-'}</span>
               </div>
               <div class="spec-item" title="Inspected & Ready for Live Demonstration">
                 <span class="label"><i class="fa fa-shield"></i> Status</span>

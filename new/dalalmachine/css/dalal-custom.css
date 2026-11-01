@@ -1301,7 +1301,7 @@ h1, h2, h3, h4, h5, h6, .sec-title h2, .main-header .navigation > li > a {
 }
 .machine-specs-grid {
   display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
+  grid-template-columns: 1.15fr 0.85fr !important;
   background: #f8fafc !important;
   border: 1px solid #e2e8f0 !important;
   border-radius: 8px !important;
@@ -1315,7 +1315,7 @@ h1, h2, h3, h4, h5, h6, .sec-title h2, .main-header .navigation > li > a {
   box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.02) !important;
 }
 .spec-item {
-  padding: 10px 14px !important;
+  padding: 9px 12px !important;
   display: flex !important;
   flex-direction: column !important;
   justify-content: center !important;
@@ -1357,13 +1357,18 @@ h1, h2, h3, h4, h5, h6, .sec-title h2, .main-header .navigation > li > a {
 }
 .spec-item span.val {
   color: #0f172a !important;
-  font-size: 13.5px !important;
+  font-size: 13px !important;
   font-weight: 700 !important;
   line-height: 1.25 !important;
   display: block !important;
-  white-space: nowrap !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
+  white-space: normal !important;
+  word-break: break-word !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+}
+.spec-item span.val.model-val {
+  font-size: 12.5px !important;
+  letter-spacing: -0.2px !important;
 }
 .spec-item span.val.status-val {
   color: #16a34a !important;
@@ -1371,10 +1376,47 @@ h1, h2, h3, h4, h5, h6, .sec-title h2, .main-header .navigation > li > a {
   display: inline-flex !important;
   align-items: center !important;
   gap: 4px !important;
+  white-space: nowrap !important;
 }
 .spec-item span.val.status-val i {
   color: #16a34a !important;
   font-size: 11px !important;
+}
+
+/* Glassmorphic Compare Pill on thumbnail */
+.machine-thumb-compare {
+  position: absolute !important;
+  bottom: 10px !important;
+  right: 10px !important;
+  background: rgba(15, 23, 42, 0.85) !important;
+  backdrop-filter: blur(6px) !important;
+  -webkit-backdrop-filter: blur(6px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  color: #ffffff !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  padding: 4px 9px !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  margin: 0 !important;
+  z-index: 3 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
+  transition: all 0.2s ease !important;
+}
+.machine-thumb-compare:hover {
+  background: rgba(15, 23, 42, 0.96) !important;
+  border-color: #f89d13 !important;
+  color: #f89d13 !important;
+}
+.machine-thumb-compare input[type="checkbox"] {
+  accent-color: #f89d13 !important;
+  cursor: pointer !important;
+  margin: 0 !important;
+  width: 13px !important;
+  height: 13px !important;
 }
 .machine-card-footer {
   margin-top: auto !important;
