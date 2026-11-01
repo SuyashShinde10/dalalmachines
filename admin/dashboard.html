@@ -145,7 +145,7 @@
               </span>
               <span style="font-size: 11px; font-weight: 700; color: #b45309; text-transform: uppercase;">In Stock Pune</span>
             </div>
-            <div class="sticky-items-list">
+            <div class="sticky-items-list" id="priority-inventory-list">
               <a href="products.html?q=5000T" class="sticky-item">
                 <i class="fa fa-file-text-o"></i>
                 <span>5000T Heavy Hydraulic Closed Die Forging Press</span>
@@ -178,7 +178,7 @@
             </div>
             <div style="display: flex; gap: 10px; margin-top: 4px;">
               <a href="inquiries.html" class="btn-primary" style="font-size: 12.5px; padding: 8px 16px;" data-tooltip="Open buyer quotation inbox">
-                <span>Open RFQ Inbox &rarr;</span>
+                <span id="btn-rfq-inbox-text">Open RFQ Inbox &rarr;</span>
               </a>
               <a href="product-form.html" class="btn-secondary" style="font-size: 12.5px; padding: 8px 14px;" data-tooltip="Create new machine listing">
                 <i class="fa fa-plus"></i>
@@ -362,6 +362,30 @@
         document.getElementById('kpi-cutting').textContent = cutting;
         document.getElementById('kpi-pune').textContent = pune;
 
+        // Render Priority Inventory Focus (Pune Yard in-stock priority)
+        const priorityList = document.getElementById('priority-inventory-list');
+        if (priorityList) {
+          const puneMachines = machines
+            .filter(m => (m.status || 'active') === 'active' && (m.location || '').toLowerCase().includes('pune'))
+            .sort((a, b) => {
+              if (a.isCustom && !b.isCustom) return -1;
+              if (!a.isCustom && b.isCustom) return 1;
+              const tA = parseInt(a.tonnage, 10) || 0;
+              const tB = parseInt(b.tonnage, 10) || 0;
+              return tB - tA;
+            })
+            .slice(0, 3);
+
+          if (puneMachines.length > 0) {
+            priorityList.innerHTML = puneMachines.map(m => `
+              <a href="product-form.html?id=${m.id}" class="sticky-item" title="View & Edit ${m.name}">
+                <i class="fa fa-file-text-o"></i>
+                <span>${m.name}</span>
+              </a>
+            `).join('');
+          }
+        }
+
         // Render Recent 5 Machines
         const recent = machines.slice(0, 5);
         const tbody = document.getElementById('recent-machines-tbody');
@@ -426,9 +450,17 @@
             } else {
               sugMeta.textContent = `New inquiries waiting for quotation response.`;
             }
+            const rfqBtn = document.getElementById('btn-rfq-inbox-text');
+            if (rfqBtn) {
+              rfqBtn.innerHTML = `Open RFQ Inbox (${newInqs.length}) &rarr;`;
+            }
           } else {
             sugTitle.textContent = `All Customer RFQ Leads Handled ✨`;
             sugMeta.textContent = `All customer quotation requests are up to date!`;
+            const rfqBtn = document.getElementById('btn-rfq-inbox-text');
+            if (rfqBtn) {
+              rfqBtn.innerHTML = `View All Leads &rarr;`;
+            }
           }
         }
 
