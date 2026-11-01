@@ -32,6 +32,8 @@ function getAuthenticatedUser(req) {
     token = authHeader.split(' ')[1];
   } else if (req.cookies && req.cookies.admin_token) {
     token = req.cookies.admin_token;
+  } else if (req.cookies && req.cookies.superadmin_token) {
+    token = req.cookies.superadmin_token;
   }
 
   if (!token) return null;
@@ -62,9 +64,16 @@ function routeShieldMiddleware(req, res, next) {
     return next();
   }
 
+  // 0. Static assets (CSS, JS, images, fonts) must ALWAYS be served so login screens and dashboards render with full styling
+  const isStaticAsset = /\.(css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot|map)$/i.test(p);
+  if (isStaticAsset) {
+    return next();
+  }
+
   const user = getAuthenticatedUser(req);
   const hasGatePass = hasValidGatewayPass(req);
   const ip = getClientIp(req);
+  const isLocalOrWhitelisted = isDevIpAllowed(req);
 
   // 1. Emergency Lockdown Enforcement
   if (global.PORTAL_LOCKDOWN) {
@@ -73,8 +82,9 @@ function routeShieldMiddleware(req, res, next) {
     }
   }
 
-  // 2. Complete Obscurity Gate: If neither logged in NOR carrying the Gateway Passkey cookie
-  if (!user && !hasGatePass) {
+  // 2. Complete Obscurity Gate
+  // Only external, non-whitelisted requests without login or gate pass get cloaked as 404
+  if (!isLocalOrWhitelisted && !user && !hasGatePass) {
     recordSecurityEvent({
       type: 'CLOAKED_ROUTE_PROBE',
       severity: 'LOW',
@@ -83,13 +93,11 @@ function routeShieldMiddleware(req, res, next) {
       userAgent: req.headers['user-agent'] || 'Unknown',
       message: `Unauthorized visitor or scanner probed protected panel without gateway passkey: ${req.originalUrl}`
     });
-    // Send 404. Attacker/scanner concludes the page does not exist!
     return sendCloaked404(res, req, 'Missing gateway pass');
   }
 
   // 3. Developer Console & Developer API Security Layer
   if (isDevPath || isDevApiPath) {
-    // Check IP restriction if configured
     if (!isDevIpAllowed(req)) {
       recordSecurityEvent({
         type: 'DEV_IP_RESTRICTION_BLOCKED',
@@ -101,13 +109,11 @@ function routeShieldMiddleware(req, res, next) {
       return sendCloaked404(res, req, 'IP not whitelisted for developer endpoint');
     }
 
-    // If user is logged in as superadmin or developer
     if (user && (user.role === 'superadmin' || user.username === 'developer')) {
       return next();
     }
 
-    // If client has gateway pass, allow access to dev console or redirect to dev login
-    if (hasGatePass) {
+    if (hasGatePass || isLocalOrWhitelisted) {
       return next();
     }
 
@@ -116,11 +122,11 @@ function routeShieldMiddleware(req, res, next) {
 
   // 4. Superadmin Portal Security Layer
   if (isSuperAdminPath) {
-    // If logged in as admin (not superadmin), conceal superadmin as 404
+    // If logged in as staff admin (not superadmin), conceal superadmin as 404
     if (user && user.role !== 'superadmin') {
       return sendCloaked404(res, req, 'Role mismatch: admin probing superadmin');
     }
-    // Allow static assets (css, js, images) and login page if carrying gate pass
+    // Allow static assets, login page, and panels through so superadmin-core.js handles auth/redirect gracefully
     return next();
   }
 
@@ -128,7 +134,6 @@ function routeShieldMiddleware(req, res, next) {
   if (isAdminPath) {
     // Check if user is suspended by developer
     if (user && user.blockedByDeveloper) {
-      // If user tries to load inner dashboard pages while blocked
       if (!p.endsWith('index.html') && p !== '/admin' && p !== '/admin/') {
         return res.redirect('/admin/index.html?suspended=true');
       }
@@ -162,4 +167,3 @@ module.exports = {
   getLockdownStatus,
   sendCloaked404
 };
-
