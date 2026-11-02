@@ -1,0 +1,1193 @@
+import subprocess, os
+
+# Create the comprehensive HTML file for the dual system pages and functional specification
+html_content = """<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Dalal & OMPI India — Complete Systems, Pages & Functional Specifications Manual</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  @page {
+    size: A4;
+    margin: 14mm 14mm 14mm 14mm;
+  }
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #1e293b;
+    background: #ffffff;
+    line-height: 1.55;
+    font-size: 10pt;
+    margin: 0;
+    padding: 0;
+  }
+  h1, h2, h3, h4, h5 {
+    font-family: 'Barlow', sans-serif;
+    color: #0f172a;
+    margin-top: 0;
+    letter-spacing: -0.3px;
+  }
+  .page-break {
+    page-break-after: always;
+    break-after: page;
+  }
+  .avoid-break {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  
+  /* Cover Header */
+  .cover-box {
+    border: 2px solid #0f172a;
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin-bottom: 22px;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    position: relative;
+  }
+  .cover-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 100%;
+    background: #f89d13;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+  }
+  .doc-badge {
+    display: inline-block;
+    background: #0f172a;
+    color: #f89d13;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8pt;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .doc-title {
+    font-size: 20pt;
+    font-weight: 900;
+    color: #0f172a;
+    line-height: 1.2;
+    margin: 0 0 6px;
+  }
+  .doc-subtitle {
+    font-size: 11pt;
+    color: #475569;
+    font-weight: 500;
+    margin: 0 0 14px;
+  }
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    border-top: 1px solid #cbd5e1;
+    padding-top: 12px;
+    font-size: 8.5pt;
+  }
+  .meta-item strong {
+    display: block;
+    color: #64748b;
+    font-size: 7.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+  }
+  
+  /* Section Header */
+  .system-banner {
+    background: #0f172a;
+    color: #ffffff;
+    padding: 12px 18px;
+    border-radius: 6px;
+    margin: 20px 0 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .system-banner h2 {
+    color: #ffffff;
+    font-size: 14pt;
+    margin: 0;
+    font-weight: 800;
+    letter-spacing: 0.2px;
+  }
+  .system-banner span {
+    color: #f89d13;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5pt;
+    font-weight: 600;
+  }
+
+  /* Page Card Container */
+  .page-spec-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 16px 18px;
+    margin-bottom: 18px;
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+  }
+  .page-spec-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+  }
+  .page-num {
+    color: #f89d13;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 9pt;
+    margin-right: 6px;
+  }
+  .page-name {
+    font-size: 13.5pt;
+    font-weight: 800;
+    color: #0f172a;
+  }
+  .page-route {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8pt;
+    background: #f1f5f9;
+    color: #334155;
+    padding: 2px 7px;
+    border-radius: 4px;
+    border: 1px solid #e2e8f0;
+  }
+  
+  /* Rationale & Functionality Boxes */
+  .spec-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .spec-box {
+    background: #f8fafc;
+    border: 1px solid #edf2f7;
+    border-radius: 6px;
+    padding: 10px 12px;
+  }
+  .spec-box.accent {
+    background: #fffbeb;
+    border-color: #fef3c7;
+  }
+  .spec-box-title {
+    font-size: 8.5pt;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .spec-box-title.why {
+    color: #b45309;
+  }
+  .spec-box-title.what {
+    color: #0f172a;
+  }
+  .spec-box p {
+    margin: 0;
+    font-size: 9pt;
+    color: #334155;
+    line-height: 1.5;
+  }
+
+  /* Table of features */
+  .features-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    font-size: 8.5pt;
+  }
+  .features-table th {
+    background: #f1f5f9;
+    color: #334155;
+    font-weight: 700;
+    text-align: left;
+    padding: 7px 10px;
+    border: 1px solid #e2e8f0;
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+  .features-table td {
+    padding: 6px 10px;
+    border: 1px solid #e2e8f0;
+    vertical-align: top;
+    color: #334155;
+    line-height: 1.45;
+  }
+  .features-table tr:nth-child(even) td {
+    background: #fafcff;
+  }
+  .feature-tag {
+    font-weight: 700;
+    color: #0f172a;
+    display: block;
+    margin-bottom: 2px;
+  }
+  .impact-badge {
+    display: inline-block;
+    background: #ecfdf5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+    font-size: 7.5pt;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  /* Footer Note */
+  .footer-bar {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 8px;
+    margin-top: 16px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 8pt;
+    color: #94a3b8;
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER HEADER -->
+<div class="cover-box">
+  <div class="doc-badge">Official Architecture &amp; Functional Manual</div>
+  <h1 class="doc-title">Dalal Machine Tools &amp; OMPI India ERP</h1>
+  <div class="doc-subtitle">Complete Systems, Pages, Workflows &amp; Feature Rationale Specification</div>
+  
+  <div class="meta-grid">
+    <div class="meta-item">
+      <strong>Enterprise Clients</strong>
+      Dalal Machine Tools Agency Pvt. Ltd.<br>OMPI India LLP
+    </div>
+    <div class="meta-item">
+      <strong>Principal Architect</strong>
+      Suyash Shinde<br>
+      Pimpri, Pune &bull; +91 96070 28594
+    </div>
+    <div class="meta-item">
+      <strong>Scope Classification</strong>
+      Customer Web Platform + Operations Portal + Industrial ERP Suite
+    </div>
+    <div class="meta-item">
+      <strong>Engineering Standard</strong>
+      Full Production Grade (Zero Dummy/Toy Modules)
+    </div>
+  </div>
+</div>
+
+<div class="spec-box" style="margin-bottom: 20px; background:#eff6ff; border-color:#bfdbfe;">
+  <p style="font-size: 9pt; color:#1e3a8a;">
+    <strong>Executive Note on Document Purpose:</strong> This document serves as the single source of truth for every web page, admin screen, ERP module, and interactive component across both <strong>Dalal Machine Tools Agency Pvt. Ltd.</strong> and <strong>OMPI India LLP</strong>. Every single screen is documented with its business justification (<em>Kyun banaya gaya hai / Why it exists</em>), its operational mechanics (<em>Kya kaam karta hai / How it works</em>), and its feature-level enterprise impact.
+  </p>
+</div>
+
+<!-- ========================================== -->
+<!-- SYSTEM 1: DALAL MACHINE TOOLS WEB PLATFORM -->
+<!-- ========================================== -->
+<div class="system-banner">
+  <h2>SYSTEM 1: DALAL MACHINE TOOLS AGENCY WEB PLATFORM</h2>
+  <span>7 CUSTOMER ROUTES + 1 OPERATIONS CONSOLE</span>
+</div>
+
+<!-- PAGE 1: HOMEPAGE -->
+<div class="page-spec-card avoid-break">
+  <div class="page-spec-header">
+    <div>
+      <span class="page-num">ROUTE 01</span>
+      <span class="page-name">Homepage &amp; Heavy Machinery Authority Portal</span>
+    </div>
+    <span class="page-route">URL: / (index.html)</span>
+  </div>
+  
+  <div class="spec-columns">
+    <div class="spec-box accent">
+      <div class="spec-box-title why">&#9658; Kyun Hai? (Business Purpose &amp; Rationale)</div>
+      <p>
+        Heavy machinery buyers (forging plant owners, stamping directors, tier-1 auto component manufacturers) decide whether a machinery importer is legitimate in under 5 seconds. If a website looks like a generic broker template, buyers assume the machines are non-existent paper listings. This page exists to establish instant physical capability, prove ready stock in Pune stockyard, and eliminate friction between buyer intent and direct WhatsApp negotiation.
+      </p>
+    </div>
+    <div class="spec-box">
+      <div class="spec-box-title what">&#9658; Kya Kaam Karta Hai? (Operational Mechanics)</div>
+      <p>
+        Acts as the primary acquisition funnel. Provides instant search across ready stock, displays physical stockyard metrics, visualizes high-seas import cost benefits, features top industrial press types (Aida, Schuler, Komatsu, Voronezh), and routes buyers straight to live yard inspection bookings and WhatsApp RFQ conversations.
+      </p>
+    </div>
+  </div>
+
+  <table class="features-table">
+    <thead>
+      <tr>
+        <th style="width:25%;">Feature Component</th>
+        <th style="width:50%;">Kyun Hai &amp; Kya Kaam Karta Hai?</th>
+        <th style="width:25%;">Business Impact</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Live Radar Stockyard Indicators</strong></td>
+        <td>A pulsing green radar badge on Pune inventory cards. Instantly verifies to the buyer that the press is physically present on the ground in the Pune yard for live trial.</td>
+        <td><span class="impact-badge">Eliminates Broker Doubts</span></td>
+      </tr>
+      <tr>
+        <td><strong>Precision Crosshair Spec Grid</strong></td>
+        <td>A 2x2 mathematical hairline grid displaying Capacity, Mfg. Year, Model Code, and Inspected Status with dedicated icons. Ensures zero awkward line wraps or floating figures.</td>
+        <td><span class="impact-badge">Clear Technical Data</span></td>
+      </tr>
+      <tr>
+        <td><strong>High Seas CIF vs Local Import Matrix</strong></td>
+        <td>Interactive financial comparison table proving how buying high-seas bonded inventory through Dalal saves 8% to 15% in double-handling, customs demurrage, and local freight.</td>
+        <td><span class="impact-badge">Price Justification</span></td>
+      </tr>
+      <tr>
+        <td><strong>Floating Glassmorphic Compare Pill</strong></td>
+        <td>Positioned on the machine image thumbnail. Allows plant engineers to select up to 4 presses without cluttering category text or header labels.</td>
+        <td><span class="impact-badge">Zero Visual Collisions</span></td>
+      </tr>
+      <tr>
+        <td><strong>Instant WhatsApp RFQ Action</strong></td>
+        <td>Direct green WhatsApp button pre-filling the exact Machine ID, Category, and Tonnage into a direct message to Mr. Vinit Dalal (+91 9821232131).</td>
+        <td><span class="impact-badge">&lt; 30-Sec Inbound Lead</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- PAGE 2: USED MACHINERY CATALOG -->
+<div class="page-spec-card avoid-break">
+  <div class="page-spec-header">
+    <div>
+      <span class="page-num">ROUTE 02</span>
+      <span class="page-name">Used Machinery Catalog &amp; Multi-Facet Search</span>
+    </div>
+    <span class="page-route">URL: /category.html</span>
+  </div>
+  
+  <div class="spec-columns">
+    <div class="spec-box accent">
+      <div class="spec-box-title why">&#9658; Kyun Hai? (Business Purpose &amp; Rationale)</div>
+      <p>
+        Factory buyers do not browse casually; they search for exact machine parameters (e.g., "Need 1600T Knuckle Joint Press" or "Horizontal Boring Machine with 110mm spindle"). If they have to click through irrelevant pages, they leave. This page provides a high-density, multi-facet industrial search engine where buyers filter 26 categories in milliseconds.
+      </p>
+    </div>
+    <div class="spec-box">
+      <div class="spec-box-title what">&#9658; Kya Kaam Karta Hai? (Operational Mechanics)</div>
+      <p>
+        Executes client-side real-time filtering across 26 industrial categories (15 Metal Forming + 11 Metal Cutting), tonnage ranges, manufacturer makes (German, Japanese, Russian, Indian), and stock locations. Supports instant Grid/Table layout toggling and deep comparison modals.
+      </p>
+    </div>
+  </div>
+
+  <table class="features-table">
+    <thead>
+      <tr>
+        <th style="width:25%;">Feature Component</th>
+        <th style="width:50%;">Kyun Hai &amp; Kya Kaam Karta Hai?</th>
+        <th style="width:25%;">Business Impact</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>26 Industrial Category Sidebar</strong></td>
+        <td>Live breakdown of 15 Metal Forming (C-Frame, Hot Forging, Hydraulic, Knuckle Joint) &amp; 11 Metal Cutting categories with dynamic live stock counters.</td>
+        <td><span class="impact-badge">Structured Navigation</span></td>
+      </tr>
+      <tr>
+        <td><strong>Tonnage Range Filter Chips</strong></td>
+        <td>One-tap filtering for Under 500T, 500T–1000T, 1000T–3000T, and 3000T+ presses. Essential for heavy forge shop buyers with specific die load requirements.</td>
+        <td><span class="impact-badge">Instant Tonnage Match</span></td>
+      </tr>
+      <tr>
+        <td><strong>Grid vs. Table View Switcher</strong></td>
+        <td>Plant directors prefer visual photo cards; procurement heads prefer dense tabular data (Stroke, SPM, Bed Size). This toggle satisfies both buyer personas.</td>
+        <td><span class="impact-badge">Dual-Persona Usability</span></td>
+      </tr>
+      <tr>
+        <td><strong>Multi-Machine Comparison Engine</strong></td>
+        <td>Modal dialog that pits up to 4 selected machines side-by-side across 10 engineering parameters (Capacity, Year, Make, Model, Stroke, Bed Dimensions).</td>
+        <td><span class="impact-badge">Speeds PO Decisions</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="page-break"></div>
+
+<!-- PAGE 3: PRODUCT DETAIL PAGE -->
+<div class="page-spec-card avoid-break">
+  <div class="page-spec-header">
+    <div>
+      <span class="page-num">ROUTE 03</span>
+      <span class="page-name">Machine Engineering Dossier &amp; High-Res PDP</span>
+    </div>
+    <span class="page-route">URL: /product.html?id=...</span>
+  </div>
+  
+  <div class="spec-columns">
+    <div class="spec-box accent">
+      <div class="spec-box-title why">&#9658; Kyun Hai? (Business Purpose &amp; Rationale)</div>
+      <p>
+        Before a factory director travels 500 km to Pune or sanctions a ₹50 Lakh advance, their chief technical officer (CTO) must verify every mechanical dimension (Stroke, Die Height, Bolster Bed Area, Main Motor HP). This page exists as an unshakeable digital technical dossier that gives engineers 100% confidence to initiate procurement.
+      </p>
+    </div>
+    <div class="spec-box">
+      <div class="spec-box-title what">&#9658; Kya Kaam Karta Hai? (Operational Mechanics)</div>
+      <p>
+        Renders complete multi-angle photo and video evidence, certified technical spec matrix, physical yard location, inspection checklist, and dual quotation CTAs (Book Live Inspection Trial vs. Request CIF Price).
+      </p>
+    </div>
+  </div>
+
+  <table class="features-table">
+    <thead>
+      <tr>
+        <th style="width:25%;">Feature Component</th>
+        <th style="width:50%;">Kyun Hai &amp; Kya Kaam Karta Hai?</th>
+        <th style="width:25%;">Business Impact</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Certified Engineering Specs Table</strong></td>
+        <td>Displays verified factory data: Tonnage, Stroke Length, Continuous SPM, Bolster Bed Size, Slide Dimensions, Motor KW, and Clutch Model (OMPI pneumatic).</td>
+        <td><span class="impact-badge">CTO Verification</span></td>
+      </tr>
+      <tr>
+        <td><strong>Yard Trial Readiness Badge</strong></td>
+        <td>Certifies whether machine has power connected for live demonstration at Pune Stockyard or is in transit from Europe/Japan ports.</td>
+        <td><span class="impact-badge">Zero Travel Waste</span></td>
+      </tr>
+      <tr>
+        <td><strong>Direct Machine RFQ Form</strong></td>
+        <td>Specialized inquiry form that auto-injects Machine ID and Model into the message, notifying Mr. Vinit Dalal instantly via database and WhatsApp.</td>
+        <td><span class="impact-badge">Direct High-Ticket Lead</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- PAGE 4: BRAND NEW MACHINERY -->
+<div class="page-spec-card avoid-break">
+  <div class="page-spec-header">
+    <div>
+      <span class="page-num">ROUTE 04</span>
+      <span class="page-name">Brand New Heavy Machinery &amp; Turn-Key Lines</span>
+    </div>
+    <span class="page-route">URL: /brand-new-machinery.html</span>
+  </div>
+  
+  <div class="spec-columns">
+    <div class="spec-box accent">
+      <div class="spec-box-title why">&#9658; Kyun Hai? (Business Purpose &amp; Rationale)</div>
+      <p>
+        Large automotive tier-1 suppliers and defence forge shops often have mandates prohibiting used machinery. Dalal Machine Tools partners with global OEMs (DMT &amp; ECAI) to supply brand-new forging lines. This page captures enterprise OEM contracts that used machinery catalogs cannot bid on.
+      </p>
+    </div>
+    <div class="spec-box">
+      <div class="spec-box-title what">&#9658; Kya Kaam Karta Hai? (Operational Mechanics)</div>
+      <p>
+        Showcases factory-new automated forging press lines, knuckle joint extrusion presses, and hydraulic trimming presses with warranty terms, energy efficiency metrics, and turn-key installation consultation.
+      </p>
+    </div>
+  </div>
+
+  <table class="features-table">
+    <thead>
+      <tr>
+        <th style="width:25%;">Feature Component</th>
+        <th style="width:50%;">Kyun Hai &amp; Kya Kaam Karta Hai?</th>
+        <th style="width:25%;">Business Impact</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Turn-Key Line Architecture</strong></td>
+        <td>Visualizes end-to-end press setup: Induction Billet Heater &#10142; Forging Press &#10142; Trim Press &#10142; Robotic Manipulator.</td>
+        <td><span class="impact-badge">Multi-Crore Project Size</span></td>
+      </tr>
+      <tr>
+        <td><strong>OEM Warranty &amp; CE Certification</strong></td>
+        <td>Details manufacturer warranties, European CE safety conformity, and energy-saving variable frequency drive (VFD) options.</td>
+        <td><span class="impact-badge">Enterprise Compliance</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- PAGE 5: SERVICES & RETROFITTING -->
+<div class="page-spec-card avoid-break">
+  <div class="page-spec-header">
+    <div>
+      <span class="page-num">ROUTE 05</span>
+      <span class="page-name">Clutch Retrofit Engineering &amp; Modernization</span>
+    </div>
+    <span class="page-route">URL: /services.html</span>
+  </div>
+  
+  <div class="spec-columns">
+    <div class="spec-box accent">
+      <div class="spec-box-title why">&#9658; Kyun Hai? (Business Purpose &amp; Rationale)</div>
+      <p>
+        Factories across India operate thousands of older mechanical presses with unsafe mechanical rolling-key / dog clutches. Converting to modern OMPI pneumatic clutch-brake systems increases press speed by 25%, prevents fatal operator accidents, and saves factories from having to scrap valuable machine beds.
+      </p>
+    </div>
+    <div class="spec-box">
+      <div class="spec-box-title what">&#9658; Kya Kaam Karta Hai? (Operational Mechanics)</div>
+      <p>
+        Highlights Dalal's technical partnership with OMPI India LLP. Shows before/after conversion comparisons, explains on-site flywheel machining, pneumatic safety valve installation, and provides an inquiry form for press modernization audits.
+      </p>
+    </div>
+  </div>
+
+  <table class="features-table">
+    <thead>
+      <tr>
+        <th style="width:25%;">Feature Component</th>
+        <th style="width:50%;">Kyun Hai &amp; Kya Kaam Karta Hai?</th>
+        <th style="width:25%;">Business Impact</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Before &amp; After Retrofit Showcase</strong></td>
+        <td>Side-by-side mechanical comparison: Old mechanical clutch with single-stroke limitation vs. OMPI Pneumatic Combined Clutch-Brake with dual safety valves.</td>
+        <td><span class="impact-badge">Visually Closes Sales</span></td>
+      </tr>
+      <tr>
+        <td><strong>Turn-Key Overhaul Milestone Guide</strong></td>
+        <td>Step-by-step breakdown: Shaft dimension audit &#10142; Flywheel boring &#10142; Pneumatic circuit installation &#10142; PLC interlock testing.</td>
+        <td><span class="impact-badge">Proves Engineering Depth</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="page-break"></div>
+
+<!-- PAGE 6: CONTACT & STOCKYARD -->
+<div class="page-spec-card avoid-break">
+  <div class="page-spec-header">
+    <div>
+      <span class="page-num">ROUTE 06</span>
+      <span class="page-name">Headquarters, Stockyard &amp; Direct Quotation Portal</span>
+    </div>
+    <span class="page-route">URL: /contact.html</span>
+  </div>
+  
+  <div class="spec-columns">
+    <div class="spec-box accent">
+      <div class="spec-box-title why">&#9658; Kyun Hai? (Business Purpose &amp; Rationale)</div>
+      <p>
+        Provides absolute transparency regarding physical headquarters and heavy equipment yards. Buyers moving 50-ton trailers need precise route guidance off the Pune-Mumbai expressway, visiting hours, and direct access to leadership without middleman filtering.
+      </p>
+    </div>
+    <div class="spec-box">
+      <div class="spec-box-title what">&#9658; Kya Kaam Karta Hai? (Operational Mechanics)</div>
+      <p>
+        Dual corporate presentation: Mumbai Registered Office (Commerce Centre, Tardeo) and Pune Industrial Machinery Stockyard. Contains an interactive Google Maps switcher, appointment booking CTA, and a 38px-padded secure quotation request form.
+      </p>
+    </div>
+  </div>
+
+  <table class="features-table">
+    <thead>
+      <tr>
+        <th style="width:25%;">Feature Component</th>
+        <th style="width:50%;">Kyun Hai &amp; Kya Kaam Karta Hai?</th>
+        <th style="width:25%;">Business Impact</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Dual Map Switcher (Mumbai vs Pune)</strong></td>
+        <td>Interactive tabs allowing buyers to switch between Mumbai corporate headquarters and Pune machine stockyard with one click.</td>
+        <td><span class="impact-badge">Multi-Location Clarity</span></td>
+      </tr>
+      <tr>
+        <td><strong>38px Padded Quotation Form</strong></td>
+        <td>Spacious, mathematically aligned form with custom input focus rings, Honeypot bot protection, and phone number length validation.</td>
+        <td><span class="impact-badge">Zero Spam, Clean Leads</span></td>
+      </tr>
+      <tr>
+        <td><strong>Direct to MD Trust Badge</strong></td>
+        <td>Clean green pill badge (<i class="fa fa-shield"></i> Direct to Managing Director) reassuring plant heads that their technical specs are reviewed directly by Mr. Vinit Dalal.</td>
+        <td><span class="impact-badge">Executive Assurance</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- PAGE 7: OPERATIONS CONSOLE -->
+<div class="page-spec-card avoid-break">
+  <div class="page-spec-header">
+    <div>
+      <span class="page-num">ROUTE 07</span>
+      <span class="page-name">Dalal Staff Lead Triage &amp; Inventory Console</span>
+    </div>
+    <span class="page-route">URL: /dev/index.html &amp; /portal-gate</span>
+  </div>
+  
+  <div class="spec-columns">
+    <div class="spec-box accent">
+      <div class="spec-box-title why">&#9658; Kyun Hai? (Business Purpose &amp; Rationale)</div>
+      <p>
+        In high-ticket machinery, a lead that waits 24 hours gets captured by competing stockyards in Ahmedabad or Faridabad. Dalal staff and Mr. Vinit Dalal need a secure, real-time command dashboard to view every incoming inquiry the moment it is submitted and fire pre-formatted WhatsApp technical proposals in 15 seconds.
+      </p>
+    </div>
+    <div class="spec-box">
+      <div class="spec-box-title what">&#9658; Kya Kaam Karta Hai? (Operational Mechanics)</div>
+      <p>
+        Monitors incoming web inquiries, stores verified contact records, tracks lead statuses (New, Contacted, Inspection Scheduled, Closed), manages live inventory status (In Stock PUNE, Under Inspection, Sold), and exports clean data to Excel for monthly board reviews.
+      </p>
+    </div>
+  </div>
+
+  <table class="features-table">
+    <thead>
+      <tr>
+        <th style="width:25%;">Feature Component</th>
+        <th style="width:50%;">Kyun Hai &amp; Kya Kaam Karta Hai?</th>
+        <th style="width:25%;">Business Impact</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>1-Click WhatsApp Proposal Dispatch</strong></td>
+        <td>Generates instant formatted message with machine specs, photos link, and inspection availability, launching directly in WhatsApp Web.</td>
+        <td><span class="impact-badge">15-Sec Lead Response</span></td>
+      </tr>
+      <tr>
+        <td><strong>Live Inventory Editor</strong></td>
+        <td>Allows staff to change machine location, mark units as "Under Inspection" or "Sold", and update tonnage without modifying code.</td>
+        <td><span class="impact-badge">Zero Developer Cost</span></td>
+      </tr>
+      <tr>
+        <td><strong>Encrypted Portal Gate Protection</strong></td>
+        <td>Protected by signed 12-hour session pass and brute-force rate limiting to safeguard Dalal's confidential customer lead database.</td>
+        <td><span class="impact-badge">Data Privacy &amp; SecOps</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ========================================== -->
+<!-- SYSTEM 2: OMPI INDIA LLP ERP SOFTWARE      -->
+<!-- ========================================== -->
+<div class="system-banner">
+  <h2>SYSTEM 2: OMPI INDIA LLP OPERATIONS &amp; ERP SOFTWARE SUITE</h2>
+  <span>8 DEDICATED INDUSTRIAL ERP MODULES</span>
+</div>
+
+<!-- ERP MODULE 1: DASHBOARD -->
+<div class="page-spec-card avoid-break">
+  <div class="page-spec-header">
+    <div>
+      <span class="page-num">ERP MOD 01</span>
+      <span class="page-name">Executive Command &amp; Operations Dashboard</span>
+    </div>
+    <span class="page-route">URL: /erp/dashboard</span>
+  </div>
+  
+  <div class="spec-columns">
+    <div class="spec-box accent">
+      <div class="spec-box-title why">&#9658; Kyun Hai? (Business Purpose &amp; Rationale)</div>
+      <p>
+        Managing Director and Operations Managers oversee hundreds of heavy clutch assemblies, active retrofit sites, Italian sea shipments, and pending customer payments. Running operations on fragmented WhatsApp chats and paper notebooks leads to delayed dispatches, missed warranties, and tied-up working capital.
+      </p>
+    </div>
+    <div class="spec-box">
+      <div class="spec-box-title what">&#9658; Kya Kaam Karta Hai? (Operational Mechanics)</div>
+      <p>
+        Consolidates real-time KPIs across all 4 operational engines: Active Commercial Pipeline Value, Italy Landed Inventory Value in INR, Open Retrofit Job Cards, and Monthly GSTR-1 Tax Liabilities into an instant single-screen overview.
+      </p>
+    </div>
+  </div>
+
+  <table class="features-table">
+    <thead>
+      <tr>
+        <th style="width:25%;">Feature / Component</th>
+        <th style="width:50%;">Kyun Hai &amp; Kya Kaam Karta Hai?</th>
+        <th style="width:25%;">Business Impact</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Executive KPI Metric Cards</strong></td>
+        <td>Real-time count and valuation of: Open Quotations, Units in Transit from Italy, Active Press Retrofits, and Pending Invoices.</td>
+        <td><span class="impact-badge">Instant Working Capital View</span></td>
+      </tr>
+      <tr>
+        <td><strong>Critical Low-Stock Sentinel</strong></td>
+        <td>Automated alerts when friction discs, rotary unions, or piston seal kits drop below safety buffer stock thresholds.</td>
+        <td><span class="impact-badge">Zero Plant Downtime</span></td>
+      </tr>
+      <tr>
+        <td><strong>Live Retrofit Project Feed</strong></td>
+        <td>Status tracker showing on-site installation progress across client forge shops (e.g., Bharat Forge, Ramkrishna Forgings).</td>
+        <td><span class="impact-badge">Field Execution Control</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ERP MODULE 2: CLUTCH SIZING & QUOTATIONS -->
+<div class="page-spec-card avoid-break">
+  <div class="page-spec-header">
+    <div>
+      <span class="page-num">ERP MOD 02</span>
+      <span class="page-name">Clutch Engineering Sizing &amp; Fast-Quote Engine</span>
+    </div>
+    <span class="page-route">URL: /erp/quotations</span>
+  </div>
+  
+  <div class="spec-columns">
+    <div class="spec-box accent">
+      <div class="spec-box-title why">&#9658; Kyun Hai? (Business Purpose &amp; Rationale)</div>
+      <p>
+        Selecting the wrong clutch torque for an 800-ton press can cause catastrophic mechanical failure, press slippage, or fatal factory accidents. Sales engineers need a mathematically rigorous sizing tool that pairs press parameters with the exact Italian OMPI clutch model and instantly calculates profitable commercial landed pricing.
+      </p>
+    </div>
+    <div class="spec-box">
+      <div class="spec-box-title what">&#9658; Kya Kaam Karta Hai? (Operational Mechanics)</div>
+      <p>
+        Calculates dynamic torque ratings based on Press Tonnage, Flywheel RPM, Operating Air Pressure (5.5 to 6.0 Bar), and Stopping Angle. Auto-generates multi-currency quotations with dynamic EUR-to-INR conversions, customs duties, freight, and 18% GST.
+      </p>
+    </div>
+  </div>
+
+  <table class="features-table">
+    <thead>
+      <tr>
+        <th style="width:25%;">Feature / Component</th>
+        <th style="width:50%;">Kyun Hai &amp; Kya Kaam Karta Hai?</th>
+        <th style="width:25%;">Business Impact</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Torque &amp; Sizing Calculator</strong></td>
+        <td>Inputs press parameters and recommends the exact OMPI model (Series 1000, 2000, 4000) with certified safety margins.</td>
+        <td><span class="impact-badge">Zero Engineering Error</span></td>
+      </tr>
+      <tr>
+        <td><strong>Landed Cost Calculation Engine</strong></td>
+        <td>Calculates EUR factory price &#10142; Customs Duty (7.5%) &#10142; SWS (10%) &#10142; Ocean Freight &#10142; Clear Profit Margin in INR.</td>
+        <td><span class="impact-badge">Guaranteed Margin</span></td>
+      </tr>
+      <tr>
+        <td><strong>1-Click Formal PDF Generator</strong></td>
+        <td>Builds client-ready PDF quote with technical dimension drawings, torque curves, payment milestones, and terms.</td>
+        <td><span class="impact-badge">Instant Quotation Delivery</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ERP MODULE 3: ITALY IMPORT TRACKER -->
+<div class="page-spec-card avoid-break">
+  <div class="page-spec-header">
+    <div>
+      <span class="page-num">ERP MOD 03</span>
+      <span class="page-name">Italy Import Procurement &amp; Landed Cost Ledger</span>
+    </div>
+    <span class="page-route">URL: /erp/imports</span>
+  </div>
+  
+  <div class="spec-columns">
+    <div class="spec-box accent">
+      <div class="spec-box-title why">&#9658; Kyun Hai? (Business Purpose &amp; Rationale)</div>
+      <p>
+        OMPI assemblies are precision-manufactured in Modena, Italy. Fluctuating EUR exchange rates, shipping container freight spikes, port demurrage, and customs clearance charges (BCD, IGST) make it impossible to know true unit profitability unless landed costs are apportioned directly down to every serial number.
+      </p>
+    </div>
+    <div class="spec-box">
+      <div class="spec-box-title what">&#9658; Kya Kaam Karta Hai? (Operational Mechanics)</div>
+      <p>
+        Tracks purchase orders from Modena factory dispatch, ocean transit to Nhava Sheva (JNPT) / Mumbai Port, Bill of Entry (BOE) filing, and allocates freight and customs duties proportionately across individual clutches.
+      </p>
+    </div>
+  </div>
+
+  <table class="features-table">
+    <thead>
+      <tr>
+        <th style="width:25%;">Feature / Component</th>
+        <th style="width:50%;">Kyun Hai &amp; Kya Kaam Karta Hai?</th>
+        <th style="width:25%;">Business Impact</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Bill of Lading &amp; Container Tracker</strong></td>
+        <td>Logs shipment container numbers, vessel name, arrival ETAs at JNPT, and customs CHA clearance progress.</td>
+        <td><span class="impact-badge">Supply Chain Predictability</span></td>
+      </tr>
+      <tr>
+        <td><strong>Landed Cost Duty Apportionment</strong></td>
+        <td>Distributes actual port handling, transport, and customs charges per unit weight/value, calculating exact net cost per unit.</td>
+        <td><span class="impact-badge">Accurate Net Costing</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ERP MODULE 4: SERIALIZED INVENTORY -->
+<div class="page-spec-card avoid-break">
+  <div class="page-spec-header">
+    <div>
+      <span class="page-num">ERP MOD 04</span>
+      <span class="page-name">Serialized Multi-Hub Clutch &amp; Spares Inventory</span>
+    </div>
+    <span class="page-route">URL: /erp/inventory</span>
+  </div>
+  
+  <div class="spec-columns">
+    <div class="spec-box accent">
+      <div class="spec-box-title why">&#9658; Kyun Hai? (Business Purpose &amp; Rationale)</div>
+      <p>
+        Pneumatic clutch-brakes are high-value serialized assemblies (₹2.5 Lakh to ₹15 Lakh per unit). Losing track of a single clutch or dispatching the wrong brake disc size causes weeks of factory stoppage and thousands of rupees in return logistics.
+      </p>
+    </div>
+    <div class="spec-box">
+      <div class="spec-box-title what">&#9658; Kya Kaam Karta Hai? (Operational Mechanics)</div>
+      <p>
+        Maintains serialized tracking for every assembled clutch-brake linked to its Italian factory inspection certificate. Tracks sub-assemblies (rotary unions, friction blocks, seal kits) across Pune Main Stockyard, Mumbai Transit Hub, and Client On-Site Stocks.
+      </p>
+    </div>
+  </div>
+
+  <table class="features-table">
+    <thead>
+      <tr>
+        <th style="width:25%;">Feature / Component</th>
+        <th style="width:50%;">Kyun Hai &amp; Kya Kaam Karta Hai?</th>
+        <th style="width:25%;">Business Impact</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Serialized Assembly Registry</strong></td>
+        <td>Every complete unit has a unique laser-etched serial ID tied to its factory test pressure (Bar) and static torque (Nm).</td>
+        <td><span class="impact-badge">100% Traceability</span></td>
+      </tr>
+      <tr>
+        <td><strong>Multi-Yard Stock Rebalancer</strong></td>
+        <td>Enables stock transfers between Pune Stockyard, Mumbai bonded warehouse, and client consignment depots with statutory delivery challans.</td>
+        <td><span class="impact-badge">Multi-Location Control</span></td>
+      </tr>
+      <tr>
+        <td><strong>QR / Barcode Tagging System</strong></td>
+        <td>Instant barcode printing for boxes and crate labels. Staff scan with any smartphone during inward receipt or outward dispatch.</td>
+        <td><span class="impact-badge">Zero Dispatch Errors</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ERP MODULE 5: RETROFIT JOB CARDS -->
+<div class="page-spec-card avoid-break">
+  <div class="page-spec-header">
+    <div>
+      <span class="page-num">ERP MOD 05</span>
+      <span class="page-name">Retrofit Project Management &amp; Digital Job Cards</span>
+    </div>
+    <span class="page-route">URL: /erp/retrofits</span>
+  </div>
+  
+  <div class="spec-columns">
+    <div class="spec-box accent">
+      <div class="spec-box-title why">&#9658; Kyun Hai? (Business Purpose &amp; Rationale)</div>
+      <p>
+        Retrofitting a 50-year-old mechanical press requires machining the crankshaft, adapting flywheel bearings, installing dual safety valves, and electrical interlocking with the press PLC. If a technician skips an alignment check, the clutch will overheat and burn out within 100 cycles.
+      </p>
+    </div>
+    <div class="spec-box">
+      <div class="spec-box-title what">&#9658; Kya Kaam Karta Hai? (Operational Mechanics)</div>
+      <p>
+        Provides digital job cards with step-by-step milestone checklists for service engineers. Requires field photos and runout gauge measurements before allowing the project to advance to final testing and warranty issuance.
+      </p>
+    </div>
+  </div>
+
+  <table class="features-table">
+    <thead>
+      <tr>
+        <th style="width:25%;">Feature / Component</th>
+        <th style="width:50%;">Kyun Hai &amp; Kya Kaam Karta Hai?</th>
+        <th style="width:25%;">Business Impact</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>5-Stage Project Milestone Gate</strong></td>
+        <td>Strict progression: 1. Shaft Audit &#10142; 2. Machining &#10142; 3. Pneumatic Plumbing &#10142; 4. PLC Safety Interlock &#10142; 5. 100-Cycle Test.</td>
+        <td><span class="impact-badge">Quality Assurance</span></td>
+      </tr>
+      <tr>
+        <td><strong>Runout Gauge &amp; Photo Sign-off</strong></td>
+        <td>Technicians upload photos of mounted clutch, dial indicator runout readings (&lt;0.05mm), and customer engineer signature.</td>
+        <td><span class="impact-badge">Prevents Warranty Disputes</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ERP MODULE 6: WARRANTY & AMC -->
+<div class="page-spec-card avoid-break">
+  <div class="page-spec-header">
+    <div>
+      <span class="page-num">ERP MOD 06</span>
+      <span class="page-name">Serialized Warranty &amp; Annual Maintenance (AMC)</span>
+    </div>
+    <span class="page-route">URL: /erp/service-warranty</span>
+  </div>
+  
+  <div class="spec-columns">
+    <div class="spec-box accent">
+      <div class="spec-box-title why">&#9658; Kyun Hai? (Business Purpose &amp; Rationale)</div>
+      <p>
+        OMPI provides genuine manufacturer warranties. Spares (friction linings, seal kits, rotary joints) provide recurring 40%+ gross margins. If warranty dates and service intervals are tracked manually, warranty claims cost money and high-margin spares renewals slip away.
+      </p>
+    </div>
+    <div class="spec-box">
+      <div class="spec-box-title what">&#9658; Kya Kaam Karta Hai? (Operational Mechanics)</div>
+      <p>
+        Monitors warranty validity per serial number, schedules preventive maintenance visits, logs field breakdown trouble tickets, and generates automated reminders for AMC renewals and friction disc replacements.
+      </p>
+    </div>
+  </div>
+
+  <table class="features-table">
+    <thead>
+      <tr>
+        <th style="width:25%;">Feature / Component</th>
+        <th style="width:50%;">Kyun Hai &amp; Kya Kaam Karta Hai?</th>
+        <th style="width:25%;">Business Impact</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Serialized Warranty Status Checker</strong></td>
+        <td>Instant lookup by Serial ID or Customer Name. Confirms whether a broken clutch is within the 12-month warranty window.</td>
+        <td><span class="impact-badge">Rejects Invalid Claims</span></td>
+      </tr>
+      <tr>
+        <td><strong>Preventive Maintenance Scheduler</strong></td>
+        <td>Auto-triggers 6-month inspection reminders for checking brake lining wear, air filter regulator moisture, and valve response times.</td>
+        <td><span class="impact-badge">Captures Spares Revenue</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ERP MODULE 7: GST INVOICING & FINANCE -->
+<div class="page-spec-card avoid-break">
+  <div class="page-spec-header">
+    <div>
+      <span class="page-num">ERP MOD 07</span>
+      <span class="page-name">GST Tax Invoicing, Ledgers &amp; GSTR-1 Engine</span>
+    </div>
+    <span class="page-route">URL: /erp/finance</span>
+  </div>
+  
+  <div class="spec-columns">
+    <div class="spec-box accent">
+      <div class="spec-box-title why">&#9658; Kyun Hai? (Business Purpose &amp; Rationale)</div>
+      <p>
+        Industrial clutches and machinery spare parts must comply with strict Indian tax regulations (HSN Code 8483 for Clutches/Couplings, HSN 8462 for Presses). Mistakes in E-way bills or tax ledgers lead to commercial vehicles being impounded by GST officers or tax reconciliation mismatches during monthly GSTR-1 filings.
+      </p>
+    </div>
+    <div class="spec-box">
+      <div class="spec-box-title what">&#9658; Kya Kaam Karta Hai? (Operational Mechanics)</div>
+      <p>
+        Generates GST-compliant B2B tax invoices, delivery challans for transit, tracks debtor payment balances (30/60/90 days aging), and exports one-click JSON/Excel reports ready for monthly GST portal filing.
+      </p>
+    </div>
+  </div>
+
+  <table class="features-table">
+    <thead>
+      <tr>
+        <th style="width:25%;">Feature / Component</th>
+        <th style="width:50%;">Kyun Hai &amp; Kya Kaam Karta Hai?</th>
+        <th style="width:25%;">Business Impact</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Automated GSTIN Calculation</strong></td>
+        <td>Auto-detects State Code from Buyer GSTIN. Applies CGST (9%) + SGST (9%) for intra-state Maharashtra sales or IGST (18%) for inter-state sales.</td>
+        <td><span class="impact-badge">100% Tax Accuracy</span></td>
+      </tr>
+      <tr>
+        <td><strong>Delivery Challan &amp; E-Way Bill Helper</strong></td>
+        <td>Generates statutory Form GST DRC-07 challans for moving clutches to client factories for trial, fitting, or warranty replacement.</td>
+        <td><span class="impact-badge">Seamless Transit Logistics</span></td>
+      </tr>
+      <tr>
+        <td><strong>Monthly GSTR-1 Export Module</strong></td>
+        <td>1-click export of Table 4 (B2B Invoices), Table 9B (Credit/Debit Notes), and Table 12 (HSN Summary) formatted for the GST portal.</td>
+        <td><span class="impact-badge">Zero CA Friction</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ERP MODULE 8: SECURITY & RBAC -->
+<div class="page-spec-card avoid-break">
+  <div class="page-spec-header">
+    <div>
+      <span class="page-num">ERP MOD 08</span>
+      <span class="page-name">Role-Based Access Control (RBAC) &amp; SecOps Audit</span>
+    </div>
+    <span class="page-route">URL: /erp/settings</span>
+  </div>
+  
+  <div class="spec-columns">
+    <div class="spec-box accent">
+      <div class="spec-box-title why">&#9658; Kyun Hai? (Business Purpose &amp; Rationale)</div>
+      <p>
+        Proprietary Italian landed costs, customer profit margins, and supplier pricing cannot be exposed to all workshop technicians or sales trainees. Unrestricted access leads to unauthorized price discounts, deleted stock entries, or intellectual property leakage.
+      </p>
+    </div>
+    <div class="spec-box">
+      <div class="spec-box-title what">&#9658; Kya Kaam Karta Hai? (Operational Mechanics)</div>
+      <p>
+        Enforces Role-Based Access Control (RBAC) across 4 permission tiers (Managing Director, Operations Manager, Sales Executive, Field Service Technician). Records an immutable tamper-proof audit trail of every price change, stock deletion, and invoice edit.
+      </p>
+    </div>
+  </div>
+
+  <table class="features-table">
+    <thead>
+      <tr>
+        <th style="width:25%;">Feature / Component</th>
+        <th style="width:50%;">Kyun Hai &amp; Kya Kaam Karta Hai?</th>
+        <th style="width:25%;">Business Impact</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>4-Tier Role Permission Matrix</strong></td>
+        <td>Strictly segments access: Field technicians see only assigned Job Cards; Sales staff cannot view Italy import landed purchase costs.</td>
+        <td><span class="impact-badge">Protects Margin Secrets</span></td>
+      </tr>
+      <tr>
+        <td><strong>Immutable Activity Audit Trail</strong></td>
+        <td>Logs every transaction with User ID, Timestamp, IP Address, and Before/After values. No user can delete records unnoticed.</td>
+        <td><span class="impact-badge">Internal Fraud Prevention</span></td>
+      </tr>
+      <tr>
+        <td><strong>Automated Database Backup Engine</strong></td>
+        <td>Generates scheduled encrypted database snapshots daily, safeguarding inventory and financial history against server failure.</td>
+        <td><span class="impact-badge">Zero Disaster Data Loss</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- SUMMARY COMPARISON TABLE -->
+<div class="page-break"></div>
+<div class="system-banner" style="background:#1e293b;">
+  <h2>COMPLETE SYSTEM MATRIX &amp; INTER-CONNECTIVITY</h2>
+  <span>END-TO-END FLOW OVERVIEW</span>
+</div>
+
+<div class="page-spec-card avoid-break">
+  <p style="font-size:9.5pt; color:#334155; line-height:1.6; margin-bottom:14px;">
+    The diagram and table below illustrate how <strong>Dalal Machine Tools Agency</strong> (the capital equipment inbound funnel) and <strong>OMPI India LLP</strong> (the precision engineering and lifecycle operations engine) operate as a single, unified enterprise ecosystem:
+  </p>
+
+  <table class="features-table">
+    <thead>
+      <tr>
+        <th style="width:18%;">Lifecycle Stage</th>
+        <th style="width:38%;">System 1: Dalal Machine Tools Agency</th>
+        <th style="width:38%;">System 2: OMPI India LLP ERP Suite</th>
+        <th style="width:6%;">Flow</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>1. Lead Generation</strong></td>
+        <td>Buyer visits <strong>Homepage (/)</strong> or <strong>Catalog (/category.html)</strong>, filters 1000T press, submits RFQ via web or WhatsApp.</td>
+        <td>Inquiry auto-logged in <strong>Sales Pipeline</strong>. If press requires clutch modernization, ERP triggers technical sizing.</td>
+        <td style="text-align:center;">&#10142;</td>
+      </tr>
+      <tr>
+        <td><strong>2. Technical Verification</strong></td>
+        <td>Buyer checks <strong>PDP (/product.html)</strong> for stroke, die height, bed area, and books live trial at <strong>Pune Stockyard</strong>.</td>
+        <td>Engineer opens <strong>Sizing Calculator (/erp/quotations)</strong>, inputs press flywheel RPM, outputs certified OMPI torque rating.</td>
+        <td style="text-align:center;">&#10142;</td>
+      </tr>
+      <tr>
+        <td><strong>3. Commercials &amp; SOW</strong></td>
+        <td>Dalal staff uses <strong>Staff Console (/dev/index.html)</strong> to dispatch commercial proposal and high-seas CIF pricing.</td>
+        <td>OMPI issues formal PDF quote with landed costs, currency pegging, and statutory GST terms.</td>
+        <td style="text-align:center;">&#10142;</td>
+      </tr>
+      <tr>
+        <td><strong>4. Stock &amp; Assembly</strong></td>
+        <td>Machine moved from "In Transit" to "In Stock PUNE" with live radar green dot displayed on public web catalog.</td>
+        <td><strong>Inventory Module (/erp/inventory)</strong> scans serialized clutch unit, tags serial ID to client's purchase order.</td>
+        <td style="text-align:center;">&#10142;</td>
+      </tr>
+      <tr>
+        <td><strong>5. Field Retrofitting</strong></td>
+        <td>Client accesses <strong>Services Portal (/services.html)</strong> to understand mechanical overhaul &amp; foundation milestones.</td>
+        <td>Technician executes <strong>5-Stage Job Card (/erp/retrofits)</strong>, logs runout measurements, and uploads photo evidence.</td>
+        <td style="text-align:center;">&#10142;</td>
+      </tr>
+      <tr>
+        <td><strong>6. Handover &amp; AMC</strong></td>
+        <td>Machine marked "Sold" on public catalog; case study archived in <strong>Shipment Archive (/gallery.html)</strong>.</td>
+        <td><strong>Finance Module (/erp/finance)</strong> issues Tax Invoice; <strong>Warranty Module (/erp/service-warranty)</strong> starts 12-month AMC cycle.</td>
+        <td style="text-align:center;">&#10004;</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="footer-bar">
+  <div><strong>Dalal Machine Tools Agency Pvt. Ltd. &amp; OMPI India LLP</strong> &bull; Complete Systems, Pages &amp; Functional Manual</div>
+  <div>Architect: Suyash Shinde &bull; Pimpri, Pune</div>
+</div>
+
+</body>
+</html>
+"""
+
+html_path = 'd:/st.ourhtmldemo.com/DALAL_AND_OMPI_SYSTEM_PAGES_AND_FUNCTIONAL_SPECIFICATION.html'
+with open(html_path, 'w', encoding='utf-8') as f:
+    f.write(html_content)
+
+print("Generated HTML manual:", os.path.exists(html_path))
+

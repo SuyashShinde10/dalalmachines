@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: #f1f5f9; padding: 40px; margin: 0; }
+  .grid-wrap { display: flex; gap: 30px; justify-content: center; }
+  .col { width: 370px; }
+
+  .machine-item-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.08);
+    display: flex;
+    flex-direction: column;
+  }
+  .machine-thumb-box {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    background: #0f172a;
+    overflow: hidden;
+  }
+  .machine-thumb-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .machine-location-pill {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(15, 23, 42, 0.85);
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    backdrop-filter: blur(4px);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .live-radar-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 6px #22c55e;
+  }
+  .machine-stock-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #f89d13;
+    color: #000;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+  }
+  .machine-info-content {
+    padding: 18px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  .machine-cat-label {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: #f89d13;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .machine-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 8px 0 14px;
+    line-height: 1.35;
+    min-height: 46px;
+  }
+
+  /* OPTION A: Crosshair Table */
+  .grid-option-a {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+  .grid-option-a .spec-item {
+    padding: 10px 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #ffffff;
+    border-bottom: 1px solid #edf2f7;
+  }
+  .grid-option-a .spec-item:nth-child(odd) {
+    border-right: 1px solid #edf2f7;
+  }
+  .grid-option-a .spec-item:nth-child(3), .grid-option-a .spec-item:nth-child(4) {
+    border-bottom: none;
+  }
+  .grid-option-a .spec-item .label {
+    color: #64748b;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 3px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .grid-option-a .spec-item .label i {
+    color: #94a3b8;
+    font-size: 10px;
+  }
+  .grid-option-a .spec-item .val {
+    color: #0f172a;
+    font-size: 13.5px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  .grid-option-a .spec-item .val.status-val {
+    color: #16a34a;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* OPTION B: Floating Micro-Pill Tiles */
+  .grid-option-b {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 8px;
+    margin-bottom: 16px;
+  }
+  .grid-option-b .spec-item {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.02);
+  }
+  .grid-option-b .spec-item .label {
+    color: #64748b;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .grid-option-b .spec-item .label i {
+    color: #94a3b8;
+    font-size: 10px;
+  }
+  .grid-option-b .spec-item .val {
+    color: #0f172a;
+    font-size: 13.5px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  .grid-option-b .spec-item .val.status-val {
+    color: #16a34a;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .machine-card-footer {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-top: auto;
+  }
+  .btn-view-details {
+    flex: 1;
+    background: #0f172a;
+    color: #fff;
+    text-align: center;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .btn-rfq-whatsapp {
+    width: 42px;
+    height: 42px;
+    background: #25d366;
+    color: #fff;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    text-decoration: none;
+  }
+</style>
+</head>
+<body>
+<div class='grid-wrap'>
+  <!-- Option A -->
+  <div class='col'>
+    <div style='text-align:center; font-weight:700; margin-bottom:10px; color:#64748b;'>OPTION A: Hairline Crosshair</div>
+    <div class='machine-item-card'>
+      <div class='machine-thumb-box'>
+        <img src='file:///d:/st.ourhtmldemo.com/new/dalalmachine/images/dalal/cframe_press_pune.jpg'>
+        <span class='machine-location-pill'><span class='live-radar-dot'></span> In Stock PUNE</span>
+        <span class='machine-stock-badge'>ID: P00004</span>
+      </div>
+      <div class='machine-info-content'>
+        <div class='machine-cat-label'>Knuckle Joint Press &bull; Voronezh</div>
+        <h4 class='machine-title'>Voronezh 1600T Knuckle Joint Coining Press</h4>
+        <div class='grid-option-a'>
+          <div class='spec-item'>
+            <span class='label'><i class='fa fa-balance-scale'></i> Capacity</span>
+            <span class='val'>1600 Tons</span>
+          </div>
+          <div class='spec-item'>
+            <span class='label'><i class='fa fa-calendar'></i> Mfg. Year</span>
+            <span class='val'>1986</span>
+          </div>
+          <div class='spec-item'>
+            <span class='label'><i class='fa fa-hashtag'></i> Model</span>
+            <span class='val'>KB8342</span>
+          </div>
+          <div class='spec-item'>
+            <span class='label'><i class='fa fa-shield'></i> Status</span>
+            <span class='val status-val'><i class='fa fa-check-circle'></i> Inspected</span>
+          </div>
+        </div>
+        <div class='machine-card-footer'>
+          <a href='#' class='btn-view-details'>Full Specifications &rarr;</a>
+          <a href='#' class='btn-rfq-whatsapp'><i class='fa fa-whatsapp'></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Option B -->
+  <div class='col'>
+    <div style='text-align:center; font-weight:700; margin-bottom:10px; color:#64748b;'>OPTION B: Micro-Tiles with Gap</div>
+    <div class='machine-item-card'>
+      <div class='machine-thumb-box'>
+        <img src='file:///d:/st.ourhtmldemo.com/new/dalalmachine/images/dalal/cframe_press_pune.jpg'>
+        <span class='machine-location-pill'><span class='live-radar-dot'></span> In Stock PUNE</span>
+        <span class='machine-stock-badge'>ID: P00004</span>
+      </div>
+      <div class='machine-info-content'>
+        <div class='machine-cat-label'>Knuckle Joint Press &bull; Voronezh</div>
+        <h4 class='machine-title'>Voronezh 1600T Knuckle Joint Coining Press</h4>
+        <div class='grid-option-b'>
+          <div class='spec-item'>
+            <span class='label'><i class='fa fa-balance-scale'></i> Capacity</span>
+            <span class='val'>1600 Tons</span>
+          </div>
+          <div class='spec-item'>
+            <span class='label'><i class='fa fa-calendar'></i> Mfg. Year</span>
+            <span class='val'>1986</span>
+          </div>
+          <div class='spec-item'>
+            <span class='label'><i class='fa fa-hashtag'></i> Model</span>
+            <span class='val'>KB8342</span>
+          </div>
+          <div class='spec-item'>
+            <span class='label'><i class='fa fa-shield'></i> Status</span>
+            <span class='val status-val'><i class='fa fa-check-circle'></i> Inspected</span>
+          </div>
+        </div>
+        <div class='machine-card-footer'>
+          <a href='#' class='btn-view-details'>Full Specifications &rarr;</a>
+          <a href='#' class='btn-rfq-whatsapp'><i class='fa fa-whatsapp'></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

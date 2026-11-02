@@ -1,0 +1,1239 @@
+# scratch/build_clean_8page_specification.py
+import os
+import subprocess
+import fitz
+
+def build_html():
+    css = """
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+      color: #1f2937;
+      background: #e5e7eb;
+      font-size: 8.4pt;
+      line-height: 1.38;
+    }
+    .page {
+      width: 210mm;
+      height: 297mm;
+      padding: 13mm 18mm 12mm 18mm;
+      margin: 0 auto;
+      background: #ffffff;
+      page-break-after: always;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 7.6pt;
+      color: #6b7280;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 4px;
+      margin-bottom: 12px;
+    }
+    .page-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 7.6pt;
+      color: #6b7280;
+      border-top: 1px solid #e5e7eb;
+      padding-top: 4px;
+      margin-top: 10px;
+    }
+    .content-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    h1.doc-title {
+      font-size: 19pt;
+      font-weight: 700;
+      color: #17365d;
+      margin: 0 0 8px 0;
+      line-height: 1.25;
+      letter-spacing: -0.3px;
+    }
+    .doc-meta {
+      font-size: 8.0pt;
+      line-height: 1.45;
+      color: #374151;
+      margin-bottom: 10px;
+    }
+    .status-notice {
+      background: #f8fafc;
+      border-left: 3.5px solid #17365d;
+      padding: 6px 10px;
+      font-size: 8.2pt;
+      line-height: 1.38;
+      color: #1e293b;
+      margin-bottom: 12px;
+    }
+    h2.section-heading {
+      font-size: 11.8pt;
+      font-weight: 700;
+      color: #17365d;
+      border-bottom: 1.5px solid #17365d;
+      padding-bottom: 2px;
+      margin: 10px 0 6px 0;
+      line-height: 1.25;
+    }
+    h3.group-heading {
+      font-size: 9.2pt;
+      font-weight: 700;
+      color: #0f172a;
+      margin: 8px 0 4px 0;
+      line-height: 1.2;
+    }
+    p {
+      margin: 0 0 6px 0;
+      font-size: 8.3pt;
+      line-height: 1.38;
+      color: #374151;
+    }
+    ul.bullet-list {
+      margin: 0 0 6px 0;
+      padding-left: 14px;
+      font-size: 8.2pt;
+      line-height: 1.4;
+      color: #374151;
+    }
+    ul.bullet-list li {
+      margin-bottom: 3.5px;
+    }
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 8px;
+      font-size: 8.1pt;
+      line-height: 1.34;
+    }
+    table.data-table th {
+      background: #17365d;
+      color: #ffffff;
+      font-weight: 700;
+      text-align: left;
+      padding: 4.5px 6.5px;
+      border: 1px solid #17365d;
+      font-size: 8.0pt;
+    }
+    table.data-table td {
+      border: 1px solid #d1d5db;
+      padding: 4px 6.5px;
+      vertical-align: top;
+      color: #1f2937;
+    }
+    table.data-table tr:nth-child(even) td {
+      background: #f9fafb;
+    }
+    .col-center {
+      text-align: center;
+    }
+    .col-nowrap {
+      white-space: nowrap;
+    }
+    .signature-box {
+      border: 1px solid #d1d5db;
+      height: 65px;
+      background: #ffffff;
+    }
+    """
+
+    def make_header():
+        return """
+        <div class="page-header">
+          <span>Dalal Machine Tools Agency &amp; OMPI India | Project Scope Document v2.5</span>
+          <span>SCOPE-PLAN-2026-DALAL-OMPI-57</span>
+        </div>
+        """
+
+    def make_footer(page_num):
+        return f"""
+        <div class="page-footer">
+          <span>Confidential. Not for sharing outside Dalal Machine Tools Agency Pvt. Ltd. and OMPI India LLP.</span>
+          <span>Page {page_num} of 8</span>
+        </div>
+        """
+
+    pages_html = []
+
+    # ==========================================
+    # PAGE 1
+    # ==========================================
+    p1 = f"""
+    <div class="page">
+      {make_header()}
+      <div class="content-area">
+        <h1 class="doc-title">Dalal Machine Tools Agency &amp; OMPI India: Project Scope Document</h1>
+        <div class="doc-meta">
+          <strong>Version 2.5</strong> &bull; Issued 2 November 2026 &bull; Valid Through 14 November 2026 &bull; Ref: <strong>SCOPE-PLAN-2026-DALAL-OMPI-57</strong><br>
+          Prepared for Mr. Vinit Dalal, Managing Director / Partner &bull; Prepared by Suyash Shinde, Principal Software Consultant, Pune<br>
+          Confidential: not to be shared outside Dalal Machine Tools Agency Pvt. Ltd. and OMPI India LLP.
+        </div>
+        <div class="status-notice">
+          <strong>Status: pre-commencement.</strong> No development work has started. Work begins only after this scope is approved and the Master Services Agreement (MSA) is signed.
+        </div>
+
+        <h2 class="section-heading">1. Summary</h2>
+        <p>This document explains, in plain language, what will be built for your two businesses, in what order, what we need from you, and what is not included. It covers scope only. Fees, payment schedule and legal terms are in the separate MSA.</p>
+
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="width: 13%;"></th>
+              <th style="width: 43.5%;">System 1: Dalal Public Platform</th>
+              <th style="width: 43.5%;">System 2: OMPI Operations ERP</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>For</strong></td>
+              <td>Dalal Machine Tools Agency Pvt. Ltd.</td>
+              <td>OMPI India LLP</td>
+            </tr>
+            <tr>
+              <td><strong>Who uses it</strong></td>
+              <td>Buyers across India, and Dalal staff</td>
+              <td>OMPI staff only: sales, godown, accounts, workshop, Managing Director</td>
+            </tr>
+            <tr>
+              <td><strong>What it does</strong></td>
+              <td>A showroom website that builds trust, shows machines running, and brings enquiries and quotation requests to your sales team</td>
+              <td>One internal system from enquiry to invoice: quotes, stock, imports in Euros, workshop jobs, GST billing, payments, and a Managing Director dashboard</td>
+            </tr>
+            <tr>
+              <td><strong>Size</strong></td>
+              <td>24 units: 22 public pages and 2 staff desks</td>
+              <td>33 modules in 7 groups</td>
+            </tr>
+            <tr>
+              <td><strong>Delivered in</strong></td>
+              <td>Phase 1</td>
+              <td>Phases 2 and 3</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="font-size: 8.0pt; margin-bottom: 8px;">The two companies stay separate: separate data, invoices, numbering and bank records for each. They share only the design of the quotation tool.</p>
+
+        <h2 class="section-heading">2. Delivery Plan</h2>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="width: 22%;">Phase</th>
+              <th style="width: 48%;">What is delivered</th>
+              <th style="width: 14%;" class="col-center">Duration</th>
+              <th style="width: 16%;" class="col-center">Indicative window</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Phase 1: Dalal Platform</strong></td>
+              <td>All 24 units of System 1, the shared quotation engine, WhatsApp enquiry buttons, basic search-engine setup and Google Analytics, go-live</td>
+              <td class="col-center">Weeks 1 to 8</td>
+              <td class="col-center">Months 1 to 2</td>
+            </tr>
+            <tr>
+              <td><strong>Phase 2: OMPI Core ERP</strong></td>
+              <td>15 modules: customers, catalogue, pricing, quotes, deal board, stock, purchase orders, landed costing, staff access, backups</td>
+              <td class="col-center">Weeks 9 to 20</td>
+              <td class="col-center">Months 3 to 5</td>
+            </tr>
+            <tr>
+              <td><strong>Phase 3: OMPI Operations and Control</strong></td>
+              <td>18 modules: workshop, port tracking, GST billing, payments, accounts reports, service desk, Managing Director desk</td>
+              <td class="col-center">Weeks 21 to 32</td>
+              <td class="col-center">Months 6 to 8</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="font-size: 8.0pt; margin-bottom: 5px;"><strong>Total: 8 Months (32 Calendar Weeks).</strong> Phases are built one after another.</p>
+
+        <p style="margin-bottom: 4px;"><strong>How the timeline works</strong></p>
+        <ul class="bullet-list" style="margin-bottom: 0;">
+          <li><strong>Start date.</strong> The clock starts when the MSA is signed, the first payment is received, and the Phase 1 content (photos, machine details, videos) is handed over. If your content or feedback is late, the dates move by the same number of days.</li>
+          <li><strong>Testing and acceptance.</strong> At the end of each phase you try the system (this is called user acceptance testing, or UAT) and confirm it works as described here. Please give feedback within 7 days. If we hear nothing within 7 days, the phase is treated as accepted, unless you have reported a problem in writing.</li>
+          <li><strong>30-day warranty.</strong> From acceptance of each phase, we fix any defect (something not working as this document describes) at no extra charge for 30 days. New features or changes are handled as change requests (section 5).</li>
+        </ul>
+      </div>
+      {make_footer(1)}
+    </div>
+    """
+    pages_html.append(p1)
+
+    # ==========================================
+    # PAGE 2
+    # ==========================================
+    p2 = f"""
+    <div class="page">
+      {make_header()}
+      <div class="content-area">
+        <ul class="bullet-list" style="margin-bottom: 10px;">
+          <li><strong>Handover.</strong> Each phase ends with a walkthrough for the staff who will use it.</li>
+        </ul>
+
+        <h2 class="section-heading">3. What Is and Is Not Included</h2>
+        <p><strong>Included:</strong> design, development, testing, deployment and go-live of the 57 units described in sections 6 and 7. All systems are web-based and work on phone, tablet and computer browsers.</p>
+
+        <p style="margin-bottom: 4px;"><strong>Not included</strong></p>
+        <ul class="bullet-list" style="margin-bottom: 8px;">
+          <li><strong>Hardware:</strong> CCTV cameras, recorders, internet or fibre line and fixed IP at the Pune yard, servers, computers, barcode scanners and label printers, office Wi-Fi.</li>
+          <li><strong>Fees of outside services</strong> (see section 4).</li>
+          <li><strong>Content creation:</strong> photography, video shooting, and writing legal agreements or tax advice.</li>
+          <li><strong>Typing in your old records.</strong> We provide import templates and load the spreadsheets you supply.</li>
+          <li><strong>Separate Android or iPhone apps.</strong></li>
+          <li><strong>Filing GST returns or replacing your accounting software.</strong> The ERP prepares data for your CA; it does not file anything on the government portal.</li>
+          <li><strong>Features not described in this document</strong>, and support after the 30-day warranty. Ongoing support is available as an Annual Maintenance Contract (AMC).</li>
+        </ul>
+
+        <p style="margin-bottom: 4px;"><strong>What we need from you</strong></p>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="width: 50%;">What</th>
+              <th style="width: 28%;">Used for</th>
+              <th style="width: 22%;">Needed by</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Machine details, photos and power-trial video links for Pune stock</td>
+              <td>Units 1, 4, 5, 7, 12</td>
+              <td>Start of Phase 1</td>
+            </tr>
+            <tr>
+              <td>Company history, photos, client references and case studies</td>
+              <td>Units 2, 3, 18, 21</td>
+              <td>Start of Phase 1</td>
+            </tr>
+            <tr>
+              <td>High Seas Sales and tax wording, reviewed by your CA or legal adviser</td>
+              <td>Units 10, 16</td>
+              <td>Before Phase 1 go-live</td>
+            </tr>
+            <tr>
+              <td>OMPI catalogue sheets, dimensions, prices and press-to-clutch data</td>
+              <td>Unit 19, Modules 02, 06</td>
+              <td>Start of Phase 2</td>
+            </tr>
+            <tr>
+              <td>Duty rates, HSN codes, payment terms and quotation terms you use</td>
+              <td>Modules 03, 04, 15, 21</td>
+              <td>Start of Phase 2</td>
+            </tr>
+            <tr>
+              <td>Existing customer, stock and supplier lists in spreadsheets</td>
+              <td>Modules 01, 07, 13</td>
+              <td>Start of Phase 2</td>
+            </tr>
+            <tr>
+              <td>One approver for sign-offs, and one contact person per department</td>
+              <td>All phases</td>
+              <td>Before kickoff</td>
+            </tr>
+            <tr>
+              <td>Testing feedback within 7 days</td>
+              <td>End of each phase</td>
+              <td>Each phase</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="section-heading">4. Outside Services (paid by you directly)</h2>
+        <p>Some features use outside services that charge their own fees. These are not part of our fee. Accounts are opened in your company's name, and we are given access during the build. Providers set their own prices; we will list the exact options before you buy anything.</p>
+
+        <table class="data-table" style="margin-bottom: 0;">
+          <thead>
+            <tr>
+              <th style="width: 32%;">Service</th>
+              <th style="width: 54%;">What it is for</th>
+              <th style="width: 14%;" class="col-center">Required?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Cloud hosting and database<br><span style="font-size: 7.6pt; color: #6b7280;">(for example Render or AWS)</span></td>
+              <td>Runs the systems online and stores your data. An office server is possible by agreement; you would then supply the server.</td>
+              <td class="col-center">Yes</td>
+            </tr>
+            <tr>
+              <td>Backup storage</td>
+              <td>Daily automatic backups</td>
+              <td class="col-center">Yes</td>
+            </tr>
+            <tr>
+              <td>Domain name and business email</td>
+              <td>Your website address and email notifications</td>
+              <td class="col-center">Yes</td>
+            </tr>
+            <tr>
+              <td>WhatsApp Business API (Meta)</td>
+              <td>Automatic sending of quotations and alerts. Phase 1 uses WhatsApp chat buttons, which are free.</td>
+              <td class="col-center">Optional</td>
+            </tr>
+            <tr>
+              <td>GST verification and E-Way Bill service</td>
+              <td>Live check of a customer's GSTIN on the GST portal. Without it, the system checks the GSTIN format and staff confirm details.</td>
+              <td class="col-center">Optional</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      {make_footer(2)}
+    </div>
+    """
+    pages_html.append(p2)
+
+    # ==========================================
+    # PAGE 3
+    # ==========================================
+    p3 = f"""
+    <div class="page">
+      {make_header()}
+      <div class="content-area">
+        <table class="data-table" style="margin-bottom: 12px;">
+          <thead>
+            <tr>
+              <th style="width: 32%;">Service</th>
+              <th style="width: 54%;">What it is for</th>
+              <th style="width: 14%;" class="col-center">Required?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Euro to INR rate feed</td>
+              <td>Automatic daily rate. Without it, staff enter the rate.</td>
+              <td class="col-center">Optional</td>
+            </tr>
+            <tr>
+              <td>Container tracking service</td>
+              <td>Automatic ship tracking. Without it, staff update milestones by hand.</td>
+              <td class="col-center">Optional</td>
+            </tr>
+            <tr>
+              <td>Email sending and Google Maps</td>
+              <td>Notification emails and location maps; charged by usage</td>
+              <td class="col-center">Yes</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="section-heading">5. Key Terms in Plain Words</h2>
+        <p>The MSA is the governing agreement. This section is a summary.</p>
+        <ul class="bullet-list" style="margin-bottom: 12px;">
+          <li><strong>One quotation tool, two companies.</strong> Phase 1 builds one quotation engine used by the website download (Unit 11), the enquiry desk (Unit 24) and the ERP (Module 04). Each company's quotations carry its own letterhead, numbering and bank details.</li>
+          <li><strong>Security and backups.</strong> Every staff member has their own login. Roles decide what each person can see, for example purchase prices only for management. Data is stored in an encrypted database with automatic daily backups. Our target is to keep 30 days of backups; the exact period depends on the hosting plan you choose. A restore test is done before each system goes live.</li>
+          <li><strong>Hosting.</strong> Cloud hosting is the default. If you prefer an office server for the ERP, we will confirm that in the MSA.</li>
+          <li><strong>Estimates only.</strong> The tonnage assistant (Unit 15), the FAQ and High Seas guides (Units 10, 16) and the price and cost calculators (Modules 03, 15) give estimates and general information. They are not engineering, legal or tax advice. Final decisions rest with your engineers and CA.</li>
+          <li><strong>Change requests.</strong> Anything not described here is estimated and agreed in writing before work starts.</li>
+          <li><strong>Ownership.</strong> Custom code and designs made for you transfer to the relevant company after full payment, as set out in the MSA. Third-party and open-source components stay under their own licences, and the consultant's general-purpose tools that are not specific to your business remain the consultant's.</li>
+          <li><strong>Confidentiality.</strong> This document and your business data are kept confidential.</li>
+        </ul>
+
+        <h2 class="section-heading">6. System 1: Dalal Public Platform (24 units, Phase 1)</h2>
+        <p>Units 1 to 22 are public pages. Units 23 and 24 are internal desks behind a staff login. All are included in Phase 1, together with a mobile-friendly design, spam protection on forms, basic search-engine setup and Google Analytics.</p>
+
+        <table class="data-table" style="margin-bottom: 0;">
+          <thead>
+            <tr>
+              <th style="width: 4%;" class="col-center">#</th>
+              <th style="width: 23%;">Page</th>
+              <th style="width: 48%;">What it does</th>
+              <th style="width: 25%;">Why it helps</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-center">1</td>
+              <td><strong>Homepage and Showroom</strong></td>
+              <td>Shows presses for sale with photos, tonnage, running videos and stock status. A WhatsApp button opens a chat already filled with the machine model.</td>
+              <td>Buyers see the machines are really in your Pune yard.</td>
+            </tr>
+            <tr>
+              <td class="col-center">2</td>
+              <td><strong>Company Profile</strong></td>
+              <td>Your 50-year history, photos of the Mumbai office and Pune yard, and the partnership with OMPI Italy.</td>
+              <td>Builds confidence for large orders and vendor approvals.</td>
+            </tr>
+            <tr>
+              <td class="col-center">3</td>
+              <td><strong>Services</strong></td>
+              <td>Explains import, customs at Nhava Sheva, transport, foundation work and clutch retrofits.</td>
+              <td>Shows Dalal is a full-service partner, not only a trader.</td>
+            </tr>
+            <tr>
+              <td class="col-center">4</td>
+              <td><strong>Machinery Catalogue</strong></td>
+              <td>Searchable list of 26 machine types with filters for tonnage, country of make and Pune stock.</td>
+              <td>Buyers find the right press quickly.</td>
+            </tr>
+            <tr>
+              <td class="col-center">5</td>
+              <td><strong>Machine Details</strong></td>
+              <td>One sheet per press: tonnage, stroke, bed size, motor, foundation needs, video, and a downloadable quotation.</td>
+              <td>Technical heads can check fit before calling.</td>
+            </tr>
+            <tr>
+              <td class="col-center">6</td>
+              <td><strong>Brand-New Machinery</strong></td>
+              <td>Showcase of new presses with European safety standards and manufacturer warranty, plus an enquiry form.</td>
+              <td>Reaches buyers who only buy new.</td>
+            </tr>
+            <tr>
+              <td class="col-center">7</td>
+              <td><strong>Photo Gallery</strong></td>
+              <td>Photos of cranes, trailers, port handling and installations, filtered by tonnage and stage.</td>
+              <td>Visual proof you can move very heavy machines.</td>
+            </tr>
+            <tr>
+              <td class="col-center">8</td>
+              <td><strong>Contact and Visit Booking</strong></td>
+              <td>Maps for Mumbai and Pune, contact directory, and a form to request a machine trial visit in Pune.</td>
+              <td>Makes inspection visits easy to arrange.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      {make_footer(3)}
+    </div>
+    """
+    pages_html.append(p3)
+
+    # ==========================================
+    # PAGE 4
+    # ==========================================
+    p4 = f"""
+    <div class="page">
+      {make_header()}
+      <div class="content-area">
+        <table class="data-table" style="margin-bottom: 8px;">
+          <thead>
+            <tr>
+              <th style="width: 4%;" class="col-center">#</th>
+              <th style="width: 23%;">Page</th>
+              <th style="width: 48%;">What it does</th>
+              <th style="width: 25%;">Why it helps</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-center">9</td>
+              <td><strong>Urgent Breakdown Request</strong></td>
+              <td>A 3-field mobile form (tonnage, bed size, urgency). An alert goes to the sales team.</td>
+              <td>Catches urgent replacement enquiries fast.</td>
+            </tr>
+            <tr>
+              <td class="col-center">10</td>
+              <td><strong>Import and Tax FAQs</strong></td>
+              <td>Plain answers on High Seas Sales, customs Bill of Entry and GST input credit. Information only; wording approved by your CA.</td>
+              <td>Answers finance questions before they delay a deal.</td>
+            </tr>
+            <tr>
+              <td class="col-center">11</td>
+              <td><strong>Quotation Download</strong></td>
+              <td>A buyer opens and downloads their official quotation PDF through a secure link.</td>
+              <td>No lost attachments; one authorised version.</td>
+            </tr>
+            <tr>
+              <td class="col-center">12</td>
+              <td><strong>Power Trial Videos</strong></td>
+              <td>Video library of presses running under power, searchable by model and tonnage.</td>
+              <td>Out-of-state buyers can judge condition remotely.</td>
+            </tr>
+            <tr>
+              <td class="col-center">13</td>
+              <td><strong>Machine Comparison</strong></td>
+              <td>Compare up to 3 machines side by side on tonnage, stroke, bed size, motor and price.</td>
+              <td>Helps engineers choose.</td>
+            </tr>
+            <tr>
+              <td class="col-center">14</td>
+              <td><strong>Sell or Trade In Your Press</strong></td>
+              <td>Form for owners to send machine details and photos for a valuation.</td>
+              <td>Brings used-machine purchase leads.</td>
+            </tr>
+            <tr>
+              <td class="col-center">15</td>
+              <td><strong>Tonnage Assistant</strong></td>
+              <td>Estimates press tonnage from component size, material and process, then suggests machines in stock. Estimate only.</td>
+              <td>Guides buyers to the right size.</td>
+            </tr>
+            <tr>
+              <td class="col-center">16</td>
+              <td><strong>High Seas Sales Guide</strong></td>
+              <td>Step-by-step overview of High Seas Sales, port clearance and a document checklist. Information only.</td>
+              <td>Helps first-time importers.</td>
+            </tr>
+            <tr>
+              <td class="col-center">17</td>
+              <td><strong>Live Yard Viewer</strong></td>
+              <td>Time-limited access for approved buyers to watch the Pune yard live. Cameras and internet are provided by you.</td>
+              <td>Remote proof that stock exists.</td>
+            </tr>
+            <tr>
+              <td class="col-center">18</td>
+              <td><strong>Installation Track Record</strong></td>
+              <td>Case studies, client references and a map of delivered machines.</td>
+              <td>Shows experience to boards and committees.</td>
+            </tr>
+            <tr>
+              <td class="col-center">19</td>
+              <td><strong>Spare Parts Catalogue</strong></td>
+              <td>Directory of genuine OMPI parts with sizes, cross-reference and a Pune stock indicator.</td>
+              <td>Supports repeat parts sales.</td>
+            </tr>
+            <tr>
+              <td class="col-center">20</td>
+              <td><strong>European Sourcing Desk</strong></td>
+              <td>Form to request a specific machine from Europe, with an import and transport cost template.</td>
+              <td>Turns special requests into leads.</td>
+            </tr>
+            <tr>
+              <td class="col-center">21</td>
+              <td><strong>Modernisation Showcase</strong></td>
+              <td>Retrofit options such as pneumatic clutch, two-hand safety controls and new panels, with before and after summaries.</td>
+              <td>Wins upgrade work from owners of older presses.</td>
+            </tr>
+            <tr>
+              <td class="col-center">22</td>
+              <td><strong>Maintenance Contracts (AMC)</strong></td>
+              <td>Describes service tiers and quarterly inspections.</td>
+              <td>Turns buyers into service customers.</td>
+            </tr>
+            <tr>
+              <td class="col-center">23</td>
+              <td><strong>Staff Machine Desk</strong><br><span style="font-size:7.4pt; color:#6b7280;">(internal)</span></td>
+              <td>Staff add machines, edit specifications, add video links and set status: Available, Reserved or Sold. Changes appear on the website straight away.</td>
+              <td>No developer needed for daily updates.</td>
+            </tr>
+            <tr>
+              <td class="col-center">24</td>
+              <td><strong>Enquiry Desk</strong><br><span style="font-size:7.4pt; color:#6b7280;">(internal)</span></td>
+              <td>One inbox for website enquiries and WhatsApp enquiries logged by staff, with status, urgency sorting (urgent breakdowns first), quotation history and notes.</td>
+              <td>No enquiry is forgotten.</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="font-size: 7.9pt; color: #4b5563; margin-bottom: 12px;"><strong>WhatsApp:</strong> the chat buttons on the website are free. Automatic capture of WhatsApp messages into the Enquiry Desk needs the paid WhatsApp Business API (section 4).</p>
+
+        <h2 class="section-heading">7. System 2: OMPI Operations ERP (33 modules, Phases 2 and 3)</h2>
+        <p>The ERP is for OMPI India LLP staff only. Each department sees one workspace made from its modules: Sales Desk, Godown Desk, Accounts Desk and Workshop Portal. The Managing Director sees everything through Module 33. Modules 31 and 32 (access control and backups) are built first, in Phase 2, because everything else depends on them.</p>
+      </div>
+      {make_footer(4)}
+    </div>
+    """
+    pages_html.append(p4)
+
+    # ==========================================
+    # PAGE 5
+    # ==========================================
+    p5 = f"""
+    <div class="page">
+      {make_header()}
+      <div class="content-area">
+        <h3 class="group-heading">Group 1: Sales and Customers</h3>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="width: 4%;" class="col-center">#</th>
+              <th style="width: 23%;">Module</th>
+              <th style="width: 44%;">What it does</th>
+              <th style="width: 22%;">Why it helps</th>
+              <th style="width: 7%;" class="col-center">Phase</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-center">01</td>
+              <td><strong>Customer Records and GST Details</strong></td>
+              <td>One profile per customer factory: GSTIN, delivery addresses, contacts, credit terms and outstanding balance. The GSTIN format is checked automatically.</td>
+              <td>Fewer billing mistakes.</td>
+              <td class="col-center">2</td>
+            </tr>
+            <tr>
+              <td class="col-center">02</td>
+              <td><strong>OMPI Product Catalogue</strong></td>
+              <td>Italian clutch-brakes, rotating unions and friction discs by bore size, torque and air pressure, with cross-references.</td>
+              <td>Find the right part in seconds.</td>
+              <td class="col-center">2</td>
+            </tr>
+            <tr>
+              <td class="col-center">03</td>
+              <td><strong>Euro to INR Price Calculator</strong></td>
+              <td>Works out the rupee selling price from the Euro price, exchange rate, freight, duty, port charges and your target margin.</td>
+              <td>Protects your margin when the Euro moves.</td>
+              <td class="col-center">2</td>
+            </tr>
+            <tr>
+              <td class="col-center">04</td>
+              <td><strong>Quick Quotation</strong></td>
+              <td>Branded A4 quotation in one click, with payment terms and validity date, sent by email or WhatsApp link.</td>
+              <td>Quote while the customer is still on the phone.</td>
+              <td class="col-center">2</td>
+            </tr>
+            <tr>
+              <td class="col-center">05</td>
+              <td><strong>Enquiry Deal Board</strong></td>
+              <td>Visual board with stages: New Lead, Quoted, Trial Scheduled, Negotiation, On Hold, Order Confirmed. Cards turn colour when a follow-up is overdue (default 48 hours).</td>
+              <td>The Managing Director sees every active deal.</td>
+              <td class="col-center">2</td>
+            </tr>
+            <tr>
+              <td class="col-center">06</td>
+              <td><strong>Press and Clutch Matcher</strong></td>
+              <td>Look up a press make to find the matching OMPI clutch, flywheel dimensions and air pressure, based on data you supply.</td>
+              <td>Confident technical advice.</td>
+              <td class="col-center">2</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 class="group-heading">Group 2: Inventory and Godown</h3>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="width: 4%;" class="col-center">#</th>
+              <th style="width: 23%;">Module</th>
+              <th style="width: 44%;">What it does</th>
+              <th style="width: 22%;">Why it helps</th>
+              <th style="width: 7%;" class="col-center">Phase</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-center">07</td>
+              <td><strong>Pune Stock Tracker</strong></td>
+              <td>Machines and parts with location, arrival date, condition and reservation. A reserved item is locked so two staff cannot sell it twice.</td>
+              <td>No double-selling.</td>
+              <td class="col-center">2</td>
+            </tr>
+            <tr>
+              <td class="col-center">08</td>
+              <td><strong>Shipment Tracker</strong></td>
+              <td>Imported container milestones: departure, vessel, expected arrival at Nhava Sheva, clearance status. Updated by staff unless you add a tracking service.</td>
+              <td>Better delivery dates for customers.</td>
+              <td class="col-center">3</td>
+            </tr>
+            <tr>
+              <td class="col-center">09</td>
+              <td><strong>Low-Stock Alerts</strong></td>
+              <td>Minimum level per item, with an alert and a suggested reorder quantity.</td>
+              <td>No stock-outs on fast-moving spares.</td>
+              <td class="col-center">2</td>
+            </tr>
+            <tr>
+              <td class="col-center">10</td>
+              <td><strong>Transfer Challans</strong></td>
+              <td>Delivery challans for movement between Pune, Mumbai, trial sites and workshops, with a record of goods in transit.</td>
+              <td>Proper paperwork and records for every movement.</td>
+              <td class="col-center">2</td>
+            </tr>
+            <tr>
+              <td class="col-center">11</td>
+              <td><strong>Shelf and Bin Locator</strong></td>
+              <td>Rack, row and shelf for each small part, with a search screen on phone or computer.</td>
+              <td>Faster picking and packing.</td>
+              <td class="col-center">2</td>
+            </tr>
+            <tr>
+              <td class="col-center">12</td>
+              <td><strong>Trial and Consignment Tracker</strong></td>
+              <td>Items placed at customer plants on trial, with return reminders and a one-click path to invoice.</td>
+              <td>No forgotten equipment.</td>
+              <td class="col-center">2</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 class="group-heading">Group 3: Procurement and Costing</h3>
+        <table class="data-table" style="margin-bottom: 0;">
+          <thead>
+            <tr>
+              <th style="width: 4%;" class="col-center">#</th>
+              <th style="width: 23%;">Module</th>
+              <th style="width: 44%;">What it does</th>
+              <th style="width: 22%;">Why it helps</th>
+              <th style="width: 7%;" class="col-center">Phase</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-center">13</td>
+              <td><strong>International Purchase Orders</strong></td>
+              <td>Euro purchase orders to OMPI Italy with part numbers, terms and HS codes, and a tracker for supplier confirmations.</td>
+              <td>Fewer ordering mistakes.</td>
+              <td class="col-center">2</td>
+            </tr>
+            <tr>
+              <td class="col-center">14</td>
+              <td><strong>Port Clearance Tracker</strong></td>
+              <td>Nhava Sheva milestones: free-storage countdown, container return dates and customs steps.</td>
+              <td>Avoids storage and detention charges.</td>
+              <td class="col-center">3</td>
+            </tr>
+            <tr>
+              <td class="col-center">15</td>
+              <td><strong>Landed Cost Sheet</strong></td>
+              <td>Spreads freight, insurance, duty, surcharges and clearing costs across the items in a shipment to give the true cost of each.</td>
+              <td>You know your real margin on every item.</td>
+              <td class="col-center">2</td>
+            </tr>
+            <tr>
+              <td class="col-center">16</td>
+              <td><strong>Supplier Delivery Record</strong></td>
+              <td>Promised against actual dates, lead times and packing condition for each supplier.</td>
+              <td>Facts for supplier negotiations.</td>
+              <td class="col-center">3</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      {make_footer(5)}
+    </div>
+    """
+    pages_html.append(p5)
+
+    # ==========================================
+    # PAGE 6
+    # ==========================================
+    p6 = f"""
+    <div class="page">
+      {make_header()}
+      <div class="content-area">
+        <h3 class="group-heading">Group 4: Workshop and Overhauls</h3>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="width: 4%;" class="col-center">#</th>
+              <th style="width: 23%;">Module</th>
+              <th style="width: 44%;">What it does</th>
+              <th style="width: 22%;">Why it helps</th>
+              <th style="width: 7%;" class="col-center">Phase</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-center">17</td>
+              <td><strong>Reconditioning Job Cards</strong></td>
+              <td>A digital job card for each machine in the Pune workshop: steps, parts used, labour hours.</td>
+              <td>Accurate overhaul cost and a service history for buyers.</td>
+              <td class="col-center">3</td>
+            </tr>
+            <tr>
+              <td class="col-center">18</td>
+              <td><strong>Clutch Retrofit Work Orders</strong></td>
+              <td>Printable instructions for fitting an OMPI clutch: flywheel boring, keyway depths, valve piping.</td>
+              <td>Fewer machining errors and rework.</td>
+              <td class="col-center">3</td>
+            </tr>
+            <tr>
+              <td class="col-center">19</td>
+              <td><strong>Pre-Dispatch Inspection Sheet</strong></td>
+              <td>Records alignment readings, motor current and clutch stopping time, and prints an inspection certificate.</td>
+              <td>Documented proof of machine condition.</td>
+              <td class="col-center">3</td>
+            </tr>
+            <tr>
+              <td class="col-center">20</td>
+              <td><strong>Site Handover Checklist</strong></td>
+              <td>Mobile checklist for the final installation: levelling, trial run, customer signature and photos. Notifies accounts for final billing.</td>
+              <td>Clear customer acceptance supports timely final payment.</td>
+              <td class="col-center">3</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 class="group-heading">Group 5: Accounts and GST</h3>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="width: 4%;" class="col-center">#</th>
+              <th style="width: 23%;">Module</th>
+              <th style="width: 44%;">What it does</th>
+              <th style="width: 22%;">Why it helps</th>
+              <th style="width: 7%;" class="col-center">Phase</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-center">21</td>
+              <td><strong>GST Tax Invoices</strong></td>
+              <td>Invoices with CGST, SGST or IGST by customer state, HSN codes, and data ready for E-Way Bills. Tax rules are confirmed with your CA before go-live.</td>
+              <td>Accurate invoices that buyers can claim input credit on.</td>
+              <td class="col-center">3</td>
+            </tr>
+            <tr>
+              <td class="col-center">22</td>
+              <td><strong>Payment Ledger and Ageing</strong></td>
+              <td>Tracks advance, pre-dispatch and final payments, with 30, 60 and 90+ day ageing, a payment check before dispatch, and polite reminders.</td>
+              <td>Protects your cash flow.</td>
+              <td class="col-center">3</td>
+            </tr>
+            <tr>
+              <td class="col-center">23</td>
+              <td><strong>Vendor Payments and Overseas Remittances</strong></td>
+              <td>Record of payments to overseas makers, clearing agents, transporters and contractors, linked to invoices and bank references.</td>
+              <td>Orderly records for audits and bank formalities.</td>
+              <td class="col-center">3</td>
+            </tr>
+            <tr>
+              <td class="col-center">24</td>
+              <td><strong>Monthly Margin Overview</strong></td>
+              <td>Revenue and direct costs, with gross margin per machine, spare-parts results and overheads.</td>
+              <td>Clear monthly profit picture.</td>
+              <td class="col-center">3</td>
+            </tr>
+            <tr>
+              <td class="col-center">25</td>
+              <td><strong>GST Return Summary</strong></td>
+              <td>Monthly sales, credit notes and job-work challans in a format your CA can review. It does not file returns.</td>
+              <td>Saves manual preparation time.</td>
+              <td class="col-center">3</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 class="group-heading">Group 6: Sales Operations and Service</h3>
+        <table class="data-table" style="margin-bottom: 0;">
+          <thead>
+            <tr>
+              <th style="width: 4%;" class="col-center">#</th>
+              <th style="width: 23%;">Module</th>
+              <th style="width: 44%;">What it does</th>
+              <th style="width: 22%;">Why it helps</th>
+              <th style="width: 7%;" class="col-center">Phase</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-center">26</td>
+              <td><strong>Field Visit Logger</strong></td>
+              <td>Mobile form for sales engineers to log factory visits, machine needs and follow-up dates.</td>
+              <td>Customer knowledge stays with the company.</td>
+              <td class="col-center">3</td>
+            </tr>
+            <tr>
+              <td class="col-center">27</td>
+              <td><strong>Quotation Follow-Up Reminders</strong></td>
+              <td>Reminds the sales person to follow up open quotations (default after 3, 7 and 14 days), with ready message templates.</td>
+              <td>Quotations do not go cold.</td>
+              <td class="col-center">3</td>
+            </tr>
+            <tr>
+              <td class="col-center">28</td>
+              <td><strong>Maintenance Contract Ledger</strong></td>
+              <td>Active AMCs, quarterly visit calendar, engineer visit notes and renewal reminders 30 days ahead.</td>
+              <td>Fewer missed visits and renewals.</td>
+              <td class="col-center">3</td>
+            </tr>
+            <tr>
+              <td class="col-center">29</td>
+              <td><strong>Breakdown Help Desk</strong></td>
+              <td>Logs urgent breakdown calls, assigns an engineer, tracks spare parts sent from Pune and records resolution.</td>
+              <td>Faster, more organised response.</td>
+              <td class="col-center">3</td>
+            </tr>
+            <tr>
+              <td class="col-center">30</td>
+              <td><strong>Customer Feedback</strong></td>
+              <td>Short survey sent after commissioning, with a summary and approved testimonials for the website.</td>
+              <td>Early warning of problems.</td>
+              <td class="col-center">3</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      {make_footer(6)}
+    </div>
+    """
+    pages_html.append(p6)
+
+    # ==========================================
+    # PAGE 7
+    # ==========================================
+    p7 = f"""
+    <div class="page">
+      {make_header()}
+      <div class="content-area">
+        <h3 class="group-heading">Group 7: Control and Security</h3>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="width: 4%;" class="col-center">#</th>
+              <th style="width: 23%;">Module</th>
+              <th style="width: 44%;">What it does</th>
+              <th style="width: 22%;">Why it helps</th>
+              <th style="width: 7%;" class="col-center">Phase</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-center">31</td>
+              <td><strong>Staff Access and Permissions</strong></td>
+              <td>Individual logins and roles. The Managing Director decides who can see what, for example supplier prices and margins only for management.</td>
+              <td>Confidential pricing stays confidential.</td>
+              <td class="col-center">2</td>
+            </tr>
+            <tr>
+              <td class="col-center">32</td>
+              <td><strong>Activity History and Backups</strong></td>
+              <td>Timestamped record of key actions (quotations, stock changes, status changes, logins) and automatic daily backups with a restore procedure.</td>
+              <td>Protects against data loss and shows who changed what.</td>
+              <td class="col-center">2</td>
+            </tr>
+            <tr>
+              <td class="col-center">33</td>
+              <td><strong>Managing Director's Desk</strong></td>
+              <td>Dashboard on phone and computer: enquiries this month, open quotations, Pune stock value, payments collected, receivables.</td>
+              <td>One view of the whole business.</td>
+              <td class="col-center">3</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="section-heading">8. How the Two Systems Work Together</h2>
+        <ul class="bullet-list" style="list-style-type: decimal; padding-left: 18px; margin-bottom: 10px;">
+          <li><strong>Customer enquires.</strong> A plant head finds a press on the website and taps the WhatsApp button, or fills a form. (Units 1, 5, 9)</li>
+          <li><strong>Technical sizing.</strong> Your sales engineer looks up the matching OMPI clutch. (Modules 02, 06)</li>
+          <li><strong>Quotation sent.</strong> An official quotation with photos, specifications and price is produced in moments. (Unit 11, Module 04)</li>
+          <li><strong>Stock reserved.</strong> Once terms are agreed, the machine is marked Reserved so nobody else can commit it. (Unit 23, Module 07)</li>
+          <li><strong>Workshop and delivery.</strong> Overhaul, power trial, inspection, transport and site handover are recorded. (Modules 17 to 20)</li>
+          <li><strong>Billing and records.</strong> GST invoice, payment tracking and a monthly summary for your CA. (Modules 21 to 25)</li>
+        </ul>
+
+        <h2 class="section-heading">9. Next Steps</h2>
+        <ul class="bullet-list" style="list-style-type: decimal; padding-left: 18px; margin-bottom: 10px;">
+          <li>You review this document and send us your questions.</li>
+          <li>We confirm the open choices together: hosting (cloud or office server), who supplies content, and which optional outside services you want.</li>
+          <li>Scope and MSA are signed by both companies.</li>
+          <li>First payment is made and Phase 1 content is handed over.</li>
+          <li>Phase 1 starts. You receive a short progress update every week.</li>
+          <li>At the end of each phase you test, we fix, and the next phase begins.</li>
+        </ul>
+
+        <h2 class="section-heading">10. Glossary</h2>
+        <table class="data-table" style="margin-bottom: 0;">
+          <thead>
+            <tr>
+              <th style="width: 25%;">Term</th>
+              <th style="width: 75%;">Meaning</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>AMC</strong></td>
+              <td>Annual Maintenance Contract: a yearly service agreement for a machine.</td>
+            </tr>
+            <tr>
+              <td><strong>CA</strong></td>
+              <td>Chartered Accountant.</td>
+            </tr>
+            <tr>
+              <td><strong>Challan</strong></td>
+              <td>A delivery note that travels with goods.</td>
+            </tr>
+            <tr>
+              <td><strong>ERP</strong></td>
+              <td>One connected business system for sales, stock, purchasing, accounts and service.</td>
+            </tr>
+            <tr>
+              <td><strong>GSP</strong></td>
+              <td>GST Suvidha Provider: an approved company that connects software to the GST portal for a fee.</td>
+            </tr>
+            <tr>
+              <td><strong>GSTIN</strong></td>
+              <td>The 15-character GST registration number of a business.</td>
+            </tr>
+            <tr>
+              <td><strong>High Seas Sale</strong></td>
+              <td>A sale of imported goods completed before they reach the Indian customs border.</td>
+            </tr>
+            <tr>
+              <td><strong>HSN / HS code</strong></td>
+              <td>Product classification codes used on tax invoices and customs papers.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      {make_footer(7)}
+    </div>
+    """
+    pages_html.append(p7)
+
+    # ==========================================
+    # PAGE 8
+    # ==========================================
+    p8 = f"""
+    <div class="page">
+      {make_header()}
+      <div class="content-area">
+        <table class="data-table" style="margin-bottom: 14px;">
+          <thead>
+            <tr>
+              <th style="width: 25%;">Term</th>
+              <th style="width: 75%;">Meaning</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Landed cost</strong></td>
+              <td>The full cost of an imported item after freight, insurance, duty and port charges.</td>
+            </tr>
+            <tr>
+              <td><strong>Power trial</strong></td>
+              <td>Running a press under electric power to check its condition.</td>
+            </tr>
+            <tr>
+              <td><strong>RFQ</strong></td>
+              <td>Request for Quotation: a buyer asking for a price.</td>
+            </tr>
+            <tr>
+              <td><strong>UAT</strong></td>
+              <td>User Acceptance Testing: you try the system and confirm it works as described.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="section-heading">11. Approval</h2>
+        <p style="margin-bottom: 12px;">Signing below approves the functional scope in this document (Scope Annexure A). Fees, payment milestones, outside-service costs and legal terms are governed only by the Master Services Agreement.</p>
+
+        <table class="data-table" style="margin-bottom: 0;">
+          <thead>
+            <tr>
+              <th style="width: 33.3%;">For Dalal Machine Tools Agency Pvt. Ltd.</th>
+              <th style="width: 33.3%;">For OMPI India LLP</th>
+              <th style="width: 33.4%;">Consultant</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding-bottom: 12px;">
+                <span style="font-size: 7.4pt; color: #6b7280; text-transform: uppercase;">Name</span><br>
+                <strong>Mr. Vinit Dalal</strong><br>
+                <span style="font-size: 7.8pt; color: #4b5563;">Managing Director</span>
+              </td>
+              <td style="padding-bottom: 12px;">
+                <span style="font-size: 7.4pt; color: #6b7280; text-transform: uppercase;">Name</span><br>
+                <strong>Authorised Signatory</strong><br>
+                <span style="font-size: 7.8pt; color: #4b5563;">Partner</span>
+              </td>
+              <td style="padding-bottom: 12px;">
+                <span style="font-size: 7.4pt; color: #6b7280; text-transform: uppercase;">Consultant</span><br>
+                <strong>Suyash Shinde</strong><br>
+                <span style="font-size: 7.8pt; color: #4b5563;">Principal Software Consultant, Pimpri, Pune</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="height: 80px; vertical-align: top;">
+                <span style="font-size: 7.4pt; color: #6b7280; text-transform: uppercase;">Signature</span>
+              </td>
+              <td style="height: 80px; vertical-align: top;">
+                <span style="font-size: 7.4pt; color: #6b7280; text-transform: uppercase;">Signature</span>
+              </td>
+              <td style="height: 80px; vertical-align: top;">
+                <span style="font-size: 7.4pt; color: #6b7280; text-transform: uppercase;">Signature</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="font-size: 7.4pt; color: #6b7280; text-transform: uppercase;">Date</span><br>
+                <span style="font-size: 8.2pt; color: #1f2937;">&nbsp;</span>
+              </td>
+              <td>
+                <span style="font-size: 7.4pt; color: #6b7280; text-transform: uppercase;">Date</span><br>
+                <span style="font-size: 8.2pt; color: #1f2937;">&nbsp;</span>
+              </td>
+              <td>
+                <span style="font-size: 7.4pt; color: #6b7280; text-transform: uppercase;">Date</span><br>
+                <strong style="font-size: 8.2pt; color: #1f2937;">2 November 2026</strong>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      {make_footer(8)}
+    </div>
+    """
+    pages_html.append(p8)
+
+    full_html = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dalal Machine Tools Agency &amp; OMPI India: Project Scope Document v2.5</title>
+  <style>{css}</style>
+</head>
+<body>
+  {''.join(pages_html)}
+</body>
+</html>
+"""
+    return full_html
+
+if __name__ == "__main__":
+    html_content = build_html()
+    output_html = "DALAL_AND_OMPI_57_PAGES_AND_MODULES_MASTER_SPECIFICATION.html"
+    with open(output_html, "w", encoding="utf-8") as f:
+        f.write(html_content)
+    print(f"Generated HTML: {output_html} ({len(html_content):,} bytes)")
+
+    # Also save as guide
+    with open("DALAL_AND_OMPI_57_EXECUTIVE_CLIENT_GUIDE_SIMPLE.html", "w", encoding="utf-8") as f:
+        f.write(html_content)
+
+    output_pdf = "DALAL_AND_OMPI_57_PAGES_AND_MODULES_MASTER_SPECIFICATION.pdf"
+    edge_paths = [
+        r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
+        r"C:\Program Files\Microsoft\Edge\Application\msedge.exe"
+    ]
+    edge_bin = None
+    for p in edge_paths:
+        if os.path.exists(p):
+            edge_bin = p
+            break
+
+    if edge_bin:
+        abs_html = os.path.abspath(output_html)
+        abs_pdf = os.path.abspath(output_pdf)
+        cmd = [
+            edge_bin,
+            "--headless=new",
+            "--disable-gpu",
+            "--run-all-compositor-stages-before-draw",
+            "--no-pdf-header-footer",
+            f"--print-to-pdf={abs_pdf}",
+            f"file:///{abs_html}"
+        ]
+        print("Rendering PDF via Edge...")
+        subprocess.run(cmd, check=True)
+        print(f"PDF Generated: {abs_pdf} ({os.path.getsize(abs_pdf):,} bytes)")
+
+        # Audit with PyMuPDF
+        doc = fitz.open(abs_pdf)
+        print(f"--- PyMuPDF Audit: Total Pages = {len(doc)} ---")
+        for i, page in enumerate(doc):
+            rect = page.rect
+            text_instances = page.get_text("blocks")
+            bottom_most = 0
+            for b in text_instances:
+                if b[4].strip() and "Page " not in b[4] and "Confidential" not in b[4]:
+                    if b[3] > bottom_most:
+                        bottom_most = b[3]
+            gap = rect.height - bottom_most
+            print(f"Page {i+1:02d}: bottom content y={bottom_most:.1f} | page height={rect.height:.1f} | gap={gap:.1f}pt")
+            pix = page.get_pixmap(dpi=150)
+            pix.save(f"scratch/clean_page_{i+1:02d}.png")
+

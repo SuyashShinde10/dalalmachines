@@ -1,0 +1,41 @@
+DALAL MACHINE TOOLS AGENCY & OMPI INDIA
+SYSTEM 2: OMPI INDUSTRIAL OPERATIONS & ERP SUITE • PROPOSED SCOPE
+Doc Ref: SCOPE-PLAN-2026−DALAL-OMPI-57
+Status: Pre-Commencement Scope Blueprint
+Language: Plain Business English (Non-Technical)
+⚠  STRICTLY CONFIDENTIAL • PRE-COMMENCEMENT MASTER PLAN • WORK NOT COMMENCED • DO NOT SHARE STRICTLY PRIVATE
+OMPI MANAGEMENT ENGINES SCOPE • MODULES 03 & 04 OF 33 (TO BE ENGINEERED) Engine 1
+ERP-MOD-03 Import Currency & Landed Pricing Engine ○  TO BE BUILT: SYSTEM
+2
+Engine 1: Sales & Customer
+Pipeline
+Responsible Staff Role: Commercial Manager, Managing Director
+WHAT THIS MANAGEMENT TOOL WILL DO ONCE BUILT
+Will calculate selling prices in Indian Rupees based on
+current Euro exchange rates, ocean shipping costs,
+customs duty, and minimum profit margins.
+BUSINESS VALUE & COMMERCIAL RISK IT PREVENTS
+Protects company profits against sudden currency
+fluctuations between the Euro and the Rupee during the 4
+to 8 weeks of ocean shipping.
+Key Management Feature: Automated price calculation incorporating daily exchange rates and port handling fees.
+ERP-MOD-04 Fast-Quote 60−Second PDF Generator ○  TO BE BUILT: SYSTEM
+2
+Engine 1: Sales & Customer
+Pipeline
+Responsible Staff Role: Sales Representatives
+WHAT THIS MANAGEMENT TOOL WILL DO ONCE BUILT
+Will compile professional, branded quotation letters
+complete with machine photos, dimensions, prices, and
+payment terms in under 60 seconds.
+BUSINESS VALUE & COMMERCIAL RISK IT PREVENTS
+Allows your team to send an official proposal while the
+customer is still on the phone, beating competitors who
+take 2 to 3 days to send a quote.
+Key Management Feature: 1−click generation of print-ready A4 PDF proposals with official company signature.
+Dalal Machine Tools Agency Pvt. Ltd. & OMPI India LLP • Commercial Operations
+Blueprint
+🔒  CONFIDENTIAL • STRICTLY NOT FOR
+SHARING
+Page 16 of
+32

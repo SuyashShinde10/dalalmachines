@@ -1,0 +1,36 @@
+DALAL MACHINE TOOLS AGENCY & OMPI INDIA
+SYSTEM 2: OMPI INDUSTRIAL OPERATIONS & ERP SUITE • PROPOSED SCOPE
+Doc Ref: SCOPE-PLAN-2026−DALAL-OMPI-57
+Status: Pre-Commencement Scope Blueprint
+Language: Plain Business English (Non-Technical)
+⚠  STRICTLY CONFIDENTIAL • PRE-COMMENCEMENT MASTER PLAN • WORK NOT COMMENCED • DO NOT SHARE STRICTLY PRIVATE
+OMPI MANAGEMENT ENGINES SCOPE • MODULES 01 & 02 OF 33 (TO BE ENGINEERED) Engine 1
+ERP-MOD-01 Client Records & GST Credit Master ○  TO BE BUILT: SYSTEM 2 Engine 1: Sales & Customer Pipeline
+Responsible Staff Role: Sales Executives, Accounts Manager
+WHAT THIS MANAGEMENT TOOL WILL DO ONCE BUILT
+Will maintain a central profile for every client factory:
+verified 15−digit GSTIN, multiple delivery godown
+addresses, authorized contact persons, and approved
+credit limits.
+BUSINESS VALUE & COMMERCIAL RISK IT PREVENTS
+Stops costly billing errors, prevents dispatching goods to
+companies with overdue payments, and ensures tax
+invoices match GST portal records.
+Key Management Feature: Automated GST number validation and company ledger outstanding summary.
+ERP-MOD-02 OMPI Technical Catalog & SKU Master ○  TO BE BUILT: SYSTEM 2 Engine 1: Sales & Customer Pipeline
+Responsible Staff Role: Technical Sales Engineers
+WHAT THIS MANAGEMENT TOOL WILL DO ONCE BUILT
+Will organize all Italian pneumatic clutch-brakes, rotating
+unions, and friction discs by bore size, torque capacity,
+and dimensional cross-references.
+BUSINESS VALUE & COMMERCIAL RISK IT PREVENTS
+Allows sales representatives to find the exact
+replacement clutch model in 10 seconds without needing
+to search through paper product catalogs.
+Key Management Feature: Quick lookup connecting press brand names with suitable OMPI clutch models.
+Dalal Machine Tools Agency Pvt. Ltd. & OMPI India LLP • Commercial Operations
+Blueprint
+🔒  CONFIDENTIAL • STRICTLY NOT FOR
+SHARING
+Page 15 of
+32

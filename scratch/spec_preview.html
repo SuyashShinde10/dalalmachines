@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f1f5f9; padding: 40px; }
+  .preview-wrapper { display: flex; gap: 30px; justify-content: center; }
+  .card { width: 360px; background: #fff; border-radius: 10px; border: 1px solid #e2e8f0; padding: 18px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+  .card h3 { margin: 0 0 4px; font-size: 13px; color: #f89d13; text-transform: uppercase; letter-spacing: 0.5px; }
+  .card h2 { margin: 0 0 14px; font-size: 17px; color: #0f172a; font-weight: 700; line-height: 1.3; }
+
+  /* CURRENT BROKEN STYLE */
+  .grid-current {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 8px 12px;
+    background: #f8fafc;
+    border: 1px solid #edf2f7;
+    padding: 10px 12px;
+    border-radius: 6px;
+    margin-bottom: 14px;
+    font-size: 12px;
+  }
+  .grid-current .spec-item span.label {
+    color: #64748b;
+    font-size: 10.5px;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 2px;
+  }
+  .grid-current .spec-item span.val {
+    color: #1e293b;
+    font-weight: 600;
+    font-size: 12px;
+    display: block;
+  }
+
+  /* OPTION A: CROSSHAIR DIVIDED INDUSTRIAL TABLE */
+  .grid-option-a {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 14px;
+  }
+  .grid-option-a .spec-item {
+    padding: 9px 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  .grid-option-a .spec-item:nth-child(odd) {
+    border-right: 1px solid #e2e8f0;
+  }
+  .grid-option-a .spec-item:nth-child(3), .grid-option-a .spec-item:nth-child(4) {
+    border-bottom: none;
+  }
+  .grid-option-a .spec-item span.label {
+    color: #64748b;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 3px;
+  }
+  .grid-option-a .spec-item span.label i {
+    color: #94a3b8;
+    font-size: 10px;
+  }
+  .grid-option-a .spec-item span.val {
+    color: #0f172a;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  /* OPTION B: POLISHED MICRO-TILES */
+  .grid-option-b {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 8px;
+    margin-bottom: 14px;
+  }
+  .grid-option-b .spec-item {
+    background: #ffffff;
+    border: 1px solid #e8eef5;
+    border-radius: 6px;
+    padding: 8px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.02);
+  }
+  .grid-option-b .spec-item span.label {
+    color: #64748b;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .grid-option-b .spec-item span.label i {
+    color: #94a3b8;
+    font-size: 10px;
+  }
+  .grid-option-b .spec-item span.val {
+    color: #0f172a;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  .status-badge {
+    color: #15803d !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+</style>
+</head>
+<body>
+<div class='preview-wrapper'>
+  <!-- Current Broken -->
+  <div class='card'>
+    <h3>Current (What User Saw)</h3>
+    <h2>Voronezh 1600T Knuckle Joint Coining Press</h2>
+    <div class='grid-current'>
+      <div class='spec-item'>
+        <span class='label'>Capacity / Tonnage</span>
+        <span class='val'>1600 Tons</span>
+      </div>
+      <div class='spec-item'>
+        <span class='label'>Mfg. Year</span>
+        <span class='val'>1986</span>
+      </div>
+      <div class='spec-item'>
+        <span class='label'>Model Code</span>
+        <span class='val'>KB8342</span>
+      </div>
+      <div class='spec-item'>
+        <span class='label'>Ready Status</span>
+        <span class='val' style='color:#16a34a;'><i class='fa fa-check-circle'></i> Inspected</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Option A -->
+  <div class='card'>
+    <h3>Option A: Crosshair Grid</h3>
+    <h2>Voronezh 1600T Knuckle Joint Coining Press</h2>
+    <div class='grid-option-a'>
+      <div class='spec-item'>
+        <span class='label'><i class='fa fa-tachometer'></i> Capacity</span>
+        <span class='val'>1600 Tons</span>
+      </div>
+      <div class='spec-item'>
+        <span class='label'><i class='fa fa-calendar'></i> Mfg. Year</span>
+        <span class='val'>1986</span>
+      </div>
+      <div class='spec-item'>
+        <span class='label'><i class='fa fa-barcode'></i> Model</span>
+        <span class='val'>KB8342</span>
+      </div>
+      <div class='spec-item'>
+        <span class='label'><i class='fa fa-shield'></i> Status</span>
+        <span class='val status-badge'><i class='fa fa-check-circle'></i> Inspected</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Option B -->
+  <div class='card'>
+    <h3>Option B: Micro-Tiles</h3>
+    <h2>Voronezh 1600T Knuckle Joint Coining Press</h2>
+    <div class='grid-option-b'>
+      <div class='spec-item'>
+        <span class='label'><i class='fa fa-tachometer'></i> Capacity</span>
+        <span class='val'>1600 Tons</span>
+      </div>
+      <div class='spec-item'>
+        <span class='label'><i class='fa fa-calendar'></i> Mfg. Year</span>
+        <span class='val'>1986</span>
+      </div>
+      <div class='spec-item'>
+        <span class='label'><i class='fa fa-barcode'></i> Model</span>
+        <span class='val'>KB8342</span>
+      </div>
+      <div class='spec-item'>
+        <span class='label'><i class='fa fa-shield'></i> Status</span>
+        <span class='val status-badge'><i class='fa fa-check-circle'></i> Inspected</span>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

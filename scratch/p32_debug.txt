@@ -1,0 +1,81 @@
+DALAL MACHINE TOOLS AGENCY & OMPI INDIA
+SYSTEM SECURITY, INFRASTRUCTURE & COMPLIANCE ARCHITECTURE
+Doc Ref: ARCH-DOC-2026−DALAL-OMPI-57
+Classification: Confidential & Proprietary
+Revision: v2.1 (Large-Font Executive Edition)
+ENTERPRISE INFRASTRUCTURE, ZERO-TRUST SECURITY & REGULATORY
+COMPLIANCE
+CONTINUOUS RELIABILITY
+STANDARDS
+1. LAN-FIRST RESILIENCE & DEPLOYMENT TOPOLOGY
+The dual-system architecture utilizes a hybrid edge
+deployment. The public commercial portal is distributed via
+global CDN edge nodes with aggressive client-side caching.
+The OMPI industrial ERP executes primarily on a dedicated
+local area network (LAN) edge server situated inside the Pune
+stockyard and workshop, guaranteeing sub-5ms internal
+transaction response times and 100% operational autonomy
+during external internet disruptions.
+2. CRYPTOGRAPHIC SECURITY & IMMUTABLE AUDIT
+TRAIL
+Zero-Trust Role-Based Access Control (RBAC) enforces strict
+least-privilege boundaries across 5 operational tiers: Sales,
+Technical Engineering, Warehouse Operations, Statutory
+Finance, and Executive Leadership. Every pricing
+modification, quotation discount override, credit limit
+change, and invoice status update generates an append-
+only transaction record sealed with SHA-256 cryptographic
+hashes for forensic auditability.
+3. STATUTORY TAX & CUSTOMS COMPLIANCE
+Deep harmonization with Indian Customs (CBIC) and GST
+statutory frameworks. System enforces automated 8−digit
+HSN mapping (8483 for mechanical clutch-brakes and
+transmission components, 6813 for friction materials, 8462
+for machine tool presses). Generates compliant B2B tax
+invoices with CGST/SGST/IGST breakdowns, Rule 55 delivery
+challans, and one-click JSON exports for direct GSTR-1 portal
+filing.
+4. DISASTER RECOVERY & REDUNDANT SNAPSHOTS
+Automated zero-downtime database snapshots execute
+every 24 hours to an isolated Network Attached Storage
+(NAS) array. Nightly encrypted archives are transmitted to a
+secondary off-site location. Disaster recovery protocols are
+tested quarterly, providing a Recovery Point Objective (RPO)
+of <24 hours and a Recovery Time Objective (RTO) of <15
+minutes.
+ENTERPRISE INFRASTRUCTURE PERFORMANCE & RELIABILITY BENCHMARKS
+ARCHITECTURE
+DIMENSION
+SYSTEM 1: DALAL WEB
+PLATFORM SYSTEM 2: OMPI INDUSTRIAL ERP DISASTER RECOVERY
+STANDARD
+Primary Hosting Cloud Edge CDN (Multi-AZ
+Resilient)
+On-Premise LAN Server (Pune
+Hub)
+Secondary Encrypted NAS
+Array
+Latency Benchmark < 120ms Global Response Time < 5ms Internal LAN Transaction
+Time
+< 15−Minute Recovery Time
+(RTO)
+Offline Capability Client-side cached parametric
+catalog
+Full autonomy during internet
+dropouts
+Automated point-in-time
+restore
+Data & Security
+Standards
+HTTPS TLS 1.3, CSP & OWASP Top
+10
+SHA-256 Ledger, 5−Tier Granular
+RBAC
+AES-256 Nightly Encrypted
+Snapshots
+Dalal Machine Tools Agency Pvt. Ltd. • OMPI
+India LLP
+Page 32 of 32 • Master Systems & Modular Architecture Manual •
+Confidential
+Architect: Suyash Shinde (+91 96070
+28594)
