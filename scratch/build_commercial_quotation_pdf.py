@@ -39,8 +39,8 @@ def build_quotation_html():
       line-height: 1.34;
     }
     .page-2 {
-      padding: 9.5mm 15mm 9.0mm 15mm;
-      font-size: 7.7pt;
+      padding: 10.5mm 15mm 10.0mm 15mm;
+      font-size: 7.8pt;
       line-height: 1.28;
     }
     .page-header {
@@ -51,7 +51,7 @@ def build_quotation_html():
       color: #6b7280;
       border-bottom: 1px solid #e5e7eb;
       padding-bottom: 3.5px;
-      margin-bottom: 7px;
+      margin-bottom: 6px;
     }
     .page-footer {
       display: flex;
@@ -61,7 +61,7 @@ def build_quotation_html():
       color: #6b7280;
       border-top: 1px solid #e5e7eb;
       padding-top: 3.5px;
-      margin-top: 6px;
+      margin-top: 5px;
     }
     .content-area {
       flex: 1;
@@ -97,25 +97,19 @@ def build_quotation_html():
     }
     .page-2 h2.section-heading {
       font-size: 9.3pt;
-      margin: 5.5px 0 3.0px 0;
+      margin: 5px 0 3.0px 0;
       padding-bottom: 1.5px;
-    }
-    p {
-      margin: 0 0 4px 0;
-      font-size: 7.9pt;
-      line-height: 1.32;
-      color: #374151;
     }
     table.quotation-table {
       width: 100%;
       border-collapse: collapse;
-      margin-bottom: 6px;
+      margin-bottom: 5px;
       font-size: 7.9pt;
       line-height: 1.28;
     }
     .page-2 table.quotation-table {
       margin-bottom: 4.0px;
-      font-size: 7.5pt;
+      font-size: 7.6pt;
       line-height: 1.24;
     }
     table.quotation-table th {
@@ -128,8 +122,8 @@ def build_quotation_html():
       font-size: 7.8pt;
     }
     .page-2 table.quotation-table th {
-      padding: 2.8px 5.5px;
-      font-size: 7.5pt;
+      padding: 3.0px 5.5px;
+      font-size: 7.6pt;
     }
     table.quotation-table td {
       border: 1px solid #d1d5db;
@@ -138,7 +132,7 @@ def build_quotation_html():
       color: #1f2937;
     }
     .page-2 table.quotation-table td {
-      padding: 2.8px 5.5px;
+      padding: 3.0px 5.5px;
     }
     table.quotation-table tr:nth-child(even) td {
       background: #f9fafb;
@@ -158,7 +152,7 @@ def build_quotation_html():
       white-space: nowrap;
     }
     .page-2 .col-price {
-      font-size: 7.7pt;
+      font-size: 7.8pt;
     }
     .subtotal-row td {
       background: #17365d !important;
@@ -195,24 +189,46 @@ def build_quotation_html():
       text-transform: uppercase;
       letter-spacing: 0.3px;
     }
-    .terms-box {
+    .terms-card {
       background: #f8fafc;
+      border: 1px solid #e2e8f0;
       border-left: 3.5px solid #17365d;
-      padding: 4.5px 8.5px;
+      border-radius: 4px;
+      padding: 6px 9px;
+      margin-bottom: 4px;
+    }
+    ul.terms-list {
+      margin: 0;
+      padding-left: 14px;
+      font-size: 7.3pt;
+      line-height: 1.30;
+      color: #374151;
+    }
+    ul.terms-list li {
+      margin-bottom: 2.5px;
+    }
+    ul.terms-list li:last-child {
+      margin-bottom: 0;
+    }
+    ul.terms-list strong {
+      color: #17365d;
+    }
+    .notice-box {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 4px;
+      padding: 5px 9px;
       font-size: 7.2pt;
       line-height: 1.28;
-      color: #374151;
-      margin-bottom: 4.5px;
-    }
-    .terms-box strong {
-      color: #1e3a8a;
+      color: #1e40af;
+      text-align: center;
     }
     """
 
     def make_header():
         return """
         <div class="page-header">
-          <span>Dalal Machine Tools Agency &amp; OMPI India | Commercial Quotation &bull; v2.0</span>
+          <span>Dalal Machine Tools Agency &amp; OMPI India | Commercial Quotation &bull; v2.1</span>
           <span>REF: QUOTE-2026-DALAL-OMPI-760K</span>
         </div>
         """
@@ -394,12 +410,21 @@ def build_quotation_html():
     </div>
     """
 
+    bullets = [
+        "<strong>Separate Corporate Invoicing &amp; Bank Accounts:</strong> Distinct invoices raised for <em>Dalal Machine Tools Agency Pvt. Ltd.</em> (&#8377;2,00,000) and <em>OMPI India LLP</em> (&#8377;5,60,000 across 7 monthly sprints @ &#8377;80,000/mo) for clean tax accounting &amp; direct GST Input Tax Credit (ITC).",
+        "<strong>Direct Pass-Through Billing (Zero Agency Markups):</strong> Third-party subscriptions—cloud hosting (AWS/Render), corporate domains, WhatsApp Cloud API conversations, and government GST portal API gateways—are billed directly to Client accounts at actual cost.",
+        "<strong>Project Timeline &amp; Client Content Prerequisite:</strong> The 8-month development cycle commences upon MSA execution, mobilization advance clearance, and handover of initial machine catalogs and media. Client review delays adjust subsequent sprint deadlines proportionally.",
+        "<strong>7-Day Deemed Acceptance Governance:</strong> Client shall review sprint demos within 7 calendar days. Absence of a written defect punch-list within 7 days constitutes formal sprint acceptance, triggering the milestone sign-off and warranty commencement.",
+        "<strong>30-Day Defect Warranty &amp; Source Code Ownership:</strong> Each delivered module includes 30 calendar days of bug rectification warranty. 100% custom source code and database schema ownership transfer to Client upon completion of final commercial settlement."
+    ]
+    bullets_html = "".join([f"<li>{b}</li>" for b in bullets])
+
     p2 = f"""
     <div class="page page-2">
       {make_header()}
       <div class="content-area">
         <h2 class="section-heading" style="margin-top: 0;">3. Total Project Investment Summary</h2>
-        <table class="quotation-table" style="margin-bottom: 4.0px;">
+        <table class="quotation-table">
           <thead>
             <tr>
               <th style="width: 32%;">Entity / System</th>
@@ -429,7 +454,7 @@ def build_quotation_html():
         </table>
 
         <h2 class="section-heading">4. Complimentary Value Deliverables (Included in Fee at &#8377;0 / FREE)</h2>
-        <table class="quotation-table" style="margin-bottom: 4.0px;">
+        <table class="quotation-table">
           <thead>
             <tr>
               <th style="width: 49%;">Complimentary Service / Value Asset</th>
@@ -470,13 +495,13 @@ def build_quotation_html():
             </tr>
             <tr style="background: #f0fdf4;">
               <td colspan="2" style="font-weight: 700; color: #065f46;">TOTAL COMPLIMENTARY VALUE DELIVERED TO CLIENT AT ZERO EXTRA CHARGE</td>
-              <td class="col-center" style="font-weight: 800; color: #047857; font-size: 7.6pt;">&#8377; 6,95,000+ FREE</td>
+              <td class="col-center" style="font-weight: 800; color: #047857; font-size: 7.8pt;">&#8377; 6,95,000+ FREE</td>
             </tr>
           </tbody>
         </table>
 
         <h2 class="section-heading">5. Agreed Retainer Payment Schedule: &#8377;2.0L Advance + 7 Monthly Sprints @ &#8377;80,000/mo</h2>
-        <table class="quotation-table" style="margin-bottom: 4.0px;">
+        <table class="quotation-table">
           <thead>
             <tr>
               <th style="width: 14%;" class="col-center">Sprint / Month</th>
@@ -489,49 +514,49 @@ def build_quotation_html():
             <tr style="background: #eff6ff;">
               <td class="col-center"><strong>Advance (M1)</strong></td>
               <td><strong>Contract Execution &amp; Phase 1 Kickoff:</strong> Complete Dalal Web Platform (24 Units), Public Showroom, Instant Quoting &amp; WhatsApp Desk</td>
-              <td class="col-center" style="font-size: 7.0pt;">Dalal Machine Tools Agency Pvt. Ltd.</td>
+              <td class="col-center" style="font-size: 7.1pt;">Dalal Machine Tools Agency Pvt. Ltd.</td>
               <td class="col-price" style="color: #1e3a8a;">&#8377; 2,00,000</td>
             </tr>
             <tr>
               <td class="col-center"><strong>Month 2</strong></td>
               <td>OMPI Core ERP Sprint 1: Customer Master, 15-Digit GST Directory &amp; Enquiry Pipeline</td>
-              <td class="col-center" style="font-size: 7.0pt;">OMPI India LLP</td>
+              <td class="col-center" style="font-size: 7.1pt;">OMPI India LLP</td>
               <td class="col-price">&#8377; 80,000</td>
             </tr>
             <tr>
               <td class="col-center"><strong>Month 3</strong></td>
               <td>OMPI Core ERP Sprint 2: Costing Sheets, Fast Multi-Revision PDF Quotation Engine</td>
-              <td class="col-center" style="font-size: 7.0pt;">OMPI India LLP</td>
+              <td class="col-center" style="font-size: 7.1pt;">OMPI India LLP</td>
               <td class="col-price">&#8377; 80,000</td>
             </tr>
             <tr>
               <td class="col-center"><strong>Month 4</strong></td>
               <td>OMPI Core ERP Sprint 3: Supplier POs &amp; Italy Landed Cost Engine (EUR/INR FX + Customs)</td>
-              <td class="col-center" style="font-size: 7.0pt;">OMPI India LLP</td>
+              <td class="col-center" style="font-size: 7.1pt;">OMPI India LLP</td>
               <td class="col-price">&#8377; 80,000</td>
             </tr>
             <tr>
               <td class="col-center"><strong>Month 5</strong></td>
               <td>OMPI Core ERP Sprint 4: Spares &amp; SKU Warehouse Inventory, Pune Godown Bin Locator</td>
-              <td class="col-center" style="font-size: 7.0pt;">OMPI India LLP</td>
+              <td class="col-center" style="font-size: 7.1pt;">OMPI India LLP</td>
               <td class="col-price">&#8377; 80,000</td>
             </tr>
             <tr>
               <td class="col-center"><strong>Month 6</strong></td>
               <td>OMPI Operations Sprint 5: Digital Job Work Cards, Clutch Retrofit Orders &amp; QC Logs</td>
-              <td class="col-center" style="font-size: 7.0pt;">OMPI India LLP</td>
+              <td class="col-center" style="font-size: 7.1pt;">OMPI India LLP</td>
               <td class="col-price">&#8377; 80,000</td>
             </tr>
             <tr>
               <td class="col-center"><strong>Month 7</strong></td>
               <td>OMPI Operations Sprint 6: GST Sales Invoicing, Credit/Debit Notes &amp; Payment Ageing</td>
-              <td class="col-center" style="font-size: 7.0pt;">OMPI India LLP</td>
+              <td class="col-center" style="font-size: 7.1pt;">OMPI India LLP</td>
               <td class="col-price">&#8377; 80,000</td>
             </tr>
             <tr>
               <td class="col-center"><strong>Month 8</strong></td>
               <td>OMPI Operations Sprint 7: Final Handover, LAN Multi-User Setup, Training &amp; Sign-Off</td>
-              <td class="col-center" style="font-size: 7.0pt;">OMPI India LLP</td>
+              <td class="col-center" style="font-size: 7.1pt;">OMPI India LLP</td>
               <td class="col-price">&#8377; 80,000</td>
             </tr>
             <tr class="grand-total-row">
@@ -541,58 +566,16 @@ def build_quotation_html():
           </tbody>
         </table>
 
-        <h2 class="section-heading">6. Commercial Governance &amp; Invoicing Terms</h2>
-        <div class="terms-box">
-          &bull; <strong>Separate Entity Invoicing:</strong> Invoices raised independently for <em>Dalal Machine Tools Agency Pvt. Ltd.</em> (&#8377;2,00,000) and <em>OMPI India LLP</em> (&#8377;5,60,000 in 7 monthly sprints @ &#8377;80,000/mo) for clean tax accounting &amp; direct GST ITC.<br>
-          &bull; <strong>Pass-Through Billing (No Markups):</strong> Third-party cloud hosting, domains, WhatsApp API fees, and GST gateway usage are billed directly to Client accounts at actuals.<br>
-          &bull; <strong>7-Day Deemed Acceptance Rule:</strong> Client reviews sprint deliverables within 7 calendar days of deployment; absence of written defect punch-list constitutes formal acceptance.<br>
-          &bull; <strong>Warranty &amp; Code Ownership:</strong> 30 calendar days defect fix warranty included per sprint. 100% custom source code transfers upon full settlement.
+        <h2 class="section-heading">6. Commercial Governance &amp; Key Operational Guidelines</h2>
+        <div class="terms-card">
+          <ul class="terms-list">
+            {bullets_html}
+          </ul>
         </div>
 
-        <h2 class="section-heading">7. Commercial Acceptance &amp; Formal Authorization</h2>
-        <p style="font-size: 7.3pt; margin-bottom: 3.0px;">Execution below constitutes formal acceptance of the commercial quotation and payment terms governed by the Master Services Agreement.</p>
-
-        <table class="quotation-table" style="margin-bottom: 0;">
-          <thead>
-            <tr>
-              <th style="width: 33.3%;">For Dalal Machine Tools Agency Pvt. Ltd.</th>
-              <th style="width: 33.3%;">For OMPI India LLP</th>
-              <th style="width: 33.4%;">Consultant / Solutions Architect</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="padding: 2.5px 5px;">
-                <span style="font-size: 6.8pt; color: #6b7280; text-transform: uppercase;">Authorised Representative</span><br>
-                <strong>Mr. Vinit Dalal</strong>, Managing Director
-              </td>
-              <td style="padding: 2.5px 5px;">
-                <span style="font-size: 6.8pt; color: #6b7280; text-transform: uppercase;">Authorised Representative</span><br>
-                <strong>Authorised Signatory</strong>, Designated Partner
-              </td>
-              <td style="padding: 2.5px 5px;">
-                <span style="font-size: 6.8pt; color: #6b7280; text-transform: uppercase;">Principal Consultant</span><br>
-                <strong>Suyash Shinde</strong>, Principal Consultant
-              </td>
-            </tr>
-            <tr>
-              <td style="height: 48px; vertical-align: top; color: #9ca3af; font-size: 7.0pt;">
-                Signature / Company Seal
-              </td>
-              <td style="height: 48px; vertical-align: top; color: #9ca3af; font-size: 7.0pt;">
-                Signature / Company Seal
-              </td>
-              <td style="height: 48px; vertical-align: top; color: #9ca3af; font-size: 7.0pt;">
-                Signature
-              </td>
-            </tr>
-            <tr>
-              <td style="padding: 2.2px 5px; font-size: 7.0pt;">Date: _________________</td>
-              <td style="padding: 2.2px 5px; font-size: 7.0pt;">Date: _________________</td>
-              <td style="padding: 2.2px 5px; font-size: 7.0pt;">Date: <strong>2 November 2026</strong></td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="notice-box">
+          <strong>Exploratory Quotation Notice:</strong> This breakdown provides indicative commercial scheduling and module costs for budgeting and alignment. Formal commercial contract execution, legal warranties, and intellectual property assignment shall be governed exclusively by the Master Services Agreement (MSA).
+        </div>
       </div>
       {make_footer(2)}
     </div>
