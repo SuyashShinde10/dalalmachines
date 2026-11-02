@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dalal &amp; OMPI: Module-Wise Commercial Quotation</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+      color: #1f2937;
+      background: #e5e7eb;
+      font-size: 8.2pt;
+      line-height: 1.34;
+    }
+    .page {
+      width: 210mm;
+      height: 297mm;
+      padding: 12mm 16mm 11mm 16mm;
+      margin: 0 auto;
+      background: #ffffff;
+      page-break-after: always;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 7.5pt;
+      color: #6b7280;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 3.5px;
+      margin-bottom: 9px;
+    }
+    .page-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 7.4pt;
+      color: #6b7280;
+      border-top: 1px solid #e5e7eb;
+      padding-top: 3.5px;
+      margin-top: 8px;
+    }
+    .content-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    h1.doc-title {
+      font-size: 16.5pt;
+      font-weight: 700;
+      color: #17365d;
+      margin: 0 0 4px 0;
+      line-height: 1.22;
+      letter-spacing: -0.2px;
+    }
+    .doc-meta {
+      font-size: 7.8pt;
+      line-height: 1.4;
+      color: #374151;
+      margin-bottom: 7px;
+      background: #f8fafc;
+      padding: 6px 10px;
+      border-radius: 4px;
+      border-left: 3.5px solid #17365d;
+    }
+    h2.section-heading {
+      font-size: 10.2pt;
+      font-weight: 700;
+      color: #17365d;
+      border-bottom: 1.5px solid #17365d;
+      padding-bottom: 2px;
+      margin: 7px 0 5px 0;
+      line-height: 1.2;
+    }
+    p {
+      margin: 0 0 5px 0;
+      font-size: 8.0pt;
+      line-height: 1.34;
+      color: #374151;
+    }
+    table.quotation-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 6px;
+      font-size: 8.0pt;
+      line-height: 1.3;
+    }
+    table.quotation-table th {
+      background: #17365d;
+      color: #ffffff;
+      font-weight: 700;
+      text-align: left;
+      padding: 4px 6px;
+      border: 1px solid #17365d;
+      font-size: 7.9pt;
+    }
+    table.quotation-table td {
+      border: 1px solid #d1d5db;
+      padding: 3.8px 6px;
+      vertical-align: middle;
+      color: #1f2937;
+    }
+    table.quotation-table tr:nth-child(even) td {
+      background: #f9fafb;
+    }
+    .col-center {
+      text-align: center;
+    }
+    .col-right {
+      text-align: right;
+    }
+    .col-price {
+      text-align: right;
+      font-weight: 700;
+      font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+      font-size: 8.1pt;
+      color: #0f172a;
+      white-space: nowrap;
+    }
+    .subtotal-row td {
+      background: #17365d !important;
+      color: #ffffff !important;
+      font-weight: 700;
+      font-size: 8.3pt;
+      border: 1px solid #17365d !important;
+      padding: 4.5px 7px;
+    }
+    .subtotal-row .col-price {
+      color: #ffffff !important;
+      font-size: 8.6pt;
+    }
+    .grand-total-row td {
+      background: #047857 !important;
+      color: #ffffff !important;
+      font-weight: 800;
+      font-size: 9.0pt;
+      border: 1px solid #047857 !important;
+      padding: 5px 8px;
+    }
+    .grand-total-row .col-price {
+      color: #ffffff !important;
+      font-size: 9.4pt;
+    }
+    ul.bullet-list {
+      margin: 0 0 6px 0;
+      padding-left: 14px;
+      font-size: 7.9pt;
+      line-height: 1.36;
+      color: #374151;
+    }
+    ul.bullet-list li {
+      margin-bottom: 3px;
+    }
+    </style>
+</head>
+<body>
+  
+    <div class="page">
+      
+        <div class="page-header">
+          <span>Dalal Machine Tools Agency &amp; OMPI India | Commercial Quotation &bull; v1.0</span>
+          <span>REF: QUOTE-2026-DALAL-OMPI-760K</span>
+        </div>
+        
+      <div class="content-area">
+        <h1 class="doc-title">Commercial Quotation: Module-Wise Cost Breakdown</h1>
+        <div class="doc-meta">
+          <strong>Engagement:</strong> Unified Digital Showroom Platform &amp; OMPI Industrial ERP Suite (57 Total Units)<br>
+          <strong>Client:</strong> Dalal Machine Tools Agency Pvt. Ltd. &amp; OMPI India LLP &bull; Attn: <strong>Mr. Vinit Dalal</strong>, Managing Director / Partner<br>
+          <strong>Consultant:</strong> Suyash Shinde, Principal Software Consultant, Pimpri, Pune &bull; <strong>Validity:</strong> 15 Days (Thru 14 Nov 2026)
+        </div>
+
+        <h2 class="section-heading">1. System 1: Dalal Machine Tools Agency Pvt. Ltd. (Public Platform &amp; Inbound Engine)</h2>
+        <p style="font-size: 7.8pt; margin-bottom: 4px;">Scope: 22 Public Showroom Pages + 2 Staff Admin Desks &bull; Delivery: Phase 1 (Weeks 1 to 8 &bull; Months 1 to 2)</p>
+
+        <table class="quotation-table">
+          <thead>
+            <tr>
+              <th style="width: 5%;" class="col-center">No.</th>
+              <th style="width: 40%;">Module / Deliverable</th>
+              <th style="width: 37%;">Operational Scope &amp; Key Deliverable</th>
+              <th style="width: 18%;" class="col-right">Price (INR)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-center">1</td>
+              <td><strong>Machinery Showroom &amp; Category Catalog</strong></td>
+              <td>26 machine categories, stock filters, yard authenticity showcase</td>
+              <td class="col-price">&#8377; 35,000</td>
+            </tr>
+            <tr>
+              <td class="col-center">2</td>
+              <td><strong>Machine Detail Sheets &amp; Video Trials</strong></td>
+              <td>Tonnage, stroke, bed specs, unedited running video links per machine</td>
+              <td class="col-price">&#8377; 30,000</td>
+            </tr>
+            <tr>
+              <td class="col-center">3</td>
+              <td><strong>Instant Quotation Engine &amp; WhatsApp Leads</strong></td>
+              <td>60-sec formal proposal PDF download + direct WhatsApp lead routing</td>
+              <td class="col-price">&#8377; 35,000</td>
+            </tr>
+            <tr>
+              <td class="col-center">4</td>
+              <td><strong>Press Tonnage &amp; Sizing Assistant</strong></td>
+              <td>Interactive component force calculation formula for plant buyers</td>
+              <td class="col-price">&#8377; 25,000</td>
+            </tr>
+            <tr>
+              <td class="col-center">5</td>
+              <td><strong>High Seas Sales &amp; Import FAQs Portal</strong></td>
+              <td>Procedural guidance, customs documentation &amp; GST ITC explainers</td>
+              <td class="col-price">&#8377; 20,000</td>
+            </tr>
+            <tr>
+              <td class="col-center">6</td>
+              <td><strong>Staff Operations Console &amp; RFQ Lead Desk</strong></td>
+              <td>Internal machine spec manager, stock toggles, buyer RFQ inbox</td>
+              <td class="col-price">&#8377; 30,000</td>
+            </tr>
+            <tr>
+              <td class="col-center">7</td>
+              <td><strong>SEO Architecture &amp; GA4 Buyer Telemetry</strong></td>
+              <td>Technical SEO metadata, Google Analytics 4 tracking &amp; search index</td>
+              <td class="col-price">&#8377; 25,000</td>
+            </tr>
+            <tr class="subtotal-row">
+              <td colspan="3"><strong>SUBTOTAL: SYSTEM 1 (DALAL MACHINE TOOLS AGENCY PVT. LTD.)</strong></td>
+              <td class="col-price">&#8377; 2,00,000</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="section-heading" style="margin-top: 8px;">2. System 2: OMPI India LLP (Industrial Operations &amp; Precision Clutch ERP)</h2>
+        <p style="font-size: 7.8pt; margin-bottom: 4px;">Scope: 33 Specialized Operations Modules in 7 Groups &bull; Delivery: Phase 2 &amp; Phase 3 (Weeks 9 to 32 &bull; Months 3 to 8)</p>
+
+        <table class="quotation-table" style="margin-bottom: 0;">
+          <thead>
+            <tr>
+              <th style="width: 5%;" class="col-center">No.</th>
+              <th style="width: 40%;">Module / Deliverable</th>
+              <th style="width: 37%;">Operational Scope &amp; Key Deliverable</th>
+              <th style="width: 18%;" class="col-right">Price (INR)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-center">1</td>
+              <td><strong>Customer Master &amp; GST Directory</strong></td>
+              <td>Verified 15-digit GSTIN, delivery godowns, commercial credit terms</td>
+              <td class="col-price">&#8377; 40,000</td>
+            </tr>
+            <tr>
+              <td class="col-center">2</td>
+              <td><strong>Italian OMPI Product &amp; SKU Master</strong></td>
+              <td>Clutch-brakes, rotating unions, friction discs by bore size &amp; torque</td>
+              <td class="col-price">&#8377; 50,000</td>
+            </tr>
+            <tr>
+              <td class="col-center">3</td>
+              <td><strong>Landed Costing &amp; Euro/INR Calculator</strong></td>
+              <td>Customs duty, ocean freight, port clearing, daily Euro exchange entry</td>
+              <td class="col-price">&#8377; 65,000</td>
+            </tr>
+            <tr>
+              <td class="col-center">4</td>
+              <td><strong>OMPI Fast-Quote &amp; Proposal Generator</strong></td>
+              <td>Shared quoting engine with OMPI letterhead &amp; separate bank details</td>
+              <td class="col-price">&#8377; 45,000</td>
+            </tr>
+            <tr>
+              <td class="col-center">5</td>
+              <td><strong>Enquiry Deal Board &amp; Follow-Up Assistant</strong></td>
+              <td>Visual deal pipeline (New, Quoted, Trial, Won) + follow-up alerts</td>
+              <td class="col-price">&#8377; 40,000</td>
+            </tr>
+            <tr>
+              <td class="col-center">6</td>
+              <td><strong>Press-to-Clutch Sizing Matcher</strong></td>
+              <td>Technical lookup matching industrial press makes with OMPI models</td>
+              <td class="col-price">&#8377; 35,000</td>
+            </tr>
+            <tr>
+              <td class="col-center">7</td>
+              <td><strong>Pune Godown Stock &amp; Reservation Locker</strong></td>
+              <td>Live stock balances, shelf bin locator, anti-double-selling stock lock</td>
+              <td class="col-price">&#8377; 55,000</td>
+            </tr>
+            <tr>
+              <td class="col-center">8</td>
+              <td><strong>International PO &amp; Shipping Milestone Logger</strong></td>
+              <td>Euro POs to Italy, Bill of Lading (BL) &amp; customs milestone tracker</td>
+              <td class="col-price">&#8377; 45,000</td>
+            </tr>
+            <tr>
+              <td class="col-center">9</td>
+              <td><strong>Workshop Overhauls &amp; Reconditioning Cards</strong></td>
+              <td>Digital job cards, clutch retrofit work orders, geometry trial logs</td>
+              <td class="col-price">&#8377; 55,000</td>
+            </tr>
+            <tr>
+              <td class="col-center">10</td>
+              <td><strong>GST Tax Invoicing &amp; Payment Ageing Ledger</strong></td>
+              <td>CGST/SGST/IGST tax invoices, 30/60/90-day payment ageing tracker</td>
+              <td class="col-price">&#8377; 50,000</td>
+            </tr>
+            <tr>
+              <td class="col-center">11</td>
+              <td><strong>Breakdown Helpdesk &amp; Service AMC Tracker</strong></td>
+              <td>Urgent breakdown calls, engineer dispatch, AMC quarterly calendar</td>
+              <td class="col-price">&#8377; 40,000</td>
+            </tr>
+            <tr>
+              <td class="col-center">12</td>
+              <td><strong>Staff Access, On-Premise LAN &amp; 3-Tier Backups</strong></td>
+              <td>Role permissions, local server setup, automated daily snapshots</td>
+              <td class="col-price">&#8377; 40,000</td>
+            </tr>
+            <tr class="subtotal-row">
+              <td colspan="3"><strong>SUBTOTAL: SYSTEM 2 (OMPI INDIA LLP)</strong></td>
+              <td class="col-price">&#8377; 5,60,000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+        <div class="page-footer">
+          <span>Confidential &bull; Commercial Scope &amp; Pricing Quotation &bull; Valid Through 14 November 2026</span>
+          <span>Page 1 of 2</span>
+        </div>
+        
+    </div>
+    
+  
+    <div class="page">
+      
+        <div class="page-header">
+          <span>Dalal Machine Tools Agency &amp; OMPI India | Commercial Quotation &bull; v1.0</span>
+          <span>REF: QUOTE-2026-DALAL-OMPI-760K</span>
+        </div>
+        
+      <div class="content-area">
+        <h2 class="section-heading" style="margin-top: 0;">3. Total Project Investment Summary</h2>
+        <table class="quotation-table">
+          <thead>
+            <tr>
+              <th style="width: 32%;">Entity / System</th>
+              <th style="width: 38%;">Scope of Deliverables</th>
+              <th style="width: 14%;" class="col-center">Schedule</th>
+              <th style="width: 16%;" class="col-right">Total (INR)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Dalal Machine Tools Agency Pvt. Ltd.</strong></td>
+              <td>System 1: Public Machinery Platform &bull; 24 Units</td>
+              <td class="col-center">Weeks 1–8</td>
+              <td class="col-price">&#8377; 2,00,000</td>
+            </tr>
+            <tr>
+              <td><strong>OMPI India LLP</strong></td>
+              <td>System 2: Industrial ERP Management Suite &bull; 33 Modules</td>
+              <td class="col-center">Weeks 9–32</td>
+              <td class="col-price">&#8377; 5,60,000</td>
+            </tr>
+            <tr class="grand-total-row">
+              <td colspan="3"><strong>TOTAL COMBINED TURNKEY INVESTMENT (57 FUNCTIONAL UNITS)</strong></td>
+              <td class="col-price">&#8377; 7,60,000</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="section-heading">4. Phased Milestone Payment Schedule</h2>
+        <table class="quotation-table">
+          <thead>
+            <tr>
+              <th style="width: 14%;" class="col-center">Milestone</th>
+              <th style="width: 48%;">Deliverable Gate &amp; Verification Trigger</th>
+              <th style="width: 16%;" class="col-center">Invoice Entity</th>
+              <th style="width: 10%;" class="col-center">%</th>
+              <th style="width: 12%;" class="col-right">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-center"><strong>Advance</strong></td>
+              <td>Contract Execution &bull; Architecture Kickoff &bull; Design Setup</td>
+              <td class="col-center">Dalal Pvt. Ltd.</td>
+              <td class="col-center">20%</td>
+              <td class="col-price">&#8377; 1,50,000</td>
+            </tr>
+            <tr>
+              <td class="col-center"><strong>Milestone 1</strong></td>
+              <td>Phase 1 Go-Live: Dalal Showroom, 24 Units, Lead Engine &amp; Quoting</td>
+              <td class="col-center">Dalal Pvt. Ltd.</td>
+              <td class="col-center">20%</td>
+              <td class="col-price">&#8377; 1,50,000</td>
+            </tr>
+            <tr>
+              <td class="col-center"><strong>Milestone 2</strong></td>
+              <td>Phase 2 UAT: OMPI Core ERP (Catalog, Sizing, Landed Cost, Stock Tracker)</td>
+              <td class="col-center">OMPI India LLP</td>
+              <td class="col-center">30%</td>
+              <td class="col-price">&#8377; 2,30,000</td>
+            </tr>
+            <tr>
+              <td class="col-center"><strong>Milestone 3</strong></td>
+              <td>Phase 3 UAT: Operations (Job Cards, GST Billing, Shipping, MD Desk)</td>
+              <td class="col-center">OMPI India LLP</td>
+              <td class="col-center">30%</td>
+              <td class="col-price">&#8377; 2,30,000</td>
+            </tr>
+            <tr class="subtotal-row">
+              <td colspan="4"><strong>TOTAL CONTRACT VALUE</strong></td>
+              <td class="col-price">&#8377; 7,60,000</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="section-heading">5. Commercial Terms, Warranties &amp; Invoicing Governance</h2>
+        <ul class="bullet-list" style="margin-bottom: 8px;">
+          <li><strong>Separate Entity Invoicing:</strong> Invoices will be raised separately in the name of <em>Dalal Machine Tools Agency Pvt. Ltd.</em> (&#8377;2,00,000 total) and <em>OMPI India LLP</em> (&#8377;5,60,000 total) to ensure clean corporate accounting and independent GST input tax credit (ITC) booking.</li>
+          <li><strong>Client Direct Accounts (No Markups):</strong> Cloud server hosting (AWS/Render), corporate domains, WhatsApp Business API (Meta conversation usage fees), and GST gateway fees are paid directly by the Client. Accounts remain 100% owned by the Client.</li>
+          <li><strong>Timeline Clock &amp; Delays:</strong> Development schedule commences upon receipt of the agreed milestone advance remittance and baseline client data. Any delay in client-provided materials automatically extends subsequent delivery target dates on a day-for-day basis.</li>
+          <li><strong>7-Day Deemed Acceptance:</strong> Client shall review and provide written feedback within 7 calendar days of milestone delivery demo. If no written punch-list is received within 7 days, the milestone is deemed formally accepted, activating the 30-day warranty window.</li>
+          <li><strong>30-Day Warranty &amp; Code Ownership:</strong> 30 calendar days of bug-fixing warranty included post-acceptance of each phase. 100% custom application code ownership transfers to Client upon full commercial settlement.</li>
+        </ul>
+
+        <h2 class="section-heading">6. Commercial Acceptance &amp; Formal Authorization</h2>
+        <p style="font-size: 7.8pt; margin-bottom: 5px;">Execution below constitutes formal acceptance of the module-wise commercial quotation. Terms shall be governed by the Master Services Agreement.</p>
+
+        <table class="quotation-table" style="margin-bottom: 0;">
+          <thead>
+            <tr>
+              <th style="width: 33.3%;">For Dalal Machine Tools Agency Pvt. Ltd.</th>
+              <th style="width: 33.3%;">For OMPI India LLP</th>
+              <th style="width: 33.4%;">Consultant / Solutions Architect</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding-bottom: 6px;">
+                <span style="font-size: 7.2pt; color: #6b7280; text-transform: uppercase;">Authorised Representative</span><br>
+                <strong>Mr. Vinit Dalal</strong><br>
+                <span style="font-size: 7.6pt; color: #4b5563;">Managing Director</span>
+              </td>
+              <td style="padding-bottom: 6px;">
+                <span style="font-size: 7.2pt; color: #6b7280; text-transform: uppercase;">Authorised Representative</span><br>
+                <strong>Authorised Signatory</strong><br>
+                <span style="font-size: 7.6pt; color: #4b5563;">Designated Partner</span>
+              </td>
+              <td style="padding-bottom: 6px;">
+                <span style="font-size: 7.2pt; color: #6b7280; text-transform: uppercase;">Principal Consultant</span><br>
+                <strong>Suyash Shinde</strong><br>
+                <span style="font-size: 7.6pt; color: #4b5563;">Principal Software Consultant, Pune</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="height: 52px; vertical-align: top;">
+                <span style="font-size: 7.2pt; color: #9ca3af; text-transform: uppercase;">Signature / Company Seal</span>
+              </td>
+              <td style="height: 52px; vertical-align: top;">
+                <span style="font-size: 7.2pt; color: #9ca3af; text-transform: uppercase;">Signature / Company Seal</span>
+              </td>
+              <td style="height: 52px; vertical-align: top;">
+                <span style="font-size: 7.2pt; color: #9ca3af; text-transform: uppercase;">Signature</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="font-size: 7.2pt; color: #6b7280; text-transform: uppercase;">Date:</span> ___________________
+              </td>
+              <td>
+                <span style="font-size: 7.2pt; color: #6b7280; text-transform: uppercase;">Date:</span> ___________________
+              </td>
+              <td>
+                <span style="font-size: 7.2pt; color: #6b7280; text-transform: uppercase;">Date:</span> <strong>2 November 2026</strong>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+        <div class="page-footer">
+          <span>Confidential &bull; Commercial Scope &amp; Pricing Quotation &bull; Valid Through 14 November 2026</span>
+          <span>Page 2 of 2</span>
+        </div>
+        
+    </div>
+    
+</body>
+</html>
