@@ -1,10 +1,10 @@
-# scratch/build_flawless_quotation.py
+# scratch/build_commercial_quotation_pdf.py
 import os
 import subprocess
 import shutil
 import fitz
 
-def build_flawless_html():
+def generate_commercial_quotation_html():
     css = """
     @page {
       size: A4 portrait;
@@ -190,10 +190,11 @@ def build_flawless_html():
       color: #ffffff;
       font-size: 6.8pt;
       font-weight: 700;
-      padding: 1.2px 5.0px;
+      padding: 1.2px 6.0px;
       border-radius: 3px;
       text-transform: uppercase;
       letter-spacing: 0.3px;
+      white-space: nowrap;
     }
     .group-tag {
       display: inline-block;
@@ -201,11 +202,18 @@ def build_flawless_html():
       color: #1e40af;
       font-size: 6.6pt;
       font-weight: 700;
-      padding: 0.5px 4px;
+      padding: 1px 4.5px;
       border-radius: 2px;
       margin-right: 4px;
       text-transform: uppercase;
       letter-spacing: 0.2px;
+      white-space: nowrap;
+      vertical-align: middle;
+    }
+    .mod-badge {
+      font-weight: 700;
+      color: #1e3a8a;
+      white-space: nowrap;
     }
     .terms-card {
       background: #f8fafc;
@@ -246,7 +254,7 @@ def build_flawless_html():
     def make_header():
         return """
         <div class="page-header">
-          <span>Dalal Machine Tools Agency &amp; OMPI India | Commercial Quotation &bull; v2.2</span>
+          <span>Dalal Machine Tools Agency &amp; OMPI India | Commercial Quotation &bull; v2.3</span>
           <span>REF: QUOTE-2026-DALAL-OMPI-760K</span>
         </div>
         """
@@ -254,12 +262,12 @@ def build_flawless_html():
     def make_footer(page_num):
         return f"""
         <div class="page-footer">
-          <span>Confidential &bull; Commercial Scope, Retainer Schedule &amp; Complimentary Deliverables &bull; Valid Through 17 Nov 2026</span>
+          <span>Confidential &bull; Commercial Scope, Retainer Schedule &amp; Complimentary Deliverables &bull; Valid Through 14 November 2026</span>
           <span>Page {page_num} of 2</span>
         </div>
         """
 
-    # PAGE 1: Modules Breakdown for System 1 & System 2
+    # PAGE 1: Modules Breakdown for System 1 & System 2 (Harmonized with Scope doc v2.5)
     p1 = f"""
     <div class="page page-1">
       {make_header()}
@@ -268,11 +276,11 @@ def build_flawless_html():
         <div class="doc-meta">
           <strong>Engagement:</strong> Unified Digital Showroom Platform &amp; OMPI Industrial ERP Suite (57 Total Functional Units)<br>
           <strong>Client Entities:</strong> Dalal Machine Tools Agency Pvt. Ltd. &amp; OMPI India LLP &bull; Attn: <strong>Mr. Vinit Dalal</strong>, Managing Director / Partner<br>
-          <strong>Consultant:</strong> Suyash Shinde, Principal Software Consultant, Pune &bull; <strong>Issue Date:</strong> 2 November 2026 &bull; <strong>Validity:</strong> 15 Days (Through 17 Nov 2026)
+          <strong>Consultant:</strong> Suyash Shinde, Principal Software Consultant, Pune &bull; <strong>Issue Date:</strong> 2 November 2026 &bull; <strong>Validity:</strong> 15 Days (Through 14 November 2026)
         </div>
 
         <h2 class="section-heading">1. System 1: Dalal Machine Tools Agency Pvt. Ltd. (Public Platform &amp; Inbound Engine)</h2>
-        <p class="section-sub">Scope: 24 Functional Units (22 Public Showroom Pages + 2 Staff Admin Desks) &bull; Delivery: Month 1 to Month 2 (Weeks 1 to 6 &bull; Mobilization &amp; Go-Live)</p>
+        <p class="section-sub">Scope: 24 Functional Units (22 Public Showroom Pages + 2 Staff Admin Desks) &bull; Delivery: Weeks 1 to 8 (Months 1 to 2)</p>
 
         <table class="quotation-table">
           <thead>
@@ -287,43 +295,43 @@ def build_flawless_html():
             <tr>
               <td class="col-center">1</td>
               <td><strong>Machinery Showroom &amp; Category Catalog</strong></td>
-              <td>26 machine categories, stock filters, yard authenticity showcase (6 Units: Routes 01–06)</td>
+              <td>26 machine categories, stock filters, yard authenticity showcase (6 Units: Routes 01&ndash;06)</td>
               <td class="col-price">&#8377; 35,000</td>
             </tr>
             <tr>
               <td class="col-center">2</td>
               <td><strong>Machine Detail Sheets &amp; Video Trials</strong></td>
-              <td>Tonnage, stroke, bed specs, unedited running video links per machine (4 Units: Routes 07–10)</td>
+              <td>Tonnage, stroke, bed specs, unedited running video links per machine (4 Units: Routes 07&ndash;10)</td>
               <td class="col-price">&#8377; 30,000</td>
             </tr>
             <tr>
               <td class="col-center">3</td>
               <td><strong>Instant Quotation Engine &amp; WhatsApp Leads</strong></td>
-              <td>60-sec formal proposal PDF download + direct WhatsApp lead routing (3 Units: Routes 11–13)</td>
+              <td>60-sec formal proposal PDF download + direct WhatsApp lead routing (3 Units: Routes 11&ndash;13)</td>
               <td class="col-price">&#8377; 35,000</td>
             </tr>
             <tr>
               <td class="col-center">4</td>
               <td><strong>Press Tonnage &amp; Sizing Assistant</strong></td>
-              <td>Interactive component force calculation formula for plant buyers (3 Units: Routes 14–16)</td>
+              <td>Interactive component force calculation formula for plant buyers (3 Units: Routes 14&ndash;16)</td>
               <td class="col-price">&#8377; 25,000</td>
             </tr>
             <tr>
               <td class="col-center">5</td>
               <td><strong>High Seas Sales &amp; Import FAQs Portal</strong></td>
-              <td>Procedural guidance, customs documentation &amp; GST ITC explainers (3 Units: Routes 17–19)</td>
+              <td>Procedural guidance, customs documentation &amp; GST ITC explainers (3 Units: Routes 17&ndash;19)</td>
               <td class="col-price">&#8377; 20,000</td>
             </tr>
             <tr>
               <td class="col-center">6</td>
               <td><strong>Company Profile, Stockyard &amp; Visit Booking</strong></td>
-              <td>Corporate legacy, Pune yard map, client visit calendar scheduler (3 Units: Routes 20–22)</td>
+              <td>Corporate legacy, Pune yard map, client visit calendar scheduler (3 Units: Routes 20&ndash;22)</td>
               <td class="col-price">&#8377; 25,000</td>
             </tr>
             <tr>
               <td class="col-center">7</td>
               <td><strong>Staff Operations Console &amp; RFQ Lead Desk</strong></td>
-              <td>Internal machine spec manager, stock toggles, buyer RFQ inbox (2 Units: Admin Desks 23–24)</td>
+              <td>Internal machine spec manager, stock toggles, buyer RFQ inbox (2 Units: Admin Desks 23&ndash;24)</td>
               <td class="col-price">&#8377; 30,000</td>
             </tr>
             <tr class="subtotal-row">
@@ -334,13 +342,13 @@ def build_flawless_html():
         </table>
 
         <h2 class="section-heading" style="margin-top: 6px;">2. System 2: OMPI India LLP (Industrial Operations &amp; Precision Clutch ERP)</h2>
-        <p class="section-sub">Scope: 33 Specialized Operations Modules in 7 Functional Groups &bull; Delivery: Months 2 to 8 (Weeks 5 to 32 &bull; 7 Monthly Sprints)</p>
+        <p class="section-sub">Scope: 33 Specialized Operations Modules in 7 Functional Groups &bull; Delivery: Weeks 9 to 32 | 7 Monthly Sprints (Months 3 to 8)</p>
 
         <table class="quotation-table" style="margin-bottom: 0;">
           <thead>
             <tr>
               <th style="width: 5%;" class="col-center">No.</th>
-              <th style="width: 44%;">Functional Group &amp; Module Scope</th>
+              <th style="width: 44%;">Functional Group &amp; Module Scope (Scope Doc v2.5 Harmonized)</th>
               <th style="width: 33%;">Operational Scope &amp; Deliverables Breakdown</th>
               <th style="width: 18%;" class="col-right">Price (INR)</th>
             </tr>
@@ -348,45 +356,45 @@ def build_flawless_html():
           <tbody>
             <tr>
               <td class="col-center">1</td>
-              <td><span class="group-tag">Group 1</span><strong>Customer Master &amp; Commercial Pipeline</strong></td>
-              <td>Verified 15-digit GSTIN directory, multi-branch shipping godowns, enquiry deal board (MOD 01–03: 3 Modules)</td>
-              <td class="col-price">&#8377; 70,000</td>
+              <td><span class="group-tag">Group 1</span><strong>Sales and Customers</strong></td>
+              <td>Customer profiles, 15-digit GSTIN check, OMPI Italian clutch-brakes catalog, Euro pricing, quick quotes, deal board &amp; press matcher <span class="mod-badge">(MOD 01&ndash;06: 6 Modules)</span></td>
+              <td class="col-price">&#8377; 1,00,000</td>
             </tr>
             <tr>
               <td class="col-center">2</td>
-              <td><span class="group-tag">Group 2</span><strong>Italian OMPI Catalog &amp; Press Matcher</strong></td>
-              <td>Clutch-brakes, rotating unions, friction discs by bore/torque, press-to-clutch sizing matcher (MOD 04–08: 5 Modules)</td>
-              <td class="col-price">&#8377; 80,000</td>
+              <td><span class="group-tag">Group 2</span><strong>Inventory and Godown</strong></td>
+              <td>Pune stock tracker, shipments, low-stock alerts, transfer challans, bin locator &amp; trial tracker <span class="mod-badge">(MOD 07&ndash;12: 6 Modules)</span></td>
+              <td class="col-price">&#8377; 90,000</td>
             </tr>
             <tr>
               <td class="col-center">3</td>
-              <td><span class="group-tag">Group 3</span><strong>Landed Costing &amp; Euro/INR Currency Engine</strong></td>
-              <td>Customs duty, ocean freight, port clearing, daily Euro exchange entry, supplier POs (MOD 09–12: 4 Modules)</td>
-              <td class="col-price">&#8377; 65,000</td>
-            </tr>
-            <tr>
-              <td class="col-center">4</td>
-              <td><span class="group-tag">Group 4</span><strong>OMPI Fast-Quote &amp; Proposal Generator</strong></td>
-              <td>Shared multi-revision quoting engine, OMPI official letterhead &amp; separate bank records (MOD 13–16: 4 Modules)</td>
-              <td class="col-price">&#8377; 60,000</td>
-            </tr>
-            <tr>
-              <td class="col-center">5</td>
-              <td><span class="group-tag">Group 5</span><strong>Pune Godown Stock &amp; Supply Chain Logistics</strong></td>
-              <td>Live spares inventory, shelf bin locator, anti-double-selling stock lock, import BL tracker (MOD 17–22: 6 Modules)</td>
-              <td class="col-price">&#8377; 95,000</td>
-            </tr>
-            <tr>
-              <td class="col-center">6</td>
-              <td><span class="group-tag">Group 6</span><strong>Workshop Overhauls &amp; Digital Job Cards</strong></td>
-              <td>Digital job work cards, clutch retrofit work orders, geometry trial logs, dispatch gate passes (MOD 23–27: 5 Modules)</td>
+              <td><span class="group-tag">Group 3</span><strong>Procurement and Costing</strong></td>
+              <td>International POs to Italy, port clearance tracker, landed cost calculation sheet &amp; supplier delivery records <span class="mod-badge">(MOD 13&ndash;16: 4 Modules)</span></td>
               <td class="col-price">&#8377; 75,000</td>
             </tr>
             <tr>
+              <td class="col-center">4</td>
+              <td><span class="group-tag">Group 4</span><strong>Workshop and Overhauls</strong></td>
+              <td>Reconditioning job cards, clutch retrofit work orders, pre-dispatch QC inspection &amp; site handover checklist <span class="mod-badge">(MOD 17&ndash;20: 4 Modules)</span></td>
+              <td class="col-price">&#8377; 70,000</td>
+            </tr>
+            <tr>
+              <td class="col-center">5</td>
+              <td><span class="group-tag">Group 5</span><strong>Accounts and GST</strong></td>
+              <td>GST tax invoices (CGST/SGST/IGST), payment ledger &amp; ageing, vendor remittances, margins &amp; GST return summary <span class="mod-badge">(MOD 21&ndash;25: 5 Modules)</span></td>
+              <td class="col-price">&#8377; 85,000</td>
+            </tr>
+            <tr>
+              <td class="col-center">6</td>
+              <td><span class="group-tag">Group 6</span><strong>Sales Operations and Service</strong></td>
+              <td>Field visit logger, quotation follow-up reminders, maintenance contract (AMC) ledger, breakdown helpdesk &amp; feedback <span class="mod-badge">(MOD 26&ndash;30: 5 Modules)</span></td>
+              <td class="col-price">&#8377; 80,000</td>
+            </tr>
+            <tr>
               <td class="col-center">7</td>
-              <td><span class="group-tag">Group 7</span><strong>GST Invoicing, Helpdesk &amp; Security Roles</strong></td>
-              <td>CGST / SGST / IGST tax billing, 30/60/90-day ageing, breakdown helpdesk, staff RBAC permissions (MOD 28–33: 6 Modules)</td>
-              <td class="col-price">&#8377; 1,15,000</td>
+              <td><span class="group-tag">Group 7</span><strong>Control and Security</strong></td>
+              <td>Staff access &amp; RBAC permissions, audit history, automated backups &amp; Managing Director's desk <span class="mod-badge">(MOD 31&ndash;33: 3 Modules)</span></td>
+              <td class="col-price">&#8377; 60,000</td>
             </tr>
             <tr class="subtotal-row">
               <td colspan="3"><strong>SUBTOTAL: SYSTEM 2 (OMPI INDIA LLP &bull; 33 MODULES IN 7 GROUPS)</strong></td>
@@ -418,13 +426,13 @@ def build_flawless_html():
             <tr>
               <td><strong>Dalal Machine Tools Agency Pvt. Ltd.</strong></td>
               <td>System 1: Public Machinery Platform &bull; 24 Units</td>
-              <td class="col-center">Weeks 1–6</td>
+              <td class="col-center">Weeks 1&ndash;8</td>
               <td class="col-price">&#8377; 2,00,000</td>
             </tr>
             <tr>
               <td><strong>OMPI India LLP</strong></td>
               <td>System 2: Industrial ERP Management Suite &bull; 33 Modules</td>
-              <td class="col-center">Weeks 5–32</td>
+              <td class="col-center">Weeks 9&ndash;32</td>
               <td class="col-price">&#8377; 5,60,000</td>
             </tr>
             <tr class="grand-total-row">
@@ -447,32 +455,32 @@ def build_flawless_html():
             <tr>
               <td><strong>In-Scope Technical Maintenance &amp; Bug Remediation:</strong> Continuous defect remediation for all 57 units across the full 8-month lifecycle + 30-day post-handover warranty.</td>
               <td>&#8377; 2,40,000 (Est.)</td>
-              <td class="col-center"><span class="free-badge">INCLUDED (&#8377;0)</span></td>
+              <td class="col-center"><span class="free-badge">INCLUDED (FREE)</span></td>
             </tr>
             <tr>
               <td><strong>On-Premise Local LAN Architecture Setup:</strong> Zero recurring third-party cloud user subscription fees; high-speed office yard local network configuration.</td>
               <td>&#8377; 2,50,000+ / Yr</td>
-              <td class="col-center"><span class="free-badge">INCLUDED (&#8377;0)</span></td>
+              <td class="col-center"><span class="free-badge">INCLUDED (FREE)</span></td>
             </tr>
             <tr>
               <td><strong>Staff Onboarding, Role Training &amp; Video Walkthroughs:</strong> 12 hours of structured staff training at Pune yard + comprehensive PDF User Training Manual.</td>
               <td>&#8377; 75,000 (Est.)</td>
-              <td class="col-center"><span class="free-badge">INCLUDED (&#8377;0)</span></td>
+              <td class="col-center"><span class="free-badge">INCLUDED (FREE)</span></td>
             </tr>
             <tr>
               <td><strong>Google SEO, AI Search (GEO) /llms.txt &amp; Schema:</strong> Rich search metadata, XML sitemaps, robots.txt &amp; AI-crawler optimization for buyer discovery.</td>
               <td>&#8377; 60,000 (Est.)</td>
-              <td class="col-center"><span class="free-badge">INCLUDED (&#8377;0)</span></td>
+              <td class="col-center"><span class="free-badge">INCLUDED (FREE)</span></td>
             </tr>
             <tr>
               <td><strong>Automated 3-Tier Rolling Disaster Recovery:</strong> Automated local and external scheduled database snapshots protecting critical business records.</td>
               <td>&#8377; 40,000 (Est.)</td>
-              <td class="col-center"><span class="free-badge">INCLUDED (&#8377;0)</span></td>
+              <td class="col-center"><span class="free-badge">INCLUDED (FREE)</span></td>
             </tr>
             <tr>
               <td><strong>1-Click Excel / CSV Leads &amp; Inventory Exporter:</strong> Instant offline data downloads with column filters &amp; UTF-8 BOM encoding across all tables.</td>
               <td>&#8377; 30,000 (Est.)</td>
-              <td class="col-center"><span class="free-badge">INCLUDED (&#8377;0)</span></td>
+              <td class="col-center"><span class="free-badge">INCLUDED (FREE)</span></td>
             </tr>
             <tr style="background: #f0fdf4;">
               <td colspan="2" style="font-weight: 700; color: #065f46;">TOTAL COMPLIMENTARY VALUE DELIVERED TO CLIENT AT ZERO EXTRA CHARGE</td>
@@ -486,7 +494,7 @@ def build_flawless_html():
           <thead>
             <tr>
               <th style="width: 15%;" class="col-center">Sprint / Month</th>
-              <th style="width: 49%;">Core Deliverable &amp; Operational Milestone Trigger</th>
+              <th style="width: 49%;">Core Deliverable &amp; Operational Milestone Trigger (Scope Doc v2.5 Aligned)</th>
               <th style="width: 20%;" class="col-center">Invoiced Entity</th>
               <th style="width: 16%;" class="col-right">Amount (INR)</th>
             </tr>
@@ -494,49 +502,49 @@ def build_flawless_html():
           <tbody>
             <tr style="background: #eff6ff;">
               <td class="col-center"><strong>Advance (M1)</strong></td>
-              <td><strong>Contract Execution &amp; Phase 1 Kickoff:</strong> Complete Dalal Web Platform (24 Units: Routes 01–24), Public Showroom, Instant Quoting &amp; WhatsApp Desk</td>
+              <td><strong>Contract Execution &amp; Phase 1 Kickoff:</strong> Complete Dalal Web Platform (24 Units: Routes 01&ndash;24), Public Showroom, Instant Quoting &amp; WhatsApp Desk</td>
               <td class="col-center" style="font-size: 7.1pt;">Dalal Machine Tools Agency Pvt. Ltd.</td>
               <td class="col-price" style="color: #1e3a8a;">&#8377; 2,00,000</td>
             </tr>
             <tr>
               <td class="col-center"><strong>Month 2</strong></td>
-              <td>OMPI Sprint 1 (Group 1: MOD 01–03): Customer Master, 15-Digit GST Directory &amp; Enquiry Pipeline</td>
+              <td>OMPI Sprint 1 (Group 1: MOD 01&ndash;06): Customer Profiles, GSTIN, OMPI Catalog, Euro Pricing, Quick Quotes &amp; Deal Board</td>
               <td class="col-center" style="font-size: 7.1pt;">OMPI India LLP</td>
               <td class="col-price">&#8377; 80,000</td>
             </tr>
             <tr>
               <td class="col-center"><strong>Month 3</strong></td>
-              <td>OMPI Sprint 2 (Group 2: MOD 04–08): Italian OMPI SKU Master &amp; Press-to-Clutch Sizing Matcher</td>
+              <td>OMPI Sprint 2 (Group 2: MOD 07&ndash;12): Pune Stock Tracker, Shipments, Low-Stock Alerts, Transfer Challans &amp; Bin Locator</td>
               <td class="col-center" style="font-size: 7.1pt;">OMPI India LLP</td>
               <td class="col-price">&#8377; 80,000</td>
             </tr>
             <tr>
               <td class="col-center"><strong>Month 4</strong></td>
-              <td>OMPI Sprint 3 (Group 3 &amp; 4: MOD 09–16): Landed Costing Engine (EUR/INR FX), Supplier POs &amp; Quoting</td>
+              <td>OMPI Sprint 3 (Group 3: MOD 13&ndash;16): International POs to Italy, Port Clearance Tracker &amp; Landed Cost Calculation Sheet</td>
               <td class="col-center" style="font-size: 7.1pt;">OMPI India LLP</td>
               <td class="col-price">&#8377; 80,000</td>
             </tr>
             <tr>
               <td class="col-center"><strong>Month 5</strong></td>
-              <td>OMPI Sprint 4 (Group 5: MOD 17–22): Spares Warehouse Inventory, Pune Godown Bin Locator &amp; Stock Lock</td>
+              <td>OMPI Sprint 4 (Group 4: MOD 17&ndash;20): Reconditioning Job Cards, Clutch Retrofit Orders, QC Inspection &amp; Site Handover</td>
               <td class="col-center" style="font-size: 7.1pt;">OMPI India LLP</td>
               <td class="col-price">&#8377; 80,000</td>
             </tr>
             <tr>
               <td class="col-center"><strong>Month 6</strong></td>
-              <td>OMPI Sprint 5 (Group 6: MOD 23–27): Workshop Digital Job Cards, Clutch Retrofits &amp; QC Trial Logs</td>
+              <td>OMPI Sprint 5 (Group 5: MOD 21&ndash;25): GST Tax Invoices (CGST/SGST/IGST), Payment Ageing Ledgers &amp; Remittance Tracking</td>
               <td class="col-center" style="font-size: 7.1pt;">OMPI India LLP</td>
               <td class="col-price">&#8377; 80,000</td>
             </tr>
             <tr>
               <td class="col-center"><strong>Month 7</strong></td>
-              <td>OMPI Sprint 6 (Group 7A: MOD 28–30): GST Tax Invoicing (CGST/SGST/IGST) &amp; Payment Ageing Ledgers</td>
+              <td>OMPI Sprint 6 (Group 6: MOD 26&ndash;30): Field Visit Logger, Follow-Up Reminders, AMC Ledger &amp; Breakdown Help Desk</td>
               <td class="col-center" style="font-size: 7.1pt;">OMPI India LLP</td>
               <td class="col-price">&#8377; 80,000</td>
             </tr>
             <tr>
               <td class="col-center"><strong>Month 8</strong></td>
-              <td>OMPI Sprint 7 (Group 7B: MOD 31–33): Breakdown Helpdesk, Service AMC, LAN Setup, Staff Training &amp; Sign-Off</td>
+              <td>OMPI Sprint 7 (Group 7: MOD 31&ndash;33): Staff RBAC Permissions, Backups, Managing Director's Desk &amp; Turnkey Handover</td>
               <td class="col-center" style="font-size: 7.1pt;">OMPI India LLP</td>
               <td class="col-price">&#8377; 80,000</td>
             </tr>
@@ -551,7 +559,7 @@ def build_flawless_html():
         <div class="terms-card">
           <ul class="terms-list">
             <li><strong>Separate Corporate Invoicing &amp; Bank Accounts:</strong> Distinct invoices raised for <em>Dalal Machine Tools Agency Pvt. Ltd.</em> (&#8377; 2,00,000) and <em>OMPI India LLP</em> (&#8377; 5,60,000 across 7 monthly sprints @ &#8377; 80,000/mo) for clean tax accounting &amp; direct GST Input Tax Credit (ITC).</li>
-            <li><strong>Direct Pass-Through Billing (Zero Agency Markups):</strong> Third-party subscriptions—cloud server hosting (AWS/Render), corporate domains, WhatsApp Cloud API conversations, and government GST portal API gateways—are billed directly to Client accounts at actual cost.</li>
+            <li><strong>Direct Pass-Through Billing (Zero Agency Markups):</strong> Third-party subscriptions &mdash; cloud server hosting (AWS/Render), corporate domains, WhatsApp Cloud API conversations, and government GST portal API gateways &mdash; are billed directly to Client accounts at actual cost.</li>
             <li><strong>Project Timeline &amp; Client Content Prerequisite:</strong> The 8-month development cycle commences upon contract execution, mobilization advance clearance, and handover of baseline machine data and media. Client review delays adjust subsequent sprint deadlines proportionally.</li>
             <li><strong>7-Day Deemed Acceptance Governance:</strong> Client shall review sprint demos within 7 calendar days. Absence of a written defect punch-list within 7 days constitutes formal sprint progress sign-off.</li>
             <li><strong>Turnkey Warranty &amp; Source Code Ownership:</strong> Continuous in-scope maintenance covers all delivered modules across the 8-month lifecycle. Following final go-live at Month 8, an umbrella 30-day post-handover warranty covers all 57 units. 100% custom source code and database schema ownership transfer to Client upon completion of final commercial settlement.</li>
@@ -582,7 +590,7 @@ def build_flawless_html():
     return full_html
 
 if __name__ == "__main__":
-    html_content = build_flawless_html()
+    html_content = generate_commercial_quotation_html()
     output_html = "DALAL_AND_OMPI_COMMERCIAL_QUOTATION_BREAKDOWN.html"
     with open(output_html, "w", encoding="utf-8") as f:
         f.write(html_content)
