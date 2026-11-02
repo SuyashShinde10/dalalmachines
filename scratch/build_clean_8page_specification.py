@@ -180,7 +180,7 @@ def build_html():
       <div class="content-area">
         <h1 class="doc-title">Dalal Machine Tools Agency &amp; OMPI India: Project Scope Document</h1>
         <div class="doc-meta">
-          <strong>Version 2.5</strong> &bull; Issued 2 November 2026 &bull; Valid Through 14 November 2026 &bull; Ref: <strong>SCOPE-PLAN-2026-DALAL-OMPI-57</strong><br>
+          <strong>Version 2.5</strong> &bull; Issued 2 November 2026 &bull; Ref: <strong>SCOPE-PLAN-2026-DALAL-OMPI-57</strong><br>
           Prepared for Mr. Vinit Dalal, Managing Director / Partner &bull; Prepared by Suyash Shinde, Principal Software Consultant, Pune<br>
           Confidential: not to be shared outside Dalal Machine Tools Agency Pvt. Ltd. and OMPI India LLP.
         </div>
@@ -264,7 +264,7 @@ def build_html():
 
         <p style="margin-bottom: 4px;"><strong>How the timeline works</strong></p>
         <ul class="bullet-list" style="margin-bottom: 0;">
-          <li><strong>Start date.</strong> The clock starts when the MSA is signed, the first payment is received, and the Phase 1 content (photos, machine details, videos) is handed over. If your content or feedback is late, the dates move by the same number of days.</li>
+          <li><strong>Start date.</strong> The clock starts when the MSA is signed, the first payment is received, and the Phase 1 content (photos, machine specifications, and stock lists) is handed over. If your content or feedback is late, the dates move by the same number of days.</li>
           <li><strong>Testing and acceptance.</strong> At the end of each phase you try the system (this is called user acceptance testing, or UAT) and confirm it works as described here. Please give feedback within 7 days. If we hear nothing within 7 days, the phase is treated as accepted, unless you have reported a problem in writing.</li>
           <li><strong>30-day warranty.</strong> From acceptance of each phase, we fix any defect (something not working as this document describes) at no extra charge for 30 days. New features or changes are handled as change requests (section 5).</li>
         </ul>
@@ -310,7 +310,7 @@ def build_html():
           </thead>
           <tbody>
             <tr>
-              <td>Machine details, photos and power-trial video links for Pune stock</td>
+              <td>Machine details and photos for Pune stock</td>
               <td>Units 1, 4, 5, 7, 12</td>
               <td>Start of Phase 1</td>
             </tr>
@@ -459,7 +459,7 @@ def build_html():
             <tr>
               <td class="col-center">1</td>
               <td><strong>Homepage and Showroom</strong></td>
-              <td>Shows presses for sale with photos, tonnage, running videos and stock status. A WhatsApp button opens a chat already filled with the machine model.</td>
+              <td>Shows presses for sale with photos, tonnage and stock status. A WhatsApp button opens a chat already filled with the machine model.</td>
               <td>Buyers see the machines are really in your Pune yard.</td>
             </tr>
             <tr>
@@ -483,7 +483,7 @@ def build_html():
             <tr>
               <td class="col-center">5</td>
               <td><strong>Machine Details</strong></td>
-              <td>One sheet per press: tonnage, stroke, bed size, motor, foundation needs, video, and a downloadable quotation.</td>
+              <td>One sheet per press: tonnage, stroke, bed size, motor, foundation requirements, machine photos and a downloadable quotation.</td>
               <td>Technical heads can check fit before calling.</td>
             </tr>
             <tr>
@@ -616,7 +616,7 @@ def build_html():
             <tr>
               <td class="col-center">23</td>
               <td><strong>Staff Machine Desk</strong><br><span style="font-size:7.4pt; color:#6b7280;">(internal)</span></td>
-              <td>Staff add machines, edit specifications, add video links and set status: Available, Reserved or Sold. Changes appear on the website straight away.</td>
+              <td>Staff add machines, edit specifications and set status: Available, Reserved or Sold. Changes appear on the website straight away.</td>
               <td>No developer needed for daily updates.</td>
             </tr>
             <tr>
@@ -1004,69 +1004,25 @@ def build_html():
           </tbody>
         </table>
 
-        <h2 class="section-heading">8. How the Two Systems Work Together</h2>
-        <ul class="bullet-list" style="list-style-type: decimal; padding-left: 18px; margin-bottom: 10px;">
-          <li><strong>Customer enquires.</strong> A plant head finds a press on the website and taps the WhatsApp button, or fills a form. (Units 1, 5, 9)</li>
-          <li><strong>Technical sizing.</strong> Your sales engineer looks up the matching OMPI clutch. (Modules 02, 06)</li>
+        <h2 class="section-heading" style="margin-top: 14px;">8. How the Two Systems Work Together</h2>
+        <ul class="bullet-list" style="list-style-type: decimal; padding-left: 18px; margin-bottom: 14px;">
+          <li><strong>Customer enquires.</strong> A plant head finds a press on the website and taps the WhatsApp button, or fills an RFQ form. (Units 1, 5, 9)</li>
+          <li><strong>Technical sizing.</strong> Your sales engineer looks up the matching OMPI clutch or replacement parts. (Modules 02, 06)</li>
           <li><strong>Quotation sent.</strong> An official quotation with photos, specifications and price is produced in moments. (Unit 11, Module 04)</li>
-          <li><strong>Stock reserved.</strong> Once terms are agreed, the machine is marked Reserved so nobody else can commit it. (Unit 23, Module 07)</li>
-          <li><strong>Workshop and delivery.</strong> Overhaul, power trial, inspection, transport and site handover are recorded. (Modules 17 to 20)</li>
-          <li><strong>Billing and records.</strong> GST invoice, payment tracking and a monthly summary for your CA. (Modules 21 to 25)</li>
+          <li><strong>Stock reserved.</strong> Once commercial terms are agreed, the machine is marked Reserved so nobody else can commit it. (Unit 23, Module 07)</li>
+          <li><strong>Workshop and delivery.</strong> Overhaul, inspection, transport and site handover are recorded on the job card. (Modules 17 to 20)</li>
+          <li><strong>Billing and records.</strong> GST tax invoice, payment tracking and a monthly summary for your CA. (Modules 21 to 25)</li>
         </ul>
 
-        <h2 class="section-heading">9. Next Steps</h2>
-        <ul class="bullet-list" style="list-style-type: decimal; padding-left: 18px; margin-bottom: 10px;">
-          <li>You review this document and send us your questions.</li>
-          <li>We confirm the open choices together: hosting (cloud or office server), who supplies content, and which optional outside services you want.</li>
-          <li>Scope and MSA are signed by both companies.</li>
-          <li>First payment is made and Phase 1 content is handed over.</li>
-          <li>Phase 1 starts. You receive a short progress update every week.</li>
-          <li>At the end of each phase you test, we fix, and the next phase begins.</li>
+        <h2 class="section-heading" style="margin-top: 14px;">9. Next Steps &amp; Project Kickoff</h2>
+        <ul class="bullet-list" style="list-style-type: decimal; padding-left: 18px; margin-bottom: 0;">
+          <li>You review this technical scope document and share any questions or feedback.</li>
+          <li>We confirm open technical infrastructure choices together: hosting (cloud or local office LAN) and optional outside services.</li>
+          <li>Master Services Agreement (MSA) and commercial quotation are formally executed.</li>
+          <li>Phase 1 mobilization advance is cleared and initial machine photos/specifications are handed over.</li>
+          <li>Phase 1 development starts. You receive a structured weekly progress update.</li>
+          <li>At the end of each phase: staff walkthrough, user acceptance testing (UAT), bug fixes, and formal transition to the next phase.</li>
         </ul>
-
-        <h2 class="section-heading">10. Glossary</h2>
-        <table class="data-table" style="margin-bottom: 0;">
-          <thead>
-            <tr>
-              <th style="width: 25%;">Term</th>
-              <th style="width: 75%;">Meaning</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>AMC</strong></td>
-              <td>Annual Maintenance Contract: a yearly service agreement for a machine.</td>
-            </tr>
-            <tr>
-              <td><strong>CA</strong></td>
-              <td>Chartered Accountant.</td>
-            </tr>
-            <tr>
-              <td><strong>Challan</strong></td>
-              <td>A delivery note that travels with goods.</td>
-            </tr>
-            <tr>
-              <td><strong>ERP</strong></td>
-              <td>One connected business system for sales, stock, purchasing, accounts and service.</td>
-            </tr>
-            <tr>
-              <td><strong>GSP</strong></td>
-              <td>GST Suvidha Provider: an approved company that connects software to the GST portal for a fee.</td>
-            </tr>
-            <tr>
-              <td><strong>GSTIN</strong></td>
-              <td>The 15-character GST registration number of a business.</td>
-            </tr>
-            <tr>
-              <td><strong>High Seas Sale</strong></td>
-              <td>A sale of imported goods completed before they reach the Indian customs border.</td>
-            </tr>
-            <tr>
-              <td><strong>HSN / HS code</strong></td>
-              <td>Product classification codes used on tax invoices and customs papers.</td>
-            </tr>
-          </tbody>
-        </table>
       </div>
       {make_footer(7)}
     </div>
@@ -1080,7 +1036,9 @@ def build_html():
     <div class="page">
       {make_header()}
       <div class="content-area">
-        <table class="data-table" style="margin-bottom: 14px;">
+        <h2 class="section-heading" style="margin-top: 0;">10. Glossary of Industrial &amp; Software Terms</h2>
+        <p style="margin-bottom: 8px;">Plain explanations of technical and commercial terms used throughout this specification:</p>
+        <table class="data-table" style="margin-bottom: 16px;">
           <thead>
             <tr>
               <th style="width: 25%;">Term</th>
@@ -1089,80 +1047,61 @@ def build_html():
           </thead>
           <tbody>
             <tr>
+              <td><strong>AMC</strong></td>
+              <td>Annual Maintenance Contract: a yearly service agreement for machinery inspection and overhauls.</td>
+            </tr>
+            <tr>
+              <td><strong>CA</strong></td>
+              <td>Chartered Accountant.</td>
+            </tr>
+            <tr>
+              <td><strong>Challan</strong></td>
+              <td>A delivery note that travels with goods during inter-yard or customer dispatches.</td>
+            </tr>
+            <tr>
+              <td><strong>ERP</strong></td>
+              <td>Enterprise Resource Planning: one connected business system for sales, stock, purchasing, accounts and service.</td>
+            </tr>
+            <tr>
+              <td><strong>GSP</strong></td>
+              <td>GST Suvidha Provider: an approved gateway provider that connects business software to the government GST portal.</td>
+            </tr>
+            <tr>
+              <td><strong>GSTIN</strong></td>
+              <td>The 15-character Goods and Services Tax Identification Number of a business entity.</td>
+            </tr>
+            <tr>
+              <td><strong>High Seas Sale</strong></td>
+              <td>A sale of imported machinery or clutch components completed before custom clearance into the Indian territory.</td>
+            </tr>
+            <tr>
+              <td><strong>HSN / HS code</strong></td>
+              <td>Harmonized System of Nomenclature: product classification codes used on GST invoices and customs papers.</td>
+            </tr>
+            <tr>
               <td><strong>Landed cost</strong></td>
-              <td>The full cost of an imported item after freight, insurance, duty and port charges.</td>
+              <td>The total actual cost of an imported item after factoring foreign invoice, ocean freight, insurance, customs duty and port clearance.</td>
             </tr>
             <tr>
               <td><strong>Power trial</strong></td>
-              <td>Running a press under electric power to check its condition.</td>
+              <td>Running a mechanical or hydraulic press under electric power at the stockyard to verify motor, clutch, and bed alignment.</td>
             </tr>
             <tr>
               <td><strong>RFQ</strong></td>
-              <td>Request for Quotation: a buyer asking for a price.</td>
+              <td>Request for Quotation: a formal buyer enquiry asking for machine price, terms and specifications.</td>
             </tr>
             <tr>
               <td><strong>UAT</strong></td>
-              <td>User Acceptance Testing: you try the system and confirm it works as described.</td>
+              <td>User Acceptance Testing: structured testing where Dalal &amp; OMPI staff verify that modules function according to this specification.</td>
             </tr>
           </tbody>
         </table>
 
-        <h2 class="section-heading">11. Approval</h2>
-        <p style="margin-bottom: 12px;">Signing below approves the functional scope in this document (Scope Annexure A). Fees, payment milestones, outside-service costs and legal terms are governed only by the Master Services Agreement.</p>
-
-        <table class="data-table" style="margin-bottom: 0;">
-          <thead>
-            <tr>
-              <th style="width: 33.3%;">For Dalal Machine Tools Agency Pvt. Ltd.</th>
-              <th style="width: 33.3%;">For OMPI India LLP</th>
-              <th style="width: 33.4%;">Consultant</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="padding-bottom: 12px;">
-                <span style="font-size: 7.4pt; color: #6b7280; text-transform: uppercase;">Name</span><br>
-                <strong>Mr. Vinit Dalal</strong><br>
-                <span style="font-size: 7.8pt; color: #4b5563;">Managing Director</span>
-              </td>
-              <td style="padding-bottom: 12px;">
-                <span style="font-size: 7.4pt; color: #6b7280; text-transform: uppercase;">Name</span><br>
-                <strong>Authorised Signatory</strong><br>
-                <span style="font-size: 7.8pt; color: #4b5563;">Partner</span>
-              </td>
-              <td style="padding-bottom: 12px;">
-                <span style="font-size: 7.4pt; color: #6b7280; text-transform: uppercase;">Consultant</span><br>
-                <strong>Suyash Shinde</strong><br>
-                <span style="font-size: 7.8pt; color: #4b5563;">Principal Software Consultant, Pimpri, Pune</span>
-              </td>
-            </tr>
-            <tr>
-              <td style="height: 80px; vertical-align: top;">
-                <span style="font-size: 7.4pt; color: #6b7280; text-transform: uppercase;">Signature</span>
-              </td>
-              <td style="height: 80px; vertical-align: top;">
-                <span style="font-size: 7.4pt; color: #6b7280; text-transform: uppercase;">Signature</span>
-              </td>
-              <td style="height: 80px; vertical-align: top;">
-                <span style="font-size: 7.4pt; color: #6b7280; text-transform: uppercase;">Signature</span>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <span style="font-size: 7.4pt; color: #6b7280; text-transform: uppercase;">Date</span><br>
-                <span style="font-size: 8.2pt; color: #1f2937;">&nbsp;</span>
-              </td>
-              <td>
-                <span style="font-size: 7.4pt; color: #6b7280; text-transform: uppercase;">Date</span><br>
-                <span style="font-size: 8.2pt; color: #1f2937;">&nbsp;</span>
-              </td>
-              <td>
-                <span style="font-size: 7.4pt; color: #6b7280; text-transform: uppercase;">Date</span><br>
-                <strong style="font-size: 8.2pt; color: #1f2937;">2 November 2026</strong>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <h2 class="section-heading">11. Scope Governance &amp; Contractual Notice</h2>
+        <div style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-left: 4.5px solid #17365d; border-radius: 4px; padding: 12px 16px; margin-top: 6px; font-size: 8.2pt; line-height: 1.45; color: #1e293b;">
+          <strong>Scope Specification Status:</strong> This document (Ref: <code>SCOPE-PLAN-2026-DALAL-OMPI-57</code>) serves as the Master Functional Scope and Technical Architecture Specification for the 57 Units across Dalal Machine Tools Agency Pvt. Ltd. (Phase 1: 24 Units) and OMPI India LLP (Phases 2 &amp; 3: 33 Modules in 7 Groups).<br><br>
+          <strong>Separation of Commercial &amp; Legal Terms:</strong> This document defines <em>what</em> is built and how the systems function. Exact engagement fees, retainer milestone schedules, outside-service pass-through policies, 30-day warranty coverage, code ownership assignment, and mutual legal liabilities are set out in the accompanying <strong>Commercial Quotation</strong> and governed exclusively by the executed <strong>Master Services Agreement (MSA)</strong>.
+        </div>
       </div>
       {make_footer(8)}
     </div>
