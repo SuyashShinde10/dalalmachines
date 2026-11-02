@@ -1819,7 +1819,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         
                         <!-- Question 1 -->
                         <div class="faq-minimal-item is-open">
-                            <button type="button" class="faq-minimal-btn" onclick="toggleDalalSplitFaq(this)" aria-expanded="true">
+                            <button type="button" class="faq-minimal-btn" aria-expanded="true">
                                 <span class="faq-minimal-question">Can our technical team inspect machines under live power before payment?</span>
                                 <i class="fa fa-chevron-down faq-minimal-chevron"></i>
                             </button>
@@ -1832,7 +1832,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
                         <!-- Question 2 -->
                         <div class="faq-minimal-item">
-                            <button type="button" class="faq-minimal-btn" onclick="toggleDalalSplitFaq(this)" aria-expanded="false">
+                            <button type="button" class="faq-minimal-btn" aria-expanded="false">
                                 <span class="faq-minimal-question">How does High Seas Sales in Indian Rupees (INR) protect our balance sheet?</span>
                                 <i class="fa fa-chevron-down faq-minimal-chevron"></i>
                             </button>
@@ -1845,7 +1845,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
                         <!-- Question 3 -->
                         <div class="faq-minimal-item">
-                            <button type="button" class="faq-minimal-btn" onclick="toggleDalalSplitFaq(this)" aria-expanded="false">
+                            <button type="button" class="faq-minimal-btn" aria-expanded="false">
                                 <span class="faq-minimal-question">What documentation and foundation blueprints are provided with used machinery?</span>
                                 <i class="fa fa-chevron-down faq-minimal-chevron"></i>
                             </button>
@@ -1858,7 +1858,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
                         <!-- Question 4 -->
                         <div class="faq-minimal-item">
-                            <button type="button" class="faq-minimal-btn" onclick="toggleDalalSplitFaq(this)" aria-expanded="false">
+                            <button type="button" class="faq-minimal-btn" aria-expanded="false">
                                 <span class="faq-minimal-question">How are heavy presses (up to 6,300 tons) transported to our factory doorstep?</span>
                                 <i class="fa fa-chevron-down faq-minimal-chevron"></i>
                             </button>
@@ -1871,7 +1871,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
                         <!-- Question 5 -->
                         <div class="faq-minimal-item">
-                            <button type="button" class="faq-minimal-btn" onclick="toggleDalalSplitFaq(this)" aria-expanded="false">
+                            <button type="button" class="faq-minimal-btn" aria-expanded="false">
                                 <span class="faq-minimal-question">What clutch-brake modernization and spare parts support is available?</span>
                                 <i class="fa fa-chevron-down faq-minimal-chevron"></i>
                             </button>
@@ -1884,7 +1884,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
                         <!-- Question 6 -->
                         <div class="faq-minimal-item">
-                            <button type="button" class="faq-minimal-btn" onclick="toggleDalalSplitFaq(this)" aria-expanded="false">
+                            <button type="button" class="faq-minimal-btn" aria-expanded="false">
                                 <span class="faq-minimal-question">Can Dalal Machine Tools source a specific tonnage or make not in stock?</span>
                                 <i class="fa fa-chevron-down faq-minimal-chevron"></i>
                             </button>
@@ -1897,7 +1897,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
                         <!-- Question 7 -->
                         <div class="faq-minimal-item">
-                            <button type="button" class="faq-minimal-btn" onclick="toggleDalalSplitFaq(this)" aria-expanded="false">
+                            <button type="button" class="faq-minimal-btn" aria-expanded="false">
                                 <span class="faq-minimal-question">What mechanical tolerance and geometry verification is conducted?</span>
                                 <i class="fa fa-chevron-down faq-minimal-chevron"></i>
                             </button>
@@ -1915,28 +1915,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
     </section>
 
-    <!-- FAQ Interactive JavaScript Controller -->
-    <script>
-    function toggleDalalSplitFaq(btn) {
-        var item = btn.closest('.faq-minimal-item');
-        if (!item) return;
-        var isOpen = item.classList.contains('is-open');
-
-        // Close other items for accordion behavior
-        var allItems = document.querySelectorAll('.faq-minimal-item');
-        allItems.forEach(function(el) {
-            el.classList.remove('is-open');
-            var button = el.querySelector('.faq-minimal-btn');
-            if (button) button.setAttribute('aria-expanded', 'false');
-        });
-
-        // Toggle selected item
-        if (!isOpen) {
-            item.classList.add('is-open');
-            btn.setAttribute('aria-expanded', 'true');
-        }
-    }
-    </script>
 
     <!-- Technical Partner Spotlight: OMPI India LLP -->
     <section style="padding: 70px 0; background: linear-gradient(135deg, #131722 0%, #1c2333 100%); color: #fff;">
@@ -2138,7 +2116,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script src="js/owl.js"></script>
 <script src="js/appear.js"></script>
 <script src="js/wow.js"></script>
-<script src="js/script.js"></script>
+<script src="js/script.js?v=3.5"></script>
 <script src="js/catalog-data.js?v=2.9"></script>
 <script src="js/catalog-app.js?v=3.1"></script>
 <script src="js/scroll-expand.js?v=2.1"></script>

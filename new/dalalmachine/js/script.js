@@ -1248,6 +1248,7 @@
 
     // Modern Split Minimalist FAQ Accordion Toggle
     window.toggleDalalSplitFaq = function(btn) {
+        if (!btn) return;
         var item = btn.closest('.faq-minimal-item');
         if (!item) return;
         var list = item.closest('.faq-minimal-list');
@@ -1270,6 +1271,14 @@
         }
     };
 
+    // Global Delegated click listener for FAQ Accordion items
+    document.addEventListener('click', function(e) {
+        var btn = e.target.closest('.faq-minimal-btn');
+        if (!btn) return;
+        e.preventDefault();
+        window.toggleDalalSplitFaq(btn);
+    });
+
     function initCfoFaq() {
         // Fallback compatibility
     }
@@ -1284,4 +1293,4 @@
     });
 
 })(window.jQuery);
-
+
