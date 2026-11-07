@@ -86,6 +86,14 @@ router.post('/login', async (req, res) => {
     sameSite: 'lax'
   });
 
+  if (user.role === 'superadmin' || user.role === 'developer') {
+    res.cookie('superadmin_token', token, {
+      httpOnly: true,
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+      sameSite: 'lax'
+    });
+  }
+
   db.addLog({
     userId: user.id,
     username: user.username,

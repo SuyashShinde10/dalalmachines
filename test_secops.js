@@ -49,14 +49,14 @@ async function runSecOpsTestSuite() {
     });
     assert('1. Public Homepage Accessible (200 OK)', resPublic.statusCode === 200);
 
-    // 2. Unauthenticated probe on /admin must return 404 (Cloaked Decoy)
+    // 2. Unauthenticated probe on protected /admin/dashboard.html must return 404 (Cloaked Decoy)
     const resAdmin404 = await makeRequest({
       hostname: '127.0.0.1',
       port: 5000,
-      path: '/admin',
+      path: '/admin/dashboard.html',
       method: 'GET'
     });
-    assert('2. Unauthenticated /admin Cloaked as 404 Not Found', resAdmin404.statusCode === 404, `Got ${resAdmin404.statusCode}`);
+    assert('2. Unauthenticated /admin/dashboard.html Cloaked as 404 Not Found', resAdmin404.statusCode === 404, `Got ${resAdmin404.statusCode}`);
 
     // 3. Unauthenticated probe on /dev must return 404
     const resDev404 = await makeRequest({

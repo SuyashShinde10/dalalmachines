@@ -27,9 +27,14 @@ function sendCloaked404(res, req, reason = 'Unauthorized path probe') {
 
 function getAuthenticatedUser(req) {
   let token = null;
+  const p = (req.path || '').toLowerCase();
+  const isSuperAdmin = p === '/superadmin' || p.startsWith('/superadmin/');
   const authHeader = req.headers['authorization'];
+
   if (authHeader && authHeader.startsWith('Bearer ')) {
     token = authHeader.split(' ')[1];
+  } else if (isSuperAdmin && req.cookies && req.cookies.superadmin_token) {
+    token = req.cookies.superadmin_token;
   } else if (req.cookies && req.cookies.admin_token) {
     token = req.cookies.admin_token;
   } else if (req.cookies && req.cookies.superadmin_token) {
@@ -70,6 +75,15 @@ function routeShieldMiddleware(req, res, next) {
     return next();
   }
 
+  const isAdminLoginPage = p === '/admin' || p === '/admin/' || p === '/admin/index.html';
+  const isSuperAdminLoginPage = p === '/superadmin' || p === '/superadmin/' || p === '/superadmin/index.html';
+
+  // 0b. Public Login Doorways: Both Admin (/admin/) and Superadmin (/superadmin/) login pages
+  // must always be accessible to serve the login form so staff, executives, and owners can authenticate cleanly
+  if (isAdminLoginPage || isSuperAdminLoginPage) {
+    return next();
+  }
+
   const user = getAuthenticatedUser(req);
   const hasGatePass = hasValidGatewayPass(req);
   const ip = getClientIp(req);
@@ -81,7 +95,8 @@ function routeShieldMiddleware(req, res, next) {
     }
   }
 
-  // 2. Complete Obscurity Gate: If neither logged in NOR carrying the Gateway Passkey cookie
+  // 2. Complete Obscurity Gate for Protected Internal Assets (dashboards, user management, logs, settings):
+  // If neither logged in NOR carrying the Gateway Passkey cookie, cloak as genuine 404
   if (!user && !hasGatePass) {
     recordSecurityEvent({
       type: 'CLOAKED_ROUTE_PROBE',
@@ -118,17 +133,16 @@ function routeShieldMiddleware(req, res, next) {
     return sendCloaked404(res, req, 'Developer auth required');
   }
 
-  // 4. Superadmin Portal Security Layer
+  // 4. Superadmin Protected Console Layer (dashboard.html, users.html, logs.html, settings.html)
   if (isSuperAdminPath) {
-    // If logged in as staff admin (not superadmin), conceal superadmin as 404
+    // If logged in as staff admin (not superadmin), conceal superadmin dashboards as 404
     if (user && user.role !== 'superadmin') {
-      return sendCloaked404(res, req, 'Role mismatch: admin probing superadmin');
+      return sendCloaked404(res, req, 'Role mismatch: admin probing superadmin dashboard');
     }
-    // Allow static assets, login page, and panels through so superadmin-core.js handles auth/redirect gracefully
     return next();
   }
 
-  // 5. Admin Portal Security Layer
+  // 5. Admin Protected Operations Layer
   if (isAdminPath) {
     // Check if user is suspended by developer
     if (user && user.blockedByDeveloper) {

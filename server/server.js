@@ -223,6 +223,19 @@ app.use('/uploads', express.static(config.UPLOADS_DIR, staticOptions));
 // 6b. Pre-Flight Route Shield: Cloaks /admin, /superadmin, and /dev as HTTP 404 to all unauthorized visitors
 app.use(routeShield.routeShieldMiddleware);
 
+// Dedicated Portal Gateways & Clean Landing Handlers (Direct, Trailing-Slash, and index.html)
+app.get(['/admin', '/admin/', '/admin/index.html'], (req, res) => {
+  res.sendFile(path.join(config.ADMIN_DIR, 'index.html'));
+});
+
+app.get(['/superadmin', '/superadmin/', '/superadmin/index.html'], (req, res) => {
+  res.sendFile(path.join(config.SUPERADMIN_DIR, 'index.html'));
+});
+
+app.get(['/dev', '/dev/', '/dev/index.html'], (req, res) => {
+  res.sendFile(path.join(config.DEV_DIR, 'index.html'));
+});
+
 app.use('/admin', express.static(config.ADMIN_DIR, staticOptions));
 app.use('/superadmin', express.static(config.SUPERADMIN_DIR, staticOptions));
 app.use('/dev', express.static(config.DEV_DIR, staticOptions));
@@ -241,18 +254,6 @@ app.get(['/new/Machinery', '/new/Machinery/'], (req, res) => {
 
 app.get('/new/dalalmachine', (req, res) => {
   res.sendFile(path.join(config.PUBLIC_DIR, 'index.html'));
-});
-
-app.get('/admin', (req, res) => {
-  res.sendFile(path.join(config.ADMIN_DIR, 'index.html'));
-});
-
-app.get('/superadmin', (req, res) => {
-  res.sendFile(path.join(config.SUPERADMIN_DIR, 'index.html'));
-});
-
-app.get('/dev', (req, res) => {
-  res.sendFile(path.join(config.DEV_DIR, 'index.html'));
 });
 
 // 8. API Routes with Rate Limiting Guards
