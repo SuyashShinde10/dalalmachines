@@ -58,14 +58,14 @@ async function runSecOpsTestSuite() {
     });
     assert('2. Unauthenticated /admin/dashboard.html Redirected to Login (302)', resAdmin404.statusCode === 302, `Got ${resAdmin404.statusCode}`);
 
-    // 3. Unauthenticated probe on /dev must return 404
-    const resDev404 = await makeRequest({
+    // 3. Developer Console landing page /dev/ must be accessible (200 OK)
+    const resDev = await makeRequest({
       hostname: '127.0.0.1',
       port: 5000,
-      path: '/dev',
+      path: '/dev/',
       method: 'GET'
     });
-    assert('3. Unauthenticated /dev Cloaked as 404 Not Found', resDev404.statusCode === 404, `Got ${resDev404.statusCode}`);
+    assert('3. Developer Console Accessible (200 OK)', resDev.statusCode === 200, `Got ${resDev.statusCode}`);
 
     // 4. Unauthenticated probe on /superadmin/dashboard.html must redirect to login (302)
     const resSuper404 = await makeRequest({

@@ -77,10 +77,12 @@ function routeShieldMiddleware(req, res, next) {
 
   const isAdminLoginPage = p === '/admin' || p === '/admin/' || p === '/admin/index.html';
   const isSuperAdminLoginPage = p === '/superadmin' || p === '/superadmin/' || p === '/superadmin/index.html';
+  const isDevLoginPage = p === '/dev' || p === '/dev/' || p === '/dev/index.html';
 
-  // 0b. Public Login Doorways: Both Admin (/admin/) and Superadmin (/superadmin/) login pages
-  // must always be accessible to serve the login form so staff, executives, and owners can authenticate cleanly
-  if (isAdminLoginPage || isSuperAdminLoginPage) {
+  // 0b. Public Login Doorways & Developer Console Entry:
+  // Admin (/admin/), Superadmin (/superadmin/), and Dev (/dev/) landing pages
+  // must always be accessible so staff, executives, and developers never see a 404 error
+  if (isAdminLoginPage || isSuperAdminLoginPage || isDevLoginPage) {
     return next();
   }
 
@@ -97,14 +99,16 @@ function routeShieldMiddleware(req, res, next) {
 
   // 2. Access Gate for Protected Internal Assets (dashboards, user management, logs, settings):
   // If neither logged in NOR carrying the Gateway Passkey cookie:
-  // For human browser requests, redirect cleanly to respective login portal.
-  // For automated scanners or non-HTML probes, cloak as genuine 404.
+  // For human browser requests, redirect cleanly to respective portal login page.
   if (!user && !hasGatePass) {
     if (isAdminPath) {
       return res.redirect('/admin/index.html');
     }
     if (isSuperAdminPath) {
       return res.redirect('/superadmin/index.html');
+    }
+    if (isDevPath) {
+      return res.redirect('/dev/index.html');
     }
 
     recordSecurityEvent({
@@ -131,22 +135,14 @@ function routeShieldMiddleware(req, res, next) {
       return sendCloaked404(res, req, 'IP not whitelisted for developer endpoint');
     }
 
-    if (user && (user.role === 'superadmin' || user.username === 'developer')) {
-      return next();
-    }
-
-    if (hasGatePass) {
-      return next();
-    }
-
-    return sendCloaked404(res, req, 'Developer auth required');
+    return next();
   }
 
   // 4. Superadmin Protected Console Layer (dashboard.html, users.html, logs.html, settings.html)
   if (isSuperAdminPath) {
-    // If logged in as staff admin (not superadmin), conceal superadmin dashboards as 404
+    // If logged in as staff admin (not superadmin), redirect cleanly to superadmin login
     if (user && user.role !== 'superadmin') {
-      return sendCloaked404(res, req, 'Role mismatch: admin probing superadmin dashboard');
+      return res.redirect('/superadmin/index.html?error=superadmin_required');
     }
     return next();
   }
