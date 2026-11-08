@@ -74,6 +74,17 @@ function loadDb() {
   const salt = bcrypt.genSaltSync(10);
   db.users = [
     {
+      id: 'usr_superadmin_md',
+      username: 'superadmin',
+      email: 'superadmin@dalalmachines.com',
+      passwordHash: bcrypt.hashSync('Dalal@Super2026', salt),
+      role: 'superadmin',
+      name: 'Super Admin (MD)',
+      active: true,
+      createdAt: new Date().toISOString(),
+      lastLogin: null
+    },
+    {
       id: 'usr_superadmin',
       username: 'developer',
       email: 'developer@dalalmachines.com',

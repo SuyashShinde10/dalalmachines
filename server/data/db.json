@@ -1,6 +1,20 @@
 {
   "users": [
     {
+      "id": "usr_superadmin_md",
+      "username": "superadmin",
+      "email": "superadmin@dalalmachines.com",
+      "passwordHash": "$2b$10$GbTnb1vgdUQoGYbJU9Do5e.t7bcKnD71oHbAfzVo538yPGn8IJ8CC",
+      "role": "superadmin",
+      "name": "Super Admin (MD)",
+      "active": true,
+      "createdAt": "2026-10-06T09:58:03.305Z",
+      "lastLogin": "2026-11-08T05:42:54.929Z",
+      "blockedByDeveloper": false,
+      "blockedReason": "",
+      "blockedAt": null
+    },
+    {
       "id": "usr_superadmin",
       "username": "developer",
       "email": "developer@dalalmachines.com",
@@ -9,7 +23,7 @@
       "name": "System Developer",
       "active": true,
       "createdAt": "2026-10-06T09:58:03.305Z",
-      "lastLogin": "2026-11-02T07:11:29.049Z",
+      "lastLogin": "2026-11-08T05:42:55.118Z",
       "blockedByDeveloper": false,
       "blockedReason": "",
       "blockedAt": null
@@ -23,7 +37,7 @@
       "name": "Dalal Inventory Admin",
       "active": true,
       "createdAt": "2026-10-06T09:58:03.484Z",
-      "lastLogin": "2026-11-02T07:11:46.256Z",
+      "lastLogin": "2026-11-08T05:42:55.278Z",
       "blockedByDeveloper": false,
       "blockedReason": "",
       "blockedAt": null
@@ -2570,6 +2584,45 @@
     }
   ],
   "logs": [
+    {
+      "id": "log_4f02a52c",
+      "timestamp": "2026-11-08T05:42:55.288Z",
+      "userId": "usr_admin",
+      "username": "admin",
+      "role": "admin",
+      "action": "USER_LOGIN",
+      "target": "AUTH",
+      "details": "User logged in successfully from ::ffff:127.0.0.1",
+      "ip": "127.0.0.1",
+      "prevHash": "b1cff5bd2e4503e560a7c710ec295ba7d57b0faf2fbc4f849c30bf5190ad1fd6",
+      "hash": "9d9335e31b7bf600485358dec6f3b575d29fe875e285d2ae0c08dd9b1abc8611"
+    },
+    {
+      "id": "log_d2c5044d",
+      "timestamp": "2026-11-08T05:42:55.136Z",
+      "userId": "usr_superadmin",
+      "username": "developer",
+      "role": "superadmin",
+      "action": "USER_LOGIN",
+      "target": "AUTH",
+      "details": "User logged in successfully from ::ffff:127.0.0.1",
+      "ip": "127.0.0.1",
+      "prevHash": "ef196b143783f1d194deee8ca20ce6669444a1d3724751321aaf4ccb73239594",
+      "hash": "b1cff5bd2e4503e560a7c710ec295ba7d57b0faf2fbc4f849c30bf5190ad1fd6"
+    },
+    {
+      "id": "log_7074c2b3",
+      "timestamp": "2026-11-08T05:42:54.959Z",
+      "userId": "usr_superadmin_md",
+      "username": "superadmin",
+      "role": "superadmin",
+      "action": "USER_LOGIN",
+      "target": "AUTH",
+      "details": "User logged in successfully from ::ffff:127.0.0.1",
+      "ip": "127.0.0.1",
+      "prevHash": "38e284b7d398e751f882b39e249d449cb3d4ec45a2d96f60c8b4f1c53c808a19",
+      "hash": "ef196b143783f1d194deee8ca20ce6669444a1d3724751321aaf4ccb73239594"
+    },
     {
       "id": "log_f8325c02",
       "timestamp": "2026-11-02T07:11:46.264Z",
