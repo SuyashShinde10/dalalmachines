@@ -80,17 +80,22 @@ router.post('/login', async (req, res) => {
   );
 
   // Set HTTP-only cookie as well for easy browser navigation
+  const isHttps = req.secure || req.headers['x-forwarded-proto'] === 'https';
   res.cookie('admin_token', token, {
     httpOnly: true,
     maxAge: 7 * 24 * 60 * 60 * 1000,
-    sameSite: 'lax'
+    sameSite: 'lax',
+    secure: isHttps,
+    path: '/'
   });
 
   if (user.role === 'superadmin' || user.role === 'developer') {
     res.cookie('superadmin_token', token, {
       httpOnly: true,
       maxAge: 7 * 24 * 60 * 60 * 1000,
-      sameSite: 'lax'
+      sameSite: 'lax',
+      secure: isHttps,
+      path: '/'
     });
   }
 

@@ -29,6 +29,7 @@ const defenseInDepth = require('./security/defenseInDepth');
 const cacheEngine = require('./performance/cacheEngine');
 
 const app = express();
+app.set('trust proxy', 1);
 
 // 1. Gzip/Brotli Compression & Disable information disclosure
 app.use(compression());

@@ -27,14 +27,12 @@ function getClientSubnet(ip) {
 }
 
 function generateClientFingerprint(req) {
-  const ip = getClientIp(req);
-  const subnet = getClientSubnet(ip);
   const userAgent = req.headers['user-agent'] || 'UnknownAgent';
   const secret = config.JWT_SECRET || 'dmta_sec_secret';
 
   return crypto
     .createHash('sha256')
-    .update(`${subnet}|${userAgent}|${secret}`)
+    .update(`${userAgent}|${secret}`)
     .digest('hex')
     .substring(0, 16);
 }

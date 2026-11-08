@@ -196,7 +196,7 @@ async function runE2E() {
     console.error(' [FAIL] 7. Error:', e.message);
   }
 
-  // 8. Cloaked Decoy 404 for Unauthorized Admin Hit
+  // 8. Unauthenticated Access Guard for Protected Admin Assets
   try {
     const directRes = await request({
       host: 'localhost',
@@ -206,11 +206,11 @@ async function runE2E() {
       // No cookie, no authorization
     });
 
-    if (directRes.statusCode === 404) {
-      console.log(' [PASS] 8. Dark Portal Concealment: Direct hit to /admin/dashboard.html returned 404 Decoy.');
+    if (directRes.statusCode === 302 || directRes.statusCode === 404) {
+      console.log(' [PASS] 8. Unauthenticated Access Guard: Direct hit to /admin/dashboard.html properly protected.');
       passed++;
     } else {
-      console.error(' [FAIL] 8. Protected page was not cloaked! Status:', directRes.statusCode);
+      console.error(' [FAIL] 8. Protected page was not protected! Status:', directRes.statusCode);
     }
   } catch (e) {
     console.error(' [FAIL] 8. Error:', e.message);

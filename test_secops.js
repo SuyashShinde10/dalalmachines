@@ -49,14 +49,14 @@ async function runSecOpsTestSuite() {
     });
     assert('1. Public Homepage Accessible (200 OK)', resPublic.statusCode === 200);
 
-    // 2. Unauthenticated probe on protected /admin/dashboard.html must return 404 (Cloaked Decoy)
+    // 2. Unauthenticated probe on protected /admin/dashboard.html must redirect to login (302)
     const resAdmin404 = await makeRequest({
       hostname: '127.0.0.1',
       port: 5000,
       path: '/admin/dashboard.html',
       method: 'GET'
     });
-    assert('2. Unauthenticated /admin/dashboard.html Cloaked as 404 Not Found', resAdmin404.statusCode === 404, `Got ${resAdmin404.statusCode}`);
+    assert('2. Unauthenticated /admin/dashboard.html Redirected to Login (302)', resAdmin404.statusCode === 302, `Got ${resAdmin404.statusCode}`);
 
     // 3. Unauthenticated probe on /dev must return 404
     const resDev404 = await makeRequest({
@@ -67,14 +67,14 @@ async function runSecOpsTestSuite() {
     });
     assert('3. Unauthenticated /dev Cloaked as 404 Not Found', resDev404.statusCode === 404, `Got ${resDev404.statusCode}`);
 
-    // 4. Unauthenticated probe on /superadmin/dashboard.html must return 404
+    // 4. Unauthenticated probe on /superadmin/dashboard.html must redirect to login (302)
     const resSuper404 = await makeRequest({
       hostname: '127.0.0.1',
       port: 5000,
       path: '/superadmin/dashboard.html',
       method: 'GET'
     });
-    assert('4. Unauthenticated /superadmin/dashboard.html Cloaked as 404', resSuper404.statusCode === 404, `Got ${resSuper404.statusCode}`);
+    assert('4. Unauthenticated /superadmin/dashboard.html Redirected to Login (302)', resSuper404.statusCode === 302, `Got ${resSuper404.statusCode}`);
 
     // 5. Honeypot Trap probe on /wp-admin
     const resHoneypot = await makeRequest({

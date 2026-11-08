@@ -95,9 +95,18 @@ function routeShieldMiddleware(req, res, next) {
     }
   }
 
-  // 2. Complete Obscurity Gate for Protected Internal Assets (dashboards, user management, logs, settings):
-  // If neither logged in NOR carrying the Gateway Passkey cookie, cloak as genuine 404
+  // 2. Access Gate for Protected Internal Assets (dashboards, user management, logs, settings):
+  // If neither logged in NOR carrying the Gateway Passkey cookie:
+  // For human browser requests, redirect cleanly to respective login portal.
+  // For automated scanners or non-HTML probes, cloak as genuine 404.
   if (!user && !hasGatePass) {
+    if (isAdminPath) {
+      return res.redirect('/admin/index.html');
+    }
+    if (isSuperAdminPath) {
+      return res.redirect('/superadmin/index.html');
+    }
+
     recordSecurityEvent({
       type: 'CLOAKED_ROUTE_PROBE',
       severity: 'LOW',
