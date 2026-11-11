@@ -97,9 +97,8 @@ function routeShieldMiddleware(req, res, next) {
     }
   }
 
-  // 2. Access Gate for Protected Internal Assets (dashboards, user management, logs, settings):
-  // If neither logged in NOR carrying the Gateway Passkey cookie:
-  // For human browser requests, redirect cleanly to respective portal login page.
+  // 2. Access Gate for Protected Dashboards & Management Pages:
+  // Redirect unauthenticated human visitors cleanly to the respective login portal
   if (!user && !hasGatePass) {
     if (isAdminPath) {
       return res.redirect('/admin/index.html');
@@ -107,22 +106,9 @@ function routeShieldMiddleware(req, res, next) {
     if (isSuperAdminPath) {
       return res.redirect('/superadmin/index.html');
     }
-    if (isDevPath) {
-      return res.redirect('/dev/index.html');
-    }
-
-    recordSecurityEvent({
-      type: 'CLOAKED_ROUTE_PROBE',
-      severity: 'LOW',
-      ip,
-      path: req.originalUrl,
-      userAgent: req.headers['user-agent'] || 'Unknown',
-      message: `Unauthorized visitor or scanner probed protected panel without gateway passkey: ${req.originalUrl}`
-    });
-    return sendCloaked404(res, req, 'Missing gateway pass');
   }
 
-  // 3. Developer Console & Developer API Security Layer
+  // 2. Developer Console & Developer API Security Layer
   if (isDevPath || isDevApiPath) {
     if (!isDevIpAllowed(req)) {
       recordSecurityEvent({
@@ -134,30 +120,13 @@ function routeShieldMiddleware(req, res, next) {
       });
       return sendCloaked404(res, req, 'IP not whitelisted for developer endpoint');
     }
-
     return next();
   }
 
-  // 4. Superadmin Protected Console Layer (dashboard.html, users.html, logs.html, settings.html)
-  if (isSuperAdminPath) {
-    // If logged in as staff admin (not superadmin), redirect cleanly to superadmin login
-    if (user && user.role !== 'superadmin') {
-      return res.redirect('/superadmin/index.html?error=superadmin_required');
-    }
-    return next();
-  }
-
-  // 5. Admin Protected Operations Layer
-  if (isAdminPath) {
-    // Check if user is suspended by developer
-    if (user && user.blockedByDeveloper) {
-      if (!p.endsWith('index.html') && p !== '/admin' && p !== '/admin/') {
-        return res.redirect('/admin/index.html?suspended=true');
-      }
-    }
-    return next();
-  }
-
+  // 3. For all Admin and Superadmin HTML pages and static views, allow Express to serve the shell.
+  // The client-side authentication guards (AdminCore.requireAuth & SuperAdminCore.requireSuperAdmin)
+  // verify session validity via /api/auth/me, purge corrupt/expired localStorage tokens with clearSession(),
+  // and handle login redirects cleanly WITHOUT creating server-side 302 infinite redirect loops.
   next();
 }
 

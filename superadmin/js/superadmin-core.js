@@ -233,6 +233,8 @@ const SuperAdminCore = {
     const token = SuperAdminCore.getToken();
     const headers = options.headers || {};
     if (token) headers['Authorization'] = `Bearer ${token}`;
+    headers['X-Requested-With'] = 'XMLHttpRequest';
+    headers['X-DMTA-CSRF'] = '1';
     if (!(options.body instanceof FormData) && !headers['Content-Type']) {
       headers['Content-Type'] = 'application/json';
     }

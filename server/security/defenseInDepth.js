@@ -177,7 +177,15 @@ function csrfGuardMiddleware(req, res, next) {
 
   // Exempt public RFQ inquiries and public login
   const path = req.path.toLowerCase();
-  if (path === '/api/inquiries' || path === '/api/auth/login' || path.startsWith('/portal-gate')) {
+  const fullPath = (req.originalUrl || req.url || req.path || '').toLowerCase().split('?')[0];
+  if (
+    path === '/auth/login' ||
+    path === '/login' ||
+    path === '/inquiries' ||
+    fullPath === '/api/auth/login' ||
+    fullPath === '/api/inquiries' ||
+    fullPath.startsWith('/portal-gate')
+  ) {
     return next();
   }
 

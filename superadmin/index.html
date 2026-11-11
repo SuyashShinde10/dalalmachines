@@ -168,16 +168,16 @@
 
     <div id="sa-alert" style="display: none; padding: 12px 14px; border-radius: 12px; margin-bottom: 20px; font-size: 13px; font-weight: 600;"></div>
 
-    <form id="sa-login-form">
+    <form id="sa-login-form" action="javascript:void(0);" onsubmit="return false;">
       <div class="sa-form-group" style="margin-bottom: 18px;">
         <label class="sa-form-label" for="sa-input-id">Super Admin Identifier</label>
-        <input type="text" id="sa-input-id" class="sa-form-control" placeholder="superadmin" required autofocus autocomplete="username" value="superadmin">
+        <input type="text" id="sa-input-id" class="sa-form-control" placeholder="superadmin" required autofocus autocomplete="off" value="superadmin">
       </div>
 
       <div class="sa-form-group" style="margin-bottom: 24px;">
         <label class="sa-form-label" for="sa-input-pw">Master Key / Password</label>
         <div style="position: relative;">
-          <input type="password" id="sa-input-pw" class="sa-form-control" placeholder="••••••••••••" required autocomplete="current-password" value="Dalal@Super2026">
+          <input type="password" id="sa-input-pw" class="sa-form-control" placeholder="••••••••••••" required autocomplete="off" value="Dalal@Super2026">
           <button type="button" id="sa-toggle-pw" style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--sa-text-dim); cursor: pointer;">
             <i class="fa fa-eye"></i>
           </button>
@@ -199,17 +199,14 @@
   <script src="/socket.io/socket.io.js"></script>
   <script src="/superadmin/js/superadmin-core.js?v=5.1"></script>
   <script>
-    // Check if redirected due to real-time developer suspension
+    // Check if redirected due to real-time developer suspension or logout
     const saParams = new URLSearchParams(window.location.search);
     if (saParams.get('blocked') === '1') {
       SuperAdminCore.clearSession();
       const reason = saParams.get('reason') || 'Master executive account suspended by System Developer.';
       showBlockedAlert({ role: 'Super Admin', blockedReason: reason });
-    } else {
-      const existing = SuperAdminCore.getUser();
-      if (SuperAdminCore.getToken() && existing && existing.role === 'superadmin') {
-        window.location.href = '/superadmin/dashboard.html';
-      }
+    } else if (saParams.get('logout') === '1') {
+      SuperAdminCore.clearSession();
     }
 
     const form = document.getElementById('sa-login-form');

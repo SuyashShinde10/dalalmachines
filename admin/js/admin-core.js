@@ -249,6 +249,9 @@ const AdminCore = {
       headers['Authorization'] = `Bearer ${token}`;
     }
 
+    headers['X-Requested-With'] = 'XMLHttpRequest';
+    headers['X-DMTA-CSRF'] = '1';
+
     if (!(options.body instanceof FormData) && !headers['Content-Type']) {
       headers['Content-Type'] = 'application/json';
     }

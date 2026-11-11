@@ -139,16 +139,16 @@
 
     <div id="login-alert" style="display: none; padding: 12px 14px; border-radius: 12px; margin-bottom: 20px; font-size: 13px; font-weight: 600;"></div>
 
-    <form id="login-form">
+    <form id="login-form" action="javascript:void(0);" onsubmit="return false;">
       <div class="form-group" style="margin-bottom: 18px;">
         <label class="form-label" for="input-identifier">Staff Username or Email</label>
-        <input type="text" id="input-identifier" class="form-control" placeholder="admin" required autofocus autocomplete="username" value="admin">
+        <input type="text" id="input-identifier" class="form-control" placeholder="admin" required autofocus autocomplete="off" value="admin">
       </div>
 
       <div class="form-group" style="margin-bottom: 24px;">
         <label class="form-label" for="input-password">Password</label>
         <div style="position: relative;">
-          <input type="password" id="input-password" class="form-control" placeholder="••••••••••••" required autocomplete="current-password" value="Dalal@Admin2026">
+          <input type="password" id="input-password" class="form-control" placeholder="••••••••••••" required autocomplete="off" value="Dalal@Admin2026">
           <button type="button" id="btn-toggle-pw" style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-dim); cursor: pointer;">
             <i class="fa fa-eye"></i>
           </button>
@@ -172,14 +172,14 @@
   <script src="/socket.io/socket.io.js"></script>
   <script src="/admin/js/admin-core.js?v=5.1"></script>
   <script>
-    // Check if redirected due to real-time developer suspension
+    // Check if redirected due to real-time developer suspension or logout
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('blocked') === '1') {
       AdminCore.clearSession();
       const reason = urlParams.get('reason') || 'Account suspended by Lead System Developer.';
       showBlockedAlert({ role: 'Admin', blockedReason: reason });
-    } else if (AdminCore.getToken() && AdminCore.getUser()) {
-      window.location.href = '/admin/dashboard.html';
+    } else if (urlParams.get('logout') === '1') {
+      AdminCore.clearSession();
     }
 
     const form = document.getElementById('login-form');

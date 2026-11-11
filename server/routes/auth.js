@@ -129,8 +129,9 @@ router.get('/me', authenticateToken, (req, res) => {
 
 // POST /api/auth/logout
 router.post('/logout', (req, res) => {
-  res.clearCookie('admin_token');
-  res.clearCookie(config.GATEWAY_COOKIE_NAME);
+  res.clearCookie('admin_token', { path: '/' });
+  res.clearCookie('superadmin_token', { path: '/' });
+  res.clearCookie(config.GATEWAY_COOKIE_NAME, { path: '/' });
   return res.json({ success: true, message: 'Logged out successfully.' });
 });
 
