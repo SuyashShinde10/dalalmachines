@@ -47,6 +47,16 @@ router.get('/', requireAdmin, (req, res) => {
   res.json({ success: true, count: list.length, inquiries: list });
 });
 
+// GET /api/inquiries/pipeline-metrics (Executive Pipeline Telemetry)
+router.get('/pipeline-metrics', requireAdmin, (req, res) => {
+  try {
+    const metrics = db.getExecutivePipelineMetrics();
+    res.json({ success: true, metrics });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
 // GET /api/inquiries/export/csv (1-Click CSV/Excel Download for Laptop Storage)
 router.get('/export/csv', requireAdmin, (req, res) => {
   try {
@@ -101,7 +111,8 @@ router.get('/export/csv', requireAdmin, (req, res) => {
 // PUT /api/inquiries/:id (Update Status)
 router.put('/:id', requireAdmin, (req, res) => {
   const { status } = req.body;
-  if (!['new', 'contacted', 'quoted', 'closed'].includes(status)) {
+  const validStages = ['new', 'contacted', 'quoted', 'closed', 'power_trial_requested', 'quotation_sent', 'under_negotiation', 'deal_closed', 'deal_lost'];
+  if (!validStages.includes(status)) {
     return res.status(400).json({ success: false, message: 'Invalid status value.' });
   }
 
@@ -112,6 +123,110 @@ router.put('/:id', requireAdmin, (req, res) => {
 
   realtime.broadcastInquiryStatusChanged({ id: updated.id, status: updated.status, updatedBy: req.user.username });
   res.json({ success: true, message: 'Inquiry status updated.', inquiry: updated });
+});
+
+// PATCH /api/inquiries/:id/pipeline (Executive Pipeline Stage & Valuation)
+router.patch('/:id/pipeline', requireAdmin, (req, res) => {
+  const { pipelineStage, estimatedValue, notes, inspectionVideoLinks, isVipDeal } = req.body;
+  const updated = db.updateInquiryPipeline(req.params.id, {
+    pipelineStage,
+    estimatedValue,
+    notes,
+    inspectionVideoLinks,
+    isVipDeal
+  }, req.user);
+
+  if (!updated) {
+    return res.status(404).json({ success: false, message: 'Inquiry not found.' });
+  }
+
+  realtime.broadcastInquiryStatusChanged({ id: updated.id, status: updated.pipelineStage, updatedBy: req.user.username });
+  res.json({ success: true, message: 'Pipeline stage & valuation updated.', inquiry: updated });
+});
+
+// PATCH /api/inquiries/:id/assign (Staff Lead Assignment & SLA Tracker)
+router.patch('/:id/assign', requireAdmin, (req, res) => {
+  const { staffId, staffName } = req.body;
+  if (!staffId || !staffName) {
+    return res.status(400).json({ success: false, message: 'Please provide staffId and staffName.' });
+  }
+
+  const updated = db.assignInquiry(req.params.id, staffId, staffName, req.user);
+  if (!updated) {
+    return res.status(404).json({ success: false, message: 'Inquiry not found.' });
+  }
+
+  res.json({ success: true, message: `Lead successfully assigned to ${staffName}.`, inquiry: updated });
+});
+
+// POST /api/inquiries/:id/generate-quotation (1-Click WhatsApp & Formal Commercial Quote Generator)
+router.post('/:id/generate-quotation', requireAdmin, (req, res) => {
+  const inq = db.getInquiries().find(i => i.id === req.params.id);
+  if (!inq) {
+    return res.status(404).json({ success: false, message: 'Inquiry not found.' });
+  }
+
+  const machine = inq.machineId ? db.getProductById(inq.machineId) : null;
+  const quotePrice = req.body.quotedPrice || inq.estimatedValue || (machine ? machine.targetPrice : 3500000);
+  const gstRate = 18;
+  const quotedPriceNum = parseFloat(quotePrice) || 3500000;
+  const gstAmount = Math.round(quotedPriceNum * (gstRate / 100));
+  const totalAmount = quotedPriceNum + gstAmount;
+
+  const quoteNumber = 'DMTA-QT-' + new Date().getFullYear() + '-' + inq.id.replace('inq_', '').toUpperCase();
+  const dateFormatted = new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+
+  // Clean WhatsApp Pre-Filled Commercial Message Text
+  const waText = [
+    `*DALAL MACHINE TOOLS AGENCY PVT. LTD.*`,
+    `_Official Commercial Quotation Ref: ${quoteNumber}_`,
+    ``,
+    `*Dear ${inq.name || 'Valued Client'} (${inq.company || 'Enterprise'}),*`,
+    `Thank you for consulting Dalal Machine Tools Agency Pvt. Ltd. (Est. 1985).`,
+    ``,
+    `*Quotation Details:*`,
+    `• *Machinery:* ${machine ? machine.name : inq.machineName || 'Industrial Heavy Machine'}`,
+    `• *Make / Model:* ${machine ? (machine.make + ' / ' + machine.model) : 'As Inspected'}`,
+    `• *Tonnage / Capacity:* ${machine && machine.tonnage ? machine.tonnage + ' Ton' : 'Standard'}`,
+    `• *Condition:* Operational / Ready for Power Trial`,
+    `• *Location:* In Stock Yard (Pune / Bhiwandi)`,
+    ``,
+    `*Commercial Terms:*`,
+    `• *Ex-Works Basic Price:* ₹${quotedPriceNum.toLocaleString('en-IN')}`,
+    `• *GST (@18%):* ₹${gstAmount.toLocaleString('en-IN')}`,
+    `• *Total Value:* ₹${totalAmount.toLocaleString('en-IN')}`,
+    `• *Payment Terms:* 30% Advance, 70% Before Dispatch on Live Power Trial Inspection`,
+    ``,
+    `*Live Power Trial Video:*`,
+    machine && machine.inspectionVideos && machine.inspectionVideos.length > 0
+      ? machine.inspectionVideos[0].url
+      : 'https://dalalmachines.com/inspection-vault/' + (machine ? machine.id : 'DMTA'),
+    ``,
+    `For technical clarifications, consult Managing Director Mr. Vinit Dalal: +91 9821232131`,
+    `Commerce Centre, Tardeo, Mumbai - 400034`
+  ].join('\n');
+
+  const cleanPhone = (inq.phone || '').replace(/[^0-9]/g, '');
+  const waUrl = cleanPhone ? `https://api.whatsapp.com/send?phone=${cleanPhone}&text=${encodeURIComponent(waText)}` : null;
+
+  // Update inquiry to 'quotation_sent'
+  db.updateInquiryPipeline(inq.id, { pipelineStage: 'quotation_sent', estimatedValue: quotedPriceNum }, req.user);
+
+  res.json({
+    success: true,
+    quoteNumber,
+    dateFormatted,
+    client: { name: inq.name, company: inq.company, phone: inq.phone, email: inq.email, city: inq.city },
+    machine: machine ? { id: machine.id, name: machine.name, make: machine.make, model: machine.model, tonnage: machine.tonnage } : { name: inq.machineName },
+    commercials: {
+      basicPrice: quotedPriceNum,
+      gstRate,
+      gstAmount,
+      totalAmount
+    },
+    whatsAppText: waText,
+    whatsAppUrl: waUrl
+  });
 });
 
 module.exports = router;

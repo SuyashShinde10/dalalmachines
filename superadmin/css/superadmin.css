@@ -1584,3 +1584,252 @@ body.sa-sidebar-collapsed .sa-main {
   flex-shrink: 0;
 }
 
+/* ==========================================================================
+   EXECUTIVE COMMERCIAL PIPELINE & SECOPS SUITE (8 ENTERPRISE CAPABILITIES)
+   ========================================================================== */
+
+/* Pipeline Funnel Bar */
+.sa-pipeline-funnel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.sa-pipeline-card {
+  background: var(--sa-card-bg);
+  border: 1px solid var(--sa-border);
+  border-radius: var(--sa-radius-sm);
+  padding: 14px 16px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+.sa-pipeline-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(245, 158, 11, 0.4);
+}
+.sa-pipeline-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--stage-color, #64748b);
+}
+.sa-pipeline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.sa-pipeline-stage-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--sa-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.sa-pipeline-stage-count {
+  font-size: 12px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+.sa-pipeline-stage-val {
+  font-size: 18px;
+  font-weight: 800;
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Pipeline Stage Pills */
+.stage-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+.stage-pill-new { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); }
+.stage-pill-trial { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
+.stage-pill-quote { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+.stage-pill-negotiation { background: rgba(236, 72, 153, 0.15); color: #f472b6; border: 1px solid rgba(236, 72, 153, 0.3); }
+.stage-pill-closed { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+.stage-pill-lost { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+
+/* VIP Deal Indicator */
+.vip-deal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #000;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.35);
+  animation: vipPulse 2s infinite ease-in-out;
+}
+@keyframes vipPulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(245, 158, 11, 0.3); }
+  50% { box-shadow: 0 0 16px rgba(245, 158, 11, 0.7); }
+}
+
+/* SLA Status Timer */
+.sla-timer {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+.sla-timer-ok {
+  background: rgba(16, 185, 129, 0.1);
+  color: #34d399;
+}
+.sla-timer-warning {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+}
+.sla-timer-overdue {
+  background: rgba(239, 68, 68, 0.18);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+/* High-Seas Logistics Stepper */
+.consign-stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  margin: 16px 0;
+  padding: 0 8px;
+}
+.consign-stepper::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  right: 20px;
+  height: 2px;
+  background: var(--sa-border);
+  z-index: 1;
+  transform: translateY(-50%);
+}
+.consign-step {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.consign-step-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--sa-surface);
+  border: 2px solid var(--sa-border);
+  color: var(--sa-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  transition: all 0.3s ease;
+}
+.consign-step.active .consign-step-circle {
+  background: var(--sa-gold);
+  border-color: var(--sa-gold);
+  color: #000;
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.5);
+}
+.consign-step.completed .consign-step-circle {
+  background: #10b981;
+  border-color: #10b981;
+  color: #fff;
+}
+.consign-step-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--sa-text-muted);
+  white-space: nowrap;
+}
+.consign-step.active .consign-step-label {
+  color: var(--sa-gold);
+}
+
+/* Modal Popup Engine */
+.sa-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.sa-modal-backdrop.open {
+  display: flex;
+}
+.sa-modal-card {
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 650px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+  color: #f8fafc;
+}
+.sa-modal-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid #1e293b;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.sa-modal-title {
+  font-size: 18px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sa-modal-body {
+  padding: 24px;
+}
+.sa-modal-footer {
+  padding: 16px 24px;
+  border-top: 1px solid #1e293b;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+.sa-modal-close-btn {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+}
+.sa-modal-close-btn:hover {
+  color: #fff;
+}
+
+

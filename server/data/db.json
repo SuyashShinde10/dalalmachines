@@ -12,7 +12,10 @@
       "lastLogin": "2026-11-08T05:42:54.929Z",
       "blockedByDeveloper": false,
       "blockedReason": "",
-      "blockedAt": null
+      "blockedAt": null,
+      "twoFactorEnabled": false,
+      "twoFactorSecret": null,
+      "twoFactorRecoveryCode": null
     },
     {
       "id": "usr_superadmin",
@@ -26,7 +29,10 @@
       "lastLogin": "2026-11-11T04:54:40.871Z",
       "blockedByDeveloper": false,
       "blockedReason": "",
-      "blockedAt": null
+      "blockedAt": null,
+      "twoFactorEnabled": false,
+      "twoFactorSecret": null,
+      "twoFactorRecoveryCode": null
     },
     {
       "id": "usr_admin",
@@ -40,7 +46,10 @@
       "lastLogin": "2026-11-11T04:55:01.675Z",
       "blockedByDeveloper": false,
       "blockedReason": "",
-      "blockedAt": null
+      "blockedAt": null,
+      "twoFactorEnabled": false,
+      "twoFactorSecret": null,
+      "twoFactorRecoveryCode": null
     }
   ],
   "products": [
@@ -78,7 +87,28 @@
       "status": "active",
       "createdAt": "2026-10-06T10:09:42.259Z",
       "updatedAt": "2026-10-28T13:50:32.709Z",
-      "createdBy": "admin"
+      "createdBy": "admin",
+      "procurementCost": 33200000,
+      "floorPrice": 41500000,
+      "targetPrice": 49800000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P00099-CUST_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P00099-CUST/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P00099-CUST_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P00099-CUST/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P00007",
@@ -110,7 +140,28 @@
       ],
       "createdAt": "2026-10-04T09:58:03.487Z",
       "updatedAt": "2026-10-06T09:58:03.487Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 21200000,
+      "floorPrice": 26500000,
+      "targetPrice": 31800000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P00007_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P00007/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P00007_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P00007/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P00031",
@@ -142,7 +193,28 @@
       ],
       "createdAt": "2026-10-04T10:58:03.487Z",
       "updatedAt": "2026-10-06T09:58:03.487Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 2800000,
+      "floorPrice": 3500000,
+      "targetPrice": 4200000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P00031_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P00031/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P00031_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P00031/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P00019C",
@@ -174,7 +246,28 @@
       ],
       "createdAt": "2026-10-04T11:58:03.487Z",
       "updatedAt": "2026-10-06T09:58:03.487Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 3200000,
+      "floorPrice": 4000000,
+      "targetPrice": 4800000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P00019C_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P00019C/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P00019C_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P00019C/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P000015",
@@ -205,7 +298,28 @@
       ],
       "createdAt": "2026-10-04T12:58:03.487Z",
       "updatedAt": "2026-10-06T09:58:03.487Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 14000000,
+      "floorPrice": 17500000,
+      "targetPrice": 21000000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P000015_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P000015/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P000015_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P000015/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P00018H",
@@ -236,7 +350,28 @@
       ],
       "createdAt": "2026-10-04T13:58:03.487Z",
       "updatedAt": "2026-10-06T09:58:03.487Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 9200000,
+      "floorPrice": 11500000,
+      "targetPrice": 13800000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P00018H_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P00018H/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P00018H_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P00018H/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P00026G",
@@ -266,7 +401,28 @@
       ],
       "createdAt": "2026-10-04T14:58:03.487Z",
       "updatedAt": "2026-10-06T09:58:03.487Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 3200000,
+      "floorPrice": 4000000,
+      "targetPrice": 4800000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P00026G_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P00026G/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P00026G_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P00026G/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P00027L",
@@ -296,7 +452,28 @@
       ],
       "createdAt": "2026-10-04T15:58:03.487Z",
       "updatedAt": "2026-10-06T09:58:03.487Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 3200000,
+      "floorPrice": 4000000,
+      "targetPrice": 4800000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P00027L_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P00027L/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P00027L_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P00027L/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P00032O",
@@ -325,7 +502,28 @@
       ],
       "createdAt": "2026-10-04T16:58:03.487Z",
       "updatedAt": "2026-10-06T09:58:03.487Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 3200000,
+      "floorPrice": 4000000,
+      "targetPrice": 4800000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P00032O_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P00032O/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P00032O_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P00032O/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P00030",
@@ -357,7 +555,28 @@
       ],
       "createdAt": "2026-10-04T17:58:03.487Z",
       "updatedAt": "2026-10-06T09:58:03.487Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 2800000,
+      "floorPrice": 3500000,
+      "targetPrice": 4200000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P00030_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P00030/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P00030_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P00030/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P0091",
@@ -387,7 +606,28 @@
       ],
       "createdAt": "2026-10-04T18:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 33200000,
+      "floorPrice": 41500000,
+      "targetPrice": 49800000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P0091_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P0091/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P0091_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P0091/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P0097",
@@ -417,7 +657,28 @@
       ],
       "createdAt": "2026-10-04T19:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 51600000,
+      "floorPrice": 64500000,
+      "targetPrice": 77400000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P0097_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P0097/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P0097_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P0097/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P00029",
@@ -447,7 +708,28 @@
       ],
       "createdAt": "2026-10-04T20:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 1840000,
+      "floorPrice": 2300000,
+      "targetPrice": 2760000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P00029_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P00029/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P00029_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P00029/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P017",
@@ -479,7 +761,28 @@
       ],
       "createdAt": "2026-10-04T21:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 3200000,
+      "floorPrice": 4000000,
+      "targetPrice": 4800000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P017_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P017/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P017_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P017/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P018",
@@ -510,7 +813,28 @@
       ],
       "createdAt": "2026-10-04T22:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 3200000,
+      "floorPrice": 4000000,
+      "targetPrice": 4800000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P018_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P018/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P018_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P018/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P00024",
@@ -538,7 +862,28 @@
       ],
       "createdAt": "2026-10-04T23:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 3200000,
+      "floorPrice": 4000000,
+      "targetPrice": 4800000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P00024_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P00024/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P00024_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P00024/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P00022",
@@ -566,7 +911,28 @@
       ],
       "createdAt": "2026-10-05T00:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 3200000,
+      "floorPrice": 4000000,
+      "targetPrice": 4800000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P00022_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P00022/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P00022_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P00022/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P0050",
@@ -594,7 +960,28 @@
       ],
       "createdAt": "2026-10-05T01:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 4400000,
+      "floorPrice": 5500000,
+      "targetPrice": 6600000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P0050_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P0050/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P0050_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P0050/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P00028",
@@ -622,7 +1009,28 @@
       ],
       "createdAt": "2026-10-05T02:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 2800000,
+      "floorPrice": 3500000,
+      "targetPrice": 4200000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P00028_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P00028/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P00028_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P00028/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P00025",
@@ -651,7 +1059,28 @@
       ],
       "createdAt": "2026-10-05T03:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 1840000,
+      "floorPrice": 2300000,
+      "targetPrice": 2760000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P00025_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P00025/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P00025_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P00025/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P0001",
@@ -679,7 +1108,28 @@
       ],
       "createdAt": "2026-10-05T04:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 9200000,
+      "floorPrice": 11500000,
+      "targetPrice": 13800000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P0001_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P0001/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P0001_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P0001/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P00021",
@@ -708,7 +1158,28 @@
       ],
       "createdAt": "2026-10-05T05:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 2400000,
+      "floorPrice": 3000000,
+      "targetPrice": 3600000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P00021_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P00021/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P00021_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P00021/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P00019D",
@@ -741,7 +1212,28 @@
       ],
       "createdAt": "2026-10-05T06:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 3200000,
+      "floorPrice": 4000000,
+      "targetPrice": 4800000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P00019D_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P00019D/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P00019D_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P00019D/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P00019E",
@@ -774,7 +1266,28 @@
       ],
       "createdAt": "2026-10-05T07:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 3200000,
+      "floorPrice": 4000000,
+      "targetPrice": 4800000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P00019E_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P00019E/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P00019E_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P00019E/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P018B",
@@ -806,7 +1319,28 @@
       ],
       "createdAt": "2026-10-05T08:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 3200000,
+      "floorPrice": 4000000,
+      "targetPrice": 4800000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P018B_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P018B/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P018B_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P018B/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P018C",
@@ -837,7 +1371,28 @@
       ],
       "createdAt": "2026-10-05T09:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 3200000,
+      "floorPrice": 4000000,
+      "targetPrice": 4800000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P018C_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P018C/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P018C_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P018C/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P017B",
@@ -868,7 +1423,28 @@
       ],
       "createdAt": "2026-10-05T10:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 3200000,
+      "floorPrice": 4000000,
+      "targetPrice": 4800000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P017B_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P017B/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P017B_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P017B/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P021M",
@@ -898,7 +1474,28 @@
       ],
       "createdAt": "2026-10-05T11:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 3200000,
+      "floorPrice": 4000000,
+      "targetPrice": 4800000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P021M_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P021M/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P021M_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P021M/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P022M",
@@ -927,7 +1524,28 @@
       ],
       "createdAt": "2026-10-05T12:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 3200000,
+      "floorPrice": 4000000,
+      "targetPrice": 4800000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P022M_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P022M/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P022M_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P022M/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P023V",
@@ -957,7 +1575,28 @@
       ],
       "createdAt": "2026-10-05T13:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 3200000,
+      "floorPrice": 4000000,
+      "targetPrice": 4800000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P023V_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P023V/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P023V_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P023V/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P024V",
@@ -986,7 +1625,28 @@
       ],
       "createdAt": "2026-10-05T14:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 3200000,
+      "floorPrice": 4000000,
+      "targetPrice": 4800000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P024V_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P024V/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P024V_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P024V/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P025VB",
@@ -1015,7 +1675,28 @@
       ],
       "createdAt": "2026-10-05T15:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 3200000,
+      "floorPrice": 4000000,
+      "targetPrice": 4800000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P025VB_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P025VB/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P025VB_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P025VB/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P028L",
@@ -1044,7 +1725,28 @@
       ],
       "createdAt": "2026-10-05T16:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 3200000,
+      "floorPrice": 4000000,
+      "targetPrice": 4800000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P028L_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P028L/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P028L_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P028L/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P029GS",
@@ -1073,7 +1775,28 @@
       ],
       "createdAt": "2026-10-05T17:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 3200000,
+      "floorPrice": 4000000,
+      "targetPrice": 4800000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P029GS_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P029GS/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P029GS_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P029GS/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P030S",
@@ -1102,7 +1825,28 @@
       ],
       "createdAt": "2026-10-05T18:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 3200000,
+      "floorPrice": 4000000,
+      "targetPrice": 4800000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P030S_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P030S/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P030S_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P030S/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P031SM",
@@ -1132,7 +1876,28 @@
       ],
       "createdAt": "2026-10-05T19:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 7600000,
+      "floorPrice": 9500000,
+      "targetPrice": 11400000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P031SM_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P031SM/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P031SM_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P031SM/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P032SM",
@@ -1161,7 +1926,28 @@
       ],
       "createdAt": "2026-10-05T20:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 5200000,
+      "floorPrice": 6500000,
+      "targetPrice": 7800000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P032SM_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P032SM/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P032SM_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P032SM/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P033HY",
@@ -1190,7 +1976,28 @@
       ],
       "createdAt": "2026-10-05T21:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 17200000,
+      "floorPrice": 21500000,
+      "targetPrice": 25800000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P033HY_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P033HY/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P033HY_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P033HY/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P034TP",
@@ -1219,7 +2026,28 @@
       ],
       "createdAt": "2026-10-05T22:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 5200000,
+      "floorPrice": 6500000,
+      "targetPrice": 7800000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P034TP_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P034TP/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P034TP_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P034TP/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P035PH",
@@ -1247,7 +2075,28 @@
       ],
       "createdAt": "2026-10-05T23:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 3200000,
+      "floorPrice": 4000000,
+      "targetPrice": 4800000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P035PH_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P035PH/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P035PH_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P035PH/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P036FS",
@@ -1276,7 +2125,28 @@
       ],
       "createdAt": "2026-10-06T00:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 4400000,
+      "floorPrice": 5500000,
+      "targetPrice": 6600000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P036FS_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P036FS/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P036FS_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P036FS/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P037CF",
@@ -1305,7 +2175,28 @@
       ],
       "createdAt": "2026-10-06T01:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 6240000,
+      "floorPrice": 7800000,
+      "targetPrice": 9360000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P037CF_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P037CF/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P037CF_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P037CF/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P038FR",
@@ -1333,7 +2224,28 @@
       ],
       "createdAt": "2026-10-06T02:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 3200000,
+      "floorPrice": 4000000,
+      "targetPrice": 4800000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P038FR_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P038FR/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P038FR_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P038FR/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P039UP",
@@ -1362,7 +2274,28 @@
       ],
       "createdAt": "2026-10-06T03:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 7600000,
+      "floorPrice": 9500000,
+      "targetPrice": 11400000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P039UP_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P039UP/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P039UP_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P039UP/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P040DS",
@@ -1390,7 +2323,28 @@
       ],
       "createdAt": "2026-10-06T04:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 2000000,
+      "floorPrice": 2500000,
+      "targetPrice": 3000000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P040DS_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P040DS/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P040DS_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P040DS/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P041HS",
@@ -1418,7 +2372,28 @@
       ],
       "createdAt": "2026-10-06T05:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 1600000,
+      "floorPrice": 2000000,
+      "targetPrice": 2400000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P041HS_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P041HS/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P041HS_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P041HS/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P042FB",
@@ -1446,7 +2421,28 @@
       ],
       "createdAt": "2026-10-06T06:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 3760000,
+      "floorPrice": 4700000,
+      "targetPrice": 5640000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P042FB_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P042FB/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P042FB_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P042FB/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P043OD",
@@ -1474,7 +2470,28 @@
       ],
       "createdAt": "2026-10-06T07:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 14000000,
+      "floorPrice": 17500000,
+      "targetPrice": 21000000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P043OD_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P043OD/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P043OD_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P043OD/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     },
     {
       "id": "P044FM",
@@ -1502,7 +2519,28 @@
       ],
       "createdAt": "2026-10-06T08:58:03.488Z",
       "updatedAt": "2026-10-06T09:58:03.488Z",
-      "createdBy": "system_import"
+      "createdBy": "system_import",
+      "procurementCost": 3200000,
+      "floorPrice": 4000000,
+      "targetPrice": 4800000,
+      "inspectionVideos": [
+        {
+          "id": "vid_P044FM_1",
+          "title": "Live Power Trial Under 415V Electric Load (Full Ram Stroke)",
+          "url": "https://dalalmachines.com/vault/P044FM/power-trial.mp4",
+          "duration": "04:18",
+          "type": "power_trial",
+          "dateAdded": "2026-10-15"
+        },
+        {
+          "id": "vid_P044FM_2",
+          "title": "Automatic Lubrication System & Gearbox Backlash Verification",
+          "url": "https://dalalmachines.com/vault/P044FM/lubrication-test.mp4",
+          "duration": "03:10",
+          "type": "lubrication",
+          "dateAdded": "2026-10-16"
+        }
+      ]
     }
   ],
   "categories": [
@@ -1680,7 +2718,18 @@
       "machineName": null,
       "message": "",
       "status": "new",
-      "createdAt": "2026-11-11T04:54:40.953Z"
+      "createdAt": "2026-11-11T04:54:40.953Z",
+      "city": "Pune",
+      "pipelineStage": "new",
+      "estimatedValue": 1800000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-11-12T04:54:40.953Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-DMTA.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_a183c6db",
@@ -1692,7 +2741,18 @@
       "machineName": null,
       "message": "",
       "status": "new",
-      "createdAt": "2026-11-08T07:37:05.036Z"
+      "createdAt": "2026-11-08T07:37:05.036Z",
+      "city": "Rajkot",
+      "pipelineStage": "new",
+      "estimatedValue": 2500000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-11-09T07:37:05.036Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-DMTA.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_eb50b56b",
@@ -1704,7 +2764,18 @@
       "machineName": null,
       "message": "",
       "status": "new",
-      "createdAt": "2026-11-08T06:59:56.553Z"
+      "createdAt": "2026-11-08T06:59:56.553Z",
+      "city": "Ludhiana",
+      "pipelineStage": "new",
+      "estimatedValue": 3800000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-11-09T06:59:56.553Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-DMTA.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_4590ba21",
@@ -1716,7 +2787,18 @@
       "machineName": null,
       "message": "",
       "status": "new",
-      "createdAt": "2026-11-08T06:57:58.530Z"
+      "createdAt": "2026-11-08T06:57:58.530Z",
+      "city": "Faridabad",
+      "pipelineStage": "new",
+      "estimatedValue": 5500000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-11-09T06:57:58.530Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-DMTA.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_9e552134",
@@ -1728,7 +2810,18 @@
       "machineName": "1600T Russian Hot Forging Press",
       "message": "Need CIF Nhava Sheva quote and live power trial schedule.",
       "status": "new",
-      "createdAt": "2026-11-02T07:11:36.425Z"
+      "createdAt": "2026-11-02T07:11:36.425Z",
+      "city": "Ahmedabad",
+      "pipelineStage": "new",
+      "estimatedValue": 7500000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-11-03T07:11:36.425Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-DMTA.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_881df5f0",
@@ -1740,7 +2833,18 @@
       "machineName": null,
       "message": "",
       "status": "new",
-      "createdAt": "2026-11-02T07:11:29.124Z"
+      "createdAt": "2026-11-02T07:11:29.124Z",
+      "city": "Coimbatore",
+      "pipelineStage": "new",
+      "estimatedValue": 9500000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-11-03T07:11:29.124Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-DMTA.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_05a1974f",
@@ -1752,7 +2856,18 @@
       "machineName": null,
       "message": "",
       "status": "new",
-      "createdAt": "2026-11-01T16:36:54.749Z"
+      "createdAt": "2026-11-01T16:36:54.749Z",
+      "city": "Mumbai",
+      "pipelineStage": "new",
+      "estimatedValue": 12000000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-11-02T16:36:54.749Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-DMTA.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_afa4351b",
@@ -1764,7 +2879,18 @@
       "machineName": "1600T Russian Hot Forging Press",
       "message": "Need CIF Nhava Sheva quote and live power trial schedule.",
       "status": "new",
-      "createdAt": "2026-11-01T16:17:55.831Z"
+      "createdAt": "2026-11-01T16:17:55.831Z",
+      "city": "Bengaluru",
+      "pipelineStage": "new",
+      "estimatedValue": 4200000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-11-02T16:17:55.831Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-DMTA.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_b283738f",
@@ -1776,7 +2902,18 @@
       "machineName": null,
       "message": "",
       "status": "new",
-      "createdAt": "2026-11-01T16:17:48.995Z"
+      "createdAt": "2026-11-01T16:17:48.995Z",
+      "city": "Pune",
+      "pipelineStage": "new",
+      "estimatedValue": 1800000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-11-02T16:17:48.995Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-DMTA.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_d23f0cd3",
@@ -1788,7 +2925,18 @@
       "machineName": "Test Machine",
       "message": "Testing sanitization",
       "status": "new",
-      "createdAt": "2026-10-31T14:47:33.924Z"
+      "createdAt": "2026-10-31T14:47:33.924Z",
+      "city": "Rajkot",
+      "pipelineStage": "new",
+      "estimatedValue": 2500000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-11-01T14:47:33.924Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P00001.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_02b365cb",
@@ -1800,7 +2948,18 @@
       "machineName": "1600T Russian Hot Forging Press",
       "message": "Need CIF Nhava Sheva quote and live power trial schedule.",
       "status": "new",
-      "createdAt": "2026-10-31T15:00:00.000Z"
+      "createdAt": "2026-10-31T15:00:00.000Z",
+      "city": "Ludhiana",
+      "pipelineStage": "new",
+      "estimatedValue": 3800000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-11-01T15:00:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P00007.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_22d47140",
@@ -1812,7 +2971,18 @@
       "machineName": "Test Machine",
       "message": "Testing sanitization",
       "status": "new",
-      "createdAt": "2026-10-31T13:08:25.115Z"
+      "createdAt": "2026-10-31T13:08:25.115Z",
+      "city": "Faridabad",
+      "pipelineStage": "new",
+      "estimatedValue": 5500000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-11-01T13:08:25.115Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P00001.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_cec1220f",
@@ -1824,7 +2994,18 @@
       "machineName": "2500T RUSSIAN TMP-VORONEZH Hot Forging Press",
       "message": "Looking for 2500T press for automotive crankshafts. Need inspection at Pune yard.",
       "status": "new",
-      "createdAt": "2026-10-31T08:00:00.000Z"
+      "createdAt": "2026-10-31T08:00:00.000Z",
+      "city": "Ahmedabad",
+      "pipelineStage": "new",
+      "estimatedValue": 7500000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-11-01T08:00:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P00007.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_849ee26b",
@@ -1836,7 +3017,18 @@
       "machineName": "DANGO & DIENENTHAL 1600 TON Open Die Forging Press",
       "message": "Urgent requirement for open die forging press with manipulator. Share CIF quote.",
       "status": "new",
-      "createdAt": "2026-10-31T04:30:00.000Z"
+      "createdAt": "2026-10-31T04:30:00.000Z",
+      "city": "Coimbatore",
+      "pipelineStage": "new",
+      "estimatedValue": 9500000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-11-01T04:30:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P043OD.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_158d3735",
@@ -1848,7 +3040,18 @@
       "machineName": "1000T EUMUCO Hot Forging Wedge Press",
       "message": "Interested in German wedge press for fast cycle connecting rod forging.",
       "status": "new",
-      "createdAt": "2026-10-31T01:00:00.000Z"
+      "createdAt": "2026-10-31T01:00:00.000Z",
+      "city": "Mumbai",
+      "pipelineStage": "new",
+      "estimatedValue": 12000000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-11-01T01:00:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P0001.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_5555a822",
@@ -1860,7 +3063,18 @@
       "machineName": "Custom 4000T Hydraulic Closed Die Forging Press",
       "message": "Please share foundation drawings and hydraulic power unit specifications.",
       "status": "new",
-      "createdAt": "2026-10-30T21:30:00.000Z"
+      "createdAt": "2026-10-30T21:30:00.000Z",
+      "city": "Bengaluru",
+      "pipelineStage": "new",
+      "estimatedValue": 4200000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-31T21:30:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P00008.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_88109332",
@@ -1872,7 +3086,18 @@
       "machineName": "1600T Russian Hot Forging Press",
       "message": "Need live power trial schedule and commercial Ex-Yard Pune price.",
       "status": "new",
-      "createdAt": "2026-10-30T18:00:00.000Z"
+      "createdAt": "2026-10-30T18:00:00.000Z",
+      "city": "Pune",
+      "pipelineStage": "new",
+      "estimatedValue": 1800000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-31T18:00:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P00007.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_79c07191",
@@ -1884,7 +3109,18 @@
       "machineName": "LI CHIN 200 TON C-Frame Press",
       "message": "Requirement for 200T C-frame mechanical press for two-wheeler brake disc stamping.",
       "status": "new",
-      "createdAt": "2026-10-30T14:30:00.000Z"
+      "createdAt": "2026-10-30T14:30:00.000Z",
+      "city": "Rajkot",
+      "pipelineStage": "new",
+      "estimatedValue": 2500000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-31T14:30:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P0002.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_39e66d12",
@@ -1896,7 +3132,18 @@
       "machineName": "2500T RUSSIAN TMP-VORONEZH Hot Forging Press",
       "message": "Need complete inspection videos under live power and electrical panel details.",
       "status": "new",
-      "createdAt": "2026-10-30T11:00:00.000Z"
+      "createdAt": "2026-10-30T11:00:00.000Z",
+      "city": "Ludhiana",
+      "pipelineStage": "new",
+      "estimatedValue": 3800000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-31T11:00:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P00007.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_2f439278",
@@ -1908,7 +3155,18 @@
       "machineName": "TOS VARNSDORF W9A Horizontal Boring Machine",
       "message": "Share DRO specs and spindle condition report.",
       "status": "new",
-      "createdAt": "2026-10-30T07:30:00.000Z"
+      "createdAt": "2026-10-30T07:30:00.000Z",
+      "city": "Faridabad",
+      "pipelineStage": "new",
+      "estimatedValue": 5500000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-31T07:30:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P00019C.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_829bbafb",
@@ -1920,7 +3178,18 @@
       "machineName": "WALDRICH COBURG 4000 Heavy CNC Portal Milling Machine",
       "message": "Looking for portal milling machine with right angle auto head.",
       "status": "new",
-      "createdAt": "2026-10-30T04:00:00.000Z"
+      "createdAt": "2026-10-30T04:00:00.000Z",
+      "city": "Ahmedabad",
+      "pipelineStage": "new",
+      "estimatedValue": 7500000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-31T04:00:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P021M.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_218129d7",
@@ -1932,7 +3201,18 @@
       "machineName": "Custom 4000T Hydraulic Closed Die Forging Press",
       "message": "Need technical specification sheet and delivery lead time to Pune.",
       "status": "new",
-      "createdAt": "2026-10-30T00:30:00.000Z"
+      "createdAt": "2026-10-30T00:30:00.000Z",
+      "city": "Coimbatore",
+      "pipelineStage": "new",
+      "estimatedValue": 9500000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-31T00:30:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P00008.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_17687bb0",
@@ -1944,7 +3224,18 @@
       "machineName": "1000T EUMUCO Hot Forging Wedge Press",
       "message": "Requesting CIF Nhava Sheva quote and trial video.",
       "status": "new",
-      "createdAt": "2026-10-29T21:00:00.000Z"
+      "createdAt": "2026-10-29T21:00:00.000Z",
+      "city": "Mumbai",
+      "pipelineStage": "new",
+      "estimatedValue": 12000000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-30T21:00:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P0001.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_2520ef5c",
@@ -1956,7 +3247,18 @@
       "machineName": "TOS VARNSDORF W100A Horizontal Boring Machine",
       "message": "Can we visit your Pune yard this Friday for machine inspection?",
       "status": "new",
-      "createdAt": "2026-10-29T17:30:00.000Z"
+      "createdAt": "2026-10-29T17:30:00.000Z",
+      "city": "Bengaluru",
+      "pipelineStage": "new",
+      "estimatedValue": 4200000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-30T17:30:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P00019D.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_68030e0b",
@@ -1968,7 +3270,18 @@
       "machineName": "DANGO & DIENENTHAL 1600 TON Open Die Forging Press",
       "message": "Need urgent quote for open die forging press.",
       "status": "new",
-      "createdAt": "2026-10-29T14:00:00.000Z"
+      "createdAt": "2026-10-29T14:00:00.000Z",
+      "city": "Pune",
+      "pipelineStage": "new",
+      "estimatedValue": 1800000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-30T14:00:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P043OD.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_4d149eba",
@@ -1980,7 +3293,18 @@
       "machineName": "LI CHIN 200 TON C-Frame Press",
       "message": "Please send complete technical specifications and payment terms.",
       "status": "new",
-      "createdAt": "2026-10-29T10:30:00.000Z"
+      "createdAt": "2026-10-29T10:30:00.000Z",
+      "city": "Rajkot",
+      "pipelineStage": "new",
+      "estimatedValue": 2500000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-30T10:30:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P0002.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_2d6b91a3",
@@ -1992,7 +3316,18 @@
       "machineName": "1600T Russian Hot Forging Press",
       "message": "Need CIF Nhava Sheva quote and live power trial schedule.",
       "status": "new",
-      "createdAt": "2026-10-29T07:00:00.000Z"
+      "createdAt": "2026-10-29T07:00:00.000Z",
+      "city": "Ludhiana",
+      "pipelineStage": "new",
+      "estimatedValue": 3800000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-30T07:00:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P00007.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_02de402d",
@@ -2004,7 +3339,18 @@
       "machineName": "2500T RUSSIAN TMP-VORONEZH Hot Forging Press",
       "message": "Looking for 2500T press for automotive crankshafts. Need inspection at Pune yard.",
       "status": "new",
-      "createdAt": "2026-10-29T03:30:00.000Z"
+      "createdAt": "2026-10-29T03:30:00.000Z",
+      "city": "Faridabad",
+      "pipelineStage": "new",
+      "estimatedValue": 5500000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-30T03:30:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P00007.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_7bbfad6d",
@@ -2016,7 +3362,18 @@
       "machineName": "DANGO & DIENENTHAL 1600 TON Open Die Forging Press",
       "message": "Urgent requirement for open die forging press with manipulator. Share CIF quote.",
       "status": "new",
-      "createdAt": "2026-10-29T00:00:00.000Z"
+      "createdAt": "2026-10-29T00:00:00.000Z",
+      "city": "Ahmedabad",
+      "pipelineStage": "new",
+      "estimatedValue": 7500000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-30T00:00:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P043OD.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_de29e804",
@@ -2027,8 +3384,19 @@
       "machineId": null,
       "machineName": "DMTA High-Precision Press",
       "message": "Automated E2E test inquiry verifying pipeline responsiveness.",
-      "status": "contacted",
-      "createdAt": "2026-10-30T09:54:33.101Z"
+      "status": "power_trial_requested",
+      "createdAt": "2026-10-30T09:54:33.101Z",
+      "city": "Coimbatore",
+      "pipelineStage": "power_trial_requested",
+      "estimatedValue": 9500000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-31T09:54:33.101Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-DMTA.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_0484f88a",
@@ -2040,7 +3408,18 @@
       "machineName": "1000T EUMUCO Hot Forging Wedge Press",
       "message": "Interested in German wedge press for fast cycle connecting rod forging.",
       "status": "new",
-      "createdAt": "2026-10-28T17:00:00.000Z"
+      "createdAt": "2026-10-28T17:00:00.000Z",
+      "city": "Mumbai",
+      "pipelineStage": "new",
+      "estimatedValue": 12000000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-29T17:00:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P0001.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_f0ca76aa",
@@ -2052,7 +3431,18 @@
       "machineName": "Custom 4000T Hydraulic Closed Die Forging Press",
       "message": "Please share foundation drawings and hydraulic power unit specifications.",
       "status": "new",
-      "createdAt": "2026-10-28T13:30:00.000Z"
+      "createdAt": "2026-10-28T13:30:00.000Z",
+      "city": "Bengaluru",
+      "pipelineStage": "new",
+      "estimatedValue": 4200000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-29T13:30:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P00008.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_7fa07233",
@@ -2064,7 +3454,18 @@
       "machineName": "1600T Russian Hot Forging Press",
       "message": "Need live power trial schedule and commercial Ex-Yard Pune price.",
       "status": "new",
-      "createdAt": "2026-10-28T10:00:00.000Z"
+      "createdAt": "2026-10-28T10:00:00.000Z",
+      "city": "Pune",
+      "pipelineStage": "new",
+      "estimatedValue": 1800000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-29T10:00:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P00007.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_daa0be9a",
@@ -2076,7 +3477,18 @@
       "machineName": "LI CHIN 200 TON C-Frame Press",
       "message": "Requirement for 200T C-frame mechanical press for two-wheeler brake disc stamping.",
       "status": "new",
-      "createdAt": "2026-10-28T06:30:00.000Z"
+      "createdAt": "2026-10-28T06:30:00.000Z",
+      "city": "Rajkot",
+      "pipelineStage": "new",
+      "estimatedValue": 2500000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-29T06:30:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P0002.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_d9b02ddb",
@@ -2088,7 +3500,18 @@
       "machineName": "2500T RUSSIAN TMP-VORONEZH Hot Forging Press",
       "message": "Need complete inspection videos under live power and electrical panel details.",
       "status": "new",
-      "createdAt": "2026-10-28T03:00:00.000Z"
+      "createdAt": "2026-10-28T03:00:00.000Z",
+      "city": "Ludhiana",
+      "pipelineStage": "new",
+      "estimatedValue": 3800000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-29T03:00:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P00007.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_628d7e77",
@@ -2100,7 +3523,18 @@
       "machineName": "TOS VARNSDORF W9A Horizontal Boring Machine",
       "message": "Share DRO specs and spindle condition report.",
       "status": "new",
-      "createdAt": "2026-10-27T23:30:00.000Z"
+      "createdAt": "2026-10-27T23:30:00.000Z",
+      "city": "Faridabad",
+      "pipelineStage": "new",
+      "estimatedValue": 5500000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-28T23:30:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P00019C.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_38dada44",
@@ -2112,7 +3546,18 @@
       "machineName": "WALDRICH COBURG 4000 Heavy CNC Portal Milling Machine",
       "message": "Looking for portal milling machine with right angle auto head.",
       "status": "new",
-      "createdAt": "2026-10-27T20:00:00.000Z"
+      "createdAt": "2026-10-27T20:00:00.000Z",
+      "city": "Ahmedabad",
+      "pipelineStage": "new",
+      "estimatedValue": 7500000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-28T20:00:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P021M.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_e44af292",
@@ -2124,7 +3569,18 @@
       "machineName": "Custom 4000T Hydraulic Closed Die Forging Press",
       "message": "Need technical specification sheet and delivery lead time to Pune.",
       "status": "new",
-      "createdAt": "2026-10-27T16:30:00.000Z"
+      "createdAt": "2026-10-27T16:30:00.000Z",
+      "city": "Coimbatore",
+      "pipelineStage": "new",
+      "estimatedValue": 9500000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-28T16:30:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P00008.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_a6df974b",
@@ -2136,7 +3592,18 @@
       "machineName": "1000T EUMUCO Hot Forging Wedge Press",
       "message": "Requesting CIF Nhava Sheva quote and trial video.",
       "status": "new",
-      "createdAt": "2026-10-27T13:00:00.000Z"
+      "createdAt": "2026-10-27T13:00:00.000Z",
+      "city": "Mumbai",
+      "pipelineStage": "new",
+      "estimatedValue": 12000000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-28T13:00:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P0001.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_73ef1283",
@@ -2148,7 +3615,18 @@
       "machineName": "TOS VARNSDORF W100A Horizontal Boring Machine",
       "message": "Can we visit your Pune yard this Friday for machine inspection?",
       "status": "new",
-      "createdAt": "2026-10-27T09:30:00.000Z"
+      "createdAt": "2026-10-27T09:30:00.000Z",
+      "city": "Bengaluru",
+      "pipelineStage": "new",
+      "estimatedValue": 4200000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-28T09:30:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P00019D.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_5418cf14",
@@ -2160,7 +3638,18 @@
       "machineName": "DANGO & DIENENTHAL 1600 TON Open Die Forging Press",
       "message": "Need urgent quote for open die forging press.",
       "status": "new",
-      "createdAt": "2026-10-27T06:00:00.000Z"
+      "createdAt": "2026-10-27T06:00:00.000Z",
+      "city": "Pune",
+      "pipelineStage": "new",
+      "estimatedValue": 1800000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-28T06:00:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P043OD.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_f2fa4f56",
@@ -2172,7 +3661,18 @@
       "machineName": "LI CHIN 200 TON C-Frame Press",
       "message": "Please send complete technical specifications and payment terms.",
       "status": "new",
-      "createdAt": "2026-10-27T02:30:00.000Z"
+      "createdAt": "2026-10-27T02:30:00.000Z",
+      "city": "Rajkot",
+      "pipelineStage": "new",
+      "estimatedValue": 2500000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-28T02:30:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P0002.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_1549795c",
@@ -2184,7 +3684,18 @@
       "machineName": "1600T Russian Hot Forging Press",
       "message": "Need CIF Nhava Sheva quote and live power trial schedule.",
       "status": "new",
-      "createdAt": "2026-10-26T23:00:00.000Z"
+      "createdAt": "2026-10-26T23:00:00.000Z",
+      "city": "Ludhiana",
+      "pipelineStage": "new",
+      "estimatedValue": 3800000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-27T23:00:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P00007.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_90866e69",
@@ -2196,7 +3707,18 @@
       "machineName": "2500T RUSSIAN TMP-VORONEZH Hot Forging Press",
       "message": "Looking for 2500T press for automotive crankshafts. Need inspection at Pune yard.",
       "status": "new",
-      "createdAt": "2026-10-26T19:30:00.000Z"
+      "createdAt": "2026-10-26T19:30:00.000Z",
+      "city": "Faridabad",
+      "pipelineStage": "new",
+      "estimatedValue": 5500000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-27T19:30:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P00007.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_d5ab09b2",
@@ -2208,7 +3730,18 @@
       "machineName": "DANGO & DIENENTHAL 1600 TON Open Die Forging Press",
       "message": "Urgent requirement for open die forging press with manipulator. Share CIF quote.",
       "status": "new",
-      "createdAt": "2026-10-26T16:00:00.000Z"
+      "createdAt": "2026-10-26T16:00:00.000Z",
+      "city": "Ahmedabad",
+      "pipelineStage": "new",
+      "estimatedValue": 7500000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-27T16:00:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P043OD.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_e7774093",
@@ -2220,7 +3753,18 @@
       "machineName": "1000T EUMUCO Hot Forging Wedge Press",
       "message": "Interested in German wedge press for fast cycle connecting rod forging.",
       "status": "new",
-      "createdAt": "2026-10-26T12:30:00.000Z"
+      "createdAt": "2026-10-26T12:30:00.000Z",
+      "city": "Coimbatore",
+      "pipelineStage": "new",
+      "estimatedValue": 9500000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-27T12:30:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P0001.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_e83af90a",
@@ -2232,7 +3776,18 @@
       "machineName": "Custom 4000T Hydraulic Closed Die Forging Press",
       "message": "Please share foundation drawings and hydraulic power unit specifications.",
       "status": "new",
-      "createdAt": "2026-10-26T09:00:00.000Z"
+      "createdAt": "2026-10-26T09:00:00.000Z",
+      "city": "Mumbai",
+      "pipelineStage": "new",
+      "estimatedValue": 12000000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-27T09:00:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P00008.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_eef9a159",
@@ -2244,7 +3799,18 @@
       "machineName": "1600T Russian Hot Forging Press",
       "message": "Need live power trial schedule and commercial Ex-Yard Pune price.",
       "status": "new",
-      "createdAt": "2026-10-26T05:30:00.000Z"
+      "createdAt": "2026-10-26T05:30:00.000Z",
+      "city": "Bengaluru",
+      "pipelineStage": "new",
+      "estimatedValue": 4200000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-27T05:30:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P00007.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_03b979e1",
@@ -2256,7 +3822,18 @@
       "machineName": "LI CHIN 200 TON C-Frame Press",
       "message": "Requirement for 200T C-frame mechanical press for two-wheeler brake disc stamping.",
       "status": "new",
-      "createdAt": "2026-10-26T02:00:00.000Z"
+      "createdAt": "2026-10-26T02:00:00.000Z",
+      "city": "Pune",
+      "pipelineStage": "new",
+      "estimatedValue": 1800000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-27T02:00:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P0002.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_cc948de5",
@@ -2268,7 +3845,18 @@
       "machineName": "2500T RUSSIAN TMP-VORONEZH Hot Forging Press",
       "message": "Need complete inspection videos under live power and electrical panel details.",
       "status": "new",
-      "createdAt": "2026-10-25T22:30:00.000Z"
+      "createdAt": "2026-10-25T22:30:00.000Z",
+      "city": "Rajkot",
+      "pipelineStage": "new",
+      "estimatedValue": 2500000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-26T22:30:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P00007.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_42e26f26",
@@ -2280,7 +3868,18 @@
       "machineName": "TOS VARNSDORF W9A Horizontal Boring Machine",
       "message": "Share DRO specs and spindle condition report.",
       "status": "new",
-      "createdAt": "2026-10-25T19:00:00.000Z"
+      "createdAt": "2026-10-25T19:00:00.000Z",
+      "city": "Ludhiana",
+      "pipelineStage": "new",
+      "estimatedValue": 3800000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-26T19:00:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P00019C.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_7180fb38",
@@ -2292,7 +3891,18 @@
       "machineName": "WALDRICH COBURG 4000 Heavy CNC Portal Milling Machine",
       "message": "Looking for portal milling machine with right angle auto head.",
       "status": "new",
-      "createdAt": "2026-10-25T15:30:00.000Z"
+      "createdAt": "2026-10-25T15:30:00.000Z",
+      "city": "Faridabad",
+      "pipelineStage": "new",
+      "estimatedValue": 5500000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-26T15:30:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P021M.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_9d64a103",
@@ -2304,7 +3914,18 @@
       "machineName": "Custom 4000T Hydraulic Closed Die Forging Press",
       "message": "Need technical specification sheet and delivery lead time to Pune.",
       "status": "new",
-      "createdAt": "2026-10-25T12:00:00.000Z"
+      "createdAt": "2026-10-25T12:00:00.000Z",
+      "city": "Ahmedabad",
+      "pipelineStage": "new",
+      "estimatedValue": 7500000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-26T12:00:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P00008.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_2c940f02",
@@ -2316,7 +3937,18 @@
       "machineName": "1000T EUMUCO Hot Forging Wedge Press",
       "message": "Requesting CIF Nhava Sheva quote and trial video.",
       "status": "new",
-      "createdAt": "2026-10-25T08:30:00.000Z"
+      "createdAt": "2026-10-25T08:30:00.000Z",
+      "city": "Coimbatore",
+      "pipelineStage": "new",
+      "estimatedValue": 9500000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-26T08:30:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P0001.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_783a0e5f",
@@ -2328,7 +3960,18 @@
       "machineName": "TOS VARNSDORF W100A Horizontal Boring Machine",
       "message": "Can we visit your Pune yard this Friday for machine inspection?",
       "status": "new",
-      "createdAt": "2026-10-25T05:00:00.000Z"
+      "createdAt": "2026-10-25T05:00:00.000Z",
+      "city": "Mumbai",
+      "pipelineStage": "new",
+      "estimatedValue": 12000000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-26T05:00:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P00019D.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_c8d1c984",
@@ -2340,7 +3983,18 @@
       "machineName": "DANGO & DIENENTHAL 1600 TON Open Die Forging Press",
       "message": "Need urgent quote for open die forging press.",
       "status": "new",
-      "createdAt": "2026-10-25T01:30:00.000Z"
+      "createdAt": "2026-10-25T01:30:00.000Z",
+      "city": "Bengaluru",
+      "pipelineStage": "new",
+      "estimatedValue": 4200000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-26T01:30:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P043OD.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_7509a303",
@@ -2352,7 +4006,18 @@
       "machineName": "LI CHIN 200 TON C-Frame Press",
       "message": "Please send complete technical specifications and payment terms.",
       "status": "new",
-      "createdAt": "2026-10-24T22:00:00.000Z"
+      "createdAt": "2026-10-24T22:00:00.000Z",
+      "city": "Pune",
+      "pipelineStage": "new",
+      "estimatedValue": 1800000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-25T22:00:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P0002.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_86be1aa1",
@@ -2363,8 +4028,19 @@
       "machineId": null,
       "machineName": "DMTA High-Precision Press",
       "message": "Automated E2E test inquiry verifying pipeline responsiveness.",
-      "status": "contacted",
-      "createdAt": "2026-10-06T16:40:05.761Z"
+      "status": "power_trial_requested",
+      "createdAt": "2026-10-06T16:40:05.761Z",
+      "city": "Rajkot",
+      "pipelineStage": "power_trial_requested",
+      "estimatedValue": 2500000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-07T16:40:05.761Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-DMTA.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_45a3a3e1",
@@ -2375,8 +4051,19 @@
       "machineId": null,
       "machineName": "DMTA High-Precision Press",
       "message": "Automated E2E test inquiry verifying pipeline responsiveness.",
-      "status": "contacted",
-      "createdAt": "2026-10-06T16:20:59.007Z"
+      "status": "power_trial_requested",
+      "createdAt": "2026-10-06T16:20:59.007Z",
+      "city": "Ludhiana",
+      "pipelineStage": "power_trial_requested",
+      "estimatedValue": 3800000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-07T16:20:59.007Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-DMTA.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_04667f95",
@@ -2387,8 +4074,19 @@
       "machineId": null,
       "machineName": "DMTA High-Precision Press",
       "message": "Automated E2E test inquiry verifying pipeline responsiveness.",
-      "status": "contacted",
-      "createdAt": "2026-10-06T16:08:01.212Z"
+      "status": "power_trial_requested",
+      "createdAt": "2026-10-06T16:08:01.212Z",
+      "city": "Faridabad",
+      "pipelineStage": "power_trial_requested",
+      "estimatedValue": 5500000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-07T16:08:01.212Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-DMTA.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_bea74947",
@@ -2399,8 +4097,19 @@
       "machineId": null,
       "machineName": "DMTA High-Precision Press",
       "message": "Automated E2E test inquiry verifying pipeline responsiveness.",
-      "status": "contacted",
-      "createdAt": "2026-10-06T15:46:01.874Z"
+      "status": "power_trial_requested",
+      "createdAt": "2026-10-06T15:46:01.874Z",
+      "city": "Ahmedabad",
+      "pipelineStage": "power_trial_requested",
+      "estimatedValue": 7500000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-07T15:46:01.874Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-DMTA.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_67d1b994",
@@ -2411,8 +4120,19 @@
       "machineId": null,
       "machineName": "DMTA High-Precision Press",
       "message": "Automated E2E test inquiry verifying pipeline responsiveness.",
-      "status": "contacted",
-      "createdAt": "2026-10-06T15:22:55.557Z"
+      "status": "power_trial_requested",
+      "createdAt": "2026-10-06T15:22:55.557Z",
+      "city": "Coimbatore",
+      "pipelineStage": "power_trial_requested",
+      "estimatedValue": 9500000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-07T15:22:55.557Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-DMTA.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_5ac71e64",
@@ -2423,8 +4143,19 @@
       "machineId": null,
       "machineName": "DMTA High-Precision Press",
       "message": "Automated E2E test inquiry verifying pipeline responsiveness.",
-      "status": "contacted",
-      "createdAt": "2026-10-06T14:39:18.883Z"
+      "status": "power_trial_requested",
+      "createdAt": "2026-10-06T14:39:18.883Z",
+      "city": "Mumbai",
+      "pipelineStage": "power_trial_requested",
+      "estimatedValue": 12000000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-07T14:39:18.883Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-DMTA.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_3a95c4f4",
@@ -2435,8 +4166,19 @@
       "machineId": null,
       "machineName": "DMTA High-Precision Press",
       "message": "Automated E2E test inquiry verifying pipeline responsiveness.",
-      "status": "contacted",
-      "createdAt": "2026-10-06T14:17:08.062Z"
+      "status": "power_trial_requested",
+      "createdAt": "2026-10-06T14:17:08.062Z",
+      "city": "Bengaluru",
+      "pipelineStage": "power_trial_requested",
+      "estimatedValue": 4200000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-07T14:17:08.062Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-DMTA.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_e0439e3e",
@@ -2447,8 +4189,19 @@
       "machineId": null,
       "machineName": "DMTA High-Precision Press",
       "message": "Automated E2E test inquiry verifying pipeline responsiveness.",
-      "status": "contacted",
-      "createdAt": "2026-10-06T13:51:47.896Z"
+      "status": "power_trial_requested",
+      "createdAt": "2026-10-06T13:51:47.896Z",
+      "city": "Pune",
+      "pipelineStage": "power_trial_requested",
+      "estimatedValue": 1800000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-07T13:51:47.896Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-DMTA.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_781352c7",
@@ -2460,7 +4213,18 @@
       "machineName": "DMTA High-Precision Press",
       "message": "Automated E2E test inquiry verifying pipeline responsiveness.",
       "status": "new",
-      "createdAt": "2026-10-06T13:16:22.866Z"
+      "createdAt": "2026-10-06T13:16:22.866Z",
+      "city": "Rajkot",
+      "pipelineStage": "new",
+      "estimatedValue": 2500000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-07T13:16:22.866Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-DMTA.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_387f2688",
@@ -2471,8 +4235,19 @@
       "machineId": null,
       "machineName": "DMTA High-Precision Press",
       "message": "Automated E2E test inquiry verifying pipeline responsiveness.",
-      "status": "contacted",
-      "createdAt": "2026-10-06T13:12:52.273Z"
+      "status": "power_trial_requested",
+      "createdAt": "2026-10-06T13:12:52.273Z",
+      "city": "Ludhiana",
+      "pipelineStage": "power_trial_requested",
+      "estimatedValue": 3800000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-07T13:12:52.273Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-DMTA.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_caf05852",
@@ -2483,8 +4258,19 @@
       "machineId": null,
       "machineName": "DMTA High-Precision Press",
       "message": "Automated E2E test inquiry verifying pipeline responsiveness.",
-      "status": "contacted",
-      "createdAt": "2026-10-06T13:09:37.089Z"
+      "status": "power_trial_requested",
+      "createdAt": "2026-10-06T13:09:37.089Z",
+      "city": "Faridabad",
+      "pipelineStage": "power_trial_requested",
+      "estimatedValue": 5500000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-07T13:09:37.089Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-DMTA.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_dd83a4b7",
@@ -2495,8 +4281,19 @@
       "machineId": null,
       "machineName": "DMTA High-Precision Press",
       "message": "Automated E2E test inquiry verifying pipeline responsiveness.",
-      "status": "contacted",
-      "createdAt": "2026-10-06T13:06:26.898Z"
+      "status": "power_trial_requested",
+      "createdAt": "2026-10-06T13:06:26.898Z",
+      "city": "Ahmedabad",
+      "pipelineStage": "power_trial_requested",
+      "estimatedValue": 7500000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-07T13:06:26.898Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-DMTA.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_80034f8d",
@@ -2507,8 +4304,19 @@
       "machineId": null,
       "machineName": "DMTA High-Precision Press",
       "message": "Automated E2E test inquiry verifying pipeline responsiveness.",
-      "status": "contacted",
-      "createdAt": "2026-10-06T12:59:26.423Z"
+      "status": "power_trial_requested",
+      "createdAt": "2026-10-06T12:59:26.423Z",
+      "city": "Coimbatore",
+      "pipelineStage": "power_trial_requested",
+      "estimatedValue": 9500000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-07T12:59:26.423Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-DMTA.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_36ff33da",
@@ -2519,8 +4327,19 @@
       "machineId": null,
       "machineName": "DMTA High-Precision Press",
       "message": "Automated E2E test inquiry verifying pipeline responsiveness.",
-      "status": "contacted",
-      "createdAt": "2026-10-06T12:52:35.499Z"
+      "status": "power_trial_requested",
+      "createdAt": "2026-10-06T12:52:35.499Z",
+      "city": "Mumbai",
+      "pipelineStage": "power_trial_requested",
+      "estimatedValue": 12000000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-07T12:52:35.499Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-DMTA.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_e3fe09b7",
@@ -2531,8 +4350,19 @@
       "machineId": null,
       "machineName": "DMTA High-Precision Press",
       "message": "Automated E2E test inquiry verifying pipeline responsiveness.",
-      "status": "contacted",
-      "createdAt": "2026-10-06T12:47:52.443Z"
+      "status": "power_trial_requested",
+      "createdAt": "2026-10-06T12:47:52.443Z",
+      "city": "Bengaluru",
+      "pipelineStage": "power_trial_requested",
+      "estimatedValue": 4200000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-07T12:47:52.443Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-DMTA.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_15b76fd3",
@@ -2543,8 +4373,19 @@
       "machineId": null,
       "machineName": "DMTA High-Precision Press",
       "message": "Automated E2E test inquiry verifying pipeline responsiveness.",
-      "status": "quoted",
-      "createdAt": "2026-10-06T12:41:01.763Z"
+      "status": "quotation_sent",
+      "createdAt": "2026-10-06T12:41:01.763Z",
+      "city": "Pune",
+      "pipelineStage": "quotation_sent",
+      "estimatedValue": 1800000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-07T12:41:01.763Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-DMTA.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_b97df165",
@@ -2555,8 +4396,19 @@
       "machineId": null,
       "machineName": "DMTA High-Precision Press",
       "message": "Automated E2E test inquiry verifying pipeline responsiveness.",
-      "status": "contacted",
-      "createdAt": "2026-10-06T12:34:24.339Z"
+      "status": "power_trial_requested",
+      "createdAt": "2026-10-06T12:34:24.339Z",
+      "city": "Rajkot",
+      "pipelineStage": "power_trial_requested",
+      "estimatedValue": 2500000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-07T12:34:24.339Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-DMTA.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_80ea8514",
@@ -2567,8 +4419,19 @@
       "machineId": null,
       "machineName": "DMTA High-Precision Press",
       "message": "Automated E2E test inquiry verifying pipeline responsiveness.",
-      "status": "contacted",
-      "createdAt": "2026-10-06T12:29:56.657Z"
+      "status": "power_trial_requested",
+      "createdAt": "2026-10-06T12:29:56.657Z",
+      "city": "Ludhiana",
+      "pipelineStage": "power_trial_requested",
+      "estimatedValue": 3800000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-07T12:29:56.657Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-DMTA.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_0db39904",
@@ -2579,8 +4442,19 @@
       "machineId": null,
       "machineName": "DMTA High-Precision Press",
       "message": "Automated E2E test inquiry verifying pipeline responsiveness.",
-      "status": "contacted",
-      "createdAt": "2026-10-06T12:17:58.255Z"
+      "status": "power_trial_requested",
+      "createdAt": "2026-10-06T12:17:58.255Z",
+      "city": "Faridabad",
+      "pipelineStage": "power_trial_requested",
+      "estimatedValue": 5500000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-07T12:17:58.255Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-DMTA.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_70c82492",
@@ -2591,8 +4465,19 @@
       "machineId": null,
       "machineName": "DMTA High-Precision Press",
       "message": "Automated E2E test inquiry verifying pipeline responsiveness.",
-      "status": "contacted",
-      "createdAt": "2026-10-06T12:09:40.416Z"
+      "status": "power_trial_requested",
+      "createdAt": "2026-10-06T12:09:40.416Z",
+      "city": "Ahmedabad",
+      "pipelineStage": "power_trial_requested",
+      "estimatedValue": 7500000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-07T12:09:40.416Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-DMTA.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_b1bd6d9b",
@@ -2603,8 +4488,19 @@
       "machineId": null,
       "machineName": "DMTA High-Precision Press",
       "message": "Automated E2E test inquiry verifying pipeline responsiveness.",
-      "status": "contacted",
-      "createdAt": "2026-10-06T11:41:40.570Z"
+      "status": "power_trial_requested",
+      "createdAt": "2026-10-06T11:41:40.570Z",
+      "city": "Coimbatore",
+      "pipelineStage": "power_trial_requested",
+      "estimatedValue": 9500000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-07T11:41:40.570Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-DMTA.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_c2ff13c6",
@@ -2616,7 +4512,18 @@
       "machineName": "1600T Russian Hot Forging Press",
       "message": "Need CIF Nhava Sheva quote and live power trial schedule.",
       "status": "new",
-      "createdAt": "2026-10-21T17:00:00.000Z"
+      "createdAt": "2026-10-21T17:00:00.000Z",
+      "city": "Mumbai",
+      "pipelineStage": "new",
+      "estimatedValue": 12000000,
+      "isVipDeal": true,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-22T17:00:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P00007.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     },
     {
       "id": "inq_sample_01",
@@ -2628,7 +4535,18 @@
       "machineName": "2500T RUSSIAN TMP-VORONEZH Hot Forging Press",
       "message": "Looking for 2500T press for automotive crankshafts. Need inspection at Pune yard.",
       "status": "new",
-      "createdAt": "2026-10-21T13:30:00.000Z"
+      "createdAt": "2026-10-21T13:30:00.000Z",
+      "city": "Bengaluru",
+      "pipelineStage": "new",
+      "estimatedValue": 4200000,
+      "isVipDeal": false,
+      "assignedStaffId": "usr_admin",
+      "assignedStaffName": "Dalal Inventory Admin",
+      "slaDeadline": "2026-10-22T13:30:00.000Z",
+      "inspectionVideoLinks": [
+        "https://dalalmachines.com/videos/power-trial-P00007.mp4"
+      ],
+      "notes": "Inquiry logged for heavy industrial requirement."
     }
   ],
   "logs": [
@@ -6693,5 +8611,74 @@
     "linkUrl": "/admin/products.html",
     "dismissable": true,
     "updatedAt": "2026-10-28T13:50:32.629Z"
-  }
+  },
+  "consignments": [
+    {
+      "id": "csg_001",
+      "title": "Voronezh 1000T Heavy Mechanical Press (High-Seas Europe)",
+      "originPort": "Hamburg, Germany",
+      "destinationPort": "JNPT / Nhava Sheva, Mumbai",
+      "vesselName": "MSC ALESSIA (Voyage 2026W)",
+      "containerNumbers": [
+        "MSCU9281729",
+        "MSCU8172635"
+      ],
+      "billOfLading": "BL-DMTA-2026-EU-084",
+      "status": "high_seas_transit",
+      "eta": "2026-11-24",
+      "totalMachines": 1,
+      "valueInr": 8500000,
+      "updatedAt": "2026-11-11T05:11:42.035Z"
+    },
+    {
+      "id": "csg_002",
+      "title": "Erfurt 500T & C-Frame 250T Power Press Twin Consignment",
+      "originPort": "Rotterdam, Netherlands",
+      "destinationPort": "JNPT / Nhava Sheva, Mumbai",
+      "vesselName": "MAERSK MC-KINNEY MOLLER",
+      "containerNumbers": [
+        "MSKU1192837",
+        "MSKU7726354"
+      ],
+      "billOfLading": "BL-DMTA-2026-EU-119",
+      "status": "customs_clearing",
+      "eta": "2026-11-14",
+      "totalMachines": 2,
+      "valueInr": 6800000,
+      "updatedAt": "2026-11-11T05:11:42.035Z"
+    },
+    {
+      "id": "csg_003",
+      "title": "Toshiba Horizontal Boring Machine BTD-110R",
+      "originPort": "Nagoya, Japan",
+      "destinationPort": "Mumbai Port Trust (MbPT)",
+      "vesselName": "ONE CONTINUITY",
+      "containerNumbers": [
+        "ONEY4482910"
+      ],
+      "billOfLading": "BL-DMTA-2026-JP-402",
+      "status": "delivered_bhiwandi",
+      "eta": "2026-11-05",
+      "totalMachines": 1,
+      "valueInr": 12000000,
+      "updatedAt": "2026-11-11T05:11:42.035Z"
+    },
+    {
+      "id": "csg_004",
+      "title": "Taiwanese 5-Axis Heavy Machining Center & VMC Shipment",
+      "originPort": "Kaohsiung, Taiwan",
+      "destinationPort": "JNPT / Nhava Sheva, Mumbai",
+      "vesselName": "EVER GIVEN (Voyage 881E)",
+      "containerNumbers": [
+        "EGLV5592811",
+        "EGLV9928172"
+      ],
+      "billOfLading": "BL-DMTA-2026-TW-905",
+      "status": "loaded_at_port",
+      "eta": "2026-12-02",
+      "totalMachines": 2,
+      "valueInr": 9500000,
+      "updatedAt": "2026-11-11T05:11:42.035Z"
+    }
+  ]
 }

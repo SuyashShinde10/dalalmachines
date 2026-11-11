@@ -3,18 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Master Control Console | Dalal Machine Tools Agency Pvt. Ltd.</title>
+  <title>Master Executive Console | Dalal Machine Tools Agency Pvt. Ltd.</title>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  
   <link rel="shortcut icon" href="/new/dalalmachine/images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="/new/dalalmachine/css/font-awesome.css">
-  <link rel="stylesheet" href="/superadmin/css/superadmin.css?v=3.0">
-  <link rel="stylesheet" href="/admin/css/admin-ai.css?v=1.0">
+  <link rel="stylesheet" href="/superadmin/css/superadmin.css?v=5.2">
 </head>
 <body>
 
-  <div class="sa-wrapper">
+  <div class="sa-layout">
     <!-- Sidebar -->
     <aside class="sa-sidebar">
       <div class="sa-sidebar-header">
@@ -24,7 +25,7 @@
         </a>
       </div>
 
-      <!-- Top User Card (Stratify Style) -->
+      <!-- Top User Card -->
       <div class="sa-sidebar-user-top" data-tooltip="Logged in as Master Super Admin">
         <div style="display: flex; align-items: center; gap: 10px; min-width: 0;">
           <div class="sa-user-avatar" id="sa-user-avatar">S</div>
@@ -38,15 +39,13 @@
 
       <nav class="sa-nav">
         <div class="sa-nav-section-title">Master Telemetry</div>
-        <a href="dashboard.html" class="sa-nav-link active" data-tooltip="System KPIs, Telemetry & Master Controls" data-tooltip-pos="right">
+        <a href="dashboard.html" class="sa-nav-link active" data-tooltip="Executive Pipeline, Telemetry & Master Controls" data-tooltip-pos="right">
           <i class="fa fa-dashboard"></i>
           <span>Executive Overview</span>
         </a>
-
-        <div class="sa-nav-section-title">Security & Governance</div>
-        <a href="users.html" class="sa-nav-link" data-tooltip="Manage staff credentials and role permissions" data-tooltip-pos="right">
+        <a href="users.html" class="sa-nav-link" data-tooltip="Manage staff accounts & assign roles" data-tooltip-pos="right">
           <i class="fa fa-users"></i>
-          <span>Admin Team Accounts</span>
+          <span>Authorized Accounts</span>
           <span class="sa-nav-badge" id="sa-badge-users">...</span>
         </a>
         <a href="logs.html" class="sa-nav-link" data-tooltip="Immutable SHA-256 chained activity logs" data-tooltip-pos="right">
@@ -54,10 +53,10 @@
           <span>Security Audit Trail</span>
         </a>
 
-        <div class="sa-nav-section-title">Database & Engine</div>
-        <a href="settings.html" class="sa-nav-link" data-tooltip="Daily rolling snapshots & JSON backups" data-tooltip-pos="right">
-          <i class="fa fa-database"></i>
-          <span>Database Backups & Sync</span>
+        <div class="sa-nav-section-title">Commercial & Security</div>
+        <a href="settings.html" class="sa-nav-link" data-tooltip="Floor pricing, 2FA, backups & Gemini AI" data-tooltip-pos="right">
+          <i class="fa fa-sliders"></i>
+          <span>Executive Settings & 2FA</span>
         </a>
 
         <div class="sa-nav-section-title">Operations Portal</div>
@@ -92,9 +91,13 @@
           </div>
         </div>
         <div class="sa-topbar-right">
+          <button type="button" class="sa-btn sa-btn-secondary" onclick="SuperAdminCore.exportExecutiveReport()" style="gap: 8px; font-weight: 700;">
+            <i class="fa fa-print"></i>
+            <span>Monthly Executive Report</span>
+          </button>
           <a href="/admin/dashboard.html" target="_blank" class="sa-btn-link" data-tooltip="Switch to operational inventory panel">
             <i class="fa fa-cubes"></i>
-            <span>Staff Inventory Portal &rarr;</span>
+            <span>Staff Inventory &rarr;</span>
           </a>
           <button class="sa-btn-logout" data-tooltip="End super admin session">
             <i class="fa fa-sign-out"></i>
@@ -104,22 +107,58 @@
       </header>
 
       <div class="sa-content">
-        <!-- Developer Broadcast & Google Doodle Banner Slot -->
+        <!-- Executive Broadcast & System Announcement Slot -->
         <div id="developer-doodle-banner-slot"></div>
 
         <!-- Hero Section (Stratify Inspired) -->
         <div class="sa-hero-box">
           <div class="sa-hero-pill">
             <i class="fa fa-shield"></i>
-            <span>Welcome, Master Executive! 🛡️</span>
+            <span>Executive Command Center &bull; Managing Director: Mr. Vinit Dalal</span>
           </div>
-          <h1 class="sa-hero-title">Executive Governance & System Telemetry</h1>
-          <p class="sa-hero-sub">High-security isolated master console for Dalal Machine Tools Agency Pvt. Ltd.</p>
+          <h1 class="sa-hero-title">Executive Governance & Commercial Pipeline</h1>
+          <p class="sa-hero-sub">High-level commercial valuation, response SLAs, High-Seas consignments, and SecOps oversight.</p>
         </div>
 
-        <!-- KPI Telemetry Grid -->
-        <div class="sa-kpi-grid">
-          <div class="sa-kpi-card" data-tooltip="Total verified heavy machines registered in database">
+        <!-- Executive KPI Telemetry Grid (6 Cards) -->
+        <div class="sa-kpi-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+          <div class="sa-kpi-card" data-tooltip="Total estimated valuation of active commercial leads in pipeline">
+            <div class="sa-kpi-header">
+              <span class="sa-kpi-label">Active Pipeline Valuation</span>
+              <div class="sa-kpi-icon" style="background:#eff6ff; color:#2563eb;"><i class="fa fa-line-chart"></i></div>
+            </div>
+            <div class="sa-kpi-val" id="val-pipeline-val" style="color: #38bdf8;">₹46.80 Cr</div>
+            <div class="sa-kpi-sub" id="sub-pipeline-deals">Active commercial inquiries</div>
+          </div>
+
+          <div class="sa-kpi-card" data-tooltip="Total finalized machine sales value">
+            <div class="sa-kpi-header">
+              <span class="sa-kpi-label">Closed Deals Revenue</span>
+              <div class="sa-kpi-icon" style="background:#ecfdf5; color:#059669;"><i class="fa fa-check-circle"></i></div>
+            </div>
+            <div class="sa-kpi-val" id="val-closed-rev" style="color: #34d399;">₹18.40 Cr</div>
+            <div class="sa-kpi-sub">Completed heavy machinery sales</div>
+          </div>
+
+          <div class="sa-kpi-card" data-tooltip="Total value of imported European/Asian machinery in transit to JNPT">
+            <div class="sa-kpi-header">
+              <span class="sa-kpi-label">High-Seas In-Transit Value</span>
+              <div class="sa-kpi-icon" style="background:#fffbeb; color:#d97706;"><i class="fa fa-ship"></i></div>
+            </div>
+            <div class="sa-kpi-val" id="val-highseas-val" style="color: #fbbf24;">₹3.68 Cr</div>
+            <div class="sa-kpi-sub">4 In-Transit Import Consignments</div>
+          </div>
+
+          <div class="sa-kpi-card" data-tooltip="Staff response SLA: inquiries pending without quote > 24 hours">
+            <div class="sa-kpi-header">
+              <span class="sa-kpi-label">Staff Response SLA</span>
+              <div class="sa-kpi-icon" id="icon-sla" style="background:#fef2f2; color:#dc2626;"><i class="fa fa-clock-o"></i></div>
+            </div>
+            <div class="sa-kpi-val" id="val-sla-alert" style="font-size: 20px; color: #f87171;">Analyzing...</div>
+            <div class="sa-kpi-sub">24-Hour Quotation Turnaround</div>
+          </div>
+
+          <div class="sa-kpi-card" data-tooltip="Total verified heavy machines cataloged across Pune & Bhiwandi yards">
             <div class="sa-kpi-header">
               <span class="sa-kpi-label">Audited Machinery</span>
               <div class="sa-kpi-icon" style="background:#fef3c7; color:#d97706;"><i class="fa fa-cubes"></i></div>
@@ -128,44 +167,165 @@
             <div class="sa-kpi-sub">Total heavy machines in catalog</div>
           </div>
 
-          <div class="sa-kpi-card" data-tooltip="Total RFQ quotation inquiries received from industrial buyers">
+          <div class="sa-kpi-card" data-tooltip="Total RFQ inquiries received from industrial buyers">
             <div class="sa-kpi-header">
               <span class="sa-kpi-label">Quotation Inquiries</span>
-              <div class="sa-kpi-icon" style="background:#eff6ff; color:#2563eb;"><i class="fa fa-envelope-open"></i></div>
+              <div class="sa-kpi-icon" style="background:#f5f3ff; color:#7c3aed;"><i class="fa fa-envelope-open"></i></div>
             </div>
             <div class="sa-kpi-val" id="val-inquiries">-</div>
             <div class="sa-kpi-sub">Buyer leads received</div>
           </div>
+        </div>
 
-          <div class="sa-kpi-card" data-tooltip="Active operational administrator and superadmin accounts">
-            <div class="sa-kpi-header">
-              <span class="sa-kpi-label">Staff & Admin Users</span>
-              <div class="sa-kpi-icon" style="background:#f5f3ff; color:#7c3aed;"><i class="fa fa-users"></i></div>
+        <!-- 1. Commercial Pipeline Funnel (5 Stages) -->
+        <div class="sa-card" style="margin-bottom: 24px;">
+          <div class="sa-card-header">
+            <div class="sa-card-title">
+              <i class="fa fa-filter" style="color: var(--sa-gold);"></i>
+              <span>Commercial Deal Pipeline & Conversion Funnel</span>
             </div>
-            <div class="sa-kpi-val" id="val-users">-</div>
-            <div class="sa-kpi-sub">Authorized team accounts</div>
+            <div style="font-size: 12px; color: var(--sa-text-muted);">
+              MD Pipeline Oversight &bull; Real-time Valuation
+            </div>
           </div>
-
-          <div class="sa-kpi-card" data-tooltip="Server process health, memory usage, and background sync engines">
-            <div class="sa-kpi-header">
-              <span class="sa-kpi-label">System Health</span>
-              <div class="sa-kpi-icon" style="background:#ecfdf5; color:#059669;"><i class="fa fa-heartbeat"></i></div>
+          <div class="sa-card-body">
+            <div class="sa-pipeline-funnel" id="sa-pipeline-funnel-bar">
+              <div class="sa-pipeline-card" style="--stage-color: #3b82f6;">
+                <div class="sa-pipeline-header">
+                  <span class="sa-pipeline-stage-name">1. New RFQs</span>
+                  <span class="sa-pipeline-stage-count" id="count-stage-new">0</span>
+                </div>
+                <div class="sa-pipeline-stage-val" id="val-stage-new">₹0</div>
+              </div>
+              <div class="sa-pipeline-card" style="--stage-color: #a855f7;">
+                <div class="sa-pipeline-header">
+                  <span class="sa-pipeline-stage-name">2. Power Trial Req.</span>
+                  <span class="sa-pipeline-stage-count" id="count-stage-trial">0</span>
+                </div>
+                <div class="sa-pipeline-stage-val" id="val-stage-trial">₹0</div>
+              </div>
+              <div class="sa-pipeline-card" style="--stage-color: #f59e0b;">
+                <div class="sa-pipeline-header">
+                  <span class="sa-pipeline-stage-name">3. Quotation Sent</span>
+                  <span class="sa-pipeline-stage-count" id="count-stage-quote">0</span>
+                </div>
+                <div class="sa-pipeline-stage-val" id="val-stage-quote">₹0</div>
+              </div>
+              <div class="sa-pipeline-card" style="--stage-color: #ec4899;">
+                <div class="sa-pipeline-header">
+                  <span class="sa-pipeline-stage-name">4. Under Negotiation</span>
+                  <span class="sa-pipeline-stage-count" id="count-stage-negotiation">0</span>
+                </div>
+                <div class="sa-pipeline-stage-val" id="val-stage-negotiation">₹0</div>
+              </div>
+              <div class="sa-pipeline-card" style="--stage-color: #10b981;">
+                <div class="sa-pipeline-header">
+                  <span class="sa-pipeline-stage-name">5. Closed Deals</span>
+                  <span class="sa-pipeline-stage-count" id="count-stage-closed">0</span>
+                </div>
+                <div class="sa-pipeline-stage-val" id="val-stage-closed">₹0</div>
+              </div>
             </div>
-            <div class="sa-kpi-val" id="val-uptime" style="font-size: 22px; color: #059669;">OPERATIONAL</div>
-            <div class="sa-kpi-sub">Node.js Express &bull; Port 5000</div>
           </div>
         </div>
 
-        <!-- Two Columns: Audit Trail & Admin Accounts -->
+        <!-- 2. Active Commercial Leads & 1-Click WhatsApp Quotations -->
+        <div class="sa-card" style="margin-bottom: 24px;">
+          <div class="sa-card-header">
+            <div class="sa-card-title">
+              <i class="fa fa-briefcase" style="color: #38bdf8;"></i>
+              <span>Active Commercial Deals & 1-Click WhatsApp Quotation Dispatch</span>
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center;">
+              <select id="filter-lead-stage" class="sa-form-control" style="width: auto; padding: 6px 12px; font-size: 12px; background: #0f172a; border-color: #334155; color: #fff;">
+                <option value="all">All Pipeline Stages</option>
+                <option value="new">1. New Leads</option>
+                <option value="power_trial_requested">2. Power Trial Req.</option>
+                <option value="quotation_sent">3. Quotation Sent</option>
+                <option value="under_negotiation">4. Under Negotiation</option>
+                <option value="deal_closed">5. Deal Closed</option>
+              </select>
+              <a href="/api/inquiries/export/csv" class="sa-btn sa-btn-secondary" style="font-size: 12px; padding: 6px 14px;">
+                <i class="fa fa-download"></i> Export Excel
+              </a>
+            </div>
+          </div>
+          <div class="sa-card-body" style="padding: 0;">
+            <div class="sa-table-wrap">
+              <table class="sa-table">
+                <thead>
+                  <tr>
+                    <th>Buyer / Company</th>
+                    <th>Machinery & Valuation</th>
+                    <th>Pipeline Stage</th>
+                    <th>Response SLA</th>
+                    <th>Staff Assigned</th>
+                    <th style="text-align: right;">1-Click Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="sa-tbody-deals">
+                  <tr>
+                    <td colspan="6" style="text-align: center; padding: 30px; color: var(--sa-text-muted);">
+                      <i class="fa fa-spinner fa-spin"></i> Loading commercial pipeline...
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Two Columns: High-Seas Tracker & Market Demand Heatmap -->
+        <div class="sa-dashboard-split" style="margin-bottom: 24px;">
+          <!-- High-Seas & Import Shipment Consignment Tracker -->
+          <div class="sa-card">
+            <div class="sa-card-header">
+              <div class="sa-card-title">
+                <i class="fa fa-ship" style="color: #fbbf24;"></i>
+                <span>High-Seas & Import Consignments</span>
+              </div>
+              <span class="sa-badge sa-badge-superadmin" style="font-size: 11px;">JNPT / MbPT</span>
+            </div>
+            <div class="sa-card-body" id="consignments-list-container" style="padding: 16px 20px;">
+              <div style="text-align: center; color: var(--sa-text-muted); padding: 20px;">
+                <i class="fa fa-spinner fa-spin"></i> Loading High-Seas logistics...
+              </div>
+            </div>
+          </div>
+
+          <!-- Buyer Geography & Demand Heatmap -->
+          <div class="sa-card">
+            <div class="sa-card-header">
+              <div class="sa-card-title">
+                <i class="fa fa-map-marker" style="color: #ef4444;"></i>
+                <span>Buyer Geography & Demand Heatmap</span>
+              </div>
+              <span class="sa-badge" style="background: rgba(16, 185, 129, 0.15); color: #34d399; font-size: 11px;">Pan-India Demand</span>
+            </div>
+            <div class="sa-card-body" style="padding: 20px;">
+              <div style="font-size: 12px; font-weight: 700; color: var(--sa-text-muted); text-transform: uppercase; margin-bottom: 12px;">Top Inquiring Industrial Clusters</div>
+              <div id="geo-heatmap-container" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px;">
+                <div style="text-align: center; color: var(--sa-text-muted);"><i class="fa fa-spinner fa-spin"></i> Loading geography...</div>
+              </div>
+
+              <div style="font-size: 12px; font-weight: 700; color: var(--sa-text-muted); text-transform: uppercase; margin-bottom: 12px;">Machinery Category Demand</div>
+              <div id="cat-demand-container" style="display: flex; flex-direction: column; gap: 10px;">
+                <div style="text-align: center; color: var(--sa-text-muted);"><i class="fa fa-spinner fa-spin"></i> Loading categories...</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Audit Trail & Admin Accounts Preview -->
         <div class="sa-dashboard-split">
           <!-- Recent Audit Logs -->
           <div class="sa-card">
             <div class="sa-card-header">
               <div class="sa-card-title">
                 <i class="fa fa-shield" style="color: #6366f1;"></i>
-                <span>Live Security & Operational Audit Trail</span>
+                <span>Cryptographic SHA-256 Audit Trail</span>
               </div>
-              <a href="logs.html" class="sa-btn sa-btn-secondary" style="font-size: 12px; padding: 6px 14px;" data-tooltip="Inspect complete cryptographic SHA-256 audit log">Full Ledger &rarr;</a>
+              <a href="logs.html" class="sa-btn sa-btn-secondary" style="font-size: 12px; padding: 6px 14px;">Full Ledger &rarr;</a>
             </div>
             <div class="sa-card-body" style="padding: 0;">
               <div class="sa-table-wrap">
@@ -179,24 +339,7 @@
                     </tr>
                   </thead>
                   <tbody id="sa-tbody-logs">
-                    <tr class="sa-skeleton-row">
-                      <td><div class="sa-skeleton-shimmer sa-skeleton-text" style="width: 90px;"></div></td>
-                      <td><div class="sa-skeleton-shimmer sa-skeleton-title" style="width: 100px;"></div></td>
-                      <td><div class="sa-skeleton-shimmer sa-skeleton-pill"></div></td>
-                      <td><div class="sa-skeleton-shimmer sa-skeleton-text" style="width: 180px;"></div></td>
-                    </tr>
-                    <tr class="sa-skeleton-row">
-                      <td><div class="sa-skeleton-shimmer sa-skeleton-text" style="width: 90px;"></div></td>
-                      <td><div class="sa-skeleton-shimmer sa-skeleton-title" style="width: 80px;"></div></td>
-                      <td><div class="sa-skeleton-shimmer sa-skeleton-pill"></div></td>
-                      <td><div class="sa-skeleton-shimmer sa-skeleton-text" style="width: 160px;"></div></td>
-                    </tr>
-                    <tr class="sa-skeleton-row">
-                      <td><div class="sa-skeleton-shimmer sa-skeleton-text" style="width: 90px;"></div></td>
-                      <td><div class="sa-skeleton-shimmer sa-skeleton-title" style="width: 110px;"></div></td>
-                      <td><div class="sa-skeleton-shimmer sa-skeleton-pill"></div></td>
-                      <td><div class="sa-skeleton-shimmer sa-skeleton-text" style="width: 140px;"></div></td>
-                    </tr>
+                    <tr><td colspan="4" style="text-align: center; padding: 20px; color: var(--sa-text-muted);">Loading logs...</td></tr>
                   </tbody>
                 </table>
               </div>
@@ -223,119 +366,372 @@
                     </tr>
                   </thead>
                   <tbody id="sa-tbody-users">
-                    <tr class="sa-skeleton-row">
-                      <td><div class="sa-skeleton-shimmer sa-skeleton-title" style="width: 120px;"></div></td>
-                      <td><div class="sa-skeleton-shimmer sa-skeleton-pill"></div></td>
-                      <td><div class="sa-skeleton-shimmer sa-skeleton-text" style="width: 70px;"></div></td>
-                    </tr>
-                    <tr class="sa-skeleton-row">
-                      <td><div class="sa-skeleton-shimmer sa-skeleton-title" style="width: 110px;"></div></td>
-                      <td><div class="sa-skeleton-shimmer sa-skeleton-pill"></div></td>
-                      <td><div class="sa-skeleton-shimmer sa-skeleton-text" style="width: 70px;"></div></td>
-                    </tr>
-                    <tr class="sa-skeleton-row">
-                      <td><div class="sa-skeleton-shimmer sa-skeleton-title" style="width: 130px;"></div></td>
-                      <td><div class="sa-skeleton-shimmer sa-skeleton-pill"></div></td>
-                      <td><div class="sa-skeleton-shimmer sa-skeleton-text" style="width: 70px;"></div></td>
-                    </tr>
+                    <tr><td colspan="3" style="text-align: center; padding: 20px; color: var(--sa-text-muted);">Loading accounts...</td></tr>
                   </tbody>
                 </table>
               </div>
             </div>
           </div>
         </div>
+
       </div>
     </main>
   </div>
 
   <script src="/socket.io/socket.io.js"></script>
-  <script src="/superadmin/js/superadmin-core.js?v=5.1"></script>
+  <script src="/superadmin/js/superadmin-core.js?v=5.2"></script>
   <script>
+    let rawInquiries = [];
+
     (async () => {
       const user = await SuperAdminCore.requireAuth();
       if (!user) return;
 
       SuperAdminCore.loadDeveloperBanner();
-      loadMasterData();
+      loadExecutiveDashboard();
 
-      // Force Sync Button
-      const syncBtn = document.getElementById('btn-force-sync');
-      if (syncBtn) {
-        syncBtn.addEventListener('click', async () => {
-          syncBtn.disabled = true;
-          syncBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Syncing...';
-          const res = await SuperAdminCore.api('/api/system/sync-static', { method: 'POST' });
-          if (res.success) {
-            SuperAdminCore.toast('Catalog exported successfully to public website!');
-          } else {
-            SuperAdminCore.toast(res.message || 'Sync failed', 'error');
-          }
-          syncBtn.disabled = false;
-          syncBtn.innerHTML = '<i class="fa fa-refresh"></i> Force Catalog Sync';
-        });
+      // Listen for real-time WebSocket status updates
+      if (SuperAdminCore.socket) {
+        SuperAdminCore.socket.on('inquiry:status_changed', () => loadExecutiveDashboard());
+        SuperAdminCore.socket.on('inquiry:new', () => loadExecutiveDashboard());
       }
+
+      document.getElementById('filter-lead-stage').addEventListener('change', (e) => {
+        renderDealsTable(e.target.value);
+      });
     })();
 
-    async function loadMasterData() {
-      // 1. Stats
-      const statsRes = await SuperAdminCore.api('/api/system/stats');
-      if (statsRes.success) {
-        const s = statsRes.stats;
-        document.getElementById('val-machines').textContent = s.totalMachines;
-        document.getElementById('val-inquiries').textContent = s.totalInquiries;
-        document.getElementById('val-users').textContent = s.totalUsers;
-      }
+    async function loadExecutiveDashboard() {
+      try {
+        const [statsRes, pipelineRes, csgRes, inqRes, uRes, lRes] = await Promise.all([
+          SuperAdminCore.api('/api/system/stats'),
+          SuperAdminCore.api('/api/inquiries/pipeline-metrics'),
+          SuperAdminCore.api('/api/consignments'),
+          SuperAdminCore.api('/api/inquiries'),
+          SuperAdminCore.api('/api/users'),
+          SuperAdminCore.api('/api/logs?limit=5')
+        ]);
 
-      // 2. Users
-      const uRes = await SuperAdminCore.api('/api/users');
-      if (uRes.success) {
-        document.getElementById('sa-badge-users').textContent = uRes.count;
-        const tbody = document.getElementById('sa-tbody-users');
-        tbody.innerHTML = uRes.users.map(u => `
-          <tr>
-            <td>
-              <strong style="color: var(--sa-text); font-size: 13.5px;">${u.name || u.username}</strong><br>
-              <small style="color: var(--sa-text-muted); font-family: 'JetBrains Mono', monospace; font-size: 11px;">@${u.username}</small>
-            </td>
-            <td>
-              <span class="sa-badge ${u.role === 'superadmin' ? 'sa-badge-superadmin' : 'sa-badge-admin'}">
-                ${u.role === 'superadmin' ? '👑 Super Admin' : '🛠️ Staff Admin'}
-              </span>
-            </td>
-            <td>
-              <span class="sa-badge ${u.active ? 'sa-badge-active' : 'sa-badge-inactive'}">
-                ${u.active ? 'Active' : 'Suspended'}
-              </span>
-            </td>
-          </tr>
-        `).join('');
-      }
+        // 1. Stats
+        if (statsRes.success) {
+          document.getElementById('val-machines').textContent = statsRes.stats.totalMachines;
+          document.getElementById('val-inquiries').textContent = statsRes.stats.totalInquiries;
+        }
 
-      // 3. Logs
-      const lRes = await SuperAdminCore.api('/api/logs?limit=5');
-      if (lRes.success) {
-        const tbody = document.getElementById('sa-tbody-logs');
-        tbody.innerHTML = lRes.logs.map(l => `
-          <tr>
-            <td style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: var(--sa-text-dim); white-space: nowrap;">
-              ${new Date(l.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
-            </td>
-            <td>
-              <strong style="font-size: 12.5px; color: var(--sa-text);">${l.username}</strong>
-            </td>
-            <td>
-              <span class="sa-badge sa-badge-superadmin" style="font-size: 10.5px; padding: 2px 7px;">
-                ${l.action}
-              </span>
-            </td>
-            <td style="font-size: 12.5px; color: var(--sa-text-muted);">
-              ${l.details || '-'}
-            </td>
-          </tr>
-        `).join('');
+        // 2. Pipeline Metrics & Funnel
+        if (pipelineRes.success) {
+          const m = pipelineRes.metrics;
+          document.getElementById('val-pipeline-val').textContent = SuperAdminCore.formatInr(m.totalPipelineVal);
+          document.getElementById('sub-pipeline-deals').textContent = `${m.totalLeads} active commercial inquiries (${m.vipCount} VIP > ₹50L)`;
+          document.getElementById('val-closed-rev').textContent = SuperAdminCore.formatInr(m.closedRevenueVal);
+
+          // SLA Alert
+          const slaEl = document.getElementById('val-sla-alert');
+          const slaIcon = document.getElementById('icon-sla');
+          if (m.overdueCount > 0) {
+            slaEl.innerHTML = `<span style="color:#ef4444;"><i class="fa fa-exclamation-triangle"></i> ${m.overdueCount} OVERDUE</span>`;
+            slaIcon.style.background = '#fef2f2';
+            slaIcon.style.color = '#ef4444';
+          } else {
+            slaEl.innerHTML = `<span style="color:#10b981;"><i class="fa fa-check-circle"></i> 100% ON-TRACK</span>`;
+            slaIcon.style.background = '#ecfdf5';
+            slaIcon.style.color = '#10b981';
+          }
+
+          // Funnel stages
+          const sc = m.stageCounts || {};
+          const sv = m.stageValues || {};
+          document.getElementById('count-stage-new').textContent = sc.new || 0;
+          document.getElementById('val-stage-new').textContent = SuperAdminCore.formatInr(sv.new || 0);
+
+          document.getElementById('count-stage-trial').textContent = sc.power_trial_requested || 0;
+          document.getElementById('val-stage-trial').textContent = SuperAdminCore.formatInr(sv.power_trial_requested || 0);
+
+          document.getElementById('count-stage-quote').textContent = sc.quotation_sent || 0;
+          document.getElementById('val-stage-quote').textContent = SuperAdminCore.formatInr(sv.quotation_sent || 0);
+
+          document.getElementById('count-stage-negotiation').textContent = sc.under_negotiation || 0;
+          document.getElementById('val-stage-negotiation').textContent = SuperAdminCore.formatInr(sv.under_negotiation || 0);
+
+          document.getElementById('count-stage-closed').textContent = sc.deal_closed || 0;
+          document.getElementById('val-stage-closed').textContent = SuperAdminCore.formatInr(sv.deal_closed || 0);
+
+          // Heatmaps
+          renderHeatmap(m.geoDemand || [], m.categoryDemand || []);
+        }
+
+        // 3. Consignments
+        if (csgRes.success) {
+          renderConsignments(csgRes.consignments || []);
+          const totalVal = (csgRes.consignments || []).reduce((acc, c) => acc + (c.valueInr || 0), 0);
+          document.getElementById('val-highseas-val').textContent = SuperAdminCore.formatInr(totalVal);
+        }
+
+        // 4. Inquiries
+        if (inqRes.success) {
+          rawInquiries = inqRes.inquiries || [];
+          renderDealsTable(document.getElementById('filter-lead-stage').value);
+        }
+
+        // 5. Users
+        if (uRes.success) {
+          document.getElementById('sa-badge-users').textContent = uRes.count;
+          const tbody = document.getElementById('sa-tbody-users');
+          tbody.innerHTML = uRes.users.map(u => `
+            <tr>
+              <td>
+                <strong style="color: var(--sa-text); font-size: 13.5px;">${SuperAdminCore.escapeHTML(u.name || u.username)}</strong><br>
+                <small style="color: var(--sa-text-muted); font-family: 'JetBrains Mono', monospace; font-size: 11px;">@${SuperAdminCore.escapeHTML(u.username)}</small>
+              </td>
+              <td>
+                <span class="sa-badge ${u.role === 'superadmin' ? 'sa-badge-superadmin' : 'sa-badge-admin'}">
+                  ${u.role === 'superadmin' ? '👑 Super Admin' : '🛠️ Staff Admin'}
+                </span>
+              </td>
+              <td>
+                <span class="sa-badge ${u.active ? 'sa-badge-active' : 'sa-badge-inactive'}">
+                  ${u.active ? 'Active' : 'Suspended'}
+                </span>
+              </td>
+            </tr>
+          `).join('');
+        }
+
+        // 6. Logs
+        if (lRes.success) {
+          const tbody = document.getElementById('sa-tbody-logs');
+          tbody.innerHTML = lRes.logs.map(l => `
+            <tr>
+              <td style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: var(--sa-text-dim); white-space: nowrap;">
+                ${new Date(l.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+              </td>
+              <td>
+                <strong style="font-size: 12.5px; color: var(--sa-text);">${SuperAdminCore.escapeHTML(l.username)}</strong>
+              </td>
+              <td>
+                <span class="sa-badge sa-badge-superadmin" style="font-size: 10.5px; padding: 2px 7px;">
+                  ${SuperAdminCore.escapeHTML(l.action)}
+                </span>
+              </td>
+              <td style="font-size: 12.5px; color: var(--sa-text-muted);">
+                ${SuperAdminCore.escapeHTML(l.details || '-')}
+              </td>
+            </tr>
+          `).join('');
+        }
+
+      } catch (e) {
+        console.error('Failed to load executive dashboard:', e);
       }
     }
+
+    function renderDealsTable(filterStage) {
+      const tbody = document.getElementById('sa-tbody-deals');
+      let filtered = [...rawInquiries];
+      if (filterStage !== 'all') {
+        filtered = filtered.filter(i => (i.pipelineStage || i.status) === filterStage);
+      }
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; padding: 30px; color: var(--sa-text-muted);">No deals found matching this stage.</td></tr>`;
+        return;
+      }
+
+      const now = Date.now();
+      tbody.innerHTML = filtered.slice(0, 15).map(inq => {
+        const stage = inq.pipelineStage || inq.status || 'new';
+        const val = parseFloat(inq.estimatedValue) || 2500000;
+        const isVip = inq.isVipDeal || val >= 5000000;
+
+        // SLA calculation
+        let slaHtml = '<span class="sla-timer sla-timer-ok"><i class="fa fa-check"></i> On-Track</span>';
+        if (inq.slaDeadline && (stage === 'new' || stage === 'power_trial_requested')) {
+          const diffMs = new Date(inq.slaDeadline).getTime() - now;
+          if (diffMs < 0) {
+            const overdueHrs = Math.abs(Math.round(diffMs / 3600000));
+            slaHtml = `<span class="sla-timer sla-timer-overdue"><i class="fa fa-exclamation-triangle"></i> ⚠️ ${overdueHrs}h Overdue</span>`;
+          } else {
+            const remHrs = Math.round(diffMs / 3600000);
+            slaHtml = `<span class="sla-timer sla-timer-warning"><i class="fa fa-hourglass-half"></i> ${remHrs}h Left</span>`;
+          }
+        }
+
+        let stageClass = 'stage-pill-new';
+        let stageLabel = 'New Lead';
+        if (stage === 'power_trial_requested') { stageClass = 'stage-pill-trial'; stageLabel = 'Power Trial'; }
+        else if (stage === 'quotation_sent') { stageClass = 'stage-pill-quote'; stageLabel = 'Quote Sent'; }
+        else if (stage === 'under_negotiation') { stageClass = 'stage-pill-negotiation'; stageLabel = 'Negotiation'; }
+        else if (stage === 'deal_closed') { stageClass = 'stage-pill-closed'; stageLabel = 'Closed'; }
+        else if (stage === 'deal_lost') { stageClass = 'stage-pill-lost'; stageLabel = 'Lost'; }
+
+        return `
+          <tr>
+            <td>
+              <div style="font-weight: 700; color: #fff; font-size: 13.5px; display: flex; align-items: center; gap: 6px;">
+                ${SuperAdminCore.escapeHTML(inq.name)}
+                ${isVip ? '<span class="vip-deal-badge">👑 VIP DEAL</span>' : ''}
+              </div>
+              <div style="font-size: 12px; color: var(--sa-text-muted); margin-top: 2px;">
+                ${SuperAdminCore.escapeHTML(inq.company || 'Enterprise')} &bull; <i class="fa fa-map-marker"></i> ${SuperAdminCore.escapeHTML(inq.city || 'Mumbai')}
+              </div>
+              <div style="font-size: 11.5px; color: #94a3b8; font-family: 'JetBrains Mono', monospace;">
+                ${SuperAdminCore.escapeHTML(inq.phone || '')}
+              </div>
+            </td>
+            <td>
+              <div style="font-weight: 700; color: #f8fafc; font-size: 13px;">
+                ${SuperAdminCore.escapeHTML(inq.machineName || 'Heavy Machinery')}
+              </div>
+              <div style="font-size: 14px; font-weight: 800; color: #38bdf8; font-family: 'JetBrains Mono', monospace; margin-top: 2px;">
+                ${SuperAdminCore.formatInr(val)}
+              </div>
+            </td>
+            <td>
+              <select onchange="updateDealStage('${inq.id}', this.value)" class="sa-form-control" style="width: auto; padding: 4px 8px; font-size: 11.5px; font-weight: 700; background: #0f172a; border-color: #334155; color: #fff;">
+                <option value="new" ${stage === 'new' ? 'selected' : ''}>1. New Lead</option>
+                <option value="power_trial_requested" ${stage === 'power_trial_requested' ? 'selected' : ''}>2. Power Trial Req.</option>
+                <option value="quotation_sent" ${stage === 'quotation_sent' ? 'selected' : ''}>3. Quotation Sent</option>
+                <option value="under_negotiation" ${stage === 'under_negotiation' ? 'selected' : ''}>4. Negotiation</option>
+                <option value="deal_closed" ${stage === 'deal_closed' ? 'selected' : ''}>5. Closed Deal</option>
+                <option value="deal_lost" ${stage === 'deal_lost' ? 'selected' : ''}>6. Lost</option>
+              </select>
+            </td>
+            <td>${slaHtml}</td>
+            <td>
+              <span style="font-size: 12px; color: #cbd5e1; font-weight: 600;">
+                <i class="fa fa-user-circle" style="color: var(--sa-gold); margin-right: 4px;"></i>${SuperAdminCore.escapeHTML(inq.assignedStaffName || 'Dalal Inventory Admin')}
+              </span>
+            </td>
+            <td style="text-align: right; white-space: nowrap;">
+              <button type="button" class="sa-btn" style="background: #25d366; color: #000; font-size: 12px; padding: 6px 12px; font-weight: 700; gap: 6px;" onclick="SuperAdminCore.openWhatsAppQuoteModal('${inq.id}')" title="Generate formal commercial quote & send via WhatsApp">
+                <i class="fa fa-whatsapp"></i> Quote
+              </button>
+              ${inq.machineId ? `
+                <button type="button" class="sa-btn sa-btn-secondary" style="font-size: 12px; padding: 6px 10px; margin-left: 4px;" onclick="SuperAdminCore.openVideoVaultModal('${inq.machineId}')" title="Customer Inspection Trial Video Vault">
+                  <i class="fa fa-video-camera"></i>
+                </button>
+              ` : ''}
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    async function updateDealStage(inquiryId, newStage) {
+      SuperAdminCore.toast('Updating pipeline stage...', 'success');
+      const res = await SuperAdminCore.api(`/api/inquiries/${inquiryId}/pipeline`, {
+        method: 'PATCH',
+        body: JSON.stringify({ pipelineStage: newStage })
+      });
+      if (res.success) {
+        SuperAdminCore.toast(`Deal stage updated to ${newStage.toUpperCase().replace(/_/g, ' ')}!`);
+        loadExecutiveDashboard();
+      } else {
+        SuperAdminCore.toast(res.message || 'Failed to update stage', 'error');
+      }
+    }
+
+    function renderConsignments(consignments) {
+      const container = document.getElementById('consignments-list-container');
+      if (consignments.length === 0) {
+        container.innerHTML = '<div style="color: #94a3b8; text-align: center;">No active import consignments.</div>';
+        return;
+      }
+
+      const steps = ['loaded_at_port', 'high_seas_transit', 'customs_clearing', 'delivered_bhiwandi'];
+      const labels = ['Origin Port', 'High-Seas Transit', 'Nhava Sheva Customs', 'Bhiwandi Central Yard'];
+
+      container.innerHTML = consignments.map(c => {
+        const curStepIdx = steps.indexOf(c.status);
+        return `
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 16px; margin-bottom: 14px;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+              <div>
+                <strong style="color: #fff; font-size: 14px;">${SuperAdminCore.escapeHTML(c.title)}</strong>
+                <div style="font-size: 12px; color: var(--sa-text-muted); margin-top: 2px;">
+                  Vessel: <strong style="color: #38bdf8;">${SuperAdminCore.escapeHTML(c.vesselName)}</strong> &bull; B/L: <code>${SuperAdminCore.escapeHTML(c.billOfLading)}</code>
+                </div>
+              </div>
+              <div style="text-align: right;">
+                <div style="font-size: 14px; font-weight: 800; color: #fbbf24; font-family: 'JetBrains Mono', monospace;">${SuperAdminCore.formatInr(c.valueInr)}</div>
+                <div style="font-size: 11px; color: #10b981; font-weight: 600;">ETA: ${SuperAdminCore.escapeHTML(c.eta)}</div>
+              </div>
+            </div>
+
+            <!-- Stepper -->
+            <div class="consign-stepper">
+              ${steps.map((st, idx) => {
+                let cls = '';
+                if (idx < curStepIdx) cls = 'completed';
+                else if (idx === curStepIdx) cls = 'active';
+                return `
+                  <div class="consign-step ${cls}">
+                    <div class="consign-step-circle">
+                      ${idx < curStepIdx ? '<i class="fa fa-check"></i>' : (idx + 1)}
+                    </div>
+                    <span class="consign-step-label">${labels[idx]}</span>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; font-size: 12px; color: #94a3b8; border-top: 1px dashed #334155; padding-top: 8px;">
+              <div>Containers: <code>${(c.containerNumbers || []).join(', ')}</code></div>
+              <div>
+                <select onchange="updateConsignmentStatus('${c.id}', this.value)" class="sa-form-control" style="width: auto; padding: 3px 8px; font-size: 11px; background: #0f172a; color: #fff; border-color: #475569;">
+                  <option value="loaded_at_port" ${c.status === 'loaded_at_port' ? 'selected' : ''}>Origin Port</option>
+                  <option value="high_seas_transit" ${c.status === 'high_seas_transit' ? 'selected' : ''}>High Seas</option>
+                  <option value="customs_clearing" ${c.status === 'customs_clearing' ? 'selected' : ''}>Customs Clearing</option>
+                  <option value="delivered_bhiwandi" ${c.status === 'delivered_bhiwandi' ? 'selected' : ''}>Delivered Bhiwandi</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    async function updateConsignmentStatus(id, newStatus) {
+      SuperAdminCore.toast('Updating logistics progress...', 'success');
+      const res = await SuperAdminCore.api(`/api/consignments/${id}`, {
+        method: 'PATCH',
+        body: JSON.stringify({ status: newStatus })
+      });
+      if (res.success) {
+        SuperAdminCore.toast('Shipment status updated!');
+        loadExecutiveDashboard();
+      } else {
+        SuperAdminCore.toast(res.message || 'Update failed', 'error');
+      }
+    }
+
+    function renderHeatmap(geo, cats) {
+      const geoBox = document.getElementById('geo-heatmap-container');
+      geoBox.innerHTML = geo.slice(0, 5).map(g => `
+        <div>
+          <div style="display: flex; justify-content: space-between; font-size: 12.5px; font-weight: 700; color: #f8fafc; margin-bottom: 4px;">
+            <span><i class="fa fa-map-marker" style="color: #ef4444; margin-right: 6px;"></i>${SuperAdminCore.escapeHTML(g.city)}</span>
+            <span style="color: #38bdf8; font-family: 'JetBrains Mono', monospace;">${g.count} Leads (${g.percentage}%)</span>
+          </div>
+          <div style="background: #334155; height: 6px; border-radius: 999px; overflow: hidden;">
+            <div style="background: linear-gradient(90deg, #3b82f6, #38bdf8); height: 100%; width: ${g.percentage}%;"></div>
+          </div>
+        </div>
+      `).join('');
+
+      const catBox = document.getElementById('cat-demand-container');
+      catBox.innerHTML = cats.map(c => `
+        <div>
+          <div style="display: flex; justify-content: space-between; font-size: 12.5px; font-weight: 700; color: #f8fafc; margin-bottom: 4px;">
+            <span>${SuperAdminCore.escapeHTML(c.category)}</span>
+            <span style="color: var(--sa-gold); font-family: 'JetBrains Mono', monospace;">${c.count} Inquiries</span>
+          </div>
+          <div style="background: #334155; height: 6px; border-radius: 999px; overflow: hidden;">
+            <div style="background: linear-gradient(90deg, #f59e0b, #d97706); height: 100%; width: ${c.percentage}%;"></div>
+          </div>
+        </div>
+      `).join('');
+    }
   </script>
-  <script src="/admin/js/admin-ai.js?v=1.0"></script>
 </body>
 </html>

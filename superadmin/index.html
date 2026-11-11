@@ -199,11 +199,11 @@
   <script src="/socket.io/socket.io.js"></script>
   <script src="/superadmin/js/superadmin-core.js?v=5.1"></script>
   <script>
-    // Check if redirected due to real-time developer suspension or logout
+    // Check if redirected due to real-time administrative lock or logout
     const saParams = new URLSearchParams(window.location.search);
     if (saParams.get('blocked') === '1') {
       SuperAdminCore.clearSession();
-      const reason = saParams.get('reason') || 'Master executive account suspended by System Developer.';
+      const reason = saParams.get('reason') || 'Master executive session locked by Security Operations.';
       showBlockedAlert({ role: 'Super Admin', blockedReason: reason });
     } else if (saParams.get('logout') === '1') {
       SuperAdminCore.clearSession();
@@ -277,16 +277,16 @@
           </div>
           <div style="flex: 1;">
             <div style="font-size: 13.5px; font-weight: 800; color: #991b1b; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">
-              🚫 Master Console Revoked by Developer
+              🚫 Master Console Session Locked
             </div>
             <div style="font-size: 12.5px; font-weight: 600; color: #7f1d1d; line-height: 1.45; margin-bottom: 8px;">
-              Your <strong>${SuperAdminCore.escapeHTML(res.role || 'Super Admin')}</strong> account has been suspended by the Lead System Developer.
+              Your <strong>${SuperAdminCore.escapeHTML(res.role || 'Super Admin')}</strong> session has been quarantined by Central Security Protocol.
             </div>
             <div style="background: #ffffff; border: 1px dashed #f87171; border-radius: 8px; padding: 8px 10px; font-size: 12px; color: #991b1b; font-family: monospace; margin-bottom: 8px;">
-              <strong>Reason:</strong> ${SuperAdminCore.escapeHTML(res.blockedReason || 'Security audit or infrastructure quarantine.')}
+              <strong>Reason:</strong> ${SuperAdminCore.escapeHTML(res.blockedReason || 'Security audit or IP quarantine.')}
             </div>
             <div style="font-size: 11.5px; color: #b91c1c;">
-              <i class="fa fa-shield"></i> System developer intervention required to unfreeze this master executive account.
+              <i class="fa fa-shield"></i> Master SecOps clearance required to unlock executive console access.
             </div>
           </div>
         </div>

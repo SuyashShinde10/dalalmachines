@@ -1,16 +1,52 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
+const jwt = require('jsonwebtoken');
+const config = require('../config');
 const db = require('../db');
 const realtime = require('../realtime');
 const cacheEngine = require('../performance/cacheEngine');
-const { requireAdmin } = require('../middleware/auth');
+const { requireAdmin, requireSuperAdmin } = require('../middleware/auth');
 const upload = require('../middleware/upload');
 const { generateSpecSheetHtml } = require('../services/pdfGenerator');
+
+function isSuperAdminRequest(req) {
+  let token = null;
+  const authHeader = req.headers['authorization'];
+  if (authHeader && authHeader.startsWith('Bearer ')) {
+    token = authHeader.split(' ')[1];
+  } else if (req.cookies && req.cookies.superadmin_token) {
+    token = req.cookies.superadmin_token;
+  }
+  if (!token) return false;
+  try {
+    const decoded = jwt.verify(token, config.JWT_SECRET);
+    return decoded && decoded.role === 'superadmin';
+  } catch (e) {
+    return false;
+  }
+}
+
+function sanitizeProductForViewer(product, isSuperAdmin) {
+  if (!product) return null;
+  if (isSuperAdmin) {
+    const pCost = product.procurementCost || 0;
+    const fPrice = product.floorPrice || 0;
+    const marginPercent = pCost > 0 ? Math.round(((fPrice - pCost) / pCost) * 100) : 25;
+    return {
+      ...product,
+      marginPercent
+    };
+  }
+  // Strip confidential MD margin & procurement cost from public visitors & staff admins
+  const { procurementCost, floorPrice, ...safeProduct } = product;
+  return safeProduct;
+}
 
 // GET /api/products (Public or Admin with In-Memory Micro-Cache)
 router.get('/', cacheEngine.middleware(30), (req, res) => {
   const { section, category, location, query, status, all } = req.query;
+  const isSuperAdmin = isSuperAdminRequest(req);
   
   const filters = { section, category, location, query };
   if (status) {
@@ -20,7 +56,7 @@ router.get('/', cacheEngine.middleware(30), (req, res) => {
     filters.status = 'active';
   }
 
-  const list = db.getProducts(filters);
+  const list = db.getProducts(filters).map(p => sanitizeProductForViewer(p, isSuperAdmin));
   res.json({
     success: true,
     count: list.length,
@@ -42,7 +78,8 @@ router.get('/:id', cacheEngine.middleware(30), (req, res) => {
   if (!product) {
     return res.status(404).json({ success: false, message: 'Machine not found.' });
   }
-  res.json({ success: true, product });
+  const isSuperAdmin = isSuperAdminRequest(req);
+  res.json({ success: true, product: sanitizeProductForViewer(product, isSuperAdmin) });
 });
 
 // GET /api/products/:id/spec-sheet (1-Click Printable PDF Spec Sheet & Official Quotation)
@@ -133,6 +170,44 @@ router.delete('/:id', requireAdmin, (req, res) => {
   } else {
     res.status(500).json({ success: false, message: 'Failed to delete machine.' });
   }
+});
+
+// PATCH /api/products/:id/confidential-pricing (Superadmin Only - MD Confidential Margin & Floor Price)
+router.patch('/:id/confidential-pricing', requireSuperAdmin, (req, res) => {
+  const existing = db.getProductById(req.params.id);
+  if (!existing) {
+    return res.status(404).json({ success: false, message: 'Machine not found.' });
+  }
+
+  const { procurementCost, floorPrice, targetPrice, inspectionVideos } = req.body;
+  const updated = db.updateConfidentialPricing(req.params.id, {
+    procurementCost,
+    floorPrice,
+    targetPrice,
+    inspectionVideos
+  }, req.user);
+
+  cacheEngine.invalidate('/api/products');
+  res.json({
+    success: true,
+    message: `Confidential floor price (₹${updated.floorPrice}) & procurement margins updated for ${updated.name}`,
+    product: sanitizeProductForViewer(updated, true)
+  });
+});
+
+// GET /api/products/:id/inspection-vault (Private Live Power Trial Inspection Videos)
+router.get('/:id/inspection-vault', requireAdmin, (req, res) => {
+  const product = db.getProductById(req.params.id);
+  if (!product) {
+    return res.status(404).json({ success: false, message: 'Machine not found.' });
+  }
+
+  res.json({
+    success: true,
+    machineId: product.id,
+    machineName: product.name,
+    inspectionVideos: product.inspectionVideos || []
+  });
 });
 
 module.exports = router;

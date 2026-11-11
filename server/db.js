@@ -514,24 +514,59 @@ module.exports = {
 
     return true;
   },
+  updateConfidentialPricing: (id, { procurementCost, floorPrice, targetPrice, inspectionVideos }, actor) => {
+    const product = db.products.find(p => p.id === id);
+    if (!product) return null;
+
+    if (procurementCost !== undefined) product.procurementCost = parseFloat(procurementCost) || 0;
+    if (floorPrice !== undefined) product.floorPrice = parseFloat(floorPrice) || 0;
+    if (targetPrice !== undefined) product.targetPrice = parseFloat(targetPrice) || 0;
+    if (Array.isArray(inspectionVideos)) product.inspectionVideos = inspectionVideos;
+    product.updatedAt = new Date().toISOString();
+
+    saveDb();
+    rebuildProductIndex();
+
+    module.exports.addLog({
+      userId: actor.id,
+      username: actor.username,
+      role: actor.role,
+      action: 'CONFIDENTIAL_PRICING_UPDATED',
+      target: product.id,
+      details: `Superadmin updated confidential floor price (₹${product.floorPrice}) & procurement cost for ${product.name}`
+    });
+
+    return product;
+  },
 
   // Categories
   getCategories: () => db.categories,
 
-  // Inquiries
+  // Inquiries & Pipeline Management
   getInquiries: () => db.inquiries,
   createInquiry: (data) => {
+    const estVal = parseFloat(data.estimatedValue) || (data.tonnage ? data.tonnage * 12000 + 1500000 : 2500000);
+    const createdAt = new Date().toISOString();
     const newInquiry = {
       id: 'inq_' + crypto.randomUUID().slice(0, 8),
       name: data.name || 'Anonymous',
       email: data.email || '',
       phone: data.phone || '',
       company: data.company || '',
+      city: data.city || 'Mumbai',
       machineId: data.machineId || null,
       machineName: data.machineName || null,
       message: data.message || '',
       status: 'new',
-      createdAt: new Date().toISOString()
+      pipelineStage: 'new',
+      estimatedValue: estVal,
+      isVipDeal: estVal >= 5000000,
+      assignedStaffId: data.assignedStaffId || 'usr_admin',
+      assignedStaffName: data.assignedStaffName || 'Dalal Inventory Admin',
+      slaDeadline: new Date(Date.now() + 24 * 3600 * 1000).toISOString(),
+      inspectionVideoLinks: Array.isArray(data.inspectionVideoLinks) ? data.inspectionVideoLinks : [],
+      notes: data.notes || '',
+      createdAt
     };
     db.inquiries.unshift(newInquiry);
     saveDb();
@@ -541,6 +576,7 @@ module.exports = {
     const inq = db.inquiries.find(i => i.id === id);
     if (!inq) return null;
     inq.status = status;
+    inq.pipelineStage = status;
     saveDb();
     module.exports.addLog({
       userId: actor.id,
@@ -551,6 +587,233 @@ module.exports = {
       details: `Changed inquiry status to ${status}`
     });
     return inq;
+  },
+  updateInquiryPipeline: (id, updates, actor) => {
+    const inq = db.inquiries.find(i => i.id === id);
+    if (!inq) return null;
+
+    if (updates.pipelineStage) {
+      inq.pipelineStage = updates.pipelineStage;
+      inq.status = updates.pipelineStage;
+    }
+    if (updates.estimatedValue !== undefined) {
+      inq.estimatedValue = parseFloat(updates.estimatedValue) || 0;
+      inq.isVipDeal = inq.estimatedValue >= 5000000;
+    }
+    if (updates.notes !== undefined) inq.notes = updates.notes;
+    if (Array.isArray(updates.inspectionVideoLinks)) inq.inspectionVideoLinks = updates.inspectionVideoLinks;
+    if (updates.isVipDeal !== undefined) inq.isVipDeal = Boolean(updates.isVipDeal);
+    inq.lastFollowUpAt = new Date().toISOString();
+
+    saveDb();
+    module.exports.addLog({
+      userId: actor.id,
+      username: actor.username,
+      role: actor.role,
+      action: 'INQUIRY_PIPELINE_UPDATED',
+      target: id,
+      details: `Updated pipeline for lead ${inq.name} (${inq.company || 'Direct'}): Stage=${inq.pipelineStage}, Deal Value=₹${inq.estimatedValue}`
+    });
+    return inq;
+  },
+  assignInquiry: (id, staffId, staffName, actor) => {
+    const inq = db.inquiries.find(i => i.id === id);
+    if (!inq) return null;
+    inq.assignedStaffId = staffId;
+    inq.assignedStaffName = staffName;
+    saveDb();
+    module.exports.addLog({
+      userId: actor.id,
+      username: actor.username,
+      role: actor.role,
+      action: 'INQUIRY_ASSIGNED',
+      target: id,
+      details: `Assigned inquiry ${id} to ${staffName}`
+    });
+    return inq;
+  },
+  getExecutivePipelineMetrics: () => {
+    const list = db.inquiries || [];
+    const now = Date.now();
+    let totalPipelineVal = 0;
+    let closedRevenueVal = 0;
+    let overdueCount = 0;
+    let vipCount = 0;
+
+    const stageCounts = {
+      new: 0,
+      power_trial_requested: 0,
+      quotation_sent: 0,
+      under_negotiation: 0,
+      deal_closed: 0,
+      deal_lost: 0
+    };
+    const stageValues = {
+      new: 0,
+      power_trial_requested: 0,
+      quotation_sent: 0,
+      under_negotiation: 0,
+      deal_closed: 0,
+      deal_lost: 0
+    };
+
+    const cityMap = {};
+    const catMap = {
+      'Mechanical Forming Presses': 0,
+      'Hydraulic Forging Presses': 0,
+      'Horizontal Boring Machines': 0,
+      'Vertical Machining Centers (VMC)': 0,
+      'Heavy Duty Lathes & Turning': 0
+    };
+
+    list.forEach(inq => {
+      const stage = inq.pipelineStage || inq.status || 'new';
+      const val = parseFloat(inq.estimatedValue) || 2500000;
+
+      if (stageCounts[stage] !== undefined) {
+        stageCounts[stage]++;
+        stageValues[stage] += val;
+      } else {
+        stageCounts['new']++;
+        stageValues['new'] += val;
+      }
+
+      if (stage === 'deal_closed') {
+        closedRevenueVal += val;
+      } else if (stage !== 'deal_lost') {
+        totalPipelineVal += val;
+      }
+
+      if (inq.isVipDeal) vipCount++;
+
+      // Check SLA overdue: if still new or power_trial_requested and past 24 hours
+      if ((stage === 'new' || stage === 'power_trial_requested') && inq.slaDeadline) {
+        if (new Date(inq.slaDeadline).getTime() < now) {
+          overdueCount++;
+        }
+      }
+
+      const city = inq.city || 'Mumbai';
+      cityMap[city] = (cityMap[city] || 0) + 1;
+
+      // Classify category from machineName or fallback
+      const mName = (inq.machineName || '').toLowerCase();
+      if (mName.includes('hydraulic') || mName.includes('forging')) {
+        catMap['Hydraulic Forging Presses']++;
+      } else if (mName.includes('boring') || mName.includes('btd') || mName.includes('horizontal')) {
+        catMap['Horizontal Boring Machines']++;
+      } else if (mName.includes('vmc') || mName.includes('machining center') || mName.includes('5-axis')) {
+        catMap['Vertical Machining Centers (VMC)']++;
+      } else if (mName.includes('lathe') || mName.includes('turning')) {
+        catMap['Heavy Duty Lathes & Turning']++;
+      } else {
+        catMap['Mechanical Forming Presses']++;
+      }
+    });
+
+    const geoDemand = Object.entries(cityMap)
+      .map(([city, count]) => ({ city, count, percentage: Math.round((count / (list.length || 1)) * 100) }))
+      .sort((a, b) => b.count - a.count);
+
+    const categoryDemand = Object.entries(catMap)
+      .map(([category, count]) => ({ category, count, percentage: Math.round((count / (list.length || 1)) * 100) }))
+      .sort((a, b) => b.count - a.count);
+
+    return {
+      totalLeads: list.length,
+      totalPipelineVal,
+      closedRevenueVal,
+      overdueCount,
+      vipCount,
+      stageCounts,
+      stageValues,
+      geoDemand,
+      categoryDemand
+    };
+  },
+
+  // High-Seas & Import Consignments
+  getConsignments: () => db.consignments || [],
+  getConsignmentById: (id) => (db.consignments || []).find(c => c.id === id) || null,
+  createConsignment: (data, actor) => {
+    if (!Array.isArray(db.consignments)) db.consignments = [];
+    const newCsg = {
+      id: 'csg_' + crypto.randomUUID().slice(0, 8),
+      title: data.title || 'European Machinery Consignment',
+      originPort: data.originPort || 'Hamburg, Germany',
+      destinationPort: data.destinationPort || 'JNPT / Nhava Sheva, Mumbai',
+      vesselName: data.vesselName || 'MSC CARGO',
+      containerNumbers: Array.isArray(data.containerNumbers) ? data.containerNumbers : (data.containerNumbers ? [data.containerNumbers] : []),
+      billOfLading: data.billOfLading || 'BL-DMTA-' + Date.now(),
+      status: data.status || 'high_seas_transit',
+      eta: data.eta || new Date(Date.now() + 14 * 86400000).toISOString().split('T')[0],
+      totalMachines: parseInt(data.totalMachines, 10) || 1,
+      valueInr: parseFloat(data.valueInr) || 5000000,
+      updatedAt: new Date().toISOString()
+    };
+    db.consignments.unshift(newCsg);
+    saveDb();
+    module.exports.addLog({
+      userId: actor.id,
+      username: actor.username,
+      role: actor.role,
+      action: 'CONSIGNMENT_CREATED',
+      target: newCsg.id,
+      details: `Created High-Seas shipment: ${newCsg.title} (${newCsg.vesselName})`
+    });
+    return newCsg;
+  },
+  updateConsignment: (id, updates, actor) => {
+    if (!Array.isArray(db.consignments)) return null;
+    const csg = db.consignments.find(c => c.id === id);
+    if (!csg) return null;
+    Object.assign(csg, updates, { updatedAt: new Date().toISOString() });
+    saveDb();
+    module.exports.addLog({
+      userId: actor.id,
+      username: actor.username,
+      role: actor.role,
+      action: 'CONSIGNMENT_UPDATED',
+      target: id,
+      details: `Updated consignment ${csg.title} to status ${csg.status}`
+    });
+    return csg;
+  },
+  deleteConsignment: (id, actor) => {
+    if (!Array.isArray(db.consignments)) return false;
+    const idx = db.consignments.findIndex(c => c.id === id);
+    if (idx === -1) return false;
+    const deleted = db.consignments[idx];
+    db.consignments.splice(idx, 1);
+    saveDb();
+    module.exports.addLog({
+      userId: actor.id,
+      username: actor.username,
+      role: actor.role,
+      action: 'CONSIGNMENT_DELETED',
+      target: id,
+      details: `Deleted consignment ${deleted.title}`
+    });
+    return true;
+  },
+
+  // 2FA Management
+  setUser2FA: (userId, { enabled, secret, recoveryCode }, actor) => {
+    const user = db.users.find(u => u.id === userId);
+    if (!user) return null;
+    user.twoFactorEnabled = !!enabled;
+    if (secret !== undefined) user.twoFactorSecret = secret;
+    if (recoveryCode !== undefined) user.twoFactorRecoveryCode = recoveryCode;
+    saveDb();
+    module.exports.addLog({
+      userId: actor.id,
+      username: actor.username,
+      role: actor.role,
+      action: enabled ? '2FA_ENABLED' : '2FA_DISABLED',
+      target: user.username,
+      details: `Superadmin ${user.username} ${enabled ? 'ACTIVATED' : 'DEACTIVATED'} RFC 6238 Two-Factor Authentication`
+    });
+    return { success: true, twoFactorEnabled: user.twoFactorEnabled };
   },
 
   // Activity Logs

@@ -3,80 +3,98 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Database & Engine Governance | Super Admin Master Console</title>
+  <title>Executive Settings & Security | Dalal Machine Tools Agency Pvt. Ltd.</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  
   <link rel="shortcut icon" href="/new/dalalmachine/images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="/new/dalalmachine/css/font-awesome.css">
-  <link rel="stylesheet" href="/superadmin/css/superadmin.css?v=3.0">
-  <link rel="stylesheet" href="/admin/css/admin-ai.css?v=1.0">
+  <link rel="stylesheet" href="/superadmin/css/superadmin.css?v=5.2">
 </head>
 <body>
 
-  <div class="sa-wrapper">
+  <div class="sa-layout">
+    <!-- Sidebar -->
     <aside class="sa-sidebar">
       <div class="sa-sidebar-header">
-        <a href="dashboard.html" class="sa-brand-badge">
+        <a href="dashboard.html" class="sa-brand-badge" data-tooltip="Dalal Master Executive Governance Portal">
           <img src="/new/dalalmachine/images/logo-dalal.png" alt="Dalal Machine Tools" style="max-height: 38px; width: auto; object-fit: contain;">
           <span class="sa-brand-badge-tag">MASTER</span>
         </a>
       </div>
 
+      <!-- Top User Card -->
+      <div class="sa-sidebar-user-top" data-tooltip="Logged in as Master Super Admin">
+        <div style="display: flex; align-items: center; gap: 10px; min-width: 0;">
+          <div class="sa-user-avatar" id="sa-user-avatar">S</div>
+          <div class="sa-user-meta">
+            <span class="sa-user-name" id="sa-user-name">Super Admin (MD)</span>
+            <span class="sa-user-role">Super Admin</span>
+          </div>
+        </div>
+        <i class="fa fa-shield" style="color: #6366f1; font-size: 13px;"></i>
+      </div>
+
       <nav class="sa-nav">
         <div class="sa-nav-section-title">Master Telemetry</div>
-        <a href="dashboard.html" class="sa-nav-link">
+        <a href="dashboard.html" class="sa-nav-link" data-tooltip="Executive Pipeline, Telemetry & Master Controls" data-tooltip-pos="right">
           <i class="fa fa-dashboard"></i>
           <span>Executive Overview</span>
         </a>
-
-        <div class="sa-nav-section-title">Security & Governance</div>
-        <a href="users.html" class="sa-nav-link">
+        <a href="users.html" class="sa-nav-link" data-tooltip="Manage staff accounts & assign roles" data-tooltip-pos="right">
           <i class="fa fa-users"></i>
-          <span>Admin Team Accounts</span>
+          <span>Authorized Accounts</span>
         </a>
-        <a href="logs.html" class="sa-nav-link">
+        <a href="logs.html" class="sa-nav-link" data-tooltip="Immutable SHA-256 chained activity logs" data-tooltip-pos="right">
           <i class="fa fa-shield"></i>
           <span>Security Audit Trail</span>
         </a>
 
-        <div class="sa-nav-section-title">Database & Engine</div>
-        <a href="settings.html" class="sa-nav-link active">
-          <i class="fa fa-database"></i>
-          <span>Database Backups & Sync</span>
+        <div class="sa-nav-section-title">Commercial & Security</div>
+        <a href="settings.html" class="sa-nav-link active" data-tooltip="Floor pricing, 2FA, backups & Gemini AI" data-tooltip-pos="right">
+          <i class="fa fa-sliders"></i>
+          <span>Executive Settings & 2FA</span>
         </a>
 
         <div class="sa-nav-section-title">Operations Portal</div>
-        <a href="/admin/dashboard.html" target="_blank" class="sa-nav-link">
+        <a href="/admin/dashboard.html" target="_blank" class="sa-nav-link" data-tooltip="Switch to operational inventory panel" data-tooltip-pos="right">
           <i class="fa fa-external-link"></i>
           <span>Open Staff Admin &rarr;</span>
+        </a>
+        <a href="/new/dalalmachine/index.html" target="_blank" class="sa-nav-link" data-tooltip="Preview live customer website in new tab" data-tooltip-pos="right">
+          <i class="fa fa-globe"></i>
+          <span>Open Public Website &rarr;</span>
         </a>
       </nav>
 
       <div class="sa-sidebar-footer">
-        <div class="sa-user-pill">
-          <div class="sa-user-avatar" id="sa-user-avatar">S</div>
-          <div class="sa-user-meta">
-            <span class="sa-user-name" id="sa-user-name">Super Admin (MD)</span>
-            <span class="sa-user-role">SUPER ADMIN</span>
-          </div>
-        </div>
-        <button class="sa-btn-logout" title="Sign Out">
+        <button class="sa-btn-logout-sidebar sa-btn-logout" data-tooltip="Securely exit Super Admin session">
           <i class="fa fa-power-off"></i>
+          <span>Exit Console</span>
         </button>
       </div>
     </aside>
 
+    <!-- Main Content -->
     <main class="sa-main">
       <header class="sa-topbar">
         <div class="sa-topbar-left">
-          <button id="sa-btn-toggle" class="sa-btn-toggle" title="Toggle Side Menu">
+          <button id="sa-btn-toggle" class="sa-btn-toggle" data-tooltip="Collapse or expand sidebar navigation">
             <i class="fa fa-bars"></i>
             <span>Menu</span>
           </button>
           <div class="sa-breadcrumb">
-            Master Console &bull; <span>Database & Sync Engine Governance</span>
+            Master Console &bull; <span>Executive Settings & Security</span>
           </div>
         </div>
         <div class="sa-topbar-right">
-          <button class="sa-btn-logout" title="Sign Out">
+          <button type="button" class="sa-btn sa-btn-secondary" onclick="SuperAdminCore.exportExecutiveReport()" style="gap: 8px; font-weight: 700;">
+            <i class="fa fa-print"></i>
+            <span>Monthly Executive Report</span>
+          </button>
+          <button class="sa-btn-logout" data-tooltip="End super admin session">
             <i class="fa fa-sign-out"></i>
             <span>Exit Console</span>
           </button>
@@ -86,11 +104,120 @@
       <div class="sa-content">
         <div class="sa-page-header">
           <div>
-            <h1 class="sa-page-title">Database Backups & Engine Synchronization</h1>
-            <p class="sa-page-sub">Export full offline database snapshots, trigger static catalog recompilation, and update routing configuration.</p>
+            <h1 class="sa-page-title">Executive Controls, Margin Governance & 2FA Security</h1>
+            <p class="sa-page-sub">Confidential floor price controls, Google Authenticator RFC 6238 2FA, inspection video vault, and database snapshots.</p>
           </div>
         </div>
 
+        <!-- 1. Executive Security: RFC 6238 Two-Factor Authentication (2FA) -->
+        <div class="sa-card" style="margin-bottom: 24px; border-color: rgba(99, 102, 241, 0.3);">
+          <div class="sa-card-header">
+            <div class="sa-card-title">
+              <i class="fa fa-lock" style="color: #6366f1;"></i>
+              <span>Managing Director Two-Factor Authentication (RFC 6238 TOTP)</span>
+            </div>
+            <div id="sa-2fa-status-pill" style="font-size: 11.5px; font-weight: 700; padding: 4px 12px; border-radius: 999px;">
+              Checking 2FA...
+            </div>
+          </div>
+          <div class="sa-card-body">
+            <p style="font-size: 13.5px; color: var(--sa-text-muted); margin-bottom: 18px;">
+              Protect the Master Executive Console with time-based one-time passwords (TOTP). Compatible with Google Authenticator, Microsoft Authenticator, and Apple Keychain.
+            </p>
+
+            <div id="sa-2fa-inactive-box" style="display: none; background: rgba(99, 102, 241, 0.08); border: 1px solid rgba(99, 102, 241, 0.25); border-radius: 12px; padding: 18px 20px;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <div style="font-size: 14px; font-weight: 800; color: #fff; margin-bottom: 4px;">Two-Factor Authentication is currently DISABLED</div>
+                  <div style="font-size: 12.5px; color: #94a3b8;">Enable 2FA to require a 6-digit code on every master login.</div>
+                </div>
+                <button type="button" id="btn-start-2fa-setup" class="sa-btn sa-btn-primary" style="background: #6366f1 !important; white-space: nowrap;">
+                  <i class="fa fa-qrcode"></i> Setup Google Authenticator (2FA)
+                </button>
+              </div>
+            </div>
+
+            <div id="sa-2fa-active-box" style="display: none; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 12px; padding: 18px 20px;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <div style="font-size: 14px; font-weight: 800; color: #34d399; margin-bottom: 4px;">
+                    <i class="fa fa-shield"></i> Two-Factor Authentication is ACTIVE & PROTECTED
+                  </div>
+                  <div style="font-size: 12.5px; color: #94a3b8;">
+                    Master Executive logins require your 6-digit code or emergency recovery code.
+                  </div>
+                </div>
+                <button type="button" id="btn-disable-2fa" class="sa-btn sa-btn-secondary" style="border-color: #ef4444; color: #f87171; white-space: nowrap;">
+                  <i class="fa fa-power-off"></i> Disable 2FA
+                </button>
+              </div>
+            </div>
+
+            <!-- 2FA Setup Container (Hidden until clicked) -->
+            <div id="sa-2fa-setup-panel" style="display: none; margin-top: 20px; background: #0f172a; border: 1px solid #334155; border-radius: 14px; padding: 24px;">
+              <h3 style="font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 12px;">Step 1: Scan QR Code with Google Authenticator</h3>
+              <p style="font-size: 13px; color: #94a3b8; margin-bottom: 16px;">
+                Open Google Authenticator or Microsoft Authenticator on your smartphone, tap <strong>"+"</strong> and scan this QR code:
+              </p>
+
+              <div style="display: flex; gap: 24px; align-items: center; flex-wrap: wrap; margin-bottom: 20px;">
+                <div style="background: #ffffff; padding: 10px; border-radius: 12px; display: inline-block;">
+                  <img id="img-2fa-qr" src="" alt="2FA QR Code" style="width: 180px; height: 180px; display: block;">
+                </div>
+                <div style="flex: 1; min-width: 260px;">
+                  <div style="font-size: 12px; color: #94a3b8; margin-bottom: 4px;">Or enter code manually:</div>
+                  <div id="txt-2fa-secret" style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 800; color: var(--sa-gold); background: #1e293b; padding: 10px 14px; border-radius: 8px; border: 1px solid #334155; user-select: all; word-break: break-all;"></div>
+                  <div style="margin-top: 12px; font-size: 12px; color: #10b981;">
+                    Emergency Backup Key: <code id="txt-2fa-recovery" style="color: #fff; font-weight: 700;"></code>
+                  </div>
+                </div>
+              </div>
+
+              <h3 style="font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 12px;">Step 2: Enter 6-Digit Code to Confirm & Lock</h3>
+              <div style="display: flex; gap: 10px; max-width: 380px;">
+                <input type="text" id="inp-2fa-token" class="sa-form-control" placeholder="123456" maxlength="6" style="font-family: 'JetBrains Mono', monospace; font-size: 18px; letter-spacing: 4px; text-align: center; font-weight: 800;">
+                <button type="button" id="btn-confirm-2fa" class="sa-btn sa-btn-primary" style="white-space: nowrap;">
+                  <i class="fa fa-check"></i> Activate 2FA
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Confidential Floor Price & Target Margin Overview (MD Private) -->
+        <div class="sa-card" style="margin-bottom: 24px;">
+          <div class="sa-card-header">
+            <div class="sa-card-title">
+              <i class="fa fa-tag" style="color: var(--sa-gold);"></i>
+              <span>Confidential Floor Price & Procurement Margins (MD Private)</span>
+            </div>
+            <span class="sa-badge sa-badge-superadmin" style="font-size: 11px;">Restricted to Superadmin</span>
+          </div>
+          <div class="sa-card-body" style="padding: 0;">
+            <p style="font-size: 13px; color: var(--sa-text-muted); padding: 16px 20px 0;">
+              These pricing figures are strictly confidential to the Managing Director. Staff Admin and public website visitors never see procurement costs or floor margins.
+            </p>
+            <div class="sa-table-wrap">
+              <table class="sa-table">
+                <thead>
+                  <tr>
+                    <th>Machine Listing</th>
+                    <th>Procurement Cost</th>
+                    <th>Minimum Floor Price</th>
+                    <th>Target Asking Price</th>
+                    <th>Gross Margin %</th>
+                    <th style="text-align: right;">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="sa-tbody-floor-prices">
+                  <tr><td colspan="6" style="text-align: center; padding: 24px; color: var(--sa-text-muted);">Loading machinery confidential margins...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Database Snapshots & Two-Way Sync -->
         <div class="sa-dashboard-split">
           <!-- 1. Database Backup & Restore -->
           <div class="sa-card">
@@ -151,7 +278,7 @@
           </div>
         </div>
 
-        <!-- 3. Enterprise Contact Routing Settings -->
+        <!-- 4. Enterprise Contact Routing Settings -->
         <div class="sa-card" style="margin-top: 24px;">
           <div class="sa-card-header">
             <div class="sa-card-title">
@@ -185,7 +312,7 @@
           </div>
         </div>
 
-        <!-- 4. AI Intelligence Engine & Gemini API Configuration -->
+        <!-- 5. AI Intelligence Engine & Gemini API Configuration -->
         <div class="sa-card" style="margin-top: 24px;">
           <div class="sa-card-header">
             <div class="sa-card-title">
@@ -225,14 +352,109 @@
     </main>
   </div>
 
+  <!-- Floor Price Edit Modal -->
+  <div id="sa-floor-modal-backdrop" class="sa-modal-backdrop">
+    <div class="sa-modal-card">
+      <div class="sa-modal-header">
+        <div class="sa-modal-title">
+          <i class="fa fa-tag" style="color: var(--sa-gold);"></i>
+          <span>Edit Confidential Floor Price & Margins</span>
+        </div>
+        <button type="button" class="sa-modal-close-btn" onclick="document.getElementById('sa-floor-modal-backdrop').classList.remove('open')">&times;</button>
+      </div>
+      <div class="sa-modal-body">
+        <input type="hidden" id="modal-floor-id">
+        <div style="font-size: 14px; font-weight: 800; color: #fff; margin-bottom: 16px;" id="modal-floor-machinename">-</div>
+
+        <div class="sa-form-group" style="margin-bottom: 14px;">
+          <label class="sa-label">Confidential Procurement Cost (₹)</label>
+          <input type="number" id="inp-proc-cost" class="sa-form-control" style="background: #1e293b; color: #fff;" oninput="recalcMargin()">
+        </div>
+        <div class="sa-form-group" style="margin-bottom: 14px;">
+          <label class="sa-label">Minimum Floor Selling Price (₹) - Staff cannot quote below this</label>
+          <input type="number" id="inp-floor-price" class="sa-form-control" style="background: #1e293b; color: #fff;" oninput="recalcMargin()">
+        </div>
+        <div class="sa-form-group" style="margin-bottom: 14px;">
+          <label class="sa-label">Target Asking Quotation Price (₹)</label>
+          <input type="number" id="inp-target-price" class="sa-form-control" style="background: #1e293b; color: #fff;">
+        </div>
+        <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; padding: 12px; margin-top: 10px;">
+          <div style="font-size: 12px; color: #94a3b8;">Calculated Gross Floor Margin:</div>
+          <div id="modal-margin-preview" style="font-size: 16px; font-weight: 800; color: #34d399; margin-top: 2px;">25% Margin</div>
+        </div>
+      </div>
+      <div class="sa-modal-footer">
+        <button type="button" class="sa-btn sa-btn-secondary" onclick="document.getElementById('sa-floor-modal-backdrop').classList.remove('open')">Cancel</button>
+        <button type="button" class="sa-btn sa-btn-primary" onclick="saveFloorPrice()">Save Confidential Pricing</button>
+      </div>
+    </div>
+  </div>
+
   <script src="/socket.io/socket.io.js"></script>
-  <script src="/superadmin/js/superadmin-core.js?v=5.1"></script>
+  <script src="/superadmin/js/superadmin-core.js?v=5.2"></script>
   <script>
+    let current2faSecret = '';
+    let current2faRecovery = '';
+
     (async () => {
       const user = await SuperAdminCore.requireSuperAdmin();
       if (!user) return;
 
       loadSettings();
+      load2faStatus();
+      loadFloorPrices();
+
+      // 2FA Setup
+      document.getElementById('btn-start-2fa-setup').addEventListener('click', async () => {
+        SuperAdminCore.toast('Generating 2FA Secret Key...', 'success');
+        const res = await SuperAdminCore.api('/api/auth/2fa/generate', { method: 'POST' });
+        if (res.success) {
+          current2faSecret = res.secret;
+          current2faRecovery = res.recoveryCode;
+          document.getElementById('img-2fa-qr').src = res.qrUrl;
+          document.getElementById('txt-2fa-secret').textContent = res.secret;
+          document.getElementById('txt-2fa-recovery').textContent = res.recoveryCode;
+          document.getElementById('sa-2fa-setup-panel').style.display = 'block';
+        } else {
+          SuperAdminCore.toast(res.message || 'Failed to initialize 2FA', 'error');
+        }
+      });
+
+      document.getElementById('btn-confirm-2fa').addEventListener('click', async () => {
+        const token = document.getElementById('inp-2fa-token').value.trim();
+        if (token.length !== 6) {
+          alert('Please enter a 6-digit verification code.');
+          return;
+        }
+
+        const res = await SuperAdminCore.api('/api/auth/2fa/verify-and-enable', {
+          method: 'POST',
+          body: JSON.stringify({ secret: current2faSecret, token, recoveryCode: current2faRecovery })
+        });
+        if (res.success) {
+          SuperAdminCore.toast('Two-Factor Authentication is now ACTIVE!');
+          document.getElementById('sa-2fa-setup-panel').style.display = 'none';
+          load2faStatus();
+        } else {
+          SuperAdminCore.toast(res.message || 'Invalid code', 'error');
+        }
+      });
+
+      document.getElementById('btn-disable-2fa').addEventListener('click', async () => {
+        const pw = prompt('Enter Master Password to confirm disabling 2FA:');
+        if (!pw) return;
+
+        const res = await SuperAdminCore.api('/api/auth/2fa/disable', {
+          method: 'POST',
+          body: JSON.stringify({ password: pw })
+        });
+        if (res.success) {
+          SuperAdminCore.toast('2FA deactivated.');
+          load2faStatus();
+        } else {
+          SuperAdminCore.toast(res.message || 'Failed to disable 2FA', 'error');
+        }
+      });
 
       // Download Backup
       document.getElementById('btn-download-backup').addEventListener('click', async () => {
@@ -343,6 +565,105 @@
       });
     })();
 
+    async function load2faStatus() {
+      const res = await SuperAdminCore.api('/api/auth/me');
+      const pill = document.getElementById('sa-2fa-status-pill');
+      const inactiveBox = document.getElementById('sa-2fa-inactive-box');
+      const activeBox = document.getElementById('sa-2fa-active-box');
+
+      if (res.success && res.user && res.user.twoFactorEnabled) {
+        pill.style.background = 'rgba(16, 185, 129, 0.15)';
+        pill.style.color = '#34d399';
+        pill.innerHTML = '<i class="fa fa-shield"></i> 2FA ACTIVE';
+        inactiveBox.style.display = 'none';
+        activeBox.style.display = 'block';
+      } else {
+        pill.style.background = 'rgba(239, 68, 68, 0.15)';
+        pill.style.color = '#f87171';
+        pill.innerHTML = '<i class="fa fa-exclamation-triangle"></i> 2FA DISABLED';
+        inactiveBox.style.display = 'block';
+        activeBox.style.display = 'none';
+      }
+    }
+
+    async function loadFloorPrices() {
+      const res = await SuperAdminCore.api('/api/products?all=true');
+      const tbody = document.getElementById('sa-tbody-floor-prices');
+      if (res.success && res.products) {
+        tbody.innerHTML = res.products.slice(0, 15).map(p => {
+          const pCost = p.procurementCost || 0;
+          const fPrice = p.floorPrice || 0;
+          const tPrice = p.targetPrice || 0;
+          const margin = p.marginPercent || (pCost > 0 ? Math.round(((fPrice - pCost) / pCost) * 100) : 25);
+          return `
+            <tr>
+              <td>
+                <strong style="color: #fff; font-size: 13.5px;">${SuperAdminCore.escapeHTML(p.name)}</strong><br>
+                <code style="color: var(--sa-gold); font-size: 11px;">${SuperAdminCore.escapeHTML(p.id)}</code> &bull; <small style="color: #94a3b8;">${p.tonnage ? p.tonnage + ' Ton' : p.category}</small>
+              </td>
+              <td><span style="font-family: 'JetBrains Mono', monospace; font-size: 13.5px; color: #94a3b8;">₹${pCost.toLocaleString('en-IN')}</span></td>
+              <td><strong style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #fbbf24;">₹${fPrice.toLocaleString('en-IN')}</strong></td>
+              <td><span style="font-family: 'JetBrains Mono', monospace; font-size: 13.5px; color: #38bdf8;">₹${tPrice.toLocaleString('en-IN')}</span></td>
+              <td>
+                <span class="sa-badge" style="background: rgba(16, 185, 129, 0.15); color: #34d399; font-weight: 800;">
+                  +${margin}%
+                </span>
+              </td>
+              <td style="text-align: right;">
+                <button type="button" class="sa-btn sa-btn-secondary" style="font-size: 12px; padding: 5px 12px;" onclick="openFloorModal('${p.id}', '${SuperAdminCore.escapeHTML(p.name)}', ${pCost}, ${fPrice}, ${tPrice})">
+                  <i class="fa fa-pencil"></i> Edit
+                </button>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      }
+    }
+
+    function openFloorModal(id, name, pCost, fPrice, tPrice) {
+      document.getElementById('modal-floor-id').value = id;
+      document.getElementById('modal-floor-machinename').textContent = name;
+      document.getElementById('inp-proc-cost').value = pCost;
+      document.getElementById('inp-floor-price').value = fPrice;
+      document.getElementById('inp-target-price').value = tPrice;
+      recalcMargin();
+      document.getElementById('sa-floor-modal-backdrop').classList.add('open');
+    }
+
+    function recalcMargin() {
+      const pCost = parseFloat(document.getElementById('inp-proc-cost').value) || 0;
+      const fPrice = parseFloat(document.getElementById('inp-floor-price').value) || 0;
+      const preview = document.getElementById('modal-margin-preview');
+      if (pCost > 0 && fPrice >= pCost) {
+        const m = Math.round(((fPrice - pCost) / pCost) * 100);
+        preview.textContent = `+${m}% Gross Floor Margin (₹${(fPrice - pCost).toLocaleString('en-IN')} Profit)`;
+        preview.style.color = '#34d399';
+      } else {
+        preview.textContent = 'Warning: Floor price is below procurement cost!';
+        preview.style.color = '#ef4444';
+      }
+    }
+
+    async function saveFloorPrice() {
+      const id = document.getElementById('modal-floor-id').value;
+      const procurementCost = parseFloat(document.getElementById('inp-proc-cost').value) || 0;
+      const floorPrice = parseFloat(document.getElementById('inp-floor-price').value) || 0;
+      const targetPrice = parseFloat(document.getElementById('inp-target-price').value) || 0;
+
+      const res = await SuperAdminCore.api(`/api/products/${id}/confidential-pricing`, {
+        method: 'PATCH',
+        body: JSON.stringify({ procurementCost, floorPrice, targetPrice })
+      });
+
+      if (res.success) {
+        SuperAdminCore.toast('Confidential floor price saved!');
+        document.getElementById('sa-floor-modal-backdrop').classList.remove('open');
+        loadFloorPrices();
+      } else {
+        SuperAdminCore.toast(res.message || 'Failed to save pricing', 'error');
+      }
+    }
+
     async function checkAiStatus() {
       try {
         const res = await fetch('/api/ai/status');
@@ -375,6 +696,5 @@
       checkAiStatus();
     }
   </script>
-  <script src="/admin/js/admin-ai.js?v=1.0"></script>
 </body>
 </html>

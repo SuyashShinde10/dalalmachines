@@ -4,7 +4,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('../config');
 const db = require('../db');
-const { authenticateToken } = require('../middleware/auth');
+const { authenticateToken, requireSuperAdmin } = require('../middleware/auth');
+const totp = require('../security/totp');
 const {
   checkAccountLockout,
   recordFailedLogin,
@@ -14,7 +15,7 @@ const {
 
 // POST /api/auth/login
 router.post('/login', async (req, res) => {
-  const { identifier, password } = req.body;
+  const { identifier, password, totpCode } = req.body;
   if (!identifier || !password) {
     return res.status(400).json({ success: false, message: 'Please provide username/email and password.' });
   }
@@ -55,6 +56,31 @@ router.post('/login', async (req, res) => {
   if (!isMatch) {
     await recordFailedLogin(identifier, req);
     return res.status(401).json({ success: false, message: 'Invalid password. Please try again.' });
+  }
+
+  // 2-Factor Authentication (TOTP / Google Authenticator) Check
+  if (user.twoFactorEnabled && user.twoFactorSecret) {
+    if (!totpCode) {
+      const tempToken = jwt.sign(
+        { tempId: user.id, requires2fa: true },
+        config.JWT_SECRET,
+        { expiresIn: '5m' }
+      );
+      return res.json({
+        success: true,
+        require2fa: true,
+        tempToken,
+        message: 'Two-Factor Authentication required. Enter the 6-digit code from Google Authenticator.'
+      });
+    }
+
+    const isValidOtp = totp.verifyTotp(user.twoFactorSecret, totpCode) ||
+      (user.twoFactorRecoveryCode && user.twoFactorRecoveryCode === totpCode.trim());
+
+    if (!isValidOtp) {
+      await recordFailedLogin(identifier, req);
+      return res.status(401).json({ success: false, message: 'Invalid 2FA code or backup recovery code.' });
+    }
   }
 
   // Clear failure records on successful login
@@ -123,8 +149,73 @@ router.get('/me', authenticateToken, (req, res) => {
   if (!user) {
     return res.status(404).json({ success: false, message: 'User not found' });
   }
-  const { passwordHash, ...safeUser } = user;
-  return res.json({ success: true, user: safeUser });
+  const { passwordHash, twoFactorSecret, ...safeUser } = user;
+  return res.json({
+    success: true,
+    user: {
+      ...safeUser,
+      twoFactorEnabled: Boolean(user.twoFactorEnabled)
+    }
+  });
+});
+
+// POST /api/auth/2fa/generate (Superadmin Setup RFC 6238 2FA)
+router.post('/2fa/generate', authenticateToken, (req, res) => {
+  const user = db.getUserById(req.user.id);
+  if (!user) return res.status(404).json({ success: false, message: 'User not found.' });
+
+  const generated = totp.generateSecret(user.username, 'Dalal Machine Tools');
+  res.json({
+    success: true,
+    secret: generated.secret,
+    qrUrl: generated.qrUrl,
+    uri: generated.uri,
+    recoveryCode: generated.recoveryCode
+  });
+});
+
+// POST /api/auth/2fa/verify-and-enable
+router.post('/2fa/verify-and-enable', authenticateToken, (req, res) => {
+  const { secret, token, recoveryCode } = req.body;
+  if (!secret || !token) {
+    return res.status(400).json({ success: false, message: 'Secret and 6-digit TOTP token are required.' });
+  }
+
+  const isValid = totp.verifyTotp(secret, token);
+  if (!isValid) {
+    return res.status(400).json({ success: false, message: 'Invalid 6-digit code. Check your Authenticator app and system clock.' });
+  }
+
+  db.setUser2FA(req.user.id, { enabled: true, secret, recoveryCode }, req.user);
+  res.json({
+    success: true,
+    message: 'Two-Factor Authentication successfully activated. Master Console is now secured with RFC 6238 TOTP.',
+    twoFactorEnabled: true
+  });
+});
+
+// POST /api/auth/2fa/disable
+router.post('/2fa/disable', authenticateToken, (req, res) => {
+  const { password, token } = req.body;
+  const user = db.getUserById(req.user.id);
+  if (!user) return res.status(404).json({ success: false, message: 'User not found.' });
+
+  if (password) {
+    const isMatch = bcrypt.compareSync(password, user.passwordHash);
+    if (!isMatch) return res.status(401).json({ success: false, message: 'Incorrect password.' });
+  } else if (token) {
+    const isValid = totp.verifyTotp(user.twoFactorSecret, token);
+    if (!isValid) return res.status(401).json({ success: false, message: 'Invalid 2FA token.' });
+  } else {
+    return res.status(400).json({ success: false, message: 'Password or 2FA token required to disable 2FA.' });
+  }
+
+  db.setUser2FA(req.user.id, { enabled: false, secret: null, recoveryCode: null }, req.user);
+  res.json({
+    success: true,
+    message: 'Two-Factor Authentication deactivated.',
+    twoFactorEnabled: false
+  });
 });
 
 // POST /api/auth/logout

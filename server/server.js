@@ -20,6 +20,7 @@ const systemRoutes = require('./routes/system');
 const aiRoutes = require('./routes/ai');
 const devRoutes = require('./routes/dev');
 const seoRoutes = require('./routes/seo');
+const consignmentsRoutes = require('./routes/consignments');
 
 // Enterprise SecOps & Concealment Engine
 const honeypot = require('./security/honeypot');
@@ -262,6 +263,7 @@ app.use('/api/auth/login', authLimiter);
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/inquiries', inquiryLimiter, inquiryRoutes);
+app.use('/api/consignments', consignmentsRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/logs', logRoutes);
 app.get('/api/system/developer-banner', (req, res) => {

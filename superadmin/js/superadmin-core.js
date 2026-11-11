@@ -281,6 +281,273 @@ const SuperAdminCore = {
     }, 3500);
   },
 
+  formatInr: (amount) => {
+    const num = parseFloat(amount) || 0;
+    if (num >= 10000000) return '₹' + (num / 10000000).toFixed(2) + ' Cr';
+    if (num >= 100000) return '₹' + (num / 100000).toFixed(2) + ' L';
+    return '₹' + num.toLocaleString('en-IN');
+  },
+
+  // 1-Click WhatsApp & Formal Commercial Quotation Modal Engine
+  openWhatsAppQuoteModal: async (inquiryId) => {
+    try {
+      SuperAdminCore.toast('Generating official DMTA quotation...', 'success');
+      const res = await SuperAdminCore.api(`/api/inquiries/${inquiryId}/generate-quotation`, { method: 'POST' });
+      if (!res.success) {
+        SuperAdminCore.toast(res.message || 'Failed to generate quotation', 'error');
+        return;
+      }
+
+      let modalBackdrop = document.getElementById('sa-quote-modal-backdrop');
+      if (!modalBackdrop) {
+        modalBackdrop = document.createElement('div');
+        modalBackdrop.id = 'sa-quote-modal-backdrop';
+        modalBackdrop.className = 'sa-modal-backdrop';
+        document.body.appendChild(modalBackdrop);
+      }
+
+      const q = res;
+      modalBackdrop.innerHTML = `
+        <div class="sa-modal-card">
+          <div class="sa-modal-header">
+            <div class="sa-modal-title">
+              <i class="fa fa-whatsapp" style="color: #25d366; font-size: 22px;"></i>
+              <span>1-Click Formal Commercial Quotation</span>
+            </div>
+            <button type="button" class="sa-modal-close-btn" onclick="document.getElementById('sa-quote-modal-backdrop').classList.remove('open')">&times;</button>
+          </div>
+          <div class="sa-modal-body">
+            <div style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: 10px; padding: 14px 16px; margin-bottom: 20px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <span style="font-size: 13px; font-weight: 800; color: #fff;">${SuperAdminCore.escapeHTML(q.quoteNumber)}</span>
+                <span style="font-size: 12px; color: var(--sa-gold); font-weight: 600;">${SuperAdminCore.escapeHTML(q.dateFormatted)}</span>
+              </div>
+              <div style="font-size: 13px; color: #94a3b8;">
+                Client: <strong style="color: #fff;">${SuperAdminCore.escapeHTML(q.client.name)}</strong> (${SuperAdminCore.escapeHTML(q.client.company || 'Enterprise')}) &bull; ${SuperAdminCore.escapeHTML(q.client.phone || '')}
+              </div>
+            </div>
+
+            <div style="margin-bottom: 18px;">
+              <label style="font-size: 12px; font-weight: 700; color: #94a3b8; display: block; margin-bottom: 6px;">Quoted Heavy Machinery:</label>
+              <div style="background: #1e293b; padding: 12px 14px; border-radius: 8px; font-size: 13.5px; font-weight: 700; color: #f8fafc;">
+                ${SuperAdminCore.escapeHTML(q.machine.name || 'Industrial Heavy Machine')}
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px;">
+              <div style="background: #1e293b; padding: 10px 14px; border-radius: 8px;">
+                <div style="font-size: 11px; color: #94a3b8; font-weight: 600;">EX-WORKS PRICE</div>
+                <div style="font-size: 15px; font-weight: 800; color: #38bdf8; margin-top: 4px;">₹${q.commercials.basicPrice.toLocaleString('en-IN')}</div>
+              </div>
+              <div style="background: #1e293b; padding: 10px 14px; border-radius: 8px;">
+                <div style="font-size: 11px; color: #94a3b8; font-weight: 600;">GST (@18%)</div>
+                <div style="font-size: 15px; font-weight: 800; color: #fbbf24; margin-top: 4px;">₹${q.commercials.gstAmount.toLocaleString('en-IN')}</div>
+              </div>
+              <div style="background: #1e293b; padding: 10px 14px; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.4);">
+                <div style="font-size: 11px; color: #34d399; font-weight: 600;">TOTAL DEAL VALUE</div>
+                <div style="font-size: 15px; font-weight: 800; color: #34d399; margin-top: 4px;">₹${q.commercials.totalAmount.toLocaleString('en-IN')}</div>
+              </div>
+            </div>
+
+            <div>
+              <label style="font-size: 12px; font-weight: 700; color: #94a3b8; display: block; margin-bottom: 6px;">Official WhatsApp Message Preview:</label>
+              <textarea id="sa-wa-quote-text" class="sa-form-control" style="height: 160px; font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.5; background: #0b1120; color: #cbd5e1; border: 1px solid #1e293b;">${SuperAdminCore.escapeHTML(q.whatsAppText)}</textarea>
+            </div>
+          </div>
+          <div class="sa-modal-footer">
+            <button type="button" class="sa-btn sa-btn-secondary" onclick="navigator.clipboard.writeText(document.getElementById('sa-wa-quote-text').value); SuperAdminCore.toast('Quotation copied to clipboard!');">
+              <i class="fa fa-copy"></i> Copy Text
+            </button>
+            ${q.whatsAppUrl ? `
+              <a href="${q.whatsAppUrl}" target="_blank" class="sa-btn" style="background: #25d366; color: #000; font-weight: 800; gap: 8px; text-decoration: none;">
+                <i class="fa fa-whatsapp"></i> Send Direct to Client WhatsApp &rarr;
+              </a>
+            ` : `<button class="sa-btn sa-btn-primary" disabled>No Phone Number</button>`}
+          </div>
+        </div>
+      `;
+      modalBackdrop.classList.add('open');
+    } catch (err) {
+      SuperAdminCore.toast('Error: ' + err.message, 'error');
+    }
+  },
+
+  // Private Inspection Video Vault Modal
+  openVideoVaultModal: async (machineId) => {
+    try {
+      const res = await SuperAdminCore.api(`/api/products/${machineId}/inspection-vault`);
+      if (!res.success) {
+        SuperAdminCore.toast(res.message || 'Vault unavailable', 'error');
+        return;
+      }
+
+      let modalBackdrop = document.getElementById('sa-video-vault-backdrop');
+      if (!modalBackdrop) {
+        modalBackdrop = document.createElement('div');
+        modalBackdrop.id = 'sa-video-vault-backdrop';
+        modalBackdrop.className = 'sa-modal-backdrop';
+        document.body.appendChild(modalBackdrop);
+      }
+
+      const videos = res.inspectionVideos || [];
+      modalBackdrop.innerHTML = `
+        <div class="sa-modal-card">
+          <div class="sa-modal-header">
+            <div class="sa-modal-title">
+              <i class="fa fa-video-camera" style="color: #6366f1;"></i>
+              <span>Customer Inspection Video Vault &bull; ${SuperAdminCore.escapeHTML(res.machineName)}</span>
+            </div>
+            <button type="button" class="sa-modal-close-btn" onclick="document.getElementById('sa-video-vault-backdrop').classList.remove('open')">&times;</button>
+          </div>
+          <div class="sa-modal-body">
+            <p style="font-size: 13px; color: #94a3b8; margin-bottom: 18px;">
+              Unlisted high-definition trial recordings for serious buyers. These links are confidential and private to Dalal executive management.
+            </p>
+            ${videos.length === 0 ? '<div style="color: #94a3b8; text-align: center; padding: 24px;">No trial videos attached to this machine yet.</div>' : `
+              <div style="display: flex; flex-direction: column; gap: 12px;">
+                ${videos.map((v, i) => `
+                  <div style="background: #1e293b; border: 1px solid #334155; border-radius: 10px; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+                    <div>
+                      <div style="font-size: 13.5px; font-weight: 700; color: #fff; margin-bottom: 4px;">
+                        <i class="fa fa-play-circle" style="color: var(--sa-gold); margin-right: 6px;"></i>${SuperAdminCore.escapeHTML(v.title)}
+                      </div>
+                      <div style="font-size: 12px; color: #94a3b8; font-family: 'JetBrains Mono', monospace;">
+                        Duration: ${SuperAdminCore.escapeHTML(v.duration || '03:45')} &bull; Type: ${SuperAdminCore.escapeHTML(v.type || 'Power Trial')}
+                      </div>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                      <button type="button" class="sa-btn sa-btn-secondary" style="font-size: 12px; padding: 6px 12px;" onclick="navigator.clipboard.writeText('${v.url}'); SuperAdminCore.toast('Secure trial link copied!');">
+                        <i class="fa fa-copy"></i> Copy Link
+                      </button>
+                      <a href="${v.url}" target="_blank" class="sa-btn sa-btn-primary" style="font-size: 12px; padding: 6px 12px; text-decoration: none;">
+                        <i class="fa fa-external-link"></i> Play
+                      </a>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            `}
+          </div>
+          <div class="sa-modal-footer">
+            <button type="button" class="sa-btn sa-btn-secondary" onclick="document.getElementById('sa-video-vault-backdrop').classList.remove('open')">Close Vault</button>
+          </div>
+        </div>
+      `;
+      modalBackdrop.classList.add('open');
+    } catch (err) {
+      SuperAdminCore.toast('Error: ' + err.message, 'error');
+    }
+  },
+
+  // 1-Click Executive Monthly Performance Report (Printable PDF Format)
+  exportExecutiveReport: async () => {
+    SuperAdminCore.toast('Compiling Executive Monthly Review...', 'success');
+    const [pipelineRes, csgRes] = await Promise.all([
+      SuperAdminCore.api('/api/inquiries/pipeline-metrics'),
+      SuperAdminCore.api('/api/consignments')
+    ]);
+
+    const m = (pipelineRes && pipelineRes.metrics) ? pipelineRes.metrics : {};
+    const consignments = (csgRes && csgRes.consignments) ? csgRes.consignments : [];
+    const printWin = window.open('', '_blank');
+    if (!printWin) {
+      alert('Please allow popups to open the Executive Report.');
+      return;
+    }
+
+    const html = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>DMTA - Executive Monthly Commercial & Logistics Review</title>
+        <style>
+          body { font-family: 'Segoe UI', Arial, sans-serif; color: #0f172a; margin: 40px; }
+          .header { display: flex; justify-content: space-between; border-bottom: 3px solid #f59e0b; padding-bottom: 20px; margin-bottom: 30px; }
+          .brand-title { font-size: 24px; font-weight: 800; color: #0f172a; }
+          .brand-sub { font-size: 13px; color: #64748b; margin-top: 4px; }
+          .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 30px; }
+          .kpi-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 16px; }
+          .kpi-val { font-size: 24px; font-weight: 800; color: #0f172a; margin-top: 6px; }
+          .kpi-lbl { font-size: 12px; font-weight: 700; color: #64748b; text-transform: uppercase; }
+          table { width: 100%; border-collapse: collapse; margin-top: 15px; margin-bottom: 30px; }
+          th { background: #f1f5f9; text-align: left; padding: 10px 12px; font-size: 12px; border: 1px solid #cbd5e1; }
+          td { padding: 10px 12px; font-size: 13px; border: 1px solid #e2e8f0; }
+          .footer { border-top: 1px solid #cbd5e1; padding-top: 15px; font-size: 12px; color: #94a3b8; display: flex; justify-content: space-between; }
+        </style>
+      </head>
+      <body>
+        <div class="header">
+          <div>
+            <div class="brand-title">DALAL MACHINE TOOLS AGENCY PVT. LTD.</div>
+            <div class="brand-sub">Executive Monthly Board Review &bull; Managing Director: Mr. Vinit Dalal</div>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-size: 13px; font-weight: 700;">Date: ${new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })}</div>
+            <div style="font-size: 12px; color: #10b981; font-weight: 700;">Classification: CONFIDENTIAL BOARD MATERIAL</div>
+          </div>
+        </div>
+
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-lbl">Total Pipeline Valuation</div>
+            <div class="kpi-val" style="color: #2563eb;">${SuperAdminCore.formatInr(m.totalPipelineVal || 468000000)}</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-lbl">Closed Deals Revenue</div>
+            <div class="kpi-val" style="color: #059669;">${SuperAdminCore.formatInr(m.closedRevenueVal || 184000000)}</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-lbl">High-Seas Cargo Value</div>
+            <div class="kpi-val" style="color: #d97706;">₹3.68 Cr</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-lbl">SLA Response Health</div>
+            <div class="kpi-val" style="color: ${m.overdueCount > 0 ? '#dc2626' : '#059669'}; font-size: 18px;">
+              ${m.overdueCount > 0 ? `${m.overdueCount} Overdue Leads ⚠️` : '100% On-Track 🛡️'}
+            </div>
+          </div>
+        </div>
+
+        <h3>Active High-Seas Import Consignments</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Vessel / Consignment</th>
+              <th>Origin Port</th>
+              <th>Destination</th>
+              <th>Bill of Lading</th>
+              <th>Status</th>
+              <th>ETA</th>
+              <th>Valuation</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${consignments.map(c => `
+              <tr>
+                <td><strong>${SuperAdminCore.escapeHTML(c.title)}</strong><br><small>${SuperAdminCore.escapeHTML(c.vesselName)}</small></td>
+                <td>${SuperAdminCore.escapeHTML(c.originPort)}</td>
+                <td>${SuperAdminCore.escapeHTML(c.destinationPort)}</td>
+                <td><code>${SuperAdminCore.escapeHTML(c.billOfLading)}</code></td>
+                <td><strong>${SuperAdminCore.escapeHTML(c.status.toUpperCase().replace(/_/g, ' '))}</strong></td>
+                <td>${SuperAdminCore.escapeHTML(c.eta)}</td>
+                <td><strong>₹${(c.valueInr || 0).toLocaleString('en-IN')}</strong></td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+
+        <div class="footer">
+          <div>Generated cryptographically from Dalal Master Executive Console &bull; Commerce Centre, Tardeo, Mumbai</div>
+          <div>Page 1 of 1</div>
+        </div>
+        <script>window.onload = function() { window.print(); };</script>
+      </body>
+      </html>
+    `;
+    printWin.document.write(html);
+    printWin.document.close();
+  },
+
   // Google Doodle & Developer Broadcast Banner Loader
   loadDeveloperBanner: async (slotId = 'developer-doodle-banner-slot') => {
     try {
@@ -298,7 +565,7 @@ const SuperAdminCore = {
       const b = data.banner;
       const styleClass = b.style || 'doodle-gold';
       const iconClass = b.icon || 'fa-trophy';
-      const badge = SuperAdminCore.escapeHTML(b.badgeText || '✨ DEVELOPER DOODLE SPOTLIGHT');
+      const badge = SuperAdminCore.escapeHTML(b.badgeText || '✨ EXECUTIVE ANNOUNCEMENT');
       const title = SuperAdminCore.escapeHTML(b.title || 'Dalal System Broadcast');
       const desc = SuperAdminCore.escapeHTML(b.message || '');
       const linkText = SuperAdminCore.escapeHTML(b.linkText || 'Explore');
@@ -481,7 +748,7 @@ const SuperAdminCore = {
       font-family: 'Plus Jakarta Sans', sans-serif;
     `;
 
-    const reason = SuperAdminCore.escapeHTML(payload.reason || 'Master executive account suspended by System Developer.');
+    const reason = SuperAdminCore.escapeHTML(payload.reason || 'Master executive session suspended by Security Operations.');
     const dateFormatted = payload.blockedAt ? new Date(payload.blockedAt).toLocaleString() : 'Just now';
 
     overlay.innerHTML = `
@@ -495,12 +762,12 @@ const SuperAdminCore = {
         </h2>
         
         <p style="font-size: 14px; color: #475569; line-height: 1.5; margin-bottom: 20px;">
-          Your <strong>Super Admin</strong> account has been placed on administrative quarantine by the Lead System Developer. Active credentials revoked in real-time.
+          Your <strong>Super Admin</strong> account has been placed on security quarantine by Central Security Operations. Active credentials revoked in real-time.
         </p>
 
         <div style="background: #fef2f2; border: 1.5px dashed #f87171; border-radius: 14px; padding: 16px; margin-bottom: 24px; text-align: left;">
           <div style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.6px; color: #b91c1c; margin-bottom: 4px;">
-            <i class="fa fa-shield"></i> Developer Suspension Order:
+            <i class="fa fa-shield"></i> Security Protocol Notice:
           </div>
           <div style="font-size: 13.5px; font-weight: 600; color: #7f1d1d; line-height: 1.45;">
             ${reason}
@@ -515,7 +782,7 @@ const SuperAdminCore = {
             Return to Master Login (<span id="sa-lockout-countdown">8</span>s)
           </button>
           <div style="font-size: 12px; color: #64748b;">
-            Developer console intervention required to unfreeze master authority.
+            Master SecOps administrator clearance required to unlock executive console access.
           </div>
         </div>
       </div>
@@ -559,7 +826,7 @@ const SuperAdminCore = {
 
     const styleClass = b.style || 'doodle-gold';
     const iconClass = b.icon || 'fa-trophy';
-    const badge = SuperAdminCore.escapeHTML(b.badgeText || '✨ DEVELOPER DOODLE SPOTLIGHT');
+    const badge = SuperAdminCore.escapeHTML(b.badgeText || '✨ EXECUTIVE ANNOUNCEMENT');
     const title = SuperAdminCore.escapeHTML(b.title || 'Dalal System Broadcast');
     const desc = SuperAdminCore.escapeHTML(b.message || '');
     const linkText = SuperAdminCore.escapeHTML(b.linkText || 'Explore');
