@@ -125,58 +125,58 @@
               Protect the Master Executive Console with time-based one-time passwords (TOTP). Compatible with Google Authenticator, Microsoft Authenticator, and Apple Keychain.
             </p>
 
-            <div id="sa-2fa-inactive-box" style="display: none; background: rgba(99, 102, 241, 0.08); border: 1px solid rgba(99, 102, 241, 0.25); border-radius: 12px; padding: 18px 20px;">
-              <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div id="sa-2fa-inactive-box" style="display: none; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 14px; padding: 18px 20px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
                 <div>
-                  <div style="font-size: 14px; font-weight: 800; color: #fff; margin-bottom: 4px;">Two-Factor Authentication is currently DISABLED</div>
-                  <div style="font-size: 12.5px; color: #94a3b8;">Enable 2FA to require a 6-digit code on every master login.</div>
+                  <div style="font-size: 14px; font-weight: 800; color: #1e40af; margin-bottom: 4px;">Two-Factor Authentication is currently DISABLED</div>
+                  <div style="font-size: 12.5px; color: #475569;">Enable 2FA to require a 6-digit code on every master executive login.</div>
                 </div>
-                <button type="button" id="btn-start-2fa-setup" class="sa-btn sa-btn-primary" style="background: #6366f1 !important; white-space: nowrap;">
+                <button type="button" id="btn-start-2fa-setup" class="sa-btn sa-btn-primary" style="background: #2563eb !important; white-space: nowrap; border-radius: 10px;">
                   <i class="fa fa-qrcode"></i> Setup Google Authenticator (2FA)
                 </button>
               </div>
             </div>
 
-            <div id="sa-2fa-active-box" style="display: none; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 12px; padding: 18px 20px;">
-              <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div id="sa-2fa-active-box" style="display: none; background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 14px; padding: 18px 20px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
                 <div>
-                  <div style="font-size: 14px; font-weight: 800; color: #34d399; margin-bottom: 4px;">
+                  <div style="font-size: 14px; font-weight: 800; color: #047857; margin-bottom: 4px;">
                     <i class="fa fa-shield"></i> Two-Factor Authentication is ACTIVE & PROTECTED
                   </div>
-                  <div style="font-size: 12.5px; color: #94a3b8;">
+                  <div style="font-size: 12.5px; color: #475569;">
                     Master Executive logins require your 6-digit code or emergency recovery code.
                   </div>
                 </div>
-                <button type="button" id="btn-disable-2fa" class="sa-btn sa-btn-secondary" style="border-color: #ef4444; color: #f87171; white-space: nowrap;">
+                <button type="button" id="btn-disable-2fa" class="sa-btn sa-btn-secondary" style="border-color: #ef4444; color: #dc2626; white-space: nowrap; border-radius: 10px;">
                   <i class="fa fa-power-off"></i> Disable 2FA
                 </button>
               </div>
             </div>
 
             <!-- 2FA Setup Container (Hidden until clicked) -->
-            <div id="sa-2fa-setup-panel" style="display: none; margin-top: 20px; background: #0f172a; border: 1px solid #334155; border-radius: 14px; padding: 24px;">
-              <h3 style="font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 12px;">Step 1: Scan QR Code with Google Authenticator</h3>
-              <p style="font-size: 13px; color: #94a3b8; margin-bottom: 16px;">
+            <div id="sa-2fa-setup-panel" style="display: none; margin-top: 20px; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 14px; padding: 24px;">
+              <h3 style="font-size: 15px; font-weight: 800; color: #0f172a; margin-bottom: 12px;">Step 1: Scan QR Code with Google Authenticator</h3>
+              <p style="font-size: 13px; color: #475569; margin-bottom: 16px;">
                 Open Google Authenticator or Microsoft Authenticator on your smartphone, tap <strong>"+"</strong> and scan this QR code:
               </p>
 
               <div style="display: flex; gap: 24px; align-items: center; flex-wrap: wrap; margin-bottom: 20px;">
-                <div style="background: #ffffff; padding: 10px; border-radius: 12px; display: inline-block;">
+                <div style="background: #ffffff; padding: 10px; border-radius: 12px; display: inline-block; border: 1px solid #cbd5e1;">
                   <img id="img-2fa-qr" src="" alt="2FA QR Code" style="width: 180px; height: 180px; display: block;">
                 </div>
                 <div style="flex: 1; min-width: 260px;">
-                  <div style="font-size: 12px; color: #94a3b8; margin-bottom: 4px;">Or enter code manually:</div>
-                  <div id="txt-2fa-secret" style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 800; color: var(--sa-gold); background: #1e293b; padding: 10px 14px; border-radius: 8px; border: 1px solid #334155; user-select: all; word-break: break-all;"></div>
-                  <div style="margin-top: 12px; font-size: 12px; color: #10b981;">
-                    Emergency Backup Key: <code id="txt-2fa-recovery" style="color: #fff; font-weight: 700;"></code>
+                  <div style="font-size: 12px; color: #64748b; margin-bottom: 4px;">Or enter code manually:</div>
+                  <div id="txt-2fa-secret" style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 800; color: #b45309; background: #ffffff; padding: 10px 14px; border-radius: 8px; border: 1px solid #cbd5e1; user-select: all; word-break: break-all;"></div>
+                  <div style="margin-top: 12px; font-size: 12px; color: #047857;">
+                    Emergency Backup Key: <code id="txt-2fa-recovery" style="color: #0f172a; font-weight: 700; background: #e2e8f0; padding: 2px 6px; border-radius: 4px;"></code>
                   </div>
                 </div>
               </div>
 
-              <h3 style="font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 12px;">Step 2: Enter 6-Digit Code to Confirm & Lock</h3>
+              <h3 style="font-size: 15px; font-weight: 800; color: #0f172a; margin-bottom: 12px;">Step 2: Enter 6-Digit Code to Confirm & Lock</h3>
               <div style="display: flex; gap: 10px; max-width: 380px;">
-                <input type="text" id="inp-2fa-token" class="sa-form-control" placeholder="123456" maxlength="6" style="font-family: 'JetBrains Mono', monospace; font-size: 18px; letter-spacing: 4px; text-align: center; font-weight: 800;">
-                <button type="button" id="btn-confirm-2fa" class="sa-btn sa-btn-primary" style="white-space: nowrap;">
+                <input type="text" id="inp-2fa-token" class="sa-form-control" placeholder="123456" maxlength="6" style="font-family: 'JetBrains Mono', monospace; font-size: 18px; letter-spacing: 4px; text-align: center; font-weight: 800; background: #ffffff; border: 1.5px solid #cbd5e1; color: #0f172a;">
+                <button type="button" id="btn-confirm-2fa" class="sa-btn sa-btn-primary" style="white-space: nowrap; border-radius: 10px;">
                   <i class="fa fa-check"></i> Activate 2FA
                 </button>
               </div>
@@ -364,23 +364,23 @@
       </div>
       <div class="sa-modal-body">
         <input type="hidden" id="modal-floor-id">
-        <div style="font-size: 14px; font-weight: 800; color: #fff; margin-bottom: 16px;" id="modal-floor-machinename">-</div>
+        <div style="font-size: 15px; font-weight: 800; color: #0f172a; margin-bottom: 16px;" id="modal-floor-machinename">-</div>
 
         <div class="sa-form-group" style="margin-bottom: 14px;">
-          <label class="sa-label">Confidential Procurement Cost (₹)</label>
-          <input type="number" id="inp-proc-cost" class="sa-form-control" style="background: #1e293b; color: #fff;" oninput="recalcMargin()">
+          <label class="sa-label" style="font-weight: 700; color: #334155; margin-bottom: 6px; display: block;">Confidential Procurement Cost (₹)</label>
+          <input type="number" id="inp-proc-cost" class="sa-form-control" style="background: #ffffff; color: #0f172a; border: 1.5px solid #cbd5e1; font-weight: 700; font-family: 'JetBrains Mono', monospace;" oninput="recalcMargin()">
         </div>
         <div class="sa-form-group" style="margin-bottom: 14px;">
-          <label class="sa-label">Minimum Floor Selling Price (₹) - Staff cannot quote below this</label>
-          <input type="number" id="inp-floor-price" class="sa-form-control" style="background: #1e293b; color: #fff;" oninput="recalcMargin()">
+          <label class="sa-label" style="font-weight: 700; color: #334155; margin-bottom: 6px; display: block;">Minimum Floor Selling Price (₹) - Staff cannot quote below this</label>
+          <input type="number" id="inp-floor-price" class="sa-form-control" style="background: #ffffff; color: #0f172a; border: 1.5px solid #cbd5e1; font-weight: 700; font-family: 'JetBrains Mono', monospace;" oninput="recalcMargin()">
         </div>
         <div class="sa-form-group" style="margin-bottom: 14px;">
-          <label class="sa-label">Target Asking Quotation Price (₹)</label>
-          <input type="number" id="inp-target-price" class="sa-form-control" style="background: #1e293b; color: #fff;">
+          <label class="sa-label" style="font-weight: 700; color: #334155; margin-bottom: 6px; display: block;">Target Asking Quotation Price (₹)</label>
+          <input type="number" id="inp-target-price" class="sa-form-control" style="background: #ffffff; color: #0f172a; border: 1.5px solid #cbd5e1; font-weight: 700; font-family: 'JetBrains Mono', monospace;">
         </div>
-        <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; padding: 12px; margin-top: 10px;">
-          <div style="font-size: 12px; color: #94a3b8;">Calculated Gross Floor Margin:</div>
-          <div id="modal-margin-preview" style="font-size: 16px; font-weight: 800; color: #34d399; margin-top: 2px;">25% Margin</div>
+        <div style="background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 10px; padding: 12px 14px; margin-top: 10px;">
+          <div style="font-size: 12px; color: #065f46; font-weight: 600;">Calculated Gross Floor Margin:</div>
+          <div id="modal-margin-preview" style="font-size: 16px; font-weight: 800; color: #047857; margin-top: 2px;">25% Margin</div>
         </div>
       </div>
       <div class="sa-modal-footer">
@@ -598,19 +598,19 @@
           return `
             <tr>
               <td>
-                <strong style="color: #fff; font-size: 13.5px;">${SuperAdminCore.escapeHTML(p.name)}</strong><br>
-                <code style="color: var(--sa-gold); font-size: 11px;">${SuperAdminCore.escapeHTML(p.id)}</code> &bull; <small style="color: #94a3b8;">${p.tonnage ? p.tonnage + ' Ton' : p.category}</small>
+                <strong style="color: #0f172a; font-size: 13.5px;">${SuperAdminCore.escapeHTML(p.name)}</strong><br>
+                <code style="color: #b45309; font-size: 11px; background: #fef3c7; padding: 1px 5px; border-radius: 4px;">${SuperAdminCore.escapeHTML(p.id)}</code> &bull; <small style="color: #64748b;">${p.tonnage ? p.tonnage + ' Ton' : p.category}</small>
               </td>
-              <td><span style="font-family: 'JetBrains Mono', monospace; font-size: 13.5px; color: #94a3b8;">₹${pCost.toLocaleString('en-IN')}</span></td>
-              <td><strong style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #fbbf24;">₹${fPrice.toLocaleString('en-IN')}</strong></td>
-              <td><span style="font-family: 'JetBrains Mono', monospace; font-size: 13.5px; color: #38bdf8;">₹${tPrice.toLocaleString('en-IN')}</span></td>
+              <td><span style="font-family: 'JetBrains Mono', monospace; font-size: 13.5px; color: #475569;">₹${pCost.toLocaleString('en-IN')}</span></td>
+              <td><strong style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #b45309;">₹${fPrice.toLocaleString('en-IN')}</strong></td>
+              <td><span style="font-family: 'JetBrains Mono', monospace; font-size: 13.5px; color: #1e40af;">₹${tPrice.toLocaleString('en-IN')}</span></td>
               <td>
-                <span class="sa-badge" style="background: rgba(16, 185, 129, 0.15); color: #34d399; font-weight: 800;">
+                <span class="sa-badge" style="background: #ecfdf5; color: #047857; font-weight: 800; border: 1px solid #a7f3d0;">
                   +${margin}%
                 </span>
               </td>
               <td style="text-align: right;">
-                <button type="button" class="sa-btn sa-btn-secondary" style="font-size: 12px; padding: 5px 12px;" onclick="openFloorModal('${p.id}', '${SuperAdminCore.escapeHTML(p.name)}', ${pCost}, ${fPrice}, ${tPrice})">
+                <button type="button" class="sa-btn sa-btn-secondary" style="font-size: 12px; padding: 5px 12px; border-radius: 8px;" onclick="openFloorModal('${p.id}', '${SuperAdminCore.escapeHTML(p.name)}', ${pCost}, ${fPrice}, ${tPrice})">
                   <i class="fa fa-pencil"></i> Edit
                 </button>
               </td>

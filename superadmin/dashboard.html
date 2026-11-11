@@ -91,17 +91,17 @@
           </div>
         </div>
         <div class="sa-topbar-right">
-          <button type="button" class="sa-btn sa-btn-secondary" onclick="SuperAdminCore.exportExecutiveReport()" style="gap: 8px; font-weight: 700;">
+          <button type="button" class="sa-btn sa-btn-secondary" onclick="SuperAdminCore.exportExecutiveReport()" style="gap: 8px; font-weight: 700; font-size: 12.5px; padding: 7px 14px;">
             <i class="fa fa-print"></i>
             <span>Monthly Executive Report</span>
           </button>
-          <a href="/admin/dashboard.html" target="_blank" class="sa-btn-link" data-tooltip="Switch to operational inventory panel">
+          <a href="/admin/dashboard.html" target="_blank" class="sa-btn-link" data-tooltip="Switch to operational inventory panel" style="font-size: 12.5px; padding: 7px 12px;">
             <i class="fa fa-cubes"></i>
-            <span>Staff Inventory &rarr;</span>
+            <span>Staff Portal &rarr;</span>
           </a>
-          <button class="sa-btn-logout" data-tooltip="End super admin session">
-            <i class="fa fa-sign-out"></i>
-            <span>Exit Console</span>
+          <button class="sa-btn-logout" data-tooltip="End super admin session" style="font-size: 12.5px; padding: 7px 12px;">
+            <i class="fa fa-power-off"></i>
+            <span>Exit</span>
           </button>
         </div>
       </header>
@@ -120,15 +120,15 @@
           <p class="sa-hero-sub">High-level commercial valuation, response SLAs, High-Seas consignments, and SecOps oversight.</p>
         </div>
 
-        <!-- Executive KPI Telemetry Grid (6 Cards) -->
-        <div class="sa-kpi-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+        <!-- Executive KPI Telemetry Grid (6 Cards: 3x2 Balanced Architecture) -->
+        <div class="sa-kpi-grid">
           <div class="sa-kpi-card" data-tooltip="Total estimated valuation of active commercial leads in pipeline">
             <div class="sa-kpi-header">
               <span class="sa-kpi-label">Active Pipeline Valuation</span>
               <div class="sa-kpi-icon" style="background:#eff6ff; color:#2563eb;"><i class="fa fa-line-chart"></i></div>
             </div>
-            <div class="sa-kpi-val" id="val-pipeline-val" style="color: #38bdf8;">₹46.80 Cr</div>
-            <div class="sa-kpi-sub" id="sub-pipeline-deals">Active commercial inquiries</div>
+            <div class="sa-kpi-val" id="val-pipeline-val" style="color: #1e40af;">₹46.80 Cr</div>
+            <div class="sa-kpi-sub" id="sub-pipeline-deals">80 active commercial inquiries (40 VIP > ₹50L)</div>
           </div>
 
           <div class="sa-kpi-card" data-tooltip="Total finalized machine sales value">
@@ -136,7 +136,7 @@
               <span class="sa-kpi-label">Closed Deals Revenue</span>
               <div class="sa-kpi-icon" style="background:#ecfdf5; color:#059669;"><i class="fa fa-check-circle"></i></div>
             </div>
-            <div class="sa-kpi-val" id="val-closed-rev" style="color: #34d399;">₹18.40 Cr</div>
+            <div class="sa-kpi-val" id="val-closed-rev" style="color: #047857;">₹18.40 Cr</div>
             <div class="sa-kpi-sub">Completed heavy machinery sales</div>
           </div>
 
@@ -145,7 +145,7 @@
               <span class="sa-kpi-label">High-Seas In-Transit Value</span>
               <div class="sa-kpi-icon" style="background:#fffbeb; color:#d97706;"><i class="fa fa-ship"></i></div>
             </div>
-            <div class="sa-kpi-val" id="val-highseas-val" style="color: #fbbf24;">₹3.68 Cr</div>
+            <div class="sa-kpi-val" id="val-highseas-val" style="color: #b45309;">₹3.68 Cr</div>
             <div class="sa-kpi-sub">4 In-Transit Import Consignments</div>
           </div>
 
@@ -154,17 +154,8 @@
               <span class="sa-kpi-label">Staff Response SLA</span>
               <div class="sa-kpi-icon" id="icon-sla" style="background:#fef2f2; color:#dc2626;"><i class="fa fa-clock-o"></i></div>
             </div>
-            <div class="sa-kpi-val" id="val-sla-alert" style="font-size: 20px; color: #f87171;">Analyzing...</div>
+            <div class="sa-kpi-val" id="val-sla-alert" style="font-size: 20px; color: #dc2626;">Analyzing...</div>
             <div class="sa-kpi-sub">24-Hour Quotation Turnaround</div>
-          </div>
-
-          <div class="sa-kpi-card" data-tooltip="Total verified heavy machines cataloged across Pune & Bhiwandi yards">
-            <div class="sa-kpi-header">
-              <span class="sa-kpi-label">Audited Machinery</span>
-              <div class="sa-kpi-icon" style="background:#fef3c7; color:#d97706;"><i class="fa fa-cubes"></i></div>
-            </div>
-            <div class="sa-kpi-val" id="val-machines">-</div>
-            <div class="sa-kpi-sub">Total heavy machines in catalog</div>
           </div>
 
           <div class="sa-kpi-card" data-tooltip="Total RFQ inquiries received from industrial buyers">
@@ -172,8 +163,17 @@
               <span class="sa-kpi-label">Quotation Inquiries</span>
               <div class="sa-kpi-icon" style="background:#f5f3ff; color:#7c3aed;"><i class="fa fa-envelope-open"></i></div>
             </div>
-            <div class="sa-kpi-val" id="val-inquiries">-</div>
+            <div class="sa-kpi-val" id="val-inquiries" style="color: #4338ca;">-</div>
             <div class="sa-kpi-sub">Buyer leads received</div>
+          </div>
+
+          <div class="sa-kpi-card" data-tooltip="Total verified heavy machines cataloged across Pune & Bhiwandi yards">
+            <div class="sa-kpi-header">
+              <span class="sa-kpi-label">Audited Machinery</span>
+              <div class="sa-kpi-icon" style="background:#f0f9ff; color:#0284c7;"><i class="fa fa-cubes"></i></div>
+            </div>
+            <div class="sa-kpi-val" id="val-machines" style="color: #0f172a;">-</div>
+            <div class="sa-kpi-sub">Total heavy machines in catalog</div>
           </div>
         </div>
 
@@ -233,11 +233,11 @@
         <div class="sa-card" style="margin-bottom: 24px;">
           <div class="sa-card-header">
             <div class="sa-card-title">
-              <i class="fa fa-briefcase" style="color: #38bdf8;"></i>
+              <i class="fa fa-briefcase" style="color: #2563eb;"></i>
               <span>Active Commercial Deals & 1-Click WhatsApp Quotation Dispatch</span>
             </div>
             <div style="display: flex; gap: 10px; align-items: center;">
-              <select id="filter-lead-stage" class="sa-form-control" style="width: auto; padding: 6px 12px; font-size: 12px; background: #0f172a; border-color: #334155; color: #fff;">
+              <select id="filter-lead-stage" class="sa-select-clean">
                 <option value="all">All Pipeline Stages</option>
                 <option value="new">1. New Leads</option>
                 <option value="power_trial_requested">2. Power Trial Req.</option>
@@ -567,27 +567,27 @@
         return `
           <tr>
             <td>
-              <div style="font-weight: 700; color: #fff; font-size: 13.5px; display: flex; align-items: center; gap: 6px;">
+              <div style="font-weight: 700; color: #0f172a; font-size: 13.5px; display: flex; align-items: center; gap: 6px;">
                 ${SuperAdminCore.escapeHTML(inq.name)}
                 ${isVip ? '<span class="vip-deal-badge">👑 VIP DEAL</span>' : ''}
               </div>
               <div style="font-size: 12px; color: var(--sa-text-muted); margin-top: 2px;">
-                ${SuperAdminCore.escapeHTML(inq.company || 'Enterprise')} &bull; <i class="fa fa-map-marker"></i> ${SuperAdminCore.escapeHTML(inq.city || 'Mumbai')}
+                ${SuperAdminCore.escapeHTML(inq.company || 'Enterprise')} &bull; <i class="fa fa-map-marker" style="color: #ef4444;"></i> ${SuperAdminCore.escapeHTML(inq.city || 'Mumbai')}
               </div>
-              <div style="font-size: 11.5px; color: #94a3b8; font-family: 'JetBrains Mono', monospace;">
+              <div style="font-size: 11.5px; color: var(--sa-text-dim); font-family: 'JetBrains Mono', monospace;">
                 ${SuperAdminCore.escapeHTML(inq.phone || '')}
               </div>
             </td>
             <td>
-              <div style="font-weight: 700; color: #f8fafc; font-size: 13px;">
+              <div style="font-weight: 700; color: #0f172a; font-size: 13px;">
                 ${SuperAdminCore.escapeHTML(inq.machineName || 'Heavy Machinery')}
               </div>
-              <div style="font-size: 14px; font-weight: 800; color: #38bdf8; font-family: 'JetBrains Mono', monospace; margin-top: 2px;">
+              <div style="font-size: 14px; font-weight: 800; color: #1e40af; font-family: 'JetBrains Mono', monospace; margin-top: 2px;">
                 ${SuperAdminCore.formatInr(val)}
               </div>
             </td>
             <td>
-              <select onchange="updateDealStage('${inq.id}', this.value)" class="sa-form-control" style="width: auto; padding: 4px 8px; font-size: 11.5px; font-weight: 700; background: #0f172a; border-color: #334155; color: #fff;">
+              <select onchange="updateDealStage('${inq.id}', this.value)" class="sa-select-clean" style="padding: 4px 8px; font-size: 11.5px;">
                 <option value="new" ${stage === 'new' ? 'selected' : ''}>1. New Lead</option>
                 <option value="power_trial_requested" ${stage === 'power_trial_requested' ? 'selected' : ''}>2. Power Trial Req.</option>
                 <option value="quotation_sent" ${stage === 'quotation_sent' ? 'selected' : ''}>3. Quotation Sent</option>
@@ -598,17 +598,17 @@
             </td>
             <td>${slaHtml}</td>
             <td>
-              <span style="font-size: 12px; color: #cbd5e1; font-weight: 600;">
-                <i class="fa fa-user-circle" style="color: var(--sa-gold); margin-right: 4px;"></i>${SuperAdminCore.escapeHTML(inq.assignedStaffName || 'Dalal Inventory Admin')}
+              <span style="font-size: 12px; color: #334155; font-weight: 600;">
+                <i class="fa fa-user-circle" style="color: #6366f1; margin-right: 4px;"></i>${SuperAdminCore.escapeHTML(inq.assignedStaffName || 'Dalal Inventory Admin')}
               </span>
             </td>
             <td style="text-align: right; white-space: nowrap;">
-              <button type="button" class="sa-btn" style="background: #25d366; color: #000; font-size: 12px; padding: 6px 12px; font-weight: 700; gap: 6px;" onclick="SuperAdminCore.openWhatsAppQuoteModal('${inq.id}')" title="Generate formal commercial quote & send via WhatsApp">
+              <button type="button" class="sa-btn" style="background: #16a34a; color: #ffffff; font-size: 12px; padding: 6px 12px; font-weight: 700; gap: 6px; border-radius: 8px;" onclick="SuperAdminCore.openWhatsAppQuoteModal('${inq.id}')" title="Generate formal commercial quote & send via WhatsApp">
                 <i class="fa fa-whatsapp"></i> Quote
               </button>
               ${inq.machineId ? `
-                <button type="button" class="sa-btn sa-btn-secondary" style="font-size: 12px; padding: 6px 10px; margin-left: 4px;" onclick="SuperAdminCore.openVideoVaultModal('${inq.machineId}')" title="Customer Inspection Trial Video Vault">
-                  <i class="fa fa-video-camera"></i>
+                <button type="button" class="sa-btn sa-btn-secondary" style="font-size: 12px; padding: 6px 10px; margin-left: 4px; border-radius: 8px;" onclick="SuperAdminCore.openVideoVaultModal('${inq.machineId}')" title="Customer Inspection Trial Video Vault">
+                  <i class="fa fa-video-camera" style="color: #2563eb;"></i>
                 </button>
               ` : ''}
             </td>
@@ -644,17 +644,17 @@
       container.innerHTML = consignments.map(c => {
         const curStepIdx = steps.indexOf(c.status);
         return `
-          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 16px; margin-bottom: 14px;">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 14px; padding: 18px; margin-bottom: 14px; box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02);">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
               <div>
-                <strong style="color: #fff; font-size: 14px;">${SuperAdminCore.escapeHTML(c.title)}</strong>
+                <strong style="color: #0f172a; font-size: 14px;">${SuperAdminCore.escapeHTML(c.title)}</strong>
                 <div style="font-size: 12px; color: var(--sa-text-muted); margin-top: 2px;">
-                  Vessel: <strong style="color: #38bdf8;">${SuperAdminCore.escapeHTML(c.vesselName)}</strong> &bull; B/L: <code>${SuperAdminCore.escapeHTML(c.billOfLading)}</code>
+                  Vessel: <strong style="color: #2563eb;">${SuperAdminCore.escapeHTML(c.vesselName)}</strong> &bull; B/L: <code style="background: #e2e8f0; padding: 2px 6px; border-radius: 4px; color: #0f172a; font-size: 11px;">${SuperAdminCore.escapeHTML(c.billOfLading)}</code>
                 </div>
               </div>
               <div style="text-align: right;">
-                <div style="font-size: 14px; font-weight: 800; color: #fbbf24; font-family: 'JetBrains Mono', monospace;">${SuperAdminCore.formatInr(c.valueInr)}</div>
-                <div style="font-size: 11px; color: #10b981; font-weight: 600;">ETA: ${SuperAdminCore.escapeHTML(c.eta)}</div>
+                <div style="font-size: 14px; font-weight: 800; color: #b45309; font-family: 'JetBrains Mono', monospace;">${SuperAdminCore.formatInr(c.valueInr)}</div>
+                <div style="font-size: 11px; color: #047857; font-weight: 700;">ETA: ${SuperAdminCore.escapeHTML(c.eta)}</div>
               </div>
             </div>
 
@@ -675,10 +675,10 @@
               }).join('')}
             </div>
 
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; font-size: 12px; color: #94a3b8; border-top: 1px dashed #334155; padding-top: 8px;">
-              <div>Containers: <code>${(c.containerNumbers || []).join(', ')}</code></div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px; font-size: 12px; color: var(--sa-text-muted); border-top: 1px dashed #e2e8f0; padding-top: 10px;">
+              <div>Containers: <code style="background: #e2e8f0; padding: 2px 6px; border-radius: 4px; color: #0f172a; font-size: 11px;">${(c.containerNumbers || []).join(', ')}</code></div>
               <div>
-                <select onchange="updateConsignmentStatus('${c.id}', this.value)" class="sa-form-control" style="width: auto; padding: 3px 8px; font-size: 11px; background: #0f172a; color: #fff; border-color: #475569;">
+                <select onchange="updateConsignmentStatus('${c.id}', this.value)" class="sa-select-clean" style="padding: 3px 8px; font-size: 11px;">
                   <option value="loaded_at_port" ${c.status === 'loaded_at_port' ? 'selected' : ''}>Origin Port</option>
                   <option value="high_seas_transit" ${c.status === 'high_seas_transit' ? 'selected' : ''}>High Seas</option>
                   <option value="customs_clearing" ${c.status === 'customs_clearing' ? 'selected' : ''}>Customs Clearing</option>
@@ -709,12 +709,12 @@
       const geoBox = document.getElementById('geo-heatmap-container');
       geoBox.innerHTML = geo.slice(0, 5).map(g => `
         <div>
-          <div style="display: flex; justify-content: space-between; font-size: 12.5px; font-weight: 700; color: #f8fafc; margin-bottom: 4px;">
+          <div style="display: flex; justify-content: space-between; font-size: 12.5px; font-weight: 700; color: #0f172a; margin-bottom: 5px;">
             <span><i class="fa fa-map-marker" style="color: #ef4444; margin-right: 6px;"></i>${SuperAdminCore.escapeHTML(g.city)}</span>
-            <span style="color: #38bdf8; font-family: 'JetBrains Mono', monospace;">${g.count} Leads (${g.percentage}%)</span>
+            <span style="color: #1e40af; font-family: 'JetBrains Mono', monospace;">${g.count} Leads (${g.percentage}%)</span>
           </div>
-          <div style="background: #334155; height: 6px; border-radius: 999px; overflow: hidden;">
-            <div style="background: linear-gradient(90deg, #3b82f6, #38bdf8); height: 100%; width: ${g.percentage}%;"></div>
+          <div style="background: #f1f5f9; height: 7px; border-radius: 999px; overflow: hidden; border: 1px solid #e2e8f0;">
+            <div style="background: linear-gradient(90deg, #3b82f6, #60a5fa); height: 100%; width: ${g.percentage}%;"></div>
           </div>
         </div>
       `).join('');
@@ -722,11 +722,11 @@
       const catBox = document.getElementById('cat-demand-container');
       catBox.innerHTML = cats.map(c => `
         <div>
-          <div style="display: flex; justify-content: space-between; font-size: 12.5px; font-weight: 700; color: #f8fafc; margin-bottom: 4px;">
+          <div style="display: flex; justify-content: space-between; font-size: 12.5px; font-weight: 700; color: #0f172a; margin-bottom: 5px;">
             <span>${SuperAdminCore.escapeHTML(c.category)}</span>
-            <span style="color: var(--sa-gold); font-family: 'JetBrains Mono', monospace;">${c.count} Inquiries</span>
+            <span style="color: #b45309; font-family: 'JetBrains Mono', monospace;">${c.count} Inquiries</span>
           </div>
-          <div style="background: #334155; height: 6px; border-radius: 999px; overflow: hidden;">
+          <div style="background: #f1f5f9; height: 7px; border-radius: 999px; overflow: hidden; border: 1px solid #e2e8f0;">
             <div style="background: linear-gradient(90deg, #f59e0b, #d97706); height: 100%; width: ${c.percentage}%;"></div>
           </div>
         </div>

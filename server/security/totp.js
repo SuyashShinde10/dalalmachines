@@ -111,3 +111,4 @@ module.exports = {
   base32Encode,
   base32Decode
 };
+

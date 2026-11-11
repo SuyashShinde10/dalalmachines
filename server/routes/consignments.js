@@ -67,3 +67,4 @@ router.delete('/:id', requireSuperAdmin, (req, res) => {
 });
 
 module.exports = router;
+

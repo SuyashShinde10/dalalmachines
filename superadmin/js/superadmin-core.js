@@ -317,41 +317,41 @@ const SuperAdminCore = {
             <button type="button" class="sa-modal-close-btn" onclick="document.getElementById('sa-quote-modal-backdrop').classList.remove('open')">&times;</button>
           </div>
           <div class="sa-modal-body">
-            <div style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: 10px; padding: 14px 16px; margin-bottom: 20px;">
+            <div style="background: #fffbeb; border: 1px solid #fde68a; border-radius: 12px; padding: 14px 16px; margin-bottom: 20px;">
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                <span style="font-size: 13px; font-weight: 800; color: #fff;">${SuperAdminCore.escapeHTML(q.quoteNumber)}</span>
-                <span style="font-size: 12px; color: var(--sa-gold); font-weight: 600;">${SuperAdminCore.escapeHTML(q.dateFormatted)}</span>
+                <span style="font-size: 13px; font-weight: 800; color: #92400e;">${SuperAdminCore.escapeHTML(q.quoteNumber)}</span>
+                <span style="font-size: 12px; color: #b45309; font-weight: 700;">${SuperAdminCore.escapeHTML(q.dateFormatted)}</span>
               </div>
-              <div style="font-size: 13px; color: #94a3b8;">
-                Client: <strong style="color: #fff;">${SuperAdminCore.escapeHTML(q.client.name)}</strong> (${SuperAdminCore.escapeHTML(q.client.company || 'Enterprise')}) &bull; ${SuperAdminCore.escapeHTML(q.client.phone || '')}
+              <div style="font-size: 13px; color: #475569;">
+                Client: <strong style="color: #0f172a;">${SuperAdminCore.escapeHTML(q.client.name)}</strong> (${SuperAdminCore.escapeHTML(q.client.company || 'Enterprise')}) &bull; ${SuperAdminCore.escapeHTML(q.client.phone || '')}
               </div>
             </div>
 
             <div style="margin-bottom: 18px;">
-              <label style="font-size: 12px; font-weight: 700; color: #94a3b8; display: block; margin-bottom: 6px;">Quoted Heavy Machinery:</label>
-              <div style="background: #1e293b; padding: 12px 14px; border-radius: 8px; font-size: 13.5px; font-weight: 700; color: #f8fafc;">
+              <label style="font-size: 12px; font-weight: 700; color: #475569; display: block; margin-bottom: 6px;">Quoted Heavy Machinery:</label>
+              <div style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 12px 14px; border-radius: 10px; font-size: 13.5px; font-weight: 700; color: #0f172a;">
                 ${SuperAdminCore.escapeHTML(q.machine.name || 'Industrial Heavy Machine')}
               </div>
             </div>
 
             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px;">
-              <div style="background: #1e293b; padding: 10px 14px; border-radius: 8px;">
-                <div style="font-size: 11px; color: #94a3b8; font-weight: 600;">EX-WORKS PRICE</div>
-                <div style="font-size: 15px; font-weight: 800; color: #38bdf8; margin-top: 4px;">₹${q.commercials.basicPrice.toLocaleString('en-IN')}</div>
+              <div style="background: #eff6ff; border: 1px solid #bfdbfe; padding: 12px 14px; border-radius: 10px;">
+                <div style="font-size: 11px; color: #1d4ed8; font-weight: 700;">EX-WORKS PRICE</div>
+                <div style="font-size: 15px; font-weight: 800; color: #1e40af; margin-top: 4px; font-family: 'JetBrains Mono', monospace;">₹${q.commercials.basicPrice.toLocaleString('en-IN')}</div>
               </div>
-              <div style="background: #1e293b; padding: 10px 14px; border-radius: 8px;">
-                <div style="font-size: 11px; color: #94a3b8; font-weight: 600;">GST (@18%)</div>
-                <div style="font-size: 15px; font-weight: 800; color: #fbbf24; margin-top: 4px;">₹${q.commercials.gstAmount.toLocaleString('en-IN')}</div>
+              <div style="background: #fffbeb; border: 1px solid #fde68a; padding: 12px 14px; border-radius: 10px;">
+                <div style="font-size: 11px; color: #b45309; font-weight: 700;">GST (@18%)</div>
+                <div style="font-size: 15px; font-weight: 800; color: #92400e; margin-top: 4px; font-family: 'JetBrains Mono', monospace;">₹${q.commercials.gstAmount.toLocaleString('en-IN')}</div>
               </div>
-              <div style="background: #1e293b; padding: 10px 14px; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.4);">
-                <div style="font-size: 11px; color: #34d399; font-weight: 600;">TOTAL DEAL VALUE</div>
-                <div style="font-size: 15px; font-weight: 800; color: #34d399; margin-top: 4px;">₹${q.commercials.totalAmount.toLocaleString('en-IN')}</div>
+              <div style="background: #ecfdf5; border: 1px solid #a7f3d0; padding: 12px 14px; border-radius: 10px;">
+                <div style="font-size: 11px; color: #047857; font-weight: 700;">TOTAL DEAL VALUE</div>
+                <div style="font-size: 15px; font-weight: 800; color: #065f46; margin-top: 4px; font-family: 'JetBrains Mono', monospace;">₹${q.commercials.totalAmount.toLocaleString('en-IN')}</div>
               </div>
             </div>
 
             <div>
-              <label style="font-size: 12px; font-weight: 700; color: #94a3b8; display: block; margin-bottom: 6px;">Official WhatsApp Message Preview:</label>
-              <textarea id="sa-wa-quote-text" class="sa-form-control" style="height: 160px; font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.5; background: #0b1120; color: #cbd5e1; border: 1px solid #1e293b;">${SuperAdminCore.escapeHTML(q.whatsAppText)}</textarea>
+              <label style="font-size: 12px; font-weight: 700; color: #475569; display: block; margin-bottom: 6px;">Official WhatsApp Message Preview:</label>
+              <textarea id="sa-wa-quote-text" class="sa-form-control" style="height: 160px; font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.5; background: #f8fafc; color: #0f172a; border: 1px solid #cbd5e1; border-radius: 10px;">${SuperAdminCore.escapeHTML(q.whatsAppText)}</textarea>
             </div>
           </div>
           <div class="sa-modal-footer">
@@ -359,7 +359,7 @@ const SuperAdminCore = {
               <i class="fa fa-copy"></i> Copy Text
             </button>
             ${q.whatsAppUrl ? `
-              <a href="${q.whatsAppUrl}" target="_blank" class="sa-btn" style="background: #25d366; color: #000; font-weight: 800; gap: 8px; text-decoration: none;">
+              <a href="${q.whatsAppUrl}" target="_blank" class="sa-btn" style="background: #16a34a; color: #ffffff; font-weight: 800; gap: 8px; text-decoration: none; border-radius: 10px; padding: 10px 18px;">
                 <i class="fa fa-whatsapp"></i> Send Direct to Client WhatsApp &rarr;
               </a>
             ` : `<button class="sa-btn sa-btn-primary" disabled>No Phone Number</button>`}
@@ -400,18 +400,18 @@ const SuperAdminCore = {
             <button type="button" class="sa-modal-close-btn" onclick="document.getElementById('sa-video-vault-backdrop').classList.remove('open')">&times;</button>
           </div>
           <div class="sa-modal-body">
-            <p style="font-size: 13px; color: #94a3b8; margin-bottom: 18px;">
+            <p style="font-size: 13px; color: var(--sa-text-muted); margin-bottom: 18px;">
               Unlisted high-definition trial recordings for serious buyers. These links are confidential and private to Dalal executive management.
             </p>
-            ${videos.length === 0 ? '<div style="color: #94a3b8; text-align: center; padding: 24px;">No trial videos attached to this machine yet.</div>' : `
+            ${videos.length === 0 ? '<div style="color: var(--sa-text-muted); text-align: center; padding: 24px;">No trial videos attached to this machine yet.</div>' : `
               <div style="display: flex; flex-direction: column; gap: 12px;">
                 ${videos.map((v, i) => `
-                  <div style="background: #1e293b; border: 1px solid #334155; border-radius: 10px; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+                  <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
                     <div>
-                      <div style="font-size: 13.5px; font-weight: 700; color: #fff; margin-bottom: 4px;">
-                        <i class="fa fa-play-circle" style="color: var(--sa-gold); margin-right: 6px;"></i>${SuperAdminCore.escapeHTML(v.title)}
+                      <div style="font-size: 13.5px; font-weight: 700; color: #0f172a; margin-bottom: 4px;">
+                        <i class="fa fa-play-circle" style="color: #d97706; margin-right: 6px;"></i>${SuperAdminCore.escapeHTML(v.title)}
                       </div>
-                      <div style="font-size: 12px; color: #94a3b8; font-family: 'JetBrains Mono', monospace;">
+                      <div style="font-size: 12px; color: var(--sa-text-muted); font-family: 'JetBrains Mono', monospace;">
                         Duration: ${SuperAdminCore.escapeHTML(v.duration || '03:45')} &bull; Type: ${SuperAdminCore.escapeHTML(v.type || 'Power Trial')}
                       </div>
                     </div>
